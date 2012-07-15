@@ -8,14 +8,49 @@ ZMUCA.newUserView = (function ($) {
 		$(container).html(table);
 		table.listview()
 	}
-	
+	var renderChallenges = function(container,challenges,onChallengeClick){
+		var table = ich.membersTable();
+		$.each(challenges,function(ind,val){
+			var row = ich.listviewRow({
+				name:val.name,
+				image:val.image
+			});
+			row.bind("tap",function(){
+				onChallengeClick(val)
+			})
+			table.append(row)
+		})
+		$(container).html(table);
+		table.listview();
+	}
+	var renderModes =function(container,modes,onModeClick){
+		$.each(modes,function(ind,mode){
+			if(mode.id="length"){
+				var table = ich.membersTable();
+				$.each(mode.params,function(ind,val){
+					var row = ich.listviewRow({
+						name:val.name,
+						image:val.image
+					});
+					row.bind("tap",function(){
+						onModeClick(val)
+					})
+					table.append(row)
+				})
+				$(container).html(table);
+				table.listview();
+			}
+		})
+	}
 	var init = function () {
        
     };
 
     var pub = {
         init: init,
-        renderTable:renderTable
+        renderTable:renderTable,
+        renderChallenges:renderChallenges,
+        renderModes:renderModes,
     };
 
     return pub;

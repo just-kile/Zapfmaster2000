@@ -1,6 +1,7 @@
 var ZMUCA = ZMUCA || {};
 
 ZMUCA.Constants ={
+		
 		debugMode:false,
 		defaultImage:"css/images/default.png",
 		phpUrl:"http://server/beerometer/zapfmasterUserClientApp.php",
@@ -16,5 +17,34 @@ ZMUCA.Constants ={
 				actionsUrl:'http://192.168.178.31:1337/actions',
 				datasUrl:'http://192.168.178.31:1337/getdatas'
 		},
-		actualUser:{}
+		actualUser:{},
+		challenges:[{
+			id:"challenge-normal",
+			name:"1 vs 1",
+			image:"images/avatars/felix.jpg"
+		},{
+			id:"challenge-team",
+			name:"Team vs Team",
+			image:"images/avatars/felix.jpg"
+		}],
+		modes:[{
+			name:"Laenge",
+			id:"length",
+			params:[{
+				name:"10 Minuten",
+				id:"mode-tenMinutes",
+				image:"images/avatars/felix.jpg",
+				length:10
+			},{
+				name:"30 Minuten",
+				id:"mode-thirtyMinutes",
+				image:"images/avatars/felix.jpg",
+				length:30
+			},{
+				name:"1 Stunde",
+				id:"mode-60Minutes",
+				image:"images/avatars/felix.jpg",
+				length:60
+			}]
+		}]
 }	

@@ -52,7 +52,15 @@
 	</a>
 	</li>
  </script>
-
+<script id="listviewRow" type="text/html">
+     <li>
+	<a href="#">
+	<img src="http://server/beerometer/{{image}}" />
+	<h3>{{name}}</h3>
+	
+	</a>
+	</li>
+ </script>
 </head>
 <body>
 
@@ -122,7 +130,9 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<div id="ZMUCA-newchallenge-tableContainer"></div>
+		<div class="challenge zm_challenge"><p style="color:white">Wähle den Modus aus!</p></div>
+		<div class="mode zm_challenge"></div>
+		<div class="opponent zm_challenge"></div>
 	</div><!-- /content -->
 </div><!-- /New User -->
 
