@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/common/reedsolomon
+END
+ReedSolomonException.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/common/reedsolomon/ReedSolomonException.java
+END
+ReedSolomonEncoder.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/common/reedsolomon/ReedSolomonEncoder.java
+END
+GenericGF.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/common/reedsolomon/GenericGF.java
+END
+ReedSolomonDecoder.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/common/reedsolomon/ReedSolomonDecoder.java
+END
+GenericGFPoly.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/common/reedsolomon/GenericGFPoly.java
+END

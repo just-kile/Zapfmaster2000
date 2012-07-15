@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/book
+END
+SearchBookContentsAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/book/SearchBookContentsAdapter.java
+END
+BrowseBookListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/book/BrowseBookListener.java
+END
+SearchBookContentsListItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/book/SearchBookContentsListItem.java
+END
+SearchBookContentsActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/book/SearchBookContentsActivity.java
+END
+SearchBookContentsResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/book/SearchBookContentsResult.java
+END

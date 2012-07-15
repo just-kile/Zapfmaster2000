@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Zapfmaster2000UserPhotoScannerApp</title>
+<!-- Libs 1 -->
+<script type="text/javascript" charset="utf-8"  src="js/libs/socket.io.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/cordova-1.8.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/tts.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/ICanHaz.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/md5.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/barcodescanner.js"></script>
+<!-- /Libs 1 -->
+<!-- Style -->
+<link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<!-- /Style -->
+<!-- App -->
+<script type="text/javascript" charset="utf-8" src="js/app/Model/constants.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Model/model.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Model/globalFunctions.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="js/app/View/view.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/View/frontPageView.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/View/loginView.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/View/newFrontPageView.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/View/newChallengeView.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/frontPageController.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/newFrontPageController.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/newChallengeController.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/loginController.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/controller.js"></script>
+<!-- /App -->
+
+<!-- Libs 2 -->
+<script type="text/javascript" charset="utf-8" src="js/libs/jquery.cookie.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/jquery.mobile-1.1.0.min.js"></script>
+<!-- /Libs 2 -->
+<!-- Templates -->
+<script id="membersTable" type="text/html">
+<ul data-role="listview" style="width:100%">
+</ul>
+ </script>
+<script id="membersTableRow" type="text/html">
+     <li>
+	<a href="#">
+	<img src="http://server/beerometer/{{image}}" />
+	<h3>{{name}}</h3>
+	<p>{{qrcode}}</p>
+	</a>
+	</li>
+ </script>
+
+</head>
+<body>
+
+
+
+
+<div data-role="page" id="index">
+
+	<div data-role="header">
+		<center><img src="css/images/zapfmaster2000.png" style="width:70%" />
+		</center>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<a href="#ZMUCA-login" data-role="button" data-rel="dialog">Login</a>
+	</div><!-- /content -->
+
+
+</div><!-- /Frontpage -->
+<div data-role="page" id="ZMUCA-login">
+
+	<div data-role="header">
+		<h1>Login</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+	<div data-role="fieldcontain" class="ui-hide-label">	
+		<label for="basic">PIN:</label>
+		<input type="password" name="ZMUCA-login-pin" id="ZMUCA-login-pin" placeholder="PIN"/>
+	</div>
+	
+			
+	<fieldset class="ui-grid-a">
+		
+	<div class="ui-block-a">
+		<div id="ZMUCA-login-submit" data-role="button">Anmelden</div>
+	</div>
+	<div class="ui-block-b">
+		<a href ="#index" id="ZMUCA-login-cancel" data-role="button">Abbrechen</a>
+	</div>
+	</fieldset>
+	<a id="ZMUCA-login-qr" data-role="button">Oder: Scanne den QR Code deiner ZM2K&reg; Karte!</a>
+	</div><!-- /content -->
+</div><!-- /Login -->
+
+<div data-role="page" id="ZMUCA-newFrontpage">
+
+	<div data-role="header">
+		<center><img src="css/images/zapfmaster2000.png" style="width:70%" />
+		</center>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<a href="#ZMUCA-newchallenge" data-role="button">New Challenge!</a>
+		<a class="logout" data-role="button">Logout</a>
+		<!-- <a href="#ZMUCA-members" data-role="button">Show Members</a>
+		<a href="#ZMUCA-nukeg" data-role="button">Nu Keg</a> -->
+	</div><!-- /content -->
+
+
+</div><!-- /logged in - Frontpage -->
+
+<div data-role="page" id="ZMUCA-newchallenge">
+
+	<div data-role="header">
+		<h1>Neue Challenge!</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div id="ZMUCA-newchallenge-tableContainer"></div>
+	</div><!-- /content -->
+</div><!-- /New User -->
+
+
+</div><!-- /show members-->
+</body>
+</html>

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder
+END
+DecodedBitStreamParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder/DecodedBitStreamParser.java
+END
+BitMatrixParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder/BitMatrixParser.java
+END
+DataBlock.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder/DataBlock.java
+END
+Mode.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder/Mode.java
+END
+DataMask.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder/DataMask.java
+END
+Decoder.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder/Decoder.java
+END
+Version.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder/Version.java
+END
+ErrorCorrectionLevel.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder/ErrorCorrectionLevel.java
+END
+FormatInformation.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/qrcode/decoder/FormatInformation.java
+END

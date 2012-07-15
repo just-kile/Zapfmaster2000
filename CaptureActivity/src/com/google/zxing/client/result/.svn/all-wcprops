@@ -1,0 +1,215 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result
+END
+ExpandedProductResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/ExpandedProductResultParser.java
+END
+ISBNResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/ISBNResultParser.java
+END
+CalendarParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/CalendarParsedResult.java
+END
+GeoParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/GeoParsedResult.java
+END
+EmailAddressResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/EmailAddressResultParser.java
+END
+WifiResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/WifiResultParser.java
+END
+ProductParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/ProductParsedResult.java
+END
+ParsedResultType.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/ParsedResultType.java
+END
+AbstractDoCoMoResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/AbstractDoCoMoResultParser.java
+END
+URLTOResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/URLTOResultParser.java
+END
+TelParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/TelParsedResult.java
+END
+VEventResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/VEventResultParser.java
+END
+GeoResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/GeoResultParser.java
+END
+BizcardResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/BizcardResultParser.java
+END
+ProductResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/ProductResultParser.java
+END
+URIParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/URIParsedResult.java
+END
+AddressBookParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/AddressBookParsedResult.java
+END
+SMTPResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/SMTPResultParser.java
+END
+TelResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/TelResultParser.java
+END
+SMSParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/SMSParsedResult.java
+END
+SMSTOMMSTOResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/SMSTOMMSTOResultParser.java
+END
+AddressBookAUResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/AddressBookAUResultParser.java
+END
+EmailDoCoMoResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/EmailDoCoMoResultParser.java
+END
+URIResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/URIResultParser.java
+END
+VCardResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/VCardResultParser.java
+END
+ParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/ParsedResult.java
+END
+AddressBookDoCoMoResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/AddressBookDoCoMoResultParser.java
+END
+TextParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/TextParsedResult.java
+END
+BookmarkDoCoMoResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/BookmarkDoCoMoResultParser.java
+END
+ExpandedProductParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/ExpandedProductParsedResult.java
+END
+ISBNParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/ISBNParsedResult.java
+END
+SMSMMSResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/SMSMMSResultParser.java
+END
+ResultParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/ResultParser.java
+END
+EmailAddressParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/EmailAddressParsedResult.java
+END
+WifiParsedResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/result/WifiParsedResult.java
+END

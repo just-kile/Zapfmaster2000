@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/wifi
+END
+Killer.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/wifi/Killer.java
+END
+WifiReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/wifi/WifiReceiver.java
+END
+NetworkSetting.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/wifi/NetworkSetting.java
+END
+NetworkUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/wifi/NetworkUtil.java
+END
+WifiActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/10/zapfmaster/libs/CaptureActivity/src/com/google/zxing/client/android/wifi/WifiActivity.java
+END
