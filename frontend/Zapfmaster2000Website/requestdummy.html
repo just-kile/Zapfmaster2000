@@ -1,0 +1,82 @@
+<html>
+<head>
+    <script type="text/javascript" src="js/prototype.js"></script>
+    <script type="text/javascript">
+	function post_to_url(user,amount,time,kind){
+		new Ajax.Request('backend.php',{
+			method:'post',
+			parameters:{'type':'drawing','user': 1,'amount':amount,'duration':time,'kind':kind},
+			onSuccess: function (oXHR, oJson) {
+            
+       	 },
+        onFailure: function (oXHR, oJson) {
+            
+        }
+
+			});
+	}
+	function startTime(i,time){
+		
+ 		post_to_url('Gustav',Math.round(Math.random() * 100) / 100 
+,Math.round(Math.random() * 100) / 100 ,'refresh');
+  		if (i > 1) {
+    		i--;
+    	// Funktion verzögert aufrufen
+    	var timeout = window.setTimeout("startTime(" + i + ","+time+")", time);
+  		}
+
+			
+		
+		
+	}
+	
+	
+	</script>
+</head>
+<body>
+<form action="backend.php" method="post">
+Type:<select name="type">
+<option value="drawing">drawing</option>
+<option value="achievement">achievement</option>
+<option value="other">other</option>
+</select>
+
+User:<input type="text" size="17" name="user" id="user"/>
+amount: <input type="text" size="17" name="amount"/>
+Zapftime:<input type="text" size="17" name ="duration" />
+
+Achievement:<input type="text" size="17" name="achievement"/>
+text (other): <input type="text" size="17" name="text"/>
+
+Imagepath:<input type="text" size="17" name="imagepath" value="images/others/1.jpg"/>
+Type:<select name="kind">
+
+<option value="new">New Process</option>
+<option value="refresh">Refresh Amount(same Process)</option>
+</select>
+<input type="submit" value="OK" />
+</form>
+<form action="javascript:post_to_url('pete','3','2',new)">
+</form>
+Anzahl
+<input type="text" id="text">
+Zeitintervall (ms)
+<input type="text" id="zeit">
+<input type="button" value="Start timer" onClick="startTime($('text').value,$('zeit').value)"/>
+
+<form action="rfid.php" method="post">
+
+Userid:<input type="text" size="17" name="USER_ID" id="USER_ID"/>
+RFIDTAg: <input type="text" size="17" name="RFID_TAG"/>
+<input type="submit" value="OK" />
+</form>
+
+
+
+<form action="rfid.php" method="post">
+RFIDTAg: <input type="text" size="17" name="RFID_TAG"/>
+<input type="submit" value="OK" />
+</form>
+</body>
+
+</html>

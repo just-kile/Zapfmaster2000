@@ -1,0 +1,1 @@
+{"KEG_ID":"1","BRAND":"Staropramen","userid":"8","amount":"0.11189655172413793","duration":"33","kind":"refresh","type":"drawing","user":"Thomas","IMAGE_PATH":"images\/avatars\/thomas.jpg"}
