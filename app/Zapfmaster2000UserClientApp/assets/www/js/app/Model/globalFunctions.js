@@ -112,10 +112,16 @@ ZMUCA.connect = function(userModel,callback){
 	ZMUCA.drawChannel = io.connect(c.node.drawUrl);
 	
 	ZMUCA.log("Connect to "+c.node.actionsUrl);
-	ZMUCA.actionsChannel = io.connect(c.node.actionsUrl).on('connect', function () {
+	if(typeof ZMUCA.actionsChannel =="undefined"){
+		ZMUCA.actionsChannel = io.connect(c.node.actionsUrl).on('connect', function () {
+			ZMUCA.actionsChannel.emit("initUser",userModel);
+			if(typeof callback != "undefined")callback();
+		});
+	}else{
 		ZMUCA.actionsChannel.emit("initUser",userModel);
 		if(typeof callback != "undefined")callback();
-	});
+	}
+
 	ZMUCA.log("Connect to "+c.node.datasUrl);
 	ZMUCA.getdatasChannel = io.connect(c.node.datasUrl);
 	
@@ -150,7 +156,8 @@ ZMUCA.testConnection  = function(callback){
 ZMUCA.disconnect = function(){
 	 if(typeof ZMUCA.drawChannel != "undefined"){
 		 ZMUCA.log("Disconnect drawChannel")
-		 ZMUCA.drawChannel.disconnect();
+		 ZMUCA.drawChannel.disconnect(function(){
+		 });
 	 };
 	 if(typeof ZMUCA.actionsChannel != "undefined"){
 		 ZMUCA.log("Disconnect actionsChannel")

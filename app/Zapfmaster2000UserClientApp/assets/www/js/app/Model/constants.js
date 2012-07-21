@@ -22,11 +22,13 @@ ZMUCA.Constants ={
 			id:"challenge-normal",
 			name:"1 vs 1",
 			image:"images/avatars/felix.jpg"
-		},{
-			id:"challenge-team",
-			name:"Team vs Team",
-			image:"images/avatars/felix.jpg"
-		}],
+		}
+//		,{
+//			id:"challenge-team",
+//			name:"Team vs Team",
+//			image:"images/avatars/felix.jpg"
+//		}
+		],
 		modes:[{
 			name:"Laenge",
 			id:"length",

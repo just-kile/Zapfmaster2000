@@ -2,11 +2,12 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Zapfmaster2000UserPhotoScannerApp</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />  
+<title>Zapfmaster2000UserClientApp</title>
 <!-- Libs 1 -->
 <script type="text/javascript" charset="utf-8"  src="js/libs/socket.io.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/cordova-1.8.1.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/libs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/jquery-1.7.1.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/tts.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/ICanHaz.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/md5.js"></script>
@@ -25,7 +26,7 @@
 <script type="text/javascript" charset="utf-8" src="js/app/View/frontPageView.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/View/loginView.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/View/newFrontPageView.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/app/View/newChallengeView.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/View/newChallengeView.js?version=23213"></script>
 
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/frontPageController.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/newFrontPageController.js"></script>
@@ -36,7 +37,7 @@
 
 <!-- Libs 2 -->
 <script type="text/javascript" charset="utf-8" src="js/libs/jquery.cookie.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/libs/jquery.mobile-1.1.0.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/jquery.mobile-1.1.1/jquery.mobile-1.1.1.js"></script>
 <!-- /Libs 2 -->
 <!-- Templates -->
 <script id="membersTable" type="text/html">
@@ -61,6 +62,9 @@
 	</a>
 	</li>
  </script>
+<script id="listviewRow" type="text/html">
+
+</script>
 </head>
 <body>
 
@@ -109,8 +113,13 @@
 <div data-role="page" id="ZMUCA-newFrontpage">
 
 	<div data-role="header">
-		<center><img src="css/images/zapfmaster2000.png" style="width:70%" />
+		<a style="display:none"></a>
+		
+		<center>
+			<img src="css/images/zapfmaster2000.png" style="width:70%" />
 		</center>
+		
+		<a href="index.html" class ="logout" data-icon="custom" data-iconpos="notext"></a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -119,10 +128,60 @@
 		<!-- <a href="#ZMUCA-members" data-role="button">Show Members</a>
 		<a href="#ZMUCA-nukeg" data-role="button">Nu Keg</a> -->
 	</div><!-- /content -->
+<div class="navigation" data-id="ZMUCA-thefooter" data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" >
+<div class="navigation" data-role="navbar" data-iconpos="top" >
+			<ul>
+				<li><a href="#ZMUCA-newFrontpage" class="news" data-icon="custom">News</a></li>
+				<li><a href="#ZMUCA-duels" class="duel" data-icon="custom">Duelle</a></li>
+				<li><a href="#ZMUCA-stats" class="stats" data-icon="custom">Stats</a></li>
+				<li><a href="#ZMUCA-newcheers" class="cheers" data-icon="custom">Prost!</a></li>
+				<li><a href="#ZMUCA-newchallenge" class="dare" data-icon="custom">Dare!</a></li>
+			</ul>
+</div>
+</div>
+</div><!-- /logged in - News -->
+<div data-role="page" id="ZMUCA-duels">
 
+	<div data-role="header">
+		<h1>Aktive Duelle</h1>
+	</div><!-- /header -->
 
-</div><!-- /logged in - Frontpage -->
+	<div data-role="content">
+		Wuff
+	</div><!-- /content -->
+	<div class="navigation" data-id="ZMUCA-thefooter" data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" >
+<div class="navigation" data-role="navbar" data-iconpos="top" >
+			<ul>
+				<li><a href="#ZMUCA-newFrontpage" class="news" data-icon="custom">News</a></li>
+				<li><a href="#ZMUCA-duels" class="duel" data-icon="custom">Duelle</a></li>
+				<li><a href="#ZMUCA-stats" class="stats" data-icon="custom">Stats</a></li>
+				<li><a href="#ZMUCA-newcheers" class="cheers" data-icon="custom">Prost!</a></li>
+				<li><a href="#ZMUCA-newchallenge" class="dare" data-icon="custom">Dare!</a></li>
+			</ul>
+</div>
+</div>
+</div><!-- /New Duels -->
+<div data-role="page" id="ZMUCA-stats">
 
+	<div data-role="header">
+		<h1>Persönliche Statistiken!</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		Wuff
+	</div><!-- /content -->
+	<div class="navigation" data-id="ZMUCA-thefooter" data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" >
+<div class="navigation" data-role="navbar" data-iconpos="top" >
+			<ul>
+				<li><a href="#ZMUCA-newFrontpage" class="news" data-icon="custom">News</a></li>
+				<li><a href="#ZMUCA-duels" class="duel" data-icon="custom">Duelle</a></li>
+				<li><a href="#ZMUCA-stats" class="stats" data-icon="custom">Stats</a></li>
+				<li><a href="#ZMUCA-newcheers" class="cheers" data-icon="custom">Prost!</a></li>
+				<li><a href="#ZMUCA-newchallenge" class="dare" data-icon="custom">Dare!</a></li>
+			</ul>
+</div>
+</div>
+</div><!-- /New Duels -->
 <div data-role="page" id="ZMUCA-newchallenge">
 
 	<div data-role="header">
@@ -134,7 +193,39 @@
 		<div class="mode zm_challenge"></div>
 		<div class="opponent zm_challenge"></div>
 	</div><!-- /content -->
-</div><!-- /New User -->
+	<div class="navigation" data-id="ZMUCA-thefooter" data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" >
+<div class="navigation" data-role="navbar" data-iconpos="top" >
+			<ul>
+				<li><a href="#ZMUCA-newFrontpage" class="news" data-icon="custom">News</a></li>
+				<li><a href="#ZMUCA-duels" class="duel" data-icon="custom">Duelle</a></li>
+				<li><a href="#ZMUCA-stats" class="stats" data-icon="custom">Stats</a></li>
+				<li><a href="#ZMUCA-newcheers" class="cheers" data-icon="custom">Prost!</a></li>
+				<li><a href="#ZMUCA-newchallenge" class="dare" data-icon="custom">Dare!</a></li>
+			</ul>
+</div>
+</div>
+</div><!-- /New Challenge -->
+<div data-role="page" id="ZMUCA-newcheers">
+
+	<div data-role="header">
+		<h1>Anstoße!</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		Wuff
+	</div><!-- /content -->
+	<div class="navigation" data-id="ZMUCA-thefooter" data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" >
+<div class="navigation" data-role="navbar" data-iconpos="top" >
+			<ul>
+				<li><a href="#ZMUCA-newFrontpage" class="news" data-icon="custom">News</a></li>
+				<li><a href="#ZMUCA-duels" class="duel" data-icon="custom">Duelle</a></li>
+				<li><a href="#ZMUCA-stats" class="stats" data-icon="custom">Stats</a></li>
+				<li><a href="#ZMUCA-newcheers" class="cheers" data-icon="custom">Prost!</a></li>
+				<li><a href="#ZMUCA-newchallenge" class="dare" data-icon="custom">Dare!</a></li>
+			</ul>
+</div>
+</div>
+</div><!-- /New Cheers -->
 
 
 </div><!-- /show members-->

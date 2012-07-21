@@ -2,6 +2,7 @@ ZMUCA.newChallengeController = (function($, view, document) {
 	var c = ZMUCA.Constants;
 	var firstCallFlag = false;
 	var id = "ZMUCA-newchallenge";
+	var challengeTab,modeTab,opponentTab;
 	var actualChallenge = {
 			challenge:"",
 			mode:"",
@@ -15,30 +16,39 @@ ZMUCA.newChallengeController = (function($, view, document) {
 		//Goto next tab
 		initMode(challenge);
 		actualChallenge.challenge = challenge;
-		$("#" + id + " [data-role=content] .zm_challenge").hide();
-		$("#" + id + " [data-role=content] .mode").show();
+		challengeTab.fadeOut(function(){
+			modeTab.fadeIn();
+		});
+		
+		//opponentTab.hide();
+		
+//		$("#" + id + " [data-role=content] .zm_challenge").hide();
+//		$("#" + id + " [data-role=content] .mode").show();
 	}
 	var onModeClick = function(mode){
 		initOpponents(mode);
 		actualChallenge.mode = mode;
 		//alert(challengeId.name);
 		//Goto next tab
-		$("#" + id + " [data-role=content] .zm_challenge").hide();
-		$("#" + id + " [data-role=content] .opponent").show();
+		modeTab.fadeOut(function(){
+			opponentTab.fadeIn();
+		});
 		
 	}
-	var onUserClick = function(user){
-		actualChallenge.user = user;
+	var onUserClick = function(event,userModel){
+		actualChallenge.users = [userModel];
+		ZMUCA.log(actualChallenge)
+		//alert(actualChallenge.challenge+"\n"+actualChallenge.mode+"\n"+actualChallenge.user)
 	}
 	var initChallenges = function() {
-		view.renderChallenges("#" + id + " .challenge",c.challenges,onChallengeClick);
+		view.renderChallenges(challengeTab,c.challenges,onChallengeClick);
 	}
 	var initMode = function() {
-		view.renderModes("#" + id + " .mode",c.modes,onModeClick)
+		view.renderModes(modeTab,c.modes,onModeClick)
 	}
 	var initOpponents = function(){
 		ZMUCA.actionsChannel.emit("getAllUsers", function(userModelArr) {
-			view.renderTable("#" + id + " .opponent", userModelArr);
+			view.renderTable(opponentTab, userModelArr,onUserClick);
 		})
 		if (!firstCallFlag) {
 			ZMUCA.log("Setting Tab Events for new Challenge");
@@ -46,24 +56,32 @@ ZMUCA.newChallengeController = (function($, view, document) {
 			// IF new User connected refresh the listview
 			ZMUCA.actionsChannel.on("newUserConnected", function(
 					userModelArr) {
-				view.renderTable("#" + id + " .opponent", userModelArr);
-			})
+				view.renderTable(opponentTab, userModelArr);
+			}) 
 
 			firstCallFlag = true;
 		}
 	}
+	var firstVisitFlag=false;
 	var onPageChange = function(event, data) {
-		$("#" + id + " [data-role=content] .zm_challenge").hide();
-		$("#" + id + " [data-role=content] :first").show();
+		if(!firstVisitFlag){
+			challengeTab = $("#" + id + " .challenge");
+			modeTab = $("#" + id + " .mode");
+			opponentTab = $("#" + id + " .opponent");
+		}
+		modeTab.hide();
+		opponentTab.hide();
+		challengeTab.show();
 
 		ZMUCA.testConnection(function() {
 			initChallenges();
 			
 		})
+		
 	};
 
 	var init = function() {
-
+		
 	};
 
 	var pub = {
@@ -74,4 +92,4 @@ ZMUCA.newChallengeController = (function($, view, document) {
 
 	return pub;
 
-}(jQuery, ZMUCA.newUserView, document));
+}(jQuery, ZMUCA.newChallengeView, document));

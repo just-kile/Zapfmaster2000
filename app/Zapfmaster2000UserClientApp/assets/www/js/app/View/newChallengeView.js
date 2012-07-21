@@ -1,11 +1,16 @@
-ZMUCA.newUserView = (function ($) {
+ZMUCA.newChallengeView = (function ($) {
 
-	var renderTable = function(container,userModelArr){
+	var renderTable = function(container,userModelArr,onUserClick){
 		var table = ich.membersTable();
 		$.each(userModelArr, function(ind, userModel) {
-			table.append(ich.membersTableRow(userModel))
+			var row = ich.membersTableRow(userModel);
+			table.append(row)
+			row.bind("tap",function(event){
+				onUserClick(event,userModel)
+			})
+			
 		});
-		$(container).html(table);
+		container.html(table);
 		table.listview()
 	}
 	var renderChallenges = function(container,challenges,onChallengeClick){
@@ -20,12 +25,12 @@ ZMUCA.newUserView = (function ($) {
 			})
 			table.append(row)
 		})
-		$(container).html(table);
+		container.html(table);
 		table.listview();
 	}
 	var renderModes =function(container,modes,onModeClick){
 		$.each(modes,function(ind,mode){
-			if(mode.id="length"){
+			if(mode.id=="length"){
 				var table = ich.membersTable();
 				$.each(mode.params,function(ind,val){
 					var row = ich.listviewRow({
@@ -37,7 +42,7 @@ ZMUCA.newUserView = (function ($) {
 					})
 					table.append(row)
 				})
-				$(container).html(table);
+				container.html(table);
 				table.listview();
 			}
 		})

@@ -11,6 +11,15 @@ body {
     background-size:100% 100%;
    
 }
+.navigation .ui-btn .ui-btn-inner { padding-top: 40px !important; }
+.navigation .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+.news .ui-icon { background:  url(images/icons/166-newspaper.png) 50% 50% no-repeat; background-size: 24px 22px; }
+.duel .ui-icon { background:  url(images/icons/89-dumbell.png) 50% 50% no-repeat; background-size: 24px 16px;  }
+.stats .ui-icon { background:  url(images/icons/16-line-chart.png) 50% 50% no-repeat;  background-size: 26px 26px; }
+.cheers .ui-icon { background:  url(images/icons/88-beer-mug.png) 50% 50% no-repeat;  background-size: 22px 27px; }
+.dare .ui-icon { background:  url(images/icons/22-skull-n-bones.png) 50% 50% no-repeat;  background-size: 20px 24px; }
+.logout .ui-icon { background:  url(images/icons/102-walk.png) 50% 50% no-repeat;  background-size: 20px 24px; }
+
 .ui-page,.ui-content,.ui-header {
     background: transparent!important;
 }
