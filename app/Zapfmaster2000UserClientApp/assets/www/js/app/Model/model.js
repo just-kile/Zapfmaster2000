@@ -10,3 +10,15 @@ ZMUCA.UserModel = function(config){
 	this.rfid = config.rfid;
 	this.qrcode = config.qrcode;
 }
+
+
+ZMUCA.NewsModel =function(config){
+	this.name = config.name;
+	this.amount = config.amount;
+	this.duration = config.duration;
+	this.date = config.date;
+	this.place = config.place;
+	this.keg =config.keg;
+	this.brand = config.brand;
+	this.image =config.image;
+}

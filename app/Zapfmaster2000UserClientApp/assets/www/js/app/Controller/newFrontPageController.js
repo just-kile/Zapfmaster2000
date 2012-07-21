@@ -1,40 +1,20 @@
 ZMUCA.newFrontPageController = (function ($, view, document) {
-	var userImageUri;
-	var qrCode =1;
-	var c = ZMUCA.Constants;
-   var eventsSetFlag = false;
-   //Photos
-  
-   
-
-	
-	function onFail(message) {
-	    alert('Failed because: ' + message);
-	}
-      
-   //QR Codes
-   var onScanQrCode = function(){
-	   c.debugMode
-	   		?onScanQrCodeSuccess({text:"1",cancelled:false})
-			:window.plugins.barcodeScanner.scan(onScanQrCodeSuccess, onFail);
-		ZMUCA.log("Scanning QR Code")
-	 
-   }
-   var onScanQrCodeSuccess = function(result){
-	   if(!result.cancelled){
-		   ZMUCA.log("Scanned QR Code: "+result.text)
-		   qrCode = result.text
-		   $("#ZMUCA-qrCode").text(qrCode)
-	   }
-	   
-   }
-   
-   
-  var channelHandlerSetFlag = false;
-	var onPageChange = function (event, data) {
+		var onPageChange = function (event, data) {
 		ZMUCA.log("newFrontPageController onPageChange called")
 		//Check if connected to Node js Server Module
-		ZMUCA.testConnection();
+		ZMUCA.testConnection(function(){
+			var news = ich["ZMUCA-news-template"](new ZMUCA.NewsModel({
+				name:"Pete",
+				amount:"20",
+				duration:"39",
+				date:"2012-07-22 00:24:35",
+				place:"Bens Huette",
+				keg:1,
+				brand:"Staropramen",
+				image:"http://server/beerometer/images/avatars/ben.jpg"
+			}));
+			news.appendTo("#ZMUCA-news-container");
+		});
 		if(!eventsSetFlag){
 			$("#ZMUCA-newFrontpage .logout").live("tap",function(){
 				ZMUCA.logout();
@@ -46,15 +26,7 @@ ZMUCA.newFrontPageController = (function ($, view, document) {
 
    
  
-    var onDraw = function(data){
-		ZMUCA.log("onDraw "+data)
-//		jQuery("#test").text(data) 
-	}
-	
-	var onChallenge = function () {
-	    //news.emit('woot');
-	 }
-	
+   
 
 
     var init = function () {

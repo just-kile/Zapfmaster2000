@@ -32,6 +32,10 @@
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/newFrontPageController.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/newChallengeController.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/loginController.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/cheersController.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/duelsController.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/statsController.js"></script>
+
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/controller.js"></script>
 <!-- /App -->
 
@@ -62,8 +66,24 @@
 	</a>
 	</li>
  </script>
-<script id="listviewRow" type="text/html">
-
+<script id="ZMUCA-news-template" type="text/html">
+		<div class="news-drink-box">
+			<div class="news-drink-box-mugshot">
+				<div>
+					<a href="index.php?user=5"><img width="48" height="48" border="0" src="{{image}}"></a>
+				</div>
+			</div>
+			<div class="news-drink-box-details">
+				<div class="news-drink-box-details-headline">
+					<b>{{name}}</b> zapfte <b>{{amount}}</b>l in <b>{{duration}}s</b>
+				</div>
+				<div class="news-box-info">Ort: <a href="index.php?place">{{place}}</a> Fass: <a href="index.php?keg=1">{{keg}}</a> der Marke {{brand}}
+				</div>
+			</div>
+			<div class="news-box-dateline">
+				<abbr title="{{date}}" class="timeago">am {{date}}</abbr>
+			</div>
+		</div>
 </script>
 </head>
 <body>
@@ -112,22 +132,24 @@
 
 <div data-role="page" id="ZMUCA-newFrontpage">
 
-	<div data-role="header">
+	<div data-role="header"  >
 		<a style="display:none"></a>
 		
 		<center>
 			<img src="css/images/zapfmaster2000.png" style="width:70%" />
 		</center>
 		
-		<a href="index.html" class ="logout" data-icon="custom" data-iconpos="notext"></a>
+		<a class ="logout" onClick ="ZMUCA.logout()" data-icon="custom" data-iconpos="notext"></a>
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<a href="#ZMUCA-newchallenge" data-role="button">New Challenge!</a>
-		<a class="logout" data-role="button">Logout</a>
+	<div id="ZMUCA-news-container"></div>
+		<!-- <a href="#ZMUCA-newchallenge" data-role="button">New Challenge!</a>
+		<a class="logout" data-role="button">Logout</a> -->
 		<!-- <a href="#ZMUCA-members" data-role="button">Show Members</a>
 		<a href="#ZMUCA-nukeg" data-role="button">Nu Keg</a> -->
 	</div><!-- /content -->
+	
 <div class="navigation" data-id="ZMUCA-thefooter" data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" >
 <div class="navigation" data-role="navbar" data-iconpos="top" >
 			<ul>
