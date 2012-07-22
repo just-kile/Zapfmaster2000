@@ -193,6 +193,13 @@ ZM.controller = function(uH){
 //		console.log()
 		callback(uH.getAllUserModels());
 	}
+	var onChallengeOffered = function(socketChallenger,challengeModel){
+		console.log(challengeModel);
+		for(var user in challengeModel.users){
+			var socketVictim  = uH.getUserSocket(challengeModel.users[user].qrcode);
+			socketVictim.emit("challenge offered",challengeModel)
+		}
+	}
 	/**
 	 * Saves the socket for initialization
 	 */
@@ -238,6 +245,9 @@ ZM.controller = function(uH){
 			  socket.on(actionEv.getAllUsers ,function(callback){
 				  onGetAllUsers(socket,callback)
 			  });
+			  socket.on("challenge offered",function(challengeModel){
+				  onChallengeOffered(socket,challengeModel)
+			  })
 			  socket.on("disconnect",function(){
 				  onGetAllUsers(socket,function(userModelArr){
 					  socket.broadcast.emit(actionEv.newUserConnected,userModelArr);

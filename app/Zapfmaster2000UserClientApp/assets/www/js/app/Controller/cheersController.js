@@ -10,12 +10,7 @@ ZMUCA.cheersController = (function ($, view, document) {
 		ZMUCA.log("cheersController onPageChange called")
 		//Check if connected to Node js Server Module
 		ZMUCA.testConnection();
-		if(!eventsSetFlag){
-			$("#ZMUCA-newFrontpage .logout").live("tap",function(){
-				ZMUCA.logout();
-			})
-			eventsSetFlag = true;
-		}
+		
 		
     };
  
@@ -27,7 +22,7 @@ ZMUCA.cheersController = (function ($, view, document) {
 
     var pub = {
         init: init,
-       // onPageChange:onPageChange,
+        onPageChange:onPageChange,
         
     };
 

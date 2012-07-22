@@ -22,3 +22,9 @@ ZMUCA.NewsModel =function(config){
 	this.brand = config.brand;
 	this.image =config.image;
 }
+
+ZMUCA.ChallengeModel = function(config){
+	this.challenge = config.challenge;
+	this.users =config.users;
+	this.mode = config.mode;
+}

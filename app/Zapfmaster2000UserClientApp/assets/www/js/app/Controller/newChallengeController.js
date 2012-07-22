@@ -3,11 +3,11 @@ ZMUCA.newChallengeController = (function($, view, document) {
 	var firstCallFlag = false;
 	var id = "ZMUCA-newchallenge";
 	var challengeTab,modeTab,opponentTab;
-	var actualChallenge = {
+	var actualChallenge = new ZMUCA.ChallengeModel({
 			challenge:"",
 			mode:"",
 			users:{}
-	}
+	});
 	// Submits
 	var onSubmit = function() {
 	}
@@ -37,7 +37,8 @@ ZMUCA.newChallengeController = (function($, view, document) {
 	}
 	var onUserClick = function(event,userModel){
 		actualChallenge.users = [userModel];
-		ZMUCA.log(actualChallenge)
+		ZMUCA.log(actualChallenge);
+		ZMUCA.actionsChannel.emit("challenge offered",actualChallenge)
 		//alert(actualChallenge.challenge+"\n"+actualChallenge.mode+"\n"+actualChallenge.user)
 	}
 	var initChallenges = function() {
@@ -56,7 +57,7 @@ ZMUCA.newChallengeController = (function($, view, document) {
 			// IF new User connected refresh the listview
 			ZMUCA.actionsChannel.on("newUserConnected", function(
 					userModelArr) {
-				view.renderTable(opponentTab, userModelArr);
+				view.renderTable(opponentTab, userModelArr,onUserClick);
 			}) 
 
 			firstCallFlag = true;
@@ -64,6 +65,7 @@ ZMUCA.newChallengeController = (function($, view, document) {
 	}
 	var firstVisitFlag=false;
 	var onPageChange = function(event, data) {
+		ZMUCA.log("newChallengeCOntroller onPageChange called")
 		if(!firstVisitFlag){
 			challengeTab = $("#" + id + " .challenge");
 			modeTab = $("#" + id + " .mode");

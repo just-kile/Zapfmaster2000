@@ -12,9 +12,12 @@
 <script type="text/javascript" charset="utf-8" src="js/libs/ICanHaz.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/md5.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/barcodescanner.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/LocalNotification.js"></script>
+
 <!-- /Libs 1 -->
 <!-- Style -->
 <link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css" />
+<!-- <link rel="stylesheet" href="css/themes/zmuca.css" /> -->
 <link rel="stylesheet" href="css/style.css" />
 <!-- /Style -->
 <!-- App -->
@@ -29,9 +32,10 @@
 <script type="text/javascript" charset="utf-8" src="js/app/View/newChallengeView.js?version=23213"></script>
 
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/frontPageController.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/loginController.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/Controller/acceptChallengeController.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/newFrontPageController.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/newChallengeController.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/app/Controller/loginController.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/cheersController.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/duelsController.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/statsController.js"></script>
@@ -42,6 +46,8 @@
 <!-- Libs 2 -->
 <script type="text/javascript" charset="utf-8" src="js/libs/jquery.cookie.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/jquery.mobile-1.1.1/jquery.mobile-1.1.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/jqm.page.params.js"></script>
+
 <!-- /Libs 2 -->
 <!-- Templates -->
 <script id="membersTable" type="text/html">
@@ -104,7 +110,7 @@
 
 
 </div><!-- /Frontpage -->
-<div data-role="page" id="ZMUCA-login">
+<div data-role="dialog" id="ZMUCA-login">
 
 	<div data-role="header">
 		<h1>Login</h1>
@@ -129,7 +135,25 @@
 	<a id="ZMUCA-login-qr" data-role="button">Oder: Scanne den QR Code deiner ZM2K&reg; Karte!</a>
 	</div><!-- /content -->
 </div><!-- /Login -->
+<div data-role="dialog" id="ZMUCA-acceptChallenge">
 
+	<div data-role="header">
+		<h1>Login</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			
+	<fieldset class="ui-grid-a">
+		
+	<div class="ui-block-a">
+		<div id="ZMUCA-acceptChallenge-submit" data-role="button">Allet Klar!</div>
+	</div>
+	<div class="ui-block-b">
+		<a id="ZMUCA-acceptChallenge-cancel" data-role="button">Pussy Out!</a>
+	</div>
+	</fieldset>
+	</div><!-- /content -->
+</div><!-- /accept challenge -->
 <div data-role="page" id="ZMUCA-newFrontpage">
 
 	<div data-role="header"  >
@@ -142,7 +166,7 @@
 		<a class ="logout" onClick ="ZMUCA.logout()" data-icon="custom" data-iconpos="notext"></a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-role="content" style="height:20em">
 	<div id="ZMUCA-news-container"></div>
 		<!-- <a href="#ZMUCA-newchallenge" data-role="button">New Challenge!</a>
 		<a class="logout" data-role="button">Logout</a> -->
@@ -210,7 +234,7 @@
 		<h1>Neue Challenge!</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-role="content" style="height:27em">
 		<div class="challenge zm_challenge"><p style="color:white">W‰hle den Modus aus!</p></div>
 		<div class="mode zm_challenge"></div>
 		<div class="opponent zm_challenge"></div>
@@ -233,7 +257,7 @@
 		<h1>Anstoﬂe!</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div data-role="content" style="height:27em">
 		Wuff
 	</div><!-- /content -->
 	<div class="navigation" data-id="ZMUCA-thefooter" data-role="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" >

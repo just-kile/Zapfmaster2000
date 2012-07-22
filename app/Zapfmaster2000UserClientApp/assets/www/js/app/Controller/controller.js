@@ -3,6 +3,10 @@ ZMUCA.controller = (function($, view, document, subcontrollers) {
 	var newFrontPageId = "ZMUCA-newFrontpage"
 	var loginId = "ZMUCA-login";
 	var newChallenge = "ZMUCA-newchallenge";
+	var duelsId = "ZMUCA-duels";
+	var cheersId = "ZMUCA-newcheers";
+	var statsId = "ZMUCA-stats";
+	var acceptChallengeId ="ZMUCA-acceptChallenge";
 	var onPageChange = function(event, data) {
 
 		var toPageId = data.toPage.attr("id");
@@ -28,37 +32,49 @@ ZMUCA.controller = (function($, view, document, subcontrollers) {
 				case loginId:
 					subcontrollers.loginController.onPageChange();
 					break;
+				case acceptChallengeId:
+					subcontrollers.acceptChallengeController.onPageChange();
+					break;
 				case newFrontPageId:
 					subcontrollers.newFrontPageController.onPageChange();
 					break;
 				case newChallenge:
 					subcontrollers.newChallengeController.onPageChange();
 					break;
+				case cheersId:
+					subcontrollers.cheersController.onPageChange();
+					break;
+				case duelsId:
+					subcontrollers.duelsController.onPageChange();
+					break;	
+				case statsId:
+					subcontrollers.statsController.onPageChange();
+					break;	
 				}
 //			})
 //		}
 	};
-	var loginTest = function(user,callback) {
-		if (typeof ZMUCA.drawChannel == "undefined") {
-			ZMUCA.login(user.password, function(userModel) {
-				ZMUCA.log("Logged in!");
-				ZMUCA.log("Hallo " + userModel.name + "!");
-
-				// window.plugins.tts.speak("Hello Idiot!",function(){
-				// alert("Fertsch")
-				// },function(){
-				// alert("Fehler")
-				// });
-				// $.mobile.changePage("#ZMUCA-newFrontpage")
-				callback();
-			}, function() {
-				onFail("Pin nicht existent! Bitte erneut eingeben");
-				$("#ZMUCA-login-pin").val("");
-			});
-		} else {
-			callback()
-		}
-	}
+//	var loginTest = function(user,callback) {
+//		if (typeof ZMUCA.drawChannel == "undefined") {
+//			ZMUCA.login(user.password, function(userModel) {
+//				ZMUCA.log("Logged in!");
+//				ZMUCA.log("Hallo " + userModel.name + "!");
+//
+//				// window.plugins.tts.speak("Hello Idiot!",function(){
+//				// alert("Fertsch")
+//				// },function(){
+//				// alert("Fehler")
+//				// });
+//				// $.mobile.changePage("#ZMUCA-newFrontpage")
+//				callback();
+//			}, function() {
+//				onFail("Pin nicht existent! Bitte erneut eingeben");
+//				$("#ZMUCA-login-pin").val("");
+//			});
+//		} else {
+//			callback()
+//		}
+//	}
 	var onPageBeforeChange = function(event, data) {
 
 		if (typeof data.toPage === "string") {
@@ -82,6 +98,7 @@ ZMUCA.controller = (function($, view, document, subcontrollers) {
 		$.each(subcontrollers, function(key, controller) {
 			controller.init();
 		});
+		
 
 	};
 
@@ -95,8 +112,14 @@ ZMUCA.controller = (function($, view, document, subcontrollers) {
 	frontPageController : ZMUCA.frontPageController,
 	newChallengeController : ZMUCA.newChallengeController,
 	loginController : ZMUCA.loginController,
+	acceptChallengeController:ZMUCA.acceptChallengeController,
 	newFrontPageController : ZMUCA.newFrontPageController,
-	newChallengeController : ZMUCA.newChallengeController
+	newChallengeController : ZMUCA.newChallengeController,
+	statsController : ZMUCA.statsController,
+	duelsController : ZMUCA.duelsController,
+	cheersController : ZMUCA.cheersController
+	
+	
 }));
 
 $(document).bind("mobileinit", function() {

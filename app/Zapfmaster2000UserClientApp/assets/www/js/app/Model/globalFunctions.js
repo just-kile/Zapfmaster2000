@@ -116,7 +116,25 @@ ZMUCA.connect = function(userModel,callback){
 		ZMUCA.actionsChannel = io.connect(c.node.actionsUrl).on('connect', function () {
 			ZMUCA.actionsChannel.emit("initUser",userModel);
 			if(typeof callback != "undefined")callback();
+			
+		}).on('challenge offered',function(challengeModel){
+			
+			ZMUCA.acceptChallengeController.initChallenge(challengeModel);
+			$.mobile.changePage("#ZMUCA-acceptChallenge", 'pop', true, true);
+			if(typeof navigator.notification!= "undefined"){
+				navigator.notification.beep(2);
+				navigator.notification.vibrate(2000);
+				window.plugins.localNotification.add({
+					date:new Date(),
+					 ticker : "Eine neue Challenge wartet auf dich!",
+                     repeatDaily : false,
+                     id : 4,
+                     message:"Eine Neue Challenge für dich!"
+				})
+			}
+			
 		});
+		
 	}else{
 		ZMUCA.actionsChannel.emit("initUser",userModel);
 		if(typeof callback != "undefined")callback();
