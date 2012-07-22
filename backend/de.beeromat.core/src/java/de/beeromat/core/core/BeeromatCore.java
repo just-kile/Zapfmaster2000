@@ -3,9 +3,9 @@ package de.beeromat.core.core;
 import de.beeromat.core.BeeromatCoreActivator;
 import de.beeromat.core.config.ConfigManager;
 import de.beeromat.core.draw.DrawManager;
-import de.beeromat.core.input.RawInputProvider;
-import de.beeromat.core.keg.KegManager;
 import de.beeromat.core.request.RequestExecutor;
+import de.zapfmaster2000.webservice.input.RawInputProvider;
+import de.zapfmaster2000.webservice.keg.KegManager;
 
 /**
  * The core of the plugin is the central place to access the functionality of

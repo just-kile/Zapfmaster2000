@@ -16,12 +16,12 @@ import org.eclipse.core.runtime.Assert;
 import de.beeromat.core.draw.DrawManager;
 import de.beeromat.core.draw.DrawManagerAdapter;
 import de.beeromat.core.draw.DrawManagerListener;
-import de.beeromat.core.input.RawInputProvider;
 import de.beeromat.core.input.RawInputProviderListener;
 import de.beeromat.core.model.FailedLoginStatus;
 import de.beeromat.core.model.db.User;
 import de.beeromat.internal.core.draw.DrawManagerImpl;
 import de.beeromat.internal.core.model.LoginDescriptor;
+import de.zapfmaster2000.webservice.input.RawInputProvider;
 
 public class LoginHandler {
 

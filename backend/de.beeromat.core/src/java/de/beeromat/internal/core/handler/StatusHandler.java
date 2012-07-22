@@ -8,11 +8,11 @@ import org.apache.log4j.Logger;
 import de.beeromat.core.draw.DrawManager;
 import de.beeromat.core.draw.DrawManagerAdapter;
 import de.beeromat.core.draw.DrawManagerListener;
-import de.beeromat.core.input.RawInputProvider;
 import de.beeromat.core.model.FailedLoginStatus;
 import de.beeromat.core.model.db.User;
 import de.beeromat.internal.core.input.RawInputProviderImpl;
 import de.beeromat.internal.core.input.Serial;
+import de.zapfmaster2000.webservice.input.RawInputProvider;
 
 public class StatusHandler {
 

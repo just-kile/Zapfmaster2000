@@ -2,8 +2,8 @@ package de.beeromat.core.achievemnt;
 
 import java.util.List;
 
-import de.beeromat.core.db.DBUtil;
 import de.beeromat.core.model.db.User;
+import de.zapfmaster2000.webservice.db.DBUtil;
 
 public abstract class AbstractUniqueAchievementProcessor extends
 		AbstractAchievementProcessor {

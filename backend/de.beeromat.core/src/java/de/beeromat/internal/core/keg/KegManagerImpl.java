@@ -6,10 +6,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import de.beeromat.core.db.SessionFactoryUtil;
-import de.beeromat.core.keg.KegManager;
 import de.beeromat.core.model.db.Keg;
 import de.beeromat.core.model.db.User;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
+import de.zapfmaster2000.webservice.keg.KegManager;
 
 public class KegManagerImpl implements KegManager {
 

@@ -1,5 +1,7 @@
 package de.beeromat.core.input;
 
+import de.zapfmaster2000.webservice.input.RawInputProvider;
+
 /**
  * The raw input provider listener is used to receive changes with help of the
  * {@link RawInputProvider}.

@@ -7,10 +7,10 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 import de.beeromat.core.achievemnt.AbstractTimedAchievementProcessor;
-import de.beeromat.core.db.DBUtil;
-import de.beeromat.core.db.SessionFactoryUtil;
 import de.beeromat.core.model.db.Drawing;
 import de.beeromat.core.model.db.User;
+import de.zapfmaster2000.webservice.db.DBUtil;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
 
 public class DerLetzteKunde extends AbstractTimedAchievementProcessor {
 

@@ -16,8 +16,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.log4j.Logger;
 
-import de.beeromat.core.input.RawInputProvider;
 import de.beeromat.core.input.RawInputProviderListener;
+import de.zapfmaster2000.webservice.input.RawInputProvider;
 
 /**
  * Mock implementation for the {@link RawInputProvider}.

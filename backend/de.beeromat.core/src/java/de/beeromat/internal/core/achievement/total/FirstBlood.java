@@ -4,9 +4,9 @@ import java.util.List;
 
 import de.beeromat.core.BeeromatCoreActivator;
 import de.beeromat.core.achievemnt.AbstractAchievementProcessor;
-import de.beeromat.core.db.DBUtil;
 import de.beeromat.core.model.db.Keg;
 import de.beeromat.core.model.db.User;
+import de.zapfmaster2000.webservice.db.DBUtil;
 
 public class FirstBlood extends AbstractAchievementProcessor {
 

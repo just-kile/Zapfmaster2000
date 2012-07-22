@@ -12,10 +12,10 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 import de.beeromat.core.config.ConfigManager;
-import de.beeromat.core.db.SessionFactoryUtil;
 import de.beeromat.core.extension.config.Config;
 import de.beeromat.core.extension.config.ConfigExtension;
 import de.beeromat.core.extension.config.ConfigExtensionResolver;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
 
 public class ConfigManagerImpl implements ConfigManager {
 

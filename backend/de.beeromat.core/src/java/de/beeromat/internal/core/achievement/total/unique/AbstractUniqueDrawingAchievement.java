@@ -6,9 +6,9 @@ import de.beeromat.core.BeeromatCoreActivator;
 import de.beeromat.core.achievemnt.AbstractAchievementProcessor;
 import de.beeromat.core.config.ConfigKeys;
 import de.beeromat.core.config.ConfigManager;
-import de.beeromat.core.db.DBUtil;
 import de.beeromat.core.model.db.Drawing;
 import de.beeromat.core.model.db.User;
+import de.zapfmaster2000.webservice.db.DBUtil;
 
 public abstract class AbstractUniqueDrawingAchievement extends
 		AbstractAchievementProcessor {
