@@ -24,12 +24,51 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="drawResponse">
     <complexType/>
    </element>
+   <element name="declineChallenge">
+    <complexType>
+     <sequence>
+      <element name="pUserId" type="xsd:int"/>
+      <element name="pText" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="declineChallengeResponse">
+    <complexType/>
+   </element>
+   <element name="startChallenge1V1">
+    <complexType>
+     <sequence>
+      <element name="pUserId1" type="xsd:int"/>
+      <element name="pUserId2" type="xsd:int"/>
+      <element name="pDuration" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="startChallenge1V1Response">
+    <complexType/>
+   </element>
   </schema>
  </wsdl:types>
+
+   <wsdl:message name="declineChallengeResponse">
+
+      <wsdl:part element="impl:declineChallengeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
 
    <wsdl:message name="drawRequest">
 
       <wsdl:part element="impl:draw" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="startChallenge1V1Request">
+
+      <wsdl:part element="impl:startChallenge1V1" name="parameters">
 
       </wsdl:part>
 
@@ -51,9 +90,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="declineChallengeRequest">
+
+      <wsdl:part element="impl:declineChallenge" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="loginRequest">
 
       <wsdl:part element="impl:login" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="startChallenge1V1Response">
+
+      <wsdl:part element="impl:startChallenge1V1Response" name="parameters">
 
       </wsdl:part>
 
@@ -80,6 +135,30 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:drawResponse" name="drawResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="declineChallenge">
+
+         <wsdl:input message="impl:declineChallengeRequest" name="declineChallengeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:declineChallengeResponse" name="declineChallengeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="startChallenge1V1">
+
+         <wsdl:input message="impl:startChallenge1V1Request" name="startChallenge1V1Request">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:startChallenge1V1Response" name="startChallenge1V1Response">
 
        </wsdl:output>
 
@@ -120,6 +199,42 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="drawResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="declineChallenge">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="declineChallengeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="declineChallengeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="startChallenge1V1">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="startChallenge1V1Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="startChallenge1V1Response">
 
             <wsdlsoap:body use="literal"/>
 

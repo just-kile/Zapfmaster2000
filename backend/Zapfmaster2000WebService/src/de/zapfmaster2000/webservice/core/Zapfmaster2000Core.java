@@ -1,6 +1,8 @@
 package de.zapfmaster2000.webservice.core;
 
 import de.zapfmaster2000.webservice.achievement.AchievementManagerImpl;
+import de.zapfmaster2000.webservice.challenge.ChallengeManager;
+import de.zapfmaster2000.webservice.challenge.ChallengeManagerImpl;
 import de.zapfmaster2000.webservice.config.ConfigManager;
 import de.zapfmaster2000.webservice.config.ConfigManagerImpl;
 import de.zapfmaster2000.webservice.draw.DrawManager;
@@ -35,6 +37,8 @@ public class Zapfmaster2000Core {
 	private KegManager kegManager;
 
 	private ConfigManager configManager;
+	
+	private ChallengeManager challengeManager;
 
 	private Zapfmaster2000Core() {
 		instance = this;
@@ -44,6 +48,7 @@ public class Zapfmaster2000Core {
 		requestExecutor = new RequestExecutorImpl();
 		kegManager = new KegManagerImpl();
 		configManager = new ConfigManagerImpl();
+		challengeManager = new ChallengeManagerImpl();
 		
 		// handlers
 		new StatusHandler(rawInputProvider, drawManager);
@@ -83,6 +88,10 @@ public class Zapfmaster2000Core {
 
 	public ConfigManager getConfigManager() {
 		return configManager;
+	}
+	
+	public ChallengeManager getChallengeManager() {
+		return challengeManager;
 	}
 
 }

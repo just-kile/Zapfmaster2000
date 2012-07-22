@@ -35,7 +35,16 @@
   <ns1:operation name="draw" qname="ns2:draw" soapAction="" xmlns:ns2="http://webservice.zapfmaster2000.de">
    <ns1:parameter qname="ns2:pNumTicks" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="draw login"/>
+  <ns1:operation name="declineChallenge" qname="ns3:declineChallenge" soapAction="" xmlns:ns3="http://webservice.zapfmaster2000.de">
+   <ns1:parameter qname="ns3:pUserId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:pText" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="startChallenge1V1" qname="ns4:startChallenge1V1" soapAction="" xmlns:ns4="http://webservice.zapfmaster2000.de">
+   <ns1:parameter qname="ns4:pUserId1" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:pUserId2" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:pDuration" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="draw startChallenge1V1 login declineChallenge"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="Zapfmaster2000Service"/>
   <ns1:parameter name="className" value="de.zapfmaster2000.webservice.Zapfmaster2000Service"/>

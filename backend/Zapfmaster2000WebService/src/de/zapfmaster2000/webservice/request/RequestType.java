@@ -6,5 +6,11 @@ public enum RequestType {
 	
 	ACHIEVEMENT,
 	
-	OTHER
+	OTHER,
+	
+	CHALLENGE_STARTED,
+	
+	CHALLENGE_DONE,
+	
+	CHALLENGE_DECLINED
 }

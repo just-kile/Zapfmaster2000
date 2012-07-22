@@ -16,7 +16,16 @@
       <operation xmlns:operNS="http://webservice.zapfmaster2000.de" name="draw" qname="operNS:draw" soapAction="">
         <parameter xmlns:pns="http://webservice.zapfmaster2000.de" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pNumTicks" type="tns:int"/>
       </operation>
-      <parameter name="allowedMethods" value="draw login"/>
+      <operation xmlns:operNS="http://webservice.zapfmaster2000.de" name="declineChallenge" qname="operNS:declineChallenge" soapAction="">
+        <parameter xmlns:pns="http://webservice.zapfmaster2000.de" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pUserId" type="tns:int"/>
+        <parameter xmlns:pns="http://webservice.zapfmaster2000.de" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pText" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://webservice.zapfmaster2000.de" name="startChallenge1V1" qname="operNS:startChallenge1V1" soapAction="">
+        <parameter xmlns:pns="http://webservice.zapfmaster2000.de" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pUserId1" type="tns:int"/>
+        <parameter xmlns:pns="http://webservice.zapfmaster2000.de" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pUserId2" type="tns:int"/>
+        <parameter xmlns:pns="http://webservice.zapfmaster2000.de" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pDuration" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="draw startChallenge1V1 login declineChallenge"/>
 
   </service>
 </deployment>
