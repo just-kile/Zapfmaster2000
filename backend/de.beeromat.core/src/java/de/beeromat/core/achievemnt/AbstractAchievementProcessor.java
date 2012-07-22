@@ -11,13 +11,13 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 import de.beeromat.core.BeeromatCoreActivator;
-import de.beeromat.core.db.SessionFactoryUtil;
 import de.beeromat.core.model.db.Achievement;
 import de.beeromat.core.model.db.GainedAchievement;
 import de.beeromat.core.model.db.News;
 import de.beeromat.core.model.db.User;
 import de.beeromat.core.request.RequestExecutor;
 import de.beeromat.core.request.RequestType;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
 
 /**
  * Checks if a user earned a specific achievement.

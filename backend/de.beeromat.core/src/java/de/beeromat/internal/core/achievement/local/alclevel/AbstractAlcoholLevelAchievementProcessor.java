@@ -7,8 +7,8 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 import de.beeromat.core.achievemnt.AbstractAchievementProcessor;
-import de.beeromat.core.db.SessionFactoryUtil;
 import de.beeromat.core.model.db.User;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
 
 public abstract class AbstractAlcoholLevelAchievementProcessor extends
 		AbstractAchievementProcessor {

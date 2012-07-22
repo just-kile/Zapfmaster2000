@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from Zapfmaster2000ServiceService WSDL service -->
+
+  <service name="Zapfmaster2000Service" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://webservice.zapfmaster2000.de"/>
+      <parameter name="wsdlServiceElement" value="Zapfmaster2000ServiceService"/>
+      <parameter name="schemaQualified" value="http://webservice.zapfmaster2000.de"/>
+      <parameter name="wsdlServicePort" value="Zapfmaster2000Service"/>
+      <parameter name="className" value="de.zapfmaster2000.webservice.Zapfmaster2000Service"/>
+      <parameter name="wsdlPortType" value="Zapfmaster2000Service"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://webservice.zapfmaster2000.de" name="login" qname="operNS:login" soapAction="">
+        <parameter xmlns:pns="http://webservice.zapfmaster2000.de" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pId" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://webservice.zapfmaster2000.de" name="draw" qname="operNS:draw" soapAction="">
+        <parameter xmlns:pns="http://webservice.zapfmaster2000.de" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pNumTicks" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="draw login"/>
+
+  </service>
+</deployment>

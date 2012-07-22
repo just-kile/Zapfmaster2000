@@ -9,10 +9,7 @@ import org.hibernate.classic.Session;
 import de.beeromat.core.achievemnt.AchievementManager;
 import de.beeromat.core.config.ConfigManager;
 import de.beeromat.core.core.BeeromatCore;
-import de.beeromat.core.db.SessionFactoryUtil;
 import de.beeromat.core.draw.DrawManager;
-import de.beeromat.core.input.RawInputProvider;
-import de.beeromat.core.keg.KegManager;
 import de.beeromat.core.request.RequestExecutor;
 import de.beeromat.internal.core.achievement.AchievementManagerImpl;
 import de.beeromat.internal.core.config.ConfigManagerImpl;
@@ -24,6 +21,9 @@ import de.beeromat.internal.core.input.RawInputProviderImpl;
 import de.beeromat.internal.core.input.RawInputProviderMock;
 import de.beeromat.internal.core.keg.KegManagerImpl;
 import de.beeromat.internal.core.request.RequestExecutorImpl;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
+import de.zapfmaster2000.webservice.input.RawInputProvider;
+import de.zapfmaster2000.webservice.keg.KegManager;
 
 /**
  * Implemenation of {@link BeeromatCore}.

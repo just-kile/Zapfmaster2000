@@ -10,8 +10,8 @@ import de.beeromat.core.BeeromatCoreActivator;
 import de.beeromat.core.achievemnt.AbstractUniqueAchievementProcessor;
 import de.beeromat.core.config.ConfigKeys;
 import de.beeromat.core.config.ConfigManager;
-import de.beeromat.core.db.SessionFactoryUtil;
 import de.beeromat.core.model.db.User;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
 
 public abstract class AbstractGlobalTotalAchievementProcessor extends
 		AbstractUniqueAchievementProcessor {

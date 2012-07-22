@@ -8,9 +8,9 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 import de.beeromat.core.achievemnt.AbstractTimedAchievementProcessor;
-import de.beeromat.core.db.SessionFactoryUtil;
 import de.beeromat.core.model.db.User;
 import de.beeromat.internal.core.draw.DrawManagerImpl;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
 
 public class Abstinenzler extends AbstractTimedAchievementProcessor {
 

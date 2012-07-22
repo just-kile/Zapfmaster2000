@@ -14,14 +14,14 @@ import org.hibernate.Transaction;
 import de.beeromat.core.BeeromatCoreActivator;
 import de.beeromat.core.config.ConfigKeys;
 import de.beeromat.core.config.ConfigManager;
-import de.beeromat.core.db.SessionFactoryUtil;
 import de.beeromat.core.draw.DrawManager;
 import de.beeromat.core.draw.DrawManagerListener;
-import de.beeromat.core.input.RawInputProvider;
 import de.beeromat.core.input.RawInputProviderListener;
 import de.beeromat.core.model.FailedLoginStatus;
 import de.beeromat.core.model.FailedLoginStatus.Type;
 import de.beeromat.core.model.db.User;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
+import de.zapfmaster2000.webservice.input.RawInputProvider;
 
 /**
  * Implementation of {@link DrawManager}.

@@ -12,7 +12,6 @@ import org.hibernate.classic.Session;
 
 import de.beeromat.core.achievemnt.AbstractAchievementProcessor;
 import de.beeromat.core.achievemnt.AchievementManager;
-import de.beeromat.core.db.SessionFactoryUtil;
 import de.beeromat.core.draw.DrawManager;
 import de.beeromat.core.draw.DrawManagerAdapter;
 import de.beeromat.core.draw.DrawManagerListener;
@@ -22,6 +21,7 @@ import de.beeromat.core.extension.achievement.AchievementExtensionResolver;
 import de.beeromat.core.model.db.User;
 import de.beeromat.internal.core.handler.DrawingsHandler;
 import de.beeromat.internal.core.handler.DrawingsHandlerListener;
+import de.zapfmaster2000.webservice.db.SessionFactoryUtil;
 
 public class AchievementManagerImpl implements AchievementManager {
 
