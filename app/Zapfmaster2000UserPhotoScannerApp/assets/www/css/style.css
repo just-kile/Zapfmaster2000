@@ -1,0 +1,16 @@
+.ZMUPSA-newuser-lineHeight{
+	 color:white;line-height:55px;
+	
+	}
+	
+body {
+    background-image: url(images/backgrnd2.jpg)!important;
+    background-repeat:repeat-y;
+    background-position:center center;
+    background-attachment:scroll;
+    background-size:100% 100%;
+   
+}
+.ui-page,.ui-content,.ui-header {
+    background: transparent!important;
+}
