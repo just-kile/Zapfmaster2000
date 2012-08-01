@@ -18,10 +18,7 @@ ZMUCA.newChallengeView = (function ($) {
 	var renderChallenges = function(container,challenges,onChallengeClick){
 		var table = ich.membersTable();
 		$.each(challenges,function(ind,val){
-			var row = ich.listviewRow({
-				name:val.name,
-				image:val.image
-			});
+			var row = ich.listviewRow(val);
 			row.bind("tap",function(e){
 				e.stopPropagation();
 				e.preventDefault();

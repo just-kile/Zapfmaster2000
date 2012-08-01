@@ -21,6 +21,7 @@ ZMUCA.NewsModel =function(config){
 	this.keg =config.keg;
 	this.brand = config.brand;
 	this.image =config.image;
+	this.userid = config.userid;
 }
 
 /**
