@@ -6,7 +6,8 @@ ZMUCA.newChallengeController = (function($, view, document) {
 	var actualChallenge = new ZMUCA.ChallengeModel({
 			challenge:"",
 			mode:"",
-			users:{}
+			challenger:[],
+			victim:[]
 	});
 	// Submits
 	var onSubmit = function() {
@@ -36,9 +37,10 @@ ZMUCA.newChallengeController = (function($, view, document) {
 		
 	}
 	var onUserClick = function(event,userModel){
-		actualChallenge.users = [userModel];
+		actualChallenge.victim.push( userModel);
+		actualChallenge.challenger.push(ZMUCA.getUser());
 		ZMUCA.log(actualChallenge);
-		ZMUCA.actionsChannel.emit("challenge offered",actualChallenge)
+		ZMUCA.actionsChannel.emit("challengeOffered",actualChallenge)
 		//alert(actualChallenge.challenge+"\n"+actualChallenge.mode+"\n"+actualChallenge.user)
 	}
 	var initChallenges = function() {
@@ -79,6 +81,13 @@ ZMUCA.newChallengeController = (function($, view, document) {
 			initChallenges();
 			
 		})
+		actualChallenge = new ZMUCA.ChallengeModel({
+			challenge:"",
+			mode:"",
+			challenger:[],
+			victim:[],
+			id:UUID.create()
+		});
 		
 	};
 

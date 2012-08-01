@@ -48,5 +48,8 @@ ZMUCA.Constants ={
 				image:"images/avatars/felix.jpg",
 				length:60
 			}]
-		}]
+		}],
+		badExcuses :["Muss morgen früh raus, um in den Anden Kajak zu fahren",
+		             "Trinke lieber nen Tee",
+		             "Hab Mami versprochen weniger zu trinken." ]
 }	

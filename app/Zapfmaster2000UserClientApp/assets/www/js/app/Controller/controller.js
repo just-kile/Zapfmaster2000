@@ -27,28 +27,28 @@ ZMUCA.controller = (function($, view, document, subcontrollers) {
 				switch (toPageId) {
 
 				case frontPageId:
-					subcontrollers.frontPageController.onPageChange();
+					subcontrollers.frontPageController.onPageChange(event, data);
 					break;
 				case loginId:
-					subcontrollers.loginController.onPageChange();
+					subcontrollers.loginController.onPageChange(event, data);
 					break;
 				case acceptChallengeId:
-					subcontrollers.acceptChallengeController.onPageChange();
+					subcontrollers.acceptChallengeController.onPageChange(event, data);
 					break;
 				case newFrontPageId:
-					subcontrollers.newFrontPageController.onPageChange();
+					subcontrollers.newFrontPageController.onPageChange(event, data);
 					break;
 				case newChallenge:
-					subcontrollers.newChallengeController.onPageChange();
+					subcontrollers.newChallengeController.onPageChange(event, data);
 					break;
 				case cheersId:
-					subcontrollers.cheersController.onPageChange();
+					subcontrollers.cheersController.onPageChange(event, data);
 					break;
 				case duelsId:
-					subcontrollers.duelsController.onPageChange();
+					subcontrollers.duelsController.onPageChange(event, data);
 					break;	
 				case statsId:
-					subcontrollers.statsController.onPageChange();
+					subcontrollers.statsController.onPageChange(event, data);
 					break;	
 				}
 //			})

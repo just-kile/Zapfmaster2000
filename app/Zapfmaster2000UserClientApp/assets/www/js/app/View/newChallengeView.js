@@ -5,8 +5,10 @@ ZMUCA.newChallengeView = (function ($) {
 		$.each(userModelArr, function(ind, userModel) {
 			var row = ich.membersTableRow(userModel);
 			table.append(row)
-			row.bind("tap",function(event){
-				onUserClick(event,userModel)
+			row.bind("tap",function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				onUserClick(e,userModel)
 			})
 			
 		});
@@ -20,7 +22,9 @@ ZMUCA.newChallengeView = (function ($) {
 				name:val.name,
 				image:val.image
 			});
-			row.bind("tap",function(){
+			row.bind("tap",function(e){
+				e.stopPropagation();
+				e.preventDefault();
 				onChallengeClick(val)
 			})
 			table.append(row)
@@ -37,7 +41,9 @@ ZMUCA.newChallengeView = (function ($) {
 						name:val.name,
 						image:val.image
 					});
-					row.bind("tap",function(){
+					row.bind("tap",function(e){
+						e.stopPropagation();
+						e.preventDefault();
 						onModeClick(val)
 					})
 					table.append(row)

@@ -66,7 +66,7 @@ ZMUCA.login = function(pin,success,fail){
 				   });
 				   
 			   }catch(e){
-				   TOMO.log(e);
+				   ZMUCA.log(e);
 				   alert("Interner Serverfehler")
 			   }
 			  
@@ -117,22 +117,34 @@ ZMUCA.connect = function(userModel,callback){
 			ZMUCA.actionsChannel.emit("initUser",userModel);
 			if(typeof callback != "undefined")callback();
 			
-		}).on('challenge offered',function(challengeModel){
+		}).on('challengeOffered',function(challengeModel){
 			
+//			ZMUCA.acceptChallengeController.initChallenge(challengeModel);
+//			var params = jQuery.param(challengeModel,{traditional:false})
+			$.mobile.changePage("#ZMUCA-acceptChallenge", {
+				transition:'pop',
+//				changeHash:false,
+//				data:challengeModel,
+//				allowSamePageTransition :true,
+				role:"dialog"
+			});
 			ZMUCA.acceptChallengeController.initChallenge(challengeModel);
-			$.mobile.changePage("#ZMUCA-acceptChallenge", 'pop', true, true);
 			if(typeof navigator.notification!= "undefined"){
 				navigator.notification.beep(2);
 				navigator.notification.vibrate(2000);
 				window.plugins.localNotification.add({
 					date:new Date(),
-					 ticker : "Eine neue Challenge wartet auf dich!",
+					 ticker : "Zapfmaster: Eine neue Challenge wartet auf dich!",
                      repeatDaily : false,
                      id : 4,
-                     message:"Eine Neue Challenge für dich!"
+                     message:"Zapfmaster: Eine Neue Challenge für dich!"
 				})
 			}
 			
+		}).on('challengeAccepted',function(challengeModel){
+			alert("Challenge akzeptiert")
+		}).on('challengeDeclined',function(challengeModel){
+			alert("Challenge abgelehnt")
 		});
 		
 	}else{

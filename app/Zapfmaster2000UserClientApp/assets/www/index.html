@@ -13,6 +13,7 @@
 <script type="text/javascript" charset="utf-8" src="js/libs/md5.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/barcodescanner.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/libs/LocalNotification.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/libs/uuid.js"></script>
 
 <!-- /Libs 1 -->
 <!-- Style -->
@@ -30,6 +31,7 @@
 <script type="text/javascript" charset="utf-8" src="js/app/View/loginView.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/View/newFrontPageView.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/View/newChallengeView.js?version=23213"></script>
+<script type="text/javascript" charset="utf-8" src="js/app/View/acceptChallengesView.js"></script>
 
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/frontPageController.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/app/Controller/loginController.js"></script>
@@ -91,6 +93,11 @@
 			</div>
 		</div>
 </script>
+<script type="text/html" id="ZMUCA-acceptChallenge-info">
+<div>
+	<span style="font-weight:bold">{{opponent}}</span> hat dich zu einem {{duration}} minütigem Wettstreit {{challenge}} herausgefordert. <br/>Nimmst du die Herausforderung an?
+</div>
+</script>
 </head>
 <body>
 
@@ -137,8 +144,7 @@
 </div><!-- /Login -->
 <div data-role="dialog" id="ZMUCA-acceptChallenge">
 
-	<div data-role="header">
-		<h1>Login</h1>
+	<div data-role="header" class="headline">
 	</div><!-- /header -->
 
 	<div data-role="content">
