@@ -46,13 +46,14 @@ ZMO.Util.Net.Ajax = (function($){
 	}
 	/**
 	 * Get datas with pull request (every 30s)
-	 * @param {String} keywordQueue separated by comma
+	 * Module inscribe to ajax module, that it will have the information
+	 * @param {String or Array} keywordQueue separated by comma or array
 	 * @param {Function} callback
 	 * @param {Boolean} onlyOnce
 	 */
 	var enqueueDatas = function(keywordQueue,callback,onlyOnce){
 		aspirantModules.push({
-			keywords:keywordQueue.split(","),
+			keywords:$.isArray(keywordQueue)?keywordQueue:keywordQueue.split(","),
 			callback:callback,
 			once:!!onlyOnce
 		});
@@ -61,6 +62,7 @@ ZMO.Util.Net.Ajax = (function($){
 	 * Gets the datas in the Queue, aber pullTimeout time, calls self again
 	 */
 	var getEnqueueDatas = function(){
+
 		getDatas(c.url,function(response){
 			//send datas to aspirants
 			$.each(aspirantModules,function(ind,val){
@@ -68,6 +70,7 @@ ZMO.Util.Net.Ajax = (function($){
 			});
 			//remove the modules which only wanted info once
 			removeOnceCalls();
+			
 			setTimeout(function(){
 				//if we dont wanna stop, again
 				if(!stop)getEnqueueDatas();
@@ -80,6 +83,7 @@ ZMO.Util.Net.Ajax = (function($){
 	var stopPull = function(){
 		stop = true;
 	}
+	
 	var startPull = function(){
 		if(stop){
 			stop = false;
@@ -87,6 +91,9 @@ ZMO.Util.Net.Ajax = (function($){
 		}
 		
 	}
+	/**
+	 * Resets the modules
+	 */
 	var resetQueue = function(){
 		aspirantModules = [];
 	}

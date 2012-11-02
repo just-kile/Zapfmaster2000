@@ -12,5 +12,6 @@ ZMO.Constants = {
 		pullTimeout:1000,
 		url:"tmp/example.json"
 	},
+	throbberUrl:"images/view/throbber.gif"
 	
 };

@@ -1,4 +1,8 @@
 var ZMO = ZMO || {};
+ZMO.exists = ZMO.Util.Object.exists;
+ZMO.ajax = ZMO.Util.Net.Ajax;
+ZMO.throbber =ZMO.Util.Browser.throbber;
+
 ZMO.parseHash = function(str){
 	return str.substr(1);
 }
@@ -20,9 +24,7 @@ ZMO.log = function(str){
 		console.log(str);
 	}
 }
-ZMO.exists = ZMO.Util.Object.exists;
-ZMO.on = ZMO.Util.Event.Delegate;
-ZMO.ajax = ZMO.Util.Net.Ajax;
+
 ZMO.changePage = function(pageId,datas){
 	var hash= hashHandler.objToQuery(pageId,datas);
 	window.location.replace(hash);

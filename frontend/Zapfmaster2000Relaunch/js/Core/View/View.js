@@ -31,7 +31,7 @@ ZMO.view=(function(){
 		return module;
 	}
 	var createCol = function(){
-		return $("<div>").addClass("col");
+		return $("<div>").addClass("zm_col");
 	}
 
 	var isRendered = function(id,key){

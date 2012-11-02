@@ -28,7 +28,9 @@ ZMO.controller = (function($,document,view){
 //			  });
 
 	}
-
+/**
+ * Gets called when a page changes
+ */
 	var onPageChange =function(event,datas){
 		var url = $.bbq.getState();
 		
