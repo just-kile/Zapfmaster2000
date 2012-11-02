@@ -1,0 +1,241 @@
+[{
+			"userid" : "10",
+			"amount" : "0.05",
+			"date" : "2012-09-01 03:40:45",
+			"duration" : "0",
+			"name" : "Osi",
+			"image" : "images\/avatars\/43985828483840.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "9",
+			"username" : "Tim",
+			"date" : "2012-09-01 03:32:41",
+			"type" : "ACHIEVEMENT",
+			"achievement_id" : "10",
+			"name" : "Veni, Vidi, Bieri",
+			"description" : "Insgesamt 100. Bier gezapft.",
+			"public" : "1",
+			"image" : "images\/achievements\/venividibieri.png"
+		}, {
+			"userid" : "9",
+			"amount" : "0.53",
+			"date" : "2012-09-01 03:32:41",
+			"duration" : "19",
+			"name" : "Tim",
+			"image" : "images\/avatars\/5495585062656.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "12",
+			"amount" : "0.49",
+			"date" : "2012-09-01 03:20:05",
+			"duration" : "26",
+			"name" : "Felix",
+			"image" : "images\/avatars\/43981525565184.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "8",
+			"amount" : "0.37",
+			"date" : "2012-09-01 03:19:04",
+			"duration" : "22",
+			"name" : "Olli",
+			"image" : "images\/avatars\/43985830407936.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "3",
+			"amount" : "0.38",
+			"date" : "2012-09-01 03:06:50",
+			"duration" : "25",
+			"name" : "Kevin",
+			"image" : "images\/avatars\/43981525550336.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "10",
+			"username" : "Osi",
+			"date" : "2012-09-01 02:56:36",
+			"type" : "ACHIEVEMENT",
+			"achievement_id" : "4",
+			"name" : "Carl",
+			"description" : null,
+			"public" : "1",
+			"image" : "images\/achievements\/carl.png"
+		}, {
+			"userid" : "10",
+			"amount" : "0.07",
+			"date" : "2012-09-01 02:56:36",
+			"duration" : "3",
+			"name" : "Osi",
+			"image" : "images\/avatars\/43985828483840.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"challenge_type" : "1v1",
+			"duration" : "30",
+			"start_time" : "2012-09-01 02:23:39",
+			"type" : "CHALLENGE_DONE",
+			"team1" : [{
+						"userid" : "6",
+						"username" : "Thomas",
+						"userimage" : "images\/avatars\/43981527934208.jpg",
+						"start_time" : "2012-09-01 02:23:39",
+						"type" : "CHALLENGE_DONE",
+						"challenge_type" : "1v1",
+						"image" : "images\/others\/CHALLENGE_DONE.jpg",
+						"won" : "1",
+						"team" : "0",
+						"duration" : "30"
+					}],
+			"team2" : [{
+						"userid" : "11",
+						"username" : "Winnii",
+						"userimage" : "images\/avatars\/43981544598528.jpg",
+						"start_time" : "2012-09-01 02:23:39",
+						"type" : "CHALLENGE_DONE",
+						"challenge_type" : "1v1",
+						"image" : "images\/others\/CHALLENGE_DONE.jpg",
+						"won" : "0",
+						"team" : "1",
+						"duration" : "30"
+					}],
+			"image" : "images\/others\/CHALLENGE_DONE.jpg"
+		}, {
+			"userid" : "13",
+			"amount" : "0.35",
+			"date" : "2012-09-01 02:52:29",
+			"duration" : "25",
+			"name" : "Flo",
+			"image" : "images\/avatars\/43981527475968.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "9",
+			"username" : "Tim",
+			"date" : "2012-09-01 02:51:48",
+			"type" : "ACHIEVEMENT",
+			"achievement_id" : "5",
+			"name" : "Lenny",
+			"description" : "Zehn Bier gezapft.",
+			"public" : "1",
+			"image" : "images\/achievements\/lenny.png"
+		}, {
+			"userid" : "9",
+			"amount" : "0.38",
+			"date" : "2012-09-01 02:51:48",
+			"duration" : "9",
+			"name" : "Tim",
+			"image" : "images\/avatars\/5495585062656.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "6",
+			"amount" : "0.24",
+			"date" : "2012-09-01 02:50:49",
+			"duration" : "17",
+			"name" : "Thomas",
+			"image" : "images\/avatars\/43981527934208.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "17",
+			"amount" : "0.55",
+			"date" : "2012-09-01 02:41:47",
+			"duration" : "16",
+			"name" : "Benni",
+			"image" : "images\/avatars\/43985808727040.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"challenge_type" : "1v1",
+			"duration" : "30",
+			"start_time" : "2012-09-01 02:10:24",
+			"type" : "CHALLENGE_DONE",
+			"team1" : [{
+						"userid" : "6",
+						"username" : "Thomas",
+						"userimage" : "images\/avatars\/43981527934208.jpg",
+						"start_time" : "2012-09-01 02:10:24",
+						"type" : "CHALLENGE_DONE",
+						"challenge_type" : "1v1",
+						"image" : "images\/others\/CHALLENGE_DONE.jpg",
+						"won" : "0",
+						"team" : "0",
+						"duration" : "30"
+					}],
+			"team2" : [{
+						"userid" : "9",
+						"username" : "Tim",
+						"userimage" : "images\/avatars\/5495585062656.jpg",
+						"start_time" : "2012-09-01 02:10:24",
+						"type" : "CHALLENGE_DONE",
+						"challenge_type" : "1v1",
+						"image" : "images\/others\/CHALLENGE_DONE.jpg",
+						"won" : "1",
+						"team" : "1",
+						"duration" : "30"
+					}],
+			"image" : "images\/others\/CHALLENGE_DONE.jpg"
+		}, {
+			"userid" : "6",
+			"amount" : "0.18",
+			"date" : "2012-09-01 02:38:12",
+			"duration" : "10",
+			"name" : "Thomas",
+			"image" : "images\/avatars\/43981527934208.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "10",
+			"amount" : "0.12",
+			"date" : "2012-09-01 02:34:47",
+			"duration" : "3",
+			"name" : "Osi",
+			"image" : "images\/avatars\/43985828483840.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "9",
+			"username" : "Tim",
+			"date" : "2012-09-01 02:34:09",
+			"type" : "ACHIEVEMENT",
+			"achievement_id" : "18",
+			"name" : "Hank Moody",
+			"description" : "Alkoholspiegel von zwei Promille erreicht.",
+			"public" : "1",
+			"image" : "images\/achievements\/hankmoody.png"
+		}, {
+			"userid" : "9",
+			"amount" : "0.36",
+			"date" : "2012-09-01 02:34:08",
+			"duration" : "23",
+			"name" : "Tim",
+			"image" : "images\/avatars\/5495585062656.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}, {
+			"userid" : "11",
+			"amount" : "0.41",
+			"date" : "2012-09-01 02:25:53",
+			"duration" : "18",
+			"name" : "Winnii",
+			"image" : "images\/avatars\/43981544598528.jpg",
+			"keg" : "2",
+			"brand" : "Warsteiner",
+			"type" : "DRAWING"
+		}]

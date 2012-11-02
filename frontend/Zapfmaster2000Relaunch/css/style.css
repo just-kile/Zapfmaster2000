@@ -1,0 +1,209 @@
+body {
+    background: url("images/view/backgrnd.jpg") repeat scroll 0 0 #FFFFFF;
+    color: black;
+    font-family: Arial,Helvetica,sans-serif;
+    margin: 0;
+}
+a:link {
+    color: navy;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:visited {
+    color: navy;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:active {
+    color: navy;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover {
+    color: navy;
+    font-weight: bold;
+    text-decoration: none;
+}
+.news-box-info {
+    color: #999999;
+    font-size: 0.7em;
+}
+.news-box-info a:link {
+    color: #999999;
+    font-weight: normal;
+    text-decoration: underline;
+}
+.news-box-info a:visited {
+    color: #999999;
+    font-weight: normal;
+    text-decoration: underline;
+}
+.news-box-dateline {
+    color: #CCCCCC;
+    font-size: 0.7em;
+    font-style: italic;
+    text-align: right;
+}
+.news-drink-box-mugshot {
+    float: left;
+    margin-right: 12px;
+}
+.news-drink-box-details-headline {
+    font-size: 1.4em;
+}
+ul#topnav {
+    height: 44px;
+    list-style: none outside none;
+    width: 950px;
+}
+ul#topnav li {
+    display: inline;
+}
+ul#topnav li a {
+    float: left;
+    height: 44px;
+    text-indent: -9999px;
+}
+ul#topnav li#topnav-0 a {
+    background: url("images/view/navi.png") no-repeat scroll 0 0 transparent;
+    width: 115px;
+}
+ul#topnav li#topnav-1 a {
+    background: url("images/view/navi.png") no-repeat scroll -116px 0 transparent;
+    width: 182px;
+}
+ul#topnav li#topnav-1 a:hover {
+    background-position: -116px -44px;
+}
+ul#topnav li#topnav-2 a {
+    background: url("images/view/navi.png") no-repeat scroll -298px 0 transparent;
+    width: 180px;
+}
+ul#topnav li#topnav-2 a:hover {
+    background-position: -298px -44px;
+}
+ul#topnav li#topnav-3 a {
+    background: url("images/view/navi.png") no-repeat scroll -478px 0 transparent;
+    width: 182px;
+}
+ul#topnav li#topnav-3 a:hover {
+    background-position: -478px -44px;
+}
+ul#topnav li#topnav-5 a {
+    background: url("images/view/navi.png") no-repeat scroll -673px 0 transparent;
+    width: 202px;
+}
+ul#topnav li#topnav-5 a:hover {
+    background-position: -673px -44px;
+}
+ul#topnav li#topnav-4 a {
+    background: url("images/view/navi.png") no-repeat scroll -875px 0 transparent;
+    width: 80px;
+}
+.news-drink-box {
+    background-image: url("images/view/news_background.png");
+    border: 1px solid silver;
+    border-radius: 4px 4px 4px 4px;
+    margin: 3px;
+    padding: 8px;
+}
+.newsfeed {
+    background-image: url("images/view/news_background.png");
+    border: 1px solid silver;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 1px 1px 3px #888888;
+    float: left;
+    height: auto;
+    margin-left: 40px;
+    padding: 8px;
+    width: 600px;
+}
+.stats {
+    background-image: url("images/view/news_background.png");
+    border: 1px solid silver;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 1px 1px 3px #888888;
+    float: left;
+    margin-left: 15px;
+    padding: 8px;
+    width: 270px;
+}
+.newsdiv {
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 24px;
+    margin-left: 5px;
+}
+.statstext {
+    color: #009900;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+.newscut {
+    background-image: url("images/view/cut.png");
+    background-repeat: no-repeat;
+    height: 1px;
+}
+.achievement {
+    text-align: center;
+}
+.statsdiv {
+    background-image: url("images/view/news_background.png");
+    border: 1px solid silver;
+    border-radius: 4px 4px 4px 4px;
+    font-size: 12px;
+    margin: 3px;
+    padding: 3px;
+}
+.statsHeadline {
+    background-image: url("images/view/balken.png");
+    border: 1px solid silver;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 1px 0 2px #000000;
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+.kegtext {
+    margin-top: -10px;
+    text-align: center;
+}
+.kegtext-drinker {
+    float: right;
+    width: 130px;
+}
+.keg-chart {
+    margin-left: 40px;
+    margin-top: -25px;
+}
+.statsImage {
+}
+.main {
+}
+.glowEffect {
+    box-shadow: 0 0 20px #FFFF00;
+}
+.impr {
+    float: left;
+    height: 25px;
+    margin-left: 40px;
+    width: 925px;
+}
+.imprDiv {
+    float: left;
+    height: 25px;
+}
+.imprDiv2 {
+    float: right;
+    height: 25px;
+}
+.imprDiv3 {
+    height: 23px;
+}
+.pagination {
+    text-align: right;
+}
+.specialevents_close {
+    cursor: pointer;
+    font-size: 10px;
+}

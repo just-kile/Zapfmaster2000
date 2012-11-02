@@ -1,0 +1,1 @@
+ZMO.modules = ZMO.modules || {};
