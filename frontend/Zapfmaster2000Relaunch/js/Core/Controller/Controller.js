@@ -4,9 +4,8 @@ ZMO.controller = (function($,document,view){
 	getDatas,
 	c = ZMO.Constants,
 	mP =ZMO.modules_properties;
-	var grid = ZMO.modules_properties;
 	var onDraw = function(data){
-		jQuery("#test").text(data) 
+		//jQuery("#test").text(data) 
 	}
 	
 	var onNews = function () {
@@ -41,7 +40,7 @@ ZMO.controller = (function($,document,view){
 				pageLoaded = true;
 			}
 		});
-		if(!pageLoaded)view.createPage("front",grid.front);
+		if(!pageLoaded)view.createPage("front",mP.front);
 		
 	}
 	var init = function(){

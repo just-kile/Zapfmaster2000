@@ -1,6 +1,18 @@
+/**
+ * Core View Class
+ * Handles the basic module injection and the view in browser
+ */
 ZMO.view=(function(){
 	var site = {};
+	/**
+	 * Declares the 3 areas of page
+	 */
 	var activeItems={main:[[]],navigation:[[]],footer:[[]]};
+	/**
+	 * Renders a given Module Model at the position
+	 * @param {ZMO.PosititionModel} posModel
+	 *  
+	 */
 	var renderModuleModel =function(posModel,moduleModel){
 		var container =$(site[posModel.key]);
 		var ratio = moduleModel.ratio;
@@ -21,24 +33,31 @@ ZMO.view=(function(){
 	var createCol = function(){
 		return $("<div>").addClass("col");
 	}
+
 	var isRendered = function(id,key){
 		return ZMO.exists(activeItems[key])
 				&&ZMO.exists(activeItems[key][id])
 	}
+	var isRenderedInPositon  = function(id,key,posModel){
+		return isRendered(id,key) && activeItems[key][id].position 
+								  && (activeItems[key][id].position.equals(posModel));
+	}
 	
 	var removeOldModules =function(newList,oldList){
-		
 		$.each(oldList,function(posKey,elObj){
 			$.each(elObj,function(elKey,el){
-				if(!ZMO.exists(newList[posKey])||!ZMO.exists(newList[posKey][elKey])){
+				if(!ZMO.exists(newList[posKey])
+						||!ZMO.exists(newList[posKey][elKey])
+						||!newList[posKey][elKey].position.equals(el.position) ){
 					ZMO.log("remove "+posKey+", "+elKey);
 					$(el.element).remove();
 				}
-			})
-		})
+			});
+		});
 		
 	}
 	/**
+	 * @notused
 	 * Moves the given element to the new PositionModel
 	 * @param {DOMElement or Selector} el the element which should be moved
 	 * @param {ZMO.PositionModel} newPos the new position
@@ -69,7 +88,10 @@ ZMO.view=(function(){
 					
 					var id=moduleModel.id;
 					var newPos = new ZMO.PositionModel([modulePosKey,col,row]);
-					if(isRendered(moduleModel.id,modulePosKey)){
+					
+					//if(isRendered(moduleModel.id,modulePosKey)){
+					if(isRenderedInPositon(moduleModel.id,modulePosKey,newPos)){
+						
 						var oldPos = activeItems[modulePosKey][id].position;
 						//renderModuleModel();
 						//passe Breite an:
@@ -78,9 +100,11 @@ ZMO.view=(function(){
 						
 						//set new active items
 						tmpActiveItems[modulePosKey][id] = activeItems[modulePosKey][id];
-						//move to new position
-						if(oldPos.col !=newPos.col || oldPos.key!=newPos.key)
-							moveToNewPosition(tmpActiveItems[modulePosKey][id].element,newPos);
+						//move to new position (deprecated)
+						if(!oldPos.equals(newPos)){
+							//moveToNewPosition(tmpActiveItems[modulePosKey][id].element,newPos);
+						}
+							
 						//set new position
 						tmpActiveItems[modulePosKey][id].position = newPos;
 						tmpActiveItems[modulePosKey][id].element.parent().css("width",moduleModel.ratio);

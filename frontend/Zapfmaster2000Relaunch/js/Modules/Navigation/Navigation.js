@@ -2,7 +2,7 @@ ZMO.modules = ZMO.modules || {};
 
 ZMO.modules.navigation = (function($,ajax){
 	var c = ZMO.modules.Constants;
-	var init = function(){
+	var createNavigation = function(){
 		var links = c.navbar;
 		var ul =jQuery(document.createElement("ul")).attr("id","topnav");
 		jQuery(links).each(function(index,val){
@@ -18,11 +18,14 @@ ZMO.modules.navigation = (function($,ajax){
 		
 		return ul;
 	}
+	var init = function(){
+		
+	}
 	var getInstance = function(){
-		return init();
+		return createNavigation();
 	}
 	var pub = {
-			key:"navigation",
+			init:init,
 			getInstance:getInstance
 	}
 	return pub
