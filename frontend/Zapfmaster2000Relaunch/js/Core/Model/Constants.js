@@ -9,7 +9,7 @@ ZMO.Constants = {
 	debugMode :true,
 	templateUrl : "js/Templates/templates.json",
 	ajax:{
-		pullTimeout:1000,
+		pullTimeout:3000,
 		url:"tmp/example.json"
 	},
 	throbberUrl:"images/view/throbber.gif"
