@@ -1,4 +1,4 @@
-ZMO.controller = (function($,document,view){
+ZMO.controller = (function($,document,view,ajax){
 	var chat,
 	news,
 	getDatas,
@@ -33,7 +33,7 @@ ZMO.controller = (function($,document,view){
  */
 	var onPageChange =function(event,datas){
 		var url = $.bbq.getState();
-		
+		ajax.resetQueue();
 		var pageLoaded = false;
 		$.each(mP,function(pageId,val){
 			if(ZMO.exists(url[pageId])&&!pageLoaded){
@@ -63,7 +63,7 @@ ZMO.controller = (function($,document,view){
 			init:init
 	}
 	return pub;
-}(jQuery,document,ZMO.view));
+}(jQuery,document,ZMO.view,ZMO.ajax));
 
 
 jQuery(document).ready(function(){

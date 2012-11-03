@@ -1,0 +1,137 @@
+{
+
+	"keg" : {
+		"keg_id" : "2",
+		"brand" : "Warsteiner",
+		"size" : "30",
+		"start_date" : "2012-09-01 01:58:22",
+		"keg_numbers" : "2"
+		 
+	},
+	"amount" : {
+		"actual" : "22.38",
+		"complete" : "57.62",
+		"once" : "1.20",
+		"mostActivityHour" : "15"
+	},
+
+	"duration" : {
+		"average" : "18.93",
+		"drinkspeed" : "0.00",
+		"complete" : "2764.00",
+		"longest" : "238.00"
+	},
+	"achievements" : {
+		"count" : "197",
+		"achievementspeed" : "50",
+		"mostAchievementHour" : "15"
+	},
+	"drawCount" : {
+		"operations" : "147",
+		"average" : "15"
+	},
+	"bestUserList" : [{
+				"user_name" : "Tim",
+				"user_id" : "9",
+				"user_image" : "/images/bla",
+				"amount" : "5.57"
+
+			}, {
+				"user_name" : "Felix",
+				"user_id" : "12",
+				"user_image" : "/images/bla",
+				"amount" : "4.97"
+
+			}],
+	"bestUserListHour" : [{
+				"user_name" : "Flo",
+				"user_id" : "13",
+				"user_image" : "/images/bla",
+				"amount" : "5.57"
+
+			}],
+	"durationUserList" : [{
+				"user_id" : "12",
+				"user_name" : "Felix",
+				"user_image" : "images/bla.jpg",
+				"duration" : "120"
+				
+			}, {
+				"user_id" : "13",
+				"user_name" : "Flo",
+				"user_image" : "images/bla.jpg",
+				"duration" : "40"
+
+			}],
+	"achievementUserList" : [{
+				"user_id" : "12",
+				"user_name" : "Felix",
+				"user_image" : "images/bla.jpg",
+				"achievement_count" : "45"
+			}, {
+				"user_id" : "13",
+				"user_name" : "Flo",
+				"user_image" : "images/bla.jpg",
+				"achievement_count" : "12"
+
+			}],
+	"drawCountUserList" : [{
+				"user_id" : "12",
+				"user_name" : "Felix",
+				"user_image" : "images/bla.jpg",
+				"draw_count" : "15"
+			}, {
+				"user_id" : "13",
+				"user_name" : "Flo",
+				"user_image" : "images/bla.jpg",
+				"draw_count" : "10"
+			}],
+	"promille" : {
+		"average" : "0"
+	},
+	"nice_word" : "fruchtigem",
+
+	"progress" : {
+		"meta" : {
+
+		},
+		"progress" : {
+
+		}
+	},
+
+
+	"challenges" : [{
+				"meta" : {
+					"challenge_type" : "1v1",
+					"duration" : "30",
+					"start_time" : "1346459019",
+					"challenge_id" : "9"
+				},
+				"team1" : [{
+							"user_id" : "6",
+							"start_time" : "1346459019",
+							"user_name" : "Thomas",
+							"user_image" : "images\/avatars\/43981527934208.jpg",
+							"amount" : 0.41851239669421,
+							"finished" : "1",
+							"won" : "1",
+							"team" : "0",
+							"duration" : "30"
+						}],
+				"team2" : [{
+							"user_id" : "11",
+							"start_time" : "1346459019",
+							"user_name" : "Winnii",
+							"user_image" : "images\/avatars\/43981544598528.jpg",
+							"amount" : 0.40892561983471,
+							"finished" : "1",
+							"won" : "0",
+							"team" : "1",
+							"duration" : "30"
+						}],
+				"image" : "images\/others\/1v1.jpg"
+			}]
+
+
+}
