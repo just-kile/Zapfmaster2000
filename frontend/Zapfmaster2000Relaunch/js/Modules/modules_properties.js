@@ -3,7 +3,7 @@ ZMO.modules_properties ={
 			sections:{
 				navigation:[[new ZMO.ModuleModel("navigation", ZMO.modules.navigation, "100%")]],
 				main:[[new ZMO.ModuleModel("drawfeed", ZMO.modules.drawfeed, "70%")],
-				      [new ZMO.ModuleModel("kegstatus", ZMO.modules.kegstatus, "30%")]
+				      [new ZMO.ModuleModel("frontpagestats", ZMO.modules.frontpageStats, "30%")]
 				      ],
 				footer:[]
 			}

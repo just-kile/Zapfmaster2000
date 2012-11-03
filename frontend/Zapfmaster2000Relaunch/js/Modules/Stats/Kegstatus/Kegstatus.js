@@ -11,7 +11,8 @@ ZMO.modules.kegstatus = (function($,ajax){
 		ajax.startPull();
 	}
 	var getInstance = function(){
-		return $("<div>").addClass("stats");
+		
+		return $("<div>").addClass("statsDiv");
 	}
 	var pub = {
 			getInstance:getInstance,
