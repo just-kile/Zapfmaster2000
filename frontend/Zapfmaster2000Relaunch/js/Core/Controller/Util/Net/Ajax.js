@@ -80,15 +80,19 @@ ZMO.Util.Net.Ajax = (function($){
 			if(!stop)getEnqueueDatas();
 		},c.pullTimeout);
 	}
+	var timeout;
 	var stopPull = function(){
 		stop = true;
+		clearTimeout(timeout);
 	}
-	
+	//wait for all requests to enqueue-> then start
 	var startPull = function(){
-		if(stop){
-			stop = false;
-			getEnqueueDatas();
-		}
+		timeout = setTimeout(function(){
+			if(stop){
+				stop = false;
+				getEnqueueDatas();
+			}
+		},200);
 		
 	}
 	/**

@@ -1,6 +1,7 @@
 ZMO.modules.drawfeed = (function($,Ajax){
 	var rfid ,newsfeed,container,counter=0;
-	var c = ZMO.modules.Constants.drawfeed;
+	var mC = ZMO.modules.Constants;
+	var c = mC.drawfeed;
 	/**
 	 * #######################################################
 	 * Blank Container Creation
@@ -115,7 +116,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 	 
 	 var updateNewslist = function(startVal){
 			if(typeof startVal != "undefined")counter = startVal;
-			Ajax.getDatas("tmp/news.json",function(datas){
+			Ajax.getDatas(mC.urls.NEWSLIST,function(datas){
 				$.each(datas,function(ind,val){
 					fillContainer(container,val)
 				});

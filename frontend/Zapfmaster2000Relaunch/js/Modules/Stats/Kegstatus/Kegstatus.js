@@ -1,9 +1,14 @@
 ZMO.modules = ZMO.modules || {};
 
 ZMO.modules.kegstatus = (function($,ajax){
-	var c = ZMO.modules.Constants;
+	var mC = ZMO.modules.Constants;
+	
+	var onDatasLoaded =function(datas){
+		console.log(datas);
+	}
 	var init = function(){
-		//ajax.enqueueDatas();
+		ajax.enqueueDatas(mC.urls.FRONTPAGESTATS,onDatasLoaded);
+		ajax.startPull();
 	}
 	var getInstance = function(){
 		return $("<div>").addClass("stats");
@@ -13,4 +18,4 @@ ZMO.modules.kegstatus = (function($,ajax){
 			init:init
 	}
 	return pub
-}(jQuery,ZMO.ajax))
+}(jQuery,ZMO.ajax));

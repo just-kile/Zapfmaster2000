@@ -36,5 +36,10 @@ ZMO.modules.Constants = {
 				CHALLENGE_DONE :"CHALLENGE_DONE",
 				CHALLENGE_DECLINED:"CHALLENGE_DECLINED"
 			}
+		},
+		urls:{
+			FRONTPAGESTATS:"/tmp/stats_fp.json",
+			NEWSLIST:"/tmp/news.json"
 		}
+
 }

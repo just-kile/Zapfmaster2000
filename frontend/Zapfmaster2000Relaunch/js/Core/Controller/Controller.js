@@ -34,6 +34,7 @@ ZMO.controller = (function($,document,view,ajax){
 	var onPageChange =function(event,datas){
 		var url = $.bbq.getState();
 		ajax.resetQueue();
+		ajax.stopPull();
 		var pageLoaded = false;
 		$.each(mP,function(pageId,val){
 			if(ZMO.exists(url[pageId])&&!pageLoaded){
