@@ -21,30 +21,46 @@ ZMUCA.Constants ={
 		challenges:[{
 			id:"challenge-normal",
 			name:"1 vs 1",
-			image:"images/avatars/felix.jpg"
-		},{
-			id:"challenge-team",
-			name:"Team vs Team",
-			image:"images/avatars/felix.jpg"
-		}],
+			image:"css/images/challenges/1v1.png",//"images/avatars/felix.jpg",
+			description:"Fordere einen Mittrinker zum Wettrinken auf! Gibt auch nen Achievement ;)"
+		}
+//		,{
+//			id:"challenge-team",
+//			name:"Team vs Team",
+//			image:"images/avatars/felix.jpg"
+//		}
+		],
 		modes:[{
 			name:"Laenge",
 			id:"length",
 			params:[{
 				name:"10 Minuten",
 				id:"mode-tenMinutes",
-				image:"images/avatars/felix.jpg",
+				image:"css/images/challenges/10min.jpg",
 				length:10
 			},{
 				name:"30 Minuten",
 				id:"mode-thirtyMinutes",
-				image:"images/avatars/felix.jpg",
+				image:"css/images/challenges/30min.jpg",
 				length:30
 			},{
 				name:"1 Stunde",
 				id:"mode-60Minutes",
-				image:"images/avatars/felix.jpg",
+				image:"css/images/challenges/60min.jpg",
 				length:60
 			}]
-		}]
+		}],
+		badExcuses :["Muss morgen früh raus, um in den Anden Kajak zu fahren",
+		             "Trinke lieber nen Tee",
+		             "Hab Mami versprochen weniger zu trinken." ]
 }	
+
+
+ZMUCA.showThrobber = function(show){
+	if (show){
+		$.mobile.showPageLoadingMsg(null, null, false);
+	}
+	else{
+		$.mobile.hidePageLoadingMsg();
+	}
+};

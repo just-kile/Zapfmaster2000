@@ -37,5 +37,6 @@
     <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
     <plugin name="TTS" value="com.phonegap.plugins.speech.TTS"/>
     <plugin name="BarcodeScanner" value="com.phonegap.plugins.barcodescanner.BarcodeScanner"/>
-	
+	<plugin name="Notification" value="org.apache.cordova.Notification"/>
+	<plugin name="LocalNotification" value="com.phonegap.plugin.localnotification.LocalNotification" />
 </plugins>

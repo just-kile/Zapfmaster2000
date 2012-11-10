@@ -1,73 +1,39 @@
-ZMUCA.newFrontPageController = (function ($, view, document) {
-	var userImageUri;
-	var qrCode =1;
-	var c = ZMUCA.Constants;
-   var eventsSetFlag = false;
-   //Photos
-  
-   
-
-	
-	function onFail(message) {
-	    alert('Failed because: ' + message);
-	}
-      
-   //QR Codes
-   var onScanQrCode = function(){
-	   c.debugMode
-	   		?onScanQrCodeSuccess({text:"1",cancelled:false})
-			:window.plugins.barcodeScanner.scan(onScanQrCodeSuccess, onFail);
-		ZMUCA.log("Scanning QR Code")
-	 
-   }
-   var onScanQrCodeSuccess = function(result){
-	   if(!result.cancelled){
-		   ZMUCA.log("Scanned QR Code: "+result.text)
-		   qrCode = result.text
-		   $("#ZMUCA-qrCode").text(qrCode)
-	   }
-	   
-   }
-   
-   
-  var channelHandlerSetFlag = false;
-	var onPageChange = function (event, data) {
+ZMUCA.newFrontPageController = (function($, view, document) {
+	var eventsSetFlag = false;
+	var counter = 0;
+	var onPageChange = function(event, data) {
 		ZMUCA.log("newFrontPageController onPageChange called")
-		//Check if connected to Node js Server Module
-		ZMUCA.testConnection();
-		if(!eventsSetFlag){
-			$("#ZMUCA-newFrontpage .logout").live("tap",function(){
-				ZMUCA.logout();
+		// Check if connected to Node js Server Module
+		ZMUCA.testConnection(function() {
+			ZMUCA.showThrobber(true)
+			ZMUCA.get("http://server/beerometer/zapfmasterUserClientApp.php",function(datas){
+				var container = $("#ZMUCA-news-container");
+				$.each(datas,function(ind,val){
+					var news = ich["ZMUCA-news-template"](new ZMUCA.NewsModel(val))
+					news.appendTo(container);
+				});
+				ZMUCA.showThrobber(false);
+				new iScroll("ZMUCA-news-container")
+				// $("[data-role=header]").fixedtoolbar("updatePagePadding")
+			},{
+				newslist:counter++
 			})
-			eventsSetFlag = true;
-		}
+			
 		
-    };
+	});
 
-   
- 
-    var onDraw = function(data){
-		ZMUCA.log("onDraw "+data)
-//		jQuery("#test").text(data) 
+	};
+
+	var init = function() {
+		ZMUCA.log("newFrontPageController init called")
 	}
-	
-	var onChallenge = function () {
-	    //news.emit('woot');
-	 }
-	
 
+	var pub = {
+		init : init,
+		onPageChange : onPageChange,
 
-    var init = function () {
-    	ZMUCA.log("newFrontPageController init called")
-    }
+	};
 
-    var pub = {
-        init: init,
-        onPageChange:onPageChange,
-        
-    };
+	return pub;
 
-    return pub;
-
-} (jQuery,ZMUCA.newFrontPageView, document));
-
+}(jQuery, ZMUCA.newFrontPageView, document));

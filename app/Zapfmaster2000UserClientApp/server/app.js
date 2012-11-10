@@ -137,6 +137,7 @@ ZM.controller = function(uH){
 	fs ,
 	qs ,
 	io,
+	soap,
 	draw,actions,getdatas;
 	var actionEv = c.sockets.actions.events;
 	var drawEv = c.sockets.draw.events;
@@ -189,9 +190,39 @@ ZM.controller = function(uH){
     		"timestamp":new Date()
     	})
 	}
+	
 	var onGetAllUsers =function(socket,callback){
 //		console.log()
 		callback(uH.getAllUserModels());
+	}
+	var onChallengeAccepted =function(socketVictim,challengeModel){
+		console.log(challengeModel);
+		//Sending Confirm to both
+		for(var user in challengeModel.challenger){
+			var socketChallenger  = uH.getUserSocket(challengeModel.challenger[user].qrcode);
+			socketChallenger.emit("challengeAccepted",challengeModel);
+		};
+		socketVictim.emit("challengeAccepted",challengeModel);
+		//TODO:
+		//Sending a SOAP Message to backend that challenge is accepted
+		
+		
+	}
+	var onChallengeDeclined = function(socketVictim,challengeModel){
+		for(var user in challengeModel.challenger){
+			var socketChallenger  = uH.getUserSocket(challengeModel.challenger[user].qrcode);
+			socketChallenger.emit("challengeDeclined",challengeModel);
+		};
+		socketVictim.emit("challengeDeclined",challengeModel);
+	}
+	var onChallengeOffered = function(socketChallenger,challengeModel){
+		console.log(challengeModel);
+		for(var user in challengeModel.victim){
+			var socketVictim  = uH.getUserSocket(challengeModel.victim[user].qrcode);
+			socketVictim.emit("challengeOffered",challengeModel)
+		}
+		//TODO:
+		//Soap Nachricht schicken
 	}
 	/**
 	 * Saves the socket for initialization
@@ -212,7 +243,7 @@ ZM.controller = function(uH){
 // http = require('Fabric').createServer(handler);
 		fs = require('fs');
 		qs = require('querystring');
-		
+//		soap = require('soap')
 		io = require('socket.io').listen(http);
 		http.listen(c.port);
 		
@@ -223,7 +254,7 @@ ZM.controller = function(uH){
 		  .on('connection', function (socket) {
 			    socket.on(drawEv.draw,onDraw);
 			    
-		  });
+		  }); 
 			
 		
 		// initialize the actions socket
@@ -238,6 +269,15 @@ ZM.controller = function(uH){
 			  socket.on(actionEv.getAllUsers ,function(callback){
 				  onGetAllUsers(socket,callback)
 			  });
+			  socket.on("challengeOffered",function(challengeModel){
+				  onChallengeOffered(socket,challengeModel)
+			  })
+			  socket.on("challengeAccepted",function(challengeModel){
+				  onChallengeAccepted(socket,challengeModel)
+			  })
+			  .on("challengeDeclined",function(challengeModel){
+				  onChallengeDeclined(socket,challengeModel)
+			  })
 			  socket.on("disconnect",function(){
 				  onGetAllUsers(socket,function(userModelArr){
 					  socket.broadcast.emit(actionEv.newUserConnected,userModelArr);

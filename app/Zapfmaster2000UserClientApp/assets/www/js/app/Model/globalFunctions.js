@@ -66,7 +66,7 @@ ZMUCA.login = function(pin,success,fail){
 				   });
 				   
 			   }catch(e){
-				   TOMO.log(e);
+				   ZMUCA.log(e);
 				   alert("Interner Serverfehler")
 			   }
 			  
@@ -112,10 +112,46 @@ ZMUCA.connect = function(userModel,callback){
 	ZMUCA.drawChannel = io.connect(c.node.drawUrl);
 	
 	ZMUCA.log("Connect to "+c.node.actionsUrl);
-	ZMUCA.actionsChannel = io.connect(c.node.actionsUrl).on('connect', function () {
+	if(typeof ZMUCA.actionsChannel =="undefined"){
+		ZMUCA.actionsChannel = io.connect(c.node.actionsUrl).on('connect', function () {
+			ZMUCA.actionsChannel.emit("initUser",userModel);
+			if(typeof callback != "undefined")callback();
+			
+		}).on('challengeOffered',function(challengeModel){
+			
+//			ZMUCA.acceptChallengeController.initChallenge(challengeModel);
+//			var params = jQuery.param(challengeModel,{traditional:false})
+			$.mobile.changePage("#ZMUCA-acceptChallenge", {
+				transition:'pop',
+//				changeHash:false,
+//				data:challengeModel,
+//				allowSamePageTransition :true,
+				role:"dialog"
+			});
+			ZMUCA.acceptChallengeController.initChallenge(challengeModel);
+			if(typeof navigator.notification!= "undefined"){
+				navigator.notification.beep(2);
+				navigator.notification.vibrate(2000);
+				window.plugins.localNotification.add({
+					date:new Date(),
+					 ticker : "Zapfmaster: Eine neue Challenge wartet auf dich!",
+                     repeatDaily : false,
+                     id : 4,
+                     message:"Zapfmaster: Eine Neue Challenge für dich!"
+				})
+			}
+			
+		}).on('challengeAccepted',function(challengeModel){
+			alert("Challenge akzeptiert")
+		}).on('challengeDeclined',function(challengeModel){
+			alert("Challenge abgelehnt")
+		});
+		
+	}else{
 		ZMUCA.actionsChannel.emit("initUser",userModel);
 		if(typeof callback != "undefined")callback();
-	});
+	}
+
 	ZMUCA.log("Connect to "+c.node.datasUrl);
 	ZMUCA.getdatasChannel = io.connect(c.node.datasUrl);
 	
@@ -150,7 +186,8 @@ ZMUCA.testConnection  = function(callback){
 ZMUCA.disconnect = function(){
 	 if(typeof ZMUCA.drawChannel != "undefined"){
 		 ZMUCA.log("Disconnect drawChannel")
-		 ZMUCA.drawChannel.disconnect();
+		 ZMUCA.drawChannel.disconnect(function(){
+		 });
 	 };
 	 if(typeof ZMUCA.actionsChannel != "undefined"){
 		 ZMUCA.log("Disconnect actionsChannel")
