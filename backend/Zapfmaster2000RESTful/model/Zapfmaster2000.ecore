@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="zapfmaster2000" nsURI="http://www.kile.de/zapfmaster2000/1.0"
+    nsPrefix="zm2k">
+  <eClassifiers xsi:type="ecore:EClass" name="Achievement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gained" upperBound="-1"
+        eType="#//GainedAchievement" containment="true" eOpposite="#//GainedAchievement/achievement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Box">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="system" lowerBound="1"
+        eType="#//System" eOpposite="#//System/boxes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kegs" upperBound="-1" eType="#//Keg"
+        containment="true" eOpposite="#//Keg/box"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="System">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boxes" upperBound="-1"
+        eType="#//Box" containment="true" eOpposite="#//Box/system"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Challenge">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ChallengeType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="finished" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participants" upperBound="-1"
+        eType="#//ChallengeParticipant" containment="true" eOpposite="#//ChallengeParticipant/challenge"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChallengeType">
+    <eLiterals name="1v1" literal="1v1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Challenge1v1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="challenge" lowerBound="1"
+        eType="#//Challenge"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="challengeEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChallengeParticipant">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="challenge" eType="#//Challenge"
+        eOpposite="#//Challenge/participants"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="team" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="won" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="-1" eType="#//User"
+        eOpposite="#//User/challengeParticipations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Config">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Drawing">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="1" eType="#//User"
+        eOpposite="#//User/drawings"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keg" lowerBound="1" eType="#//Keg"
+        eOpposite="#//Keg/drawings"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GainedAchievement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="achievement" lowerBound="1"
+        eType="#//Achievement" eOpposite="#//Achievement/gained"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" eType="#//User" eOpposite="#//User/gained"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Keg">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="brand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="drawings" upperBound="-1"
+        eType="#//Drawing" eOpposite="#//Drawing/keg"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="box" lowerBound="1" eType="#//Box"
+        eOpposite="#//Box/kegs"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="News">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//NewsType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contents" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingQrRfid">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qrCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rfidTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="User">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rfidTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gained" upperBound="-1"
+        eType="#//GainedAchievement" eOpposite="#//GainedAchievement/user"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="drawings" upperBound="-1"
+        eType="#//Drawing" containment="true" eOpposite="#//Drawing/user"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="challengeParticipations"
+        upperBound="-1" eType="#//ChallengeParticipant" eOpposite="#//ChallengeParticipant/user"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Sex">
+    <eLiterals name="male" literal="male"/>
+    <eLiterals name="female" value="1" literal="female"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="NewsType">
+    <eLiterals name="drawing" literal="drawing"/>
+    <eLiterals name="achievement" value="1" literal="achievement"/>
+    <eLiterals name="other" value="2" literal="other"/>
+    <eLiterals name="challenge_startet" value="3" literal="challenge_startet"/>
+    <eLiterals name="challenge_done" value="4" literal="challenge_done"/>
+    <eLiterals name="challenge_declined" value="5" literal="challenge_declined"/>
+  </eClassifiers>
+</ecore:EPackage>
