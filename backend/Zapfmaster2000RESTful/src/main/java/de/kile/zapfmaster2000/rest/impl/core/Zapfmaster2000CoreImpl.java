@@ -32,5 +32,14 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	public TransactionManager getTransactionManager() {
 		return transactionManager;
 	}
+	
+	/**
+	 * Sets a transaction manager. Use only for mocking in unit tests!
+	 * 
+	 * @param pTransactionManager the manager to set
+	 */
+	void setTransactionManager(TransactionManager pTransactionManager) {
+		this.transactionManager = pTransactionManager;
+	}
 
 }

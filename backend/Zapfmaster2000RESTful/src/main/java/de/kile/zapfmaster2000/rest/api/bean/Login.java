@@ -24,13 +24,11 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 @Path("/login")
 public class Login {
 
-	@Context
-	private HttpServletRequest request;
-
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/box")
-	public Response userLogin(Credentials credentials) {
+	public Response userLogin(Credentials credentials,
+			@Context HttpServletRequest request) {
 		Response response = Response.status(Status.INTERNAL_SERVER_ERROR)
 				.build();
 
@@ -41,14 +39,15 @@ public class Login {
 		session.beginTransaction();
 
 		try {
-//			Account account = Zapfmaster2000Factory.eINSTANCE.createAccount();
-//			Box box = Zapfmaster2000Factory.eINSTANCE.createBox(); //
-//			account.getBoxes().add(box);
-//			box.setId("zapfmaster-box-1");
-//			box.setPassphrase("Y4SYg95B40AEbCblc7T1eSKM2JEOgdZ1");
-//			box.setVersion("3.0");
-//			session.save(box); 
-//			session.save(account);
+			// Account account =
+			// Zapfmaster2000Factory.eINSTANCE.createAccount();
+			// Box box = Zapfmaster2000Factory.eINSTANCE.createBox(); //
+			// account.getBoxes().add(box);
+			// box.setId("zapfmaster-box-1");
+			// box.setPassphrase("Y4SYg95B40AEbCblc7T1eSKM2JEOgdZ1");
+			// box.setVersion("3.0");
+			// session.save(box);
+			// session.save(account);
 
 			Query query = session
 					.createQuery("SELECT a FROM Account a, Box b WHERE b.id = :id AND b.passphrase = :passphrase AND b.account = a");
