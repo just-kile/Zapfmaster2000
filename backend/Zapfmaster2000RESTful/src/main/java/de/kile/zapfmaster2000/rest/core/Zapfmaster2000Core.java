@@ -16,5 +16,12 @@ public interface Zapfmaster2000Core {
 
 	/** shared instance */
 	public static Zapfmaster2000Core INSTANCE = Zapfmaster2000CoreImpl.init();
+	
+	/**
+	 * Returns the transaction manager.
+	 * 
+	 * @return the transation manager, never <code>null</code>.
+	 */
+	public TransactionManager getTransactionManager();
 
 }
