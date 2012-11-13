@@ -29,6 +29,7 @@ public class Login {
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/box")
 	public Response userLogin(Credentials credentials) {
 		Response response = Response.status(Status.INTERNAL_SERVER_ERROR)
 				.build();
