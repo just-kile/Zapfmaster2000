@@ -15,8 +15,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getVersion <em>Version</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getSystem <em>System</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getAccount <em>Account</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getKegs <em>Kegs</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getId <em>Id</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,32 +54,32 @@ public interface Box extends EObject {
 	void setVersion(String value);
 
 	/**
-	 * Returns the value of the '<em><b>System</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.System#getBoxes <em>Boxes</em>}'.
+	 * Returns the value of the '<em><b>Account</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getBoxes <em>Boxes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>System</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Account</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>System</em>' container reference.
-	 * @see #setSystem(de.kile.zapfmaster2000.rest.model.zapfmaster2000.System)
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_System()
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.System#getBoxes
+	 * @return the value of the '<em>Account</em>' container reference.
+	 * @see #setAccount(Account)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_Account()
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getBoxes
 	 * @model opposite="boxes" required="true" transient="false"
 	 * @generated
 	 */
-	de.kile.zapfmaster2000.rest.model.zapfmaster2000.System getSystem();
+	Account getAccount();
 
 	/**
-	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getSystem <em>System</em>}' container reference.
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getAccount <em>Account</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>System</em>' container reference.
-	 * @see #getSystem()
+	 * @param value the new value of the '<em>Account</em>' container reference.
+	 * @see #getAccount()
 	 * @generated
 	 */
-	void setSystem(de.kile.zapfmaster2000.rest.model.zapfmaster2000.System value);
+	void setAccount(Account value);
 
 	/**
 	 * Returns the value of the '<em><b>Kegs</b></em>' containment reference list.
@@ -96,5 +98,57 @@ public interface Box extends EObject {
 	 * @generated
 	 */
 	EList<Keg> getKegs();
+
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_Id()
+	 * @model
+	 * @generated
+	 */
+	String getId();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Passphrase</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Passphrase</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Passphrase</em>' attribute.
+	 * @see #setPassphrase(String)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_Passphrase()
+	 * @model
+	 * @generated
+	 */
+	String getPassphrase();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Passphrase</em>' attribute.
+	 * @see #getPassphrase()
+	 * @generated
+	 */
+	void setPassphrase(String value);
 
 } // Box

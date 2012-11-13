@@ -2,19 +2,7 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.util;
 
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Config;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -90,9 +78,9 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Zapfmaster2000Package.SYSTEM: {
-				de.kile.zapfmaster2000.rest.model.zapfmaster2000.System system = (de.kile.zapfmaster2000.rest.model.zapfmaster2000.System)theEObject;
-				T result = caseSystem(system);
+			case Zapfmaster2000Package.ACCOUNT: {
+				Account account = (Account)theEObject;
+				T result = caseAccount(account);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -191,17 +179,17 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>System</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Account</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>System</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Account</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSystem(de.kile.zapfmaster2000.rest.model.zapfmaster2000.System object) {
+	public T caseAccount(Account object) {
 		return null;
 	}
 

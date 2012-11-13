@@ -2,6 +2,7 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
@@ -21,18 +22,18 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>System</b></em>'.
+ * An implementation of the model object '<em><b>Account</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.SystemImpl#getBoxes <em>Boxes</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl#getBoxes <em>Boxes</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.rest.model.zapfmaster2000.System {
+public class AccountImpl extends EObjectImpl implements Account {
 	/**
 	 * The cached value of the '{@link #getBoxes() <em>Boxes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -48,7 +49,7 @@ public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SystemImpl() {
+	protected AccountImpl() {
 		super();
 	}
 
@@ -59,7 +60,7 @@ public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.re
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return Zapfmaster2000Package.Literals.SYSTEM;
+		return Zapfmaster2000Package.Literals.ACCOUNT;
 	}
 
 	/**
@@ -69,7 +70,7 @@ public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.re
 	 */
 	public EList<Box> getBoxes() {
 		if (boxes == null) {
-			boxes = new EObjectContainmentWithInverseEList<Box>(Box.class, this, Zapfmaster2000Package.SYSTEM__BOXES, Zapfmaster2000Package.BOX__SYSTEM);
+			boxes = new EObjectContainmentWithInverseEList<Box>(Box.class, this, Zapfmaster2000Package.ACCOUNT__BOXES, Zapfmaster2000Package.BOX__ACCOUNT);
 		}
 		return boxes;
 	}
@@ -83,7 +84,7 @@ public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.re
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Zapfmaster2000Package.SYSTEM__BOXES:
+			case Zapfmaster2000Package.ACCOUNT__BOXES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBoxes()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -97,7 +98,7 @@ public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.re
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Zapfmaster2000Package.SYSTEM__BOXES:
+			case Zapfmaster2000Package.ACCOUNT__BOXES:
 				return ((InternalEList<?>)getBoxes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -111,7 +112,7 @@ public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.re
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Zapfmaster2000Package.SYSTEM__BOXES:
+			case Zapfmaster2000Package.ACCOUNT__BOXES:
 				return getBoxes();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -126,7 +127,7 @@ public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.re
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Zapfmaster2000Package.SYSTEM__BOXES:
+			case Zapfmaster2000Package.ACCOUNT__BOXES:
 				getBoxes().clear();
 				getBoxes().addAll((Collection<? extends Box>)newValue);
 				return;
@@ -142,7 +143,7 @@ public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.re
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Zapfmaster2000Package.SYSTEM__BOXES:
+			case Zapfmaster2000Package.ACCOUNT__BOXES:
 				getBoxes().clear();
 				return;
 		}
@@ -157,10 +158,10 @@ public class SystemImpl extends EObjectImpl implements de.kile.zapfmaster2000.re
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Zapfmaster2000Package.SYSTEM__BOXES:
+			case Zapfmaster2000Package.ACCOUNT__BOXES:
 				return boxes != null && !boxes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //SystemImpl
+} //AccountImpl

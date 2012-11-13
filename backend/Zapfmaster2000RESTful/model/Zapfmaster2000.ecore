@@ -11,14 +11,16 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Box">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="system" lowerBound="1"
-        eType="#//System" eOpposite="#//System/boxes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
+        eType="#//Account" eOpposite="#//Account/boxes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="kegs" upperBound="-1" eType="#//Keg"
         containment="true" eOpposite="#//Keg/box"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="passphrase" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="System">
+  <eClassifiers xsi:type="ecore:EClass" name="Account">
     <eStructuralFeatures xsi:type="ecore:EReference" name="boxes" upperBound="-1"
-        eType="#//Box" containment="true" eOpposite="#//Box/system"/>
+        eType="#//Box" containment="true" eOpposite="#//Box/account"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Challenge">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ChallengeType"/>

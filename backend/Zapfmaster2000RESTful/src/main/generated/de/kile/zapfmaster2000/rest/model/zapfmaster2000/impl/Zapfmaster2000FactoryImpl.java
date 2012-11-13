@@ -2,23 +2,7 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Config;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewsType;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -75,7 +59,7 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 		switch (eClass.getClassifierID()) {
 			case Zapfmaster2000Package.ACHIEVEMENT: return createAchievement();
 			case Zapfmaster2000Package.BOX: return createBox();
-			case Zapfmaster2000Package.SYSTEM: return createSystem();
+			case Zapfmaster2000Package.ACCOUNT: return createAccount();
 			case Zapfmaster2000Package.CHALLENGE: return createChallenge();
 			case Zapfmaster2000Package.CHALLENGE1V1: return createChallenge1v1();
 			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT: return createChallengeParticipant();
@@ -154,9 +138,9 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public de.kile.zapfmaster2000.rest.model.zapfmaster2000.System createSystem() {
-		SystemImpl system = new SystemImpl();
-		return system;
+	public Account createAccount() {
+		AccountImpl account = new AccountImpl();
+		return account;
 	}
 
 	/**

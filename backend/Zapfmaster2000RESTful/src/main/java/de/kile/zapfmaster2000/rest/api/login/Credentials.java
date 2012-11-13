@@ -1,4 +1,4 @@
-package de.kile.zapfmaster2000.rest.api.model;
+package de.kile.zapfmaster2000.rest.api.login;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -6,22 +6,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Credentials {
 
 	private String name;
-	private String password;
+	private String passphrase;
 
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPassphrase() {
+		return passphrase;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassphrase(String passphrase) {
+		this.passphrase = passphrase;
 	}
 
 }

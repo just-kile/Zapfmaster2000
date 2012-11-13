@@ -2,19 +2,7 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.util;
 
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Config;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.*;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -88,8 +76,8 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 				return createBoxAdapter();
 			}
 			@Override
-			public Adapter caseSystem(de.kile.zapfmaster2000.rest.model.zapfmaster2000.System object) {
-				return createSystemAdapter();
+			public Adapter caseAccount(Account object) {
+				return createAccountAdapter();
 			}
 			@Override
 			public Adapter caseChallenge(Challenge object) {
@@ -180,16 +168,16 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.System <em>System</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.System
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account
 	 * @generated
 	 */
-	public Adapter createSystemAdapter() {
+	public Adapter createAccountAdapter() {
 		return null;
 	}
 

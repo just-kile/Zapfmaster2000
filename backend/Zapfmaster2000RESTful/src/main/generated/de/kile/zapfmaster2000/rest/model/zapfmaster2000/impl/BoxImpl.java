@@ -2,6 +2,7 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
@@ -31,8 +32,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getSystem <em>System</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getAccount <em>Account</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getKegs <em>Kegs</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getId <em>Id</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getPassphrase <em>Passphrase</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,6 +71,46 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @ordered
 	 */
 	protected EList<Keg> kegs;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPassphrase() <em>Passphrase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPassphrase()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PASSPHRASE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPassphrase() <em>Passphrase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPassphrase()
+	 * @generated
+	 * @ordered
+	 */
+	protected String passphrase = PASSPHRASE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,9 +157,9 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public de.kile.zapfmaster2000.rest.model.zapfmaster2000.System getSystem() {
-		if (eContainerFeatureID() != Zapfmaster2000Package.BOX__SYSTEM) return null;
-		return (de.kile.zapfmaster2000.rest.model.zapfmaster2000.System)eContainer();
+	public Account getAccount() {
+		if (eContainerFeatureID() != Zapfmaster2000Package.BOX__ACCOUNT) return null;
+		return (Account)eContainer();
 	}
 
 	/**
@@ -124,8 +167,8 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSystem(de.kile.zapfmaster2000.rest.model.zapfmaster2000.System newSystem, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newSystem, Zapfmaster2000Package.BOX__SYSTEM, msgs);
+	public NotificationChain basicSetAccount(Account newAccount, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newAccount, Zapfmaster2000Package.BOX__ACCOUNT, msgs);
 		return msgs;
 	}
 
@@ -134,20 +177,20 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSystem(de.kile.zapfmaster2000.rest.model.zapfmaster2000.System newSystem) {
-		if (newSystem != eInternalContainer() || (eContainerFeatureID() != Zapfmaster2000Package.BOX__SYSTEM && newSystem != null)) {
-			if (EcoreUtil.isAncestor(this, newSystem))
+	public void setAccount(Account newAccount) {
+		if (newAccount != eInternalContainer() || (eContainerFeatureID() != Zapfmaster2000Package.BOX__ACCOUNT && newAccount != null)) {
+			if (EcoreUtil.isAncestor(this, newAccount))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newSystem != null)
-				msgs = ((InternalEObject)newSystem).eInverseAdd(this, Zapfmaster2000Package.SYSTEM__BOXES, de.kile.zapfmaster2000.rest.model.zapfmaster2000.System.class, msgs);
-			msgs = basicSetSystem(newSystem, msgs);
+			if (newAccount != null)
+				msgs = ((InternalEObject)newAccount).eInverseAdd(this, Zapfmaster2000Package.ACCOUNT__BOXES, Account.class, msgs);
+			msgs = basicSetAccount(newAccount, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__SYSTEM, newSystem, newSystem));
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__ACCOUNT, newAccount, newAccount));
 	}
 
 	/**
@@ -167,14 +210,56 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPassphrase() {
+		return passphrase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPassphrase(String newPassphrase) {
+		String oldPassphrase = passphrase;
+		passphrase = newPassphrase;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__PASSPHRASE, oldPassphrase, passphrase));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Zapfmaster2000Package.BOX__SYSTEM:
+			case Zapfmaster2000Package.BOX__ACCOUNT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetSystem((de.kile.zapfmaster2000.rest.model.zapfmaster2000.System)otherEnd, msgs);
+				return basicSetAccount((Account)otherEnd, msgs);
 			case Zapfmaster2000Package.BOX__KEGS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getKegs()).basicAdd(otherEnd, msgs);
 		}
@@ -189,8 +274,8 @@ public class BoxImpl extends EObjectImpl implements Box {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Zapfmaster2000Package.BOX__SYSTEM:
-				return basicSetSystem(null, msgs);
+			case Zapfmaster2000Package.BOX__ACCOUNT:
+				return basicSetAccount(null, msgs);
 			case Zapfmaster2000Package.BOX__KEGS:
 				return ((InternalEList<?>)getKegs()).basicRemove(otherEnd, msgs);
 		}
@@ -205,8 +290,8 @@ public class BoxImpl extends EObjectImpl implements Box {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case Zapfmaster2000Package.BOX__SYSTEM:
-				return eInternalContainer().eInverseRemove(this, Zapfmaster2000Package.SYSTEM__BOXES, de.kile.zapfmaster2000.rest.model.zapfmaster2000.System.class, msgs);
+			case Zapfmaster2000Package.BOX__ACCOUNT:
+				return eInternalContainer().eInverseRemove(this, Zapfmaster2000Package.ACCOUNT__BOXES, Account.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -221,10 +306,14 @@ public class BoxImpl extends EObjectImpl implements Box {
 		switch (featureID) {
 			case Zapfmaster2000Package.BOX__VERSION:
 				return getVersion();
-			case Zapfmaster2000Package.BOX__SYSTEM:
-				return getSystem();
+			case Zapfmaster2000Package.BOX__ACCOUNT:
+				return getAccount();
 			case Zapfmaster2000Package.BOX__KEGS:
 				return getKegs();
+			case Zapfmaster2000Package.BOX__ID:
+				return getId();
+			case Zapfmaster2000Package.BOX__PASSPHRASE:
+				return getPassphrase();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -241,12 +330,18 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case Zapfmaster2000Package.BOX__VERSION:
 				setVersion((String)newValue);
 				return;
-			case Zapfmaster2000Package.BOX__SYSTEM:
-				setSystem((de.kile.zapfmaster2000.rest.model.zapfmaster2000.System)newValue);
+			case Zapfmaster2000Package.BOX__ACCOUNT:
+				setAccount((Account)newValue);
 				return;
 			case Zapfmaster2000Package.BOX__KEGS:
 				getKegs().clear();
 				getKegs().addAll((Collection<? extends Keg>)newValue);
+				return;
+			case Zapfmaster2000Package.BOX__ID:
+				setId((String)newValue);
+				return;
+			case Zapfmaster2000Package.BOX__PASSPHRASE:
+				setPassphrase((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -263,11 +358,17 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case Zapfmaster2000Package.BOX__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
-			case Zapfmaster2000Package.BOX__SYSTEM:
-				setSystem((de.kile.zapfmaster2000.rest.model.zapfmaster2000.System)null);
+			case Zapfmaster2000Package.BOX__ACCOUNT:
+				setAccount((Account)null);
 				return;
 			case Zapfmaster2000Package.BOX__KEGS:
 				getKegs().clear();
+				return;
+			case Zapfmaster2000Package.BOX__ID:
+				setId(ID_EDEFAULT);
+				return;
+			case Zapfmaster2000Package.BOX__PASSPHRASE:
+				setPassphrase(PASSPHRASE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -283,10 +384,14 @@ public class BoxImpl extends EObjectImpl implements Box {
 		switch (featureID) {
 			case Zapfmaster2000Package.BOX__VERSION:
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-			case Zapfmaster2000Package.BOX__SYSTEM:
-				return getSystem() != null;
+			case Zapfmaster2000Package.BOX__ACCOUNT:
+				return getAccount() != null;
 			case Zapfmaster2000Package.BOX__KEGS:
 				return kegs != null && !kegs.isEmpty();
+			case Zapfmaster2000Package.BOX__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case Zapfmaster2000Package.BOX__PASSPHRASE:
+				return PASSPHRASE_EDEFAULT == null ? passphrase != null : !PASSPHRASE_EDEFAULT.equals(passphrase);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -303,6 +408,10 @@ public class BoxImpl extends EObjectImpl implements Box {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (version: ");
 		result.append(version);
+		result.append(", id: ");
+		result.append(id);
+		result.append(", passphrase: ");
+		result.append(passphrase);
 		result.append(')');
 		return result.toString();
 	}

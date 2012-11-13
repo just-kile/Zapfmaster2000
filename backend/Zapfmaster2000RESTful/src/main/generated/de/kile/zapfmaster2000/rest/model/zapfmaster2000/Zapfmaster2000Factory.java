@@ -40,13 +40,13 @@ public interface Zapfmaster2000Factory extends EFactory {
 	Box createBox();
 
 	/**
-	 * Returns a new object of class '<em>System</em>'.
+	 * Returns a new object of class '<em>Account</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>System</em>'.
+	 * @return a new object of class '<em>Account</em>'.
 	 * @generated
 	 */
-	System createSystem();
+	Account createAccount();
 
 	/**
 	 * Returns a new object of class '<em>Challenge</em>'.

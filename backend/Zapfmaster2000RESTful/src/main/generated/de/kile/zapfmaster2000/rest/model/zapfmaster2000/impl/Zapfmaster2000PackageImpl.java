@@ -2,6 +2,7 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
@@ -54,7 +55,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass systemEClass = null;
+	private EClass accountEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -276,7 +277,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBox_System() {
+	public EReference getBox_Account() {
 		return (EReference)boxEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -294,8 +295,8 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSystem() {
-		return systemEClass;
+	public EAttribute getBox_Id() {
+		return (EAttribute)boxEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -303,8 +304,26 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSystem_Boxes() {
-		return (EReference)systemEClass.getEStructuralFeatures().get(0);
+	public EAttribute getBox_Passphrase() {
+		return (EAttribute)boxEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAccount() {
+		return accountEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAccount_Boxes() {
+		return (EReference)accountEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -820,11 +839,13 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 
 		boxEClass = createEClass(BOX);
 		createEAttribute(boxEClass, BOX__VERSION);
-		createEReference(boxEClass, BOX__SYSTEM);
+		createEReference(boxEClass, BOX__ACCOUNT);
 		createEReference(boxEClass, BOX__KEGS);
+		createEAttribute(boxEClass, BOX__ID);
+		createEAttribute(boxEClass, BOX__PASSPHRASE);
 
-		systemEClass = createEClass(SYSTEM);
-		createEReference(systemEClass, SYSTEM__BOXES);
+		accountEClass = createEClass(ACCOUNT);
+		createEReference(accountEClass, ACCOUNT__BOXES);
 
 		challengeEClass = createEClass(CHALLENGE);
 		createEAttribute(challengeEClass, CHALLENGE__TYPE);
@@ -930,11 +951,13 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 
 		initEClass(boxEClass, Box.class, "Box", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBox_Version(), ecorePackage.getEString(), "version", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBox_System(), this.getSystem(), this.getSystem_Boxes(), "system", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBox_Account(), this.getAccount(), this.getAccount_Boxes(), "account", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBox_Kegs(), this.getKeg(), this.getKeg_Box(), "kegs", null, 0, -1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBox_Id(), ecorePackage.getEString(), "id", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBox_Passphrase(), ecorePackage.getEString(), "passphrase", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(systemEClass, de.kile.zapfmaster2000.rest.model.zapfmaster2000.System.class, "System", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSystem_Boxes(), this.getBox(), this.getBox_System(), "boxes", null, 0, -1, de.kile.zapfmaster2000.rest.model.zapfmaster2000.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(accountEClass, Account.class, "Account", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAccount_Boxes(), this.getBox(), this.getBox_Account(), "boxes", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(challengeEClass, Challenge.class, "Challenge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getChallenge_Type(), this.getChallengeType(), "type", null, 0, 1, Challenge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

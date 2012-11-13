@@ -131,13 +131,13 @@ public interface Zapfmaster2000Package extends EPackage {
 	int BOX__VERSION = 0;
 
 	/**
-	 * The feature id for the '<em><b>System</b></em>' container reference.
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__SYSTEM = 1;
+	int BOX__ACCOUNT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Kegs</b></em>' containment reference list.
@@ -149,23 +149,41 @@ public interface Zapfmaster2000Package extends EPackage {
 	int BOX__KEGS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__ID = 3;
+
+	/**
+	 * The feature id for the '<em><b>Passphrase</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__PASSPHRASE = 4;
+
+	/**
 	 * The number of structural features of the '<em>Box</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX_FEATURE_COUNT = 3;
+	int BOX_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.SystemImpl <em>System</em>}' class.
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.SystemImpl
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getSystem()
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAccount()
 	 * @generated
 	 */
-	int SYSTEM = 2;
+	int ACCOUNT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Boxes</b></em>' containment reference list.
@@ -174,16 +192,16 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM__BOXES = 0;
+	int ACCOUNT__BOXES = 0;
 
 	/**
-	 * The number of structural features of the '<em>System</em>' class.
+	 * The number of structural features of the '<em>Account</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_FEATURE_COUNT = 1;
+	int ACCOUNT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeImpl <em>Challenge</em>}' class.
@@ -842,15 +860,15 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getBox_Version();
 
 	/**
-	 * Returns the meta object for the container reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getSystem <em>System</em>}'.
+	 * Returns the meta object for the container reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>System</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getSystem()
+	 * @return the meta object for the container reference '<em>Account</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getAccount()
 	 * @see #getBox()
 	 * @generated
 	 */
-	EReference getBox_System();
+	EReference getBox_Account();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getKegs <em>Kegs</em>}'.
@@ -864,25 +882,47 @@ public interface Zapfmaster2000Package extends EPackage {
 	EReference getBox_Kegs();
 
 	/**
-	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.System <em>System</em>}'.
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>System</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.System
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getId()
+	 * @see #getBox()
 	 * @generated
 	 */
-	EClass getSystem();
+	EAttribute getBox_Id();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.System#getBoxes <em>Boxes</em>}'.
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Passphrase</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_Passphrase();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account <em>Account</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Account</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account
+	 * @generated
+	 */
+	EClass getAccount();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getBoxes <em>Boxes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Boxes</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.System#getBoxes()
-	 * @see #getSystem()
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getBoxes()
+	 * @see #getAccount()
 	 * @generated
 	 */
-	EReference getSystem_Boxes();
+	EReference getAccount_Boxes();
 
 	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge <em>Challenge</em>}'.
@@ -1537,12 +1577,12 @@ public interface Zapfmaster2000Package extends EPackage {
 		EAttribute BOX__VERSION = eINSTANCE.getBox_Version();
 
 		/**
-		 * The meta object literal for the '<em><b>System</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Account</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BOX__SYSTEM = eINSTANCE.getBox_System();
+		EReference BOX__ACCOUNT = eINSTANCE.getBox_Account();
 
 		/**
 		 * The meta object literal for the '<em><b>Kegs</b></em>' containment reference list feature.
@@ -1553,14 +1593,30 @@ public interface Zapfmaster2000Package extends EPackage {
 		EReference BOX__KEGS = eINSTANCE.getBox_Kegs();
 
 		/**
-		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.SystemImpl <em>System</em>}' class.
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.SystemImpl
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getSystem()
 		 * @generated
 		 */
-		EClass SYSTEM = eINSTANCE.getSystem();
+		EAttribute BOX__ID = eINSTANCE.getBox_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Passphrase</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__PASSPHRASE = eINSTANCE.getBox_Passphrase();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAccount()
+		 * @generated
+		 */
+		EClass ACCOUNT = eINSTANCE.getAccount();
 
 		/**
 		 * The meta object literal for the '<em><b>Boxes</b></em>' containment reference list feature.
@@ -1568,7 +1624,7 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SYSTEM__BOXES = eINSTANCE.getSystem_Boxes();
+		EReference ACCOUNT__BOXES = eINSTANCE.getAccount_Boxes();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeImpl <em>Challenge</em>}' class.
