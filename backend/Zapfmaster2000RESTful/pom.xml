@@ -88,6 +88,9 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+		<sourceDirectory>${basedir}/src/main/generated</sourceDirectory>
+
 	</build>
 
 </project>

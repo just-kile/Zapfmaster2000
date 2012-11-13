@@ -28,7 +28,7 @@
         eType="#//ChallengeParticipant" containment="true" eOpposite="#//ChallengeParticipant/challenge"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ChallengeType">
-    <eLiterals name="1v1" literal="1v1"/>
+    <eLiterals name="OneVsOne" literal="OneVsOne"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Challenge1v1">
     <eStructuralFeatures xsi:type="ecore:EReference" name="challenge" lowerBound="1"
@@ -40,7 +40,7 @@
         eOpposite="#//Challenge/participants"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="team" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="won" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="-1" eType="#//User"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//User"
         eOpposite="#//User/challengeParticipations"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Config">
