@@ -22,7 +22,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	 * @return the core. Never <code>null</code>.
 	 */
 	public synchronized static Zapfmaster2000Core init() {
-		if (instance != null) {
+		if (instance == null) {
 			instance = new Zapfmaster2000CoreImpl();
 		}
 		return instance;
