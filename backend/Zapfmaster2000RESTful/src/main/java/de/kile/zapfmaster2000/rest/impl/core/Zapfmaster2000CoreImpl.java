@@ -12,7 +12,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	private TransactionManager transactionManager;
 
 	private Zapfmaster2000CoreImpl() {
-		transactionManager = new TransationManagerImpl();
+		transactionManager = new TransactionManagerImpl();
 	}
 
 	/**
