@@ -77,7 +77,7 @@ public class DrawManagerImpl implements DrawManager {
 				return currentUser;
 			}
 		}
-		
+
 		// log did fail
 		return null;
 	}
@@ -138,7 +138,7 @@ public class DrawManagerImpl implements DrawManager {
 			session.beginTransaction();
 			@SuppressWarnings("unchecked")
 			List<User> users = session
-					.createQuery("SELECT u FROM User WHERE u.rfid = :rfid")
+					.createQuery("FROM User u WHERE u.rfidTag = :rfid")
 					.setLong("rfid", pRfidId).list();
 			if (users.size() != 1) {
 				return null;
