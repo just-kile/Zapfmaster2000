@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getKeg <em>Keg</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getAmount <em>Amount</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getDate <em>Date</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getDuration <em>Duration</em>}</li>
  * </ul>
  * </p>
  *
@@ -134,31 +133,5 @@ public interface Drawing extends EObject {
 	 * @generated
 	 */
 	void setDate(Date value);
-
-	/**
-	 * Returns the value of the '<em><b>Duration</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Duration</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Duration</em>' attribute.
-	 * @see #setDuration(int)
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getDrawing_Duration()
-	 * @model
-	 * @generated
-	 */
-	int getDuration();
-
-	/**
-	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getDuration <em>Duration</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Duration</em>' attribute.
-	 * @see #getDuration()
-	 * @generated
-	 */
-	void setDuration(int value);
 
 } // Drawing

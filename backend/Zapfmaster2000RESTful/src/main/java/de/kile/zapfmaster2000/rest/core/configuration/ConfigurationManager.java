@@ -15,6 +15,15 @@ public interface ConfigurationManager {
 	 * @return value as int
 	 */
 	public int getInt(String pKey);
+	
+	/**
+	 * Returns a configuration value for the given key
+	 * 
+	 * @param pKey
+	 *            key
+	 * @return value as double
+	 */
+	public double getDouble(String pKey);
 
 	/**
 	 * Returns a configuration value for the given key

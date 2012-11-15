@@ -36,6 +36,11 @@ public class FileConfigurationManagerImpl implements ConfigurationManager {
 	}
 
 	@Override
+	public double getDouble(String pKey) {
+		return Double.parseDouble(get(pKey));
+	}
+
+	@Override
 	public String get(String pKey) {
 		// TODO: proper handling for cast
 		return (String) properties.get(pKey);

@@ -1,20 +1,26 @@
 package de.kile.zapfmaster2000.rest.impl.core.box;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.print.attribute.standard.MediaSize.Other;
-
 import org.apache.log4j.Logger;
+import org.eclipse.emf.teneo.hibernate.mapping.identifier.IdentifierCacheHandler;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.box.DrawManager;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
+import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
 public class DrawManagerImpl implements DrawManager {
 
@@ -36,8 +42,8 @@ public class DrawManagerImpl implements DrawManager {
 	/** time when the last drawing action was performed */
 	private long lastDrawing;
 
-	/** amount of the current draw process */
-	private double amount;
+	/** number of ticks for the current drawing process */
+	private int totalTicks;
 
 	/** the timer */
 	private Timer timer;
@@ -61,7 +67,7 @@ public class DrawManagerImpl implements DrawManager {
 					if (newUser != null) {
 						// login succeeded
 						if (currentUser != null) {
-							notifyEndDrawing(currentUser, amount);
+							finishCurrentDraw();
 						}
 
 						currentUser = newUser;
@@ -84,7 +90,38 @@ public class DrawManagerImpl implements DrawManager {
 
 	@Override
 	public void draw(int pRawAmount) {
-		// TODO Auto-generated method stub
+		ConfigurationManager config = Zapfmaster2000Core.INSTANCE
+				.getConfigurationManager();
+
+		if (pRawAmount < config
+				.getInt(ConfigurationConstants.BOX_DRAW_MIN_TICKS)) {
+			// ignore too little tick counts, otherwise a user might not get
+			// logged out even if he is not doing anything
+			return;
+		}
+		pRawAmount -= config
+				.getInt(ConfigurationConstants.BOX_DRAW_TICK_REDUCTION);
+
+		scheduleAutoLogout();
+		lastDrawing = System.currentTimeMillis();
+
+		totalTicks += pRawAmount;
+		// ignore to little amounts. This is most likely a "problem" of the
+		// flowmeter
+		double realAmount = calcRealAmount(totalTicks);
+		if (realAmount > config
+				.getDouble(ConfigurationConstants.BOX_DRAW_MIN_AMOUNT)) {
+			if (currentUser != null) {
+				notifyDrawing(currentUser, realAmount);
+			} else {
+				// guest starts to draw
+				guestUser = findGuest();
+				notifyLoginSuccessful(guestUser);
+				currentUser = guestUser;
+				notifyDrawing(guestUser, realAmount);
+				scheduleAutoLogout();
+			}
+		}
 
 	}
 
@@ -117,7 +154,7 @@ public class DrawManagerImpl implements DrawManager {
 		}
 		double diff = System.currentTimeMillis() - lastDrawing;
 		if (diff < Zapfmaster2000Core.INSTANCE.getConfigurationManager()
-				.getInt(ConfigurationConstants.BOX_LONGIN_MIN_DIFF)) {
+				.getInt(ConfigurationConstants.BOX_LOGIN_MIN_DIFF)) {
 			return false;
 		}
 		return true;
@@ -174,7 +211,7 @@ public class DrawManagerImpl implements DrawManager {
 		}
 		timer = new Timer();
 		int time = Zapfmaster2000Core.INSTANCE.getConfigurationManager()
-				.getInt(ConfigurationConstants.BOX_LONGIN_AUTO_LOGOUT);
+				.getInt(ConfigurationConstants.BOX_LOGIN_AUTO_LOGOUT);
 		timer.schedule(createTimerTask(), time);
 	}
 
@@ -187,7 +224,7 @@ public class DrawManagerImpl implements DrawManager {
 						if (currentUser != null) {
 							LOG.info("Auto-Logout for user: "
 									+ currentUser.getName());
-							notifyEndDrawing(currentUser, amount);
+							finishCurrentDraw();
 							currentUser = null;
 						}
 					}
@@ -198,4 +235,78 @@ public class DrawManagerImpl implements DrawManager {
 		};
 	}
 
+	private double calcRealAmount(int pRawTicks) {
+		ConfigurationManager config = Zapfmaster2000Core.INSTANCE
+				.getConfigurationManager();
+		int ticksPerLiter = config
+				.getInt(ConfigurationConstants.BOX_DRAW_TICKS_PER_LITER);
+		return (double) pRawTicks / (double) ticksPerLiter;
+	}
+
+	/**
+	 * Finds the guest user. If there is no guest user in the db yet, it is
+	 * created now.
+	 * 
+	 * @return guest user, never <code>null</code>.
+	 */
+	private User findGuest() {
+		User user;
+
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<User> guests = session.createQuery(
+				"FROM USER u WHERE u.type = GUEST").list();
+		if (guests.isEmpty()) {
+			User newUser = Zapfmaster2000Factory.eINSTANCE.createUser();
+			newUser.setName("Guest");
+			newUser.setImagePath("img/guest.png");
+			newUser.setWeight(100);
+			newUser.setType(UserType.GUEST);
+			session.save(newUser);
+			user = newUser;
+		} else {
+			user = guests.get(0);
+		}
+		tx.commit();
+		return user;
+	}
+
+	private void finishCurrentDraw() {
+		double realAmount = calcRealAmount(totalTicks);
+		totalTicks = 0;
+		
+		if (currentUser != null) {
+			// add drawing to database
+			Drawing drawing = Zapfmaster2000Factory.eINSTANCE.createDrawing();
+			drawing.setAmount(realAmount);
+			drawing.setDate(new Date());
+			drawing.setKeg(value)
+			drawing.setUser(currentUser);
+			
+			
+			// push
+			
+			notifyEndDrawing(currentUser, realAmount);
+		}
+		
+		// reset values
+		totalTicks = 0;
+		currentUser = null;
+	}
+
+	private Keg findActiveKeg() {
+		Keg keg;
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		
+		Long id = (Long) IdentifierCacheHandler.getInstance().getID(box);
+		session.createQuery(FROM Keq k)
+		
+		
+		box.g
+		session.
+	}
 }

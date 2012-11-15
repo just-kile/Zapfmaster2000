@@ -14,7 +14,6 @@ import de.kile.zapfmaster2000.rest.AbstractDatabaseTest;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
 import de.kile.zapfmaster2000.rest.impl.core.box.DrawManagerImpl;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
@@ -45,7 +44,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 	@After
 	public void waitForAutoLogout() throws InterruptedException {
 		int time = Zapfmaster2000Core.INSTANCE.getConfigurationManager()
-				.getInt(ConfigurationConstants.BOX_LONGIN_AUTO_LOGOUT);
+				.getInt(ConfigurationConstants.BOX_LOGIN_AUTO_LOGOUT);
 		Thread.sleep(time);
 	}
 
@@ -99,7 +98,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 		
 		// wait for auto log-off
 		int time = Zapfmaster2000Core.INSTANCE.getConfigurationManager()
-				.getInt(ConfigurationConstants.BOX_LONGIN_AUTO_LOGOUT);
+				.getInt(ConfigurationConstants.BOX_LOGIN_AUTO_LOGOUT);
 		Thread.sleep(time);
 		
 		// ron logs in one more, should succeed now

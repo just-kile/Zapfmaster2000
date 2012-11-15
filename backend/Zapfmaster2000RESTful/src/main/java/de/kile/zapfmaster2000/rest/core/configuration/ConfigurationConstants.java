@@ -13,8 +13,16 @@ public class ConfigurationConstants {
 	private ConfigurationConstants() {
 	}
 
-	public final static String BOX_LONGIN_MIN_DIFF = "box.login.mindiff";
+	public final static String BOX_LOGIN_MIN_DIFF = "box.login.minDiff";
 
-	public final static String BOX_LONGIN_AUTO_LOGOUT = "box.login.autologout";
+	public final static String BOX_LOGIN_AUTO_LOGOUT = "box.login.autoLogout";
+
+	public final static String BOX_DRAW_MIN_TICKS = "box.draw.minTicks";
+
+	public final static String BOX_DRAW_MIN_AMOUNT = "box.draw.minAmount";
+
+	public final static String BOX_DRAW_TICK_REDUCTION = "box.draw.tickReduction";
+
+	public final static String BOX_DRAW_TICKS_PER_LITER = "box.draw.ticksPerLiter";
 
 }

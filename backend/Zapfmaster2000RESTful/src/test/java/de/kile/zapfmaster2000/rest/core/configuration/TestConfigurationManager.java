@@ -16,7 +16,7 @@ public class TestConfigurationManager {
 		ConfigurationManager mgr = Zapfmaster2000Core.INSTANCE
 				.getConfigurationManager();
 		assertEquals(3000,
-				mgr.getInt(ConfigurationConstants.BOX_LONGIN_MIN_DIFF));
+				mgr.getInt(ConfigurationConstants.BOX_LOGIN_MIN_DIFF));
 
 		try {
 			mgr.getInt("foo");
@@ -30,8 +30,8 @@ public class TestConfigurationManager {
 		ConfigurationManager mgr = Zapfmaster2000Core.INSTANCE
 				.getConfigurationManager();
 		assertEquals("3000",
-				mgr.get(ConfigurationConstants.BOX_LONGIN_MIN_DIFF));
-		assertEquals(null, mgr.get(ConfigurationConstants.BOX_LONGIN_MIN_DIFF));
+				mgr.get(ConfigurationConstants.BOX_LOGIN_MIN_DIFF));
+		assertEquals(null, mgr.get(ConfigurationConstants.BOX_LOGIN_MIN_DIFF));
 	}
 
 }

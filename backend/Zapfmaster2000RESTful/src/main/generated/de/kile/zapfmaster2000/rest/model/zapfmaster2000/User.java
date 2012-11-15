@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getGained <em>Gained</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getDrawings <em>Drawings</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getChallengeParticipations <em>Challenge Participations</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -243,5 +244,35 @@ public interface User extends EObject {
 	 * @generated
 	 */
 	EList<ChallengeParticipant> getChallengeParticipations();
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * The default value is <code>"USER"</code>.
+	 * The literals are from the enumeration {@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType
+	 * @see #setType(UserType)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getUser_Type()
+	 * @model default="USER"
+	 * @generated
+	 */
+	UserType getType();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getType <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(UserType value);
 
 } // User
