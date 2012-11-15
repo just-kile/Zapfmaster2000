@@ -1,4 +1,4 @@
-package de.kile.zapfmaster2000.rest.api;
+package de.kile.zapfmaster2000.rest.api.login;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -14,14 +14,14 @@ import org.hibernate.Session;
 import org.junit.Test;
 
 import de.kile.zapfmaster2000.rest.AbstractDatabaseTest;
-import de.kile.zapfmaster2000.rest.api.bean.Login;
 import de.kile.zapfmaster2000.rest.api.login.Credentials;
+import de.kile.zapfmaster2000.rest.api.login.LoginResource;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
-public class TestLoginBox extends AbstractDatabaseTest {
+public class TestLoginResource extends AbstractDatabaseTest {
 
 	@Test
 	public void correctCredentials() {
@@ -31,7 +31,7 @@ public class TestLoginBox extends AbstractDatabaseTest {
 		credentials.setName("my-box");
 		credentials.setPassphrase("my-secret-passphrase");
 
-		Login login = new Login();
+		LoginResource login = new LoginResource();
 		HttpServletRequest request = createRequestMock();
 		Response response = login.userLogin(credentials, request);
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
@@ -47,7 +47,7 @@ public class TestLoginBox extends AbstractDatabaseTest {
 		credentials.setName("my-other-box");
 		credentials.setPassphrase("wrong-passphrase");
 
-		Login login = new Login();
+		LoginResource login = new LoginResource();
 		HttpServletRequest request = createRequestMock();
 		Response response = login.userLogin(credentials, request);
 		assertEquals(Response.Status.FORBIDDEN.getStatusCode(),

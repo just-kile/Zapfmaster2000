@@ -1,4 +1,4 @@
-package de.kile.zapfmaster2000.rest.api.bean;
+package de.kile.zapfmaster2000.rest.api.login;
 
 import java.util.List;
 
@@ -16,7 +16,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import de.kile.zapfmaster2000.rest.api.login.Credentials;
 import de.kile.zapfmaster2000.rest.constants.HttpSessionConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
@@ -24,7 +23,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
 @Path("/login")
-public class Login {
+public class LoginResource {
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -41,19 +40,11 @@ public class Login {
 		session.beginTransaction();
 
 		try {
-//			Account account = Zapfmaster2000Factory.eINSTANCE.createAccount();
-//			Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
-//			account.getBoxes().add(box);
-//			box.setId("zapfmaster-box-1");
-//			box.setPassphrase("Y4SYg95B40AEbCblc7T1eSKM2JEOgdZ1");
-//			box.setVersion("3.0");
-//			session.save(box);
-//			session.save(account);
-
 			Query query = session
 					.createQuery("SELECT a FROM Account a, Box b WHERE b.id = :id AND b.passphrase = :passphrase AND b.account = a");
 			query.setString("id", credentials.getName()).setString(
 					"passphrase", credentials.getPassphrase());
+			@SuppressWarnings("unchecked")
 			List<Account> results = query.list();
 
 			if (results.isEmpty()) {

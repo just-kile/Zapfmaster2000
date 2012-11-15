@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="box.login.mindiff">3000</entry>
+	<entry key="box.login.autologout">5000</entry>
+</properties>
