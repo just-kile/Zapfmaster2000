@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AchievementImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AchievementImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AchievementImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AchievementImpl#getImagePath <em>Image Path</em>}</li>
@@ -39,6 +40,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class AchievementImpl extends EObjectImpl implements Achievement {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -126,6 +147,27 @@ public class AchievementImpl extends EObjectImpl implements Achievement {
 	@Override
 	protected EClass eStaticClass() {
 		return Zapfmaster2000Package.Literals.ACHIEVEMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.ACHIEVEMENT__ID, oldId, id));
 	}
 
 	/**
@@ -240,6 +282,8 @@ public class AchievementImpl extends EObjectImpl implements Achievement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.ACHIEVEMENT__ID:
+				return getId();
 			case Zapfmaster2000Package.ACHIEVEMENT__NAME:
 				return getName();
 			case Zapfmaster2000Package.ACHIEVEMENT__DESCRIPTION:
@@ -261,6 +305,9 @@ public class AchievementImpl extends EObjectImpl implements Achievement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.ACHIEVEMENT__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.ACHIEVEMENT__NAME:
 				setName((String)newValue);
 				return;
@@ -286,6 +333,9 @@ public class AchievementImpl extends EObjectImpl implements Achievement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.ACHIEVEMENT__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.ACHIEVEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -310,6 +360,8 @@ public class AchievementImpl extends EObjectImpl implements Achievement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.ACHIEVEMENT__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.ACHIEVEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case Zapfmaster2000Package.ACHIEVEMENT__DESCRIPTION:
@@ -332,7 +384,9 @@ public class AchievementImpl extends EObjectImpl implements Achievement {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", name: ");
 		result.append(name);
 		result.append(", description: ");
 		result.append(description);

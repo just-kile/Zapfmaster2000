@@ -76,15 +76,6 @@ public interface Zapfmaster2000Factory extends EFactory {
 	ChallengeParticipant createChallengeParticipant();
 
 	/**
-	 * Returns a new object of class '<em>Config</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Config</em>'.
-	 * @generated
-	 */
-	Config createConfig();
-
-	/**
 	 * Returns a new object of class '<em>Drawing</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GainedAchievementImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GainedAchievementImpl#getAchievement <em>Achievement</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GainedAchievementImpl#getDate <em>Date</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GainedAchievementImpl#getUser <em>User</em>}</li>
@@ -36,6 +37,26 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * @generated
  */
 public class GainedAchievementImpl extends EObjectImpl implements GainedAchievement {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -83,6 +104,27 @@ public class GainedAchievementImpl extends EObjectImpl implements GainedAchievem
 	@Override
 	protected EClass eStaticClass() {
 		return Zapfmaster2000Package.Literals.GAINED_ACHIEVEMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.GAINED_ACHIEVEMENT__ID, oldId, id));
 	}
 
 	/**
@@ -265,6 +307,8 @@ public class GainedAchievementImpl extends EObjectImpl implements GainedAchievem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__ID:
+				return getId();
 			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__ACHIEVEMENT:
 				return getAchievement();
 			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__DATE:
@@ -284,6 +328,9 @@ public class GainedAchievementImpl extends EObjectImpl implements GainedAchievem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__ACHIEVEMENT:
 				setAchievement((Achievement)newValue);
 				return;
@@ -305,6 +352,9 @@ public class GainedAchievementImpl extends EObjectImpl implements GainedAchievem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__ACHIEVEMENT:
 				setAchievement((Achievement)null);
 				return;
@@ -326,6 +376,8 @@ public class GainedAchievementImpl extends EObjectImpl implements GainedAchievem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__ACHIEVEMENT:
 				return getAchievement() != null;
 			case Zapfmaster2000Package.GAINED_ACHIEVEMENT__DATE:
@@ -346,7 +398,9 @@ public class GainedAchievementImpl extends EObjectImpl implements GainedAchievem
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (date: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", date: ");
 		result.append(date);
 		result.append(')');
 		return result.toString();

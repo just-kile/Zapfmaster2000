@@ -1,6 +1,5 @@
 package de.kile.zapfmaster2000.rest.core.box;
 
-import de.kile.zapfmaster2000.rest.impl.core.box.DrawServiceListener;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 

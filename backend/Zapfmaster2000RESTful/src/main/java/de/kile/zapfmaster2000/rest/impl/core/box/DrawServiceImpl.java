@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.box.DrawService;
+import de.kile.zapfmaster2000.rest.core.box.DrawServiceListener;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
@@ -200,9 +201,9 @@ public class DrawServiceImpl implements DrawService {
 		}
 	}
 
-	private void notifyEndDrawing(User pUser, double pAmount) {
+	private void notifyEndDrawing(Drawing pDrawing) {
 		for (DrawServiceListener listener : listeners) {
-			listener.onEndDrawing(pUser, pAmount);
+			listener.onEndDrawing(pDrawing);
 		}
 	}
 
@@ -290,12 +291,14 @@ public class DrawServiceImpl implements DrawService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
+
+			Drawing drawing = null;
+
 			try {
 				session.update(activeKeg);
 				session.update(currentUser);
 
-				Drawing drawing = Zapfmaster2000Factory.eINSTANCE
-						.createDrawing();
+				drawing = Zapfmaster2000Factory.eINSTANCE.createDrawing();
 				drawing.setAmount(realAmount);
 				drawing.setDate(new Date());
 				drawing.setKeg(activeKeg);
@@ -309,7 +312,7 @@ public class DrawServiceImpl implements DrawService {
 				throw new WebServiceException("Could not write draw to db", ex);
 			}
 
-			notifyEndDrawing(currentUser, realAmount);
+			notifyEndDrawing(drawing);
 		}
 
 		// reset values

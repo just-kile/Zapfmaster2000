@@ -7,14 +7,16 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewsType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
+import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
@@ -24,16 +26,38 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getContents <em>Contents</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getImagePath <em>Image Path</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getAccount <em>Account</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getDate <em>Date</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class NewsImpl extends EObjectImpl implements News {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -95,6 +119,26 @@ public class NewsImpl extends EObjectImpl implements News {
 	protected String imagePath = IMAGE_PATH_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date DATE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDate() <em>Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date date = DATE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -111,6 +155,27 @@ public class NewsImpl extends EObjectImpl implements News {
 	@Override
 	protected EClass eStaticClass() {
 		return Zapfmaster2000Package.Literals.NEWS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.NEWS__ID, oldId, id));
 	}
 
 	/**
@@ -222,6 +287,27 @@ public class NewsImpl extends EObjectImpl implements News {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Date getDate() {
+		return date;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDate(Date newDate) {
+		Date oldDate = date;
+		date = newDate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.NEWS__DATE, oldDate, date));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -269,6 +355,8 @@ public class NewsImpl extends EObjectImpl implements News {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.NEWS__ID:
+				return getId();
 			case Zapfmaster2000Package.NEWS__TYPE:
 				return getType();
 			case Zapfmaster2000Package.NEWS__CONTENTS:
@@ -277,6 +365,8 @@ public class NewsImpl extends EObjectImpl implements News {
 				return getImagePath();
 			case Zapfmaster2000Package.NEWS__ACCOUNT:
 				return getAccount();
+			case Zapfmaster2000Package.NEWS__DATE:
+				return getDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -289,6 +379,9 @@ public class NewsImpl extends EObjectImpl implements News {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.NEWS__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.NEWS__TYPE:
 				setType((NewsType)newValue);
 				return;
@@ -300,6 +393,9 @@ public class NewsImpl extends EObjectImpl implements News {
 				return;
 			case Zapfmaster2000Package.NEWS__ACCOUNT:
 				setAccount((Account)newValue);
+				return;
+			case Zapfmaster2000Package.NEWS__DATE:
+				setDate((Date)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -313,6 +409,9 @@ public class NewsImpl extends EObjectImpl implements News {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.NEWS__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.NEWS__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -324,6 +423,9 @@ public class NewsImpl extends EObjectImpl implements News {
 				return;
 			case Zapfmaster2000Package.NEWS__ACCOUNT:
 				setAccount((Account)null);
+				return;
+			case Zapfmaster2000Package.NEWS__DATE:
+				setDate(DATE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -337,6 +439,8 @@ public class NewsImpl extends EObjectImpl implements News {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.NEWS__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.NEWS__TYPE:
 				return type != TYPE_EDEFAULT;
 			case Zapfmaster2000Package.NEWS__CONTENTS:
@@ -345,6 +449,8 @@ public class NewsImpl extends EObjectImpl implements News {
 				return IMAGE_PATH_EDEFAULT == null ? imagePath != null : !IMAGE_PATH_EDEFAULT.equals(imagePath);
 			case Zapfmaster2000Package.NEWS__ACCOUNT:
 				return getAccount() != null;
+			case Zapfmaster2000Package.NEWS__DATE:
+				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -359,12 +465,16 @@ public class NewsImpl extends EObjectImpl implements News {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (type: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", type: ");
 		result.append(type);
 		result.append(", contents: ");
 		result.append(contents);
 		result.append(", imagePath: ");
 		result.append(imagePath);
+		result.append(", date: ");
+		result.append(date);
 		result.append(')');
 		return result.toString();
 	}

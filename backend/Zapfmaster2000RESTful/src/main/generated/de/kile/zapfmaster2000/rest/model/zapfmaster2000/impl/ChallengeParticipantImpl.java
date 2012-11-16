@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeParticipantImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeParticipantImpl#getChallenge <em>Challenge</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeParticipantImpl#getTeam <em>Team</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeParticipantImpl#isWon <em>Won</em>}</li>
@@ -41,6 +42,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class ChallengeParticipantImpl extends EObjectImpl implements ChallengeParticipant {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getTeam() <em>Team</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -108,6 +129,27 @@ public class ChallengeParticipantImpl extends EObjectImpl implements ChallengePa
 	@Override
 	protected EClass eStaticClass() {
 		return Zapfmaster2000Package.Literals.CHALLENGE_PARTICIPANT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.CHALLENGE_PARTICIPANT__ID, oldId, id));
 	}
 
 	/**
@@ -262,6 +304,8 @@ public class ChallengeParticipantImpl extends EObjectImpl implements ChallengePa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__ID:
+				return getId();
 			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__CHALLENGE:
 				return getChallenge();
 			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__TEAM:
@@ -283,6 +327,9 @@ public class ChallengeParticipantImpl extends EObjectImpl implements ChallengePa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__CHALLENGE:
 				setChallenge((Challenge)newValue);
 				return;
@@ -308,6 +355,9 @@ public class ChallengeParticipantImpl extends EObjectImpl implements ChallengePa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__CHALLENGE:
 				setChallenge((Challenge)null);
 				return;
@@ -332,6 +382,8 @@ public class ChallengeParticipantImpl extends EObjectImpl implements ChallengePa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__CHALLENGE:
 				return getChallenge() != null;
 			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT__TEAM:
@@ -354,7 +406,9 @@ public class ChallengeParticipantImpl extends EObjectImpl implements ChallengePa
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (team: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", team: ");
 		result.append(team);
 		result.append(", won: ");
 		result.append(won);
