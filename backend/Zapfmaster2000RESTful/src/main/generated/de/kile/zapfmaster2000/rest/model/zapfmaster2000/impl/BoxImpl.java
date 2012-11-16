@@ -31,10 +31,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getAccount <em>Account</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getKegs <em>Kegs</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getPassphrase <em>Passphrase</em>}</li>
  * </ul>
  * </p>
@@ -42,6 +42,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class BoxImpl extends EObjectImpl implements Box {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -71,26 +91,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @ordered
 	 */
 	protected EList<Keg> kegs;
-
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getPassphrase() <em>Passphrase</em>}' attribute.
@@ -210,7 +210,7 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -219,8 +219,8 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(String newId) {
-		String oldId = id;
+	public void setId(long newId) {
+		long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__ID, oldId, id));
@@ -304,14 +304,14 @@ public class BoxImpl extends EObjectImpl implements Box {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.BOX__ID:
+				return getId();
 			case Zapfmaster2000Package.BOX__VERSION:
 				return getVersion();
 			case Zapfmaster2000Package.BOX__ACCOUNT:
 				return getAccount();
 			case Zapfmaster2000Package.BOX__KEGS:
 				return getKegs();
-			case Zapfmaster2000Package.BOX__ID:
-				return getId();
 			case Zapfmaster2000Package.BOX__PASSPHRASE:
 				return getPassphrase();
 		}
@@ -327,6 +327,9 @@ public class BoxImpl extends EObjectImpl implements Box {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.BOX__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.BOX__VERSION:
 				setVersion((String)newValue);
 				return;
@@ -336,9 +339,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case Zapfmaster2000Package.BOX__KEGS:
 				getKegs().clear();
 				getKegs().addAll((Collection<? extends Keg>)newValue);
-				return;
-			case Zapfmaster2000Package.BOX__ID:
-				setId((String)newValue);
 				return;
 			case Zapfmaster2000Package.BOX__PASSPHRASE:
 				setPassphrase((String)newValue);
@@ -355,6 +355,9 @@ public class BoxImpl extends EObjectImpl implements Box {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.BOX__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.BOX__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
@@ -363,9 +366,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return;
 			case Zapfmaster2000Package.BOX__KEGS:
 				getKegs().clear();
-				return;
-			case Zapfmaster2000Package.BOX__ID:
-				setId(ID_EDEFAULT);
 				return;
 			case Zapfmaster2000Package.BOX__PASSPHRASE:
 				setPassphrase(PASSPHRASE_EDEFAULT);
@@ -382,14 +382,14 @@ public class BoxImpl extends EObjectImpl implements Box {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.BOX__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.BOX__VERSION:
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 			case Zapfmaster2000Package.BOX__ACCOUNT:
 				return getAccount() != null;
 			case Zapfmaster2000Package.BOX__KEGS:
 				return kegs != null && !kegs.isEmpty();
-			case Zapfmaster2000Package.BOX__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case Zapfmaster2000Package.BOX__PASSPHRASE:
 				return PASSPHRASE_EDEFAULT == null ? passphrase != null : !PASSPHRASE_EDEFAULT.equals(passphrase);
 		}
@@ -406,10 +406,10 @@ public class BoxImpl extends EObjectImpl implements Box {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (version: ");
-		result.append(version);
-		result.append(", id: ");
+		result.append(" (id: ");
 		result.append(id);
+		result.append(", version: ");
+		result.append(version);
 		result.append(", passphrase: ");
 		result.append(passphrase);
 		result.append(')');

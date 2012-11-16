@@ -89,6 +89,8 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return createSexFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.NEWS_TYPE:
 				return createNewsTypeFromString(eDataType, initialValue);
+			case Zapfmaster2000Package.USER_TYPE:
+				return createUserTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -108,6 +110,8 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return convertSexToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.NEWS_TYPE:
 				return convertNewsTypeToString(eDataType, instanceValue);
+			case Zapfmaster2000Package.USER_TYPE:
+				return convertUserTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -300,6 +304,26 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * @generated
 	 */
 	public String convertNewsTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UserType createUserTypeFromString(EDataType eDataType, String initialValue) {
+		UserType result = UserType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUserTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

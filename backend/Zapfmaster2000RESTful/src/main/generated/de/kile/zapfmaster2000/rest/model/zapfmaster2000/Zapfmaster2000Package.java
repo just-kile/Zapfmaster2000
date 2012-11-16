@@ -122,13 +122,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int BOX = 1;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__ID = 0;
+
+	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__VERSION = 0;
+	int BOX__VERSION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Account</b></em>' container reference.
@@ -137,7 +146,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__ACCOUNT = 1;
+	int BOX__ACCOUNT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Kegs</b></em>' containment reference list.
@@ -146,16 +155,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__KEGS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__ID = 3;
+	int BOX__KEGS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Passphrase</b></em>' attribute.
@@ -434,22 +434,13 @@ public interface Zapfmaster2000Package extends EPackage {
 	int DRAWING__DATE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Duration</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DRAWING__DURATION = 4;
-
-	/**
 	 * The number of structural features of the '<em>Drawing</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DRAWING_FEATURE_COUNT = 5;
+	int DRAWING_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GainedAchievementImpl <em>Gained Achievement</em>}' class.
@@ -745,13 +736,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int USER__CHALLENGE_PARTICIPATIONS = 8;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER__TYPE = 9;
+
+	/**
 	 * The number of structural features of the '<em>User</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_FEATURE_COUNT = 9;
+	int USER_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType <em>Challenge Type</em>}' enum.
@@ -782,6 +782,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	int NEWS_TYPE = 15;
+
+
+	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType <em>User Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUserType()
+	 * @generated
+	 */
+	int USER_TYPE = 16;
 
 
 	/**
@@ -1151,17 +1162,6 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getDrawing_Date();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getDuration <em>Duration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Duration</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getDuration()
-	 * @see #getDrawing()
-	 * @generated
-	 */
-	EAttribute getDrawing_Duration();
-
-	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement <em>Gained Achievement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1465,6 +1465,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EReference getUser_ChallengeParticipations();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getType()
+	 * @see #getUser()
+	 * @generated
+	 */
+	EAttribute getUser_Type();
+
+	/**
 	 * Returns the meta object for enum '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType <em>Challenge Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1493,6 +1504,16 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EEnum getNewsType();
+
+	/**
+	 * Returns the meta object for enum '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType <em>User Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>User Type</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType
+	 * @generated
+	 */
+	EEnum getUserType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1805,14 +1826,6 @@ public interface Zapfmaster2000Package extends EPackage {
 		EAttribute DRAWING__DATE = eINSTANCE.getDrawing_Date();
 
 		/**
-		 * The meta object literal for the '<em><b>Duration</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DRAWING__DURATION = eINSTANCE.getDrawing_Duration();
-
-		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GainedAchievementImpl <em>Gained Achievement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2047,6 +2060,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		EReference USER__CHALLENGE_PARTICIPATIONS = eINSTANCE.getUser_ChallengeParticipations();
 
 		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USER__TYPE = eINSTANCE.getUser_Type();
+
+		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType <em>Challenge Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2075,6 +2096,16 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EEnum NEWS_TYPE = eINSTANCE.getNewsType();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType <em>User Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUserType()
+		 * @generated
+		 */
+		EEnum USER_TYPE = eINSTANCE.getUserType();
 
 	}
 

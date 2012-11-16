@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getKeg <em>Keg</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getAmount <em>Amount</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getDate <em>Date</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getDuration <em>Duration</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,26 +86,6 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * @ordered
 	 */
 	protected Date date = DATE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getDuration() <em>Duration</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDuration()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int DURATION_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getDuration() <em>Duration</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDuration()
-	 * @generated
-	 * @ordered
-	 */
-	protected int duration = DURATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -275,27 +254,6 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getDuration() {
-		return duration;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDuration(int newDuration) {
-		int oldDuration = duration;
-		duration = newDuration;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.DRAWING__DURATION, oldDuration, duration));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -358,8 +316,6 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 				return getAmount();
 			case Zapfmaster2000Package.DRAWING__DATE:
 				return getDate();
-			case Zapfmaster2000Package.DRAWING__DURATION:
-				return getDuration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -383,9 +339,6 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 				return;
 			case Zapfmaster2000Package.DRAWING__DATE:
 				setDate((Date)newValue);
-				return;
-			case Zapfmaster2000Package.DRAWING__DURATION:
-				setDuration((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -411,9 +364,6 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 			case Zapfmaster2000Package.DRAWING__DATE:
 				setDate(DATE_EDEFAULT);
 				return;
-			case Zapfmaster2000Package.DRAWING__DURATION:
-				setDuration(DURATION_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -434,8 +384,6 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 				return amount != AMOUNT_EDEFAULT;
 			case Zapfmaster2000Package.DRAWING__DATE:
 				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
-			case Zapfmaster2000Package.DRAWING__DURATION:
-				return duration != DURATION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -454,8 +402,6 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 		result.append(amount);
 		result.append(", date: ");
 		result.append(date);
-		result.append(", duration: ");
-		result.append(duration);
 		result.append(')');
 		return result.toString();
 	}

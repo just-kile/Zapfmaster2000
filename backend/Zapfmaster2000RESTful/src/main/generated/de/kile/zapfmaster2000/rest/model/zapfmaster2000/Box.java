@@ -14,10 +14,10 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getVersion <em>Version</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getAccount <em>Account</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getKegs <em>Kegs</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}</li>
  * </ul>
  * </p>
@@ -108,12 +108,12 @@ public interface Box extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
+	 * @see #setId(long)
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_Id()
-	 * @model
+	 * @model id="true"
 	 * @generated
 	 */
-	String getId();
+	long getId();
 
 	/**
 	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getId <em>Id</em>}' attribute.
@@ -123,7 +123,7 @@ public interface Box extends EObject {
 	 * @see #getId()
 	 * @generated
 	 */
-	void setId(String value);
+	void setId(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Passphrase</b></em>' attribute.

@@ -7,6 +7,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 import java.util.Collection;
@@ -42,6 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getGained <em>Gained</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getDrawings <em>Drawings</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getChallengeParticipations <em>Challenge Participations</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -197,6 +199,26 @@ public class UserImpl extends EObjectImpl implements User {
 	 * @ordered
 	 */
 	protected EList<ChallengeParticipant> challengeParticipations;
+
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final UserType TYPE_EDEFAULT = UserType.USER;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected UserType type = TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -384,6 +406,27 @@ public class UserImpl extends EObjectImpl implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public UserType getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(UserType newType) {
+		UserType oldType = type;
+		type = newType == null ? TYPE_EDEFAULT : newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.USER__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -442,6 +485,8 @@ public class UserImpl extends EObjectImpl implements User {
 				return getDrawings();
 			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
 				return getChallengeParticipations();
+			case Zapfmaster2000Package.USER__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -485,6 +530,9 @@ public class UserImpl extends EObjectImpl implements User {
 				getChallengeParticipations().clear();
 				getChallengeParticipations().addAll((Collection<? extends ChallengeParticipant>)newValue);
 				return;
+			case Zapfmaster2000Package.USER__TYPE:
+				setType((UserType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -524,6 +572,9 @@ public class UserImpl extends EObjectImpl implements User {
 			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
 				getChallengeParticipations().clear();
 				return;
+			case Zapfmaster2000Package.USER__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -554,6 +605,8 @@ public class UserImpl extends EObjectImpl implements User {
 				return drawings != null && !drawings.isEmpty();
 			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
 				return challengeParticipations != null && !challengeParticipations.isEmpty();
+			case Zapfmaster2000Package.USER__TYPE:
+				return type != TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -580,6 +633,8 @@ public class UserImpl extends EObjectImpl implements User {
 		result.append(sex);
 		result.append(", weight: ");
 		result.append(weight);
+		result.append(", type: ");
+		result.append(type);
 		result.append(')');
 		return result.toString();
 	}

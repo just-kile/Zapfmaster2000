@@ -2,6 +2,10 @@ package de.kile.zapfmaster2000.rest.impl.core;
 
 import de.kile.zapfmaster2000.rest.core.TransactionManager;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.box.BoxManager;
+import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
+import de.kile.zapfmaster2000.rest.impl.core.box.BoxManagerImpl;
+import de.kile.zapfmaster2000.rest.impl.core.configuration.FileConfigurationManagerImpl;
 
 public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 
@@ -11,8 +15,16 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	/** the transaction manager */
 	private TransactionManager transactionManager;
 
+	/** the configuration manager */
+	private ConfigurationManager configurationManager;
+
+	/** the box manager */
+	private BoxManager boxManager;
+
 	private Zapfmaster2000CoreImpl() {
 		transactionManager = new TransactionManagerImpl();
+		configurationManager = new FileConfigurationManagerImpl();
+		boxManager = new BoxManagerImpl();
 	}
 
 	/**
@@ -32,14 +44,45 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	public TransactionManager getTransactionManager() {
 		return transactionManager;
 	}
-	
+
+	@Override
+	public BoxManager getBoxManager() {
+		return boxManager;
+	}
+
+	@Override
+	public ConfigurationManager getConfigurationManager() {
+		return configurationManager;
+	}
+
 	/**
 	 * Sets a transaction manager. Use only for mocking in unit tests!
 	 * 
-	 * @param pTransactionManager the manager to set
+	 * @param pTransactionManager
+	 *            the manager to set
 	 */
 	void setTransactionManager(TransactionManager pTransactionManager) {
-		this.transactionManager = pTransactionManager;
+		transactionManager = pTransactionManager;
+	}
+
+	/**
+	 * Sets the configuration manager. Use only for mocking in unit tests!
+	 * 
+	 * @param pConfigurationManager
+	 *            the manager to set
+	 */
+	void setConfigurationManager(ConfigurationManager pConfigurationManager) {
+		configurationManager = pConfigurationManager;
+	}
+
+	/**
+	 * Sets the box manager. Use only for mocking in unit tests!
+	 * 
+	 * @param pBoxManager
+	 *            the manager to set
+	 */
+	void setBoxManager(BoxManager pBoxManager) {
+		boxManager = pBoxManager;
 	}
 
 }
