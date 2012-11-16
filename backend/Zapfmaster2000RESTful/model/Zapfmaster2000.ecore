@@ -20,8 +20,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="passphrase" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Account">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="boxes" upperBound="-1"
         eType="#//Box" containment="true" eOpposite="#//Box/account"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="news" upperBound="-1" eType="#//News"
+        containment="true" eOpposite="#//News/account"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Challenge">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ChallengeType"/>
@@ -78,6 +82,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//NewsType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="contents" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="account" eType="#//Account"
+        eOpposite="#//Account/news"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingQrRfid">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qrCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>

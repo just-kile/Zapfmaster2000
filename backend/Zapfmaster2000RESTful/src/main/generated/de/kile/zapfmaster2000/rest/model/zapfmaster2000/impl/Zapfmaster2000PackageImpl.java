@@ -330,8 +330,26 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAccount_Id() {
+		return (EAttribute)accountEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getAccount_Boxes() {
-		return (EReference)accountEClass.getEStructuralFeatures().get(0);
+		return (EReference)accountEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAccount_News() {
+		return (EReference)accountEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -663,6 +681,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getNews_Account() {
+		return (EReference)newsEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMappingQrRfid() {
 		return mappingQrRfidEClass;
 	}
@@ -862,7 +889,9 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(boxEClass, BOX__PASSPHRASE);
 
 		accountEClass = createEClass(ACCOUNT);
+		createEAttribute(accountEClass, ACCOUNT__ID);
 		createEReference(accountEClass, ACCOUNT__BOXES);
+		createEReference(accountEClass, ACCOUNT__NEWS);
 
 		challengeEClass = createEClass(CHALLENGE);
 		createEAttribute(challengeEClass, CHALLENGE__TYPE);
@@ -907,6 +936,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(newsEClass, NEWS__TYPE);
 		createEAttribute(newsEClass, NEWS__CONTENTS);
 		createEAttribute(newsEClass, NEWS__IMAGE_PATH);
+		createEReference(newsEClass, NEWS__ACCOUNT);
 
 		mappingQrRfidEClass = createEClass(MAPPING_QR_RFID);
 		createEAttribute(mappingQrRfidEClass, MAPPING_QR_RFID__QR_CODE);
@@ -975,7 +1005,9 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getBox_Passphrase(), ecorePackage.getEString(), "passphrase", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accountEClass, Account.class, "Account", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAccount_Id(), ecorePackage.getELong(), "id", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAccount_Boxes(), this.getBox(), this.getBox_Account(), "boxes", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccount_News(), this.getNews(), this.getNews_Account(), "news", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(challengeEClass, Challenge.class, "Challenge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getChallenge_Type(), this.getChallengeType(), "type", null, 0, 1, Challenge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1020,6 +1052,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getNews_Type(), this.getNewsType(), "type", null, 0, 1, News.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNews_Contents(), ecorePackage.getEString(), "contents", null, 0, 1, News.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNews_ImagePath(), ecorePackage.getEString(), "imagePath", null, 0, 1, News.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNews_Account(), this.getAccount(), this.getAccount_News(), "account", null, 0, 1, News.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingQrRfidEClass, MappingQrRfid.class, "MappingQrRfid", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMappingQrRfid_QrCode(), ecorePackage.getELong(), "qrCode", null, 0, 1, MappingQrRfid.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

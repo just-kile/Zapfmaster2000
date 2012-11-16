@@ -2,16 +2,20 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewsType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +27,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getContents <em>Contents</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getImagePath <em>Image Path</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.NewsImpl#getAccount <em>Account</em>}</li>
  * </ul>
  * </p>
  *
@@ -176,6 +181,91 @@ public class NewsImpl extends EObjectImpl implements News {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Account getAccount() {
+		if (eContainerFeatureID() != Zapfmaster2000Package.NEWS__ACCOUNT) return null;
+		return (Account)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAccount(Account newAccount, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newAccount, Zapfmaster2000Package.NEWS__ACCOUNT, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAccount(Account newAccount) {
+		if (newAccount != eInternalContainer() || (eContainerFeatureID() != Zapfmaster2000Package.NEWS__ACCOUNT && newAccount != null)) {
+			if (EcoreUtil.isAncestor(this, newAccount))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newAccount != null)
+				msgs = ((InternalEObject)newAccount).eInverseAdd(this, Zapfmaster2000Package.ACCOUNT__NEWS, Account.class, msgs);
+			msgs = basicSetAccount(newAccount, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.NEWS__ACCOUNT, newAccount, newAccount));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case Zapfmaster2000Package.NEWS__ACCOUNT:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetAccount((Account)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case Zapfmaster2000Package.NEWS__ACCOUNT:
+				return basicSetAccount(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case Zapfmaster2000Package.NEWS__ACCOUNT:
+				return eInternalContainer().eInverseRemove(this, Zapfmaster2000Package.ACCOUNT__NEWS, Account.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -185,6 +275,8 @@ public class NewsImpl extends EObjectImpl implements News {
 				return getContents();
 			case Zapfmaster2000Package.NEWS__IMAGE_PATH:
 				return getImagePath();
+			case Zapfmaster2000Package.NEWS__ACCOUNT:
+				return getAccount();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,6 +297,9 @@ public class NewsImpl extends EObjectImpl implements News {
 				return;
 			case Zapfmaster2000Package.NEWS__IMAGE_PATH:
 				setImagePath((String)newValue);
+				return;
+			case Zapfmaster2000Package.NEWS__ACCOUNT:
+				setAccount((Account)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -227,6 +322,9 @@ public class NewsImpl extends EObjectImpl implements News {
 			case Zapfmaster2000Package.NEWS__IMAGE_PATH:
 				setImagePath(IMAGE_PATH_EDEFAULT);
 				return;
+			case Zapfmaster2000Package.NEWS__ACCOUNT:
+				setAccount((Account)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -245,6 +343,8 @@ public class NewsImpl extends EObjectImpl implements News {
 				return CONTENTS_EDEFAULT == null ? contents != null : !CONTENTS_EDEFAULT.equals(contents);
 			case Zapfmaster2000Package.NEWS__IMAGE_PATH:
 				return IMAGE_PATH_EDEFAULT == null ? imagePath != null : !IMAGE_PATH_EDEFAULT.equals(imagePath);
+			case Zapfmaster2000Package.NEWS__ACCOUNT:
+				return getAccount() != null;
 		}
 		return super.eIsSet(featureID);
 	}

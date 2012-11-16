@@ -186,13 +186,31 @@ public interface Zapfmaster2000Package extends EPackage {
 	int ACCOUNT = 2;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT__ID = 0;
+
+	/**
 	 * The feature id for the '<em><b>Boxes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT__BOXES = 0;
+	int ACCOUNT__BOXES = 1;
+
+	/**
+	 * The feature id for the '<em><b>News</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT__NEWS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Account</em>' class.
@@ -201,7 +219,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_FEATURE_COUNT = 1;
+	int ACCOUNT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeImpl <em>Challenge</em>}' class.
@@ -599,13 +617,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int NEWS__IMAGE_PATH = 2;
 
 	/**
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEWS__ACCOUNT = 3;
+
+	/**
 	 * The number of structural features of the '<em>News</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NEWS_FEATURE_COUNT = 3;
+	int NEWS_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl <em>Mapping Qr Rfid</em>}' class.
@@ -925,6 +952,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EClass getAccount();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getId()
+	 * @see #getAccount()
+	 * @generated
+	 */
+	EAttribute getAccount_Id();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getBoxes <em>Boxes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -934,6 +972,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EReference getAccount_Boxes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getNews <em>News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getNews()
+	 * @see #getAccount()
+	 * @generated
+	 */
+	EReference getAccount_News();
 
 	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge <em>Challenge</em>}'.
@@ -1324,6 +1373,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getNews_ImagePath();
 
 	/**
+	 * Returns the meta object for the container reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.News#getAccount <em>Account</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Account</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.News#getAccount()
+	 * @see #getNews()
+	 * @generated
+	 */
+	EReference getNews_Account();
+
+	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid <em>Mapping Qr Rfid</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1640,12 +1700,28 @@ public interface Zapfmaster2000Package extends EPackage {
 		EClass ACCOUNT = eINSTANCE.getAccount();
 
 		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACCOUNT__ID = eINSTANCE.getAccount_Id();
+
+		/**
 		 * The meta object literal for the '<em><b>Boxes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference ACCOUNT__BOXES = eINSTANCE.getAccount_Boxes();
+
+		/**
+		 * The meta object literal for the '<em><b>News</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACCOUNT__NEWS = eINSTANCE.getAccount_News();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeImpl <em>Challenge</em>}' class.
@@ -1950,6 +2026,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute NEWS__IMAGE_PATH = eINSTANCE.getNews_ImagePath();
+
+		/**
+		 * The meta object literal for the '<em><b>Account</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NEWS__ACCOUNT = eINSTANCE.getNews_Account();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl <em>Mapping Qr Rfid</em>}' class.

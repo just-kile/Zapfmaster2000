@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.News#getType <em>Type</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.News#getContents <em>Contents</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.News#getImagePath <em>Image Path</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.News#getAccount <em>Account</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,5 +104,33 @@ public interface News extends EObject {
 	 * @generated
 	 */
 	void setImagePath(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Account</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getNews <em>News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Account</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Account</em>' container reference.
+	 * @see #setAccount(Account)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getNews_Account()
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getNews
+	 * @model opposite="news" transient="false"
+	 * @generated
+	 */
+	Account getAccount();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.News#getAccount <em>Account</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Account</em>' container reference.
+	 * @see #getAccount()
+	 * @generated
+	 */
+	void setAccount(Account value);
 
 } // News
