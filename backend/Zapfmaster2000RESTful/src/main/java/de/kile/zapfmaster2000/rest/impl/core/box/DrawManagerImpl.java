@@ -9,7 +9,6 @@ import java.util.TimerTask;
 import javax.xml.ws.WebServiceException;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.teneo.hibernate.mapping.identifier.IdentifierCacheHandler;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -258,8 +257,9 @@ public class DrawManagerImpl implements DrawManager {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
-		List<User> guests = session.createQuery(
-				"FROM USER u WHERE u.type = GUEST").list();
+		List<User> guests = session
+				.createQuery("FROM User u WHERE u.type = :guest")
+				.setParameter("guest", UserType.GUEST).list();
 		if (guests.isEmpty()) {
 			User newUser = Zapfmaster2000Factory.eINSTANCE.createUser();
 			newUser.setName("Guest");
@@ -279,7 +279,10 @@ public class DrawManagerImpl implements DrawManager {
 		double realAmount = calcRealAmount(totalTicks);
 		totalTicks = 0;
 
-		if (currentUser != null) {
+		boolean drewMinAmount = realAmount >= Zapfmaster2000Core.INSTANCE
+				.getConfigurationManager().getDouble(
+						ConfigurationConstants.BOX_DRAW_MIN_AMOUNT);
+		if (currentUser != null && drewMinAmount) {
 			// add drawing to database
 			Keg activeKeg = findActiveKeg();
 
