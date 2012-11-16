@@ -19,9 +19,9 @@ public abstract class AbstractDatabaseTest {
 
 	@After
 	public void truncate() {
-		Transaction tx = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		Transaction tx = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession().beginTransaction();
-		Zapfmaster2000Core.INSTANCE.getTransactionManager().getSessionFactory()
+		Zapfmaster2000Core.INSTANCE.getTransactionService().getSessionFactory()
 				.getCurrentSession()
 				.createSQLQuery("TRUNCATE SCHEMA PUBLIC AND COMMIT")
 				.executeUpdate();

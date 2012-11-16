@@ -63,7 +63,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.CHALLENGE: return createChallenge();
 			case Zapfmaster2000Package.CHALLENGE1V1: return createChallenge1v1();
 			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT: return createChallengeParticipant();
-			case Zapfmaster2000Package.CONFIG: return createConfig();
 			case Zapfmaster2000Package.DRAWING: return createDrawing();
 			case Zapfmaster2000Package.GAINED_ACHIEVEMENT: return createGainedAchievement();
 			case Zapfmaster2000Package.KEG: return createKeg();
@@ -83,10 +82,10 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case Zapfmaster2000Package.CHALLENGE_TYPE:
-				return createChallengeTypeFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.SEX:
 				return createSexFromString(eDataType, initialValue);
+			case Zapfmaster2000Package.CHALLENGE_TYPE:
+				return createChallengeTypeFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.NEWS_TYPE:
 				return createNewsTypeFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.USER_TYPE:
@@ -104,10 +103,10 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case Zapfmaster2000Package.CHALLENGE_TYPE:
-				return convertChallengeTypeToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.SEX:
 				return convertSexToString(eDataType, instanceValue);
+			case Zapfmaster2000Package.CHALLENGE_TYPE:
+				return convertChallengeTypeToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.NEWS_TYPE:
 				return convertNewsTypeToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.USER_TYPE:
@@ -182,16 +181,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Config createConfig() {
-		ConfigImpl config = new ConfigImpl();
-		return config;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Drawing createDrawing() {
 		DrawingImpl drawing = new DrawingImpl();
 		return drawing;
@@ -252,26 +241,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ChallengeType createChallengeTypeFromString(EDataType eDataType, String initialValue) {
-		ChallengeType result = ChallengeType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertChallengeTypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Sex createSexFromString(EDataType eDataType, String initialValue) {
 		Sex result = Sex.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -284,6 +253,26 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * @generated
 	 */
 	public String convertSexToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ChallengeType createChallengeTypeFromString(EDataType eDataType, String initialValue) {
+		ChallengeType result = ChallengeType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertChallengeTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

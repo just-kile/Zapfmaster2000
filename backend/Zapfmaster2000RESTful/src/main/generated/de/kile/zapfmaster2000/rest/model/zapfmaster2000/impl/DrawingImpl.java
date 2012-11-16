@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getUser <em>User</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getKeg <em>Keg</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getAmount <em>Amount</em>}</li>
@@ -37,6 +38,26 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * @generated
  */
 public class DrawingImpl extends EObjectImpl implements Drawing {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getKeg() <em>Keg</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -104,6 +125,27 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	@Override
 	protected EClass eStaticClass() {
 		return Zapfmaster2000Package.Literals.DRAWING;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.DRAWING__ID, oldId, id));
 	}
 
 	/**
@@ -307,6 +349,8 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.DRAWING__ID:
+				return getId();
 			case Zapfmaster2000Package.DRAWING__USER:
 				return getUser();
 			case Zapfmaster2000Package.DRAWING__KEG:
@@ -328,6 +372,9 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.DRAWING__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.DRAWING__USER:
 				setUser((User)newValue);
 				return;
@@ -352,6 +399,9 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.DRAWING__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.DRAWING__USER:
 				setUser((User)null);
 				return;
@@ -376,6 +426,8 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.DRAWING__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.DRAWING__USER:
 				return getUser() != null;
 			case Zapfmaster2000Package.DRAWING__KEG:
@@ -398,7 +450,9 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (amount: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", amount: ");
 		result.append(amount);
 		result.append(", date: ");
 		result.append(date);

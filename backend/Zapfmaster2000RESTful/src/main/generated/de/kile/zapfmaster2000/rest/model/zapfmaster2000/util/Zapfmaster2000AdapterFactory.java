@@ -92,10 +92,6 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 				return createChallengeParticipantAdapter();
 			}
 			@Override
-			public Adapter caseConfig(Config object) {
-				return createConfigAdapter();
-			}
-			@Override
 			public Adapter caseDrawing(Drawing object) {
 				return createDrawingAdapter();
 			}
@@ -220,20 +216,6 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createChallengeParticipantAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Config <em>Config</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Config
-	 * @generated
-	 */
-	public Adapter createConfigAdapter() {
 		return null;
 	}
 

@@ -7,14 +7,14 @@ import org.junit.Test;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
-import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
+import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 
-public class TestConfigurationManager {
+public class TestConfigurationService {
 
 	@Test
 	public void testGetInt() {
-		ConfigurationManager mgr = Zapfmaster2000Core.INSTANCE
-				.getConfigurationManager();
+		ConfigurationService mgr = Zapfmaster2000Core.INSTANCE
+				.getConfigurationService();
 		assertEquals(3000,
 				mgr.getInt(ConfigurationConstants.BOX_LOGIN_MIN_DIFF));
 
@@ -27,8 +27,8 @@ public class TestConfigurationManager {
 	}
 
 	public void testGet() {
-		ConfigurationManager mgr = Zapfmaster2000Core.INSTANCE
-				.getConfigurationManager();
+		ConfigurationService mgr = Zapfmaster2000Core.INSTANCE
+				.getConfigurationService();
 		assertEquals("3000",
 				mgr.get(ConfigurationConstants.BOX_LOGIN_MIN_DIFF));
 		assertEquals(null, mgr.get(ConfigurationConstants.BOX_LOGIN_MIN_DIFF));

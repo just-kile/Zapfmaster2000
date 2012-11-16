@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getChallenge <em>Challenge</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getChallengeEnd <em>Challenge End</em>}</li>
  * </ul>
@@ -31,6 +32,26 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getChallenge() <em>Challenge</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -78,6 +99,27 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	@Override
 	protected EClass eStaticClass() {
 		return Zapfmaster2000Package.Literals.CHALLENGE1V1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.CHALLENGE1V1__ID, oldId, id));
 	}
 
 	/**
@@ -147,6 +189,8 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.CHALLENGE1V1__ID:
+				return getId();
 			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE:
 				if (resolve) return getChallenge();
 				return basicGetChallenge();
@@ -164,6 +208,9 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.CHALLENGE1V1__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE:
 				setChallenge((Challenge)newValue);
 				return;
@@ -182,6 +229,9 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.CHALLENGE1V1__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE:
 				setChallenge((Challenge)null);
 				return;
@@ -200,6 +250,8 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.CHALLENGE1V1__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE:
 				return challenge != null;
 			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE_END:
@@ -218,7 +270,9 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (challengeEnd: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", challengeEnd: ");
 		result.append(challengeEnd);
 		result.append(')');
 		return result.toString();

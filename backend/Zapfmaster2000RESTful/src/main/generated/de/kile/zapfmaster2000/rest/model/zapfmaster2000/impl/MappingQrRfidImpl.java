@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl#getQrCode <em>Qr Code</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl#getRfidTag <em>Rfid Tag</em>}</li>
  * </ul>
@@ -27,6 +28,26 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class MappingQrRfidImpl extends EObjectImpl implements MappingQrRfid {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getQrCode() <em>Qr Code</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -91,6 +112,27 @@ public class MappingQrRfidImpl extends EObjectImpl implements MappingQrRfid {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.MAPPING_QR_RFID__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public long getQrCode() {
 		return qrCode;
 	}
@@ -136,6 +178,8 @@ public class MappingQrRfidImpl extends EObjectImpl implements MappingQrRfid {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.MAPPING_QR_RFID__ID:
+				return getId();
 			case Zapfmaster2000Package.MAPPING_QR_RFID__QR_CODE:
 				return getQrCode();
 			case Zapfmaster2000Package.MAPPING_QR_RFID__RFID_TAG:
@@ -152,6 +196,9 @@ public class MappingQrRfidImpl extends EObjectImpl implements MappingQrRfid {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.MAPPING_QR_RFID__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.MAPPING_QR_RFID__QR_CODE:
 				setQrCode((Long)newValue);
 				return;
@@ -170,6 +217,9 @@ public class MappingQrRfidImpl extends EObjectImpl implements MappingQrRfid {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.MAPPING_QR_RFID__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.MAPPING_QR_RFID__QR_CODE:
 				setQrCode(QR_CODE_EDEFAULT);
 				return;
@@ -188,6 +238,8 @@ public class MappingQrRfidImpl extends EObjectImpl implements MappingQrRfid {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.MAPPING_QR_RFID__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.MAPPING_QR_RFID__QR_CODE:
 				return qrCode != QR_CODE_EDEFAULT;
 			case Zapfmaster2000Package.MAPPING_QR_RFID__RFID_TAG:
@@ -206,7 +258,9 @@ public class MappingQrRfidImpl extends EObjectImpl implements MappingQrRfid {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (qrCode: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", qrCode: ");
 		result.append(qrCode);
 		result.append(", rfidTag: ");
 		result.append(rfidTag);

@@ -1,15 +1,16 @@
-package de.kile.zapfmaster2000.rest.impl.core.box;
+package de.kile.zapfmaster2000.rest.core.box;
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 /**
- * The draw manager listener can be used to detect all activities performed for
+ * The draw services listener can be used to detect all activities performed for
  * a drawing-process.
  * 
  * @author Thomas Kipar
  * 
  */
-public interface DrawManagerListener {
+public interface DrawServiceListener {
 
 	/**
 	 * Invoked when logs in to a box.
@@ -32,11 +33,9 @@ public interface DrawManagerListener {
 	/**
 	 * Invoked when the user finished drawing.
 	 * 
-	 * @param pUser
-	 *            the user that finish drawing
-	 * @param pAmount
-	 *            the amount the user draw.
+	 * @param Drawing pDrawing
+	 *            the drawing that was written to db
 	 */
-	public void onEndDrawing(User pUser, double pAmount);
+	public void onEndDrawing(Drawing pDrawing);
 
 }

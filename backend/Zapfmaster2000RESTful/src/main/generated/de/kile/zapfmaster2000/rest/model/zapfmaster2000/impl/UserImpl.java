@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getPassword <em>Password</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getImagePath <em>Image Path</em>}</li>
@@ -50,6 +51,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class UserImpl extends EObjectImpl implements User {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -237,6 +258,27 @@ public class UserImpl extends EObjectImpl implements User {
 	@Override
 	protected EClass eStaticClass() {
 		return Zapfmaster2000Package.Literals.USER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.USER__ID, oldId, id));
 	}
 
 	/**
@@ -467,6 +509,8 @@ public class UserImpl extends EObjectImpl implements User {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.USER__ID:
+				return getId();
 			case Zapfmaster2000Package.USER__NAME:
 				return getName();
 			case Zapfmaster2000Package.USER__PASSWORD:
@@ -500,6 +544,9 @@ public class UserImpl extends EObjectImpl implements User {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.USER__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.USER__NAME:
 				setName((String)newValue);
 				return;
@@ -545,6 +592,9 @@ public class UserImpl extends EObjectImpl implements User {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.USER__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.USER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -587,6 +637,8 @@ public class UserImpl extends EObjectImpl implements User {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.USER__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.USER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case Zapfmaster2000Package.USER__PASSWORD:
@@ -621,7 +673,9 @@ public class UserImpl extends EObjectImpl implements User {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", name: ");
 		result.append(name);
 		result.append(", password: ");
 		result.append(password);

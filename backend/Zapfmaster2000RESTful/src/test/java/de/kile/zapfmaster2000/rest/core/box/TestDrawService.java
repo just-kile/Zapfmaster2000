@@ -16,7 +16,7 @@ import org.junit.Test;
 import de.kile.zapfmaster2000.rest.AbstractDatabaseTest;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
-import de.kile.zapfmaster2000.rest.impl.core.box.DrawManagerImpl;
+import de.kile.zapfmaster2000.rest.impl.core.box.DrawServiceImpl;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
@@ -24,7 +24,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
-public class TestDrawManager extends AbstractDatabaseTest {
+public class TestDrawService extends AbstractDatabaseTest {
 
 	private static final long RFID_TAG_1 = 123;
 
@@ -42,7 +42,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 		user2.setName("Ron");
 		user2.setRfidTag(RFID_TAG_2);
 
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		session.save(user1);
@@ -61,7 +61,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 		box.getKegs().add(keg1);
 		box.getKegs().add(keg2);
 
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		session.save(box);
@@ -70,7 +70,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 
 	@After
 	public void waitForAutoLogout() throws InterruptedException {
-		int time = Zapfmaster2000Core.INSTANCE.getConfigurationManager()
+		int time = Zapfmaster2000Core.INSTANCE.getConfigurationService()
 				.getInt(ConfigurationConstants.BOX_LOGIN_AUTO_LOGOUT);
 		Thread.sleep((long) (time * 1.1)); // +10% to have time to write stuff
 											// to the database
@@ -78,7 +78,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 
 	@Test
 	public void testLoginSimple() {
-		DrawManagerImpl mgr = new DrawManagerImpl(
+		DrawServiceImpl mgr = new DrawServiceImpl(
 				Zapfmaster2000Factory.eINSTANCE.createBox());
 		User user = mgr.login(RFID_TAG_1);
 		assertNotNull(user);
@@ -87,7 +87,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 
 	@Test
 	public void testLoginTwice() {
-		DrawManagerImpl mgr = new DrawManagerImpl(
+		DrawServiceImpl mgr = new DrawServiceImpl(
 				Zapfmaster2000Factory.eINSTANCE.createBox());
 
 		User user = mgr.login(RFID_TAG_1);
@@ -101,7 +101,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 
 	@Test
 	public void testLoginOtherUserAlreadyLoggedIn() {
-		DrawManagerImpl mgr = new DrawManagerImpl(
+		DrawServiceImpl mgr = new DrawServiceImpl(
 				Zapfmaster2000Factory.eINSTANCE.createBox());
 
 		User user = mgr.login(RFID_TAG_1);
@@ -114,7 +114,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 
 	@Test
 	public void testAutoLogout() throws InterruptedException {
-		DrawManagerImpl mgr = new DrawManagerImpl(box);
+		DrawServiceImpl mgr = new DrawServiceImpl(box);
 
 		User user = mgr.login(RFID_TAG_1);
 		assertNotNull(user);
@@ -134,7 +134,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 
 	@Test
 	public void testUserDoesNotExist() {
-		DrawManagerImpl mgr = new DrawManagerImpl(
+		DrawServiceImpl mgr = new DrawServiceImpl(
 				Zapfmaster2000Factory.eINSTANCE.createBox());
 
 		User user = mgr.login(-1);
@@ -143,7 +143,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 
 	@Test
 	public void testSimpleDraw() throws InterruptedException {
-		DrawManagerImpl mgr = new DrawManagerImpl(box);
+		DrawServiceImpl mgr = new DrawServiceImpl(box);
 		mgr.login(RFID_TAG_1);
 		mgr.draw(2000);
 
@@ -151,7 +151,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 		waitForAutoLogout();
 
 		// check if drawing was added to database
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
@@ -160,7 +160,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 		assertEquals(1, drawings.size());
 		Drawing drawing = drawings.get(0);
 		int ticksPerLiter = Zapfmaster2000Core.INSTANCE
-				.getConfigurationManager().getInt(
+				.getConfigurationService().getInt(
 						ConfigurationConstants.BOX_DRAW_TICKS_PER_LITER);
 		assertEquals((double) 2000 / ticksPerLiter, drawing.getAmount(), 1);
 
@@ -180,11 +180,11 @@ public class TestDrawManager extends AbstractDatabaseTest {
 	@Test
 	public void testDrawGuestUser() throws InterruptedException {
 		// note: there is no guest user in the database yet
-		DrawManagerImpl mgr = new DrawManagerImpl(box);
+		DrawServiceImpl mgr = new DrawServiceImpl(box);
 		mgr.draw(2000); // drawing without login
 		waitForAutoLogout();
 
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
@@ -207,7 +207,7 @@ public class TestDrawManager extends AbstractDatabaseTest {
 		mgr.draw(2000); // drawing without login
 		waitForAutoLogout();
 
-		session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		tx = session.beginTransaction();
 

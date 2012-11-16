@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.KegImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.KegImpl#getBrand <em>Brand</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.KegImpl#getSize <em>Size</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.KegImpl#getStartDate <em>Start Date</em>}</li>
@@ -44,6 +45,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class KegImpl extends EObjectImpl implements Keg {
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long ID_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected long id = ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getBrand() <em>Brand</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -151,6 +172,27 @@ public class KegImpl extends EObjectImpl implements Keg {
 	@Override
 	protected EClass eStaticClass() {
 		return Zapfmaster2000Package.Literals.KEG;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(long newId) {
+		long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.KEG__ID, oldId, id));
 	}
 
 	/**
@@ -347,6 +389,8 @@ public class KegImpl extends EObjectImpl implements Keg {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case Zapfmaster2000Package.KEG__ID:
+				return getId();
 			case Zapfmaster2000Package.KEG__BRAND:
 				return getBrand();
 			case Zapfmaster2000Package.KEG__SIZE:
@@ -372,6 +416,9 @@ public class KegImpl extends EObjectImpl implements Keg {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case Zapfmaster2000Package.KEG__ID:
+				setId((Long)newValue);
+				return;
 			case Zapfmaster2000Package.KEG__BRAND:
 				setBrand((String)newValue);
 				return;
@@ -403,6 +450,9 @@ public class KegImpl extends EObjectImpl implements Keg {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.KEG__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.KEG__BRAND:
 				setBrand(BRAND_EDEFAULT);
 				return;
@@ -433,6 +483,8 @@ public class KegImpl extends EObjectImpl implements Keg {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case Zapfmaster2000Package.KEG__ID:
+				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.KEG__BRAND:
 				return BRAND_EDEFAULT == null ? brand != null : !BRAND_EDEFAULT.equals(brand);
 			case Zapfmaster2000Package.KEG__SIZE:
@@ -459,7 +511,9 @@ public class KegImpl extends EObjectImpl implements Keg {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (brand: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", brand: ");
 		result.append(brand);
 		result.append(", size: ");
 		result.append(size);

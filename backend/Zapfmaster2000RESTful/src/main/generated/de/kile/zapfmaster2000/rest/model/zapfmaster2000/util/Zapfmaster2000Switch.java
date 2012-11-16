@@ -102,12 +102,6 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Zapfmaster2000Package.CONFIG: {
-				Config config = (Config)theEObject;
-				T result = caseConfig(config);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case Zapfmaster2000Package.DRAWING: {
 				Drawing drawing = (Drawing)theEObject;
 				T result = caseDrawing(drawing);
@@ -235,21 +229,6 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseChallengeParticipant(ChallengeParticipant object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Config</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Config</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConfig(Config object) {
 		return null;
 	}
 

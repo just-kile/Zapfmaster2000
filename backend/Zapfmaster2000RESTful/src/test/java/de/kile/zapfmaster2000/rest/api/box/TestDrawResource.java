@@ -14,8 +14,8 @@ import javax.ws.rs.core.Response.Status;
 import org.junit.Test;
 
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
-import de.kile.zapfmaster2000.rest.core.box.BoxManager;
-import de.kile.zapfmaster2000.rest.core.box.DrawManager;
+import de.kile.zapfmaster2000.rest.core.box.BoxService;
+import de.kile.zapfmaster2000.rest.core.box.DrawService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
@@ -28,12 +28,12 @@ public class TestDrawResource extends AbstractMockingTest {
 		user.setName("Horst");
 		user.setImagePath("img/njancat.gif");
 
-		DrawManager drawManager = mock(DrawManager.class);
-		BoxManager mgr = mock(BoxManager.class);
-		when(mgr.getDrawManager("abcde")).thenReturn(drawManager);
+		DrawService drawManager = mock(DrawService.class);
+		BoxService mgr = mock(BoxService.class);
+		when(mgr.getDrawService("abcde")).thenReturn(drawManager);
 		when(drawManager.login(1123581321)).thenReturn(user);
 
-		mockBoxManager(mgr);
+		mockBoxService(mgr);
 
 		// run the test
 		DrawResource drawResource = new DrawResource();
@@ -49,10 +49,10 @@ public class TestDrawResource extends AbstractMockingTest {
 	@Test
 	public void testLoginFailureBoxDoesNotExist() {
 		// setup mocks
-		BoxManager mgr = mock(BoxManager.class);
-		when(mgr.getDrawManager(anyString())).thenThrow(
+		BoxService mgr = mock(BoxService.class);
+		when(mgr.getDrawService(anyString())).thenThrow(
 				new IllegalArgumentException());
-		mockBoxManager(mgr);
+		mockBoxService(mgr);
 
 		// run the test
 		DrawResource drawResource = new DrawResource();
@@ -63,12 +63,12 @@ public class TestDrawResource extends AbstractMockingTest {
 	@Test
 	public void testLoginFailureUserDoesNotExist() {
 		// setup mocks
-		DrawManager drawManager = mock(DrawManager.class);
-		BoxManager mgr = mock(BoxManager.class);
-		when(mgr.getDrawManager("abcde")).thenReturn(drawManager);
+		DrawService drawManager = mock(DrawService.class);
+		BoxService mgr = mock(BoxService.class);
+		when(mgr.getDrawService("abcde")).thenReturn(drawManager);
 		when(drawManager.login(1123581321)).thenReturn(null);
 
-		mockBoxManager(mgr);
+		mockBoxService(mgr);
 
 		// run the test
 		DrawResource drawResource = new DrawResource();

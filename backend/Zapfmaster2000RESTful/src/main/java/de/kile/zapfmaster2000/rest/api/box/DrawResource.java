@@ -30,8 +30,8 @@ public class DrawResource {
 
 		User user = null;
 		try {
-			user = Zapfmaster2000Core.INSTANCE.getBoxManager()
-					.getDrawManager(pBoxPasspharse).login(pRfidId);
+			user = Zapfmaster2000Core.INSTANCE.getBoxService()
+					.getDrawService(pBoxPasspharse).login(pRfidId);
 		} catch (IllegalArgumentException ex) {
 			LOG.warn("Box with passphrase " + pBoxPasspharse
 					+ " does not exist", ex);
