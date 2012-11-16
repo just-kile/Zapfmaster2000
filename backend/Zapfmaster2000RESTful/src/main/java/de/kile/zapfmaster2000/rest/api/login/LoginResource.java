@@ -34,7 +34,7 @@ public class LoginResource {
 				.build();
 
 		SessionFactory sessionFactory = Zapfmaster2000Core.INSTANCE
-				.getTransactionManager().getSessionFactory();
+				.getTransactionService().getSessionFactory();
 
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();

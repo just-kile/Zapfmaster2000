@@ -10,16 +10,16 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
-import de.kile.zapfmaster2000.rest.core.box.BoxManager;
-import de.kile.zapfmaster2000.rest.core.box.DrawManager;
+import de.kile.zapfmaster2000.rest.core.box.BoxService;
+import de.kile.zapfmaster2000.rest.core.box.DrawService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 
-public class BoxManagerImpl implements BoxManager {
+public class BoxServiceImpl implements BoxService {
 
-	private Map<String, DrawManager> mapBox2DrawManager = new HashMap<>();
+	private Map<String, DrawService> mapBox2DrawManager = new HashMap<>();
 
 	@Override
-	public DrawManager getDrawManager(String pBoxPassphrase)
+	public DrawService getDrawService(String pBoxPassphrase)
 			throws IllegalArgumentException {
 
 		// return cached draw manager if possible
@@ -28,7 +28,7 @@ public class BoxManagerImpl implements BoxManager {
 		}
 
 		// query database for box manager otherwisse
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
@@ -40,7 +40,7 @@ public class BoxManagerImpl implements BoxManager {
 				throw new IllegalArgumentException("Box with passphrase \""
 						+ pBoxPassphrase + "\" does not exist");
 			}
-			DrawManager drawManager = new DrawManagerImpl(box.get(0));
+			DrawService drawManager = new DrawServiceImpl(box.get(0));
 			mapBox2DrawManager.put(pBoxPassphrase, drawManager);
 			return drawManager;
 		} finally {

@@ -5,7 +5,7 @@ package de.kile.zapfmaster2000.rest.core.configuration;
  * 
  * @author Thomas Kipar
  */
-public interface ConfigurationManager {
+public interface ConfigurationService {
 
 	/**
 	 * Returns a configuration value for the given key

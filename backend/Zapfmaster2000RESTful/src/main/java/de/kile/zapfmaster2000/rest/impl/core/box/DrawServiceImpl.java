@@ -13,9 +13,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
-import de.kile.zapfmaster2000.rest.core.box.DrawManager;
+import de.kile.zapfmaster2000.rest.core.box.DrawService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
-import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
+import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
@@ -23,10 +23,10 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
-public class DrawManagerImpl implements DrawManager {
+public class DrawServiceImpl implements DrawService {
 
 	/** logger */
-	private static final Logger LOG = Logger.getLogger(DrawManagerImpl.class);
+	private static final Logger LOG = Logger.getLogger(DrawServiceImpl.class);
 
 	/** sync for user changes */
 	private final Object SYNC_USER_LOCK = new Object();
@@ -50,9 +50,9 @@ public class DrawManagerImpl implements DrawManager {
 	private Timer timer;
 
 	/** listeners */
-	private final List<DrawManagerListener> listeners = new ArrayList<>();
+	private final List<DrawServiceListener> listeners = new ArrayList<>();
 
-	public DrawManagerImpl(Box pBox) {
+	public DrawServiceImpl(Box pBox) {
 		assert (pBox != null);
 		box = pBox;
 	}
@@ -91,8 +91,8 @@ public class DrawManagerImpl implements DrawManager {
 
 	@Override
 	public void draw(int pRawAmount) {
-		ConfigurationManager config = Zapfmaster2000Core.INSTANCE
-				.getConfigurationManager();
+		ConfigurationService config = Zapfmaster2000Core.INSTANCE
+				.getConfigurationService();
 
 		if (pRawAmount < config
 				.getInt(ConfigurationConstants.BOX_DRAW_MIN_TICKS)) {
@@ -132,14 +132,14 @@ public class DrawManagerImpl implements DrawManager {
 	}
 
 	@Override
-	public void addListener(DrawManagerListener pListener) {
+	public void addListener(DrawServiceListener pListener) {
 		if (pListener != null) {
 			listeners.add(pListener);
 		}
 	}
 
 	@Override
-	public void removeListener(DrawManagerListener pListener) {
+	public void removeListener(DrawServiceListener pListener) {
 		listeners.remove(pListener);
 	}
 
@@ -154,7 +154,7 @@ public class DrawManagerImpl implements DrawManager {
 			return true;
 		}
 		double diff = System.currentTimeMillis() - lastDrawing;
-		if (diff < Zapfmaster2000Core.INSTANCE.getConfigurationManager()
+		if (diff < Zapfmaster2000Core.INSTANCE.getConfigurationService()
 				.getInt(ConfigurationConstants.BOX_LOGIN_MIN_DIFF)) {
 			return false;
 		}
@@ -170,7 +170,7 @@ public class DrawManagerImpl implements DrawManager {
 	 */
 	private User readUser(long pRfidId) {
 		// query database for box manager otherwisse
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
@@ -189,19 +189,19 @@ public class DrawManagerImpl implements DrawManager {
 	}
 
 	private void notifyLoginSuccessful(User pUser) {
-		for (DrawManagerListener listener : listeners) {
+		for (DrawServiceListener listener : listeners) {
 			listener.onLoginsuccessful(pUser);
 		}
 	}
 
 	private void notifyDrawing(User pUser, double pAmount) {
-		for (DrawManagerListener listener : listeners) {
+		for (DrawServiceListener listener : listeners) {
 			listener.onDrawing(pUser, pAmount);
 		}
 	}
 
 	private void notifyEndDrawing(User pUser, double pAmount) {
-		for (DrawManagerListener listener : listeners) {
+		for (DrawServiceListener listener : listeners) {
 			listener.onEndDrawing(pUser, pAmount);
 		}
 	}
@@ -211,7 +211,7 @@ public class DrawManagerImpl implements DrawManager {
 			timer.cancel();
 		}
 		timer = new Timer();
-		int time = Zapfmaster2000Core.INSTANCE.getConfigurationManager()
+		int time = Zapfmaster2000Core.INSTANCE.getConfigurationService()
 				.getInt(ConfigurationConstants.BOX_LOGIN_AUTO_LOGOUT);
 		timer.schedule(createTimerTask(), time);
 	}
@@ -237,8 +237,8 @@ public class DrawManagerImpl implements DrawManager {
 	}
 
 	private double calcRealAmount(int pRawTicks) {
-		ConfigurationManager config = Zapfmaster2000Core.INSTANCE
-				.getConfigurationManager();
+		ConfigurationService config = Zapfmaster2000Core.INSTANCE
+				.getConfigurationService();
 		int ticksPerLiter = config
 				.getInt(ConfigurationConstants.BOX_DRAW_TICKS_PER_LITER);
 		return (double) pRawTicks / (double) ticksPerLiter;
@@ -253,7 +253,7 @@ public class DrawManagerImpl implements DrawManager {
 	private User findGuest() {
 		User user;
 
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
@@ -280,14 +280,14 @@ public class DrawManagerImpl implements DrawManager {
 		totalTicks = 0;
 
 		boolean drewMinAmount = realAmount >= Zapfmaster2000Core.INSTANCE
-				.getConfigurationManager().getDouble(
+				.getConfigurationService().getDouble(
 						ConfigurationConstants.BOX_DRAW_MIN_AMOUNT);
 		if (currentUser != null && drewMinAmount) {
 			// add drawing to database
 			Keg activeKeg = findActiveKeg();
 
 			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionManager().getSessionFactory()
+					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 			try {
@@ -326,7 +326,7 @@ public class DrawManagerImpl implements DrawManager {
 	 */
 	private Keg findActiveKeg() {
 		Keg keg = null;
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		session.update(getBox());

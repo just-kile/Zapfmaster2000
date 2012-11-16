@@ -1,11 +1,11 @@
 package de.kile.zapfmaster2000.rest.impl.core;
 
-import de.kile.zapfmaster2000.rest.core.TransactionManager;
+import de.kile.zapfmaster2000.rest.core.TransactionService;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
-import de.kile.zapfmaster2000.rest.core.box.BoxManager;
-import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
-import de.kile.zapfmaster2000.rest.impl.core.box.BoxManagerImpl;
-import de.kile.zapfmaster2000.rest.impl.core.configuration.FileConfigurationManagerImpl;
+import de.kile.zapfmaster2000.rest.core.box.BoxService;
+import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
+import de.kile.zapfmaster2000.rest.impl.core.box.BoxServiceImpl;
+import de.kile.zapfmaster2000.rest.impl.core.configuration.FileConfiguratioServiceImpl;
 
 public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 
@@ -13,18 +13,18 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	private static Zapfmaster2000CoreImpl instance;
 
 	/** the transaction manager */
-	private TransactionManager transactionManager;
+	private TransactionService transactionManager;
 
 	/** the configuration manager */
-	private ConfigurationManager configurationManager;
+	private ConfigurationService configurationManager;
 
 	/** the box manager */
-	private BoxManager boxManager;
+	private BoxService boxManager;
 
 	private Zapfmaster2000CoreImpl() {
-		transactionManager = new TransactionManagerImpl();
-		configurationManager = new FileConfigurationManagerImpl();
-		boxManager = new BoxManagerImpl();
+		transactionManager = new TransactionServiceImpl();
+		configurationManager = new FileConfiguratioServiceImpl();
+		boxManager = new BoxServiceImpl();
 	}
 
 	/**
@@ -41,17 +41,17 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	}
 
 	@Override
-	public TransactionManager getTransactionManager() {
+	public TransactionService getTransactionService() {
 		return transactionManager;
 	}
 
 	@Override
-	public BoxManager getBoxManager() {
+	public BoxService getBoxService() {
 		return boxManager;
 	}
 
 	@Override
-	public ConfigurationManager getConfigurationManager() {
+	public ConfigurationService getConfigurationService() {
 		return configurationManager;
 	}
 
@@ -61,7 +61,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	 * @param pTransactionManager
 	 *            the manager to set
 	 */
-	void setTransactionManager(TransactionManager pTransactionManager) {
+	void setTransactionManager(TransactionService pTransactionManager) {
 		transactionManager = pTransactionManager;
 	}
 
@@ -71,7 +71,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	 * @param pConfigurationManager
 	 *            the manager to set
 	 */
-	void setConfigurationManager(ConfigurationManager pConfigurationManager) {
+	void setConfigurationManager(ConfigurationService pConfigurationManager) {
 		configurationManager = pConfigurationManager;
 	}
 
@@ -81,7 +81,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	 * @param pBoxManager
 	 *            the manager to set
 	 */
-	void setBoxManager(BoxManager pBoxManager) {
+	void setBoxManager(BoxService pBoxManager) {
 		boxManager = pBoxManager;
 	}
 

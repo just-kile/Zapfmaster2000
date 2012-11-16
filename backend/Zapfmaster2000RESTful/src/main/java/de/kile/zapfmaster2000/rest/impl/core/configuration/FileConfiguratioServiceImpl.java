@@ -6,10 +6,10 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
+import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 
 /**
- * Implementation of the {@link ConfigurationManager} for xml file based
+ * Implementation of the {@link ConfigurationService} for xml file based
  * configuration values.
  * 
  * @author Thomas Kipar
@@ -18,7 +18,7 @@ import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
 // doesn't it?
 // Suggestion: Different scopes (default, file, db) + Resource to invoke
 // properties reload via REST
-public class FileConfigurationManagerImpl implements ConfigurationManager {
+public class FileConfiguratioServiceImpl implements ConfigurationService {
 
 	/** zapfmaster2000 config path */
 	private static final String PATH = "zapfmaster2000.cfg.xml";
@@ -26,7 +26,7 @@ public class FileConfigurationManagerImpl implements ConfigurationManager {
 	/** the properties */
 	private final Properties properties;
 
-	public FileConfigurationManagerImpl() {
+	public FileConfiguratioServiceImpl() {
 		properties = loadProperties();
 	}
 

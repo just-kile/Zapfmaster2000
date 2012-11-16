@@ -2,10 +2,10 @@ package de.kile.zapfmaster2000.rest.impl.core;
 
 import org.junit.After;
 
-import de.kile.zapfmaster2000.rest.core.TransactionManager;
+import de.kile.zapfmaster2000.rest.core.TransactionService;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
-import de.kile.zapfmaster2000.rest.core.box.BoxManager;
-import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
+import de.kile.zapfmaster2000.rest.core.box.BoxService;
+import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 
 /**
  * Utility class to mock managers from the zapfmaster 2000 core.
@@ -14,37 +14,37 @@ import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
  */
 public class CoreMockery {
 
-	private TransactionManager originalTransactionManager;
+	private TransactionService originalTransactionService;
 
-	private ConfigurationManager originalConfigurationManager;
+	private ConfigurationService originalConfigurationServoce;
 
-	private BoxManager originalBoxManager;
+	private BoxService originalBoxService;
 
-	public void mockTransactionManager(TransactionManager pManager) {
-		originalTransactionManager = getCore().getTransactionManager();
+	public void mockTransactionService(TransactionService pManager) {
+		originalTransactionService = getCore().getTransactionService();
 		getCore().setTransactionManager(pManager);
 	}
 
-	public void mockConfigurationManager(ConfigurationManager pManager) {
-		originalConfigurationManager = getCore().getConfigurationManager();
+	public void mockConfigurationService(ConfigurationService pManager) {
+		originalConfigurationServoce = getCore().getConfigurationService();
 		getCore().setConfigurationManager(pManager);
 	}
 
-	public void mockBoxManager(BoxManager pManager) {
-		originalBoxManager = getCore().getBoxManager();
+	public void mockBoxService(BoxService pManager) {
+		originalBoxService = getCore().getBoxService();
 		getCore().setBoxManager(pManager);
 	}
 
 	@After
 	public void resetMocks() {
-		if (originalTransactionManager != null) {
-			getCore().setTransactionManager(originalTransactionManager);
+		if (originalTransactionService != null) {
+			getCore().setTransactionManager(originalTransactionService);
 		}
-		if (originalConfigurationManager != null) {
-			getCore().setConfigurationManager(originalConfigurationManager);
+		if (originalConfigurationServoce != null) {
+			getCore().setConfigurationManager(originalConfigurationServoce);
 		}
-		if (originalBoxManager != null) {
-			getCore().setBoxManager(originalBoxManager);
+		if (originalBoxService != null) {
+			getCore().setBoxManager(originalBoxService);
 		}
 	}
 

@@ -1,7 +1,7 @@
 package de.kile.zapfmaster2000.rest.core;
 
-import de.kile.zapfmaster2000.rest.core.box.BoxManager;
-import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationManager;
+import de.kile.zapfmaster2000.rest.core.box.BoxService;
+import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.impl.core.Zapfmaster2000CoreImpl;
 
 /**
@@ -24,14 +24,14 @@ public interface Zapfmaster2000Core {
 	 * 
 	 * @return the transation manager, never <code>null</code>.
 	 */
-	public TransactionManager getTransactionManager();
+	public TransactionService getTransactionService();
 
 	/**
 	 * Returns the box manager.
 	 * 
 	 * @return the box manager, never <code>null</code>.
 	 */
-	public BoxManager getBoxManager();
+	public BoxService getBoxService();
 	
 	
 	/**
@@ -39,6 +39,6 @@ public interface Zapfmaster2000Core {
 	 * 
 	 * @return the configuration manager, never <code>null</code>.
 	 */
-	public ConfigurationManager getConfigurationManager();
+	public ConfigurationService getConfigurationService();
 
 }

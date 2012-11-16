@@ -6,10 +6,10 @@ import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import de.kile.zapfmaster2000.rest.core.TransactionManager;
+import de.kile.zapfmaster2000.rest.core.TransactionService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
-public class TransactionManagerImpl implements TransactionManager {
+public class TransactionServiceImpl implements TransactionService {
 
 	/** session factory */
 	private final SessionFactory sessionFactory;
@@ -17,7 +17,7 @@ public class TransactionManagerImpl implements TransactionManager {
 	/**
 	 * Constructor
 	 */
-	public TransactionManagerImpl() {
+	public TransactionServiceImpl() {
 		sessionFactory = configureHibernate();
 	}
 

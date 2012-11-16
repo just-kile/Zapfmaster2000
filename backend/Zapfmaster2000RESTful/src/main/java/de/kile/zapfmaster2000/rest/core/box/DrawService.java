@@ -1,17 +1,17 @@
 package de.kile.zapfmaster2000.rest.core.box;
 
-import de.kile.zapfmaster2000.rest.impl.core.box.DrawManagerListener;
+import de.kile.zapfmaster2000.rest.impl.core.box.DrawServiceListener;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 /**
- * The draw manager handles all stuff related to a single Zapfmaster2000-Box.
+ * The draw service handles all stuff related to a single Zapfmaster2000-Box.
  * This is to log in for a user (via rfid card) or to handle drawing actions
  * performed for the specific box.
  * 
  * @author Thomas Kipar
  */
-public interface DrawManager {
+public interface DrawService {
 
 	/**
 	 * Invoked when the user logs in with his rfid card on a box.
@@ -33,7 +33,7 @@ public interface DrawManager {
 	public void draw(int pRawAmount);
 
 	/**
-	 * Returns the box the manager is working for.
+	 * Returns the box this service is working for.
 	 * 
 	 * @return the box, never <code>null</code>.
 	 */
@@ -45,7 +45,7 @@ public interface DrawManager {
 	 * @param pListener
 	 *            listener to add
 	 */
-	public void addListener(DrawManagerListener pListener);
+	public void addListener(DrawServiceListener pListener);
 
 	/**
 	 * Removes a draw manager listener
@@ -53,6 +53,6 @@ public interface DrawManager {
 	 * @param pListener
 	 *            listener to remove
 	 */
-	public void removeListener(DrawManagerListener pListener);
+	public void removeListener(DrawServiceListener pListener);
 
 }
