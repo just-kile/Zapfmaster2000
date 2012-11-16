@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.xml.ws.WebServiceException;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.teneo.hibernate.mapping.identifier.IdentifierCacheHandler;
 import org.hibernate.Session;
@@ -276,37 +278,73 @@ public class DrawManagerImpl implements DrawManager {
 	private void finishCurrentDraw() {
 		double realAmount = calcRealAmount(totalTicks);
 		totalTicks = 0;
-		
+
 		if (currentUser != null) {
 			// add drawing to database
-			Drawing drawing = Zapfmaster2000Factory.eINSTANCE.createDrawing();
-			drawing.setAmount(realAmount);
-			drawing.setDate(new Date());
-			drawing.setKeg(value)
-			drawing.setUser(currentUser);
-			
-			
-			// push
-			
+			Keg activeKeg = findActiveKeg();
+
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionManager().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			try {
+				session.update(activeKeg);
+				session.update(currentUser);
+
+				Drawing drawing = Zapfmaster2000Factory.eINSTANCE
+						.createDrawing();
+				drawing.setAmount(realAmount);
+				drawing.setDate(new Date());
+				drawing.setKeg(activeKeg);
+				drawing.setUser(currentUser);
+
+				session.save(drawing);
+				tx.commit();
+			} catch (RuntimeException ex) {
+				tx.rollback();
+				LOG.error("Could not write draw to db", ex);
+				throw new WebServiceException("Could not write draw to db", ex);
+			}
+
 			notifyEndDrawing(currentUser, realAmount);
 		}
-		
+
 		// reset values
 		totalTicks = 0;
 		currentUser = null;
 	}
 
+	/**
+	 * Returns the active keg for the box.
+	 * 
+	 * @return the keg, never <code>null</code>
+	 * @throws WebServiceException
+	 *             if there is no active
+	 */
 	private Keg findActiveKeg() {
-		Keg keg;
+		Keg keg = null;
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		
-		Long id = (Long) IdentifierCacheHandler.getInstance().getID(box);
-		session.createQuery(FROM Keq k)
-		
-		
-		box.g
-		session.
+		session.update(getBox());
+		try {
+			@SuppressWarnings("unchecked")
+			List<Keg> kegs = session
+					.createQuery(
+							"FROM Keg k WHERE k.box = :box ORDER BY k.startDate DESC")
+					.setEntity("box", getBox()).list();
+			if (kegs.isEmpty()) {
+				// problem over here
+				throw new WebServiceException("Box " + getBox().getId()
+						+ " has no active keg. Drawing not allowed.");
+			}
+			keg = kegs.get(0); // active keg
+			tx.commit();
+		} catch (RuntimeException ex) {
+			tx.rollback();
+			throw ex;
+		}
+		return keg;
+
 	}
 }

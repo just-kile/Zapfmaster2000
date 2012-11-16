@@ -122,13 +122,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int BOX = 1;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__ID = 0;
+
+	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__VERSION = 0;
+	int BOX__VERSION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Account</b></em>' container reference.
@@ -137,7 +146,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__ACCOUNT = 1;
+	int BOX__ACCOUNT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Kegs</b></em>' containment reference list.
@@ -146,16 +155,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__KEGS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__ID = 3;
+	int BOX__KEGS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Passphrase</b></em>' attribute.

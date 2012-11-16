@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.After;
@@ -14,6 +17,8 @@ import de.kile.zapfmaster2000.rest.AbstractDatabaseTest;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
 import de.kile.zapfmaster2000.rest.impl.core.box.DrawManagerImpl;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
@@ -22,6 +27,8 @@ public class TestDrawManager extends AbstractDatabaseTest {
 	private static final long RFID_TAG_1 = 123;
 
 	private static final long RFID_TAG_2 = 234;
+
+	private Box box;
 
 	@Before
 	public void createUsers() {
@@ -38,6 +45,24 @@ public class TestDrawManager extends AbstractDatabaseTest {
 		Transaction tx = session.beginTransaction();
 		session.save(user1);
 		session.save(user2);
+		tx.commit();
+	}
+
+	@Before
+	public void createBoxAndKeg() {
+		Keg keg1 = Zapfmaster2000Factory.eINSTANCE.createKeg();
+		keg1.setStartDate(new GregorianCalendar(2012, 10, 17).getTime());
+		Keg keg2 = Zapfmaster2000Factory.eINSTANCE.createKeg();
+		keg2.setStartDate(new GregorianCalendar(2012, 11, 03).getTime());
+
+		box = Zapfmaster2000Factory.eINSTANCE.createBox();
+		box.getKegs().add(keg1);
+		box.getKegs().add(keg2);
+
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		session.save(box);
 		tx.commit();
 	}
 
@@ -83,11 +108,10 @@ public class TestDrawManager extends AbstractDatabaseTest {
 		user = mgr.login(RFID_TAG_2);
 		assertNull(user); // harry is still logge in
 	}
-	
+
 	@Test
 	public void testAutoLogout() throws InterruptedException {
-		DrawManagerImpl mgr = new DrawManagerImpl(
-				Zapfmaster2000Factory.eINSTANCE.createBox());
+		DrawManagerImpl mgr = new DrawManagerImpl(box);
 
 		User user = mgr.login(RFID_TAG_1);
 		assertNotNull(user);
@@ -95,18 +119,18 @@ public class TestDrawManager extends AbstractDatabaseTest {
 
 		user = mgr.login(RFID_TAG_2);
 		assertNull(user); // harry is still logged in
-		
+
 		// wait for auto log-off
 		int time = Zapfmaster2000Core.INSTANCE.getConfigurationManager()
 				.getInt(ConfigurationConstants.BOX_LOGIN_AUTO_LOGOUT);
 		Thread.sleep(time);
-		
+
 		// ron logs in one more, should succeed now
 		user = mgr.login(RFID_TAG_2);
 		assertNotNull(user);
-		assertEquals("Ron", user.getName());		
+		assertEquals("Ron", user.getName());
 	}
-	
+
 	@Test
 	public void testUserDoesNotExist() {
 		DrawManagerImpl mgr = new DrawManagerImpl(
@@ -115,6 +139,5 @@ public class TestDrawManager extends AbstractDatabaseTest {
 		User user = mgr.login(-1);
 		assertNull(user);
 	}
-	
 
 }
