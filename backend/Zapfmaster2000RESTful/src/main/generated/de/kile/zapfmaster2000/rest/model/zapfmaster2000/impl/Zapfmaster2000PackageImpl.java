@@ -358,6 +358,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAccount_Name() {
+		return (EAttribute)accountEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getChallenge() {
 		return challengeEClass;
 	}
@@ -957,6 +966,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(accountEClass, ACCOUNT__ID);
 		createEReference(accountEClass, ACCOUNT__BOXES);
 		createEReference(accountEClass, ACCOUNT__NEWS);
+		createEAttribute(accountEClass, ACCOUNT__NAME);
 
 		challengeEClass = createEClass(CHALLENGE);
 		createEAttribute(challengeEClass, CHALLENGE__ID);
@@ -1080,6 +1090,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getAccount_Id(), ecorePackage.getELong(), "id", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAccount_Boxes(), this.getBox(), this.getBox_Account(), "boxes", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAccount_News(), this.getNews(), this.getNews_Account(), "news", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAccount_Name(), ecorePackage.getEString(), "name", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(challengeEClass, Challenge.class, "Challenge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getChallenge_Id(), ecorePackage.getELong(), "id", null, 0, 1, Challenge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

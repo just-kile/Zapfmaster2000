@@ -222,13 +222,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int ACCOUNT__NEWS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCOUNT__NAME = 3;
+
+	/**
 	 * The number of structural features of the '<em>Account</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCOUNT_FEATURE_COUNT = 3;
+	int ACCOUNT_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeImpl <em>Challenge</em>}' class.
@@ -1057,6 +1066,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EReference getAccount_News();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getName()
+	 * @see #getAccount()
+	 * @generated
+	 */
+	EAttribute getAccount_Name();
+
+	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge <em>Challenge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1880,6 +1900,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EReference ACCOUNT__NEWS = eINSTANCE.getAccount_News();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACCOUNT__NAME = eINSTANCE.getAccount_Name();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeImpl <em>Challenge</em>}' class.

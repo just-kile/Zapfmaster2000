@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl#getBoxes <em>Boxes</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl#getNews <em>News</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +79,26 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @ordered
 	 */
 	protected EList<News> news;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,6 +169,27 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.ACCOUNT__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -190,6 +232,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return getBoxes();
 			case Zapfmaster2000Package.ACCOUNT__NEWS:
 				return getNews();
+			case Zapfmaster2000Package.ACCOUNT__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -214,6 +258,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 				getNews().clear();
 				getNews().addAll((Collection<? extends News>)newValue);
 				return;
+			case Zapfmaster2000Package.ACCOUNT__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -235,6 +282,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case Zapfmaster2000Package.ACCOUNT__NEWS:
 				getNews().clear();
 				return;
+			case Zapfmaster2000Package.ACCOUNT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -253,6 +303,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return boxes != null && !boxes.isEmpty();
 			case Zapfmaster2000Package.ACCOUNT__NEWS:
 				return news != null && !news.isEmpty();
+			case Zapfmaster2000Package.ACCOUNT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -269,6 +321,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}
