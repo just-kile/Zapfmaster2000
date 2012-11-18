@@ -114,22 +114,24 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			})
 		}
 	 
-	 var updateNewslist = function(startVal){
+	 var updateNewslist = function(startVal,length){
 			if(typeof startVal != "undefined")counter = startVal;
 			Ajax.getDatas(mC.urls.NEWSLIST,function(datas){
 				$.each(datas,function(ind,val){
 					fillContainer(container,val)
 				});
 			},{
-				newslist:counter++
-			})
+				start:startVal,
+				length:length,
+				random:new Date().getTime()
+			});
 		}
 	var updateNews =function(val,top){
 		fillContainer(container,val,top)
 	}
 	 var fillInitialData = function(){
 		 container =$("#drawfeed-news")
-		 updateNewslist(0);
+		 updateNewslist(0,10);
 	 }
 	 /**
 	  * Gets called, when container is appended

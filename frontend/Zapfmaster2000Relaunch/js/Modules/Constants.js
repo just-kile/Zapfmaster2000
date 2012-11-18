@@ -39,7 +39,8 @@ ZMO.modules.Constants = {
 		},
 		urls:{
 			FRONTPAGESTATS:"/tmp/stats_fp.json",
-			NEWSLIST:"/tmp/news.json"
+			//NEWSLIST:"/tmp/news.json"
+			NEWSLIST:"http://192.168.178.38:8080/Zapfmaster2000RESTful/news"
 		}
 
 }
