@@ -8,7 +8,10 @@
 	<name>Zapfmaster2000RESTful</name>
 
 	<repositories>
-
+		<repository>
+			<id>jboss</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+		</repository>
 	</repositories>
 
 
@@ -20,21 +23,24 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>1.14</version>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.3.5.Final</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-servlet</artifactId>
-			<version>1.14</version>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>2.3.5.Final</version>
 		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-			<version>1.14</version>
-		</dependency>
-		
+
+		<!-- jersey 1 <dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-server</artifactId> 
+			<version>1.14</version> </dependency> <dependency> <groupId>com.sun.jersey</groupId> 
+			<artifactId>jersey-servlet</artifactId> <version>1.14</version> </dependency> 
+			<dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-json</artifactId> 
+			<version>1.14</version> </dependency> -->
+
+
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>

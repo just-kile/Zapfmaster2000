@@ -59,7 +59,6 @@ public class LoginResource {
 
 			try {
 				// TODO: extract path
-
 				response = Response.seeOther(new URI("../page.html")).build();
 			} catch (URISyntaxException e) {
 				LOG.error("Invalid URI", e);
