@@ -85,9 +85,10 @@ ZMO.GlobalChallengeModel = function(config){
 	this.challengeId = config.challenge_id;
 };
 
-ZMO.ModuleModel  =function(id,element,ratio){
-	this.id= id;
-	this.element= element;
-	this.ratio= ratio;
+ZMO.ModuleModel  =function(conf,modulePosKey){
+	this.moduleId= conf.moduleId;
+	this.element= ZMO.modules[conf.moduleId];
+	this.ratio= conf.ratio;
+	this.position = new ZMO.PositionModel(modulePosKey,conf.position);
 };
 

@@ -7,16 +7,19 @@
  * 			{int} col: the wanted column
  * 			{int} row: the wanted row
  */
-ZMO.PositionModel =function(arr){
-	this.key =arr[0];
+ZMO.PositionModel =function(key,arr){
+	this.key =key;
 	this.col = arr[1];
-	this.row = arr[2];
+	this.row = arr[0];
 	/**
 	 * Compares two ZMO.PositionModels
 	 * 
 	 */
 	this.equals = function(newPos){
-		return this.col ==newPos.col && this.key==newPos.key;
+		return 	typeof newPos !="undefined" 
+				&& this.col ==newPos.col 
+				&& this.key==newPos.key
+				&& this.row==newPos.row;
 	}
 }
 

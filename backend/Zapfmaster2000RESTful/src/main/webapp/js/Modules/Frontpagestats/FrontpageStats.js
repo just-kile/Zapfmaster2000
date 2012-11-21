@@ -4,7 +4,7 @@
  * 
  */
 ZMO.modules = ZMO.modules || {};
-ZMO.modules.frontpageStats = (function($,ajax){
+ZMO.modules.frontpagestats = (function($,ajax){
 	var mC = ZMO.modules.Constants;
 	
 	var container;
