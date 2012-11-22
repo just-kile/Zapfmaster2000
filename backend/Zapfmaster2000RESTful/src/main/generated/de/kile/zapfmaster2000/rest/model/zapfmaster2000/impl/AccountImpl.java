@@ -5,6 +5,7 @@ package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 import java.util.Collection;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -34,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl#getBoxes <em>Boxes</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl#getNews <em>News</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl#getUsers <em>Users</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,6 +102,16 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getUsers() <em>Users</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUsers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<User> users;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,6 +203,18 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<User> getUsers() {
+		if (users == null) {
+			users = new EObjectWithInverseResolvingEList<User>(User.class, this, Zapfmaster2000Package.ACCOUNT__USERS, Zapfmaster2000Package.USER__ACCOUNT);
+		}
+		return users;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -198,6 +223,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBoxes()).basicAdd(otherEnd, msgs);
 			case Zapfmaster2000Package.ACCOUNT__NEWS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getNews()).basicAdd(otherEnd, msgs);
+			case Zapfmaster2000Package.ACCOUNT__USERS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUsers()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -214,6 +241,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return ((InternalEList<?>)getBoxes()).basicRemove(otherEnd, msgs);
 			case Zapfmaster2000Package.ACCOUNT__NEWS:
 				return ((InternalEList<?>)getNews()).basicRemove(otherEnd, msgs);
+			case Zapfmaster2000Package.ACCOUNT__USERS:
+				return ((InternalEList<?>)getUsers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -234,6 +263,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return getNews();
 			case Zapfmaster2000Package.ACCOUNT__NAME:
 				return getName();
+			case Zapfmaster2000Package.ACCOUNT__USERS:
+				return getUsers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -261,6 +292,10 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case Zapfmaster2000Package.ACCOUNT__NAME:
 				setName((String)newValue);
 				return;
+			case Zapfmaster2000Package.ACCOUNT__USERS:
+				getUsers().clear();
+				getUsers().addAll((Collection<? extends User>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -285,6 +320,9 @@ public class AccountImpl extends EObjectImpl implements Account {
 			case Zapfmaster2000Package.ACCOUNT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case Zapfmaster2000Package.ACCOUNT__USERS:
+				getUsers().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -305,6 +343,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return news != null && !news.isEmpty();
 			case Zapfmaster2000Package.ACCOUNT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case Zapfmaster2000Package.ACCOUNT__USERS:
+				return users != null && !users.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
