@@ -39,8 +39,8 @@ ZMO.modules.Constants = {
 		},
 		urls:{
 			FRONTPAGESTATS:"/tmp/stats_fp.json",
-			//NEWSLIST:"/tmp/news.json"
-			NEWSLIST:"rest/news"
+			NEWSLIST:"tmp/news.json"
+			//NEWSLIST:"rest/news"
 		}
 
 }
