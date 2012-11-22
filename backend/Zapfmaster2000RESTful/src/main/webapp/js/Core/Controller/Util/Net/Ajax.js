@@ -104,19 +104,19 @@ ZMO.Util.Net.Ajax = (function($){
 	var dummyCallback;
 	var connectToChannel = function(channel,callback){
 		//DUMMY
-		var tmp = {
-				"userid" : "10",
-				"amount" : "0.05",
-				"date" : "2012-09-01 03:40:45",
-				"duration" : "0",
-				"name" : "PUSHEXAMPLE",
-				"image" : "images\/avatars\/43985828483840.jpg",
-				"keg" : "2",
-				"brand" : "Warsteiner",
-				"type" : "DRAWING"
-			};
+//		var tmp = {
+//				"userid" : "10",
+//				"amount" : "0.05",
+//				"date" : "2012-09-01 03:40:45",
+//				"duration" : "0",
+//				"name" : "PUSHEXAMPLE",
+//				"image" : "images\/avatars\/43985828483840.jpg",
+//				"keg" : "2",
+//				"brand" : "Warsteiner",
+//				"type" : "DRAWING"
+//			};
 		dummyCallback = callback;
-		if(callback)callback(tmp);
+//		if(callback)callback(tmp);
 		
 	};
 	var rfidDummyCallback;
