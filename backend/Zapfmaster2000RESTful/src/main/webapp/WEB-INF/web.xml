@@ -10,10 +10,11 @@
         <servlet-class>
             org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
         </servlet-class>
-      <!--  <init-param>
+                <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>com.restfully.shop.services.ShoppingApplication</param-value>
-        </init-param> -->
+            <param-value>de.kile.zapfmaster2000.rest.Zapfmaster2000Application</param-value>
+        </init-param>
+ 		<load-on-startup>1</load-on-startup>
     </servlet>
     
 	<context-param>
@@ -25,14 +26,6 @@
 		<param-value>/rest/</param-value>
 	</context-param>
 	
-	<!-- <servlet> <servlet-name>Zapfmaster2000 RESTful Service</servlet-name> 
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class> 
-		<init-param> <param-name>com.sun.jersey.config.property.packages</param-name> 
-		<param-value>de.kile.zapfmaster2000.rest.api</param-value> </init-param> 
-		<init-param> <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name> 
-		<param-value>true</param-value> </init-param> <init-param> <param-name>com.sun.jersey.config.property.WebPageContentRegex</param-name> 
-		<param-value>/*</param-value> </init-param> <load-on-startup>1</load-on-startup> 
-		</servlet> -->
 	<servlet-mapping>
 		<servlet-name>Zapfmaster2000 RESTful Service</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
