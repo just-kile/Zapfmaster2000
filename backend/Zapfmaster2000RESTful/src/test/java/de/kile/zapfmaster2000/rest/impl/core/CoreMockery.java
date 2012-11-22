@@ -3,6 +3,7 @@ package de.kile.zapfmaster2000.rest.impl.core;
 import org.junit.After;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
@@ -19,6 +20,8 @@ public class CoreMockery {
 	private ConfigurationService originalConfigurationServoce;
 
 	private BoxService originalBoxService;
+	
+	private AuthService originalAuthService;
 
 	public void mockTransactionService(TransactionService pManager) {
 		originalTransactionService = getCore().getTransactionService();
@@ -33,6 +36,11 @@ public class CoreMockery {
 	public void mockBoxService(BoxService pManager) {
 		originalBoxService = getCore().getBoxService();
 		getCore().setBoxManager(pManager);
+	}
+	
+	public void mockAuthService(AuthService pAuthService) {
+		originalAuthService = getCore().getAuthService();
+		getCore().setAuthService(originalAuthService);
 	}
 
 	@After

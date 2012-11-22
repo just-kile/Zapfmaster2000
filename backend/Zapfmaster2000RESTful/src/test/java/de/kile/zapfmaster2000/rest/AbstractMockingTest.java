@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
@@ -29,16 +30,20 @@ public abstract class AbstractMockingTest extends AbstractDatabaseTest {
 		mockery.resetMocks();
 	}
 
-	public void mockTransactionService(TransactionService pTransactionManager) {
-		mockery.mockTransactionService(pTransactionManager);
+	public void mockTransactionService(TransactionService pTransactionService) {
+		mockery.mockTransactionService(pTransactionService);
 	}
 
-	public void mockConfigurationService(ConfigurationService pManager) {
-		mockery.mockConfigurationService(pManager);
+	public void mockConfigurationService(ConfigurationService pConfigurationService) {
+		mockery.mockConfigurationService(pConfigurationService);
 	}
 
-	public void mockBoxService(BoxService pManager) {
-		mockery.mockBoxService(pManager);
+	public void mockBoxService(BoxService pBoxService) {
+		mockery.mockBoxService(pBoxService);
+	}
+	
+	public void mockAuthService(AuthService pAuthService) {
+		mockery.mockAuthService(pAuthService);
 	}
 
 }
