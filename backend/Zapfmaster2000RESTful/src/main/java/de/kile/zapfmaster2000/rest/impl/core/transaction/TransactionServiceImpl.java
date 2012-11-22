@@ -1,4 +1,4 @@
-package de.kile.zapfmaster2000.rest.impl.core;
+package de.kile.zapfmaster2000.rest.impl.core.transaction;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
@@ -6,7 +6,7 @@ import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import de.kile.zapfmaster2000.rest.core.TransactionService;
+import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class TransactionServiceImpl implements TransactionService {

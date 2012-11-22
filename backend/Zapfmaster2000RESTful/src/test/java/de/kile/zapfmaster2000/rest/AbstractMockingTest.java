@@ -3,10 +3,10 @@ package de.kile.zapfmaster2000.rest;
 import org.junit.After;
 import org.junit.Before;
 
-import de.kile.zapfmaster2000.rest.core.TransactionService;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
+import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.CoreMockery;
 
 /**

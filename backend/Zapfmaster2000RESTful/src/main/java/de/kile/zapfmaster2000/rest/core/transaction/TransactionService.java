@@ -1,4 +1,4 @@
-package de.kile.zapfmaster2000.rest.core;
+package de.kile.zapfmaster2000.rest.core.transaction;
 
 import org.hibernate.SessionFactory;
 
