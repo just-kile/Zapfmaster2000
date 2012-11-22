@@ -1,11 +1,14 @@
 package de.kile.zapfmaster2000.rest.impl.core;
 
-import de.kile.zapfmaster2000.rest.core.TransactionService;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
+import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
+import de.kile.zapfmaster2000.rest.impl.core.auth.AuthServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.box.BoxServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.configuration.FileConfiguratioServiceImpl;
+import de.kile.zapfmaster2000.rest.impl.core.transaction.TransactionServiceImpl;
 
 public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 
@@ -21,10 +24,14 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	/** the box manager */
 	private BoxService boxManager;
 
+	/** the auth service */
+	private AuthService authService;
+
 	private Zapfmaster2000CoreImpl() {
 		transactionManager = new TransactionServiceImpl();
 		configurationManager = new FileConfiguratioServiceImpl();
 		boxManager = new BoxServiceImpl();
+		authService = new AuthServiceImpl();
 	}
 
 	/**
@@ -55,34 +62,49 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 		return configurationManager;
 	}
 
+	@Override
+	public AuthService getAuthService() {
+		return authService;
+	}
+
 	/**
-	 * Sets a transaction manager. Use only for mocking in unit tests!
+	 * Sets a transaction service. Use only for mocking in unit tests!
 	 * 
 	 * @param pTransactionManager
-	 *            the manager to set
+	 *            the service to set
 	 */
 	void setTransactionManager(TransactionService pTransactionManager) {
 		transactionManager = pTransactionManager;
 	}
 
 	/**
-	 * Sets the configuration manager. Use only for mocking in unit tests!
+	 * Sets the configuration service. Use only for mocking in unit tests!
 	 * 
 	 * @param pConfigurationManager
-	 *            the manager to set
+	 *            the service to set
 	 */
 	void setConfigurationManager(ConfigurationService pConfigurationManager) {
 		configurationManager = pConfigurationManager;
 	}
 
 	/**
-	 * Sets the box manager. Use only for mocking in unit tests!
+	 * Sets the box service. Use only for mocking in unit tests!
 	 * 
 	 * @param pBoxManager
-	 *            the manager to set
+	 *            the service to set
 	 */
 	void setBoxManager(BoxService pBoxManager) {
 		boxManager = pBoxManager;
+	}
+
+	/**
+	 * Sets the auth service. Use only for mocking in unit tests!
+	 * 
+	 * @param pAuthService
+	 *            the service to set
+	 */
+	void setAuthService(AuthService pAuthService) {
+		authService = pAuthService;
 	}
 
 }

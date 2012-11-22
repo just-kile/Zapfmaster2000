@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,6 +13,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
 @Path("news")
 public class NewsResource {
@@ -24,31 +26,10 @@ public class NewsResource {
 			@QueryParam("length") int pLength,
 			@Context HttpServletRequest pRequest) {
 
-		// check if the user is logged in
-		// TODO: extract this somewhere
-		// if (pRequest.getSession(false) != null
-		// && pRequest.getAttribute(HttpSessionConstants.ACCOUNT) instanceof
-		// Account) {
-
-		if (pRequest.getSession(false) != null) {
-			// Account account = (Account) pRequest
-			// .getAttribute(HttpSessionConstants.ACCOUNT);
-			//
-			// Response response = Response.status(Status.INTERNAL_SERVER_ERROR)
-			// .build();
-			//
-			// Session session = Zapfmaster2000Core.INSTANCE
-			// .getTransactionService().getSessionFactory()
-			// .getCurrentSession();
-			// session.update(account);
-
-			// Transaction tx = session.beginTransaction();
-			// List<News> news = session
-			// .createQuery("SELECT n FROM News n WHERE n = :account")
-			// .setEntity("account", account).list();
-			//
-			// tx.commit();
-
+		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAccount(pRequest);
+		if (account != null) {
+			// TODO: retrieve real data from db...
 			// TODO: extract adaption
 			List<AbstractNewsResponse> newsResp = new ArrayList<>();
 			// for (News n : news) {
@@ -61,13 +42,10 @@ public class NewsResource {
 			resp.setImage("asdf.jpg");
 			resp.setKegId(2);
 			newsResp.add(resp);
-			// }
-
 			return Response.ok(newsResp.toArray()).build();
 
 		} else {
 			return Response.status(Status.FORBIDDEN).build();
 		}
-
 	}
 }

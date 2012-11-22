@@ -2,10 +2,10 @@ package de.kile.zapfmaster2000.rest.impl.core;
 
 import org.junit.After;
 
-import de.kile.zapfmaster2000.rest.core.TransactionService;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
+import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 
 /**
  * Utility class to mock managers from the zapfmaster 2000 core.

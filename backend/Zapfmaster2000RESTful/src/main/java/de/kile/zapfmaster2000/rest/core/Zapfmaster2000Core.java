@@ -1,7 +1,9 @@
 package de.kile.zapfmaster2000.rest.core;
 
+import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
+import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.Zapfmaster2000CoreImpl;
 
 /**
@@ -20,25 +22,32 @@ public interface Zapfmaster2000Core {
 	public static Zapfmaster2000Core INSTANCE = Zapfmaster2000CoreImpl.init();
 
 	/**
-	 * Returns the transaction manager.
+	 * Returns the transaction service.
 	 * 
-	 * @return the transation manager, never <code>null</code>.
+	 * @return the transaction service, never <code>null</code>.
 	 */
 	public TransactionService getTransactionService();
 
 	/**
-	 * Returns the box manager.
+	 * Returns the box service.
 	 * 
-	 * @return the box manager, never <code>null</code>.
+	 * @return the box service, never <code>null</code>.
 	 */
 	public BoxService getBoxService();
 	
 	
 	/**
-	 * Returns the configuration manager.
+	 * Returns the configuration service.
 	 * 
-	 * @return the configuration manager, never <code>null</code>.
+	 * @return the configuration service, never <code>null</code>.
 	 */
 	public ConfigurationService getConfigurationService();
+	
+	/**
+	 * Returns the auth service.
+	 * 
+	 * @return the auth service, never <code>null</code>.
+	 */
+	public AuthService getAuthService();
 
 }
