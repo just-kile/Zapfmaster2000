@@ -25,4 +25,6 @@ public class ConfigurationConstants {
 
 	public final static String BOX_DRAW_TICKS_PER_LITER = "box.draw.ticksPerLiter";
 
+	public final static String BEER_SIZE = "beer.size";
+
 }
