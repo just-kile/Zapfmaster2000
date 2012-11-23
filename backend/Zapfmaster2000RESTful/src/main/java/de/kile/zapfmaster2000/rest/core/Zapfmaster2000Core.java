@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest.core;
 
+import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
@@ -49,5 +50,12 @@ public interface Zapfmaster2000Core {
 	 * @return the auth service, never <code>null</code>.
 	 */
 	public AuthService getAuthService();
+	
+	/**
+	 * Returns the achievement service.
+	 * 
+	 * @return the achievement service,never <code>null</code>.
+	 */
+	public AchievementService getAchievementService();
 
 }

@@ -1,10 +1,12 @@
 package de.kile.zapfmaster2000.rest.impl.core;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
+import de.kile.zapfmaster2000.rest.impl.core.achievement.AchievementServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.auth.AuthServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.box.BoxServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.configuration.FileConfiguratioServiceImpl;
@@ -16,22 +18,26 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	private static Zapfmaster2000CoreImpl instance;
 
 	/** the transaction manager */
-	private TransactionService transactionManager;
+	private TransactionService transactionService;
 
 	/** the configuration manager */
-	private ConfigurationService configurationManager;
+	private ConfigurationService configurationService;
 
 	/** the box manager */
-	private BoxService boxManager;
+	private BoxService boxService;
 
 	/** the auth service */
 	private AuthService authService;
+	
+	/** the achievement service */
+	private AchievementService achievementService;
 
 	private Zapfmaster2000CoreImpl() {
-		transactionManager = new TransactionServiceImpl();
-		configurationManager = new FileConfiguratioServiceImpl();
-		boxManager = new BoxServiceImpl();
+		transactionService = new TransactionServiceImpl();
+		configurationService = new FileConfiguratioServiceImpl();
+		boxService = new BoxServiceImpl();
 		authService = new AuthServiceImpl();
+		achievementService = new AchievementServiceImpl(boxService, transactionService);
 	}
 
 	/**
@@ -49,22 +55,27 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 
 	@Override
 	public TransactionService getTransactionService() {
-		return transactionManager;
+		return transactionService;
 	}
 
 	@Override
 	public BoxService getBoxService() {
-		return boxManager;
+		return boxService;
 	}
 
 	@Override
 	public ConfigurationService getConfigurationService() {
-		return configurationManager;
+		return configurationService;
 	}
 
 	@Override
 	public AuthService getAuthService() {
 		return authService;
+	}
+
+	@Override
+	public AchievementService getAchievementService() {
+		return achievementService;
 	}
 
 	/**
@@ -74,7 +85,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	 *            the service to set
 	 */
 	void setTransactionManager(TransactionService pTransactionManager) {
-		transactionManager = pTransactionManager;
+		transactionService = pTransactionManager;
 	}
 
 	/**
@@ -84,7 +95,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	 *            the service to set
 	 */
 	void setConfigurationManager(ConfigurationService pConfigurationManager) {
-		configurationManager = pConfigurationManager;
+		configurationService = pConfigurationManager;
 	}
 
 	/**
@@ -94,7 +105,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	 *            the service to set
 	 */
 	void setBoxManager(BoxService pBoxManager) {
-		boxManager = pBoxManager;
+		boxService = pBoxManager;
 	}
 
 	/**
@@ -105,6 +116,16 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	 */
 	void setAuthService(AuthService pAuthService) {
 		authService = pAuthService;
+	}
+	
+	/**
+	 * Sets the achievement service. Use only for mocking in unit tests!
+	 * 
+	 * @param setAchievementService
+	 *            the service to set
+	 */
+	void setAchievementService(AchievementService pAchievementService) {
+		achievementService = pAchievementService;
 	}
 
 }
