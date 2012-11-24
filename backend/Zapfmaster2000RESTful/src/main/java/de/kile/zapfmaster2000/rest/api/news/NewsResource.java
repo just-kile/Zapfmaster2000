@@ -14,11 +14,21 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse.Type;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 @Path("news")
 public class NewsResource {
+
+	private static final Logger LOG = Logger.getLogger(NewsResource.class);
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -29,23 +39,60 @@ public class NewsResource {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pRequest);
 		if (account != null) {
-			// TODO: retrieve real data from db...
-			// TODO: extract adaption
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			@SuppressWarnings("unchecked")
+			List<News> result = session
+					.createQuery(
+							"SELECT n FROM News n WHERE n.account.id = :accountId"
+									+ " ORDER BY n.date DESC")
+					.setLong("accountId", account.getId()).list();
+			tx.commit();
+
+			// adapt news (to ResponseBean)
 			List<AbstractNewsResponse> newsResp = new ArrayList<>();
-			// for (News n : news) {
-			// TODO: this is just a dummy
-			DrawingNewsResponse resp = new DrawingNewsResponse();
-			resp.setUserName("foo");
-			resp.setBrand("Foo");
-			resp.setDate(new Date());
-			resp.setAmount(123);
-			resp.setImage("asdf.jpg");
-			resp.setKegId(2);
-			newsResp.add(resp);
+			for (News news : result) {
+				newsResp.add(adapt(news));
+			}
+
 			return Response.ok(newsResp.toArray()).build();
 
 		} else {
 			return Response.status(Status.FORBIDDEN).build();
 		}
+	}
+
+	private AbstractNewsResponse adapt(News pNews) {
+		AbstractNewsResponse newsResponse = null;
+		switch (pNews.eClass().getClassifierID()) {
+		case Zapfmaster2000Package.DRAWING_NEWS:
+			DrawingNews drawingNews = (DrawingNews) pNews;
+			DrawingNewsResponse drawingResp = new DrawingNewsResponse();
+
+			drawingResp.setType(Type.DRAWING);
+			drawingResp.setAmount(drawingNews.getDrawing().getAmount());
+			drawingResp.setKegId(drawingNews.getDrawing().getKeg().getId());
+			drawingResp.setBrand(drawingNews.getDrawing().getKeg().getBrand());
+			drawingResp.setImage(drawingNews.getDrawing().getUser()
+					.getImagePath());
+			drawingResp.setUserId(drawingNews.getDrawing().getUser().getId());
+			drawingResp.setUserName(drawingNews.getDrawing().getUser()
+					.getName());
+
+			newsResponse = drawingResp;
+			break;
+		case Zapfmaster2000Package.ACHIEVEMENT_NEWS:
+		case Zapfmaster2000Package.OTHER_NEWS:
+		default:
+			LOG.error("Unsupported news type: " + pNews.getClass().getName());
+		}
+
+		if (newsResponse != null) {
+			newsResponse.setDate(pNews.getDate());
+		}
+		return newsResponse;
 	}
 }
