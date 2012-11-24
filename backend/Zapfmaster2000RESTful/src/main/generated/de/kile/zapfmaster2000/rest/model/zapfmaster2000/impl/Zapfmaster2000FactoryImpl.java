@@ -66,7 +66,9 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.DRAWING: return createDrawing();
 			case Zapfmaster2000Package.GAINED_ACHIEVEMENT: return createGainedAchievement();
 			case Zapfmaster2000Package.KEG: return createKeg();
-			case Zapfmaster2000Package.NEWS: return createNews();
+			case Zapfmaster2000Package.DRAWING_NEWS: return createDrawingNews();
+			case Zapfmaster2000Package.ACHIEVEMENT_NEWS: return createAchievementNews();
+			case Zapfmaster2000Package.OTHER_NEWS: return createOtherNews();
 			case Zapfmaster2000Package.MAPPING_QR_RFID: return createMappingQrRfid();
 			case Zapfmaster2000Package.USER: return createUser();
 			default:
@@ -86,8 +88,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return createSexFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.CHALLENGE_TYPE:
 				return createChallengeTypeFromString(eDataType, initialValue);
-			case Zapfmaster2000Package.NEWS_TYPE:
-				return createNewsTypeFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.USER_TYPE:
 				return createUserTypeFromString(eDataType, initialValue);
 			default:
@@ -107,8 +107,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return convertSexToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.CHALLENGE_TYPE:
 				return convertChallengeTypeToString(eDataType, instanceValue);
-			case Zapfmaster2000Package.NEWS_TYPE:
-				return convertNewsTypeToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.USER_TYPE:
 				return convertUserTypeToString(eDataType, instanceValue);
 			default:
@@ -211,16 +209,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public News createNews() {
-		NewsImpl news = new NewsImpl();
-		return news;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public MappingQrRfid createMappingQrRfid() {
 		MappingQrRfidImpl mappingQrRfid = new MappingQrRfidImpl();
 		return mappingQrRfid;
@@ -234,6 +222,36 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	public User createUser() {
 		UserImpl user = new UserImpl();
 		return user;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DrawingNews createDrawingNews() {
+		DrawingNewsImpl drawingNews = new DrawingNewsImpl();
+		return drawingNews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AchievementNews createAchievementNews() {
+		AchievementNewsImpl achievementNews = new AchievementNewsImpl();
+		return achievementNews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OtherNews createOtherNews() {
+		OtherNewsImpl otherNews = new OtherNewsImpl();
+		return otherNews;
 	}
 
 	/**
@@ -273,26 +291,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * @generated
 	 */
 	public String convertChallengeTypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NewsType createNewsTypeFromString(EDataType eDataType, String initialValue) {
-		NewsType result = NewsType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertNewsTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

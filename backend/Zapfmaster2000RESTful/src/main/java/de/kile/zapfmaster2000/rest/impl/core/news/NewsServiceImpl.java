@@ -15,6 +15,7 @@ import de.kile.zapfmaster2000.rest.core.news.NewsServiceListener;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewsType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
@@ -67,14 +68,12 @@ public class NewsServiceImpl implements NewsService {
 		List<Account> accounts = session
 				.createQuery("SELECT b.account FROM Box b WHERE b.id = :id")
 				.setLong("id", pBox.getId()).list();
-
+		session.update(pDrawing);
 		if (accounts.size() == 1) {
-			News news = Zapfmaster2000Factory.eINSTANCE.createNews();
+			DrawingNews news = Zapfmaster2000Factory.eINSTANCE.createDrawingNews();
 			news.setAccount(accounts.get(0));
-			news.setContents(String.valueOf(pDrawing.getId()));
-			news.setImagePath(pDrawing.getUser().getImagePath());
 			news.setDate(new Date());
-			news.setType(NewsType.DRAWING);
+			news.setDrawing(pDrawing);
 			session.save(news);
 		} else {
 			LOG.error("Could not post news: No (unique) system found for box "

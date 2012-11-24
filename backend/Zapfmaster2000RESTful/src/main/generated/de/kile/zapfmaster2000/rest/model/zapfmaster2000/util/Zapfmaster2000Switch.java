@@ -126,6 +126,27 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Zapfmaster2000Package.DRAWING_NEWS: {
+				DrawingNews drawingNews = (DrawingNews)theEObject;
+				T result = caseDrawingNews(drawingNews);
+				if (result == null) result = caseNews(drawingNews);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Zapfmaster2000Package.ACHIEVEMENT_NEWS: {
+				AchievementNews achievementNews = (AchievementNews)theEObject;
+				T result = caseAchievementNews(achievementNews);
+				if (result == null) result = caseNews(achievementNews);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Zapfmaster2000Package.OTHER_NEWS: {
+				OtherNews otherNews = (OtherNews)theEObject;
+				T result = caseOtherNews(otherNews);
+				if (result == null) result = caseNews(otherNews);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case Zapfmaster2000Package.MAPPING_QR_RFID: {
 				MappingQrRfid mappingQrRfid = (MappingQrRfid)theEObject;
 				T result = caseMappingQrRfid(mappingQrRfid);
@@ -319,6 +340,51 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseUser(User object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Drawing News</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Drawing News</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDrawingNews(DrawingNews object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Achievement News</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Achievement News</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAchievementNews(AchievementNews object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Other News</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Other News</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOtherNews(OtherNews object) {
 		return null;
 	}
 

@@ -103,15 +103,6 @@ public interface Zapfmaster2000Factory extends EFactory {
 	Keg createKeg();
 
 	/**
-	 * Returns a new object of class '<em>News</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>News</em>'.
-	 * @generated
-	 */
-	News createNews();
-
-	/**
 	 * Returns a new object of class '<em>Mapping Qr Rfid</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -128,6 +119,33 @@ public interface Zapfmaster2000Factory extends EFactory {
 	 * @generated
 	 */
 	User createUser();
+
+	/**
+	 * Returns a new object of class '<em>Drawing News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Drawing News</em>'.
+	 * @generated
+	 */
+	DrawingNews createDrawingNews();
+
+	/**
+	 * Returns a new object of class '<em>Achievement News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Achievement News</em>'.
+	 * @generated
+	 */
+	AchievementNews createAchievementNews();
+
+	/**
+	 * Returns a new object of class '<em>Other News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Other News</em>'.
+	 * @generated
+	 */
+	OtherNews createOtherNews();
 
 	/**
 	 * Returns the package supported by this factory.

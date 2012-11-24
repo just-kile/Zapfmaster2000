@@ -108,6 +108,18 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 				return createNewsAdapter();
 			}
 			@Override
+			public Adapter caseDrawingNews(DrawingNews object) {
+				return createDrawingNewsAdapter();
+			}
+			@Override
+			public Adapter caseAchievementNews(AchievementNews object) {
+				return createAchievementNewsAdapter();
+			}
+			@Override
+			public Adapter caseOtherNews(OtherNews object) {
+				return createOtherNewsAdapter();
+			}
+			@Override
 			public Adapter caseMappingQrRfid(MappingQrRfid object) {
 				return createMappingQrRfidAdapter();
 			}
@@ -300,6 +312,48 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUserAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews <em>Drawing News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews
+	 * @generated
+	 */
+	public Adapter createDrawingNewsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews <em>Achievement News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews
+	 * @generated
+	 */
+	public Adapter createAchievementNewsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews <em>Other News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews
+	 * @generated
+	 */
+	public Adapter createOtherNewsAdapter() {
 		return null;
 	}
 
