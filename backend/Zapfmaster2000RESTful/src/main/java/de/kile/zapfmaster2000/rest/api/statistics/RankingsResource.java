@@ -32,7 +32,9 @@ public class RankingsResource {
 			
 			session.update(account);
 			@SuppressWarnings("unchecked")
-			List<User> list =  session.createQuery("FROM User").list(); //session.createQuery("FROM User u WHERE u.account = :account").setEntity("account", account).list();
+			List<User> list =  session.createQuery("FROM User u").list(); 
+			//session.createQuery("FROM User u WHERE u.account = :account").setEntity("account", account).list();
+			//session.createQuery("SELECT u.id id, u.name name, SUM(d.amount) FROM User u JOIN Drawing d where d.").list();
 			tx.commit();
 			
 			List<UserAmountResponse> resp = new ArrayList<>();
