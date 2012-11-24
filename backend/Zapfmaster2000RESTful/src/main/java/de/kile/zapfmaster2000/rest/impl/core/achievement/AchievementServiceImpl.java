@@ -12,11 +12,16 @@ import org.hibernate.Transaction;
 import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.achievement.AchievementServiceListener;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
+import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.AbstractAchievementProcessor;
+import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.AchievementProcessorListener;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
 public class AchievementServiceImpl implements AchievementService {
@@ -28,10 +33,13 @@ public class AchievementServiceImpl implements AchievementService {
 
 	private final Map<Account, List<AbstractAchievementProcessor>> mapAccount2Processors = new HashMap<>();
 
+	private final AchievementProcessorListener achievementProcessorListener = createAchievementProcessorListener();
+
 	public AchievementServiceImpl(BoxService pBoxService,
 			TransactionService pTransactionService) {
 
 		createAchievmentProcessors(pTransactionService);
+		pBoxService.addListener(createBoxServiceListener());
 	}
 
 	@Override
@@ -78,6 +86,7 @@ public class AchievementServiceImpl implements AchievementService {
 					AbstractAchievementProcessor processor = desc
 							.getProcessor().newInstance();
 					processor.init(account, achievement);
+					processor.addListener(achievementProcessorListener);
 				} catch (InstantiationException | IllegalAccessException e) {
 					LOG.error("Could not create achivement processor", e);
 				}
@@ -110,6 +119,48 @@ public class AchievementServiceImpl implements AchievementService {
 		tx.commit();
 
 		return achievement;
+	}
+
+	private BoxServiceListener createBoxServiceListener() {
+		return new BoxServiceListener() {
+
+			@Override
+			public void onLoginsuccessful(Box pBox, User pUser) {
+			}
+
+			@Override
+			public void onEndDrawing(Box pBox, Drawing pDrawing) {
+				processAchievements(pBox.getAccount(), pDrawing);
+			}
+
+			@Override
+			public void onDrawing(Box pBox, User pUser, double pAmount) {
+			}
+		};
+	}
+
+	private void processAchievements(Account pAccount, Drawing pDrawing) {
+		List<AbstractAchievementProcessor> processors = mapAccount2Processors
+				.get(pAccount);
+		if (processors != null) {
+			for (AbstractAchievementProcessor processor : processors) {
+				if (processor.canGain(pDrawing.getUser())) {
+					processor.process(pDrawing);
+				}
+			}
+		} else {
+			LOG.error("Could not find processors for account: " + pAccount);
+		}
+
+	}
+
+	private AchievementProcessorListener createAchievementProcessorListener() {
+		return new AchievementProcessorListener() {
+			@Override
+			public void onAchievementGained(GainedAchievement pGainedAchievement) {
+				notifyAchivementGained(pGainedAchievement);
+			}
+		};
 	}
 
 }
