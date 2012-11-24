@@ -29,7 +29,7 @@ public class TrinkerDerStunde extends AbstractAchievementProcessor {
 		List<?> result = session
 				.createQuery(
 						"SELECT d.user.id, SUM(d.amount) AS drawSum FROM Drawing d "
-								+ "WHERE d.date > :date GROUP BY d.userId "
+								+ "WHERE d.date > :date GROUP BY d.user.id "
 								+ "ORDER BY drawSum DESC")
 				.setTimestamp("date", date).setMaxResults(1).list();
 		tx.commit();

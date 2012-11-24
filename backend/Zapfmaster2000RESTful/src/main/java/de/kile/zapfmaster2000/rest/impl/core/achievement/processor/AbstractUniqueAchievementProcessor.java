@@ -22,10 +22,10 @@ public abstract class AbstractUniqueAchievementProcessor extends
 		List<?> result = session
 				.createQuery(
 						"SELECT COUNT(*) FROM GainedAchievement a "
-								+ "WHERE a.achievement = :achievement "
-								+ "AND a.user.account = :account")
-				.setEntity("achievement", getAchievement())
-				.setEntity("account", getAccount()).list();
+								+ "WHERE a.achievement.id = :achievementId "
+								+ "AND a.user.account.id = :accountId")
+				.setLong("achievementId", getAchievement().getId())
+				.setLong("accountId", getAccount().getId()).list();
 		tx.commit();
 		long count = (Long) result.get(0);
 

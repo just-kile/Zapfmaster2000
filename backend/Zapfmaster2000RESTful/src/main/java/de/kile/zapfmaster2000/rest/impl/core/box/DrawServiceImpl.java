@@ -259,14 +259,18 @@ public class DrawServiceImpl implements DrawService {
 		Transaction tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<User> guests = session
-				.createQuery("FROM User u WHERE u.type = :guest")
-				.setParameter("guest", UserType.GUEST).list();
+				.createQuery(
+						"FROM User u WHERE u.type = :guest AND u.account.id = :accountId")
+				.setParameter("guest", UserType.GUEST)
+				.setLong("accountId", box.getAccount().getId()).list();
 		if (guests.isEmpty()) {
+			session.update(box.getAccount());
 			User newUser = Zapfmaster2000Factory.eINSTANCE.createUser();
 			newUser.setName("Guest");
 			newUser.setImagePath("img/guest.png");
 			newUser.setWeight(100);
 			newUser.setType(UserType.GUEST);
+			newUser.setAccount(box.getAccount());
 			session.save(newUser);
 			user = newUser;
 		} else {

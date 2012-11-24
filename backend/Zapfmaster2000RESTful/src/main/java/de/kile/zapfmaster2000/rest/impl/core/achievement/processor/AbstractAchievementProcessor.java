@@ -38,20 +38,19 @@ public abstract class AbstractAchievementProcessor {
 	}
 
 	public boolean canGain(User pUser) {
-		boolean gained;
-
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		List<?> result = session
 				.createQuery(
-						"SELECT a FROM GainedAchievement a WHERE a.user.id = :userId and a.id = :achievementId")
+						"SELECT COUNT(*) FROM GainedAchievement a "
+								+ "WHERE a.user.id = :userId and a.achievement.id = :achievementId")
 				.setLong("userId", pUser.getId())
 				.setLong("achievementId", achievement.getId()).list();
-		gained = !result.isEmpty();
+		long count = (Long) result.get(0);
 		tx.commit();
 
-		return !gained;
+		return count == 0;
 	}
 
 	/**
@@ -71,7 +70,7 @@ public abstract class AbstractAchievementProcessor {
 	public void removeListener(AchievementProcessorListener pListener) {
 		listeners.remove(pListener);
 	}
-	
+
 	public Account getAccount() {
 		return account;
 	}
@@ -99,7 +98,7 @@ public abstract class AbstractAchievementProcessor {
 	protected Achievement getAchievement() {
 		return achievement;
 	}
-	
+
 	protected final double getBeerSize() {
 		return Zapfmaster2000Core.INSTANCE.getConfigurationService().getDouble(
 				ConfigurationConstants.BEER_SIZE);
