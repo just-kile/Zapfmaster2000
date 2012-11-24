@@ -29,6 +29,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="news" upperBound="-1" eType="#//News"
         containment="true" eOpposite="#//News/account"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="users" upperBound="-1"
+        eType="#//User" eOpposite="#//User/account"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Challenge">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
@@ -119,6 +121,8 @@
         upperBound="-1" eType="#//ChallengeParticipant" eOpposite="#//ChallengeParticipant/user"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//UserType"
         defaultValueLiteral="USER"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="account" eType="#//Account"
+        eOpposite="#//Account/users"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Sex">
     <eLiterals name="male" literal="male"/>
