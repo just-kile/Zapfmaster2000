@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getBoxes <em>Boxes</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getNews <em>News</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getName <em>Name</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account#getUsers <em>Users</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,5 +114,23 @@ public interface Account extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Users</b></em>' reference list.
+	 * The list contents are of type {@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User}.
+	 * It is bidirectional and its opposite is '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getAccount <em>Account</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Users</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Users</em>' reference list.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getAccount_Users()
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getAccount
+	 * @model opposite="account"
+	 * @generated
+	 */
+	EList<User> getUsers();
 
 } // Account
