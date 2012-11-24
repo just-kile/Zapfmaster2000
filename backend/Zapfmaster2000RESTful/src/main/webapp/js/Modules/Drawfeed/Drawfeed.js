@@ -1,5 +1,5 @@
 ZMO.modules.drawfeed = (function($,Ajax){
-	var rfid ,newsfeed,container,counter=0;
+	var rfid ,newsfeed,container,counter=0,rfid;
 	var mC = ZMO.modules.Constants;
 	var c = mC.drawfeed;
 	/**
@@ -37,7 +37,8 @@ ZMO.modules.drawfeed = (function($,Ajax){
 	 * @param {Object} val the news entry from backend
 	 * @param {Boolean} top if true inserts content at top, not at bottom 
 	 */
-	 var fillContainer = function(container,val,top){
+	var lastContainer = null;
+	 var fillContainer = function(cont,val,top){
 		 	var news;
 			 switch (val.type.toUpperCase()){
 				case c.types.ACHIEVEMENT:
@@ -61,13 +62,15 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			}
 			if(typeof top!="undefined" && top ==true){
 				if(val.kind!= "refresh"){
-					container.prepend(news)
+					cont.prepend(news);
+					lastContainer = news;
 				}else{
-					$("#ZMO-news-container").children(":first").replaceWith(news);
+					lastContainer.replaceWith(news);
+					lastContainer = news;
 					
 				}
 			}else{
-				container.append(news);
+				cont.append(news);
 			}
 		 }
 	 var parseChallengesStarted = function(val){
@@ -125,19 +128,38 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				length:length,
 				random:new Date().getTime()
 			});
-		}
-	var updateNews =function(val,top){
-		fillContainer(container,val,top)
+		};
+	
+	var onMessageReceive =function(data,refresh){
+		if(refresh)data.kind="refresh";
+		fillContainer(container,data,true);
 	}
+	
 	 var fillInitialData = function(){
-		 container =$("#drawfeed-news")
+
 		 updateNewslist(0,10);
-	 }
+		 Ajax.connectToChannel("news",onMessageReceive);
+		 //Ajax.connectToChannel("rfid",onRfidLogin)
+		 //DUMMY
+		 Ajax.rfidLogin(onRfidLogin);
+	 };
+	 
+	 var onRfidLogin = function(name,logout){ 
+		 if(logout){
+			 rfid.text("");
+		 }else{
+			 rfid.text("Hallo "+name+". Du kannst jetzt zapfen!");
+		 }
+	 };
+	 
 	 /**
 	  * Gets called, when container is appended
 	  */
 	 var init = function(){
+		 rfid = $("#rfid");
+		 container =$("#drawfeed-news")
 		 fillInitialData();
+		
 	}
 
 	/**

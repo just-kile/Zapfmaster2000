@@ -42,7 +42,7 @@ ZMO.Util.Net.Ajax = (function($){
 		aspirantModules =  tmpObj;
 		
 		
-	}
+	};
 	/**
 	 * Get datas with pull request (every 30s)
 	 * Module inscribe to ajax module, that it will have the information
@@ -58,7 +58,7 @@ ZMO.Util.Net.Ajax = (function($){
 			callback:callback,
 			once:!!onlyOnce
 		});
-	}
+	};
 	/**
 	 * Gets the datas in the Queue, aber pullTimeout time, calls self again
 	 */
@@ -79,12 +79,12 @@ ZMO.Util.Net.Ajax = (function($){
 			//if we dont wanna stop, again
 			if(!stop)getEnqueueDatas();
 		},c.pullTimeout);
-	}
-	var timeout;
+	};
+	var timeout = null;
 	var stopPull = function(){
 		stop = true;
-		clearTimeout(timeout);
-	}
+		if(ZMO.exists(timeout))clearTimeout(timeout);
+	};
 	//wait for all requests to enqueue-> then start
 	var startPull = function(){
 		timeout = setTimeout(function(){
@@ -94,25 +94,70 @@ ZMO.Util.Net.Ajax = (function($){
 			}
 		},200);
 		
-	}
+	};
 	/**
 	 * Resets the modules
 	 */
 	var resetQueue = function(){
 		aspirantModules = {};
-	}
+	};
+	var dummyCallback;
+	var connectToChannel = function(channel,callback){
+		//DUMMY
+//		var tmp = {
+//				"userid" : "10",
+//				"amount" : "0.05",
+//				"date" : "2012-09-01 03:40:45",
+//				"duration" : "0",
+//				"name" : "PUSHEXAMPLE",
+//				"image" : "images\/avatars\/43985828483840.jpg",
+//				"keg" : "2",
+//				"brand" : "Warsteiner",
+//				"type" : "DRAWING"
+//			};
+		dummyCallback = callback;
+//		if(callback)callback(tmp);
+		
+	};
+	var rfidDummyCallback;
+	var rfidLogin = function(callb){
+		//if(callb)callb();
+		rfidDummyCallback = callb;
+	};
+	var pushDummyData = function(refresh){
+		dummyCallback({
+				"userid" : "10",
+				"amount" : Math.random(),
+				"date" : "2012-09-01 03:40:45",
+				"duration" : "0",
+				"name" : "PUSHEXAMPLE",
+				"image" : "images\/avatars\/43985828483840.jpg",
+				"keg" : "2",
+				"brand" : "Warsteiner",
+				"type" : "DRAWING"
+			},refresh);
+	};
+	var pushRfidDummyData = function(name,logout){
+		rfidDummyCallback(name,logout);
+	};
 	var pub = {
 			getDatas:getDatas,
 			enqueueDatas:enqueueDatas,
 			stopPull:stopPull,
 			startPull:startPull,
-			resetQueue:resetQueue
-	}
+			resetQueue:resetQueue,
+			connectToChannel:connectToChannel,
+			rfidLogin:rfidLogin,
+			
+			pushDummyData:pushDummyData,
+			pushRfidDummyData:pushRfidDummyData,
+
+	};
 	return pub;
 	
 	
 	
-})(jQuery)
+})(jQuery);
 
 /*
  * NOTUSED DUE TO USING FULL PATHS TO RESTAPI, NOT KEYWORDS

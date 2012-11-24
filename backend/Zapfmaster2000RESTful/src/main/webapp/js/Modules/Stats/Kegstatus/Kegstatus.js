@@ -12,7 +12,7 @@ ZMO.modules.kegstatus = (function($,ajax){
 	}
 	var getInstance = function(){
 		
-		return $("<div>").addClass("statsDiv");
+		return $("<div>").addClass("statsDiv").text("kegstatus");
 	}
 	var pub = {
 			getInstance:getInstance,
