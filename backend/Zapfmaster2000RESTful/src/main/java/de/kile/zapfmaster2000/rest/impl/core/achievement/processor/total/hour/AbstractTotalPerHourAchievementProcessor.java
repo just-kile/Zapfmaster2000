@@ -18,7 +18,7 @@ public abstract class AbstractTotalPerHourAchievementProcessor extends
 	@Override
 	public void process(Drawing pDrawing) {
 		User user = pDrawing.getUser();
-		
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.HOUR, -1);
 		Date date = calendar.getTime();
@@ -30,9 +30,9 @@ public abstract class AbstractTotalPerHourAchievementProcessor extends
 		session.update(user);
 		List<?> result = session
 				.createQuery(
-						"SELECT SUM(d.realAmount) FROM Drawing d "
+						"SELECT SUM(d.amount) FROM Drawing d "
 								+ "WHERE d.user = :user AND d.date > :date1")
-				.setEntity(":user", user).setTimestamp("date1", date).list();
+				.setEntity("user", user).setTimestamp("date1", date).list();
 		tx.commit();
 
 		if (!result.isEmpty() && result.get(0) instanceof Double) {

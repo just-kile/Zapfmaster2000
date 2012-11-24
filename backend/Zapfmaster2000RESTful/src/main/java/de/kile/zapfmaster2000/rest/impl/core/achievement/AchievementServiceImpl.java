@@ -31,7 +31,7 @@ public class AchievementServiceImpl implements AchievementService {
 
 	private final List<AchievementServiceListener> listeners = new ArrayList<>();
 
-	private final Map<Account, List<AbstractAchievementProcessor>> mapAccount2Processors = new HashMap<>();
+	private final Map<Long, List<AbstractAchievementProcessor>> mapAccountId2Processors = new HashMap<>();
 
 	private final AchievementProcessorListener achievementProcessorListener = createAchievementProcessorListener();
 
@@ -75,7 +75,7 @@ public class AchievementServiceImpl implements AchievementService {
 		tx.commit();
 
 		for (Account account : result) {
-			mapAccount2Processors.put(account,
+			mapAccountId2Processors.put(account.getId(),
 					new ArrayList<AbstractAchievementProcessor>());
 		}
 
@@ -87,6 +87,8 @@ public class AchievementServiceImpl implements AchievementService {
 							.getProcessor().newInstance();
 					processor.init(account, achievement);
 					processor.addListener(achievementProcessorListener);
+
+					mapAccountId2Processors.get(account.getId()).add(processor);
 				} catch (InstantiationException | IllegalAccessException e) {
 					LOG.error("Could not create achivement processor", e);
 				}
@@ -140,8 +142,8 @@ public class AchievementServiceImpl implements AchievementService {
 	}
 
 	private void processAchievements(Account pAccount, Drawing pDrawing) {
-		List<AbstractAchievementProcessor> processors = mapAccount2Processors
-				.get(pAccount);
+		List<AbstractAchievementProcessor> processors = mapAccountId2Processors
+				.get(pAccount.getId());
 		if (processors != null) {
 			for (AbstractAchievementProcessor processor : processors) {
 				if (processor.canGain(pDrawing.getUser())) {

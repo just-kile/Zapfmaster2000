@@ -17,12 +17,12 @@ public abstract class AbstractGlobalTotalAchievementProcessor extends
 	@Override
 	public void process(Drawing pDrawing) {
 		User user = pDrawing.getUser();
-		
+
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		Query query = session
-				.createQuery("SELECT SUM(d.realAmount) FROM Drawing d");
+				.createQuery("SELECT SUM(d.amount) FROM Drawing d");
 		List<?> result = query.list();
 		tx.commit();
 

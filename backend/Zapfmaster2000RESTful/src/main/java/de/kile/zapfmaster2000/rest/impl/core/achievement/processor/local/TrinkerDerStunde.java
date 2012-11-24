@@ -25,11 +25,10 @@ public class TrinkerDerStunde extends AbstractAchievementProcessor {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		tx = session.beginTransaction();
 
 		List<?> result = session
 				.createQuery(
-						"SELECT d.user.id, SUM(d.realAmount) drawSum FROM Drawing d "
+						"SELECT d.user.id, SUM(d.amount) AS drawSum FROM Drawing d "
 								+ "WHERE d.date > :date GROUP BY d.userId "
 								+ "ORDER BY drawSum DESC")
 				.setTimestamp("date", date).setMaxResults(1).list();

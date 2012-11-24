@@ -24,10 +24,10 @@ public abstract class AbstractUniqueAchievementProcessor extends
 						"SELECT COUNT(*) FROM GainedAchievement a "
 								+ "WHERE a.achievement = :achievement "
 								+ "AND a.user.account = :account")
-				.setEntity("achievenet", getAchievement())
+				.setEntity("achievement", getAchievement())
 				.setEntity("account", getAccount()).list();
 		tx.commit();
-		int count = (Integer) result.get(0);
+		long count = (Long) result.get(0);
 
 		return count == 0;
 	}

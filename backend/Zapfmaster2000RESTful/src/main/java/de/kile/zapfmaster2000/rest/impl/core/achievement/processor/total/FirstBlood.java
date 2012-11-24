@@ -27,7 +27,7 @@ public class FirstBlood extends AbstractAchievementProcessor {
 				.setEntity("keg", pDrawing.getKeg()).list();
 		tx.commit();
 		
-		int count = (Integer) result.get(0);
+		long count = (Long) result.get(0);
 		if (count == 1) {
 			gain(user);
 		}

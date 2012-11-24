@@ -20,15 +20,15 @@ public class BoxServiceImpl implements BoxService {
 
 	private List<BoxServiceListener> boxServiceListeners = new ArrayList<>();
 
-	private Map<String, DrawService> mapBox2DrawManager = new HashMap<>();
+	private Map<String, DrawService> mapBox2DrawService = new HashMap<>();
 
 	@Override
 	public DrawService getDrawService(String pBoxPassphrase)
 			throws IllegalArgumentException {
 
 		// return cached draw manager if possible
-		if (mapBox2DrawManager.containsKey(pBoxPassphrase)) {
-			return mapBox2DrawManager.get(pBoxPassphrase);
+		if (mapBox2DrawService.containsKey(pBoxPassphrase)) {
+			return mapBox2DrawService.get(pBoxPassphrase);
 		}
 
 		// query database for box manager otherwise
@@ -36,6 +36,7 @@ public class BoxServiceImpl implements BoxService {
 				.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
+			@SuppressWarnings("unchecked")
 			List<Box> box = session
 					.createQuery("FROM Box b WHERE b.passphrase = :passphrase")
 					.setString("passphrase", pBoxPassphrase).list();
@@ -43,9 +44,10 @@ public class BoxServiceImpl implements BoxService {
 				throw new IllegalArgumentException("Box with passphrase \""
 						+ pBoxPassphrase + "\" does not exist");
 			}
-			DrawService drawManager = new DrawServiceImpl(box.get(0));
-			mapBox2DrawManager.put(pBoxPassphrase, drawManager);
-			return drawManager;
+			DrawService drawService = new DrawServiceImpl(box.get(0));
+			drawService.addListener(createDrawServiceListener(drawService));
+			mapBox2DrawService.put(pBoxPassphrase, drawService);
+			return drawService;
 		} finally {
 			session.getTransaction().commit();
 			session.close();

@@ -33,7 +33,6 @@ public abstract class AbstractAlcoholLevelAchievementProcessor extends
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		tx = session.beginTransaction();
 		session.update(user);
 
 		for (int i = 0; i < NUM_HOURS; ++i) {

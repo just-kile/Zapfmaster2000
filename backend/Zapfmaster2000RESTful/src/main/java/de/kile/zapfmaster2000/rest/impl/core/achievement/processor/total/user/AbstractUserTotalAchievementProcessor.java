@@ -23,7 +23,7 @@ public abstract class AbstractUserTotalAchievementProcessor extends
 		session.update(user);
 		List<?> result = session
 				.createQuery(
-						"SELECT SUM(d.amount) DROM Drawing d where d.user = :user")
+						"SELECT SUM(d.amount) FROM Drawing d where d.user = :user")
 				.setEntity("user", user).list();
 		tx.commit();
 
