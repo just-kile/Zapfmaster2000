@@ -40,7 +40,7 @@ public class CoreMockery {
 	
 	public void mockAuthService(AuthService pAuthService) {
 		originalAuthService = getCore().getAuthService();
-		getCore().setAuthService(originalAuthService);
+		getCore().setAuthService(pAuthService);
 	}
 
 	@After

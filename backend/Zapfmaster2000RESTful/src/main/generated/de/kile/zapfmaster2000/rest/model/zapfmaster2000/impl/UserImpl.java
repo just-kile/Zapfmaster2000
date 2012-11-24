@@ -2,6 +2,7 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
@@ -45,6 +46,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getDrawings <em>Drawings</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getChallengeParticipations <em>Challenge Participations</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getAccount <em>Account</em>}</li>
  * </ul>
  * </p>
  *
@@ -240,6 +242,16 @@ public class UserImpl extends EObjectImpl implements User {
 	 * @ordered
 	 */
 	protected UserType type = TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAccount() <em>Account</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAccount()
+	 * @generated
+	 * @ordered
+	 */
+	protected Account account;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -469,6 +481,66 @@ public class UserImpl extends EObjectImpl implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Account getAccount() {
+		if (account != null && account.eIsProxy()) {
+			InternalEObject oldAccount = (InternalEObject)account;
+			account = (Account)eResolveProxy(oldAccount);
+			if (account != oldAccount) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.USER__ACCOUNT, oldAccount, account));
+			}
+		}
+		return account;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Account basicGetAccount() {
+		return account;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAccount(Account newAccount, NotificationChain msgs) {
+		Account oldAccount = account;
+		account = newAccount;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.USER__ACCOUNT, oldAccount, newAccount);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAccount(Account newAccount) {
+		if (newAccount != account) {
+			NotificationChain msgs = null;
+			if (account != null)
+				msgs = ((InternalEObject)account).eInverseRemove(this, Zapfmaster2000Package.ACCOUNT__USERS, Account.class, msgs);
+			if (newAccount != null)
+				msgs = ((InternalEObject)newAccount).eInverseAdd(this, Zapfmaster2000Package.ACCOUNT__USERS, Account.class, msgs);
+			msgs = basicSetAccount(newAccount, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.USER__ACCOUNT, newAccount, newAccount));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -479,6 +551,10 @@ public class UserImpl extends EObjectImpl implements User {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDrawings()).basicAdd(otherEnd, msgs);
 			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChallengeParticipations()).basicAdd(otherEnd, msgs);
+			case Zapfmaster2000Package.USER__ACCOUNT:
+				if (account != null)
+					msgs = ((InternalEObject)account).eInverseRemove(this, Zapfmaster2000Package.ACCOUNT__USERS, Account.class, msgs);
+				return basicSetAccount((Account)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -497,6 +573,8 @@ public class UserImpl extends EObjectImpl implements User {
 				return ((InternalEList<?>)getDrawings()).basicRemove(otherEnd, msgs);
 			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
 				return ((InternalEList<?>)getChallengeParticipations()).basicRemove(otherEnd, msgs);
+			case Zapfmaster2000Package.USER__ACCOUNT:
+				return basicSetAccount(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -531,6 +609,9 @@ public class UserImpl extends EObjectImpl implements User {
 				return getChallengeParticipations();
 			case Zapfmaster2000Package.USER__TYPE:
 				return getType();
+			case Zapfmaster2000Package.USER__ACCOUNT:
+				if (resolve) return getAccount();
+				return basicGetAccount();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -580,6 +661,9 @@ public class UserImpl extends EObjectImpl implements User {
 			case Zapfmaster2000Package.USER__TYPE:
 				setType((UserType)newValue);
 				return;
+			case Zapfmaster2000Package.USER__ACCOUNT:
+				setAccount((Account)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -625,6 +709,9 @@ public class UserImpl extends EObjectImpl implements User {
 			case Zapfmaster2000Package.USER__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
+			case Zapfmaster2000Package.USER__ACCOUNT:
+				setAccount((Account)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -659,6 +746,8 @@ public class UserImpl extends EObjectImpl implements User {
 				return challengeParticipations != null && !challengeParticipations.isEmpty();
 			case Zapfmaster2000Package.USER__TYPE:
 				return type != TYPE_EDEFAULT;
+			case Zapfmaster2000Package.USER__ACCOUNT:
+				return account != null;
 		}
 		return super.eIsSet(featureID);
 	}
