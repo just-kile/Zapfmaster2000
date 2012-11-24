@@ -21,6 +21,9 @@ import de.kile.zapfmaster2000.rest.AbstractMockingTest;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
@@ -32,15 +35,30 @@ public class TestRankingsResource extends AbstractMockingTest {
 	@Before
 	public void setupData() {
 		account = Zapfmaster2000Factory.eINSTANCE.createAccount();
+		Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
+		Keg keg = Zapfmaster2000Factory.eINSTANCE.createKeg();
+		box.setAccount(account);
+		keg.setBox(box);
+
 		User user1 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user1.setName("Horst");
 
 		User user2 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user1.setName("Ingrid");
 
+		Drawing drawing1 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
+		drawing1.setUser(user1);
+		drawing1.setAmount(3.14);
+		
+		Drawing drawing2 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
+		drawing2.setUser(user2);
+		drawing2.setAmount(2.71);
+		
+		
+		
 		account.getUsers().add(user1);
 		account.getUsers().add(user2);
-
+		
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
