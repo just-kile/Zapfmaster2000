@@ -4,6 +4,7 @@ import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
+import de.kile.zapfmaster2000.rest.core.news.NewsService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.Zapfmaster2000CoreImpl;
 
@@ -35,27 +36,33 @@ public interface Zapfmaster2000Core {
 	 * @return the box service, never <code>null</code>.
 	 */
 	public BoxService getBoxService();
-	
-	
+
 	/**
 	 * Returns the configuration service.
 	 * 
 	 * @return the configuration service, never <code>null</code>.
 	 */
 	public ConfigurationService getConfigurationService();
-	
+
 	/**
 	 * Returns the auth service.
 	 * 
 	 * @return the auth service, never <code>null</code>.
 	 */
 	public AuthService getAuthService();
-	
+
 	/**
 	 * Returns the achievement service.
 	 * 
-	 * @return the achievement service,never <code>null</code>.
+	 * @return the achievement service, never <code>null</code>.
 	 */
 	public AchievementService getAchievementService();
+
+	/**
+	 * Returns the news service.
+	 * 
+	 * @return the news service, never <code>null</code>.
+	 */
+	public NewsService getNewsService();
 
 }

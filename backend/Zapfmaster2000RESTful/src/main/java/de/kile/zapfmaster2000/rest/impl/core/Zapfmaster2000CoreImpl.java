@@ -5,11 +5,13 @@ import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
+import de.kile.zapfmaster2000.rest.core.news.NewsService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.AchievementServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.auth.AuthServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.box.BoxServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.configuration.FileConfiguratioServiceImpl;
+import de.kile.zapfmaster2000.rest.impl.core.news.NewsServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.transaction.TransactionServiceImpl;
 
 public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
@@ -28,16 +30,21 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 
 	/** the auth service */
 	private AuthService authService;
-	
+
 	/** the achievement service */
 	private AchievementService achievementService;
+
+	/** the news service */
+	private NewsService newsService;
 
 	private Zapfmaster2000CoreImpl() {
 		transactionService = new TransactionServiceImpl();
 		configurationService = new FileConfiguratioServiceImpl();
 		boxService = new BoxServiceImpl();
 		authService = new AuthServiceImpl();
-		achievementService = new AchievementServiceImpl(boxService, transactionService);
+		achievementService = new AchievementServiceImpl(boxService,
+				transactionService);
+		newsService = new NewsServiceImpl(boxService);
 	}
 
 	/**
@@ -76,6 +83,11 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	@Override
 	public AchievementService getAchievementService() {
 		return achievementService;
+	}
+
+	@Override
+	public NewsService getNewsService() {
+		return newsService;
 	}
 
 	/**
@@ -117,15 +129,25 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	void setAuthService(AuthService pAuthService) {
 		authService = pAuthService;
 	}
-	
+
 	/**
 	 * Sets the achievement service. Use only for mocking in unit tests!
 	 * 
-	 * @param setAchievementService
+	 * @param pAchievementService
 	 *            the service to set
 	 */
 	void setAchievementService(AchievementService pAchievementService) {
 		achievementService = pAchievementService;
+	}
+
+	/**
+	 * Sets the news service. Use only for mocking in unit tests!
+	 * 
+	 * @param pNewsService
+	 *            the service to set
+	 */
+	void setNewsService(NewsService pNewsService) {
+		newsService = pNewsService;
 	}
 
 }
