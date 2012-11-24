@@ -14,11 +14,11 @@ import de.kile.zapfmaster2000.rest.api.box.LoginRequest;
 
 public class MockClient {
 
-	private static final String URL = "http://localhost:8080/Zapfmaster2000RESTful/";
+	private static final String URL = "http://localhost:8080/de.kile.zapfmaster2000.rest/rest/";
 
 	private static final int UPDATE_RATE = 1000;
 
-	private String boxPassphrase = "";
+	private String boxPassphrase = "box-1";
 
 	public static void main(String[] pArgs) throws IOException {
 		System.out.println("Zapfmaster 2000 Mock Client");
@@ -47,7 +47,7 @@ public class MockClient {
 					break;
 				case "login":
 					assertParameterCount(segments, 1);
-					performLogin(Long.parseLong(segments[0]));
+					performLogin(Long.parseLong(segments[1]));
 					break;
 				case "draw":
 					assertParameterCount(segments, 2);
@@ -90,13 +90,15 @@ public class MockClient {
 			ClientResponse<?> response = request.body(
 					MediaType.APPLICATION_JSON, drawRequest).post();
 			System.out.println("Response: " + response.getStatus());
+			
+			Thread.sleep(UPDATE_RATE);
 		}
 	}
 
 	private void assertParameterCount(String[] pCommand, int pExpectedCount) {
-		if (pCommand.length + 1 != pExpectedCount) {
+		if ((pCommand.length - 1) != pExpectedCount) {
 			throw new IllegalArgumentException("Wrong parmaeter count: "
-					+ pExpectedCount + "parameter expected.");
+					+ pExpectedCount + " parameter expected.");
 		}
 	}
 }

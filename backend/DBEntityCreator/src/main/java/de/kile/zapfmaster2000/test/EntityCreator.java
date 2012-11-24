@@ -1,10 +1,13 @@
 package de.kile.zapfmaster2000.test;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
@@ -20,6 +23,12 @@ public class EntityCreator {
 		box.setVersion("1.0");
 		box.setPassphrase("box-1");
 		box.setAccount(account);
+		
+		Keg keg = Zapfmaster2000Factory.eINSTANCE.createKeg();
+		keg.setBox(box);
+		keg.setBrand("keg-brand-1");
+		keg.setStartDate(new Date());
+		keg.setSize(50);
 		
 		User user1 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user1.setName("user-1");
@@ -54,9 +63,11 @@ public class EntityCreator {
 		
 		session.save(account);
 		session.save(box);
+		session.save(keg);
 		session.save(user1);
 		session.save(user2);
 		session.save(user3);
+		
 		
 		session.getTransaction().commit();
 		
