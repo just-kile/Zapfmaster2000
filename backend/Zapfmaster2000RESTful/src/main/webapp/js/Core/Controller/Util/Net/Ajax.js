@@ -122,7 +122,7 @@ ZMO.Util.Net.Ajax = (function($){
 			url:ZMO.modules.Constants.push.NEWS,
 			timeout:100000, 
 			success:function(data){
-				if(callback)callb(data);
+				if(callback)callback(data);
 				connectToChannel(callback);
 			},
 			error:function(){
