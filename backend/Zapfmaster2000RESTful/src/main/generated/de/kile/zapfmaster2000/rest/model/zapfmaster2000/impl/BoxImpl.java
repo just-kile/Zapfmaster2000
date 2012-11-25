@@ -34,8 +34,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getAccount <em>Account</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getKegs <em>Kegs</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getPassphrase <em>Passphrase</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getKegs <em>Kegs</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getLocation <em>Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,16 +84,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 	protected String version = VERSION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getKegs() <em>Kegs</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getKegs()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Keg> kegs;
-
-	/**
 	 * The default value of the '{@link #getPassphrase() <em>Passphrase</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,6 +102,36 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @ordered
 	 */
 	protected String passphrase = PASSPHRASE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getKegs() <em>Kegs</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKegs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Keg> kegs;
+
+	/**
+	 * The default value of the '{@link #getLocation() <em>Location</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LOCATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String location = LOCATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -231,6 +252,27 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getLocation() {
+		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocation(String newLocation) {
+		String oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__LOCATION, oldLocation, location));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getPassphrase() {
 		return passphrase;
 	}
@@ -310,10 +352,12 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return getVersion();
 			case Zapfmaster2000Package.BOX__ACCOUNT:
 				return getAccount();
-			case Zapfmaster2000Package.BOX__KEGS:
-				return getKegs();
 			case Zapfmaster2000Package.BOX__PASSPHRASE:
 				return getPassphrase();
+			case Zapfmaster2000Package.BOX__KEGS:
+				return getKegs();
+			case Zapfmaster2000Package.BOX__LOCATION:
+				return getLocation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -336,12 +380,15 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case Zapfmaster2000Package.BOX__ACCOUNT:
 				setAccount((Account)newValue);
 				return;
+			case Zapfmaster2000Package.BOX__PASSPHRASE:
+				setPassphrase((String)newValue);
+				return;
 			case Zapfmaster2000Package.BOX__KEGS:
 				getKegs().clear();
 				getKegs().addAll((Collection<? extends Keg>)newValue);
 				return;
-			case Zapfmaster2000Package.BOX__PASSPHRASE:
-				setPassphrase((String)newValue);
+			case Zapfmaster2000Package.BOX__LOCATION:
+				setLocation((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -364,11 +411,14 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case Zapfmaster2000Package.BOX__ACCOUNT:
 				setAccount((Account)null);
 				return;
+			case Zapfmaster2000Package.BOX__PASSPHRASE:
+				setPassphrase(PASSPHRASE_EDEFAULT);
+				return;
 			case Zapfmaster2000Package.BOX__KEGS:
 				getKegs().clear();
 				return;
-			case Zapfmaster2000Package.BOX__PASSPHRASE:
-				setPassphrase(PASSPHRASE_EDEFAULT);
+			case Zapfmaster2000Package.BOX__LOCATION:
+				setLocation(LOCATION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -388,10 +438,12 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 			case Zapfmaster2000Package.BOX__ACCOUNT:
 				return getAccount() != null;
-			case Zapfmaster2000Package.BOX__KEGS:
-				return kegs != null && !kegs.isEmpty();
 			case Zapfmaster2000Package.BOX__PASSPHRASE:
 				return PASSPHRASE_EDEFAULT == null ? passphrase != null : !PASSPHRASE_EDEFAULT.equals(passphrase);
+			case Zapfmaster2000Package.BOX__KEGS:
+				return kegs != null && !kegs.isEmpty();
+			case Zapfmaster2000Package.BOX__LOCATION:
+				return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -412,6 +464,8 @@ public class BoxImpl extends EObjectImpl implements Box {
 		result.append(version);
 		result.append(", passphrase: ");
 		result.append(passphrase);
+		result.append(", location: ");
+		result.append(location);
 		result.append(')');
 		return result.toString();
 	}

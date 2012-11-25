@@ -322,7 +322,16 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * @generated
 	 */
 	public EReference getBox_Kegs() {
-		return (EReference)boxEClass.getEStructuralFeatures().get(3);
+		return (EReference)boxEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBox_Location() {
+		return (EAttribute)boxEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -331,7 +340,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * @generated
 	 */
 	public EAttribute getBox_Passphrase() {
-		return (EAttribute)boxEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)boxEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1021,8 +1030,9 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(boxEClass, BOX__ID);
 		createEAttribute(boxEClass, BOX__VERSION);
 		createEReference(boxEClass, BOX__ACCOUNT);
-		createEReference(boxEClass, BOX__KEGS);
 		createEAttribute(boxEClass, BOX__PASSPHRASE);
+		createEReference(boxEClass, BOX__KEGS);
+		createEAttribute(boxEClass, BOX__LOCATION);
 
 		accountEClass = createEClass(ACCOUNT);
 		createEAttribute(accountEClass, ACCOUNT__ID);
@@ -1156,8 +1166,9 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getBox_Id(), ecorePackage.getELong(), "id", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBox_Version(), ecorePackage.getEString(), "version", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBox_Account(), this.getAccount(), this.getAccount_Boxes(), "account", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBox_Kegs(), this.getKeg(), this.getKeg_Box(), "kegs", null, 0, -1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBox_Passphrase(), ecorePackage.getEString(), "passphrase", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBox_Kegs(), this.getKeg(), this.getKeg_Box(), "kegs", null, 0, -1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBox_Location(), ecorePackage.getEString(), "location", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accountEClass, Account.class, "Account", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAccount_Id(), ecorePackage.getELong(), "id", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

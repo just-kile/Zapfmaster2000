@@ -158,22 +158,31 @@ public interface Zapfmaster2000Package extends EPackage {
 	int BOX__ACCOUNT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Kegs</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__KEGS = 3;
-
-	/**
 	 * The feature id for the '<em><b>Passphrase</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__PASSPHRASE = 4;
+	int BOX__PASSPHRASE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Kegs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__KEGS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__LOCATION = 5;
 
 	/**
 	 * The number of structural features of the '<em>Box</em>' class.
@@ -182,7 +191,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOX_FEATURE_COUNT = 5;
+	int BOX_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.
@@ -1167,6 +1176,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EReference getBox_Kegs();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getLocation <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getLocation()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_Location();
+
+	/**
 	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2066,6 +2086,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EReference BOX__KEGS = eINSTANCE.getBox_Kegs();
+
+		/**
+		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__LOCATION = eINSTANCE.getBox_Location();
 
 		/**
 		 * The meta object literal for the '<em><b>Passphrase</b></em>' attribute feature.

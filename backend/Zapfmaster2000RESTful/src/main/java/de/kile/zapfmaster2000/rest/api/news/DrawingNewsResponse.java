@@ -12,6 +12,8 @@ public class DrawingNewsResponse extends AbstractNewsResponse {
 
 	private String brand;
 
+	private String location;
+
 	public DrawingNewsResponse() {
 		setType(Type.DRAWING);
 	}
@@ -54,6 +56,14 @@ public class DrawingNewsResponse extends AbstractNewsResponse {
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 }
