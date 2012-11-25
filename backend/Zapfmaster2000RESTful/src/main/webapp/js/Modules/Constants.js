@@ -45,7 +45,7 @@ ZMO.modules.Constants = {
 		},
 		push:{
 			NEWS:"rest/push/news",
-			RFID:"rest/push/rfid"
+			RFID:"rest/push/login"
 		}
 
 }
