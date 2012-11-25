@@ -49,7 +49,8 @@ public class NewsResource {
 					.createQuery(
 							"SELECT n FROM News n WHERE n.account.id = :accountId"
 									+ " ORDER BY n.date DESC")
-					.setLong("accountId", account.getId()).list();
+					.setLong("accountId", account.getId())
+					.setMaxResults(pLength).setFirstResult(pStart).list();
 			tx.commit();
 
 			// adapt news (to ResponseBean)

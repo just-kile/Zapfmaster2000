@@ -138,6 +138,10 @@ public class AchievementServiceImpl implements AchievementService {
 			@Override
 			public void onDrawing(Box pBox, User pUser, double pAmount) {
 			}
+
+			@Override
+			public void onLogout(Box pBox, User pUser) {
+			}
 		};
 	}
 

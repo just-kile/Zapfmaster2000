@@ -206,6 +206,12 @@ public class DrawServiceImpl implements DrawService {
 			listener.onEndDrawing(pDrawing);
 		}
 	}
+	
+	private void notifyLogout(User pUser) {
+		for (DrawServiceListener listener : listeners) {
+			listener.onLogout(pUser);
+		}
+	}
 
 	private void scheduleAutoLogout() {
 		if (timer != null) {
@@ -319,6 +325,10 @@ public class DrawServiceImpl implements DrawService {
 			notifyEndDrawing(drawing);
 		}
 
+		if (currentUser != null) {
+			notifyLogout(currentUser);	
+		}
+		
 		// reset values
 		totalTicks = 0;
 		currentUser = null;
