@@ -124,12 +124,12 @@ ZMO.Util.Net.Ajax = (function($){
 			success:function(data){
 				if(callback && data!="")callback(data);
 				ZMO.log("New Request")
-				connectToChannel(callback);
+				connectToChannel(channel,callback);
 			},
 			error:function(){
 				ZMO.log("Error: reconnect in 1000ms")
 				setTimeout(function(){
-					connectToChannel(callback);
+					connectToChannel(channel,callback);
 				},1000);
 			}
 		});
