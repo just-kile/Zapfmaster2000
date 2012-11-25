@@ -16,7 +16,7 @@ public class MockClient {
 
 	private static final String URL = "http://localhost:8080/Zapfmaster2000RESTful/rest/";
 
-	private static final int UPDATE_RATE = 1000;
+	private static final int UPDATE_RATE = 250;
 
 	private String boxPassphrase = "box-1";
 
