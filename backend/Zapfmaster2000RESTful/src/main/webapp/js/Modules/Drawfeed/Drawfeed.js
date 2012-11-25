@@ -61,7 +61,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 					 break;
 			}
 			if(typeof top!="undefined" && top ==true){
-				if(val.kind!= "refresh"){
+				if(val.refreshType!= "REFRESH"){
 					cont.prepend(news);
 					lastContainer = news;
 				}else{
@@ -176,7 +176,8 @@ ZMO.modules.drawfeed = (function($,Ajax){
 
 	var pub = {
 			getInstance:getInstance,
-			init:init
+			init:init,
+			updateNewslist:updateNewslist
 	}
 	return pub;
 }(jQuery,ZMO.ajax))
