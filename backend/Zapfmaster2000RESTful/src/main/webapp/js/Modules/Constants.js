@@ -41,6 +41,7 @@ ZMO.modules.Constants = {
 			FRONTPAGESTATS:"/tmp/stats_fp.json",
 			//NEWSLIST:"tmp/news.json"
 			NEWSLIST:"rest/news",
+			MEMBERS:"rest/members"
 			//NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
 		push:{
