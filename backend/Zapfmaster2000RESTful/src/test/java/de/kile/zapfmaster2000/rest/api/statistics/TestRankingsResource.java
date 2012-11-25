@@ -45,6 +45,7 @@ public class TestRankingsResource extends AbstractMockingTest {
 		//number2 in ranking
 		User user1 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user1.setName("Horst");
+		user1.setImagePath("/imagePath/image.jpg");
 
 		User user2 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user2.setName("Ingrid");
@@ -141,6 +142,8 @@ public class TestRankingsResource extends AbstractMockingTest {
 		
 		UserAmountResponse uWinFromTo = (UserAmountResponse) rawUARFromTo[0];
 		UserAmountResponse uWinFrom = (UserAmountResponse) rawUARFrom[0];
+		
+		assertEquals("/imagePath/image.jpg", user2.getImage());
 		
 		assertEquals("Waldemar", user1.getName());
 		assertEquals("Horst", user2.getName());
