@@ -1,7 +1,6 @@
 package de.kile.zapfmaster2000.rest.api.news;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +20,7 @@ import org.hibernate.Transaction;
 import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse.Type;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
@@ -67,20 +67,21 @@ public class NewsResource {
 
 	private AbstractNewsResponse adapt(News pNews) {
 		AbstractNewsResponse newsResponse = null;
+
 		switch (pNews.eClass().getClassifierID()) {
 		case Zapfmaster2000Package.DRAWING_NEWS:
 			DrawingNews drawingNews = (DrawingNews) pNews;
 			DrawingNewsResponse drawingResp = new DrawingNewsResponse();
+			Drawing drawing = drawingNews.getDrawing();
 
 			drawingResp.setType(Type.DRAWING);
-			drawingResp.setAmount(drawingNews.getDrawing().getAmount());
-			drawingResp.setKegId(drawingNews.getDrawing().getKeg().getId());
-			drawingResp.setBrand(drawingNews.getDrawing().getKeg().getBrand());
-			drawingResp.setImage(drawingNews.getDrawing().getUser()
-					.getImagePath());
-			drawingResp.setUserId(drawingNews.getDrawing().getUser().getId());
-			drawingResp.setUserName(drawingNews.getDrawing().getUser()
-					.getName());
+			drawingResp.setAmount(drawing.getAmount());
+			drawingResp.setKegId(drawing.getKeg().getId());
+			drawingResp.setBrand(drawing.getKeg().getBrand());
+			drawingResp.setLocation(drawing.getKeg().getBox().getLocation());
+			drawingResp.setImage(drawing.getUser().getImagePath());
+			drawingResp.setUserId(drawing.getUser().getId());
+			drawingResp.setUserName(drawing.getUser().getName());
 
 			newsResponse = drawingResp;
 			break;
