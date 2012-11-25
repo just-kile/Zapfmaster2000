@@ -6,6 +6,8 @@ public class UserAmountResponse {
 	
 	private long id;
 	
+	private String image;
+	
 	private double amount;
 
 	public String getName() {
@@ -30,6 +32,14 @@ public class UserAmountResponse {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	
