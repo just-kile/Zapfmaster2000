@@ -111,6 +111,7 @@ public class RankingsResource {
 				userAmountResponse.setName((String) object[1]);
 				userAmountResponse.setId((Long) object[0]);
 				userAmountResponse.setAmount((Double) object[2]);
+				userAmountResponse.setImage((String) object[3]);
 				resp.add(userAmountResponse);
 			}
 
