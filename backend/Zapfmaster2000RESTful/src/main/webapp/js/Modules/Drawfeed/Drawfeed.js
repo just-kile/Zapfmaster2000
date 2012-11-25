@@ -131,24 +131,30 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		};
 	
 	var onMessageReceive =function(data,refresh){
-		if(refresh)data.kind="refresh";
-		fillContainer(container,data,true);
+		if(ZMO.exists(data)){
+			if(refresh|| data.refresh=="true")data.kind="refresh";
+			fillContainer(container,data,true);
+		}else{
+			ZMO.log("Warning: Drawfeed data empty!");
+		}
 	}
 	
 	 var fillInitialData = function(){
 
 		 updateNewslist(0,10);
-		 Ajax.connectToChannel("news",onMessageReceive);
+		 Ajax.connectToChannel(onMessageReceive);
 		 //Ajax.connectToChannel("rfid",onRfidLogin)
 		 //DUMMY
 		 Ajax.rfidLogin(onRfidLogin);
 	 };
 	 
-	 var onRfidLogin = function(name,logout){ 
-		 if(logout){
+	 var onRfidLogin = function(data){ 
+		 var rfidModel = ZMO.RfidModel(data)
+		 if(rfidModel.type == "LOGOUT"){
 			 rfid.text("");
 		 }else{
-			 rfid.text("Hallo "+name+". Du kannst jetzt zapfen!");
+			
+			 rfid.text("Hallo "+rfidModel.userName+". Du kannst jetzt zapfen!");
 		 }
 	 };
 	 

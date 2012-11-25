@@ -101,72 +101,53 @@ ZMO.Util.Net.Ajax = (function($){
 	var resetQueue = function(){
 		aspirantModules = {};
 	};
-	var dummyCallback;
-	var connectToChannel = function(channel,callback){
-		//DUMMY
-//		var tmp = {
-//				"userid" : "10",
-//				"amount" : "0.05",
-//				"date" : "2012-09-01 03:40:45",
-//				"duration" : "0",
-//				"name" : "PUSHEXAMPLE",
-//				"image" : "images\/avatars\/43985828483840.jpg",
-//				"keg" : "2",
-//				"brand" : "Warsteiner",
-//				"type" : "DRAWING"
-//			};
-		dummyCallback = callback;
-//		if(callback)callback(tmp);
-		$.ajax({
+	var newsPush=null,rfidPush=null;
+	var connectToChannel = function(callback){
+		newsPush = $.ajax({
 			type:"GET",
 			url:ZMO.modules.Constants.push.NEWS,
 			timeout:10000000, 
 			success:function(data){
 				if(callback && data!="")callback(data);
-				ZMO.log("New Request")
-				connectToChannel(channel,callback);
+				ZMO.log("New Request to "+ZMO.modules.Constants.push.NEWS);
+				connectToChannel(callback);
 			},
 			error:function(){
-				ZMO.log("Error: reconnect in 1000ms")
-				setTimeout(function(){
-					connectToChannel(channel,callback);
-				},1000);
+				ZMO.log("Error: reconnect ...");
+				//setTimeout(function(){
+					connectToChannel(callback);
+				//},1000);
 			}
 		});
 		
 	};
-	var rfidDummyCallback;
-	var rfidLogin = function(callb){
-		//if(callb)callb();
-//		$.ajax({
-//			type:"GET",
-//			url:ZMO.modules.Constants.push.RFID,
-//			timeout:100000, 
-//			success:callb,
-//			error:function(){
-//				setTimeout(function(){
-//					rfidLogin(callb);
-//				},1000);
-//			}
-//		});
-		rfidDummyCallback = callb;
+	var rfidLogin = function(callback){
+		$.ajax({
+			type:"GET",
+			url:ZMO.modules.Constants.push.RFID,
+			timeout:10000000, 
+			success:function(data){
+				if(callback && data!="")callback(data);
+				ZMO.log("New Request to "+ZMO.modules.Constants.push.RFID);
+				rfidLogin(callback);
+			},
+			error:function(){
+				ZMO.log("Error: reconnect ...")
+				//setTimeout(function(){
+					rfidLogin(callback);
+				//},1000);
+			}
+		});
 	};
-	var pushDummyData = function(refresh){
-		dummyCallback({
-				"userid" : "10",
-				"amount" : Math.random(),
-				"date" : "2012-09-01 03:40:45",
-				"duration" : "0",
-				"name" : "PUSHEXAMPLE",
-				"image" : "images\/avatars\/43985828483840.jpg",
-				"keg" : "2",
-				"brand" : "Warsteiner",
-				"type" : "DRAWING"
-			},refresh);
+	var abortNewsPush = function(){
+		if(ZMO.exists(newsPush))newsPush.abort();
+		newsPush = null;
 	};
-	var pushRfidDummyData = function(name,logout){
-		rfidDummyCallback(name,logout);
+	var abortRfidPush = function(){
+		if(ZMO.exists(rfidPush))rfidPush.abort();
+		rfidPush = null;
 	};
+	
 	var pub = {
 			getDatas:getDatas,
 			enqueueDatas:enqueueDatas,
@@ -175,10 +156,9 @@ ZMO.Util.Net.Ajax = (function($){
 			resetQueue:resetQueue,
 			connectToChannel:connectToChannel,
 			rfidLogin:rfidLogin,
-			
-			pushDummyData:pushDummyData,
-			pushRfidDummyData:pushRfidDummyData,
-
+			abortNewsPush:abortNewsPush,
+			abortRfidPush:abortRfidPush
+	
 	};
 	return pub;
 	
