@@ -20,6 +20,7 @@ import de.kile.zapfmaster2000.rest.impl.core.news.NewsServiceImpl;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
@@ -75,11 +76,9 @@ public class TestNewsService extends AbstractDatabaseTest {
 		@SuppressWarnings("unchecked")
 		List<News> allNews = session.createQuery("FROM News").list();
 		assertEquals(1, allNews.size());
-
-		News news = allNews.get(0);
-		assertEquals(String.valueOf(drawing.getId()), news.getContents());
-		assertEquals("img/user1", news.getImagePath());
-		assertEquals(box.getId(), box.getId());
+		
+		DrawingNews news = (DrawingNews) allNews.get(0);
+		assertEquals(drawing.getId(), news.getDrawing().getId());
 
 		tx.commit();
 

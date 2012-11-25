@@ -17,6 +17,7 @@ import de.kile.zapfmaster2000.rest.AbstractDatabaseTest;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
 import de.kile.zapfmaster2000.rest.impl.core.box.DrawServiceImpl;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
@@ -51,7 +52,7 @@ public class TestDrawService extends AbstractDatabaseTest {
 	}
 
 	@Before
-	public void createBoxAndKeg() {
+	public void createAccount() {
 		Keg keg1 = Zapfmaster2000Factory.eINSTANCE.createKeg();
 		keg1.setStartDate(new GregorianCalendar(2012, 10, 17).getTime());
 		Keg keg2 = Zapfmaster2000Factory.eINSTANCE.createKeg();
@@ -60,11 +61,14 @@ public class TestDrawService extends AbstractDatabaseTest {
 		box = Zapfmaster2000Factory.eINSTANCE.createBox();
 		box.getKegs().add(keg1);
 		box.getKegs().add(keg2);
+		
+		Account account = Zapfmaster2000Factory.eINSTANCE.createAccount();
+		account.getBoxes().add(box);
 
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		session.save(box);
+		session.save(account);
 		tx.commit();
 	}
 
