@@ -14,14 +14,20 @@ import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
+/**
+ * Ranks users by amount.
+ * Gives out list of {@link UserAmountResponse}.
+ * 
+ * @author PB
+ *
+ */
 @Path("statistics/rankings")
 public class RankingsResource {
 
 	public Response rankUsers(@QueryParam("from") String pFrom,
 			@Context HttpServletRequest pRequest) {
-		
+
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pRequest);
 		if (account != null) {
@@ -29,26 +35,28 @@ public class RankingsResource {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			
+
 			session.update(account);
+
 			@SuppressWarnings("unchecked")
-			List<User> list =  session.createQuery("FROM User u").list(); 
-			//session.createQuery("FROM User u WHERE u.account = :account").setEntity("account", account).list();
-			//session.createQuery("SELECT u.id id, u.name name, SUM(d.amount) FROM User u JOIN Drawing d where d.").list();
+			List<Object[]> list = session
+					.createQuery(
+							"SELECT u.id, u.name, SUM(d.amount) AS amt FROM User u, Drawing d WHERE d.user = u AND u.account = :account GROUP BY u.id ORDER BY amt DESC")
+					.setEntity("account", account).list();
 			tx.commit();
-			
+
 			List<UserAmountResponse> resp = new ArrayList<>();
-			for (User user : list) {
+			for (Object[] object : list) {
 				UserAmountResponse userAmountResponse = new UserAmountResponse();
-				userAmountResponse.setName(user.getName());
-				userAmountResponse.setId(user.getId());
-				userAmountResponse.setAmount(0);
+				userAmountResponse.setName((String) object[1]);
+				userAmountResponse.setId((Long) object[0]);
+				userAmountResponse.setAmount((Double) object[2]);
 				resp.add(userAmountResponse);
 			}
-			
+
 			return Response.ok(resp.toArray()).build();
 		}
-		
+
 		return null;
 	}
 
