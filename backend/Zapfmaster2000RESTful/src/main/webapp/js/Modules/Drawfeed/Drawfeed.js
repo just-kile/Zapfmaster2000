@@ -149,7 +149,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 	 };
 	 
 	 var onRfidLogin = function(data){ 
-		 var rfidModel = ZMO.RfidModel(data)
+		 var rfidModel = new ZMO.RfidModel(data);
 		 if(rfidModel.type == "LOGOUT"){
 			 rfid.text("");
 		 }else{
