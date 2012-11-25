@@ -16,8 +16,6 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewsType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
@@ -40,6 +38,10 @@ public class NewsServiceImpl implements NewsService {
 			@Override
 			public void onEndDrawing(Box pBox, Drawing pDrawing) {
 				postNewsDrawFinished(pBox, pDrawing);
+			}
+
+			@Override
+			public void onLogout(Box pBox, User pUser) {
 			}
 		});
 	}
@@ -70,7 +72,8 @@ public class NewsServiceImpl implements NewsService {
 				.setLong("id", pBox.getId()).list();
 		session.update(pDrawing);
 		if (accounts.size() == 1) {
-			DrawingNews news = Zapfmaster2000Factory.eINSTANCE.createDrawingNews();
+			DrawingNews news = Zapfmaster2000Factory.eINSTANCE
+					.createDrawingNews();
 			news.setAccount(accounts.get(0));
 			news.setDate(new Date());
 			news.setDrawing(pDrawing);

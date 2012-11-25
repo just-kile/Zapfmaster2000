@@ -19,6 +19,13 @@ public interface DrawServiceListener {
 	 *            the user, never <code>null</code>.
 	 */
 	public void onLoginsuccessful(User pUser);
+	
+	/**
+	 * Invoked when a user was logged out.
+	 * 
+	 * @param pUser the user that was logged out.
+	 */
+	public void onLogout(User pUser);
 
 	/**
 	 * Invoked when the user is drawing.
@@ -37,5 +44,5 @@ public interface DrawServiceListener {
 	 *            the drawing that was written to db
 	 */
 	public void onEndDrawing(Drawing pDrawing);
-
+	
 }

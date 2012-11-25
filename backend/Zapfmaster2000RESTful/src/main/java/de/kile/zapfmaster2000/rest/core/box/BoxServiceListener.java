@@ -22,6 +22,16 @@ public interface BoxServiceListener {
 	public void onLoginsuccessful(Box pBox, User pUser);
 
 	/**
+	 * Invoked when a log out occurred.
+	 * 
+	 * @param pBox
+	 *            the box the logout was performed for
+	 * @param pUser
+	 *            the user that logged off
+	 */
+	public void onLogout(Box pBox, User pUser);
+
+	/**
 	 * Invoked when the user is drawing.
 	 * 
 	 * @param pBox
