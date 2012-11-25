@@ -5,6 +5,7 @@ import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
+import de.kile.zapfmaster2000.rest.core.push.PushService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.Zapfmaster2000CoreImpl;
 
@@ -64,5 +65,12 @@ public interface Zapfmaster2000Core {
 	 * @return the news service, never <code>null</code>.
 	 */
 	public NewsService getNewsService();
+	
+	/**
+	 * Returns the push service.
+	 * 
+	 * @return the push service.
+	 */
+	public PushService getPushService();
 
 }

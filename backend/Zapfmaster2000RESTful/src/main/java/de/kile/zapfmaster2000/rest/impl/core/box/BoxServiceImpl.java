@@ -92,6 +92,7 @@ public class BoxServiceImpl implements BoxService {
 				for (BoxServiceListener listener : boxServiceListeners) {
 					listener.onDrawing(box, pUser, pAmount);
 				}
+
 			}
 		};
 	}

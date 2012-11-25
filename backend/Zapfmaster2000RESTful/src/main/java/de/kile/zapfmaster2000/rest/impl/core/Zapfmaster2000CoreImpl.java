@@ -6,12 +6,14 @@ import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
+import de.kile.zapfmaster2000.rest.core.push.PushService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.AchievementServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.auth.AuthServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.box.BoxServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.configuration.FileConfiguratioServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.news.NewsServiceImpl;
+import de.kile.zapfmaster2000.rest.impl.core.push.PushServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.transaction.TransactionServiceImpl;
 
 public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
@@ -37,6 +39,9 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	/** the news service */
 	private NewsService newsService;
 
+	/** the push service */
+	private PushService pushService;
+
 	private Zapfmaster2000CoreImpl() {
 		transactionService = new TransactionServiceImpl();
 		configurationService = new FileConfiguratioServiceImpl();
@@ -45,6 +50,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 		achievementService = new AchievementServiceImpl(boxService,
 				transactionService);
 		newsService = new NewsServiceImpl(boxService);
+		pushService = new PushServiceImpl(boxService);
 	}
 
 	/**
@@ -88,6 +94,11 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	@Override
 	public NewsService getNewsService() {
 		return newsService;
+	}
+
+	@Override
+	public PushService getPushService() {
+		return pushService;
 	}
 
 	/**
@@ -150,4 +161,13 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 		newsService = pNewsService;
 	}
 
+	/**
+	 * Sets the push service. Use only for mocking in unit tests!
+	 * 
+	 * @param pPushService
+	 *            the service to set
+	 */
+	void setPushService(PushService pPushService) {
+		pushService = pPushService;
+	}
 }
