@@ -94,6 +94,13 @@ public class BoxServiceImpl implements BoxService {
 				}
 
 			}
+
+			@Override
+			public void onLogout(User pUser) {
+				for (BoxServiceListener listener : boxServiceListeners) {
+					listener.onLogout(box, pUser);
+				}				
+			}
 		};
 	}
 

@@ -13,6 +13,8 @@ import de.kile.zapfmaster2000.rest.api.news.DrawingNewsResponse;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
 import de.kile.zapfmaster2000.rest.core.push.PushService;
+import de.kile.zapfmaster2000.rest.core.push.UserLoginResponse;
+import de.kile.zapfmaster2000.rest.core.push.UserLoginResponse.Type;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
@@ -20,6 +22,8 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 public class PushServiceImpl implements PushService {
 
 	private final List<AsynchronousResponse> pendingNewsResponses = new ArrayList<>();
+
+	private final List<AsynchronousResponse> pendingLoginResponses = new ArrayList<>();
 
 	public PushServiceImpl(BoxService pBoxService) {
 		pBoxService.addListener(createServiceListener());
@@ -30,11 +34,17 @@ public class PushServiceImpl implements PushService {
 		pendingNewsResponses.add(pResponse);
 	}
 
+	@Override
+	public void addLoginRequest(AsynchronousResponse pResponse) {
+		pendingLoginResponses.add(pResponse);
+	}
+
 	private BoxServiceListener createServiceListener() {
 		return new BoxServiceListener() {
 
 			@Override
 			public void onLoginsuccessful(Box pBox, User pUser) {
+				pushLogin(pUser, Type.LOGIN);
 			}
 
 			@Override
@@ -44,6 +54,11 @@ public class PushServiceImpl implements PushService {
 
 			@Override
 			public void onDrawing(Box pBox, User pUser, double pAmount) {
+			}
+
+			@Override
+			public void onLogout(Box pBox, User pUser) {
+				pushLogin(pUser, Type.LOGOUT);
 			}
 		};
 	}
@@ -60,12 +75,24 @@ public class PushServiceImpl implements PushService {
 		news.setUserName("foo-user");
 
 		for (AsynchronousResponse pendingResponse : pendingNewsResponses) {
-			System.out.println("---> sending ");
 			Response response = Response.ok(news)
 					.type(MediaType.APPLICATION_JSON).build();
 			pendingResponse.setResponse(response);
 		}
 		pendingNewsResponses.clear();
+	}
 
+	private void pushLogin(User pUser, Type pType) {
+		UserLoginResponse loginResp = new UserLoginResponse();
+		loginResp.setType(pType);
+		loginResp.setUserName(pUser.getName());
+		loginResp.setUserId(pUser.getId());
+
+		for (AsynchronousResponse pendingResponse : pendingLoginResponses) {
+			Response response = Response.ok(loginResp)
+					.type(MediaType.APPLICATION_JSON).build();
+			pendingResponse.setResponse(response);
+		}
+		pendingLoginResponses.clear();
 	}
 }

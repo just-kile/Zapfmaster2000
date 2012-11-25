@@ -6,4 +6,6 @@ public interface PushService {
 
 	public void addNewsRequest(AsynchronousResponse pResponse);
 
+	public void addLoginRequest(AsynchronousResponse pResponse);
+	
 }

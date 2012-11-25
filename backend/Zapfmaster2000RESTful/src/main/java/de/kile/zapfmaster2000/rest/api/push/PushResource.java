@@ -19,5 +19,12 @@ public class PushResource {
 	public void getNews(final @Suspend(10000) AsynchronousResponse pResponse) {
 		Zapfmaster2000Core.INSTANCE.getPushService().addNewsRequest(pResponse);
 	}
+	
+	@GET
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void getLogin(final @Suspend(10000) AsynchronousResponse pResponse) {
+		Zapfmaster2000Core.INSTANCE.getPushService().addLoginRequest(pResponse);
+	}
 
 }
