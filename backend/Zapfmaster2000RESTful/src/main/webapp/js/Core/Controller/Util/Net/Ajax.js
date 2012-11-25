@@ -117,11 +117,37 @@ ZMO.Util.Net.Ajax = (function($){
 //			};
 		dummyCallback = callback;
 //		if(callback)callback(tmp);
+		$.ajax({
+			type:"GET",
+			url:c.push.RFID,
+			timeout:100000, 
+			success:function(data){
+				if(callb)callb(data);
+				connectToChannel(callb);
+			},
+			error:function(){
+				ZMO.log("Error: reconnect in 1000ms")
+				setTimeout(function(){
+					connectToChannel(callb);
+				},1000);
+			}
+		});
 		
 	};
 	var rfidDummyCallback;
 	var rfidLogin = function(callb){
 		//if(callb)callb();
+		$.ajax({
+			type:"GET",
+			url:c.push.RFID,
+			timeout:100000, 
+			success:callb,
+			error:function(){
+				setTimeout(function(){
+					rfidLogin(callb);
+				},1000);
+			}
+		});
 		rfidDummyCallback = callb;
 	};
 	var pushDummyData = function(refresh){

@@ -40,7 +40,12 @@ ZMO.modules.Constants = {
 		urls:{
 			FRONTPAGESTATS:"/tmp/stats_fp.json",
 			//NEWSLIST:"tmp/news.json"
-			NEWSLIST:"rest/news"
+			//NEWSLIST:"rest/news",
+			NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
+		},
+		push:{
+			NEWS:"push/news",
+			RFID:"push/rfid"
 		}
 
 }
