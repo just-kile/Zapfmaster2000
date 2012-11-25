@@ -119,16 +119,16 @@ ZMO.Util.Net.Ajax = (function($){
 //		if(callback)callback(tmp);
 		$.ajax({
 			type:"GET",
-			url:c.push.RFID,
+			url:ZMO.modules.Constants.push.NEWS,
 			timeout:100000, 
 			success:function(data){
-				if(callb)callb(data);
-				connectToChannel(callb);
+				if(callback)callb(data);
+				connectToChannel(callback);
 			},
 			error:function(){
 				ZMO.log("Error: reconnect in 1000ms")
 				setTimeout(function(){
-					connectToChannel(callb);
+					connectToChannel(callback);
 				},1000);
 			}
 		});
@@ -137,17 +137,17 @@ ZMO.Util.Net.Ajax = (function($){
 	var rfidDummyCallback;
 	var rfidLogin = function(callb){
 		//if(callb)callb();
-		$.ajax({
-			type:"GET",
-			url:c.push.RFID,
-			timeout:100000, 
-			success:callb,
-			error:function(){
-				setTimeout(function(){
-					rfidLogin(callb);
-				},1000);
-			}
-		});
+//		$.ajax({
+//			type:"GET",
+//			url:ZMO.modules.Constants.push.RFID,
+//			timeout:100000, 
+//			success:callb,
+//			error:function(){
+//				setTimeout(function(){
+//					rfidLogin(callb);
+//				},1000);
+//			}
+//		});
 		rfidDummyCallback = callb;
 	};
 	var pushDummyData = function(refresh){
