@@ -9,16 +9,15 @@ ZMO.DrawfeedModel = function(config){
 	this.keg = config.keg;
 };
 ZMO.NewsModel =function(config){
-	this.name = config.name||config.user||config.user_name;
+	this.name = config.userName;
 	this.amount = Math.round(config.amount*100)/100;
 	this.duration = config.duration;
 	this.date = config.date||(new Date()). toGMTString();
 	this.place = config.place;
 	this.keg =config.keg;
-	this.brand = config.brand||config.BRAND;
-	this.image =config.image||config.IMAGE_PATH||config.user_image;
-	
-	this.userid = config.userid||config.user_id;
+	this.brand = config.brand;
+	this.image =config.image;
+	this.userid = config.userid;
 	this.type = config.type;
 };
 ZMO.AchievementModel = function(config){
