@@ -120,9 +120,10 @@ ZMO.Util.Net.Ajax = (function($){
 		$.ajax({
 			type:"GET",
 			url:ZMO.modules.Constants.push.NEWS,
-			timeout:100000, 
+			timeout:10000000, 
 			success:function(data){
-				if(callback)callback(data);
+				if(callback && data!="")callback(data);
+				ZMO.log("New Request")
 				connectToChannel(callback);
 			},
 			error:function(){
