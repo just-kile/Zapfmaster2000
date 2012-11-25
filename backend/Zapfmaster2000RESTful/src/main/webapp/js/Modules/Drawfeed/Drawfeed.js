@@ -130,9 +130,9 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			});
 		};
 	
-	var onMessageReceive =function(data,refresh){
+	var onMessageReceive =function(data){
 		if(ZMO.exists(data)){
-			if(refresh|| data.refresh=="true")data.kind="refresh";
+			if(data.refreshType=="REFRESH")data.kind="refresh";
 			fillContainer(container,data,true);
 		}else{
 			ZMO.log("Warning: Drawfeed data empty!");
@@ -153,7 +153,6 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		 if(rfidModel.type == "LOGOUT"){
 			 rfid.text("");
 		 }else{
-			
 			 rfid.text("Hallo "+rfidModel.userName+". Du kannst jetzt zapfen!");
 		 }
 	 };
