@@ -16,8 +16,6 @@ public abstract class AbstractUniqueAchievementProcessor extends
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		session.update(getAccount());
-		session.update(getAchievement());
 
 		List<?> result = session
 				.createQuery(

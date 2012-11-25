@@ -61,7 +61,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 					 break;
 			}
 			if(typeof top!="undefined" && top ==true){
-				if(val.kind!= "refresh"){
+				if(val.refreshType!= "REFRESH"){
 					cont.prepend(news);
 					lastContainer = news;
 				}else{
@@ -130,25 +130,30 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			});
 		};
 	
-	var onMessageReceive =function(data,refresh){
-		if(refresh)data.kind="refresh";
-		fillContainer(container,data,true);
+	var onMessageReceive =function(data){
+		if(ZMO.exists(data)){
+			if(data.refreshType=="REFRESH")data.kind="refresh";
+			fillContainer(container,data,true);
+		}else{
+			ZMO.log("Warning: Drawfeed data empty!");
+		}
 	}
 	
 	 var fillInitialData = function(){
 
 		 updateNewslist(0,10);
-		 Ajax.connectToChannel("news",onMessageReceive);
+		 Ajax.connectToChannel(onMessageReceive);
 		 //Ajax.connectToChannel("rfid",onRfidLogin)
 		 //DUMMY
 		 Ajax.rfidLogin(onRfidLogin);
 	 };
 	 
-	 var onRfidLogin = function(name,logout){ 
-		 if(logout){
+	 var onRfidLogin = function(data){ 
+		 var rfidModel = new ZMO.RfidModel(data);
+		 if(rfidModel.type == "LOGOUT"){
 			 rfid.text("");
 		 }else{
-			 rfid.text("Hallo "+name+". Du kannst jetzt zapfen!");
+			 rfid.text("Hallo "+rfidModel.userName+". Du kannst jetzt zapfen!");
 		 }
 	 };
 	 
@@ -171,7 +176,8 @@ ZMO.modules.drawfeed = (function($,Ajax){
 
 	var pub = {
 			getInstance:getInstance,
-			init:init
+			init:init,
+			updateNewslist:updateNewslist
 	}
 	return pub;
 }(jQuery,ZMO.ajax))
