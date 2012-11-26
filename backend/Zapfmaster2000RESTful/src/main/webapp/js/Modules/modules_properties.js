@@ -34,7 +34,7 @@ ZMO.modules_properties ={
 					position:[0,0]
 				}],
 				main:[{
-					moduleId:"frontpagestats",
+					moduleId:"lineChart",
 					ratio:"100%",
 					position:[0,0]
 				}],
