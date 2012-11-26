@@ -8,6 +8,7 @@ ZMO.controller = (function($,document,view,ajax){
 		var url = $.bbq.getState();
 		ajax.resetQueue();
 		ajax.stopPull();
+		ajax.abortPushRequests();
 		var pageLoaded = false;
 		$.each(mP,function(pageId,val){
 			if(ZMO.exists(url[pageId])&&!pageLoaded){
