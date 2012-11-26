@@ -37,6 +37,19 @@ ZMO.modules_properties ={
 					moduleId:"lineChart",
 					ratio:"100%",
 					position:[0,0]
+				},{
+					moduleId:"frontpagestats",
+					ratio:"33%",
+					position:[1,0]
+				},{
+					moduleId:"bestlist",
+					ratio:"33%",
+					position:[1,1]
+				},
+				{
+					moduleId:"achievementBestlist",
+					ratio:"33%",
+					position:[1,2]
 				}],
 				  
 				footer:[]

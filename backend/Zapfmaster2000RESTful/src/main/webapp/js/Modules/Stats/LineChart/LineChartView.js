@@ -32,9 +32,7 @@ ZMO.modules.lineChartView = (function($,ajax){
                     align: 'left',
                     x: 3,
                     y: -3
-                },title: {
-                    text: 'Datum'
-                },
+                }
             },
             yAxis: {
                 title: {
@@ -65,7 +63,7 @@ ZMO.modules.lineChartView = (function($,ajax){
                 name: 'Draw Amount',
                 pointInterval:  3600 * 1000*0.5, //half an hour
                 pointStart: Date.UTC(2013, 0, 01),
-                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6,7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6,7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                data: progressModel.data
             }]
         });
    
@@ -73,7 +71,7 @@ ZMO.modules.lineChartView = (function($,ajax){
 	var updateChart = function(val){
 		var series = chart.series[0];
 		series.addPoint(val, true, true);
-	}
+	};
 	var pub = {
 			updateChart:updateChart,
 			init:init,
