@@ -11,7 +11,8 @@ ZMO.modules.lineChart = (function($,ajax){
 	 */
 	var init = function(){
 		container.text("Hello drinkers worldwide!");
-		
+		ajax.enqueueDatas(mC.urls.FRONTPAGESTATS,onDatasLoaded);
+		ajax.startPull();
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM
