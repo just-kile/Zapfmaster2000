@@ -7,17 +7,23 @@ ZMO.Util.Net.Ajax = (function($){
 	 * Get datas instant
 	 */
 	var getDatas = function(url,callback,datas){
+		if(!ZMO.exists(datas))datas = {};
+		datas["_"] = new Date().getTime();
 		$.ajax({
 			url:url,
 			type:"GET",
 			data:datas,
-			success:function(resp){
+			complete:function(resp){
+			if(resp.status==200){
 				try{
-					callback(resp);
+					var data = $.parseJSON(resp.responseText);
+					callback(data);
 				}catch(e){
 					ZMO.log(e);
 				}
+			}else{
 				
+			}	
 			}
 		});
 	};
@@ -101,6 +107,9 @@ ZMO.Util.Net.Ajax = (function($){
 	var resetQueue = function(){
 		aspirantModules = {};
 	};
+	/*******
+	 * Server Push
+	 *******/
 	var newsPush=null,rfidPush=null;
 	var connectToChannel = function(callback){
 		newsPush = $.ajax({
