@@ -124,8 +124,8 @@ public class TestRankingsResource extends AbstractMockingTest {
 		String pTo = "20120101-130000";
 		
 		Response respFromTo = rankingsResource.bestUserListTimeSpan(pFrom, pTo, null);
-		Response respFrom = rankingsResource.bestUserListTimeSpan(pFrom, "", null);
-		Response respAll = rankingsResource.bestUserListTimeSpan("","",null);
+		Response respFrom = rankingsResource.bestUserListTimeSpan(pFrom, null, null);
+		Response respAll = rankingsResource.bestUserListTimeSpan(null,null,null);
 
 		assertEquals(Status.OK.getStatusCode(), respFromTo.getStatus());
 		assertEquals(Status.OK.getStatusCode(), respFrom.getStatus());
@@ -163,8 +163,8 @@ public class TestRankingsResource extends AbstractMockingTest {
 		String pTo = "20120101-130000";
 		
 		Response respFromTo = rankingsResource.drawCountUserListTimeSpan(pFrom, pTo, null);
-		Response respFrom = rankingsResource.drawCountUserListTimeSpan(pFrom, "", null);
-		Response respAll = rankingsResource.drawCountUserListTimeSpan("","",null);
+		Response respFrom = rankingsResource.drawCountUserListTimeSpan(pFrom, null, null);
+		Response respAll = rankingsResource.drawCountUserListTimeSpan(null,null,null);
 
 		assertEquals(Status.OK.getStatusCode(), respFromTo.getStatus());
 		assertEquals(Status.OK.getStatusCode(), respFrom.getStatus());

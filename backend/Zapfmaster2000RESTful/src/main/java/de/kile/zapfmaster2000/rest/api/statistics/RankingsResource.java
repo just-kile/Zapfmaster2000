@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -50,8 +49,8 @@ public class RankingsResource {
 	@SuppressWarnings("unchecked")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response bestUserListTimeSpan(@QueryParam("from") @DefaultValue("") String pFrom,
-			@QueryParam("to") @DefaultValue("") String pTo, @Context HttpServletRequest pRequest) {
+	public Response bestUserListTimeSpan(@QueryParam("from") String pFrom,
+			@QueryParam("to") String pTo, @Context HttpServletRequest pRequest) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pRequest);
@@ -68,7 +67,7 @@ public class RankingsResource {
 			
 			List<Object[]> list;
 			try {
-			if (pFrom.length() == 0) {//Full list
+			if (pFrom == null) {//Full list
 				list = session
 						.createQuery(
 								"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath" +
@@ -78,7 +77,7 @@ public class RankingsResource {
 						.setEntity("account", account)
 						.list();
 				
-			} else if (pTo.length() == 0){//List until now
+			} else if (pTo == null){//List until now
 				Date dFrom = df.parse(pFrom);
 				list = session
 						.createQuery(
@@ -142,8 +141,8 @@ public class RankingsResource {
 	@SuppressWarnings("unchecked")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response drawCountUserListTimeSpan(@QueryParam("from") @DefaultValue("") String pFrom,
-			@QueryParam("to") @DefaultValue("") String pTo, @Context HttpServletRequest pRequest) {
+	public Response drawCountUserListTimeSpan(@QueryParam("from") String pFrom,
+			@QueryParam("to") String pTo, @Context HttpServletRequest pRequest) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pRequest);
@@ -160,7 +159,7 @@ public class RankingsResource {
 			
 			List<Object[]> list;
 			try {
-			if (pFrom.length() == 0) {//Full list
+			if (pFrom  == null) {//Full list
 				list = session
 						.createQuery(
 								"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath" +
@@ -170,7 +169,7 @@ public class RankingsResource {
 						.setEntity("account", account)
 						.list();
 				
-			} else if (pTo.length() == 0){//List until now
+			} else if (pTo == null){//List until now
 				Date dFrom = df.parse(pFrom);
 				list = session
 						.createQuery(
