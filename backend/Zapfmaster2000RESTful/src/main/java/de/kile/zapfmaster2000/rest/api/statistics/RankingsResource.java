@@ -66,7 +66,8 @@ public class RankingsResource {
 			if (pFrom.length() == 0) {//Full list
 				list = session
 						.createQuery(
-								"SELECT u.id, u.name, SUM(d.amount) AS amt FROM User u, Drawing d " +
+								"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath" +
+								" FROM User u, Drawing d " +
 								" WHERE d.user = u AND u.account = :account AND " +
 								" GROUP BY u.id ORDER BY amt DESC")
 						.setEntity("account", account)
@@ -76,7 +77,8 @@ public class RankingsResource {
 				Date dFrom = df.parse(pFrom);
 				list = session
 						.createQuery(
-								"SELECT u.id, u.name, SUM(d.amount) AS amt FROM User u, Drawing d " +
+								"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath" +
+								" FROM User u, Drawing d " +
 								" WHERE d.user = u AND u.account = :account AND " +
 								" d.date >= :from" +
 								" GROUP BY u.id ORDER BY amt DESC")
@@ -87,7 +89,8 @@ public class RankingsResource {
 				Date dTo = df.parse(pTo);
 				list = session
 						.createQuery(
-								"SELECT u.id, u.name, SUM(d.amount) AS amt FROM User u, Drawing d " +
+								"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath" +
+								" FROM User u, Drawing d " +
 								" WHERE d.user = u AND u.account = :account AND " +
 								" d.date >= :from AND d.date <= :to" +
 								" GROUP BY u.id ORDER BY amt DESC")
@@ -108,6 +111,7 @@ public class RankingsResource {
 				userAmountResponse.setName((String) object[1]);
 				userAmountResponse.setId((Long) object[0]);
 				userAmountResponse.setAmount((Double) object[2]);
+				userAmountResponse.setImage((String) object[3]);
 				resp.add(userAmountResponse);
 			}
 
