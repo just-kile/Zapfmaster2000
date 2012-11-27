@@ -38,17 +38,17 @@ ZMO.modules_properties ={
 					ratio:"100%",
 					position:[0,0]
 				},{
-					moduleId:"frontpagestats",
-					ratio:"33%",
+					moduleId:"kegstatus",
+					ratio:"31%",
 					position:[1,0]
 				},{
 					moduleId:"bestlist",
-					ratio:"33%",
+					ratio:"31%",
 					position:[1,1]
 				},
 				{
 					moduleId:"achievementBestlist",
-					ratio:"33%",
+					ratio:"31%",
 					position:[1,2]
 				}],
 				  
