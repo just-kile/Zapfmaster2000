@@ -485,3 +485,8 @@ ul#topnav li#topnav-5 a:hover {
 	margin-left: 5px;
 	font-weight: bold;
 }
+
+.member-headline {
+	font-size: 1.4em;
+	font-weight: bold;
+}

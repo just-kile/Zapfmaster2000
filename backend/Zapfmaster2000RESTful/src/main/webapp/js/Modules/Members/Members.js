@@ -7,6 +7,7 @@ ZMO.modules.members = (function($,ajax){
 	var mC = ZMO.modules.Constants;
 	var container;
 	var onMembersReceive = function(members){
+		container.append("<div class=\"member-headline\">Members: " + members.length + "</div>");
 		$.each(members,function(ind,val){
 			var m = ich["ZMO-members-template-box"](new ZMO.MemberModel(val));
 			container.append(m);
@@ -16,7 +17,6 @@ ZMO.modules.members = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(){
-		container.text("Hello drinkers worldwide! foo!");
 		ajax.getDatas(mC.urls.MEMBERS,onMembersReceive)
 	}
 	/**
