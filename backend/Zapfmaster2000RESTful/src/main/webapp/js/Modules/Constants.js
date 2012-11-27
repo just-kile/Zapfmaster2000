@@ -47,6 +47,9 @@ ZMO.modules.Constants = {
 		push:{
 			NEWS:"rest/push/news",
 			RFID:"rest/push/login"
+		},
+		member:{
+			MAX_ACHIEVEMENTS:8
 		}
 
 }

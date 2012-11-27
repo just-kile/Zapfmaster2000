@@ -70,7 +70,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			<a>{{username}}</a> erreichte den  öffentlichen  Erfolg <br>
+			<a>{{username}}</a> erreichte den  ï¿½ffentlichen  Erfolg <br>
 			<b>
 				<a>{{name}}</a>
 			</b>
@@ -110,7 +110,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}}</a> beginnt eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}!
+			{{team1}}</a> beginnt eine {{duration}} minï¿½tigen Challenge {{type}} gegen {{team2}}!
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="place.php">{{place}}</a>
@@ -133,7 +133,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}} hatte eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}.<br /> Gewonnen hat: {{winner}}
+			{{team1}} hatte eine {{duration}} minï¿½tigen Challenge {{type}} gegen {{team2}}.<br /> Gewonnen hat: {{winner}}
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="place.php">{{place}}</a>
@@ -155,7 +155,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}} hat eine {{duration}} minütige Challenge {{type}} gegen {{team2}} abgelehnt mit der Begründung <br /> &quot;{{reason}}&quot;
+			{{team1}} hat eine {{duration}} minï¿½tige Challenge {{type}} gegen {{team2}} abgelehnt mit der Begrï¿½ndung <br /> &quot;{{reason}}&quot;
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="place.php">Kackegal, hier wird g'trunken!</a>
@@ -165,6 +165,44 @@
 		<abbr class="timeago" title="{{date}}">am {{date}} Uhr</abbr>
 	</div>
 </div>
+</script>
+
+<script type="text/html" id="ZMO-members-template-box">
+<div class="news-drink-box">
+
+	<div class="member-box-left">
+
+	<div class="news-drink-box-mugshot">
+		<div>
+			<a><img width="48" height="48" border="0" src="http://server/beerometer/{{userImage}}"></a>
+		</div>
+	</div>
+	<div class="members-box-headline">
+		<a href="some where">{{userName}}</a>
+	</div>
+	<div class="members-box-amount">
+		Gezapfte Menge: {{totalAmount}} Liter
+	</div>
+	</div>
+
+{{#additional}}
+	<div class="member-box-additional">
+		+ {{additionalCount}}
+	</div>
+{{/additional}}
+
+{{#achievements}}	
+	<div class="member-box-achievement-mugshot">
+		<div>
+			<a><img width="48" height="48" border="0" src="http://server/beerometer/{{achievementImage}}"></a>
+		</div>
+	</div>	
+{{/achievements}}
+
+<div style="clear:both;"></div>
+</div>
+
+
 </script>
 
 </head>
