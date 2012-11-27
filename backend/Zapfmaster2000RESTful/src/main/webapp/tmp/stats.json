@@ -16,6 +16,12 @@
                 "user_id": "9",
                 "user_image": "/images/bla",
                 "amount": "5.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "3.57"
             }
         ],
         "promille": {
