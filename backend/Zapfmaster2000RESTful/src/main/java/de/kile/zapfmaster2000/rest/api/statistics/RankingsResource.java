@@ -47,6 +47,7 @@ public class RankingsResource {
 	 * @return 
 	 */
 	@SuppressWarnings("unchecked")
+	@Path("bestUserList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response bestUserListTimeSpan(@QueryParam("from") String pFrom,
@@ -139,6 +140,7 @@ public class RankingsResource {
 	 * @return 
 	 */
 	@SuppressWarnings("unchecked")
+	@Path("drawCountUserList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response drawCountUserListTimeSpan(@QueryParam("from") String pFrom,
