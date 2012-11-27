@@ -7,9 +7,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -36,15 +40,18 @@ public class RankingsResource {
 	/**
 	 * Returns {@link UserAmountResponse} list ordered by the amount drawn by each {@link User}
 	 * in the given time span  
+	 * Users that have no drawings in the given time span will not occur in the list.
 	 * 
-	 * @param pFrom start of time span. Format: "yyyyMMdd-hhmmss". Empty String results in full list.
-	 * @param pTo end of time span. Format: "yyyyMMdd-hhmmss". Empty String results in list until now.
+	 * @param pFrom start of time span. For format see {@link PlatformConstants}. <code>null</code> results in full list.
+	 * @param pTo end of time span. For format see {@link PlatformConstants}. <code>null</code> results in list until now.
 	 * @param pRequest 
 	 * @return 
 	 */
 	@SuppressWarnings("unchecked")
-	public Response bestUserListTimeSpan(@QueryParam("from") String pFrom,
-			@QueryParam("to") String pTo, @Context HttpServletRequest pRequest) {
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response bestUserListTimeSpan(@QueryParam("from") @DefaultValue("") String pFrom,
+			@QueryParam("to") @DefaultValue("") String pTo, @Context HttpServletRequest pRequest) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pRequest);
@@ -121,30 +128,22 @@ public class RankingsResource {
 		
 	}
 	
-	/**
-	 * Returns {@link UserAmountResponse} list ordered by the amount drawn by each {@link User}
-	 * over the whole time span.
-	 * 
-	 * @param pRequest
-	 * @return
-	 */
-	public Response bestUserList(@Context HttpServletRequest pRequest){
-		return bestUserListTimeSpan("","",pRequest);
-		
-	}
 	
 	/**
 	 * Returns {@link DrawCountUserListResponse} list ordered by the number of drawings by each {@link User}
-	 * in the given time span  
+	 * in the given time span.
+	 * Users that have no drawings in the given time span will not occur in the list.  
 	 * 
-	 * @param pFrom start of time span. Format: "yyyyMMdd-hhmmss". Empty String results in full list.
-	 * @param pTo end of time span. Format: "yyyyMMdd-hhmmss". Empty String results in list until now.
+	 * @param pFrom start of time span. For format see {@link PlatformConstants}. <code>null</code> results in full list.
+	 * @param pTo end of time span. For format see {@link PlatformConstants}. <code>null</code> results in list until now.
 	 * @param pRequest 
 	 * @return 
 	 */
 	@SuppressWarnings("unchecked")
-	public Response drawCountUserListTimeSpan(@QueryParam("from") String pFrom,
-			@QueryParam("to") String pTo, @Context HttpServletRequest pRequest) {
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response drawCountUserListTimeSpan(@QueryParam("from") @DefaultValue("") String pFrom,
+			@QueryParam("to") @DefaultValue("") String pTo, @Context HttpServletRequest pRequest) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pRequest);
@@ -217,17 +216,6 @@ public class RankingsResource {
 		}
 
 		return null;
-	}
-	
-	/**
-	 * Returns {@link DrawCountUserListResponse} list ordered by number of drawings by each {@link User}
-	 * over the whole time span.
-	 * 
-	 * @param pRequest
-	 * @return
-	 */
-	public Response drawCountUserList( @Context HttpServletRequest pRequest) {
-		return drawCountUserListTimeSpan("", "", pRequest);
 	}
 	
 }

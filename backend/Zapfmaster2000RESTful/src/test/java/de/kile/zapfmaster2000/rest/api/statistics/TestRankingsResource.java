@@ -125,7 +125,7 @@ public class TestRankingsResource extends AbstractMockingTest {
 		
 		Response respFromTo = rankingsResource.bestUserListTimeSpan(pFrom, pTo, null);
 		Response respFrom = rankingsResource.bestUserListTimeSpan(pFrom, "", null);
-		Response respAll = rankingsResource.bestUserList(null);
+		Response respAll = rankingsResource.bestUserListTimeSpan("","",null);
 
 		assertEquals(Status.OK.getStatusCode(), respFromTo.getStatus());
 		assertEquals(Status.OK.getStatusCode(), respFrom.getStatus());
@@ -164,7 +164,7 @@ public class TestRankingsResource extends AbstractMockingTest {
 		
 		Response respFromTo = rankingsResource.drawCountUserListTimeSpan(pFrom, pTo, null);
 		Response respFrom = rankingsResource.drawCountUserListTimeSpan(pFrom, "", null);
-		Response respAll = rankingsResource.drawCountUserList(null);
+		Response respAll = rankingsResource.drawCountUserListTimeSpan("","",null);
 
 		assertEquals(Status.OK.getStatusCode(), respFromTo.getStatus());
 		assertEquals(Status.OK.getStatusCode(), respFrom.getStatus());
