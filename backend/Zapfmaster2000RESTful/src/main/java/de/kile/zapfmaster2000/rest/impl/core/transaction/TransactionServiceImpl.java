@@ -12,7 +12,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 public class TransactionServiceImpl implements TransactionService {
 
 	/** session factory */
-	private final SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
 	/**
 	 * Constructor
@@ -26,6 +26,13 @@ public class TransactionServiceImpl implements TransactionService {
 		return sessionFactory;
 	}
 
+	/**
+	 * Reconfigures the session factory. Useful to drop schema for unit tests!
+	 */
+	void reconfigure() {
+		sessionFactory = configureHibernate();
+	}
+	
 	/**
 	 * Configures hibernate.
 	 * 

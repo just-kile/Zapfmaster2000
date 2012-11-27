@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.junit.After;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.impl.core.transaction.SessionReconfigurator;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
@@ -34,14 +35,7 @@ public abstract class AbstractDatabaseTest {
 
 	@After
 	public void truncate() {
-		Transaction tx = Zapfmaster2000Core.INSTANCE.getTransactionService()
-				.getSessionFactory().getCurrentSession().beginTransaction();
-		Zapfmaster2000Core.INSTANCE.getTransactionService().getSessionFactory()
-				.getCurrentSession()
-				.createSQLQuery("TRUNCATE SCHEMA PUBLIC AND COMMIT")
-				.executeUpdate();
-
-		tx.commit();
+		SessionReconfigurator.reconfigure();
 	}
 
 	protected Account createAccount(String pName) {
