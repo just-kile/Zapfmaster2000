@@ -42,7 +42,7 @@ public class TestMemberResource extends AbstractMockingTest {
 	public void setupData() {
 		// truncate at first! This way, we get rid of any achievements that are
 		// being created on start up
-//		truncate();
+		truncate();
 
 		account1 = createAccount("foo-account");
 		Account account2 = createAccount("bar-account");
