@@ -34,14 +34,14 @@ public abstract class AbstractDatabaseTest {
 
 	@After
 	public void truncate() {
-//		Transaction tx = Zapfmaster2000Core.INSTANCE.getTransactionService()
-//				.getSessionFactory().getCurrentSession().beginTransaction();
-//		Zapfmaster2000Core.INSTANCE.getTransactionService().getSessionFactory()
-//				.getCurrentSession()
-//				.createSQLQuery("TRUNCATE SCHEMA PUBLIC AND COMMIT")
-//				.executeUpdate();
-//
-//		tx.commit();
+		Transaction tx = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession().beginTransaction();
+		Zapfmaster2000Core.INSTANCE.getTransactionService().getSessionFactory()
+				.getCurrentSession()
+				.createSQLQuery("TRUNCATE SCHEMA PUBLIC AND COMMIT")
+				.executeUpdate();
+
+		tx.commit();
 	}
 
 	protected Account createAccount(String pName) {
