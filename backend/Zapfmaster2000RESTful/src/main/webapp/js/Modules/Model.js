@@ -100,6 +100,7 @@ ZMO.MemberModel = function(config) {
 	this.userName = config.userName;
 	this.userId = config.userId;
 	this.achievements = config.achievements;	
+	this.totalAmount = config.totalAmount.toFixed(2);
 	
 	var max = ZMO.modules.Constants.member.MAX_ACHIEVEMENTS;
 	if (this.achievements.length > max) {
