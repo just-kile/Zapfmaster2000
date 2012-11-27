@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
@@ -33,14 +34,14 @@ public abstract class AbstractDatabaseTest {
 
 	@After
 	public void truncate() {
-		Transaction tx = Zapfmaster2000Core.INSTANCE.getTransactionService()
-				.getSessionFactory().getCurrentSession().beginTransaction();
-		Zapfmaster2000Core.INSTANCE.getTransactionService().getSessionFactory()
-				.getCurrentSession()
-				.createSQLQuery("TRUNCATE SCHEMA PUBLIC AND COMMIT")
-				.executeUpdate();
-
-		tx.commit();
+//		Transaction tx = Zapfmaster2000Core.INSTANCE.getTransactionService()
+//				.getSessionFactory().getCurrentSession().beginTransaction();
+//		Zapfmaster2000Core.INSTANCE.getTransactionService().getSessionFactory()
+//				.getCurrentSession()
+//				.createSQLQuery("TRUNCATE SCHEMA PUBLIC AND COMMIT")
+//				.executeUpdate();
+//
+//		tx.commit();
 	}
 
 	protected Account createAccount(String pName) {
@@ -122,12 +123,27 @@ public abstract class AbstractDatabaseTest {
 		return gainedAchievement;
 	}
 
+	protected Date createDate(int pYear, int pMonth, int pDay) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(pYear, pMonth, pDay);
+		return cal.getTime();
+	}
+
+	protected Date createDate(int pYear, int pMonth, int pDay, int pHour,
+			int pMinute, int pSecond) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(pYear, pMonth, pDay, pHour, pMinute, pSecond);
+		return cal.getTime();
+	}
+
 	protected void saveEntity(EObject pEntity, EObject... pEntitiesToUpdate) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		for (EObject entityToUpdate : pEntitiesToUpdate)
-			session.save(entityToUpdate);
+		for (EObject entityToUpdate : pEntitiesToUpdate) {
+			session.update(entityToUpdate);
+		}
+		session.save(pEntity);
 		tx.commit();
 	}
 }

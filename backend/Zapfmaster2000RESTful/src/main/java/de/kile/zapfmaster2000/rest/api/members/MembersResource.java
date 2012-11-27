@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response.Status;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import de.kile.zapfmaster2000.rest.api.members.MemberResponse.GainedUserAchievement;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
@@ -33,10 +34,13 @@ public class MembersResource {
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 
+			// TODO: 1+n queries (n is num of users). Is that the best way?
 			List<?> result = session
 					.createQuery(
-							"SELECT u.name, u.imagePath, u.id FROM User u "
-									+ "WHERE u.account.id = :accountId")
+							"SELECT u.name, u.imagePath, u.id, SUM(d.amount)"
+									+ "FROM User u LEFT OUTER JOIN u.drawings d "
+									+ "WHERE u.account.id = :accountId "
+									+ "GROUP BY u.id ORDER BY u.name")
 					.setLong("accountId", account.getId()).list();
 
 			List<MemberResponse> response = new ArrayList<>();
@@ -47,6 +51,29 @@ public class MembersResource {
 				memberResponse.setUserId((Long) resultArray[2]);
 				memberResponse.setUserName((String) resultArray[0]);
 				memberResponse.setImagePath((String) resultArray[1]);
+				if (resultArray[3] instanceof Double) {
+					memberResponse.setTotalAmount((Double) resultArray[3]);
+				} // else the user did not drink at all yet, leave "0.0"
+
+				List<?> gaResult = session
+						.createQuery(
+								"SELECT ga.achievement.name, ga.achievement.imagePath,"
+										+ " ga.achievement.id FROM GainedAchievement ga "
+										+ "WHERE ga.user.id = :userId "
+										+ "ORDER BY ga.date DESC")
+						.setLong("userId", memberResponse.getUserId()).list();
+
+				for (Object rawGaResult : gaResult) {
+					Object[] gaResultArray = (Object[]) rawGaResult;
+
+					GainedUserAchievement gainedAchievement = new GainedUserAchievement();
+					gainedAchievement.setAchievementId((Long) gaResultArray[2]);
+					gainedAchievement
+							.setAchievementName((String) gaResultArray[0]);
+					gainedAchievement.setImagePath((String) gaResultArray[1]);
+
+					memberResponse.getAchievements().add(gainedAchievement);
+				}
 
 				response.add(memberResponse);
 			}
@@ -57,5 +84,4 @@ public class MembersResource {
 		return Response.status(Status.FORBIDDEN).build();
 
 	}
-
 }

@@ -51,7 +51,7 @@ public class MemberResponse {
 		return achievements;
 	}
 
-	public class GainedUserAchievement {
+	public static class GainedUserAchievement {
 
 		private String achievementName;
 
