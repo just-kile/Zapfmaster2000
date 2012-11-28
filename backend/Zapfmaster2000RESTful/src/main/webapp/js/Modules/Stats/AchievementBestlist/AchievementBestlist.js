@@ -3,7 +3,7 @@
  * 
  */
 ZMO.modules = ZMO.modules || {};
-ZMO.modules.dummy = (function($,ajax){
+ZMO.modules.achievementBestlist = (function($,ajax){
 	var mC = ZMO.modules.Constants;
 	var container =null;
 	/**
@@ -16,7 +16,7 @@ ZMO.modules.dummy = (function($,ajax){
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
-		return (container = $("<div class='statsDiv'>"));
+		return (container = $("<div class='stats'>"));
 	};
 	var pub = {
 			getInstance:getInstance,

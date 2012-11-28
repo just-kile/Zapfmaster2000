@@ -7,17 +7,23 @@ ZMO.Util.Net.Ajax = (function($){
 	 * Get datas instant
 	 */
 	var getDatas = function(url,callback,datas){
+		if(!ZMO.exists(datas))datas = {};
+		datas["_"] = new Date().getTime();
 		$.ajax({
 			url:url,
 			type:"GET",
 			data:datas,
-			success:function(resp){
+			complete:function(resp){
+			if(resp.status==200){
 				try{
-					callback(resp);
+					var data = $.parseJSON(resp.responseText);
+					callback(data);
 				}catch(e){
 					ZMO.log(e);
 				}
+			}else{
 				
+			}	
 			}
 		});
 	};
@@ -101,6 +107,9 @@ ZMO.Util.Net.Ajax = (function($){
 	var resetQueue = function(){
 		aspirantModules = {};
 	};
+	/*******
+	 * Server Push
+	 *******/
 	var newsPush=null,rfidPush=null;
 	var connectToChannel = function(callback){
 		newsPush = $.ajax({
@@ -112,17 +121,23 @@ ZMO.Util.Net.Ajax = (function($){
 				ZMO.log("New Request to "+ZMO.modules.Constants.push.NEWS);
 				connectToChannel(callback);
 			},
-			error:function(){
-				ZMO.log("Error: reconnect ...");
+			error:function(e){
+				if(e.status==0){
+					ZMO.log("Request abort success!");
+				}else{
+					
+				ZMO.log("Error: reconnect news...");
 				//setTimeout(function(){
 					connectToChannel(callback);
 				//},1000);
+
+				}
 			}
 		});
 		
 	};
 	var rfidLogin = function(callback){
-		$.ajax({
+		rfidPush = $.ajax({
 			type:"GET",
 			url:ZMO.modules.Constants.push.RFID,
 			timeout:10000000, 
@@ -131,23 +146,32 @@ ZMO.Util.Net.Ajax = (function($){
 				ZMO.log("New Request to "+ZMO.modules.Constants.push.RFID);
 				rfidLogin(callback);
 			},
-			error:function(){
-				ZMO.log("Error: reconnect ...")
+			error:function(e){
+				if(e.status==0){
+					ZMO.log("Request abort success!");
+				}else{
+					ZMO.log("Error: reconnect RFID...")
 				//setTimeout(function(){
 					rfidLogin(callback);
 				//},1000);
+				}
 			}
 		});
 	};
 	var abortNewsPush = function(){
 		if(ZMO.exists(newsPush))newsPush.abort();
+		ZMO.log("News Push aborted.");
 		newsPush = null;
 	};
 	var abortRfidPush = function(){
 		if(ZMO.exists(rfidPush))rfidPush.abort();
+		ZMO.log("RFID Push aborted.");
 		rfidPush = null;
 	};
-	
+	var abortPushRequests = function(){
+		abortNewsPush();
+		abortRfidPush();
+	};
 	var pub = {
 			getDatas:getDatas,
 			enqueueDatas:enqueueDatas,
@@ -157,7 +181,8 @@ ZMO.Util.Net.Ajax = (function($){
 			connectToChannel:connectToChannel,
 			rfidLogin:rfidLogin,
 			abortNewsPush:abortNewsPush,
-			abortRfidPush:abortRfidPush
+			abortRfidPush:abortRfidPush,
+			abortPushRequests:abortPushRequests
 	
 	};
 	return pub;

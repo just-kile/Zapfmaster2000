@@ -46,15 +46,6 @@ ZMO.view=(function(){
 	var createRow = function(){
 		return $("<div>").addClass("zm_row");
 	};
-
-	var isRendered = function(id,key){
-		return ZMO.exists(activeItems[key])
-				&&ZMO.exists(activeItems[key][id])
-	};
-	var isRenderedInPositon  = function(id,key,posModel){
-		return isRendered(id,key) && activeItems[key][id].position 
-								  && (activeItems[key][id].position.equals(posModel));
-	};
 	
 	var removeOldModules =function(newList,oldList){
 		$.each(oldList,function(posKey,elObj){
@@ -67,12 +58,12 @@ ZMO.view=(function(){
 				}
 		});
 		
-	}
+	};
 	var isRenderedAndSamePos = function(moduleModel,oldModel){
 		return 	typeof oldModel!="undefined" 
 				&& typeof oldModel[1]!="undefined"
 				&& moduleModel.position.equals(oldModel[1].position);
-	}
+	};
 	
 	var createPage =function(pageKey,moduleMap){
 		//iterate through site position (navi,main,footer)
@@ -84,80 +75,31 @@ ZMO.view=(function(){
 				var model = new ZMO.ModuleModel(module,modulePosKey);
 				if(isRenderedAndSamePos(model,activeItems[model.moduleId]) ){
 					tmpActiveItems[model.moduleId] = activeItems[model.moduleId];
-					$(tmpActiveItems[model.moduleId][0]).css("width",model.ratio)
+					$(tmpActiveItems[model.moduleId][0]).parent().css("width",model.ratio);
 				}else{
 					tmpActiveItems[model.moduleId] =[renderModuleModel(model,modulePosKey),model];
 					
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-//				//iterate through column rows
-//				$.each(moduleModelArr,function(row,moduleModel){
-//					
-//					var id=moduleModel.id;
-//					var newPos = new ZMO.PositionModel([modulePosKey,col,row]);
-//					
-//					//if(isRendered(moduleModel.id,modulePosKey)){
-//					if(isRenderedInPositon(moduleModel.id,modulePosKey,newPos)){
-//						
-//						var oldPos = activeItems[modulePosKey][id].position;
-//						//renderModuleModel();
-//						//passe Breite an:
-//						ZMO.log("same module, same position");
-//						ZMO.log(moduleModel);
-//						
-//						//set new active items
-//						tmpActiveItems[modulePosKey][id] = activeItems[modulePosKey][id];
-//						//move to new position (deprecated)
-//						if(!oldPos.equals(newPos)){
-//							//moveToNewPosition(tmpActiveItems[modulePosKey][id].element,newPos);
-//						}
-//							
-//						//set new position
-//						tmpActiveItems[modulePosKey][id].position = newPos;
-//						tmpActiveItems[modulePosKey][id].element.parent().css("width",moduleModel.ratio);
-//						
-//					}
-//					else{
-//						var element = renderModuleModel(newPos,new ZMO.ModuleModel(moduleModel));
-//						
-//						tmpActiveItems[modulePosKey][id] = {
-//								id:id,
-//								element:element,
-//								position:newPos
-//						};
-//						ZMO.log("other module")
-//						ZMO.log(moduleModel)
-//					}
-//
-//				});
-				
-			})
+			});
 		});
 		removeOldModules(tmpActiveItems,activeItems);
 		activeItems = tmpActiveItems;
-	}
+	};
 	var empty = function(){
 		$.each(site,function(ind,val){
 			val.empty();
 		});
-	}
+	};
 	var init =function(){
 		site.navigation = $(".main .nav");
 		site.main=$(".main .major");
 		site.footer=$(".main .footer");
 		
-	}
+	};
 	var pub = {
 			init:init,
 			createPage:createPage
 			
-	}
+	};
 	return pub;
-}(jQuery,document))
+}(jQuery,document));
