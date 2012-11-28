@@ -70,6 +70,7 @@ ZMO.modules.bestlistView = (function($,ajax){
 		var template = ich["ZMO-stats-bestlist-item"];
 		var table = $("<table>").addClass("bestlist-table");
 		$.each(userlistModel,function(ind,val){
+			val.rank = ind+1;
 			table.append(template(val));
 		});
 		bestlistContainer.append(table);

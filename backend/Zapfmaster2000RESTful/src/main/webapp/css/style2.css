@@ -511,6 +511,9 @@ ul#topnav li#topnav-5 a:hover {
 tr.bestlist-item{
 width:100%;	
 }
+tr.bestlist-item td.rank{
+width:10%;	
+}
 tr.bestlist-item:nth-child(even){
 	background:rgba(0,0,0,0.5);
 	
