@@ -5,19 +5,19 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.bestlist = (function($,view,ajax){
 	var mC = ZMO.modules.Constants;
-	var container =null,chart=null,pieChartID= "ZMO-stats-piechart";
+	var container =null,chartContainer=null,bestlistContainer=null,pieChartID= "ZMO-stats-piechart";
 	var onDatasLoaded = function(data){
 		var statsModel = new ZMO.modules.StatsModel(data);
 		var userlistModel = statsModel.bestUserList;
-		view.init(chart);
-		view.createPieChart(userlistModel);
-		
+		view.init();
+		view.createPieChart(userlistModel,chartContainer);
+		view.createBestlist(userlistModel,bestlistContainer);
 	};
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(){
-		//container.text("Hello drinkers worldwide!");
+		//enqueue datas, so that after 30s datas will be updated
 		ajax.enqueueDatas(mC.urls.STATS,onDatasLoaded);
 		ajax.startPull();
 	};
@@ -30,7 +30,10 @@ ZMO.modules.bestlist = (function($,view,ajax){
 		$("<div>").addClass("newsdiv").html("<span>Allgemeine Stats.</span>").appendTo(container);
 		//newscut
 		$("<div>").addClass("newscut").appendTo(container);
-		chart = $("<div>").addClass("statsDiv").attr("id",pieChartID).appendTo(container);
+		//chart container
+		chartContainer = $("<div>").addClass("statsDiv").attr("id",pieChartID).appendTo(container);
+		//bestlist container
+		bestlistContainer = $("<div>").addClass("statsDiv").appendTo(container);
 		return container;
 	};
 	var pub = {

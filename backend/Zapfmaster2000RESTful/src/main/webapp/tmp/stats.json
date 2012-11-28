@@ -1,5 +1,5 @@
 {
-    "keg": {
+    "keg": [{
         "keg_id": "2",
         "brand": "Warsteiner",
         "size": "30",
@@ -9,7 +9,17 @@
             "actual": "22.38",
             "complete": "57.62"
         }
-     },
+     },{
+        "keg_id": "3",
+        "brand": "Oettinger",
+        "size": "50",
+        "start_date": "2012-09-01 01:58:22",
+        "keg_numbers": "2",
+        "amount": {
+            "actual": "22.38",
+            "complete": "57.62"
+        }
+     }],
         "bestUserList": [
             {
                 "user_name": "Tim",
@@ -22,6 +32,84 @@
                 "user_id": "65",
                 "user_image": "/images/bla",
                 "amount": "3.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "3.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "3.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "3.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "3.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "3.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "3.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "3.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "0.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "0.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "0.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "0.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "0.57"
+            },
+              {
+                "user_name": "Ben",
+                "user_id": "65",
+                "user_image": "/images/bla",
+                "amount": "0.57"
             }
         ],
         "promille": {

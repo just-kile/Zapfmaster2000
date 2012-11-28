@@ -26,7 +26,6 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 
-// FIXME: This test runs perfectly fine using MySQL as db but fails using HSQLDB
 public class TestMemberResource extends AbstractMockingTest {
 
 	private Account account1;
@@ -42,7 +41,7 @@ public class TestMemberResource extends AbstractMockingTest {
 	public void setupData() {
 		// truncate at first! This way, we get rid of any achievements that are
 		// being created on start up
-//		truncate();
+		truncate();
 
 		account1 = createAccount("foo-account");
 		Account account2 = createAccount("bar-account");

@@ -75,8 +75,7 @@ a:hover {
 
 .zm_col {
 	float: left;
-	margin-left:20px;
-	margin-top:20px;
+	
 }
 
 ul#topnav {
@@ -462,6 +461,7 @@ ul#topnav li#topnav-5 a:hover {
 	top:48%;
 	position:absolute;
 }
+
 .linechart {
 	float: left;
 	width: 100%;
@@ -476,4 +476,52 @@ ul#topnav li#topnav-5 a:hover {
 	border-radius: 15px;
 	background-image: url(../images/view/news_background2.png);
 	color: #FFF;
+
+}
+.members-box-headline {
+	font-size: 1.4em;
+}
+
+.members-box-amount {
+	
+}
+
+.member-box-achievement-mugshot {
+	float: right;
+}
+
+.member-box-left {
+	float: left;
+	width: 50%;
+}
+.member-box-additional {
+	float: right;
+	font-size: 1.4em;
+	vertical-align:middle;
+	margin-top:12px;
+	margin-left: 5px;
+	font-weight: bold;
+}
+
+.member-headline {
+	font-size: 1.4em;
+	font-weight: bold;
+
+}
+tr.bestlist-item{
+width:100%;	
+}
+tr.bestlist-item td.rank{
+width:10%;	
+}
+tr.bestlist-item:nth-child(even){
+	background:rgba(0,0,0,0.5);
+	
+}
+table.bestlist-table{
+	width:100%;
+	color:white;
+}
+tr.bestlist-item:nth-child(odd){
+	background:rgba(0,0,0,0);
 }

@@ -58,6 +58,9 @@ public class TestRankingsResource extends AbstractMockingTest {
 		User user4 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user4.setName("Judas");
 
+		//no drawings
+		User user5 = Zapfmaster2000Factory.eINSTANCE.createUser();
+		user5.setName("Wilfried");
 		
 		SimpleDateFormat df = new SimpleDateFormat(PlatformConstants.DATE_TIME_FORMAT);
 		
@@ -95,6 +98,7 @@ public class TestRankingsResource extends AbstractMockingTest {
 		account.getUsers().add(user1);
 		account.getUsers().add(user2);
 		account.getUsers().add(user3);
+		account.getUsers().add(user5);
 		account2.getUsers().add(user4);
 		
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
@@ -111,18 +115,17 @@ public class TestRankingsResource extends AbstractMockingTest {
 		mockAuthService(authService);
 
 	}
-
+	
 	@Test
-	public void testSimple() {
+	public void testBestUserList() {
 		RankingsResource rankingsResource = new RankingsResource();
-		//Response response = rankingsResource.rankUsers(null, null);
 		
 		String pFrom = "20120101-100000";
 		String pTo = "20120101-130000";
 		
 		Response respFromTo = rankingsResource.bestUserListTimeSpan(pFrom, pTo, null);
-		Response respFrom = rankingsResource.bestUserListTimeSpan(pFrom, "", null);
-		Response respAll = rankingsResource.bestUserListTimeSpan(pFrom, "", null);
+		Response respFrom = rankingsResource.bestUserListTimeSpan(pFrom, null, null);
+		Response respAll = rankingsResource.bestUserListTimeSpan(null,null,null);
 
 		assertEquals(Status.OK.getStatusCode(), respFromTo.getStatus());
 		assertEquals(Status.OK.getStatusCode(), respFrom.getStatus());
@@ -145,10 +148,50 @@ public class TestRankingsResource extends AbstractMockingTest {
 		
 		assertEquals("/imagePath/image.jpg", user2.getImage());
 		
+		
 		assertEquals("Waldemar", user1.getName());
 		assertEquals("Horst", user2.getName());
 		assertEquals("Horst", uWinFromTo.getName());
 		assertEquals("Waldemar", uWinFrom.getName());
+	}
+	
+	@Test
+	public void testDrawCountUserList(){
+		RankingsResource rankingsResource = new RankingsResource();
+		
+		String pFrom = "20120101-100000";
+		String pTo = "20120101-130000";
+		
+		Response respFromTo = rankingsResource.drawCountUserListTimeSpan(pFrom, pTo, null);
+		Response respFrom = rankingsResource.drawCountUserListTimeSpan(pFrom, null, null);
+		Response respAll = rankingsResource.drawCountUserListTimeSpan(null,null,null);
+
+		assertEquals(Status.OK.getStatusCode(), respFromTo.getStatus());
+		assertEquals(Status.OK.getStatusCode(), respFrom.getStatus());
+		assertEquals(Status.OK.getStatusCode(), respAll.getStatus());
+		
+		Object[] rawUARFromTo = (Object[]) respFromTo.getEntity();
+		Object[] rawUARFrom = (Object[]) respFrom.getEntity();
+		Object[] rawUARAll = (Object[]) respAll.getEntity();
+
+		
+		assertEquals(2, rawUARFromTo.length);
+		assertEquals(3, rawUARAll.length);
+		assertEquals(3, rawUARFrom.length);
+		
+		DrawCountUserListResponse user1 = (DrawCountUserListResponse) rawUARAll[0];
+		DrawCountUserListResponse user2 = (DrawCountUserListResponse) rawUARAll[1];
+		
+		DrawCountUserListResponse uWinFromTo = (DrawCountUserListResponse) rawUARFromTo[0];
+		DrawCountUserListResponse uWinFrom = (DrawCountUserListResponse) rawUARFrom[0];
+		
+		assertEquals("Waldemar", user1.getName());
+		assertEquals(2, user1.getDrawCount());
+		
+		assertEquals(1, user2.getDrawCount());
+		
+		assertEquals(1,uWinFromTo.getDrawCount());
+		assertEquals(1,uWinFrom.getDrawCount());
 		
 		
 	}
