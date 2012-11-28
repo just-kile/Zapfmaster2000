@@ -219,4 +219,94 @@ public class RankingsResource {
 		return null;
 	}
 	
+	/**
+	 * Returns {@link AchievementUserListResponse} list ordered by the number of achievements by each {@link User}
+	 * in the given time span.
+	 * Users that gained no achievements in the given time span will not occur in the list.  
+	 * 
+	 * @param pFrom start of time span. For format see {@link PlatformConstants}. <code>null</code> results in full list.
+	 * @param pTo end of time span. For format see {@link PlatformConstants}. <code>null</code> results in list until now.
+	 * @param pRequest 
+	 * @return 
+	 */
+	@SuppressWarnings("unchecked")
+	@Path("achievementUserList")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response achievementUserListTimeSpan(@QueryParam("from") String pFrom,
+			@QueryParam("to") String pTo, @Context HttpServletRequest pRequest) {
+
+		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAccount(pRequest);
+		if (account != null) {
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			session.update(account);
+
+			SimpleDateFormat df = new SimpleDateFormat(PlatformConstants.DATE_TIME_FORMAT); 
+			
+			
+			List<Object[]> list;
+			try {
+			if (pFrom  == null) {//Full list
+				list = session
+						.createQuery(
+								"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath" +
+								" FROM User u, GainedAchievement g " +
+								" WHERE g.user = u AND u.account = :account " +
+								" GROUP BY u.id ORDER BY cnt DESC")
+						.setEntity("account", account)
+						.list();
+				
+			} else if (pTo == null){//List until now
+				Date dFrom = df.parse(pFrom);
+				list = session
+						.createQuery(
+								"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath" +
+								" FROM User u, GainedAchievement g " +
+								" WHERE d.user = u AND u.account = :account AND " +
+								" d.date >= :from" +
+								" GROUP BY u.id ORDER BY cnt DESC")
+						.setEntity("account", account).setDate("from", dFrom)
+						.list();				
+			} else { //general list
+				Date dFrom = df.parse(pFrom);
+				Date dTo = df.parse(pTo);
+				list = session
+						.createQuery(
+								"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath" +
+								" FROM User u, GainedAchievement g " +
+								" WHERE d.user = u AND u.account = :account AND " +
+								" d.date >= :from AND d.date <= :to" +
+								" GROUP BY u.id ORDER BY cnt DESC")
+						.setEntity("account", account).setDate("from", dFrom).setDate("to", dTo)
+						.list();
+				
+			}
+			} catch (ParseException e) {
+				LOG.error("Could not parse date", e);
+				return Response.status(Status.BAD_REQUEST).build();				
+			}
+			
+			tx.commit();
+
+			List<AchievementUserListResponse> resp = new ArrayList<>();
+			for (Object[] object : list) {
+				AchievementUserListResponse achievementCountResponse = new AchievementUserListResponse();
+				achievementCountResponse.setName((String) object[1]);
+				achievementCountResponse.setId((Long) object[0]);
+				achievementCountResponse.setCount((long) object[2]);
+				achievementCountResponse.setImage((String) object[3]);
+				resp.add(achievementCountResponse);
+			}
+
+			return Response.ok(resp.toArray()).build();
+		}
+
+		return null;
+	}
+	
 }
