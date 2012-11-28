@@ -75,7 +75,7 @@ a:hover {
 
 .zm_col {
 	float: left;
-
+	
 }
 
 ul#topnav {
@@ -507,4 +507,18 @@ ul#topnav li#topnav-5 a:hover {
 	font-size: 1.4em;
 	font-weight: bold;
 
+}
+tr.bestlist-item{
+width:100%;	
+}
+tr.bestlist-item:nth-child(even){
+	background:rgba(0,0,0,0.5);
+	
+}
+table.bestlist-table{
+	width:100%;
+	color:white;
+}
+tr.bestlist-item:nth-child(odd){
+	background:rgba(0,0,0,0);
 }

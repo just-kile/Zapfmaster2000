@@ -5,14 +5,30 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.bestlistView = (function($,ajax){
 	var mC = ZMO.modules.Constants;
-	var container = null,chart = null;
+	var chartContainer = null,chart = null,bestlistContainer = null;
 	var init = function(cont){
-		container =cont;
+		
 	};
-	var createPieChart = function(progressModel){
+	var convertToSeries = function(userlistModel){
+		var seriesArr =[];
+		try{
+			$.each(userlistModel,function(ind,user){
+				var username = user.user_name;
+				var amount = parseFloat(user.amount);
+				seriesArr.push([username,amount]);
+			});
+		}catch(e){
+			ZMO.log("Parse Error Beslist!")
+		}
+		return seriesArr;
+		
+	};
+	var createPieChart = function(userlistModel,container){
+		chartContainer =container;
+		var datas = convertToSeries(userlistModel);
 		chart = new Highcharts.Chart({
             chart: {
-                renderTo: container.attr("id"),
+                renderTo: chartContainer.attr("id"),
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
@@ -34,32 +50,29 @@ ZMO.modules.bestlistView = (function($,ajax){
                         enabled: true,
                         color: '#fff',
                         connectorColor: '#fff',
-                        //distance:2,
+                        distance:0,
                         formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                            return '<b>'+ this.point.name +'</b>: '+this.percentage.toFixed(1) +' %';
                         }
                     }
                 }
             },
             series: [{
                 type: 'pie',
-                name: 'Browser share',
-                data: [
-                    ['Firefox',   45.0],
-                    ['IE',       26.8],
-                    {
-                        name: 'Chrome',
-                        y: 12.8,
-                        sliced: true,
-                        selected: true
-                    },
-                    ['Safari',    8.5],
-                    ['Opera',     6.2],
-                    ['Others',   0.7]
-                ]
+                name: 'Menge',
+                data: datas
             }]
         });
    
+	};
+	var createBestlist = function(userlistModel,container){
+		bestlistContainer =  container;
+		var template = ich["ZMO-stats-bestlist-item"];
+		var table = $("<table>").addClass("bestlist-table");
+		$.each(userlistModel,function(ind,val){
+			table.append(template(val));
+		});
+		bestlistContainer.append(table);
 	};
 	var updateChart = function(val){
 		var series = chart.series[0];
@@ -68,7 +81,8 @@ ZMO.modules.bestlistView = (function($,ajax){
 	var pub = {
 			updateChart:updateChart,
 			init:init,
-			createPieChart:createPieChart
+			createPieChart:createPieChart,
+			createBestlist:createBestlist
 	};
 	return pub;
 }(jQuery,ZMO.ajax));
