@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Before;
@@ -35,6 +38,10 @@ public class TestRankingsResource extends AbstractMockingTest {
 
 	private Account account;
 	private Account account2;
+	
+	private User user1, user2, user3, userForeignAcc, userEmpty;
+	private Drawing drawing1, drawing2, drawing3, drawing4, drawing5;  
+	
 
 	@Before
 	public void setupData() {
@@ -43,52 +50,52 @@ public class TestRankingsResource extends AbstractMockingTest {
 
 		//test users
 		//number2 in ranking
-		User user1 = Zapfmaster2000Factory.eINSTANCE.createUser();
+		user1 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user1.setName("Horst");
 		user1.setImagePath("/imagePath/image.jpg");
 
-		User user2 = Zapfmaster2000Factory.eINSTANCE.createUser();
+		user2 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user2.setName("Ingrid");
 		
 		//number1 in ranking
-		User user3 = Zapfmaster2000Factory.eINSTANCE.createUser();
+		user3 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user3.setName("Waldemar");
 		
 		//user in different account		
-		User user4 = Zapfmaster2000Factory.eINSTANCE.createUser();
-		user4.setName("Judas");
+		userForeignAcc = Zapfmaster2000Factory.eINSTANCE.createUser();
+		userForeignAcc.setName("Judas");
 
 		//no drawings
-		User user5 = Zapfmaster2000Factory.eINSTANCE.createUser();
-		user5.setName("Wilfried");
+		userEmpty = Zapfmaster2000Factory.eINSTANCE.createUser();
+		userEmpty.setName("Wilfried");
 		
 		SimpleDateFormat df = new SimpleDateFormat(PlatformConstants.DATE_TIME_FORMAT);
 		
 		//test drawings
 		try {
-			Drawing drawing1 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
+			drawing1 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
 			drawing1.setUser(user1);
 			drawing1.setAmount(5.14);
 			drawing1.setDate(df.parse("20120101-120000"));
 			
-			Drawing drawing2 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
+			drawing2 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
 			drawing2.setUser(user2);
 			drawing2.setAmount(2.71);
 			drawing2.setDate(df.parse("20120101-130000"));
 			
-			Drawing drawing3 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
+			drawing3 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
 			drawing3.setUser(user3);
 			drawing3.setAmount(4.1);
 			drawing3.setDate(df.parse("20120101-090000"));
 			
-			Drawing drawing4 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
+			drawing4 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
 			drawing4.setUser(user3);
 			drawing4.setAmount(6);
 			drawing4.setDate(df.parse("20120101-140000"));
 			
 			//drawing in different account. should not appear in ranking 
-			Drawing drawing5 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
-			drawing5.setUser(user4);
+			drawing5 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
+			drawing5.setUser(userForeignAcc);
 			drawing5.setAmount(20);
 			drawing5.setDate(df.parse("20120101-130000"));
 		} catch (ParseException e){
@@ -98,8 +105,8 @@ public class TestRankingsResource extends AbstractMockingTest {
 		account.getUsers().add(user1);
 		account.getUsers().add(user2);
 		account.getUsers().add(user3);
-		account.getUsers().add(user5);
-		account2.getUsers().add(user4);
+		account.getUsers().add(userEmpty);
+		account2.getUsers().add(userForeignAcc);
 		
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
@@ -117,83 +124,106 @@ public class TestRankingsResource extends AbstractMockingTest {
 	}
 	
 	@Test
-	public void testBestUserList() {
+	public void testAmountRanking(){
 		RankingsResource rankingsResource = new RankingsResource();
+		Response response = rankingsResource.bestUserListTimeSpan(null,null,null);
 		
-		String pFrom = "20120101-100000";
-		String pTo = "20120101-130000";
+		Object[] rawUserAmountResponse =  (Object[]) response.getEntity();
 		
-		Response respFromTo = rankingsResource.bestUserListTimeSpan(pFrom, pTo, null);
-		Response respFrom = rankingsResource.bestUserListTimeSpan(pFrom, null, null);
-		Response respAll = rankingsResource.bestUserListTimeSpan(null,null,null);
-
-		assertEquals(Status.OK.getStatusCode(), respFromTo.getStatus());
-		assertEquals(Status.OK.getStatusCode(), respFrom.getStatus());
-		assertEquals(Status.OK.getStatusCode(), respAll.getStatus());
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		
-		Object[] rawUARFromTo = (Object[]) respFromTo.getEntity();
-		Object[] rawUARFrom = (Object[]) respFrom.getEntity();
-		Object[] rawUARAll = (Object[]) respAll.getEntity();
-
+		assertEquals(3, rawUserAmountResponse.length);
 		
-		assertEquals(2, rawUARFromTo.length);
-		assertEquals(3, rawUARAll.length);
-		assertEquals(3, rawUARFrom.length);
+		assertEquals(user3.getId(), ((UserAmountResponse) rawUserAmountResponse[0]).getId());
+		assertEquals(user1.getId(),  ((UserAmountResponse) rawUserAmountResponse[1]).getId());
 		
-		UserAmountResponse user1 = (UserAmountResponse) rawUARAll[0];
-		UserAmountResponse user2 = (UserAmountResponse) rawUARAll[1];
-		
-		UserAmountResponse uWinFromTo = (UserAmountResponse) rawUARFromTo[0];
-		UserAmountResponse uWinFrom = (UserAmountResponse) rawUARFrom[0];
-		
-		assertEquals("/imagePath/image.jpg", user2.getImage());
-		
-		
-		assertEquals("Waldemar", user1.getName());
-		assertEquals("Horst", user2.getName());
-		assertEquals("Horst", uWinFromTo.getName());
-		assertEquals("Waldemar", uWinFrom.getName());
+		assertEquals(user1.getImagePath(), ((UserAmountResponse) rawUserAmountResponse[1]).getImage());
 	}
 	
 	@Test
-	public void testDrawCountUserList(){
+	public void testAmountFrom(){
+		RankingsResource rankingsResource = new RankingsResource();
+		
+		String pFrom = "20120101-100000";
+		
+		Response response = rankingsResource.bestUserListTimeSpan(pFrom,null,null);
+		
+		Object[] rawUserAmountResponse =  (Object[]) response.getEntity();
+		
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+		
+		
+		assertEquals(3, rawUserAmountResponse.length);
+		assertEquals(user3.getId(), ((UserAmountResponse) rawUserAmountResponse[0]).getId());
+	}
+	
+	@Test
+	public void testAmountFromTo() {
 		RankingsResource rankingsResource = new RankingsResource();
 		
 		String pFrom = "20120101-100000";
 		String pTo = "20120101-130000";
 		
-		Response respFromTo = rankingsResource.drawCountUserListTimeSpan(pFrom, pTo, null);
-		Response respFrom = rankingsResource.drawCountUserListTimeSpan(pFrom, null, null);
-		Response respAll = rankingsResource.drawCountUserListTimeSpan(null,null,null);
-
-		assertEquals(Status.OK.getStatusCode(), respFromTo.getStatus());
-		assertEquals(Status.OK.getStatusCode(), respFrom.getStatus());
-		assertEquals(Status.OK.getStatusCode(), respAll.getStatus());
+		Response response = rankingsResource.bestUserListTimeSpan(pFrom,pTo,null);
 		
-		Object[] rawUARFromTo = (Object[]) respFromTo.getEntity();
-		Object[] rawUARFrom = (Object[]) respFrom.getEntity();
-		Object[] rawUARAll = (Object[]) respAll.getEntity();
-
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		
-		assertEquals(2, rawUARFromTo.length);
-		assertEquals(3, rawUARAll.length);
-		assertEquals(3, rawUARFrom.length);
+		Object[] rawUserAmountResponse =  (Object[]) response.getEntity();
 		
-		DrawCountUserListResponse user1 = (DrawCountUserListResponse) rawUARAll[0];
-		DrawCountUserListResponse user2 = (DrawCountUserListResponse) rawUARAll[1];
-		
-		DrawCountUserListResponse uWinFromTo = (DrawCountUserListResponse) rawUARFromTo[0];
-		DrawCountUserListResponse uWinFrom = (DrawCountUserListResponse) rawUARFrom[0];
-		
-		assertEquals("Waldemar", user1.getName());
-		assertEquals(2, user1.getDrawCount());
-		
-		assertEquals(1, user2.getDrawCount());
-		
-		assertEquals(1,uWinFromTo.getDrawCount());
-		assertEquals(1,uWinFrom.getDrawCount());
-		
-		
+		assertEquals(2, rawUserAmountResponse.length);
+		//order should have changed
+		assertEquals(user1.getId(), ((UserAmountResponse) rawUserAmountResponse[0]).getId());
 	}
+	
+	
+	@Test
+	public void testDrawCountRanking(){
+		RankingsResource rankingsResource = new RankingsResource();
+		Response response = rankingsResource.drawCountUserListTimeSpan(null,null,null);
+		
+		Object[] rawDrawCountResponse =  (Object[]) response.getEntity();
+		
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+		
+		assertEquals(3, rawDrawCountResponse.length);
+		
+		assertEquals(user3.getDrawings().size(), ((DrawCountUserListResponse) rawDrawCountResponse[0]).getDrawCount());
+		assertEquals(user1.getDrawings().size(), ((DrawCountUserListResponse) rawDrawCountResponse[1]).getDrawCount());
+	}
+	
+	@Test
+	public void testDrawCountFrom(){
+		RankingsResource rankingsResource = new RankingsResource();
+		
+		String pFrom = "20120101-100000";
+		
+		Response response = rankingsResource.drawCountUserListTimeSpan(pFrom,null,null);
+		
+		Object[] rawDrawCountResponse =  (Object[]) response.getEntity();
+		
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+		
+		
+		assertEquals(3, rawDrawCountResponse.length);
+		assertEquals(user1.getDrawings().size(), ((DrawCountUserListResponse) rawDrawCountResponse[0]).getDrawCount());
+	}
+	
+	@Test
+	public void testDrawCountFromTo() {
+		RankingsResource rankingsResource = new RankingsResource();
+		
+		String pFrom = "20120101-100000";
+		String pTo = "20120101-130000";
+		
+		Response response = rankingsResource.drawCountUserListTimeSpan(pFrom,pTo,null);
+		
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+		
+		Object[] rawDrawCountResponse =  (Object[]) response.getEntity();
+		
+		assertEquals(2, rawDrawCountResponse.length);
+		assertEquals(user1.getDrawings().size(), ((DrawCountUserListResponse) rawDrawCountResponse[0]).getDrawCount());
+	}
+	
 
 }
