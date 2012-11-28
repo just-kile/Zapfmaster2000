@@ -83,17 +83,9 @@ ZMO.modules_properties ={
 					position:[0,0]
 				}],
 				main:[{
-					moduleId:"drawfeed",
-					ratio:"70%",
+					moduleId:"members",
+					ratio:"100%",
 					position:[0,0]
-				},{
-					moduleId:"frontpagestats",
-					ratio:"30%",
-					position:[0,1]
-				},{
-					moduleId:"challenges",
-					ratio:"40%",
-					position:[1,0]
 				}],
 				  
 				footer:[]

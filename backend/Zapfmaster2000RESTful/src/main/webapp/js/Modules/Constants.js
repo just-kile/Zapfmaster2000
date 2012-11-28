@@ -43,11 +43,17 @@ ZMO.modules.Constants = {
 			NEWSLIST:"rest/news",
 			//NEWSLIST:"//thomas-notebook-ubuntu/rest/news",
 //			STATS:"rest/stats/getStatsAsJson"
-			STATS:"tmp/stats.json"
+			STATS:"tmp/stats.json",
+
+			MEMBERS:"rest/members"
+			//NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
 		push:{
 			NEWS:"rest/push/news",
 			RFID:"rest/push/login"
+		},
+		member:{
+			MAX_ACHIEVEMENTS:8
 		}
 
 }

@@ -7,9 +7,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -23,8 +26,6 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 /**
- * Ranks users by amount.
- * Gives out list of {@link UserAmountResponse}.
  * 
  * @author PB
  *
@@ -38,13 +39,17 @@ public class RankingsResource {
 	/**
 	 * Returns {@link UserAmountResponse} list ordered by the amount drawn by each {@link User}
 	 * in the given time span  
+	 * Users that have no drawings in the given time span will not occur in the list.
 	 * 
-	 * @param pFrom start of time span. Format: "yyyyMMdd-hhmmss". Empty String results in full list.
-	 * @param pTo end of time span. Format: "yyyyMMdd-hhmmss". Empty String results in list until now.
+	 * @param pFrom start of time span. For format see {@link PlatformConstants}. <code>null</code> results in full list.
+	 * @param pTo end of time span. For format see {@link PlatformConstants}. <code>null</code> results in list until now.
 	 * @param pRequest 
 	 * @return 
 	 */
 	@SuppressWarnings("unchecked")
+	@Path("bestUserList")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response bestUserListTimeSpan(@QueryParam("from") String pFrom,
 			@QueryParam("to") String pTo, @Context HttpServletRequest pRequest) {
 
@@ -63,17 +68,17 @@ public class RankingsResource {
 			
 			List<Object[]> list;
 			try {
-			if (pFrom.length() == 0) {//Full list
+			if (pFrom == null) {//Full list
 				list = session
 						.createQuery(
 								"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath" +
 								" FROM User u, Drawing d " +
-								" WHERE d.user = u AND u.account = :account AND " +
+								" WHERE d.user = u AND u.account = :account " +
 								" GROUP BY u.id ORDER BY amt DESC")
 						.setEntity("account", account)
 						.list();
 				
-			} else if (pTo.length() == 0){//List until now
+			} else if (pTo == null){//List until now
 				Date dFrom = df.parse(pFrom);
 				list = session
 						.createQuery(
@@ -123,16 +128,95 @@ public class RankingsResource {
 		
 	}
 	
+	
 	/**
-	 * Returns {@link UserAmountResponse} list ordered by the amount drawn by each {@link User}
-	 * over the whole time span.
+	 * Returns {@link DrawCountUserListResponse} list ordered by the number of drawings by each {@link User}
+	 * in the given time span.
+	 * Users that have no drawings in the given time span will not occur in the list.  
 	 * 
-	 * @param pRequest
-	 * @return
+	 * @param pFrom start of time span. For format see {@link PlatformConstants}. <code>null</code> results in full list.
+	 * @param pTo end of time span. For format see {@link PlatformConstants}. <code>null</code> results in list until now.
+	 * @param pRequest 
+	 * @return 
 	 */
-	public Response bestUserList(@Context HttpServletRequest pRequest){
-		return bestUserListTimeSpan("","",pRequest);
-		
+	@SuppressWarnings("unchecked")
+	@Path("drawCountUserList")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response drawCountUserListTimeSpan(@QueryParam("from") String pFrom,
+			@QueryParam("to") String pTo, @Context HttpServletRequest pRequest) {
+
+		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAccount(pRequest);
+		if (account != null) {
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			session.update(account);
+
+			SimpleDateFormat df = new SimpleDateFormat(PlatformConstants.DATE_TIME_FORMAT); 
+			
+			
+			List<Object[]> list;
+			try {
+			if (pFrom  == null) {//Full list
+				list = session
+						.createQuery(
+								"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath" +
+								" FROM User u, Drawing d " +
+								" WHERE d.user = u AND u.account = :account " +
+								" GROUP BY u.id ORDER BY cnt DESC")
+						.setEntity("account", account)
+						.list();
+				
+			} else if (pTo == null){//List until now
+				Date dFrom = df.parse(pFrom);
+				list = session
+						.createQuery(
+								"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath" +
+								" FROM User u, Drawing d " +
+								" WHERE d.user = u AND u.account = :account AND " +
+								" d.date >= :from" +
+								" GROUP BY u.id ORDER BY cnt DESC")
+						.setEntity("account", account).setDate("from", dFrom)
+						.list();				
+			} else { //general list
+				Date dFrom = df.parse(pFrom);
+				Date dTo = df.parse(pTo);
+				list = session
+						.createQuery(
+								"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath" +
+								" FROM User u, Drawing d " +
+								" WHERE d.user = u AND u.account = :account AND " +
+								" d.date >= :from AND d.date <= :to" +
+								" GROUP BY u.id ORDER BY cnt DESC")
+						.setEntity("account", account).setDate("from", dFrom).setDate("to", dTo)
+						.list();
+				
+			}
+			} catch (ParseException e) {
+				LOG.error("Could not parse date", e);
+				return Response.status(Status.BAD_REQUEST).build();				
+			}
+			
+			tx.commit();
+
+			List<DrawCountUserListResponse> resp = new ArrayList<>();
+			for (Object[] object : list) {
+				DrawCountUserListResponse drawCountResponse = new DrawCountUserListResponse();
+				drawCountResponse.setName((String) object[1]);
+				drawCountResponse.setId((Long) object[0]);
+				drawCountResponse.setDrawCount((long) object[2]);
+				drawCountResponse.setImage((String) object[3]);
+				resp.add(drawCountResponse);
+			}
+
+			return Response.ok(resp.toArray()).build();
+		}
+
+		return null;
 	}
 	
 }
