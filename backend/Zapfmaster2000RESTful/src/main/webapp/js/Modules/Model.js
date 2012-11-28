@@ -94,4 +94,24 @@ ZMO.RfidModel = function(conf){
 	this.userName = conf.userName;
 	this.userId = conf.userId;
 	this.type = conf.type;
+};
+
+ZMO.MemberModel = function(config) {
+	this.userName = config.userName;
+	this.userId = config.userId;
+	this.achievements = config.achievements;
+	if (config.totalAmount != undefined) {
+		this.totalAmount = config.totalAmount.toFixed(2);
+	} else {
+		config.totalAmount = 0;
+	}
+	
+	// ignore all achievements if there are way to many
+	var max = ZMO.modules.Constants.member.MAX_ACHIEVEMENTS;
+	if (this.achievements != undefined && this.achievements.length > max) {
+		this.additional = true;
+		this.additionalCount = config.achievements.length - max;
+		this.achievements.splice(max, this.achievements.length - max);
+	}
+	
 }

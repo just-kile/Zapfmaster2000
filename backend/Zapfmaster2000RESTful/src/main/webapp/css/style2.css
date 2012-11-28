@@ -460,3 +460,33 @@ ul#topnav li#topnav-5 a:hover {
 	top:48%;
 	position:absolute;
 }
+
+.members-box-headline {
+	font-size: 1.4em;
+}
+
+.members-box-amount {
+	
+}
+
+.member-box-achievement-mugshot {
+	float: right;
+}
+
+.member-box-left {
+	float: left;
+	width: 50%;
+}
+.member-box-additional {
+	float: right;
+	font-size: 1.4em;
+	vertical-align:middle;
+	margin-top:12px;
+	margin-left: 5px;
+	font-weight: bold;
+}
+
+.member-headline {
+	font-size: 1.4em;
+	font-weight: bold;
+}
