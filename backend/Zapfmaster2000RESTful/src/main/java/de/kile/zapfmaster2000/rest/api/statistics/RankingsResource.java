@@ -87,7 +87,7 @@ public class RankingsResource {
 								" WHERE d.user = u AND u.account = :account AND " +
 								" d.date >= :from" +
 								" GROUP BY u.id ORDER BY amt DESC")
-						.setEntity("account", account).setDate("from", dFrom)
+						.setEntity("account", account).setTimestamp("from", dFrom)
 						.list();				
 			} else { //general list
 				Date dFrom = df.parse(pFrom);
@@ -99,7 +99,7 @@ public class RankingsResource {
 								" WHERE d.user = u AND u.account = :account AND " +
 								" d.date >= :from AND d.date <= :to" +
 								" GROUP BY u.id ORDER BY amt DESC")
-						.setEntity("account", account).setDate("from", dFrom).setDate("to", dTo)
+						.setEntity("account", account).setTimestamp("from", dFrom).setTimestamp("to", dTo)
 						.list();
 				
 			}
@@ -180,7 +180,7 @@ public class RankingsResource {
 								" WHERE d.user = u AND u.account = :account AND " +
 								" d.date >= :from" +
 								" GROUP BY u.id ORDER BY cnt DESC")
-						.setEntity("account", account).setDate("from", dFrom)
+						.setEntity("account", account).setTimestamp("from", dFrom)
 						.list();				
 			} else { //general list
 				Date dFrom = df.parse(pFrom);
@@ -192,7 +192,7 @@ public class RankingsResource {
 								" WHERE d.user = u AND u.account = :account AND " +
 								" d.date >= :from AND d.date <= :to" +
 								" GROUP BY u.id ORDER BY cnt DESC")
-						.setEntity("account", account).setDate("from", dFrom).setDate("to", dTo)
+						.setEntity("account", account).setTimestamp("from", dFrom).setTimestamp("to", dTo)
 						.list();
 				
 			}
