@@ -5,6 +5,19 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>de.kile.zapfmaster2000.rest</display-name>
 
+	<filter>
+    	<filter-name>monitoring</filter-name>
+        <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+        <async-supported>true</async-supported>
+ 	</filter>
+    <filter-mapping>
+    	<filter-name>monitoring</filter-name>
+        <url-pattern>/*</url-pattern>
+  	</filter-mapping>
+    <listener>
+    	<listener-class>net.bull.javamelody.SessionListener</listener-class>
+  	</listener>
+        
 	<servlet>
         <servlet-name>Zapfmaster2000 RESTful Service</servlet-name>
         <servlet-class>
