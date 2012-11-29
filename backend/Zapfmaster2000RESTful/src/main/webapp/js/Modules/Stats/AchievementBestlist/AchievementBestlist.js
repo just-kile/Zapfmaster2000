@@ -16,7 +16,7 @@ ZMO.modules.achievementBestlist = (function($,ajax){
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
-		return (container = $("<div class='stats'>"));
+		return (container = $("<div class='stats stats-achievements'>"));
 	};
 	var pub = {
 			getInstance:getInstance,

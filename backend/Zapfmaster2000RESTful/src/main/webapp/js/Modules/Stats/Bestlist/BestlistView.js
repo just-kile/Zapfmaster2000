@@ -73,7 +73,8 @@ ZMO.modules.bestlistView = (function($,ajax){
 			val.rank = ind+1;
 			table.append(template(val));
 		});
-		bestlistContainer.append(table);
+		var headline  =$("<span>").text("Bestlist");
+		bestlistContainer.append(headline).append(table);
 	};
 	var updateChart = function(val){
 		var series = chart.series[0];

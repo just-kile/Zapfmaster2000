@@ -7,8 +7,7 @@ ZMO.modules.lineChart = (function($,view,ajax){
 	var mC = ZMO.modules.Constants;
 	var chartID = "ZMO-stats-linechart";
 	var container = null;
-	var onDatasLoaded = function(data){
-		var statsModel = new ZMO.modules.StatsModel(data);
+	var onDatasLoaded = function(statsModel){
 		var progressModel = statsModel.progress;
 		view.init(container);
 		view.createLineChart(progressModel);

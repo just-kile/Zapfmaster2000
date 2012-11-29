@@ -1,122 +1,119 @@
 {
-    "keg": [{
+    "keg": {
         "keg_id": "2",
         "brand": "Warsteiner",
         "size": "30",
         "start_date": "2012-09-01 01:58:22",
-        "keg_numbers": "2",
-        "amount": {
-            "actual": "22.38",
-            "complete": "57.62"
-        }
-     },{
-        "keg_id": "3",
-        "brand": "Oettinger",
-        "size": "50",
-        "start_date": "2012-09-01 01:58:22",
-        "keg_numbers": "2",
-        "amount": {
-            "actual": "22.38",
-            "complete": "57.62"
-        }
-     }],
-        "bestUserList": [
-            {
-                "user_name": "Tim",
-                "user_id": "9",
-                "user_image": "/images/bla",
-                "amount": "5.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "3.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "3.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "3.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "3.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "3.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "3.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "3.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "3.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "0.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "0.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "0.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "0.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "0.57"
-            },
-              {
-                "user_name": "Ben",
-                "user_id": "65",
-                "user_image": "/images/bla",
-                "amount": "0.57"
-            }
-        ],
-        "promille": {
-            "average": "0"
+        "keg_numbers": "2"
+    },
+    "amount": {
+        "current": "22.38",
+        "complete": "57.62",
+        "once": "1.20",
+        "mostActivityHour": "15"
+    },
+    "achievements": {
+        "count": "197",
+        "achievementspeed": "50",
+        "mostAchievementHour": "15"
+    },
+    "drawCount": {
+        "operations": "147",
+        "average": "15"
+    },
+    "bestUserList": [
+        {
+            "user_name": "Tim",
+            "user_id": "9",
+            "user_image": "/images/bla",
+            "amount": "5.57"
         },
-        "progress": {
-           "data":[7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6,7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6,7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+        {
+            "user_name": "Felix",
+            "user_id": "12",
+            "user_image": "/images/bla",
+            "amount": "4.97"
         }
-    
+    ],
+    "bestUserListHour": [
+        {
+            "user_name": "Flo",
+            "user_id": "13",
+            "user_image": "/images/bla",
+            "amount": "5.57"
+        }
+    ],
+    "achievementUserList": [
+        {
+            "user_id": "12",
+            "user_name": "Felix",
+            "user_image": "images/bla.jpg",
+            "achievement_count": "45"
+        },
+        {
+            "user_id": "13",
+            "user_name": "Flo",
+            "user_image": "images/bla.jpg",
+            "achievement_count": "12"
+        }
+    ],
+    "drawCountUserList": [
+        {
+            "user_id": "12",
+            "user_name": "Felix",
+            "user_image": "images/bla.jpg",
+            "draw_count": "15"
+        },
+        {
+            "user_id": "13",
+            "user_name": "Flo",
+            "user_image": "images/bla.jpg",
+            "draw_count": "10"
+        }
+    ],
+    "promille": {
+        "average": "0"
+    },
+    "progress": {
+        "start_date": "26.01.2012 16:43",
+        "interval": "30",
+        "data": [
+            7,
+            6.9,
+            9.5,
+            14.5,
+            18.2,
+            21.5,
+            25.2,
+            26.5,
+            23.3,
+            18.3,
+            13.9,
+            9.6,
+            7,
+            6.9,
+            9.5,
+            14.5,
+            18.2,
+            21.5,
+            25.2,
+            26.5,
+            23.3,
+            18.3,
+            13.9,
+            9.6,
+            7,
+            6.9,
+            9.5,
+            14.5,
+            18.2,
+            21.5,
+            25.2,
+            26.5,
+            23.3,
+            18.3,
+            13.9,
+            9.6
+        ]
+    }
 }

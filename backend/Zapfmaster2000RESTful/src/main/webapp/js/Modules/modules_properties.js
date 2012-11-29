@@ -39,16 +39,16 @@ ZMO.modules_properties ={
 					position:[0,0]
 				},{
 					moduleId:"kegstatus",
-					ratio:"33%",
+					ratio:"30%",
 					position:[1,0]
 				},{
 					moduleId:"bestlist",
-					ratio:"33%",
+					ratio:"30%",
 					position:[1,1]
 				},
 				{
 					moduleId:"achievementBestlist",
-					ratio:"33%",
+					ratio:"30%",
 					position:[1,2]
 				}],
 				  

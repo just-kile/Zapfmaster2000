@@ -1,14 +1,13 @@
 ZMO.modules = ZMO.modules || {};
 
 ZMO.modules.kegstatus = (function($,view,ajax){
-	var mC = ZMO.modules.Constants,container=null,chartContainer=null,barChartID ="ZMO-stats-barchart"; ;
+	var mC = ZMO.modules.Constants,container=null,drinkstatsContainer=null,chartContainer=null,barChartID ="ZMO-stats-barchart";
 	
-	var onDatasLoaded =function(datas){
-		var statsModel = new ZMO.modules.StatsModel(datas);
+	var onDatasLoaded =function(statsModel){
 		var keglistModel = statsModel.keg;
 		view.init();
-		view.createBarChart(keglistModel,chartContainer);
-		//view.createBestlist(keglistModel,bestlistContainer);
+		view.createBarChart(keglistModel,statsModel.amount,chartContainer);
+		view.createDrinkstats(keglistModel,statsModel.amount,drinkstatsContainer);
 		
 	};
 	var init = function(){
@@ -16,11 +15,11 @@ ZMO.modules.kegstatus = (function($,view,ajax){
 		ajax.startPull();
 	};
 	var getInstance = function(){
-		container = $("<div>").addClass("stats");
+		container = $("<div>").addClass("stats stats-kegstatus");
 		//bar chart container
 		chartContainer = $("<div>").addClass("statsDiv").attr("id",barChartID).appendTo(container);
 		//bestlist container
-		//bestlistContainer = $("<div>").addClass("statsDiv").appendTo(container);
+		drinkstatsContainer = $("<div>").addClass("statsDiv").appendTo(container);
 		
 		return container;
 	};

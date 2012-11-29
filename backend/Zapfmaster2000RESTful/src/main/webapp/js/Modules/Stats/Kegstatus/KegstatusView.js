@@ -5,25 +5,25 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.kegstatusView = (function($,ajax){
 	var mC = ZMO.modules.Constants;
-	var barContainer = null,chart = null,bestlistContainer = null;
+	var barContainer = null,chart = null,drinkerContainer = null;
 	var wording = {
 		REMAINING:"Verbleibend",
 		COMPLETE:"Komplett",
 		TITLE:"Fass Uebersicht",
-		XBAR:"Getrunkene Menge"
+		XBAR:"Liter"
 	};
 	
 	var init = function(cont){
 		
 	};
-	var convertToSeries = function(keglistModel){
+	var convertToSeries = function(keglistModel,amountModel){
 		var seriesObj =[];
 		seriesObj.categories=[];
 		var remaining =[],complete = [];
 		try{
 			$.each(keglistModel,function(ind,keg){
 				//var kegName = keg.brand;
-				var amount = parseFloat(keg.amount.actual);
+				var amount = parseFloat(amountModel.current);
 				var complAmount = parseFloat(keg.size);
 				
 				seriesObj.categories.push( keg.keg_id);
@@ -39,15 +39,15 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		return seriesObj;
 		
 	};
-	var createBarChart = function(keglistModel,container){
+	var createBarChart = function(keglistModel,amountModel,container){
 		barContainer =container;
-		var series = convertToSeries(keglistModel);
+		var series = convertToSeries(keglistModel,amountModel);
 
         chart = new Highcharts.Chart({
             chart: {
                 renderTo: container.attr("id"),
                 type: 'bar',
-                height:300
+                height:200
             },
             title: {
                 text: wording.TITLE
@@ -86,15 +86,13 @@ ZMO.modules.kegstatusView = (function($,ajax){
         });
    
 	};
-	var createBestlist = function(userlistModel,container){
-		bestlistContainer =  container;
-		var template = ich["ZMO-stats-bestlist-item"];
-		var table = $("<table>").addClass("bestlist-table");
-		$.each(userlistModel,function(ind,val){
-			val.rank = ind+1;
-			table.append(template(val));
+	var createDrinkstats = function(userlistModel,container){
+		drinkerContainer =  container;
+		var table = ich["ZMO-stats-drinker"]({
+			
 		});
-		bestlistContainer.append(table);
+		
+		//drinkerContainer.append(table);
 	};
 	var updateChart = function(val){
 		var series = chart.series[0];
@@ -104,7 +102,7 @@ ZMO.modules.kegstatusView = (function($,ajax){
 			updateChart:updateChart,
 			init:init,
 			createBarChart:createBarChart,
-			createBestlist:createBestlist
+			createDrinkstats:createDrinkstats
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

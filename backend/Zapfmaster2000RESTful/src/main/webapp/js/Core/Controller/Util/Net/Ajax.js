@@ -27,7 +27,9 @@ ZMO.Util.Net.Ajax = (function($){
 			}
 		});
 	};
-
+	/*****
+	 * Interval pull
+	 *****/
 	/**
 	 * If function want to get datas once this function removes aspirant after it gets the datas
 	 */
@@ -55,25 +57,28 @@ ZMO.Util.Net.Ajax = (function($){
 	 * @param {String or Array} keywordQueue separated by comma or array
 	 * @param {Function} callback
 	 * @param {Boolean} onlyOnce
+	 * @param {Boolean} rawData return only
 	 */
-	var enqueueDatas = function(url,callback,onlyOnce){
+	var enqueueDatas = function(url,callback,onlyOnce,rawData){
 		if(!ZMO.exists(aspirantModules[url])){
 			aspirantModules[url] = [];
 		}
 		aspirantModules[url].push(  {
 			callback:callback,
-			once:!!onlyOnce
+			once:!!onlyOnce,
+			rawData:!!rawData
 		});
 	};
 	/**
-	 * Gets the datas in the Queue, aber pullTimeout time, calls self again
+	 * Gets the datas in the Queue, wait pullTimeout time, calls self again
 	 */
 	var getEnqueueDatas = function(){
 		$.each(aspirantModules,function(url,modulesArr){
 			getDatas(url,function(response){
 				//send datas to aspirants
+				var statsModel = new ZMO.modules.StatsModel(response);
 				$.each(modulesArr,function(ind,val){
-					if(val.callback)val.callback(response);
+					if(val.callback)val.callback(val.rawData?response:statsModel);
 				});
 				//remove the modules which only wanted info once
 				removeOnceCalls();

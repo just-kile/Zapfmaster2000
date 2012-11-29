@@ -6,8 +6,7 @@ ZMO.modules = ZMO.modules || {};
 ZMO.modules.bestlist = (function($,view,ajax){
 	var mC = ZMO.modules.Constants;
 	var container =null,chartContainer=null,bestlistContainer=null,pieChartID= "ZMO-stats-piechart";
-	var onDatasLoaded = function(data){
-		var statsModel = new ZMO.modules.StatsModel(data);
+	var onDatasLoaded = function(statsModel){
 		var userlistModel = statsModel.bestUserList;
 		view.init();
 		view.createPieChart(userlistModel,chartContainer);
@@ -25,7 +24,7 @@ ZMO.modules.bestlist = (function($,view,ajax){
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
-		container = $("<div>").addClass("stats");
+		container = $("<div>").addClass("stats").addClass("stats-bestlist");
 		//headline
 		$("<div>").addClass("newsdiv").html("<span>Allgemeine Stats.</span>").appendTo(container);
 		//newscut

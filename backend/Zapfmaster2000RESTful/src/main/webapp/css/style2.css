@@ -191,7 +191,7 @@ ul#topnav li#topnav-5 a:hover {
 .stats {
 	float: left;
 	width: 100%;
-	padding: 8px 0;
+	padding: 8px 8px;
 	-moz-box-shadow: 0px 0px 20px #99ffff;
 	-webkit-box-shadow: 0px 0px 20px #99ffff;
 	box-shadow: 0px 0px 20px #99ffff;
@@ -508,20 +508,46 @@ ul#topnav li#topnav-5 a:hover {
 	font-weight: bold;
 
 }
+/*Bestlist*/
 tr.bestlist-item{
 width:100%;	
 }
 tr.bestlist-item td.rank{
 width:10%;	
 }
-tr.bestlist-item:nth-child(even){
+tr.bestlist-item:nth-child(odd){
 	background:rgba(0,0,0,0.5);
 	
 }
 table.bestlist-table{
 	width:100%;
 	color:white;
+	font-size:14px;
 }
-tr.bestlist-item:nth-child(odd){
-	background:rgba(0,0,0,0);
+tr.bestlist-item:nth-child(even){
+	background:#333;
+}
+tr.bestlist-item td.name{
+width:60%;	
+}
+tr.bestlist-item td.amount{
+width:30%;	
+}
+/*End Bestlist*/
+
+
+div.stats-kegstatus{
+	margin-top:15px;
+	
+}
+div.stats-bestlist{
+	text-align:center;
+	margin-top:15px;
+	margin-left:35px;
+}
+
+
+div.stats-achievements{
+	margin-top:15px;
+	margin-left:70px;
 }
