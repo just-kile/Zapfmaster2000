@@ -36,14 +36,17 @@ ZMO.modules.kegstatusView = (function($,ajax){
 	var convertToSeries = function(keglistModel,amountModel){
 		var seriesObj =[];
 		seriesObj.categories=[];
+		seriesObj.stack= [];
 		var remaining =[],complete = [];
+		//set keglist
+		keglist(keglistModel);
 		try{
 			$.each(keglistModel,function(ind,keg){
 				//var kegName = keg.brand;
 				var amount = parseFloat(keg.current_amount);
 				var complAmount = parseFloat(keg.size);
 				seriesObj.categories.push( keg.keg_id);
-				seriesObj.brand = keg.brand;
+				//seriesObj.stack.push(keg.brand);
 				remaining.push(amount);
 				complete.push(complAmount - amount);
 			
@@ -55,6 +58,26 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		
 		return seriesObj;
 		
+	};
+	/**
+	 * Provides further information about keg
+	 */
+	var keglistMod ={};
+	var keglist = function(keglistModelOrId){
+		if(typeof keglistModelOrId =="string" ){
+			var model;
+			$.each(keglistMod,function(ind,keg){
+				if(keg.keg_id==keglistModelOrId){
+					model  = keg;
+					return false;
+				}
+			});
+			return model;
+		}else if(typeof keglistModelOrId == "object"){
+			keglistMod = keglistModelOrId
+		}else{
+			return keglistMod;
+		}
 	};
 	var createBarChart = function(keglistModel,amountModel,container){
 		barContainer =container;
@@ -86,10 +109,10 @@ ZMO.modules.kegstatusView = (function($,ajax){
                 formatter: function() {
                 	if(this.series.name == wording.REMAINING){
                 		 return ''+
-                         this.series.name +': '+ this.y +' Liter '+this.series.brand;
+                         this.series.name +': '+ this.y +' Liter '+keglist(this.key).brand;
                 	}else{
                 		 return ''+
-                         this.series.name +': '+ this.point.total +' Liter '+this.series.brand;
+                         this.series.name +': '+ this.point.total +' Liter '+keglist(this.key).brand;
                 	}
                    
                 }
@@ -167,13 +190,6 @@ ZMO.modules.kegstatusView = (function($,ajax){
 	var createGeneralStats = function(statsModel,container){
 		var table = $("<table>").addClass("stats-drinker");
 		var tp = ich["ZMO-stats-drinker"];
-//		ONCE_DRAFT:"Gr&ouml;&szlig;te auf einmal gezapfte Menge",
-//		COMPLETE_AMOUNT:"Gesamtliteranzahl",
-//		COMPLETE_DRAFTS:"Gesamtanzahl Zapfvorg&auml;nge",
-//		MID_DRAFTS:"Durchschnittliche Zapfvorg&auml;nge",
-//		GAINED_ACHIEVEMENTS:"Bisher erreichte Achievements",
-//		MOST_ACTIVITIY_HOUR:"Most Activity&copy; Hour",
-//		MOST_ACHIEVEMENT_HOUR:"Most Achievement&copy; Hour"
 		table.append(tp(generateObj(wording.COMPLETE_AMOUNT,statsModel.amount.complete,"l")))
 			.append(tp(generateObj(wording.ONCE_DRAFT,statsModel.amount.once,"l")))
 			.append(tp(generateObj(wording.MID_DRAFTS,statsModel.drawCount.average,"x/h")))
