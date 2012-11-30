@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -19,8 +20,13 @@ import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 import static org.junit.Assert.assertEquals;
 
@@ -28,202 +34,213 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests the class {@link RankingsResource}.
- * Different users, multiple {@link Drawing}, multiple {@link Account}
+ * Tests the class {@link RankingsResource}. Different users, multiple
+ * {@link Drawing}, multiple {@link Account}
  * 
  * @author PB
- *
+ * 
  */
 public class TestRankingsResource extends AbstractMockingTest {
 
 	private Account account;
 	private Account account2;
 	
-	private User user1, user2, user3, userForeignAcc, userEmpty;
-	private Drawing drawing1, drawing2, drawing3, drawing4, drawing5;  
+	private Box box, box2;
+	private Keg keg, keg2;
 	
+	private User user1, user2, user3, userForeignAcc, userEmpty;
+	private Drawing drawing1, drawing2, drawing3, drawing4, drawing5;
+	private Achievement achievement1, achievement2, achievement3;
+
+	private Date tooEarly, midDate, midDate2, tooLate;
+	private String midDateString, midDate2String;
 
 	@Before
 	public void setupData() {
-		account = Zapfmaster2000Factory.eINSTANCE.createAccount();
-		account2 = Zapfmaster2000Factory.eINSTANCE.createAccount();
+		truncate();
 
-		//test users
-		//number2 in ranking
-		user1 = Zapfmaster2000Factory.eINSTANCE.createUser();
-		user1.setName("Horst");
-		user1.setImagePath("/imagePath/image.jpg");
+		account = createAccount("foo-account");
 
-		user2 = Zapfmaster2000Factory.eINSTANCE.createUser();
-		user2.setName("Ingrid");
-		
-		//number1 in ranking
-		user3 = Zapfmaster2000Factory.eINSTANCE.createUser();
-		user3.setName("Waldemar");
-		
-		//user in different account		
-		userForeignAcc = Zapfmaster2000Factory.eINSTANCE.createUser();
-		userForeignAcc.setName("Judas");
+		account2 = createAccount("bar-account");
 
-		//no drawings
-		userEmpty = Zapfmaster2000Factory.eINSTANCE.createUser();
-		userEmpty.setName("Wilfried");
-		
-		SimpleDateFormat df = new SimpleDateFormat(PlatformConstants.DATE_TIME_FORMAT);
-		
-		//test drawings
-		try {
-			drawing1 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
-			drawing1.setUser(user1);
-			drawing1.setAmount(5.14);
-			drawing1.setDate(df.parse("20120101-120000"));
-			
-			drawing2 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
-			drawing2.setUser(user2);
-			drawing2.setAmount(2.71);
-			drawing2.setDate(df.parse("20120101-130000"));
-			
-			drawing3 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
-			drawing3.setUser(user3);
-			drawing3.setAmount(4.1);
-			drawing3.setDate(df.parse("20120101-090000"));
-			
-			drawing4 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
-			drawing4.setUser(user3);
-			drawing4.setAmount(6);
-			drawing4.setDate(df.parse("20120101-140000"));
-			
-			//drawing in different account. should not appear in ranking 
-			drawing5 = Zapfmaster2000Factory.eINSTANCE.createDrawing();
-			drawing5.setUser(userForeignAcc);
-			drawing5.setAmount(20);
-			drawing5.setDate(df.parse("20120101-130000"));
-		} catch (ParseException e){
-			//
-		}
-		
-		account.getUsers().add(user1);
-		account.getUsers().add(user2);
-		account.getUsers().add(user3);
-		account.getUsers().add(userEmpty);
-		account2.getUsers().add(userForeignAcc);
-		
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
-				.getSessionFactory().getCurrentSession();
-		Transaction tx = session.beginTransaction();
+		// test users
+		// number2 in ranking
+		user1 = createUser("Horst", "/imagePath/image.jpg", "user-pw", 101,
+				Sex.MALE, 85, UserType.USER, account);
+		user2 = createUser("Ingrid", "/imagePath/image.jpg", "user-pw", 201,
+				Sex.FEMALE, 85, UserType.USER, account);
+		user3 = createUser("Waldemar", "/imagePath/image.jpg", "user-pw", 301,
+				Sex.MALE, 85, UserType.USER, account);
 
-		session.save(account);
-		session.save(account2);
+		// Users that should not appear anywhere
+		userForeignAcc = createUser("Judas", "/imagePath/image.jpg", "user-pw",
+				101, Sex.MALE, 85, UserType.USER, account2);
+		userEmpty = createUser("Wilfried", "/imagePath/image.jpg", "user-pw",
+				401, Sex.MALE, 85, UserType.USER, account);
+		
+		SimpleDateFormat df = new SimpleDateFormat(
+				PlatformConstants.DATE_TIME_FORMAT);
+		// try {
+		// tooEarly = df.parse("20110101-090000");
+		// tooLate = df.parse("20120201-130000");
+		// midDate = df.parse("20120101-120000");
+		// midDate2 = df.parse("20120101-130000");
+		// } catch (ParseException e){
+		// //
+		// }
+		tooEarly = createDate(2011, 1, 1, 12, 0, 0);
+		tooLate = createDate(2012, 1, 1, 14, 0, 0);
 
-		tx.commit();
+		midDate = createDate(2012, 1, 1, 11, 0, 0);
+		midDate2 = createDate(2012, 1, 1, 12, 0, 0);
+
+		midDateString = df.format(midDate);
+		midDate2String = df.format(midDate2);
+
+		box = createBox("123", "home", "0.1", account);
+		box2 = createBox("123", "home", "0.1", account2);
+		
+		keg = createKeg("TestBier", tooEarly, null, 50, box);
+		keg2 = createKeg("TestBier", tooEarly, null, 50, box2);		
+		
+		// test drawings		
+		drawing1 = createDrawing(5.14, midDate, keg, user1);
+		drawing2 = createDrawing(2.71, midDate2, keg, user2);
+		drawing3 = createDrawing(4.1, tooEarly, keg, user3);
+		drawing4 = createDrawing(6, tooLate, keg, user3);
+		drawing5 = createDrawing(20, midDate, keg2, userForeignAcc);
+		
+
+		// Achievements
+		achievement3 = createAchievement("achievement-3", "desc3", "img/ach3");
+		achievement1 = createAchievement("achievement-1", "desc1", "img/ach1");
+		achievement2 = createAchievement("achievement-2", "desc2", "img/ach2");
+
+		createGainedAchievement(createDate(2012, 1, 1), user1, achievement1);
+		createGainedAchievement(createDate(2012, 2, 1), user1, achievement2);
+		createGainedAchievement(createDate(2012, 3, 1), user2, achievement1);
+		createGainedAchievement(createDate(2012, 4, 1), userForeignAcc,
+				achievement1);
 
 		AuthService authService = mock(AuthService.class);
 		when(authService.retrieveAccount(null)).thenReturn(account);
 		mockAuthService(authService);
 
 	}
-	
+
 	@Test
-	public void testAmountRanking(){
+	public void testAmountRanking() {
 		RankingsResource rankingsResource = new RankingsResource();
-		Response response = rankingsResource.bestUserListTimeSpan(null,null,null);
-		
-		Object[] rawUserAmountResponse =  (Object[]) response.getEntity();
-		
+		Response response = rankingsResource.bestUserListTimeSpan(null, null,
+				null);
+
+		Object[] rawUserAmountResponse = (Object[]) response.getEntity();
+
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-		
+
 		assertEquals(3, rawUserAmountResponse.length);
-		
-		assertEquals(user3.getId(), ((UserAmountResponse) rawUserAmountResponse[0]).getId());
-		assertEquals(user1.getId(),  ((UserAmountResponse) rawUserAmountResponse[1]).getId());
-		
-		assertEquals(user1.getImagePath(), ((UserAmountResponse) rawUserAmountResponse[1]).getImage());
+
+		assertEquals(user3.getId(),
+				((UserAmountResponse) rawUserAmountResponse[0]).getId());
+		assertEquals(user1.getId(),
+				((UserAmountResponse) rawUserAmountResponse[1]).getId());
+
+		assertEquals(user1.getImagePath(),
+				((UserAmountResponse) rawUserAmountResponse[1]).getImage());
 	}
-	
+
 	@Test
-	public void testAmountFrom(){
+	public void testAmountFrom() {
 		RankingsResource rankingsResource = new RankingsResource();
-		
-		String pFrom = "20120101-100000";
-		
-		Response response = rankingsResource.bestUserListTimeSpan(pFrom,null,null);
-		
-		Object[] rawUserAmountResponse =  (Object[]) response.getEntity();
-		
+
+		// String pFrom = "20120101-100000";
+
+		Response response = rankingsResource.bestUserListTimeSpan(
+				midDateString, null, null);
+
+		Object[] rawUserAmountResponse = (Object[]) response.getEntity();
+
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-		
-		
+
 		assertEquals(3, rawUserAmountResponse.length);
-		assertEquals(user3.getId(), ((UserAmountResponse) rawUserAmountResponse[0]).getId());
+		assertEquals(user3.getId(),
+				((UserAmountResponse) rawUserAmountResponse[0]).getId());
 	}
-	
+
 	@Test
 	public void testAmountFromTo() {
 		RankingsResource rankingsResource = new RankingsResource();
 		
-		String pFrom = "20120101-100000";
-		String pTo = "20120101-130000";
-		
-		Response response = rankingsResource.bestUserListTimeSpan(pFrom,pTo,null);
-		
+		Response response = rankingsResource.bestUserListTimeSpan(
+				midDateString, midDate2String, null);
+
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-		
-		Object[] rawUserAmountResponse =  (Object[]) response.getEntity();
-		
+
+		Object[] rawUserAmountResponse = (Object[]) response.getEntity();
+
 		assertEquals(2, rawUserAmountResponse.length);
-		//order should have changed
-		assertEquals(user1.getId(), ((UserAmountResponse) rawUserAmountResponse[0]).getId());
+		// order should have changed
+		assertEquals(user1.getId(),
+				((UserAmountResponse) rawUserAmountResponse[0]).getId());
 	}
-	
-	
+
 	@Test
-	public void testDrawCountRanking(){
+	public void testDrawCountRanking() {
 		RankingsResource rankingsResource = new RankingsResource();
-		Response response = rankingsResource.drawCountUserListTimeSpan(null,null,null);
-		
-		Object[] rawDrawCountResponse =  (Object[]) response.getEntity();
-		
+		Response response = rankingsResource.drawCountUserListTimeSpan(null,
+				null, null);
+
+		Object[] rawDrawCountResponse = (Object[]) response.getEntity();
+
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-		
+
 		assertEquals(3, rawDrawCountResponse.length);
-		
-		assertEquals(user3.getDrawings().size(), ((DrawCountUserListResponse) rawDrawCountResponse[0]).getDrawCount());
-		assertEquals(user1.getDrawings().size(), ((DrawCountUserListResponse) rawDrawCountResponse[1]).getDrawCount());
+
+		assertEquals(user3.getDrawings().size(),
+				((DrawCountUserListResponse) rawDrawCountResponse[0])
+						.getDrawCount());
+		assertEquals(user1.getDrawings().size(),
+				((DrawCountUserListResponse) rawDrawCountResponse[1])
+						.getDrawCount());
 	}
-	
+
 	@Test
-	public void testDrawCountFrom(){
+	public void testDrawCountFrom() {
 		RankingsResource rankingsResource = new RankingsResource();
-		
+
 		String pFrom = "20120101-100000";
-		
-		Response response = rankingsResource.drawCountUserListTimeSpan(pFrom,null,null);
-		
-		Object[] rawDrawCountResponse =  (Object[]) response.getEntity();
-		
+
+		Response response = rankingsResource.drawCountUserListTimeSpan(pFrom,
+				null, null);
+
+		Object[] rawDrawCountResponse = (Object[]) response.getEntity();
+
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-		
-		
+
 		assertEquals(3, rawDrawCountResponse.length);
-		assertEquals(user1.getDrawings().size(), ((DrawCountUserListResponse) rawDrawCountResponse[0]).getDrawCount());
+		assertEquals(user1.getDrawings().size(),
+				((DrawCountUserListResponse) rawDrawCountResponse[0])
+						.getDrawCount());
 	}
-	
+
 	@Test
 	public void testDrawCountFromTo() {
 		RankingsResource rankingsResource = new RankingsResource();
-		
+
 		String pFrom = "20120101-100000";
 		String pTo = "20120101-130000";
-		
-		Response response = rankingsResource.drawCountUserListTimeSpan(pFrom,pTo,null);
-		
+
+		Response response = rankingsResource.drawCountUserListTimeSpan(pFrom,
+				pTo, null);
+
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-		
-		Object[] rawDrawCountResponse =  (Object[]) response.getEntity();
-		
+
+		Object[] rawDrawCountResponse = (Object[]) response.getEntity();
+
 		assertEquals(2, rawDrawCountResponse.length);
-		assertEquals(user1.getDrawings().size(), ((DrawCountUserListResponse) rawDrawCountResponse[0]).getDrawCount());
+		assertEquals(user1.getDrawings().size(),
+				((DrawCountUserListResponse) rawDrawCountResponse[0])
+						.getDrawCount());
 	}
-	
 
 }
