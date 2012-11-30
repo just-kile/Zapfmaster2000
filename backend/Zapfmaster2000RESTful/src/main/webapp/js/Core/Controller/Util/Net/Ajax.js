@@ -7,21 +7,29 @@ ZMO.Util.Net.Ajax = (function($){
 	 * Get datas instant
 	 */
 	var getDatas = function(url,callback,datas){
+		if(!ZMO.exists(datas))datas = {};
+		datas["_"] = new Date().getTime();
 		$.ajax({
 			url:url,
 			type:"GET",
 			data:datas,
-			success:function(resp){
+			complete:function(resp){
+			if(resp.status==200){
 				try{
-					callback(resp);
+					var data = $.parseJSON(resp.responseText);
 				}catch(e){
 					ZMO.log(e);
 				}
+				callback(data);
+			}else{
 				
+			}	
 			}
 		});
 	};
-
+	/*****
+	 * Interval pull
+	 *****/
 	/**
 	 * If function want to get datas once this function removes aspirant after it gets the datas
 	 */
@@ -49,25 +57,28 @@ ZMO.Util.Net.Ajax = (function($){
 	 * @param {String or Array} keywordQueue separated by comma or array
 	 * @param {Function} callback
 	 * @param {Boolean} onlyOnce
+	 * @param {Boolean} rawData return only
 	 */
-	var enqueueDatas = function(url,callback,onlyOnce){
+	var enqueueDatas = function(url,callback,onlyOnce,rawData){
 		if(!ZMO.exists(aspirantModules[url])){
 			aspirantModules[url] = [];
 		}
 		aspirantModules[url].push(  {
 			callback:callback,
-			once:!!onlyOnce
+			once:!!onlyOnce,
+			rawData:!!rawData
 		});
 	};
 	/**
-	 * Gets the datas in the Queue, aber pullTimeout time, calls self again
+	 * Gets the datas in the Queue, wait pullTimeout time, calls self again
 	 */
 	var getEnqueueDatas = function(){
 		$.each(aspirantModules,function(url,modulesArr){
 			getDatas(url,function(response){
 				//send datas to aspirants
+				var statsModel = new ZMO.modules.StatsModel(response);
 				$.each(modulesArr,function(ind,val){
-					if(val.callback)val.callback(response);
+					if(val.callback)val.callback(val.rawData?response:statsModel);
 				});
 				//remove the modules which only wanted info once
 				removeOnceCalls();
@@ -101,6 +112,9 @@ ZMO.Util.Net.Ajax = (function($){
 	var resetQueue = function(){
 		aspirantModules = {};
 	};
+	/*******
+	 * Server Push
+	 *******/
 	var newsPush=null,rfidPush=null;
 	var connectToChannel = function(callback){
 		newsPush = $.ajax({
@@ -112,17 +126,23 @@ ZMO.Util.Net.Ajax = (function($){
 				ZMO.log("New Request to "+ZMO.modules.Constants.push.NEWS);
 				connectToChannel(callback);
 			},
-			error:function(){
-				ZMO.log("Error: reconnect ...");
+			error:function(e){
+				if(e.status==0){
+					ZMO.log("Request abort success!");
+				}else{
+					
+				ZMO.log("Error: reconnect news...");
 				//setTimeout(function(){
 					connectToChannel(callback);
 				//},1000);
+
+				}
 			}
 		});
 		
 	};
 	var rfidLogin = function(callback){
-		$.ajax({
+		rfidPush = $.ajax({
 			type:"GET",
 			url:ZMO.modules.Constants.push.RFID,
 			timeout:10000000, 
@@ -131,23 +151,32 @@ ZMO.Util.Net.Ajax = (function($){
 				ZMO.log("New Request to "+ZMO.modules.Constants.push.RFID);
 				rfidLogin(callback);
 			},
-			error:function(){
-				ZMO.log("Error: reconnect ...")
+			error:function(e){
+				if(e.status==0){
+					ZMO.log("Request abort success!");
+				}else{
+					ZMO.log("Error: reconnect RFID...")
 				//setTimeout(function(){
 					rfidLogin(callback);
 				//},1000);
+				}
 			}
 		});
 	};
 	var abortNewsPush = function(){
 		if(ZMO.exists(newsPush))newsPush.abort();
+		ZMO.log("News Push aborted.");
 		newsPush = null;
 	};
 	var abortRfidPush = function(){
 		if(ZMO.exists(rfidPush))rfidPush.abort();
+		ZMO.log("RFID Push aborted.");
 		rfidPush = null;
 	};
-	
+	var abortPushRequests = function(){
+		abortNewsPush();
+		abortRfidPush();
+	};
 	var pub = {
 			getDatas:getDatas,
 			enqueueDatas:enqueueDatas,
@@ -157,7 +186,8 @@ ZMO.Util.Net.Ajax = (function($){
 			connectToChannel:connectToChannel,
 			rfidLogin:rfidLogin,
 			abortNewsPush:abortNewsPush,
-			abortRfidPush:abortRfidPush
+			abortRfidPush:abortRfidPush,
+			abortPushRequests:abortPushRequests
 	
 	};
 	return pub;

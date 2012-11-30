@@ -114,4 +114,5 @@ ZMO.MemberModel = function(config) {
 		this.achievements.splice(max, this.achievements.length - max);
 	}
 	
-}
+};
+

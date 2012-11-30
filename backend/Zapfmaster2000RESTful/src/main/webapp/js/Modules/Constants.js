@@ -41,6 +41,10 @@ ZMO.modules.Constants = {
 			FRONTPAGESTATS:"/tmp/stats_fp.json",
 			//NEWSLIST:"tmp/news.json"
 			NEWSLIST:"rest/news",
+			//NEWSLIST:"//thomas-notebook-ubuntu/rest/news",
+//			STATS:"rest/stats/getStatsAsJson"
+			STATS:"tmp/stats.json",
+
 			MEMBERS:"rest/members"
 			//NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
@@ -50,6 +54,6 @@ ZMO.modules.Constants = {
 		},
 		member:{
 			MAX_ACHIEVEMENTS:8
-		}
-
+		},
+		
 }
