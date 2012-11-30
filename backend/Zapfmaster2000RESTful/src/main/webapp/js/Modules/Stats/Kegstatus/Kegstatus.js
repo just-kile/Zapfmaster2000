@@ -1,7 +1,7 @@
 ZMO.modules = ZMO.modules || {};
 
 ZMO.modules.kegstatus = (function($,view,ajax){
-	var mC = ZMO.modules.Constants,container=null,drinkstatsContainer=null,chartContainer=null,barChartID ="ZMO-stats-barchart";
+	var mC = ZMO.modules.Constants,container=null,drinkstatsContainer=null,chartContainer=null,generalStatsContainer=null,barChartID ="ZMO-stats-barchart";
 	
 	var onDatasLoaded =function(statsModel){
 		var keglistModel = statsModel.keg;
@@ -9,6 +9,8 @@ ZMO.modules.kegstatus = (function($,view,ajax){
 		view.createBarChart(keglistModel,statsModel.amount,chartContainer);
 		drinkstatsContainer.empty();
 		view.createDrinkstats(statsModel,drinkstatsContainer);
+		generalStatsContainer.empty();
+		view.createGeneralStats(statsModel,generalStatsContainer);
 		
 	};
 	var init = function(){
@@ -22,7 +24,7 @@ ZMO.modules.kegstatus = (function($,view,ajax){
 		//bestlist container
 		drinkstatsContainer = $("<div>").addClass("statsDiv").appendTo(container);
 		//general stats
-		
+		generalStatsContainer = $("<div>").addClass("statsDiv").appendTo(container);
 		return container;
 	};
 	var pub = {

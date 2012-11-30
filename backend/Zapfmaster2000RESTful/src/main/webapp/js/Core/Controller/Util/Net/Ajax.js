@@ -17,10 +17,10 @@ ZMO.Util.Net.Ajax = (function($){
 			if(resp.status==200){
 				try{
 					var data = $.parseJSON(resp.responseText);
-					callback(data);
 				}catch(e){
 					ZMO.log(e);
 				}
+				callback(data);
 			}else{
 				
 			}	

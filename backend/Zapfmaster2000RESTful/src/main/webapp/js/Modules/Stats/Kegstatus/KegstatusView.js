@@ -11,7 +11,15 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		COMPLETE:"Komplett",
 		TITLE:"Fass Uebersicht",
 		XBAR:"Liter",
-		PROMILLE:"Ungefährer Blutalkohol"
+		PROMILLE:"Ungef&auml;hrer Blutalkohol",
+		
+		ONCE_DRAFT:"Gr&ouml;&szlig;te auf einmal gezapfte Menge",
+		COMPLETE_AMOUNT:"Gesamtliteranzahl",
+		COMPLETE_DRAFTS:"Gesamtanzahl Zapfvorg&auml;nge",
+		MID_DRAFTS:"Durchschnittliche Zapfvorg&auml;nge",
+		GAINED_ACHIEVEMENTS:"Bisher erreichte Achievements",
+		MOST_ACTIVITIY_HOUR:"Most Activity&copy; Hour",
+		MOST_ACHIEVEMENT_HOUR:"Most Achievement&copy; Hour"
 	};
 	var drinkersWording= {
 		ALLTIME:"All Time",
@@ -22,6 +30,9 @@ ZMO.modules.kegstatusView = (function($,ajax){
 	var init = function(cont){
 		
 	};
+	/******
+	 * Create Bar chart
+	 ******/
 	var convertToSeries = function(keglistModel,amountModel){
 		var seriesObj =[];
 		seriesObj.categories=[];
@@ -29,10 +40,10 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		try{
 			$.each(keglistModel,function(ind,keg){
 				//var kegName = keg.brand;
-				var amount = parseFloat(amountModel.current);
+				var amount = parseFloat(keg.current_amount);
 				var complAmount = parseFloat(keg.size);
-				
 				seriesObj.categories.push( keg.keg_id);
+				seriesObj.brand = keg.brand;
 				remaining.push(amount);
 				complete.push(complAmount - amount);
 			
@@ -75,10 +86,10 @@ ZMO.modules.kegstatusView = (function($,ajax){
                 formatter: function() {
                 	if(this.series.name == wording.REMAINING){
                 		 return ''+
-                         this.series.name +': '+ this.y +' Liter';
+                         this.series.name +': '+ this.y +' Liter '+this.series.brand;
                 	}else{
                 		 return ''+
-                         this.series.name +': '+ this.point.total +' Liter';
+                         this.series.name +': '+ this.point.total +' Liter '+this.series.brand;
                 	}
                    
                 }
@@ -88,10 +99,17 @@ ZMO.modules.kegstatusView = (function($,ajax){
                     stacking: 'normal'
                 }
             },
-                series: series.series
+            series: series.series
         });
    
 	};
+	var updateChart = function(val){
+		var series = chart.series[0];
+		series.addPoint(val, true, true);
+	};
+	/******
+	 * Drinker stats
+	 ******/
 	var parseTableObject = function(description,statsList,unit){
 		var obj = {description:description,isLink:true};
 		
@@ -135,15 +153,43 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		}));
 		drinkerContainer.append(table);
 	};
-	var updateChart = function(val){
-		var series = chart.series[0];
-		series.addPoint(val, true, true);
+	/******
+	 * General stats
+	 ******/
+	var generateObj = function(description,text,unit){
+		return {
+			description:description,
+			isText:true,
+			text:text,
+			unit:unit
+		};
+	};
+	var createGeneralStats = function(statsModel,container){
+		var table = $("<table>").addClass("stats-drinker");
+		var tp = ich["ZMO-stats-drinker"];
+//		ONCE_DRAFT:"Gr&ouml;&szlig;te auf einmal gezapfte Menge",
+//		COMPLETE_AMOUNT:"Gesamtliteranzahl",
+//		COMPLETE_DRAFTS:"Gesamtanzahl Zapfvorg&auml;nge",
+//		MID_DRAFTS:"Durchschnittliche Zapfvorg&auml;nge",
+//		GAINED_ACHIEVEMENTS:"Bisher erreichte Achievements",
+//		MOST_ACTIVITIY_HOUR:"Most Activity&copy; Hour",
+//		MOST_ACHIEVEMENT_HOUR:"Most Achievement&copy; Hour"
+		table.append(tp(generateObj(wording.COMPLETE_AMOUNT,statsModel.amount.complete,"l")))
+			.append(tp(generateObj(wording.ONCE_DRAFT,statsModel.amount.once,"l")))
+			.append(tp(generateObj(wording.MID_DRAFTS,statsModel.drawCount.average,"x/h")))
+			.append(tp(generateObj(wording.COMPLETE_DRAFTS,statsModel.drawCount.operations,"x")))
+			.append(tp(generateObj(wording.MOST_ACTIVITIY_HOUR,statsModel.amount.mostActivityHour," Uhr")))
+			.append(tp(generateObj(wording.GAINED_ACHIEVEMENTS,statsModel.achievements.count,"")))
+			.append(tp(generateObj(wording.MOST_ACHIEVEMENT_HOUR,statsModel.achievements.mostAchievementHour," Uhr")));
+			
+		table.appendTo(container);
 	};
 	var pub = {
 			updateChart:updateChart,
 			init:init,
 			createBarChart:createBarChart,
-			createDrinkstats:createDrinkstats
+			createDrinkstats:createDrinkstats,
+			createGeneralStats:createGeneralStats
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

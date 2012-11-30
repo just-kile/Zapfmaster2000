@@ -554,4 +554,8 @@ div.stats-achievements{
 table.stats-drinker{
 	color:white;
 	font-size:13px;
+	width:100%;
+}
+tr.stats-drinker-row:nth-child(even){
+	background:rgba(0,0,0,0.4);
 }

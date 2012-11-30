@@ -5,14 +5,15 @@ ZMO.modules = ZMO.modules || {};
  * @return {ZMO.modules.StatsModel}
  */
 ZMO.modules.StatsModel = function(config){
-	this.keg = [new ZMO.modules.kegModel(config.keg)];
+	//TODO
+	this.keg = config.keg;//new ZMO.modules.kegModel(config.keg);
+	
 	this.amount = new ZMO.modules.amountStatsModel(config.amount);
 	this.achievements = new ZMO.modules.achievementStatsModel(config.achievements);
 	this.drawCount  =new ZMO.modules.drawCountModel (config.drawCount);
 	this.progress = new ZMO.modules.progressModel(config.progress);
 
 	this.promille = config.promille?config.promille.average:null;
-	
 	this.bestUserList = config.bestUserList;
 	this.bestUserListHour = config.bestUserListHour;
 	this.achievementUserList = config.achievementUserList;
@@ -31,7 +32,7 @@ ZMO.modules.kegModel = function(config){
       this.size = config.size;
       this.start_date=new Date();//config.start_date;
       this.keg_numbers=config.keg_numbers;
-    
+      this.current_amount = config.current_amount;
 };
 /**
  * Amount model
