@@ -19,8 +19,8 @@ ZMO.modules_properties ={
 					position:[0,1]
 				},{
 					moduleId:"challenges",
-					ratio:"100%",
-					position:[1,0]
+					ratio:"30%",
+					position:[0,1]
 				}],
 				  
 				footer:[]

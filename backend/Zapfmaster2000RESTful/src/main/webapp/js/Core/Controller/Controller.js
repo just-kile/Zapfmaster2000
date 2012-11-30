@@ -10,7 +10,7 @@ ZMO.controller = (function($,document,view,ajax){
 		ajax.resetQueue();
 		ajax.stopPull();
 		ajax.abortPushRequests();
-		
+		$(window).unbind("scroll");
 		//var hash = Object.keys(url)[0];
 		var arr=[],datas={};
 		if(hash){
