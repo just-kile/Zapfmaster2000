@@ -61,8 +61,8 @@ ZMO.modules.lineChartView = (function($,ajax){
             },
             series: [{
                 name: 'Draw Amount',
-                pointInterval:  3600 * 1000*0.5, //half an hour
-                pointStart: Date.UTC(2013, 0, 01),
+                pointInterval:  progressModel.interval*60*1000,//60*60 * 1000*0.5, //half an hour
+                pointStart: progressModel.start_date,//Date.UTC(2013, 0, 01),
                 data: progressModel.data
             }]
         });

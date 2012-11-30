@@ -10,7 +10,13 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		REMAINING:"Verbleibend",
 		COMPLETE:"Komplett",
 		TITLE:"Fass Uebersicht",
-		XBAR:"Liter"
+		XBAR:"Liter",
+		PROMILLE:"Ungefährer Blutalkohol"
+	};
+	var drinkersWording= {
+		ALLTIME:"All Time",
+		DRINKER_OF_HOUR:"Trinker der Stunde",
+		MOST_LOYAL:"Treuester Kunde",
 	};
 	
 	var init = function(cont){
@@ -32,7 +38,7 @@ ZMO.modules.kegstatusView = (function($,ajax){
 			
 			});
 		}catch(e){
-			ZMO.log("Parse Error Kegstatus!")
+			ZMO.log("Parse Error Kegstatus!");
 		}
 		seriesObj.series=[{name:wording.COMPLETE,data:complete},{name:wording.REMAINING,data:remaining,showInLegend:false}];
 		
@@ -86,13 +92,48 @@ ZMO.modules.kegstatusView = (function($,ajax){
         });
    
 	};
-	var createDrinkstats = function(userlistModel,container){
-		drinkerContainer =  container;
-		var table = ich["ZMO-stats-drinker"]({
-			
-		});
+	var parseTableObject = function(description,statsList,unit){
+		var obj = {description:description,isLink:true};
 		
-		//drinkerContainer.append(table);
+		if(statsList && ZMO.exists(statsList[0])){
+			obj.user_name = statsList[0].user_name;
+			obj.user_id = statsList[0].user_id;
+			obj.amount  = (statsList[0].amount || statsList[0].draw_count ||statsList[0].achievement_count)+" "+unit;
+		}else{
+			obj.user_name = "Noch niemand";
+			obj.user_id = "";
+		}
+		
+		return obj;
+	};
+	var createDrinkstats = function(statsModel,container){
+		
+		drinkerContainer =  container;
+		var table = $("<table>").addClass("stats-drinker");
+		var template = ich["ZMO-stats-drinker"];
+		$.each(drinkersWording,function(ind,val){
+			var obj={};
+			switch(val){
+			case drinkersWording.ALLTIME:
+				obj = parseTableObject(val,statsModel.bestUserList,"l");
+				break;
+			case drinkersWording.DRINKER_OF_HOUR:
+				obj = parseTableObject(val,statsModel.bestUserListHour,"l");
+				break;
+			case drinkersWording.MOST_LOYAL:
+				obj = parseTableObject(val,statsModel.drawCountUserList,"x");
+				break;
+			}
+			var row = template(obj);
+			table.append(row);
+		});
+		table.append(template({
+			description:wording.PROMILLE,
+			isText:true,
+			text:statsModel.promille,
+			unit:"&permil;"
+		}));
+		drinkerContainer.append(table);
 	};
 	var updateChart = function(val){
 		var series = chart.series[0];

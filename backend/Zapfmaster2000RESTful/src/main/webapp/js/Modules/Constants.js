@@ -54,6 +54,6 @@ ZMO.modules.Constants = {
 		},
 		member:{
 			MAX_ACHIEVEMENTS:8
-		}
-
+		},
+		
 }

@@ -10,6 +10,7 @@ ZMO.modules.bestlist = (function($,view,ajax){
 		var userlistModel = statsModel.bestUserList;
 		view.init();
 		view.createPieChart(userlistModel,chartContainer);
+		bestlistContainer.empty();
 		view.createBestlist(userlistModel,bestlistContainer);
 	};
 	/**

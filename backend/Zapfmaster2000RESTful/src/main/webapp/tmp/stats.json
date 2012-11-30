@@ -33,6 +33,28 @@
             "user_id": "12",
             "user_image": "/images/bla",
             "amount": "4.97"
+        },        {
+            "user_name": "Tim",
+            "user_id": "9",
+            "user_image": "/images/bla",
+            "amount": "5.57"
+        },
+        {
+            "user_name": "Felix",
+            "user_id": "12",
+            "user_image": "/images/bla",
+            "amount": "4.97"
+        },        {
+            "user_name": "Tim",
+            "user_id": "9",
+            "user_image": "/images/bla",
+            "amount": "5.57"
+        },
+        {
+            "user_name": "Felix",
+            "user_id": "12",
+            "user_image": "/images/bla",
+            "amount": "4.97"
         }
     ],
     "bestUserListHour": [

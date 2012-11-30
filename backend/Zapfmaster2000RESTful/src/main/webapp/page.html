@@ -231,16 +231,19 @@
 </tr>
 </script>
 <script type="text/html" id="ZMO-stats-drinker">
-<table>
-<tr class="stats-drinker">
+<tr >
 	<td>
-		All Time:
+		{{description}}
 	</td>
 	<td>
-		<a href="#stats?userid={{user_id}}">{{user_name}}</a>	
+		{{#isLink}}
+			<a href="#stats?userid={{user_id}}">{{user_name}}</a><span>&nbsp;({{amount}})</span>	
+		{{/isLink}}
+		{{#isText}}
+			<span>{{text}}</span><span>&nbsp;{{unit}}</span>	
+		{{/isText}}
 	</td>
 </tr>
-</table>
 </script>
 </head>
 <body>

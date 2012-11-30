@@ -52,7 +52,7 @@ ZMO.modules.bestlistView = (function($,ajax){
                         connectorColor: '#fff',
                         distance:0,
                         formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+this.percentage.toFixed(1) +' %';
+                            return '<b>'+ this.point.name +'</b>';//+this.percentage.toFixed(1) +' %';
                         }
                     }
                 }

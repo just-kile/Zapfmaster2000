@@ -551,3 +551,7 @@ div.stats-achievements{
 	margin-top:15px;
 	margin-left:70px;
 }
+table.stats-drinker{
+	color:white;
+	font-size:13px;
+}
