@@ -65,16 +65,16 @@ ZMO.modules.bestlistView = (function($,ajax){
         });
    
 	};
-	var createBestlist = function(userlistModel,container){
-		bestlistContainer =  container;
+	var createBestlist = function(userlistModel,container,unit,headlineText){
 		var template = ich["ZMO-stats-bestlist-item"];
 		var table = $("<table>").addClass("bestlist-table");
 		$.each(userlistModel,function(ind,val){
 			val.rank = ind+1;
+			val.unit = unit?unit:"l";
 			table.append(template(val));
 		});
-		var headline  =$("<span>").text("Bestlist");
-		bestlistContainer.append(headline).append(table);
+		var headline  =$("<span>").text(headlineText?headlineText:"Bestlist");
+		container.append(headline).append(table);
 	};
 	var updateChart = function(val){
 		var series = chart.series[0];

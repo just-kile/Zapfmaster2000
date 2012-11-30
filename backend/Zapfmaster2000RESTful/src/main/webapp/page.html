@@ -226,7 +226,10 @@
 		<a href="#stats?userid={{user_id}}">{{user_name}}</a>	
 	</td>
 	<td class="amount">
-		{{amount}} l
+		{{#amount}}{{amount}}{{/amount}}
+		{{#achievement_count}}{{achievement_count}}{{/achievement_count}}
+		{{#draw_count}}{{draw_count}}{{/draw_count}}
+ {{unit}}
 	</td>
 </tr>
 </script>

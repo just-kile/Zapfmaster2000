@@ -531,7 +531,8 @@ tr.bestlist-item td.name{
 width:60%;	
 }
 tr.bestlist-item td.amount{
-width:30%;	
+width:30%;
+white-space:nowrap;
 }
 /*End Bestlist*/
 
@@ -550,11 +551,16 @@ div.stats-bestlist{
 div.stats-achievements{
 	margin-top:15px;
 	margin-left:70px;
+	text-align:center;
 }
 table.stats-drinker{
 	color:white;
 	font-size:13px;
 	width:100%;
+}
+tr.stats-drinker-row >td{
+padding:5px;
+
 }
 tr.stats-drinker-row:nth-child(even){
 	background:rgba(0,0,0,0.4);
