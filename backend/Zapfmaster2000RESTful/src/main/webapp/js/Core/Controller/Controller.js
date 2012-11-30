@@ -5,19 +5,25 @@ ZMO.controller = (function($,document,view,ajax){
  * Gets called when a page changes
  */
 	var onPageChange =function(event,datas){
-		var url = $.bbq.getState();
+//		var url = $.bbq.getState();
+		var hash = window.location.hash;
 		ajax.resetQueue();
 		ajax.stopPull();
 		ajax.abortPushRequests();
-		var pageLoaded = false;
-		$.each(mP,function(pageId,val){
-			if(ZMO.exists(url[pageId])&&!pageLoaded){
-				var datas =ZMO.hashHandler.queryToObj( url[pageId]);
-				view.createPage(pageId,val,datas);
-				pageLoaded = true;
-			}
-		});
-		if(!pageLoaded)view.createPage("front",mP.front);
+		
+		//var hash = Object.keys(url)[0];
+		var arr=[],datas={};
+		if(hash){
+			arr = ZMO.hashHandler.queryToObj(hash);
+			url = arr[0];
+			datas = arr[1];
+		}
+
+		if(typeof hash=="undefined" || hash=="" || typeof mP[url] =="undefined"){
+			view.createPage("front",mP.front);
+		}else{
+			view.createPage(url,mP[url],datas);
+		}
 		
 	};
 	var init = function(){

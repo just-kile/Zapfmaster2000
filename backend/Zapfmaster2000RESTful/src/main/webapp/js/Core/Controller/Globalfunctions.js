@@ -23,12 +23,12 @@ ZMO.log = function(str){
 	if(console && ZMO.Constants.debugMode){
 		console.log(str);
 	}
-}
+};
 
 ZMO.changePage = function(pageId,datas){
 	var hash= hashHandler.objToQuery(pageId,datas);
 	window.location.replace(hash);
-}
+};
 ZMO.hashHandler = (function($){
 	var objToQuery  = function(id,datas){
 		var dataArr = [];
@@ -37,21 +37,25 @@ ZMO.hashHandler = (function($){
 		});
 		var dataQuery = dataArr.join(";");
 		return id +"="+ dataQuery;
-	}
+	};
 	var queryToObj = function(query){
-		var tmp  = query.split("=");
-		query = tmp[tmp.length-1];
-		var arr = query.split(";");
+		var tmp  = query.split("?");
 		var respObj = {};
-		$.each(arr,function(ind,val){
-			var tmpArr = val.split(":");
-			respObj[tmpArr[0]] = tmpArr[1];
-		})
-		return respObj;
-	}
+		if(tmp.length>1){
+			query = tmp.length>1?tmp[tmp.length-1]:"";
+			var arr = query.split("&");
+			$.each(arr,function(ind,val){
+				var tmpArr = val.split("=");
+				respObj[tmpArr[0]] = tmpArr[1];
+			});
+		}
+		var tmp1 = tmp[0].split("#");
+		var url =tmp1[tmp1.length-1];
+		return [url,respObj];
+	};
 	var pub = {
 		objToQuery:objToQuery,
 		queryToObj:queryToObj
-	}
+	};
 	return pub;
-})(jQuery)
+})(jQuery);

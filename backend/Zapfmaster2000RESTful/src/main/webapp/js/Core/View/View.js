@@ -13,7 +13,7 @@ ZMO.view=(function(){
 	 * @param {ZMO.PosititionModel} posModel
 	 *  
 	 */
-	var renderModuleModel =function(moduleModel,key){
+	var renderModuleModel =function(moduleModel,key,queryData){
 		var container =$(site[key]);
 		var ratio = moduleModel.ratio;
 		var module = moduleModel.element.getInstance();
@@ -37,7 +37,7 @@ ZMO.view=(function(){
 			$(rowChildren[moduleCol]).css("width",ratio).append(module);
 		}
 		//container.append(wrapper);
-		if(moduleModel.element.init)moduleModel.element.init();
+		if(moduleModel.element.init)moduleModel.element.init(queryData);
 		return module;
 	};
 	var createCol = function(){
@@ -65,7 +65,7 @@ ZMO.view=(function(){
 				&& moduleModel.position.equals(oldModel[1].position);
 	};
 	
-	var createPage =function(pageKey,moduleMap){
+	var createPage =function(pageKey,moduleMap,queryData){
 		//iterate through site position (navi,main,footer)
 		var  tmpActiveItems={};
 		$.each(moduleMap.sections,function(modulePosKey,moduleModelArrArr){
@@ -77,7 +77,7 @@ ZMO.view=(function(){
 					tmpActiveItems[model.moduleId] = activeItems[model.moduleId];
 					$(tmpActiveItems[model.moduleId][0]).parent().css("width",model.ratio);
 				}else{
-					tmpActiveItems[model.moduleId] =[renderModuleModel(model,modulePosKey),model];
+					tmpActiveItems[model.moduleId] =[renderModuleModel(model,modulePosKey,queryData),model];
 					
 				}
 			});

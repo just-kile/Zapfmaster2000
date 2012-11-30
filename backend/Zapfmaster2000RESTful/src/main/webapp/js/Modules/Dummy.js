@@ -9,7 +9,7 @@ ZMO.modules.dummy = (function($,ajax){
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
-	var init = function(){
+	var init = function(data){
 		container.text("Hello drinkers worldwide!");
 	};
 	/**
