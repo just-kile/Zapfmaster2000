@@ -53,6 +53,7 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public Account retrieveAccount(String pToken) {
+		Account account = null;
 
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
@@ -60,16 +61,18 @@ public class AuthServiceImpl implements AuthService {
 
 		@SuppressWarnings("unchecked")
 		List<Token> result = session
-				.createQuery("SELECT t FROM Token t WHERE t.token = :token")
+				.createQuery(
+						"SELECT t FROM Token t JOIN FETCH t.account "
+								+ "WHERE t.token = :token ")
 				.setString("token", pToken).list();
 
 		if (result.size() == 1) {
 			Token token = result.get(0);
-			return token.getAccount();
+			account = token.getAccount();
 		}
 
 		tx.commit();
-		return null;
+		return account;
 	}
 
 	private String createNextToken() {
