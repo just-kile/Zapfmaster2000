@@ -89,6 +89,7 @@ ZMO.ModuleModel  =function(conf,modulePosKey){
 	this.element= ZMO.modules[conf.moduleId];
 	this.ratio= conf.ratio;
 	this.position = new ZMO.PositionModel(modulePosKey,conf.position);
+	this.nocache = !!conf.nocache;
 };
 ZMO.RfidModel = function(conf){
 	this.userName = conf.userName;

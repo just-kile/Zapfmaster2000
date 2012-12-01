@@ -63,18 +63,34 @@ ZMO.modules_properties ={
 					position:[0,0]
 				}],
 				main:[{
-					moduleId:"drawfeed",
-					ratio:"70%",
+					moduleId:"achievements",
+					ratio:"100%",
 					position:[0,0]
-				},{
-					moduleId:"frontpagestats",
-					ratio:"30%",
-					position:[0,1]
 				}],
-				  
 				footer:[]
 			}
-		},		
+		},
+		achievementstats:{
+			sections:{
+				navigation:[{
+					moduleId:"navigation",
+					ratio:"100%",
+					position:[0,0]
+				}],
+				main:[{
+					moduleId:"achievementlist",
+					ratio:"70%",
+					position:[0,0],
+					nocache:true
+				},{
+					moduleId:"achievementstats",
+					ratio:"30%",
+					position:[0,1],
+					nocache:true
+				}],
+				footer:[]
+			}
+		},	
 		members:{
 			sections:{
 				navigation:[{
@@ -92,46 +108,3 @@ ZMO.modules_properties ={
 			}
 		}
 };
-
-
-
-//ZMO.modules_properties ={
-//		front:{
-//			sections:{
-//				navigation:[[new ZMO.ModuleModel("navigation", ZMO.modules.navigation, "100%")]],
-//				main:[[new ZMO.ModuleModel("drawfeed", ZMO.modules.drawfeed, "70%")],
-//				      [new ZMO.ModuleModel("frontpagestats", ZMO.modules.frontpageStats, "30%")]
-//				      ],
-//				footer:[]
-//			}
-//		},
-//		stats:{
-//			sections:{
-//				navigation:[[new ZMO.ModuleModel("navigation", ZMO.modules.navigation, "100%")]],
-//				main:[[new ZMO.ModuleModel("drawfeed", ZMO.modules.drawfeed, "70%")]],
-//				footer:[]
-//			}
-//		},		
-//		achievements:{
-//			sections:{
-//				navigation:[[new ZMO.ModuleModel("navigation", ZMO.modules.navigation, "100%")]],
-//				main:[[new ZMO.ModuleModel("drawfeed", ZMO.modules.drawfeed, "70%")]],
-//				footer:[]
-//			}
-//		},		
-//		members:{
-//			sections:{
-//				navigation:[[new ZMO.ModuleModel("navigation", ZMO.modules.navigation, "100%")]],
-//				main:[[new ZMO.ModuleModel("kegstatus", ZMO.modules.kegstatus, "70%"),new ZMO.ModuleModel("kegstat", ZMO.modules.kegstatus, "70%")],
-//				      [new ZMO.ModuleModel("drawfeed", ZMO.modules.drawfeed, "30%")]],
-//				footer:[]
-//			}
-//		},
-//		challenges:{
-//			sections:{
-//				navigation:[[new ZMO.ModuleModel("navigation", ZMO.modules.navigation, "100%")]],
-//				main:[[new ZMO.ModuleModel("challenges", ZMO.modules.challenges, "100%")]],
-//				footer:[]
-//			}
-//		}
-//}

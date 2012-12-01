@@ -20,6 +20,7 @@ ZMO.view=(function(){
 		var moduleRow = moduleModel.position.row;
 		var moduleCol = moduleModel.position.col;
 		var row;
+		var oldParams;
 		
 		var containerChildren = container.children();
 		if(containerChildren.length-1<moduleRow){
@@ -52,7 +53,8 @@ ZMO.view=(function(){
 				if(!ZMO.exists(newList[posKey])
 						||!ZMO.exists(newList[posKey][1])
 						||!ZMO.exists(newList[posKey][1].position)
-						||!newList[posKey][1].position.equals(elObj[1].position) ){
+						||!newList[posKey][1].position.equals(elObj[1].position)
+						||newList[posKey][1].nocache){
 					ZMO.log("remove "+posKey);
 					$(oldList[posKey][0]).remove();
 				}
@@ -73,7 +75,7 @@ ZMO.view=(function(){
 			//Iterate through Models
 			$.each(moduleModelArrArr,function(ind,module){
 				var model = new ZMO.ModuleModel(module,modulePosKey);
-				if(isRenderedAndSamePos(model,activeItems[model.moduleId]) ){
+				if(isRenderedAndSamePos(model,activeItems[model.moduleId]) &&!module.nocache){
 					tmpActiveItems[model.moduleId] = activeItems[model.moduleId];
 					$(tmpActiveItems[model.moduleId][0]).parent().css("width",model.ratio);
 				}else{

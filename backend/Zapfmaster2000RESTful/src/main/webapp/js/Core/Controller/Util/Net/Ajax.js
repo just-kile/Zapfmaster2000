@@ -2,6 +2,10 @@ ZMO.Util.Net = ZMO.Util.Net || {};
 ZMO.Util.Net.Ajax = (function($){
 	var c = ZMO.Constants.ajax;
 	var aspirantModules ={};
+	var conf = {
+			MODULE_DATA:"data",
+			MODULE_PARAMS:"params"
+	};
 	var stop=true;
 	/**
 	 * Get datas instant
@@ -37,16 +41,15 @@ ZMO.Util.Net.Ajax = (function($){
 	var removeOnceCalls = function(){
 		var tmpObj = {};
 		$.each(aspirantModules,function(url,arr){
-			
-			var tmpArr = [];
-			$.each(arr,function(ind,val){
+			var tmpArr = {};
+			tmpArr[conf.MODULE_DATA] = [];
+			tmpArr[conf.MODULE_PARAMS] = arr[conf.MODULE_PARAMS];
+			$.each(arr[conf.MODULE_DATA],function(ind,val){
 				if(!val.once){
-					tmpArr.push(val);
+					tmpArr[conf.MODULE_DATA].push(val);
 				}
-				tmpObj[url] = tmpArr;
-				
 			});
-			
+			tmpObj[url] = tmpArr;
 		});
 		aspirantModules =  tmpObj;
 		
@@ -57,18 +60,22 @@ ZMO.Util.Net.Ajax = (function($){
 	 * Module inscribe to ajax module, that it will have the information
 	 * @param {String or Array} keywordQueue separated by comma or array
 	 * @param {Function} callback
+	 * @param {Object} datas request params
 	 * @param {Boolean} onlyOnce
 	 * @param {Boolean} rawData return only
 	 */
-	var enqueueDatas = function(url,callback,onlyOnce,rawData){
+	var enqueueDatas = function(url,callback,data,onlyOnce,rawData){
 		if(!ZMO.exists(aspirantModules[url])){
-			aspirantModules[url] = [];
+			aspirantModules[url] = {};
+			aspirantModules[url][conf.MODULE_DATA]= [];
+			aspirantModules[url][conf.MODULE_PARAMS]= {};
 		}
-		aspirantModules[url].push(  {
+		aspirantModules[url][conf.MODULE_DATA].push(  {
 			callback:callback,
 			once:!!onlyOnce,
 			rawData:!!rawData
 		});
+		aspirantModules[url][conf.MODULE_PARAMS] = $.extend(aspirantModules[url][conf.MODULE_PARAMS],data);
 	};
 	/**
 	 * Gets the datas in the Queue, wait pullTimeout time, calls self again
@@ -78,14 +85,14 @@ ZMO.Util.Net.Ajax = (function($){
 			getDatas(url,function(response){
 				//send datas to aspirants
 				var statsModel = new ZMO.modules.StatsModel(response);
-				$.each(modulesArr,function(ind,val){
+				$.each(modulesArr[conf.MODULE_DATA],function(ind,val){
 					if(val.callback)val.callback(val.rawData?response:statsModel);
 				});
 				//remove the modules which only wanted info once
 				removeOnceCalls();
 				
 
-			});
+			},modulesArr[conf.MODULE_PARAMS]);
 		});
 		setTimeout(function(){
 			//if we dont wanna stop, again

@@ -128,7 +128,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			},{
 				start:startVal,
 				length:length,
-				random:new Date().getTime()
+				//random:new Date().getTime()
 			});
 		};
 	
