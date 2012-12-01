@@ -34,10 +34,10 @@ public class NewsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveNews(@QueryParam("start") int pStart,
 			@QueryParam("length") int pLength,
-			@Context HttpServletRequest pRequest) {
+			@QueryParam("token") String pToken) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pRequest);
+				.retrieveAccount(pToken);
 		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()

@@ -71,6 +71,7 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.OTHER_NEWS: return createOtherNews();
 			case Zapfmaster2000Package.MAPPING_QR_RFID: return createMappingQrRfid();
 			case Zapfmaster2000Package.USER: return createUser();
+			case Zapfmaster2000Package.TOKEN: return createToken();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -222,6 +223,16 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	public User createUser() {
 		UserImpl user = new UserImpl();
 		return user;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Token createToken() {
+		TokenImpl token = new TokenImpl();
+		return token;
 	}
 
 	/**

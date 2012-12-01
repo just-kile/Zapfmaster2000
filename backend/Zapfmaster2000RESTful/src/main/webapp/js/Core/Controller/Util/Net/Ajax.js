@@ -9,6 +9,7 @@ ZMO.Util.Net.Ajax = (function($){
 	var getDatas = function(url,callback,datas){
 		if(!ZMO.exists(datas))datas = {};
 		datas["_"] = new Date().getTime();
+		datas["token"] = localStorage.getItem("token");
 		$.ajax({
 			url:url,
 			type:"GET",
@@ -117,10 +118,13 @@ ZMO.Util.Net.Ajax = (function($){
 	 *******/
 	var newsPush=null,rfidPush=null;
 	var connectToChannel = function(callback){
+		var data ={};
+		data["token"] = localStorage.getItem("token");
 		newsPush = $.ajax({
 			type:"GET",
 			url:ZMO.modules.Constants.push.NEWS,
 			timeout:10000000, 
+			data:data,
 			success:function(data){
 				if(callback && data!="")callback(data);
 				ZMO.log("New Request to "+ZMO.modules.Constants.push.NEWS);
@@ -142,10 +146,13 @@ ZMO.Util.Net.Ajax = (function($){
 		
 	};
 	var rfidLogin = function(callback){
+		var datas ={};
+		datas["token"] = localStorage.getItem("token");
 		rfidPush = $.ajax({
 			type:"GET",
 			url:ZMO.modules.Constants.push.RFID,
 			timeout:10000000, 
+			data:datas,
 			success:function(data){
 				if(callback && data!="")callback(data);
 				ZMO.log("New Request to "+ZMO.modules.Constants.push.RFID);
