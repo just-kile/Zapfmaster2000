@@ -12,7 +12,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 
 @Path("/push")
 public class PushResource {
-
+	
 	@GET
 	@Path("/news")
 	@Produces(MediaType.APPLICATION_JSON)

@@ -128,6 +128,10 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 				return createUserAdapter();
 			}
 			@Override
+			public Adapter caseToken(Token object) {
+				return createTokenAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -312,6 +316,20 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUserAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token <em>Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token
+	 * @generated
+	 */
+	public Adapter createTokenAdapter() {
 		return null;
 	}
 

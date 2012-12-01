@@ -121,6 +121,15 @@ public interface Zapfmaster2000Factory extends EFactory {
 	User createUser();
 
 	/**
+	 * Returns a new object of class '<em>Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Token</em>'.
+	 * @generated
+	 */
+	Token createToken();
+
+	/**
 	 * Returns a new object of class '<em>Drawing News</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
