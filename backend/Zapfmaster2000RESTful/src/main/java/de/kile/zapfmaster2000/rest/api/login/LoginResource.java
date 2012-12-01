@@ -1,6 +1,7 @@
 package de.kile.zapfmaster2000.rest.api.login;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
@@ -20,11 +21,11 @@ public class LoginResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/account")
-	public Response userLogin(AccountLoginParameter pLoginParam) {
-		LOG.debug("Login request for account " + pLoginParam.getAccountName());
+	public Response userLogin(@FormParam("accountName") String pAccountName) {
+		LOG.debug("Login request for account " + pAccountName);
 
 		String token = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.loginAccount(pLoginParam.getAccountName());
+				.loginAccount(pAccountName);
 		if (token == null) {
 			// log in failed
 			return Response.status(Status.FORBIDDEN).build();
