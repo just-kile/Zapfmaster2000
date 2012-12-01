@@ -18,7 +18,7 @@ public class LoginResource {
 	private static final Logger LOG = Logger.getLogger(NewsResource.class);
 
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/account")
 	public Response userLogin(AccountLoginParameter pLoginParam) {
 		LOG.debug("Login request for account " + pLoginParam.getAccountName());
