@@ -15,18 +15,15 @@ public interface AuthService {
 	 * Login via a Zapfmaster2000 Account.
 	 * 
 	 * <p>
-	 * Will create a session if authentication succeeds.
+	 * Will return the token if the login succeeds.
 	 * </p>
 	 * 
 	 * @param pAccountName
 	 *            account name
-	 * @param pRequest
-	 *            the http request to perform the login for (and create the
-	 *            session for).
-	 * @return the account if authenticated succeeds, <code>null</code>
-	 *         otherwise.
+	 * @return the token or <code>null</code> if the authentication did not
+	 *         succeed.
 	 */
-	public Account loginAccount(String pAccountName, HttpServletRequest pRequest);
+	public String loginAccount(String pAccountName);
 
 	/**
 	 * Retrieves the account associated with the session for a given request. If
