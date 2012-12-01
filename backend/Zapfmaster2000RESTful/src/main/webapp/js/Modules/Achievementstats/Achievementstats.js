@@ -21,7 +21,7 @@ ZMO.modules.achievementstats = (function($,ajax){
 		//you can access with data.id to the wanted id
 		var text = JSON.stringify(data);
 		container.append(text);
-		ajax.enqueueDatas(mC.urls.MEMBERS,onMembersReceive,data,true);
+		ajax.enqueueDatas(mC.urls.MEMBERS,onMembersReceive,data,true,true);
 		ajax.startPull();
 	};
 	/**

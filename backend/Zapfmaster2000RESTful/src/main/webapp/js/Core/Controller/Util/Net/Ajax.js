@@ -169,7 +169,7 @@ ZMO.Util.Net.Ajax = (function($){
 				if(e.status==0){
 					ZMO.log("Request abort success!");
 				}else{
-					ZMO.log("Error: reconnect RFID...")
+					ZMO.log("Error: reconnect RFID...");
 				//setTimeout(function(){
 					rfidLogin(callback);
 				//},1000);
