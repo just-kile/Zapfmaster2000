@@ -19,7 +19,11 @@ ZMO.modules.lineChart = (function($,view,ajax){
 	var init = function(){
 		//container.text("Hello drinkers worldwide!");
 		//register for dataupdate
-		ajax.enqueueDatas(mC.urls.STATS,onDatasLoaded);
+		//@see Core/Controller/Util/Net/Ajax.js --> enqueueData
+		ajax.enqueueDatas({
+			url:mC.urls.STATS,
+			callback:onDatasLoaded
+		});
 		ajax.startPull();
 	};
 	/**

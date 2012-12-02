@@ -12,8 +12,8 @@ ZMO.Util.Net.Ajax = (function($){
 	 */
 	var getDatas = function(url,callback,datas){
 		if(!ZMO.exists(datas))datas = {};
-		datas["_"] = new Date().getTime();
-		datas["token"] = localStorage.getItem("token");
+		if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
+		datas["token"] = localStorage.getItem(ZMO.Constants.tokenName);
 		$.ajax({
 			url:url,
 			type:"GET",
@@ -58,24 +58,35 @@ ZMO.Util.Net.Ajax = (function($){
 	/**
 	 * Get datas with pull request (every 30s)
 	 * Module inscribe to ajax module, that it will have the information
-	 * @param {String or Array} keywordQueue separated by comma or array
+	 * the handled object can contain following attributes
+	 * @param {String} url
 	 * @param {Function} callback
 	 * @param {Object} datas request params
-	 * @param {Boolean} onlyOnce
-	 * @param {Boolean} rawData return only
+	 * @param {Boolean} onlyOnce flag, if request should not be repeated every 30s
+	 * @param {Boolean} rawData return only the raw datas without ZMO.StatsModel wrapper
+	 * @param {Boolean} uniqueRequest forces a unique request even if urls are equal
 	 */
-	var enqueueDatas = function(url,callback,data,onlyOnce,rawData){
+	//var enqueueDatas = function(url,callback,data,onlyOnce,rawData){
+	var enqueueDatas = function(attr){
+		//default settings
+		var settings = {
+				url:"",
+				callback:null,
+				data:{},
+				onlyOnce:false,
+				rawData:false,
+				uniqueRequest:false
+		};
+		//override them
+		settings = $.extend(settings,attr);
+		var url = settings.uniqueRequest?settings.url+"?_"+new Date().getTime():settings.url;
 		if(!ZMO.exists(aspirantModules[url])){
 			aspirantModules[url] = {};
 			aspirantModules[url][conf.MODULE_DATA]= [];
 			aspirantModules[url][conf.MODULE_PARAMS]= {};
 		}
-		aspirantModules[url][conf.MODULE_DATA].push(  {
-			callback:callback,
-			once:!!onlyOnce,
-			rawData:!!rawData
-		});
-		aspirantModules[url][conf.MODULE_PARAMS] = $.extend(aspirantModules[url][conf.MODULE_PARAMS],data);
+		aspirantModules[url][conf.MODULE_DATA].push(  settings);
+		aspirantModules[url][conf.MODULE_PARAMS] = $.extend(aspirantModules[url][conf.MODULE_PARAMS],settings.data);
 	};
 	/**
 	 * Gets the datas in the Queue, wait pullTimeout time, calls self again
@@ -126,7 +137,7 @@ ZMO.Util.Net.Ajax = (function($){
 	var newsPush=null,rfidPush=null;
 	var connectToChannel = function(callback){
 		var data ={};
-		data["token"] = localStorage.getItem("token");
+		data["token"] = localStorage.getItem(ZMO.Constants.tokenName);
 		newsPush = $.ajax({
 			type:"GET",
 			url:ZMO.modules.Constants.push.NEWS,
@@ -154,7 +165,7 @@ ZMO.Util.Net.Ajax = (function($){
 	};
 	var rfidLogin = function(callback){
 		var datas ={};
-		datas["token"] = localStorage.getItem("token");
+		datas["token"] = localStorage.getItem(ZMO.Constants.tokenName);
 		rfidPush = $.ajax({
 			type:"GET",
 			url:ZMO.modules.Constants.push.RFID,

@@ -14,7 +14,10 @@ ZMO.modules.kegstatus = (function($,view,ajax){
 		
 	};
 	var init = function(){
-		ajax.enqueueDatas(mC.urls.STATS,onDatasLoaded);
+		ajax.enqueueDatas({
+			url:mC.urls.STATS,
+			callback:onDatasLoaded
+		});
 		ajax.startPull();
 	};
 	var getInstance = function(){

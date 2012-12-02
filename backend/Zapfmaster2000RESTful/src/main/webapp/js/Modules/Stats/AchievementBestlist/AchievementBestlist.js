@@ -21,7 +21,10 @@ ZMO.modules.achievementBestlist = (function($,view,ajax){
 	 */
 	var init = function(){
 		//container.text("Hello drinkers worldwide!");
-		ajax.enqueueDatas(mC.urls.STATS,onDatasLoaded);
+		ajax.enqueueDatas({
+			url:mC.urls.STATS,
+			callback:onDatasLoaded
+		})
 		ajax.startPull();
 	};
 	/**

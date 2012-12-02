@@ -18,7 +18,10 @@ ZMO.modules.bestlist = (function($,view,ajax){
 	 */
 	var init = function(){
 		//enqueue datas, so that after 30s datas will be updated
-		ajax.enqueueDatas(mC.urls.STATS,onDatasLoaded);
+		ajax.enqueueDatas({
+			url:mC.urls.STATS,
+			callback:onDatasLoaded
+		});
 		ajax.startPull();
 	};
 	/**

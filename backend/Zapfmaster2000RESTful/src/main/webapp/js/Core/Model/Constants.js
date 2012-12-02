@@ -11,6 +11,6 @@ ZMO.Constants = {
 	ajax:{
 		pullTimeout:120000,//ms
 	},
-	throbberUrl:"images/view/throbber.gif"
-	
+	throbberUrl:"images/view/throbber.gif",
+	tokenName:"token"
 };

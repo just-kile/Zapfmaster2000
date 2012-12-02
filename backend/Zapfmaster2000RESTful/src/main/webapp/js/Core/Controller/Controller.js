@@ -26,17 +26,29 @@ ZMO.controller = (function($,document,view,ajax){
 		}
 		
 	};
+	var checkLoginStatus =function(successCallb,errorCallb){
+		var token = localStorage.getItem(ZMO.Constants.tokenName);
+		if(ZMO.exists(token)){
+			if(successCallb)successCallb();
+		}else{
+			if(errorCallb)errorCallb();
+		}
+	};
 	var init = function(){
 		//Getting Templates
-		ZMO.getTemplates(function(templates){
-			//Add Templates to ICanHaz - Engine
-			$.each(templates, function (template) {
-		        ich.addTemplate(template.name, template.template);
-		    });
-			
-			view.init();
-			$(window).bind("hashchange",onPageChange);
-			$(window).trigger( "hashchange" );
+		checkLoginStatus(function(){
+			ZMO.getTemplates(function(templates){
+				//Add Templates to ICanHaz - Engine
+				$.each(templates, function (template) {
+			        ich.addTemplate(template.name, template.template);
+			    });
+				view.init();
+				$(window).bind("hashchange",onPageChange);
+				$(window).trigger( "hashchange" );
+			});
+		},function(){
+			alert("not logged in");
+			window.location.replace("/");
 		});
 		
 	};
