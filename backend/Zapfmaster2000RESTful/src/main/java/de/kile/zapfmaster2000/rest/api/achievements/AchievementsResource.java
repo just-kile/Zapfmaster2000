@@ -5,11 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -26,10 +25,10 @@ public class AchievementsResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response retrieveAchievements(@Context HttpServletRequest pRequest) {
+	public Response retrieveAchievements(@QueryParam("token") String pToken) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pRequest);
+				.retrieveAccount(pToken);
 		if (account != null) {
 
 			Session session = Zapfmaster2000Core.INSTANCE

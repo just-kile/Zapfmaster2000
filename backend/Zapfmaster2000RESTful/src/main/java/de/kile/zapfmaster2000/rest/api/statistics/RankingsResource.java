@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -55,10 +53,10 @@ public class RankingsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveUserRankingByAmount(
 			@QueryParam("from") String pFrom, @QueryParam("to") String pTo,
-			@Context HttpServletRequest pRequest) {
+			@QueryParam("token") String pToken) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pRequest);
+				.retrieveAccount(pToken);
 		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
@@ -151,10 +149,10 @@ public class RankingsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveUserRankingByDrawCount(
 			@QueryParam("from") String pFrom, @QueryParam("to") String pTo,
-			@Context HttpServletRequest pRequest) {
+			@QueryParam("token") String pToken) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pRequest);
+				.retrieveAccount(pToken);
 		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
@@ -246,10 +244,10 @@ public class RankingsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveUserRankingByAchievementCount(
 			@QueryParam("from") String pFrom, @QueryParam("to") String pTo,
-			@Context HttpServletRequest pRequest) {
+			@QueryParam("token") String pToken) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pRequest);
+				.retrieveAccount(pToken);
 		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
