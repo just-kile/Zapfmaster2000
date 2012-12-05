@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -54,8 +53,9 @@ public class RankingsResource {
 	@Path("bestUserList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response bestUserListTimeSpan(@QueryParam("from") String pFrom,
-			@QueryParam("to") String pTo, @Context HttpServletRequest pRequest) {
+	public Response retrieveUserRankingByAmount(
+			@QueryParam("from") String pFrom, @QueryParam("to") String pTo,
+			@Context HttpServletRequest pRequest) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pRequest);
@@ -84,11 +84,12 @@ public class RankingsResource {
 				} else if (pTo == null) {// List until now
 					Date dFrom = df.parse(pFrom);
 					list = session
+							// createCriteria
 							.createQuery(
 									"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
 											+ " FROM User u, Drawing d "
 											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date >= :from"
+											+ " d.date > :from"
 											+ " GROUP BY u.id ORDER BY amt DESC")
 							.setEntity("account", account)
 							.setTimestamp("from", dFrom).list();
@@ -100,7 +101,7 @@ public class RankingsResource {
 									"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
 											+ " FROM User u, Drawing d "
 											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date >= :from AND d.date <= :to"
+											+ " d.date BETWEEN :from AND :to"
 											+ " GROUP BY u.id ORDER BY amt DESC")
 							.setEntity("account", account)
 							.setTimestamp("from", dFrom)
@@ -126,7 +127,7 @@ public class RankingsResource {
 			return Response.ok(resp.toArray()).build();
 		}
 
-		return null;
+		return Response.status(Status.FORBIDDEN).build();
 
 	}
 
@@ -148,8 +149,9 @@ public class RankingsResource {
 	@Path("drawCountUserList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response drawCountUserListTimeSpan(@QueryParam("from") String pFrom,
-			@QueryParam("to") String pTo, @Context HttpServletRequest pRequest) {
+	public Response retrieveUserRankingByDrawCount(
+			@QueryParam("from") String pFrom, @QueryParam("to") String pTo,
+			@Context HttpServletRequest pRequest) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pRequest);
@@ -182,7 +184,7 @@ public class RankingsResource {
 									"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
 											+ " FROM User u, Drawing d "
 											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date >= :from"
+											+ " d.date > :from"
 											+ " GROUP BY u.id ORDER BY cnt DESC")
 							.setEntity("account", account)
 							.setTimestamp("from", dFrom).list();
@@ -194,7 +196,7 @@ public class RankingsResource {
 									"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
 											+ " FROM User u, Drawing d "
 											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date >= :from AND d.date <= :to"
+											+ " d.date BETWEEN :from AND :to"
 											+ " GROUP BY u.id ORDER BY cnt DESC")
 							.setEntity("account", account)
 							.setTimestamp("from", dFrom)
@@ -221,7 +223,7 @@ public class RankingsResource {
 			return Response.ok(resp.toArray()).build();
 		}
 
-		return null;
+		return Response.status(Status.FORBIDDEN).build();
 	}
 
 	/**
@@ -242,7 +244,7 @@ public class RankingsResource {
 	@Path("achievementUserList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response achievementUserListTimeSpan(
+	public Response retrieveUserRankingByAchievementCount(
 			@QueryParam("from") String pFrom, @QueryParam("to") String pTo,
 			@Context HttpServletRequest pRequest) {
 
@@ -276,11 +278,11 @@ public class RankingsResource {
 							.createQuery(
 									"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
 											+ " FROM User u, GainedAchievement g "
-											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date >= :from"
+											+ " WHERE g.user = u AND u.account = :account AND "
+											+ " g.date > :from"
 											+ " GROUP BY u.id ORDER BY cnt DESC")
 							.setEntity("account", account)
-							.setDate("from", dFrom).list();
+							.setTimestamp("from", dFrom).list();
 				} else { // general list
 					Date dFrom = df.parse(pFrom);
 					Date dTo = df.parse(pTo);
@@ -288,11 +290,12 @@ public class RankingsResource {
 							.createQuery(
 									"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
 											+ " FROM User u, GainedAchievement g "
-											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date >= :from AND d.date <= :to"
+											+ " WHERE g.user = u AND u.account = :account AND "
+											+ " g.date BETWEEN :from AND :to"
 											+ " GROUP BY u.id ORDER BY cnt DESC")
 							.setEntity("account", account)
-							.setDate("from", dFrom).setDate("to", dTo).list();
+							.setTimestamp("from", dFrom)
+							.setTimestamp("to", dTo).list();
 
 				}
 			} catch (ParseException e) {
@@ -315,7 +318,7 @@ public class RankingsResource {
 			return Response.ok(resp.toArray()).build();
 		}
 
-		return null;
+		return Response.status(Status.FORBIDDEN).build();
 	}
 
 }
