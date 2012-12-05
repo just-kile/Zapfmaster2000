@@ -122,9 +122,9 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 
 		assertEquals(3, rawAchievementListResponse.length);
 
-		assertConfirm(user3,
+		assertConforms(user3,
 				(AchievementUserListResponse) rawAchievementListResponse[0]);
-		assertConfirm(user1,
+		assertConforms(user1,
 				(AchievementUserListResponse) rawAchievementListResponse[1]);
 	}
 
@@ -169,7 +169,7 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 						.getCount());
 	}
 
-	public void assertConfirm(User user, AchievementUserListResponse response) {
+	public void assertConforms(User user, AchievementUserListResponse response) {
 		assertEquals(user.getName(), response.getName());
 		assertEquals(user.getId(), response.getId());
 		assertEquals(user.getImagePath(), response.getImage());

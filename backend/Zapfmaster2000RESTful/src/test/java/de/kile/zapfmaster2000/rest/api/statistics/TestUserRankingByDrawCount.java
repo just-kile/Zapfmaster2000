@@ -128,9 +128,9 @@ public class TestUserRankingByDrawCount extends AbstractMockingTest {
 
 		assertEquals(3, rawDrawCountResponse.length);
 
-		assertConfirm(user3,
+		assertConforms(user3,
 				(DrawCountUserListResponse) rawDrawCountResponse[0]);
-		assertConfirm(user1,
+		assertConforms(user1,
 				(DrawCountUserListResponse) rawDrawCountResponse[1]);
 	}
 
@@ -147,7 +147,7 @@ public class TestUserRankingByDrawCount extends AbstractMockingTest {
 
 		assertEquals(3, rawDrawCountResponse.length);
 
-		assertConfirm(user1,
+		assertConforms(user1,
 				(DrawCountUserListResponse) rawDrawCountResponse[0]);
 	}
 
@@ -171,7 +171,7 @@ public class TestUserRankingByDrawCount extends AbstractMockingTest {
 						.getDrawCount());
 	}
 
-	public void assertConfirm(User user, DrawCountUserListResponse response) {
+	public void assertConforms(User user, DrawCountUserListResponse response) {
 		assertEquals(user.getName(), response.getName());
 		assertEquals(user.getId(), response.getId());
 		assertEquals(user.getImagePath(), response.getImage());

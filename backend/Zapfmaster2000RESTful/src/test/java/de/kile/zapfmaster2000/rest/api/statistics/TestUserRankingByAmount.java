@@ -128,8 +128,8 @@ public class TestUserRankingByAmount extends AbstractMockingTest {
 
 		assertEquals(3, rawUserAmountResponse.length);
 
-		assertConfirm(user3, (UserAmountResponse) rawUserAmountResponse[0]);
-		assertConfirm(user1, (UserAmountResponse) rawUserAmountResponse[1]);
+		assertConforms(user3, (UserAmountResponse) rawUserAmountResponse[0]);
+		assertConforms(user1, (UserAmountResponse) rawUserAmountResponse[1]);
 	}
 
 	@Test
@@ -144,7 +144,7 @@ public class TestUserRankingByAmount extends AbstractMockingTest {
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 
 		assertEquals(3, rawUserAmountResponse.length);
-		assertConfirm(user3, (UserAmountResponse) rawUserAmountResponse[0]);
+		assertConforms(user3, (UserAmountResponse) rawUserAmountResponse[0]);
 	}
 
 	@Test
@@ -161,10 +161,10 @@ public class TestUserRankingByAmount extends AbstractMockingTest {
 		assertEquals(2, rawUserAmountResponse.length);
 
 		// user3 should not be first because his drawings at in the wrong time
-		assertConfirm(user1, (UserAmountResponse) rawUserAmountResponse[0]);
+		assertConforms(user1, (UserAmountResponse) rawUserAmountResponse[0]);
 	}
 
-	public void assertConfirm(User user, UserAmountResponse response) {
+	public void assertConforms(User user, UserAmountResponse response) {
 		assertEquals(user.getName(), response.getName());
 		assertEquals(user.getId(), response.getId());
 		assertEquals(user.getImagePath(), response.getImage());
