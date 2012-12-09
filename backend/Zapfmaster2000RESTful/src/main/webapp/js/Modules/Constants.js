@@ -54,7 +54,7 @@ ZMO.modules.Constants = {
 			RFID:"rest/push/login"
 		},
 		member:{
-			MAX_ACHIEVEMENTS:8
+			MAX_ACHIEVEMENTS:7
 		},
 		
 }

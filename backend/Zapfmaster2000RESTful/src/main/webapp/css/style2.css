@@ -502,6 +502,8 @@ ul#topnav li#topnav-5 a:hover {
 	margin-top:12px;
 	margin-left: 5px;
 	font-weight: bold;
+	width: 48px;
+	text-align: center;
 }
 
 .member-headline {
