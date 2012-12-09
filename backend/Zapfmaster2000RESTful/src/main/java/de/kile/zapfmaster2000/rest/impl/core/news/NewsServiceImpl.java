@@ -118,7 +118,9 @@ public class NewsServiceImpl implements NewsService {
 		Transaction tx = session.beginTransaction();
 
 		session.update(pGainedAchievement);
-
+		session.update(pGainedAchievement.getUser());
+		session.update(pGainedAchievement.getUser().getAccount());
+		
 		AchievementNews news = Zapfmaster2000Factory.eINSTANCE
 				.createAchievementNews();
 		news.setAccount(pGainedAchievement.getUser().getAccount());

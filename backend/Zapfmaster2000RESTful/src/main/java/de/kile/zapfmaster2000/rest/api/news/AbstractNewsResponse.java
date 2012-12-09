@@ -9,6 +9,10 @@ public class AbstractNewsResponse {
 	private String image;
 
 	private Date date;
+	
+	public AbstractNewsResponse(Type pType) {
+		type = pType;
+	}
 
 	public Type getType() {
 		return type;

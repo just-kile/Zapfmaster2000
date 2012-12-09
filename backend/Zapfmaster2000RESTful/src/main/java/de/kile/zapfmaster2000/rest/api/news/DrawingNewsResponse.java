@@ -15,7 +15,7 @@ public class DrawingNewsResponse extends AbstractNewsResponse {
 	private String location;
 
 	public DrawingNewsResponse() {
-		setType(Type.DRAWING);
+		super(Type.DRAWING);
 	}
 
 	public long getUserId() {
