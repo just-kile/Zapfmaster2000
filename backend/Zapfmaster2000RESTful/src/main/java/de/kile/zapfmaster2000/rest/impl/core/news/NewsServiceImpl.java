@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest.impl.core.news;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
@@ -23,6 +25,9 @@ public class NewsServiceImpl implements NewsService {
 
 	/** logger */
 	private static final Logger LOG = Logger.getLogger(NewsServiceImpl.class);
+
+	/** listeners */
+	private static List<NewsServiceListener> listeners = new ArrayList<>();
 
 	public NewsServiceImpl(BoxService pBoxService) {
 		pBoxService.addListener(new BoxServiceListener() {
@@ -48,14 +53,15 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public void addListener(NewsServiceListener pListener) {
-		// TODO Auto-generated method stub
+		if (pListener != null) {
+			listeners.add(pListener);
+		}
 
 	}
 
 	@Override
 	public void removeListener(NewsServiceListener pListener) {
-		// TODO Auto-generated method stub
-
+		listeners.remove(pListener);
 	}
 
 	private void postNewsDrawFinished(Box pBox, Drawing pDrawing) {
@@ -71,9 +77,10 @@ public class NewsServiceImpl implements NewsService {
 				.createQuery("SELECT b.account FROM Box b WHERE b.id = :id")
 				.setLong("id", pBox.getId()).list();
 		session.update(pDrawing);
+
+		DrawingNews news = null;
 		if (accounts.size() == 1) {
-			DrawingNews news = Zapfmaster2000Factory.eINSTANCE
-					.createDrawingNews();
+			news = Zapfmaster2000Factory.eINSTANCE.createDrawingNews();
 			news.setAccount(accounts.get(0));
 			news.setDate(new Date());
 			news.setDrawing(pDrawing);
@@ -84,5 +91,15 @@ public class NewsServiceImpl implements NewsService {
 		}
 
 		tx.commit();
+
+		if (news != null) {
+			notifiyListenersNewsPosted(news);
+		}
+	}
+
+	private void notifiyListenersNewsPosted(News pNews) {
+		for (NewsServiceListener listener : listeners) {
+			listener.onNewsPosted(pNews);
+		}
 	}
 }
