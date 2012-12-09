@@ -1,6 +1,7 @@
 package de.kile.zapfmaster2000.rest.api.member;
 
 import static junit.framework.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -69,7 +70,7 @@ public class TestMemberResource extends AbstractMockingTest {
 		createDrawing(0.5, new Date(), keg1, user2);
 
 		AuthService authService = mock(AuthService.class);
-		when(authService.retrieveAccount(null)).thenReturn(account1);
+		when(authService.retrieveAccount(anyString())).thenReturn(account1);
 		mockAuthService(authService);
 	}
 

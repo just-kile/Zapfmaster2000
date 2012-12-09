@@ -22,6 +22,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import static org.junit.Assert.assertEquals;
 
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -111,7 +112,7 @@ public class TestUserRankingByAmount extends AbstractMockingTest {
 		createDrawing(20, midDate, keg2, userForeignAcc);
 
 		AuthService authService = mock(AuthService.class);
-		when(authService.retrieveAccount(null)).thenReturn(account);
+		when(authService.retrieveAccount(anyString())).thenReturn(account);
 		mockAuthService(authService);
 
 	}

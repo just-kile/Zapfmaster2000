@@ -1,6 +1,7 @@
 package de.kile.zapfmaster2000.rest.api.achievments;
 
 import static junit.framework.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -67,7 +68,7 @@ public class TestAchievementsResource extends AbstractMockingTest {
 		createGainedAchievement(createDate(2012, 4, 1), user4, achievement1);
 
 		AuthService authService = mock(AuthService.class);
-		when(authService.retrieveAccount(null)).thenReturn(account1);
+		when(authService.retrieveAccount(anyString())).thenReturn(account1);
 		mockAuthService(authService);
 	}
 
