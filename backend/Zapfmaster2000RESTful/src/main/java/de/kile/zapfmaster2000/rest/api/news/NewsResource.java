@@ -16,13 +16,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.util.NewsAdapter;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 @Path("news")
 public class NewsResource {
@@ -35,6 +31,8 @@ public class NewsResource {
 			@QueryParam("length") int pLength,
 			@QueryParam("token") String pToken) {
 
+		LOG.debug("Retrieving news");
+		
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 		if (account != null) {
@@ -54,8 +52,9 @@ public class NewsResource {
 
 			// adapt news (to ResponseBean)
 			List<AbstractNewsResponse> newsResp = new ArrayList<>();
+			NewsAdapter adapter = new NewsAdapter();
 			for (News news : result) {
-				newsResp.add(adapt(news));
+				newsResp.add(adapter.adapt(news));
 			}
 
 			return Response.ok(newsResp.toArray()).build();
@@ -63,60 +62,5 @@ public class NewsResource {
 		} else {
 			return Response.status(Status.FORBIDDEN).build();
 		}
-	}
-
-	private AbstractNewsResponse adapt(News pNews) {
-		AbstractNewsResponse newsResponse = null;
-
-		switch (pNews.eClass().getClassifierID()) {
-		case Zapfmaster2000Package.DRAWING_NEWS:
-			DrawingNews drawingNews = (DrawingNews) pNews;
-			newsResponse = adaptDrawingNews(drawingNews);
-			break;
-		case Zapfmaster2000Package.ACHIEVEMENT_NEWS:
-			AchievementNews achievementNews = (AchievementNews) pNews;
-			newsResponse = adaptAchievementNews(achievementNews);
-			break;
-		case Zapfmaster2000Package.OTHER_NEWS:
-		default:
-			LOG.error("Unsupported news type: " + pNews.getClass().getName());
-		}
-
-		if (newsResponse != null) {
-			newsResponse.setDate(pNews.getDate());
-		}
-		return newsResponse;
-	}
-
-	private AbstractNewsResponse adaptDrawingNews(DrawingNews pNews) {
-		DrawingNewsResponse drawingResp = new DrawingNewsResponse();
-		Drawing drawing = pNews.getDrawing();
-
-		drawingResp.setDate(pNews.getDate());
-		drawingResp.setAmount(drawing.getAmount());
-		drawingResp.setKegId(drawing.getKeg().getId());
-		drawingResp.setBrand(drawing.getKeg().getBrand());
-		drawingResp.setLocation(drawing.getKeg().getBox().getLocation());
-		drawingResp.setImage(drawing.getUser().getImagePath());
-		drawingResp.setUserId(drawing.getUser().getId());
-		drawingResp.setUserName(drawing.getUser().getName());
-
-		return drawingResp;
-	}
-
-	private AbstractNewsResponse adaptAchievementNews(AchievementNews pNews) {
-		AchievementNewsResponse achievementResp = new AchievementNewsResponse();
-		GainedAchievement gainedAchievement = pNews.getGainedAchievment();
-
-		achievementResp.setDate(pNews.getDate());
-		achievementResp.setImage(gainedAchievement.getAchievement()
-				.getImagePath());
-		achievementResp.setUserName(gainedAchievement.getUser().getName());
-		achievementResp.setUserId(gainedAchievement.getUser().getId());
-		achievementResp.setAchievementName(gainedAchievement.getAchievement()
-				.getName());
-		achievementResp.setAchievementId(gainedAchievement.getUser().getId());
-
-		return achievementResp;
 	}
 }
