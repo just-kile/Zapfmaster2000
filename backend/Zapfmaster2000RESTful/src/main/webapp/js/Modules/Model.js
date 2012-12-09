@@ -21,17 +21,14 @@ ZMO.NewsModel =function(config){
 	this.type = config.type;
 };
 ZMO.AchievementModel = function(config){
-	this.userid = config.userid||config.user_id;
-	this.username = config.username|| config.user || config.user_name;
-	this.userimage = config.user_image;
+	this.userid = config.userId;
+	this.username = config.userName;
 	this.date = config.date||(new Date()). toGMTString();
 	this.type = config.type;
-	this.achievement_id = config.achievement_id||config.ACHIEVEMENT_ID;
-	this.name = config.name||config.ACHIEVEMENT_NAME||config.achievement_name;
+	this.achievement_id = config.achievementId;
+	this.name = config.achievementName;
 	this.description = config.description;
-	this.image =config.image||config.ACHIEVEMENT_IMAGE_PATH||config.achievement_image;
-	this.is_public = config.is_public;
-	
+	this.image =config.image;
 };
 ZMO.OtherModel = function(config){
 	this.text = config.text;
