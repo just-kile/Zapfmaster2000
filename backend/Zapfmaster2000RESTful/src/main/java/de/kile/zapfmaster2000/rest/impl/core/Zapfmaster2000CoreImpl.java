@@ -49,7 +49,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 		authService = new AuthServiceImpl();
 		achievementService = new AchievementServiceImpl(boxService,
 				transactionService);
-		newsService = new NewsServiceImpl(boxService);
+		newsService = new NewsServiceImpl(boxService, achievementService);
 		pushService = new PushServiceImpl(boxService);
 	}
 
