@@ -11,7 +11,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -20,7 +19,6 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
 public class KegResource {
 
-	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
 
 	@Path("kegStats")
 	@GET
