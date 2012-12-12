@@ -8,11 +8,11 @@ var ZMO = ZMO || {};
 			"js/Core/Model/Model.js",
 			"js/Modules/Model.js" ,
 			//utils
-			"js/Core/Controller/Util/Util.js",
-			"js/Core/Controller/Util/Browser/Throbber.js",
-			"js/Core/Controller/Util/Net/Ajax.js",
-			"js/Core/Controller/Util/Object/Exists.js",
-			"js/Core/Controller/Globalfunctions.js",
+			"js/Modules/Util/Util.js",
+			"js/Modules/Util/Browser/Throbber.js",
+			"js/Modules/Util/Net/Ajax.js",
+			"js/Modules/Util/Object/Exists.js",
+			"js/Modules/Util/Globalfunctions.js",
 			//modules
 			"js/Modules/Stats/StatsModels.js",
 			"js/Modules/Constants.js",
@@ -37,6 +37,7 @@ var ZMO = ZMO || {};
 			"js/Core/View/View.js" ,
 			"js/Core/Controller/Controller.js",
 			function() {
-				if(ZMO.controller)ZMO.controller.init();
+				if(ZMO.controller)ZMO.controller.init()
+				else alert("Problems with fileloading!")
 		});
 })();
