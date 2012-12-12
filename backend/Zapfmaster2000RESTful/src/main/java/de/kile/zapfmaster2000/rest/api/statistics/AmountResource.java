@@ -32,18 +32,36 @@ public class AmountResource {
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 
-			// TODO restrict to Box
+			// TODO restrict to box
 
-			List<Object> resultAmountCurrentKeg = session.createQuery(
-					"SELECT SUM(d.amount), MAX(d.date)" +
-					" FROM Keg k, Drawing g" +
-					" WHERE d.keg = k " +
-					" GROUP BY k.id " +
-					" ORDER BY MAX(d.date) DESC").setMaxResults(1).list();
+			List<Object> resultAmountCurrentKeg = session
+					.createQuery(
+							"SELECT SUM(d.amount)" + " FROM Keg k, Drawing d"
+									+ " WHERE d.keg = k " + " GROUP BY k.id "
+									+ " ORDER BY MAX(d.date) DESC")
+					.setMaxResults(1).list();
 
-			
+			// TODO restrict to box
+			List<Object[]> resultAmounts = session.createQuery(
+					"SELECT SUM(d.amount), MAX(d.amount) FROM Drawing d")
+					.list();
+
+			List<Object> resultMostActivity = session
+					.createQuery(
+							"SELECT HOUR(d.date)" + " FROM Drawing d"
+									+ " GROUP BY HOUR(d.date)"
+									+ " ORDER BY SUM(d.amount) DESC")
+					.setMaxResults(1).list();
+
 			tx.commit();
 
+			AmountResponse response = new AmountResponse();
+			response.setAmountCurrentKeg((Double) resultAmountCurrentKeg.get(0));
+			response.setAmountTotal((Double) resultAmounts.get(0)[0]);
+			response.setGreatestDrawing((Double) resultAmounts.get(0)[1]);
+			response.setMostActivityHour((Integer) resultMostActivity.get(0));
+
+			return Response.ok(response).build();
 		}
 
 		return Response.status(Status.FORBIDDEN).build();
