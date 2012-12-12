@@ -27,6 +27,32 @@ ZMO.modules.Constants = {
 			text:"Challenges",
 			title:"Challenges"
 		}],
+		navbarMobile :	[{
+			id:"topnav-1",
+			link:"#",
+			text:"Home",
+			title:"Home"
+		},{
+			id:"topnav-2",
+			link:"#stats",
+			text:"Stats",
+			title:"Stats"
+		},{
+			id:"topnav-3",
+			link:"#members",
+			text:"Members",
+			title:"Members"
+		},{
+			id:"topnav-4",
+			link:"#achievements",
+			text:"Achievements",
+			title:"Achievements"
+		},{
+			id:"topnav-5",
+			link:"#challenges",
+			text:"Challenges",
+			title:"Challenges"
+		}],
 		drawfeed:{
 			types:{
 				ACHIEVEMENT:"ACHIEVEMENT",

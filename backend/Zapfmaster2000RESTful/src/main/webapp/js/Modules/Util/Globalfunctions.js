@@ -12,7 +12,13 @@ ZMO.getTemplates = function(callback){
 		"url":url,
 		type:"GET",
 		complete:function(resp){
-			var datas = jQuery.parseJSON(resp.responseText);
+			var datas = {templates:[]};
+			try{
+				//datas = jQuery.parseJSON(resp.responseText);
+				datas = eval("("+resp.responseText+")");
+			}catch(e){
+				ZMO.log("WARNING:Parsing error! No ICH Templates loaded: "+e.toLocaleString());
+			}
 			callback(datas.templates);
 		}
 	});

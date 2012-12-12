@@ -1,14 +1,10 @@
 ZMO.controller = (function($,document,view,ajax){
 	var mP =ZMO.modules_properties;
-	var onPageChangeFlag = false;
 /**
  * Gets called when a page changes
  */
 	var onPageChange =function(event,datas){
 		
-		if(!onPageChangeFlag){
-			onPageChangeFlag=true;
-			setTimeout(function(){
 				var hash = window.location.hash;
 				ajax.resetQueue();
 				ajax.stopPull();
@@ -27,9 +23,6 @@ ZMO.controller = (function($,document,view,ajax){
 				}else{
 					view.createPage(url,mP[url],datas);
 				}
-				onPageChangeFlag=false;
-			});
-		}
 	};
 	var checkLoginStatus =function(successCallb,errorCallb){
 		var token = localStorage.getItem(ZMO.Constants.tokenName);
@@ -44,7 +37,7 @@ ZMO.controller = (function($,document,view,ajax){
 		checkLoginStatus(function(){
 			ZMO.getTemplates(function(templates){
 				//Add Templates to ICanHaz - Engine
-				$.each(templates, function (template) {
+				$.each(templates, function (ind,template) {
 			        ich.addTemplate(template.name, template.template);
 			    });
 				view.init();

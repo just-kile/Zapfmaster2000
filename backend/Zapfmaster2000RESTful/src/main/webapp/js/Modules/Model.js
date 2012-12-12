@@ -39,7 +39,7 @@ ZMO.DrawfeedModel = function(config){
 	this.imageurl =config.imageurl;
 	this.duration = config.duration;
 	this.amount = config.amount;
-	this.timestamp = config.timestamp;
+	this.timestamp = new Date(config.timestamp);
 	this.place = "Harzj";
 	this.keg = config.keg;
 };
@@ -47,7 +47,7 @@ ZMO.NewsModel =function(config){
 	this.name = config.userName;
 	this.amount = Math.round(config.amount*100)/100;
 	this.duration = config.duration;
-	this.date = config.date||(new Date()). toGMTString();
+	this.date = config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 	this.place = config.place;
 	this.keg =config.keg;
 	this.brand = config.brand;
@@ -58,7 +58,8 @@ ZMO.NewsModel =function(config){
 ZMO.AchievementModel = function(config){
 	this.userid = config.userId;
 	this.username = config.userName;
-	this.date = config.date||(new Date()). toGMTString();
+	this.date = config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
+	
 	this.type = config.type;
 	this.achievement_id = config.achievementId;
 	this.name = config.achievementName;
@@ -69,7 +70,8 @@ ZMO.OtherModel = function(config){
 	this.text = config.text;
 	this.image = config.image||config.IMAGE_PATH||config.imagepath;
 	this.type = config.type;
-	this.date = config.date||(""+new Date());
+	this.date = config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
+	
 	
 };
 ZMO.ChallengeStartedModel = function(config){

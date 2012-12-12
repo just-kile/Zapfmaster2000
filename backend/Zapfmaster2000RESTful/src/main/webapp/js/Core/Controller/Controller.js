@@ -2,15 +2,11 @@ ZMO.controller = (function($,document,view,ajax){
 	var mP =ZMO.modules_properties;
 	//prevents a bug, that onPageChange will be called up to 3 times
 	//TODO: find out why
-	var onPageChangeFlag = false;
 /**
  * Gets called when a page changes
  */
 	var onPageChange =function(event,datas){
 		
-		if(!onPageChangeFlag){
-			onPageChangeFlag=true;
-			setTimeout(function(){
 				var hash = window.location.hash;
 				ajax.resetQueue();
 				ajax.stopPull();
@@ -28,9 +24,6 @@ ZMO.controller = (function($,document,view,ajax){
 				}else{
 					view.createPage(url,mP[url],datas);
 				}
-				onPageChangeFlag=false;
-			});
-		}
 		
 	};
 	var checkLoginStatus =function(successCallb,errorCallb){
@@ -46,7 +39,7 @@ ZMO.controller = (function($,document,view,ajax){
 		checkLoginStatus(function(){
 			ZMO.getTemplates(function(templates){
 				//Add Templates to ICanHaz - Engine
-				$.each(templates, function (template) {
+				$.each(templates, function (ind,template) {
 			        ich.addTemplate(template.name, template.template);
 			    });
 				view.init();
@@ -66,6 +59,3 @@ ZMO.controller = (function($,document,view,ajax){
 }(jQuery,document,ZMO.view,ZMO.ajax));
 
 
-jQuery(document).ready(function(){
-	ZMO.controller.init();
-});
