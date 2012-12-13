@@ -28,19 +28,16 @@ ZMO.modules.Constants = {
 			title:"Challenges"
 		}],
 		navbarMobile :	[{
-			id:"topnav-1",
 			link:"#",
 			text:"News",
 			title:"News",
 			image:"images/icons/166-newspaper.png"
 		},{
-			id:"topnav-2",
 			link:"#duels",
 			text:"Duels",
 			title:"Duels",
 			image:"images/icons/89-dumbell.png"
 		},{
-			id:"topnav-3",
 			link:"#dare",
 			text:"Dare",
 			title:"Dare",

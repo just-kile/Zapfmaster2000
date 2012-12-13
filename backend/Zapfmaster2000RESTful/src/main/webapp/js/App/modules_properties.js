@@ -17,6 +17,38 @@ ZMO.modules_properties ={
 						position:[0,0]
 					}]
 			}
+		},
+		duels:{
+			sections:{
+				navigation:[],
+				main:[{
+					moduleId:"challenges",
+					ratio:"100%",
+					position:[0,0]
+				}],
+				  
+				footer:[{
+						moduleId:"navigationMobile",
+						ratio:"100%",
+						position:[0,0]
+					}]
+			}
+		},
+		dare:{
+			sections:{
+				navigation:[],
+				main:[{
+					moduleId:"createChallenge",
+					ratio:"100%",
+					position:[0,0]
+				}],
+				  
+				footer:[{
+						moduleId:"navigationMobile",
+						ratio:"100%",
+						position:[0,0]
+					}]
+			}
 		}
 		
 };

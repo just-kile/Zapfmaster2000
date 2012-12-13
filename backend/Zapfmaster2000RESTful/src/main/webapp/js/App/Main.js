@@ -39,6 +39,7 @@ var ZMO = ZMO || {};
 			"js/Modules/Achievements/Achievements.js",
 			"js/Modules/Achievementstats/Achievementstats.js",
 			"js/Modules/Achievementlist/Achievementlist.js",
+			"js/Modules/CreateChallenge/CreateChallenge.js",
 
 			//main
 			"js/App/Model/Model.js",
