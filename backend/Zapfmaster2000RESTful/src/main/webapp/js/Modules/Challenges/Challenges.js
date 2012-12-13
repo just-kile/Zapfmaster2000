@@ -3,26 +3,72 @@
  * 
  */
 ZMO.modules = ZMO.modules || {};
-ZMO.modules.challenges = (function($,Ajax){
+ZMO.modules.challenges = (function($,ajax){
 	var c = ZMO.modules.Constants;
-	var container;
+	var container = null,duelsContainerUl= null;
+	
+	var stretchLengthStatus = function(newsRow,globalChallengeModel){
+    	var team1Div =newsRow.find(".team1_amount");
+    	var team2Div =newsRow.find(".team2_amount");
+    	var team1Amount = globalChallengeModel.team1Amount;
+    	var team2Amount = globalChallengeModel.team2Amount;
+    	if(team1Amount>0 || team2Amount>0){
+    		var sum = team1Amount+team2Amount;
+    		var percent1 = team1Amount/sum;
+    		var percent2 = team2Amount/sum;
+    		team1Div.css("width",(percent1*100)+"%");
+    		team2Div.css("width",(percent2*100)+"%");
+    	}
+    	return newsRow;
+	};
+	var parseChallengesOverview = function(model){
+		return ich["ZMO-duelsRow"]({
+			team1:model.team1Images.join(""),
+			team2:model.team2Images.join(""),
+			type:function(){
+				//model.challenge_type,
+				var am1 = Math.round(model.team1Amount*100)/100;
+				var am2 =Math.round(model.team2Amount*100)/100;
+				return am1+"l -- "+am2+"l";
+			}(),
+			active:model.finished==0?"Fertig":"Aktiv",
+			time:(function(){
+				var oneMinute = 1000*60;
+				var duration = parseInt(model.duration)*oneMinute*1;
+				var time =Math.ceil((parseInt(model.date)*1000+duration-(new Date()).getTime())/oneMinute);
+				return time>0?time +"min verbleibend":"Challenge beendet!";
+			})()
+		});
+	};
+	var fillContainer = function(globalChallengeModel){
+		var news = $(parseChallengesOverview(globalChallengeModel));
+		duelsContainerUl.append(stretchLengthStatus(news,globalChallengeModel));
+	};
+	var onChallengesReceive = function(datas){
+		ZMO.log("challenges datas received!");
+		$.each(datas.CHALLENGES,function(ind,val){
+			fillContainer(new ZMO.GlobalChallengeModel(val));
+		});
+	};
+	
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(){
-		Ajax.getDatas("tmp/challenges.json",function(resp){
-			
-		});
-	}
+		ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
+	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
-		return container = $("<div>").addClass("stats");
-	}
+		container = $("<div>");
+		duelsContainerUl = $("<ul>").attr("id","ZMO-duels-container");
+		container.append(duelsContainerUl);
+		return container;
+	};
 	var pub = {
 			getInstance:getInstance,
 			init:init
-	}
-	return pub
-}(jQuery,ZMO.ajax))
+	};
+	return pub;
+}(jQuery,ZMO.ajax));

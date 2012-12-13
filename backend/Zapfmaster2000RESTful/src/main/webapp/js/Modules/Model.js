@@ -151,3 +151,35 @@ ZMO.MemberModel = function(config) {
 	
 };
 
+ZMO.GlobalChallengeModel = function(config){
+	this.type = config.type;
+	this.challenge_type = config.challenge_type;
+	this.duration = config.duration;
+	var parseTeam = function(teamArr,key){
+		var arr = [];
+		$.each(teamArr,function(ind,val){
+//			arr.push(new ZMUCA.ChallengeStartedModel(val))
+			arr.push(val[key]);
+			
+		});
+		return arr;
+	}
+	var sumArr =function(arr){
+		var count = 0;
+		for (var i = 0; i < arr.length; i++ )
+		{
+			count += arr[i];
+		}
+		return count;
+	}
+	this.team1 = parseTeam(config.team1,"username")
+	this.team2 = parseTeam(config.team2,"username")
+	this.team1Images = parseTeam(config.team1,"userimage")
+	this.team2Images = parseTeam(config.team2,"userimage")
+	this.team1Amount = sumArr(parseTeam(config.team1,"amount"));
+	this.team2Amount = sumArr(parseTeam(config.team2,"amount"));
+	this.image = config.image;
+	this.date = config.start_time;
+	this.challengeId = config.challenge_id;
+}
+

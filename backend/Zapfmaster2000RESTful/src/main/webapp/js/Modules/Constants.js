@@ -41,7 +41,7 @@ ZMO.modules.Constants = {
 			link:"#dare",
 			text:"Dare",
 			title:"Dare",
-			image:"images/icons/166-newspaper.png"
+			image:"images/icons/22-skull-n-bones.png"
 		}],
 		drawfeed:{
 			types:{
@@ -61,7 +61,7 @@ ZMO.modules.Constants = {
 			//NEWSLIST:"//thomas-notebook-ubuntu/rest/news",
 //			STATS:"rest/stats/getStatsAsJson"
 			STATS:"tmp/stats.json",
-
+			CHALLENGES:"tmp/challenges.json",
 			MEMBERS:"rest/members"
 			//NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
