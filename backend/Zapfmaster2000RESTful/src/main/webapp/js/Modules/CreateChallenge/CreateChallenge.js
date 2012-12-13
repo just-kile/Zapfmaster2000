@@ -9,19 +9,32 @@ ZMO.modules.createChallenge = (function($,view,ajax){
 	var challengeDatas = {};
 	var resetChallengeDatas = function(){
 		challengeDatas = {type:"",mode:"",victim:{}};
-	}
+	};
 	resetChallengeDatas();
+	var sendChallengeRequest = function(){
+		ZMO.log(challengeDatas);
+		alert("Challenge verschickt!");
+		resetChallengeDatas();
+		init();
+	};
 	var showMemberlist = function(){
-		ajax.getDatas("tmp/challenges.json",function(resp){
-			alert("MEMBERS")
+		ajax.getDatas(c.urls.ACTIVEMEMBERS,function(resp){
+			var memberModelArr = [];
+			$.each(resp,function(ind,member){
+				memberModelArr.push(new ZMO.MemberModel(member));
+			});
+			view.createChallengeOverview(container,memberModelArr,function(e,victim){
+				challengeDatas.victim = victim;
+				sendChallengeRequest();
+			});
 		});
-	}
+	};
 	var showDurationlist = function(){
 		view.createChallengeOverview(container,c.challenges.modes.params,function(e,mode){
 			showMemberlist();
 			challengeDatas.mode = mode;
 		});
-	}
+	};
 	var createChallengesModesOverview= function(){
 		view.createChallengeOverview(container,c.challenges.types,function(e,type){
 			showDurationlist();
@@ -41,11 +54,11 @@ ZMO.modules.createChallenge = (function($,view,ajax){
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
-		return container = $("<div>").addClass("statsdiv");
+		return container = $("<div>");
 	};
 	var pub = {
 			getInstance:getInstance,
 			init:init
 	};
 	return pub;
-}(jQuery,ZMO.modules.createChallengeView,ZMO.ajax))
+}(jQuery,ZMO.modules.createChallengeView,ZMO.ajax));

@@ -17,10 +17,6 @@ ZMO.modules_properties ={
 					moduleId:"frontpagestats",
 					ratio:"30%",
 					position:[0,1]
-				},{
-					moduleId:"challenges",
-					ratio:"30%",
-					position:[0,1]
 				}],
 				  
 				footer:[]
@@ -100,6 +96,22 @@ ZMO.modules_properties ={
 				}],
 				main:[{
 					moduleId:"members",
+					ratio:"100%",
+					position:[0,0]
+				}],
+				  
+				footer:[]
+			}
+		},
+		challenges:{
+			sections:{
+				navigation:[{
+					moduleId:"navigation",
+					ratio:"100%",
+					position:[0,0]
+				}],
+				main:[{
+					moduleId:"challenges",
 					ratio:"100%",
 					position:[0,0]
 				}],

@@ -46,7 +46,8 @@ ZMO.controller = (function($,document,view,ajax){
 			});
 		},function(){
 			alert("not logged in");
-			window.location.replace("/");
+			var baseUrl = window.location.href.replace(new RegExp("(/[a-zA-Z]*.html)"),"");
+			window.location.replace(baseUrl);
 		});
 		
 	};

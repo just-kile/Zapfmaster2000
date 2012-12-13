@@ -338,14 +338,14 @@ ul#topnav li#topnav-5 a:hover {
 	height: 23px;
 }
 
-#ZMUCA-duels-container {
+#ZMO-duels-container {
 	width: 100%;
 	list-style-type: none;
 	padding-left: 0;
 	font-size: 1em;
 }
 
-#ZMUCA-duels-container .rowContainer {
+#ZMO-duels-container .rowContainer {
 	height: 50px;
 	position: relative;
 	left: 0;
@@ -353,64 +353,64 @@ ul#topnav li#topnav-5 a:hover {
 	margin-right: 0;
 }
 
-#ZMUCA-duels-container span {
+#ZMO-duels-container span {
 	position: absolute
 }
 
-#ZMUCA-duels-container .row {
+#ZMO-duels-container .row {
 	color: white; opacity; 0.5;
 	padding: 5px;
 }
 
-#ZMUCA-duels-container .row:nth-child(even) {
+#ZMO-duels-container .row:nth-child(even) {
 	background: rgba(0, 0, 0, 0.2);
 }
 
-#ZMUCA-duels-container .row:nth-child(odd) {
+#ZMO-duels-container .row:nth-child(odd) {
 	background: rgba(0, 0, 0, 0.5);
 }
 
-#ZMUCA-duels-container li :active {
+#ZMO-duels-container li :active {
 	background: rgba(255, 255, 255, 0.2);
 	color: white;
 	opacity;
 	0.5;
 }
 
-#ZMUCA-duels-container .active {
+#ZMO-duels-container .active {
 	left: 50%;
 	margin-left: -1.1em;
 	bottom: 5px;
 	font-size: 0.8em;
 }
 
-#ZMUCA-duels-container .type {
+#ZMO-duels-container .type {
 	left: 50%;
 	margin-left: -1.7em;
 	font-size: 0.8em;
 }
 
-#ZMUCA-duels-container .time {
+#ZMO-duels-container .time {
 	left: 50%;
 	margin-left: -60px;
 	font-size: 0.8em;
 	top: 1.3em;
 }
 
-#ZMUCA-duels-container .backgrnd {
+#ZMO-duels-container .backgrnd {
 	left: 50%;
 	margin-left: -100px;
 }
 
-#ZMUCA-duels-container .team {
+#ZMO-duels-container .team {
 	
 }
 
-#ZMUCA-duels-container .team2 {
+#ZMO-duels-container .team2 {
 	right: 0;
 }
 
-#ZMUCA-duels-container .team1_amount {
+#ZMO-duels-container .team1_amount {
 	right: 0;
 	background: #ffa3ea;
 	position: absolute;
@@ -434,7 +434,7 @@ ul#topnav li#topnav-5 a:hover {
 	float: left;
 }
 
-#ZMUCA-duels-container .team2_amount {
+#ZMO-duels-container .team2_amount {
 	background: #ffe88e;
 	position: absolute;
 	height: 48px;

@@ -42,11 +42,12 @@
 </div>
 </li>
  </script>
+
   <script id="ZMO-createChallengeRow" type="text/html">
  <li class="row">
 	<div class="rowContainer">
-		{{name}}	
-	</div>
+		<img src="{{image}}{{userImage}}" />
+	<span>{{name}}{{userName}} {{#description}}:{{description}}{{/description}}</span>
 </li>
  </script>
 <script id="ZMO-news-template" type="text/html">

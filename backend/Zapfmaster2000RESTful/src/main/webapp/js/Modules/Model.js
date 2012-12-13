@@ -135,6 +135,7 @@ ZMO.MemberModel = function(config) {
 	this.userName = config.userName;
 	this.userId = config.userId;
 	this.achievements = config.achievements;
+	this.userImage = config.imagePath;
 	if (config.totalAmount != undefined) {
 		this.totalAmount = config.totalAmount.toFixed(2);
 	} else {

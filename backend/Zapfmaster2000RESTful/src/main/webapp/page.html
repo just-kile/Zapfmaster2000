@@ -14,6 +14,22 @@
 
  <script src="js/Core/Main.js"></script>
 <!-- Templates ==> Put them to templates.json (same effect) -->
+ <script id="ZMO-duelsRow" type="text/html">
+ <li class="row">
+	<div class="rowContainer">
+<div class="team1_amount"></div>
+	<div class="team2_amount"></div>
+	<!--<span class="backgrnd"><img src="css/images/challenge.png" style="opacity:0.5"/></span>
+	-->
+	<span class="team"><img src="http://server/beerometer/{{team1}}"/></span>
+	<span class="type">({{type}})</span>
+	<span class="team2"><img src="http://server/beerometer/{{team2}}"/></span>
+	<span class="time">{{time}}</span>
+
+	
+</div>
+</li>
+ </script>
 <script id="ZMO-news-template" type="text/html">
 		<div class="news-drink-box">
 			<div class="news-drink-box-mugshot">
