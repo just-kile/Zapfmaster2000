@@ -4,7 +4,7 @@ ZMO.controller = (function($,document,view,ajax){
  * Gets called when a page changes
  */
 	var onPageChange =function(event,datas){
-		
+				if(ZMO.throbber)ZMO.throbber.show();
 				var hash = window.location.hash;
 				ajax.resetQueue();
 				ajax.stopPull();

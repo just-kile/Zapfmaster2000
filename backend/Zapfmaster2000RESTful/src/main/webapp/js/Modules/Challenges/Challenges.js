@@ -61,7 +61,7 @@ ZMO.modules.challenges = (function($,ajax){
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
-		container = $("<div>");
+		container = $("<div>").addClass("newsdiv");
 		duelsContainerUl = $("<ul>").attr("id","ZMO-duels-container");
 		container.append(duelsContainerUl);
 		return container;

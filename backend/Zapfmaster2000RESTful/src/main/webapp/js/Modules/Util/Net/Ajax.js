@@ -20,15 +20,19 @@ ZMO.Util.Net.Ajax = (function($){
 			data:datas,
 			complete:function(resp){
 			if(resp.status==200){
+				var data = {};
 				try{
-					var data = $.parseJSON(resp.responseText);
+					data = $.parseJSON(resp.responseText);
 				}catch(e){
 					ZMO.log(e);
 				}
 				callback(data);
+				
 			}else{
 				
-			}	
+				ZMO.log("AJAX ERROR "+resp.status);
+			}
+			if(ZMO.throbber)ZMO.throbber.hide();
 			}
 		});
 	};

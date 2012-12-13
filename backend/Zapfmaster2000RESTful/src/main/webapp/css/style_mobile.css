@@ -361,19 +361,19 @@ display:none;
 	left: 50%;
 	margin-left: -1.1em;
 	bottom: 5px;
-	font-size: 0.8em;
+	font-size: 12px;
 }
 
 #ZMO-duels-container .type {
 	left: 50%;
 	margin-left: -1.7em;
-	font-size: 0.8em;
+	font-size: 12px;
 }
 
 #ZMO-duels-container .time {
 	left: 50%;
 	margin-left: -60px;
-	font-size: 0.8em;
+	font-size: 12px;
 	top: 1.3em;
 }
 
@@ -430,13 +430,14 @@ display:none;
 	position:absolute;
 	width:100%;
 	height:100%;
-	background:black;
+
 	opacity:0.5;
 	z-index:26000;
 }
 .throbber img{
 	top:48%;
 	position:absolute;
+	left:50%;
 }
 
 .linechart {
