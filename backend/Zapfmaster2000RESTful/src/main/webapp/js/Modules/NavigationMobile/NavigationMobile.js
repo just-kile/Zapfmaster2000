@@ -1,29 +1,33 @@
 ZMO.modules = ZMO.modules || {};
 
 ZMO.modules.navigationMobile = (function($,ajax){
+	
 	var c = ZMO.modules.Constants;
 	var container = null;
 	var createNavigation = function(){
 		var links = c.navbarMobile;
-		var ul =$("<ul>").attr("id","topnav");
-		jQuery(links).each(function(index,val){
-			var li = jQuery(document.createElement("li")).attr({
-				"id":val.id
-			});
-			jQuery(document.createElement("a")).attr({
-				href:val.link,
-				title:val.title
-			}).text(val.text).appendTo(li);
-			li.appendTo(ul);
+		var ul = $("<ul>").addClass("navBtn");
+		container.append(ul);
+		$.each(links,function(ind,link){
+			var li = $("<li>");
+			var textSpan = $("<span>").text(link.text);
+			var icon = $("<img>").attr("src",link.image);
+			var iconCont = $("<div>").addClass("iconContainer").append(icon);
+			li.append(iconCont).append(textSpan);
+			ul.append(li);
+			
+			li.on("mousedown",function(){
+				//alert(link.text);
+				ZMO.changePage(link.link);
+			})
 		});
 		
-		return ul;
 	};
 	var init = function(){
 		createNavigation();
 	};
 	var getInstance = function(){
-		return container = $("<div>");
+		return container = $("<div>").addClass("navMobile");
 	};
 	var pub = {
 			init:init,

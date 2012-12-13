@@ -15,6 +15,8 @@ var ZMO = ZMO || {};
 			//Util
 			"js/Modules/Util/Util.js",
 			"js/Modules/Util/Browser/Throbber.js",
+			"js/Modules/Util/Browser/ChangePage.js",
+			"js/Modules/Util/Net/Ajax.js",
 			"js/Modules/Util/Net/Ajax.js",
 			"js/Modules/Util/Object/Exists.js",
 			"js/Modules/Util/Globalfunctions.js",
@@ -23,7 +25,7 @@ var ZMO = ZMO || {};
 			"js/Modules/Stats/StatsModels.js",
 			"js/Modules/Constants.js",
 			"js/Modules/Drawfeed/Drawfeed.js",
-			"js/Modules/Navigation/Navigation.js",
+			"js/Modules/NavigationMobile/NavigationMobile.js",
 			"js/Modules/Stats/Kegstatus/KegstatusView.js",
 			"js/Modules/Stats/Kegstatus/Kegstatus.js",
 			"js/Modules/Stats/LineChart/LineChartView.js",

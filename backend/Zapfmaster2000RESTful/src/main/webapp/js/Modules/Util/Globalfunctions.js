@@ -2,6 +2,7 @@ var ZMO = ZMO || {};
 ZMO.exists = ZMO.Util.Object.exists;
 ZMO.ajax = ZMO.Util.Net.Ajax;
 ZMO.throbber =ZMO.Util.Browser.throbber;
+ZMO.changePage = ZMO.Util.Browser.changePage;
 
 ZMO.parseHash = function(str){
 	return str.substr(1);
@@ -31,10 +32,10 @@ ZMO.log = function(str){
 	}
 };
 
-ZMO.changePage = function(pageId,datas){
-	var hash= hashHandler.objToQuery(pageId,datas);
-	window.location.replace(hash);
-};
+//ZMO.changePage = function(pageId,datas){
+//	var hash= hashHandler.objToQuery(pageId,datas);
+//	window.location.replace(hash);
+//};
 ZMO.hashHandler = (function($){
 	var objToQuery  = function(id,datas){
 		var dataArr = [];

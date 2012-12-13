@@ -30,28 +30,21 @@ ZMO.modules.Constants = {
 		navbarMobile :	[{
 			id:"topnav-1",
 			link:"#",
-			text:"Home",
-			title:"Home"
+			text:"News",
+			title:"News",
+			image:"images/icons/166-newspaper.png"
 		},{
 			id:"topnav-2",
-			link:"#stats",
-			text:"Stats",
-			title:"Stats"
+			link:"#duels",
+			text:"Duels",
+			title:"Duels",
+			image:"images/icons/89-dumbell.png"
 		},{
 			id:"topnav-3",
-			link:"#members",
-			text:"Members",
-			title:"Members"
-		},{
-			id:"topnav-4",
-			link:"#achievements",
-			text:"Achievements",
-			title:"Achievements"
-		},{
-			id:"topnav-5",
-			link:"#challenges",
-			text:"Challenges",
-			title:"Challenges"
+			link:"#dare",
+			text:"Dare",
+			title:"Dare",
+			image:"images/icons/166-newspaper.png"
 		}],
 		drawfeed:{
 			types:{
