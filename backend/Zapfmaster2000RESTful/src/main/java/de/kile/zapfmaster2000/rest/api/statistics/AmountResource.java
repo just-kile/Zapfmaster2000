@@ -48,7 +48,7 @@ public class AmountResource {
 
 			List<Object> resultMostActivity = session
 					.createQuery(
-							"SELECT HOUR(d.date)" + " FROM Drawing d"
+							"SELECT HOUR(d.date) FROM Drawing d"
 									+ " GROUP BY HOUR(d.date)"
 									+ " ORDER BY SUM(d.amount) DESC")
 					.setMaxResults(1).list();

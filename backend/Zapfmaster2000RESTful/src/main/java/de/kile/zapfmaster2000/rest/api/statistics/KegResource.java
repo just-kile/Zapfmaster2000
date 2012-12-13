@@ -19,7 +19,6 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
 public class KegResource {
 
-
 	@Path("kegStats")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
