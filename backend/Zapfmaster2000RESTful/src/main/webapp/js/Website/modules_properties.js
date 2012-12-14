@@ -11,7 +11,7 @@ ZMO.modules_properties ={
 				}],
 				main:[{
 					moduleId:"drawfeed",
-					ratio:"70%",
+					ratio:"65%",
 					position:[0,0]
 				},{
 					moduleId:"frontpagestats",

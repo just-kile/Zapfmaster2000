@@ -9,10 +9,10 @@ ZMO.modules.StatsModel = function(config){
 	if("undefined"!=typeof config){
 		this.keg = config.keg;//new ZMO.modules.kegModel(config.keg);
 		
-		this.amount = new ZMO.modules.amountStatsModel(config.amount);
-		this.achievements = new ZMO.modules.achievementStatsModel(config.achievements);
-		this.drawCount  =new ZMO.modules.drawCountModel (config.drawCount);
-		this.progress = new ZMO.modules.progressModel(config.progress);
+		this.amount = new ZMO.modules.AmountStatsModel(config.amount);
+		this.achievements = new ZMO.modules.AchievementStatsModel(config.achievements);
+		this.drawCount  =new ZMO.modules.DrawCountModel (config.drawCount);
+		this.progress = new ZMO.modules.ProgressModel(config.progress);
 	
 		this.promille = config.promille?config.promille.average:null;
 		this.bestUserList = config.bestUserList;
@@ -27,7 +27,7 @@ ZMO.modules.StatsModel = function(config){
  * @param config
  * @returns {ZMO.modules.kegModel}
  */
-ZMO.modules.kegModel = function(config){
+ZMO.modules.KegModel = function(config){
 	if("undefined"!=typeof config){
       this.keg_id= config.keg_id;
       this.brand=config.brand;
@@ -42,7 +42,7 @@ ZMO.modules.kegModel = function(config){
  * @param config
  * @returns {ZMO.modules.amount}
  */
-ZMO.modules.amountStatsModel = function(config){
+ZMO.modules.AmountStatsModel = function(config){
 	if("undefined"!=typeof config){
         this.current=config.current;
         this.complete = config.complete;
@@ -55,7 +55,7 @@ ZMO.modules.amountStatsModel = function(config){
  * @param config
  * @returns {ZMO.modules.achievementStatsModel}
  */
-ZMO.modules.achievementStatsModel=function(config){
+ZMO.modules.AchievementStatsModel=function(config){
 	if("undefined"!=typeof config){
         this.count=config.count,
 //        "achievementspeed": "50",
@@ -67,7 +67,7 @@ ZMO.modules.achievementStatsModel=function(config){
  * @param config
  * @returns {ZMO.modules.progressModel}
  */
-ZMO.modules.drawCountModel =function(config){
+ZMO.modules.DrawCountModel =function(config){
 	if("undefined"!=typeof config){
 		this.operations = config.operations;
 	
@@ -79,7 +79,7 @@ ZMO.modules.drawCountModel =function(config){
  * @param config
  * @returns {ZMO.modules.progressModel}
  */
-ZMO.modules.progressModel = function(config){
+ZMO.modules.ProgressModel = function(config){
 	if("undefined"!=typeof config){
 	this.data = config.data;
 	this.start_date = Date.UTC(2012, 12, 31);// config.start_date;

@@ -26,6 +26,7 @@ var ZMO = ZMO || {};
 			"js/Modules/Stats/Bestlist/Bestlist.js",
 			"js/Modules/Stats/AchievementBestlist/AchievementBestlist.js",
 			"js/Modules/Challenges/Challenges.js",
+			"js/Modules/Frontpagestats/FrontpageStatsView.js",
 			"js/Modules/Frontpagestats/FrontpageStats.js",
 			"js/Modules/Members/Members.js",
 			"js/Modules/Achievements/Achievements.js",

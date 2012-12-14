@@ -14,7 +14,7 @@ ZMO.modules_properties ={
 					moduleId:"drawfeed",
 					ratio:"100%",
 					position:[0,0],
-					params:{length:4}
+					params:{}
 				}],
 				  
 				footer:[{
