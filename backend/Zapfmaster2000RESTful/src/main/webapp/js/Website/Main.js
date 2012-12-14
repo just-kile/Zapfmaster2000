@@ -4,8 +4,7 @@ var ZMO = ZMO || {};
  */
 (function(){
 	head.js(//core models
-			"js/Core/Model/Constants.js" ,
-			"js/Core/Model/Model.js",
+			"js/Website/Constants.js" ,
 			"js/Modules/Model.js" ,
 			//utils
 			"js/Util/Util.js",
@@ -33,12 +32,13 @@ var ZMO = ZMO || {};
 			"js/Modules/Achievementstats/Achievementstats.js",
 			"js/Modules/Achievementlist/Achievementlist.js",
 			//page definition properties
-			"js/Core/modules_properties.js",
+			"js/Website/modules_properties.js",
 			//Core2
-			"js/Core/View/View.js" ,
-			"js/Core/Controller/Controller.js",
+			"js/Modules/Core/View.js" ,
+			"js/Modules/Core/Controller.js",
 			function() {
-				if(ZMO.controller)ZMO.controller.init()
-				else alert("Problems with fileloading!")
+				//execute core controller
+				if(ZMO.controller)ZMO.controller.init();
+				else alert("Problems with fileloading!");
 		});
 })();

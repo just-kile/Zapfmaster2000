@@ -11,7 +11,7 @@ var ZMO = ZMO || {};
  */
 (function(){
 	head.js(
-			"js/App/Model/Constants.js",
+			"js/App/Constants.js",
 			//Util
 			"js/Util/Util.js",
 			"js/Util/UtilConstants.js",
@@ -31,10 +31,9 @@ var ZMO = ZMO || {};
 			"js/Modules/CreateChallenge/CreateChallenge.js",
 			"js/Modules/ReceiveChallenge/ReceiveChallenge.js",
 			//main
-			"js/App/Model/Model.js",
-			"js/App/View/View.js",
+			"js/Modules/Core/View.js",
 			"js/App/modules_properties.js",
-			"js/App/Controller/Controller.js",
+			"js/Modules/Core/Controller.js",
 			function() {
 				if(ZMO.controller)ZMO.controller.init();
 		});
