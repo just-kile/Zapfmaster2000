@@ -21,9 +21,9 @@
 	<div class="team2_amount"></div>
 	<!--<span class="backgrnd"><img src="css/images/challenge.png" style="opacity:0.5"/></span>
 	-->
-	<span class="team"><img src="http://server/beerometer/{{team1}}"/></span>
+	<span class="team"><img src="{{team1}}"/></span>
 	<span class="type">({{type}})</span>
-	<span class="team2"><img src="http://server/beerometer/{{team2}}"/></span>
+	<span class="team2"><img src="{{team2}}"/></span>
 	<span class="time">{{time}}</span>
 
 	
@@ -34,7 +34,7 @@
 		<div class="news-drink-box">
 			<div class="news-drink-box-mugshot">
 				<div>
-					<a><img width="48" height="48" border="0" src="http://server/beerometer/{{image}}"></a>
+					<a><img width="48" height="48" border="0" src="{{image}}"></a>
 				</div>
 			</div>
 			<div class="news-drink-box-details">
@@ -54,7 +54,7 @@
 	<div class="news-drink-box-mugshot">
 		<div>
 			<a>
-				<img src="http://server/beerometer/{{image}}" border="0" height="48" width="48">
+				<img src="{{image}}" border="0" height="48" width="48">
 			</a>
 		</div>
 	</div>
@@ -78,7 +78,7 @@
 <div class="news-drink-box">
 	<div class="news-drink-box-mugshot">
 		<div>
-			<img src="http://server/beerometer/{{image}}" border="0" height="48" width="48">
+			<img src="{{image}}" border="0" height="48" width="48">
 		</div>
 	</div>
 	<div class="news-drink-box-details">
@@ -94,7 +94,7 @@
 	<div class="news-drink-box-mugshot">
 		<div>
 			<a>
-				<img src="http://server/beerometer/{{image}}" border="0" height="48" width="48">
+				<img src="{{image}}" border="0" height="48" width="48">
 			</a>
 		</div>
 	</div>
@@ -117,7 +117,7 @@
 	<div class="news-drink-box-mugshot">
 		<div>
 			<a>
-				<img src="http://server/beerometer/{{image}}" border="0" height="48" width="48">
+				<img src="{{image}}" border="0" height="48" width="48">
 			</a>
 		</div>
 	</div>
@@ -139,7 +139,7 @@
 	<div class="news-drink-box-mugshot">
 		<div>
 			<a>
-				<img src="http://server/beerometer/{{image}}" border="0" height="48" width="48">
+				<img src="{{image}}" border="0" height="48" width="48">
 			</a>
 		</div>
 	</div>
@@ -162,13 +162,13 @@
 	<div class="member-box-left">
 		<div class="news-drink-box-mugshot">
 			<div>
-				<a href="page.html#user?id={{userId}}">
+				<a href="#user?id={{userId}}">
 					<img width="48" height="48" border="0" src="{{userImage}}">
 				</a>
 			</div>
 		</div>
 		<div class="members-box-headline">
-			<a href="page.html#user?id={{userId}}">{{userName}}</a>
+			<a href="#user?id={{userId}}">{{userName}}</a>
 		</div>
 		<div class="members-box-amount">
 			Gezapfte Menge: {{totalAmount}} Liter
@@ -184,7 +184,7 @@
 {{#achievements}}	
 	<div class="member-box-achievement-mugshot">
 		<div>
-			<a href="page.html#achievementstats?id={{achievementId}}">
+			<a href="#achievementstats?id={{achievementId}}">
 				<img width="48" height="48" border="0" src="{{imagePath}}" title="{{achievementName}}">
 			</a>
 		</div>
