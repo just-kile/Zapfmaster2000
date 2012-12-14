@@ -59,9 +59,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 		updateNormalKegstats(kegModel);
 		updateChart(kegModel);
 	};
-	/**
-	 * Gets called after the "getInstance" container is appended to DOM
-	 */
+	
 	var initContainer = function(kegModel){
 		return $("<div>").addClass("news-drink-box");
 		
@@ -71,7 +69,19 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 		cont.append(chartContainer);
 		return view.createBarChart(kegModel,chartContainer);
 	};
-	
+	var initKegStats = function(kegModel){
+		//create basic container
+		var kegStatsContainer = initContainer(kegModel);
+		container.append(kegStatsContainer);
+		//Append Chart
+		var chart = createChart(kegStatsContainer,kegModel);
+		//Append text container
+		kegStatsContainer.append($("<div>").addClass("text"));
+		//Add Container to store
+		containerHandler.add(kegModel,kegStatsContainer,chart);
+		//Fill text container
+		updateNormalKegstats(kegModel);
+	};
 	/*****
 	 * User Draws chart creation
 	 *****/
@@ -84,21 +94,18 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 	/*****
 	 * Switch functionality
 	 *****/
-	
+	var switchContainer =function(kegId){
+		
+	}
 	/*****
 	 * Initialization
 	 */
 	var init = function(){
-		ajax.getDatas("tmp/kegstatus.json",function(kegDatas){
+		ajax.getDatas("tmp/stats.json",function(kegDatas){
 			containerHandler = new ContainerHandler();
 			$.each(kegDatas["keg"],function(ind,kegData){
 				var kegModel = new ZMO.modules.KegModel(kegData); 
-				var kegStatsContainer = initContainer(kegModel);
-				container.append(kegStatsContainer);
-				var chart = createChart(kegStatsContainer,kegModel);
-				containerHandler.add(kegModel,kegStatsContainer,chart);
-				kegStatsContainer.append($("<div>").addClass("text"));
-				updateNormalKegstats(kegModel);
+				initKegStats(kegModel);
 			});
 		});
 	};
