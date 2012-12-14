@@ -25,10 +25,11 @@ ZMO.controller = (function($,document,view,ajax){
 				}
 	};
 	var checkLoginStatus =function(successCallb,errorCallb){
-		var token = localStorage.getItem(ZMO.Constants.tokenName);
+		var token = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		if(ZMO.exists(token)){
 			if(successCallb)successCallb();
-		}else{
+		}
+		else{
 			if(errorCallb)errorCallb();
 		}
 	};

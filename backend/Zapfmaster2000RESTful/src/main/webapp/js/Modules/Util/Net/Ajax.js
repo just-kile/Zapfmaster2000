@@ -1,6 +1,6 @@
 ZMO.Util.Net = ZMO.Util.Net || {};
 ZMO.Util.Net.Ajax = (function($){
-	var c = ZMO.Constants.ajax;
+	var c = ZMO.UtilConstants.ajax;
 	/*****
 	 * Receive Datas
 	 *****/
@@ -16,7 +16,7 @@ ZMO.Util.Net.Ajax = (function($){
 	var getDatas = function(url,callback,datas){
 		if(!ZMO.exists(datas))datas = {};
 		if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
-		datas["token"] = localStorage.getItem(ZMO.Constants.tokenName);
+		datas["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		$.ajax({
 			url:url,
 			type:"GET",
@@ -151,7 +151,7 @@ ZMO.Util.Net.Ajax = (function($){
 	 */
 	var connectToChannel = function(url,successCb,errorCb,data){
 		if(!data)data ={};
-		data["token"] = localStorage.getItem(ZMO.Constants.tokenName);
+		data["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		pushRequests[url] = $.ajax({
 			type:"GET",
 			url:url,
@@ -164,7 +164,7 @@ ZMO.Util.Net.Ajax = (function($){
 			error:function(e){
 				if(e.status==0){
 					ZMO.log("Request abort success!");
-				}else if(e.status==503){
+				}else if(e.status==c.NO_DATAS_RECEIVED_CODE){
 					ZMO.log("No Datas Received! Reconnect...");
 //					if(errorCb)errorCb(e);
 					connectToChannel(url,successCb,errorCb,data);

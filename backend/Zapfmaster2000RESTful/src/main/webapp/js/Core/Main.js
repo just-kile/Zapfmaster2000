@@ -9,6 +9,7 @@ var ZMO = ZMO || {};
 			"js/Modules/Model.js" ,
 			//utils
 			"js/Modules/Util/Util.js",
+			"js/Modules/Util/UtilConstants.js",
 			"js/Modules/Util/Browser/Throbber.js",
 			"js/Modules/Util/Net/Ajax.js",
 			"js/Modules/Util/Object/Exists.js",

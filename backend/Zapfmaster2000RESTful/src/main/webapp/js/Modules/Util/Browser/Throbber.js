@@ -1,6 +1,6 @@
 ZMO.Util.Browser = ZMO.Util.Browser || {};
 ZMO.Util.Browser.throbber = (function($){
-	var c  =ZMO.Constants;
+	var c  =ZMO.UtilConstants;
 	var isActive = false;
 	var icon;
 	var iconArr;

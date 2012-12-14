@@ -8,9 +8,5 @@ ZMO.Positions={
 ZMO.Constants = {
 	debugMode :true,
 	templateUrl : "js/Templates/templates.json",
-	ajax:{
-		pullTimeout:120000,//ms
-	},
-	throbberUrl:"images/view/throbber.gif",
-	tokenName:"token"
+
 };
