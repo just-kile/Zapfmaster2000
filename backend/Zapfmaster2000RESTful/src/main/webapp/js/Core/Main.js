@@ -8,12 +8,12 @@ var ZMO = ZMO || {};
 			"js/Core/Model/Model.js",
 			"js/Modules/Model.js" ,
 			//utils
-			"js/Modules/Util/Util.js",
-			"js/Modules/Util/UtilConstants.js",
-			"js/Modules/Util/Browser/Throbber.js",
-			"js/Modules/Util/Net/Ajax.js",
-			"js/Modules/Util/Object/Exists.js",
-			"js/Modules/Util/Globalfunctions.js",
+			"js/Util/Util.js",
+			"js/Util/UtilConstants.js",
+			"js/Util/Browser/Throbber.js",
+			"js/Util/Net/Ajax.js",
+			"js/Util/Object/Exists.js",
+			"js/Util/Globalfunctions.js",
 			//modules
 			"js/Modules/Stats/StatsModels.js",
 			"js/Modules/Constants.js",
