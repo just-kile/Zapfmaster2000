@@ -13,9 +13,12 @@ ZMO.modules.createChallenge = (function($,view,ajax){
 	resetChallengeDatas();
 	var sendChallengeRequest = function(){
 		ZMO.log(challengeDatas);
-		alert("Challenge verschickt!");
-		resetChallengeDatas();
-		init();
+		ajax.sendChallengeRequest(challengeDatas,function(){
+			alert("Challenge verschickt!");
+			resetChallengeDatas();
+			init();
+		});
+
 	};
 	var showMemberlist = function(){
 		ajax.getDatas(c.urls.ACTIVEMEMBERS,function(resp){

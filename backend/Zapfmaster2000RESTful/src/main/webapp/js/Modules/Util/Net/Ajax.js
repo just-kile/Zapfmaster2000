@@ -1,6 +1,9 @@
 ZMO.Util.Net = ZMO.Util.Net || {};
 ZMO.Util.Net.Ajax = (function($){
 	var c = ZMO.Constants.ajax;
+	/*****
+	 * Receive Datas
+	 *****/
 	var aspirantModules ={};
 	var conf = {
 			MODULE_DATA:"data",
@@ -27,9 +30,7 @@ ZMO.Util.Net.Ajax = (function($){
 					ZMO.log(e);
 				}
 				callback(data);
-				
 			}else{
-				
 				ZMO.log("AJAX ERROR "+resp.status);
 			}
 			if(ZMO.throbber)ZMO.throbber.hide();
@@ -138,73 +139,88 @@ ZMO.Util.Net.Ajax = (function($){
 	/*******
 	 * Server Push
 	 *******/
-	var newsPush=null,rfidPush=null;
-	var connectToChannel = function(callback){
-		var data ={};
+	var pushRequests = {};
+	/**
+	 * General Server Push Connection Function
+	 * @param {String} url
+	 * 			The Url to the channel
+	 * @param {Function} successCb
+	 * 			The function that will be executed, when data received
+	 * @param {Function} errorCb
+	 * 			The function that will be executed, when error occurs, or timeout
+	 */
+	var connectToChannel = function(url,successCb,errorCb,data){
+		if(!data)data ={};
 		data["token"] = localStorage.getItem(ZMO.Constants.tokenName);
-		newsPush = $.ajax({
+		pushRequests[url] = $.ajax({
 			type:"GET",
-			url:ZMO.modules.Constants.push.NEWS,
+			url:url,
 			timeout:10000000, 
 			data:data,
 			success:function(data){
-				if(callback && data!="")callback(data);
-				ZMO.log("New Request to "+ZMO.modules.Constants.push.NEWS);
-				connectToChannel(callback);
+				if(successCb && data!="")successCb(data);
+				connectToChannel(url,successCb,errorCb,data);
 			},
 			error:function(e){
 				if(e.status==0){
 					ZMO.log("Request abort success!");
+				}else if(e.status==503){
+					ZMO.log("No Datas Received! Reconnect...");
+//					if(errorCb)errorCb(e);
+					connectToChannel(url,successCb,errorCb,data);
 				}else{
-					
-				ZMO.log("Error: reconnect news...");
-				//setTimeout(function(){
-					connectToChannel(callback);
-				//},1000);
-
+					ZMO.log("Error! Status "+e.status);
+					ZMO.log("Reconnect in 5s...");
+				
+					if(errorCb)errorCb(e);
+					setTimeout(function(){
+						connectToChannel(url,successCb,errorCb,data);
+					},5000);
 				}
 			}
 		});
 		
 	};
+	var connectToNewsPush = function(callback){
+		
+		connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
+	};
 	var rfidLogin = function(callback){
-		var datas ={};
-		datas["token"] = localStorage.getItem(ZMO.Constants.tokenName);
-		rfidPush = $.ajax({
-			type:"GET",
-			url:ZMO.modules.Constants.push.RFID,
-			timeout:10000000, 
-			data:datas,
-			success:function(data){
-				if(callback && data!="")callback(data);
-				ZMO.log("New Request to "+ZMO.modules.Constants.push.RFID);
-				rfidLogin(callback);
-			},
-			error:function(e){
-				if(e.status==0){
-					ZMO.log("Request abort success!");
-				}else{
-					ZMO.log("Error: reconnect RFID...");
-				//setTimeout(function(){
-					rfidLogin(callback);
-				//},1000);
-				}
-			}
-		});
+		connectToChannel(ZMO.modules.Constants.push.RFID,callback);
+	};
+
+	var abortReq = function(url){
+		var push = pushRequests[url];
+		if(ZMO.exists(push))push.abort();
+		ZMO.log(" Push aborted: "+url);
+		pushRequests[url] = null;
 	};
 	var abortNewsPush = function(){
-		if(ZMO.exists(newsPush))newsPush.abort();
-		ZMO.log("News Push aborted.");
-		newsPush = null;
+		abortReq(ZMO.modules.Constants.push.NEWS);
 	};
 	var abortRfidPush = function(){
-		if(ZMO.exists(rfidPush))rfidPush.abort();
-		ZMO.log("RFID Push aborted.");
-		rfidPush = null;
+		abortReq(ZMO.modules.Constants.push.RFID);
 	};
+
 	var abortPushRequests = function(){
 		abortNewsPush();
 		abortRfidPush();
+	};
+	
+	/*****
+	 * Challenge Requests
+	 *****/
+	var abortChallengePush = function(){
+		abortReq(ZMO.modules.Constants.push.CHALLENGE);
+	};
+	var connectChallengeReceive = function(callback){
+		connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback);
+	};
+	var sendChallengeConfirmation = function(data){
+			
+	};
+	var sendChallengeRequest = function(datas,callback){
+		if(callback)callback();
 	};
 	var pub = {
 			getDatas:getDatas,
@@ -212,126 +228,21 @@ ZMO.Util.Net.Ajax = (function($){
 			stopPull:stopPull,
 			startPull:startPull,
 			resetQueue:resetQueue,
+			
 			connectToChannel:connectToChannel,
+			connectToNewsPush:connectToNewsPush,
 			rfidLogin:rfidLogin,
 			abortNewsPush:abortNewsPush,
 			abortRfidPush:abortRfidPush,
-			abortPushRequests:abortPushRequests
-	
+			abortPushRequests:abortPushRequests,
+			
+			connectChallengeReceive:connectChallengeReceive,
+			abortChallengePush:abortChallengePush,
+			sendChallengeConfirmation:sendChallengeConfirmation,
+			sendChallengeRequest:sendChallengeRequest
 	};
 	return pub;
 	
 	
-	
 })(jQuery);
 
-/*
- * NOTUSED DUE TO USING FULL PATHS TO RESTAPI, NOT KEYWORDS
- */
-//ZMO.Util.Net.Ajax213213 = (function($){
-//	var c = ZMO.Constants.ajax;
-//	var aspirantModules =[];
-//	var stop=true;
-//	/**
-//	 * Get datas instant
-//	 */
-//	var getDatas = function(url,callback,datas){
-//		$.ajax({
-//			url:url,
-//			type:"GET",
-//			data:datas,
-//			success:function(resp){
-//				try{
-//					callback(resp);
-//				}catch(e){
-//					ZMO.log(e);
-//				}
-//				
-//			}
-//		});
-//	};
-//	/**
-//	 * Parse the wanted queues from each aspirant and returns a unique array with the keywords
-//	 */
-//	var generateKeywordQueue = function(){
-//		var tmpArr = [];
-//		$.each(aspirantModules,function(ind,val){
-//			$.merge(tmpArr,val.keywords);
-//		})
-//		return $.unique(tmpArr);
-//	}
-//	/**
-//	 * If function want to get datas once this function removes aspirant after it gets the datas
-//	 */
-//	var removeOnceCalls = function(){
-//		var tmpArr = [];
-//		$.each(aspirantModules,function(ind,val){
-//			if(!val.once){
-//				tmpArr.push(val);
-//			}
-//		});
-//		aspirantModules = tmpArr;
-//	}
-//	/**
-//	 * Get datas with pull request (every 30s)
-//	 * Module inscribe to ajax module, that it will have the information
-//	 * @param {String or Array} keywordQueue separated by comma or array
-//	 * @param {Function} callback
-//	 * @param {Boolean} onlyOnce
-//	 */
-//	var enqueueDatas = function(keywordQueue,callback,onlyOnce){
-//		aspirantModules.push({
-//			keywords:$.isArray(keywordQueue)?keywordQueue:keywordQueue.split(","),
-//			callback:callback,
-//			once:!!onlyOnce
-//		});
-//	}
-//	/**
-//	 * Gets the datas in the Queue, aber pullTimeout time, calls self again
-//	 */
-//	var getEnqueueDatas = function(){
-//
-//		getDatas(c.url,function(response){
-//			//send datas to aspirants
-//			$.each(aspirantModules,function(ind,val){
-//				val.callback(response);
-//			});
-//			//remove the modules which only wanted info once
-//			removeOnceCalls();
-//			
-//			setTimeout(function(){
-//				//if we dont wanna stop, again
-//				if(!stop)getEnqueueDatas();
-//			},c.pullTimeout);
-//		},$.param({
-//			keywords:generateKeywordQueue(),
-//		},true));
-//		
-//	}
-//	var stopPull = function(){
-//		stop = true;
-//	}
-//	
-//	var startPull = function(){
-//		if(stop){
-//			stop = false;
-//			getEnqueueDatas();
-//		}
-//		
-//	}
-//	/**
-//	 * Resets the modules
-//	 */
-//	var resetQueue = function(){
-//		aspirantModules = [];
-//	}
-//	var pub = {
-//			getDatas:getDatas,
-//			enqueueDatas:enqueueDatas,
-//			stopPull:stopPull,
-//			startPull:startPull,
-//			resetQueue:resetQueue
-//	}
-//	return pub;
-//	
-//})(jQuery);
