@@ -1,0 +1,19 @@
+ {  
+  "keg":[ {
+        "keg_id": "2",
+        "brand": "Warsteiner",
+        "size": "30",
+        "start_date": "2012-09-01 01:58:22",
+        "keg_numbers": "2",
+        "current_amount": "22.38",
+        "propably_empty":"2.43"
+    },{
+        "keg_id": "3",
+        "brand": "Oettinger",
+        "size": "50",
+        "start_date": "2012-09-01 01:58:22",
+        "keg_numbers": "2",
+        "current_amount": "13.38",
+        "propably_empty":"2.43"
+    }]
+}

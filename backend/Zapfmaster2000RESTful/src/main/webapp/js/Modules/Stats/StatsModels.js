@@ -35,6 +35,7 @@ ZMO.modules.KegModel = function(config){
       this.start_date=new Date();//config.start_date;
       this.keg_numbers=config.keg_numbers;
       this.current_amount = config.current_amount;
+      this.propably_empty=config.propably_empty;
 	}
 };
 /**

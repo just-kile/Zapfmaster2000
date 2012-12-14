@@ -204,7 +204,9 @@ ul#topnav li#topnav-5 a:hover {
 	background-image: url(../images/view/news_background2.png);
 	color: #FFF;
 }
-
+.frontPageStats{
+	margin-left:10px;
+}
 .drinkstats {
 	margin-top: 10px !important;
 }

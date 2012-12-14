@@ -47,8 +47,8 @@ ZMO.modules.kegstatusView = (function($,ajax){
 				var complAmount = parseFloat(keg.size);
 				seriesObj.categories.push( keg.keg_id);
 				//seriesObj.stack.push(keg.brand);
-				remaining.push(amount);
-				complete.push(complAmount - amount);
+				remaining.push(complAmount-amount);
+				complete.push( amount);
 			
 			});
 		}catch(e){
@@ -109,10 +109,10 @@ ZMO.modules.kegstatusView = (function($,ajax){
                 formatter: function() {
                 	if(this.series.name == wording.REMAINING){
                 		 return ''+
-                         this.series.name +': '+ this.y +' Liter '+keglist(this.key).brand;
+                         this.series.name +': '+ this.y.toFixed(2) +' Liter '+keglist(this.key).brand;
                 	}else{
                 		 return ''+
-                         this.series.name +': '+ this.point.total +' Liter '+keglist(this.key).brand;
+                         this.series.name +': '+ this.point.total.toFixed(2) +' Liter '+keglist(this.key).brand;
                 	}
                    
                 }

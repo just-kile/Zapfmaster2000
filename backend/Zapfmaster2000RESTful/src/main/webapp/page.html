@@ -15,8 +15,24 @@
  <script src="js/Website/Main.js"></script>
 <!-- Templates ==> Put them to templates.json (same effect) -->
  <script id="ZMO-frontpagestats-template" type="text/html">
- <div class="news-drink-box">
-	{{keg_id}}
+ <div class="text">
+	<table class="stats-drinker">
+<tr class="stats-drinker-row">
+	<td>Fass Id</td><td>{{keg_id}}</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>Marke</td><td>{{brand}}</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>Bisher getrunken</td><td>{{current_amount}}l / {{size}} l</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>Angezapft am </td><td>{{start_date}}</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>Leer in </td><td>{{propably_empty}} h</td>
+</tr>
+</table>
 </div>
  </script>
  <script id="ZMO-duelsRow" type="text/html">
