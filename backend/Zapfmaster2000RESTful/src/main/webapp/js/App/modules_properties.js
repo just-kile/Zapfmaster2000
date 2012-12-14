@@ -4,11 +4,17 @@
 ZMO.modules_properties ={
 		front:{
 			sections:{
-				navigation:[],
+				navigation:[{
+					moduleId:"receiveChallenge",
+					ratio:"100%",
+					position:[0,0],
+					params:{}
+				}],
 				main:[{
 					moduleId:"drawfeed",
 					ratio:"100%",
-					position:[0,0]
+					position:[0,0],
+					params:{length:4}
 				}],
 				  
 				footer:[{
@@ -20,7 +26,11 @@ ZMO.modules_properties ={
 		},
 		duels:{
 			sections:{
-				navigation:[],
+				navigation:[{
+					moduleId:"receiveChallenge",
+					ratio:"100%",
+					position:[0,0]
+				}],
 				main:[{
 					moduleId:"challenges",
 					ratio:"100%",
@@ -36,7 +46,11 @@ ZMO.modules_properties ={
 		},
 		dare:{
 			sections:{
-				navigation:[],
+				navigation:[{
+					moduleId:"receiveChallenge",
+					ratio:"100%",
+					position:[0,0]
+				}],
 				main:[{
 					moduleId:"createChallenge",
 					ratio:"100%",

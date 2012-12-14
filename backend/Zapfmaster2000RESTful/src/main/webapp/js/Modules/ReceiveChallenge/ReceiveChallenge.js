@@ -3,13 +3,13 @@
  * 
  */
 ZMO.modules = ZMO.modules || {};
-ZMO.modules.dummy = (function($,ajax){
+ZMO.modules.receiveChallenge = (function($,ajax){
 	var mC = ZMO.modules.Constants;
 	var container =null;
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
-	var init = function(hashParams,moduleParams){
+	var init = function(data){
 		container.text("Hello drinkers worldwide!");
 	};
 	/**

@@ -121,9 +121,10 @@ ZMO.GlobalChallengeModel = function(config){
 ZMO.ModuleModel  =function(conf,modulePosKey){
 	this.moduleId= conf.moduleId;
 	this.element= ZMO.modules[conf.moduleId];
-	this.ratio= conf.ratio;
+	this.ratio= conf.ratio||"100%";
 	this.position = new ZMO.PositionModel(modulePosKey,conf.position);
 	this.nocache = !!conf.nocache;
+	this.params = conf.params||{};
 };
 ZMO.RfidModel = function(conf){
 	this.userName = conf.userName;
