@@ -17,7 +17,6 @@ import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 @Path("statistics")
 public class AlcoholLevelResource {
@@ -29,7 +28,7 @@ public class AlcoholLevelResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveAlcoholLevel(@QueryParam("token") String pToken,
-			@QueryParam("user") User pUser) {
+			@QueryParam("user") String pUser) {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 
@@ -69,9 +68,12 @@ public class AlcoholLevelResource {
 				// int sex = (Integer) resultAmountByHour.get(0)[2];
 				// int weight = (Integer) resultAmountByHour.get(0)[3];
 
-				int sex = pUser.getSex().getValue(); // TODO use enum instead
-				int weight = pUser.getWeight();
+//				int sex = pUser.getSex().getValue(); // TODO use enum instead
+//				int weight = pUser.getWeight();
 
+				// TODO stub
+				int sex = 0;
+				int weight = 70;
 				double reductionFactor;
 				double alcoholBreakDown = 0.15; // per mille per hour
 				if (sex == 0) {// male
