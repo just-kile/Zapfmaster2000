@@ -20,6 +20,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 @Path("statistics")
 public class KegResource {
 
+	@SuppressWarnings("unchecked")
 	@Path("kegStats")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -34,7 +35,6 @@ public class KegResource {
 
 			// TODO restrict to Box?
 
-			@SuppressWarnings("unchecked")
 			List<Object> resultCurrentKeg = session
 					.createQuery(
 							"SELECT k.id, k.brand, k.size, k.startDate "
@@ -43,10 +43,17 @@ public class KegResource {
 									+ " ORDER BY d.date DESC").setMaxResults(1)
 					.list();
 
-			@SuppressWarnings("unchecked")
 			List<Object> resultNumberKegs = session.createQuery(
 					"SELECT COUNT (DISTINCT k.id) FROM Keg k, Drawing d"
 							+ " WHERE d.keg = k").list();
+
+			List<Object> resultCurrentAmount = session
+					.createQuery(
+							"SELECT (k.size-SUM(d.amount)) FROM Drawing d, Keg k "
+									+ " WHERE d.keg = k"
+									+ " GROUP BY (k.id)"
+									+ " ORDER BY MAX(d.date) DESC")
+					.setMaxResults(1).list();
 
 			tx.commit();
 
@@ -58,6 +65,7 @@ public class KegResource {
 			response.setSize((Integer) resultRow[2]);
 			response.setStart_date((Date) resultRow[3]);
 			response.setKegNumbers((Long) resultNumberKegs.get(0));
+			response.setCurrentAmount((Double) resultCurrentAmount.get(0));
 
 			return Response.ok(response).build();
 		}

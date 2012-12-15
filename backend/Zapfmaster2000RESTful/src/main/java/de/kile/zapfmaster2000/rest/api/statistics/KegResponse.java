@@ -11,6 +11,7 @@ public class KegResponse {
 	private String brand;
 	private int size;
 	private Date start_date;
+	private double currentAmount;
 
 	/**
 	 * Number of kegs drunk so far (including the current one)
@@ -55,6 +56,14 @@ public class KegResponse {
 
 	public void setKegNumbers(long kegNumbers) {
 		this.kegNumbers = kegNumbers;
+	}
+
+	public double getCurrentAmount() {
+		return currentAmount;
+	}
+
+	public void setCurrentAmount(double currentAmount) {
+		this.currentAmount = currentAmount;
 	}
 
 }

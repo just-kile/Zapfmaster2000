@@ -33,7 +33,6 @@ public class TestKegStats extends AbstractMockingTest {
 	@Before
 	public void setupData() {
 
-		
 		truncate();
 
 		account1 = createAccount("foo-account");
@@ -75,6 +74,7 @@ public class TestKegStats extends AbstractMockingTest {
 		assertEquals(keg3.getBrand(), kegResponse.getBrand());
 		assertEquals(keg3.getSize(), kegResponse.getSize());
 		assertEquals(keg3.getStartDate(), kegResponse.getStartDate());
+		assertEquals(keg3.getSize() - 3.0, kegResponse.getCurrentAmount());
 		assertEquals(3, kegResponse.getKegNumber());
 
 	}
