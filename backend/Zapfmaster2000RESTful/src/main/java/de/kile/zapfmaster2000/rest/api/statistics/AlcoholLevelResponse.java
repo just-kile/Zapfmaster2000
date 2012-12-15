@@ -1,6 +1,6 @@
 package de.kile.zapfmaster2000.rest.api.statistics;
 
-public class AlcoholLevel {
+public class AlcoholLevelResponse {
 	
 	/**
 	 * Alcohol level in per mille.
