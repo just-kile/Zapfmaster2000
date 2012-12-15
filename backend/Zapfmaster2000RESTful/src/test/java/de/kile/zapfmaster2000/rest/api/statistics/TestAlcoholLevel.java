@@ -71,7 +71,7 @@ public class TestAlcoholLevel extends AbstractMockingTest {
 	public void testSimple() {
 		AlcoholLevelResource alcoholLevelResource = new AlcoholLevelResource();
 
-		Response response = alcoholLevelResource.retrieveAlcoholLevel(null, user1);
+		Response response = alcoholLevelResource.retrieveAlcoholLevel(null, Long.toString(user1.getId()));
 		assertEquals(response.getStatus(), Status.OK.getStatusCode());
 
 		AlcoholLevelResponse alcoholLevelResponse = (AlcoholLevelResponse) response.getEntity();
