@@ -1,5 +1,12 @@
 <html>
 <head>
+<!-- Meta Tags for mobile -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />  
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="true">
+<meta name="MobileOptimized" content="width">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -15,8 +22,12 @@ $(document).ready(function(){
 			success:function(token){
 				if(localStorage){
 					localStorage.setItem('token',token );
-					window.location.replace(window.location.pathname+"page.html");
-					//alert("ok")
+					if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
+						{
+							window.location.replace(window.location.pathname+"app.html");
+						}else{
+								window.location.replace(window.location.pathname+"page.html");
+						}
 				}else{
 					alert("Use a normal browser! Localstorage is not available")
 				}

@@ -66,11 +66,11 @@ a:hover {
 
 .nav {
 	z-index: 1000;
-	height: 80px;
+	height: 2em;
 	/*margin-top:-80px;*/
 	position: relative;
-	width: 850px;
-	margin-left: 40px;
+	width: 100%;
+	
 }
 
 .zm_col {
@@ -175,16 +175,8 @@ ul#topnav li#topnav-5 a:hover {
 }
 
 .newsfeed {
-	-moz-box-shadow: 0px 0px 20px #d3ffc6;
-	-webkit-box-shadow: 0px 0px 20px #d3ffc6;
-	box-shadow: 0px 0px 20px #d3ffc6;
+
 	padding: 5px;
-	border: 5px solid #d3ffc6;
-	background-image: url(../images/view/news_background2.png);
-	-moz-border-radius: 10px;
-	-khtml-border-radius: 10px;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
 	color: #FFF;
 	margin-bottom:100px;
 }
@@ -231,7 +223,9 @@ ul#topnav li#topnav-5 a:hover {
 	font-size: 24px;
 	margin-left: 5px;
 }
-
+.newsdiv > span {
+display:none;
+}
 .statstext {
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 16px;
@@ -291,10 +285,7 @@ ul#topnav li#topnav-5 a:hover {
 }
 
 .main {
-	width: 900px;
-	position: absolute;
-	left: 50%;
-	margin-left: -460px;
+	width: 100%;
 }
 
 .news-backgrnd {
@@ -304,18 +295,6 @@ ul#topnav li#topnav-5 a:hover {
 	height: auto;
 }
 
-.header {
-	margin-left: 40px;
-	z-index: 900;
-}
-
-.zapfmaster {
-	background: none no-repeat;
-	background-position: center;
-	background-image: url(../images/view/zapfmaster2000.png);
-	width: 800px;
-	height: 322px;
-}
 
 .impr {
 	float: left;
@@ -343,6 +322,7 @@ ul#topnav li#topnav-5 a:hover {
 	list-style-type: none;
 	padding-left: 0;
 	font-size: 1em;
+	margin-bottom:4em;
 }
 
 #ZMO-duels-container .rowContainer {
@@ -381,19 +361,19 @@ ul#topnav li#topnav-5 a:hover {
 	left: 50%;
 	margin-left: -1.1em;
 	bottom: 5px;
-	font-size: 0.8em;
+	font-size: 12px;
 }
 
 #ZMO-duels-container .type {
 	left: 50%;
 	margin-left: -1.7em;
-	font-size: 0.8em;
+	font-size: 12px;
 }
 
 #ZMO-duels-container .time {
 	left: 50%;
 	margin-left: -60px;
-	font-size: 0.8em;
+	font-size: 12px;
 	top: 1.3em;
 }
 
@@ -422,12 +402,42 @@ ul#topnav li#topnav-5 a:hover {
 	box-shadow: 0px 0px 20px #ffa3ea;
 }
 
-.newsfeed2 {
-	margin-left: 645px !important;
-}
+/*CHALLENGES*/
+.createChallenges .rowContainer {
+	font-size: 18px;
 
-.challenges .rowContainer {
-	font-size: 12px;
+}
+.createChallenges{
+	list-style:none;
+	margin:0;
+	margin-bottom:6em;
+	padding:0;
+	color:white;
+}
+.createChallenges img{
+	height:3.5em;
+	float:left;
+	margin-right:5px;
+}
+.createChallenges > li{
+background: rgb(73,73,73); /* Old browsers */
+background: -moz-linear-gradient(-45deg,  rgba(73,73,73,1) 1%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(1%,rgba(73,73,73,1)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  rgba(73,73,73,1) 1%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  rgba(73,73,73,1) 1%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  rgba(73,73,73,1) 1%,rgba(0,0,0,1) 100%); /* IE10+ */
+background: linear-gradient(135deg,  rgba(73,73,73,1) 1%,rgba(0,0,0,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#494949', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+box-shadow: 0px 1px 5px #000, 0px -1px 5px #000;
+height:4em;
+
+border-radius: 5px; 
+-moz-border-radius: 5px; 
+-webkit-border-radius: 5px; 	
+	
+	border:1px solid #666;
+	padding:10px;
 }
 
 .floatLeft {
@@ -446,21 +456,21 @@ ul#topnav li#topnav-5 a:hover {
 }
 
 .members {
-	margin-top: 80px;
-	margin-left: 40px;
+
 }
 .throbber{
 	text-align:center;
 	position:absolute;
 	width:100%;
 	height:100%;
-	
+
 	opacity:0.5;
 	z-index:26000;
 }
 .throbber img{
 	top:48%;
 	position:absolute;
+	left:50%;
 }
 
 .linechart {
@@ -568,3 +578,39 @@ padding:5px;
 tr.stats-drinker-row:nth-child(even){
 	background:rgba(0,0,0,0.4);
 }
+
+
+
+.navMobile{
+	position:fixed;
+    -webkit-transition:none !important;
+ 	bottom:0;
+	
+	width:100%;
+	text-align:center;
+	height:3.5em;
+}
+.navMobile .navBtn{
+list-style-type: none;
+margin: 0;
+padding: 0;
+width: 100%;
+color:white;
+}
+.navMobile .navBtn li {
+float: left;
+border: 1px solid #555;
+width: 32.5%;
+height: 100%;
+background: rgba(68,55,55,0.9); /* Old browsers */
+box-shadow: 0px 1px 5px #000, 0px -1px 5px #000;
+
+
+}
+.navMobile .iconContainer{
+	width:100%;
+	height:1.8em;
+	margin-top:0.2em;
+}
+
+

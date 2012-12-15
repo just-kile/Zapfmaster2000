@@ -38,7 +38,7 @@ ZMO.view=(function(){
 			$(rowChildren[moduleCol]).css("width",ratio).append(module);
 		}
 		//container.append(wrapper);
-		if(moduleModel.element.init)moduleModel.element.init(queryData);
+		if(moduleModel.element.init)moduleModel.element.init(queryData,moduleModel.params);
 		return module;
 	};
 	var createCol = function(){
