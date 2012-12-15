@@ -19,6 +19,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
+@Path("statistics")
 public class AlcoholLevelResource {
 
 	// TODO AlcoholLevelResponse necessary?

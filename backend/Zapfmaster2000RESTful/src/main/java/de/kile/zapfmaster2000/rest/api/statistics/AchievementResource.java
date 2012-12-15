@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
+@Path("statistics")
 public class AchievementResource {
 
 	// TODO add specific to user
