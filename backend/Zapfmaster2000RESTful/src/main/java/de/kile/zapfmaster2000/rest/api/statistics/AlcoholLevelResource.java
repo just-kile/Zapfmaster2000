@@ -17,11 +17,10 @@ import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 
 @Path("statistics")
 public class AlcoholLevelResource {
-
-	// TODO AlcoholLevelResponse necessary?
 
 	@SuppressWarnings("unchecked")
 	@Path("alcoholLevel")
@@ -54,31 +53,28 @@ public class AlcoholLevelResource {
 
 			List<Object[]> resultAmountByHour = session
 					.createQuery(
-							"SELECT (d.amount*1000*0.048*0.8), d.date"
-									+ " FROM Drawing d"
-									+ " WHERE d.user = :user"
+							"SELECT (d.amount*1000*0.048*0.8), d.date, u.sex, u.weight"
+									+ " FROM Drawing d, User u"
+									+ " WHERE u.id = :user AND d.user = u AND u.account = :account"
 									+ " AND d.date > :timestamp "
 									+ " ORDER BY d.date ASC")
-					.setEntity("user", pUser)
+					.setLong("user", Long.valueOf(pUser))
+					.setEntity("account", account)
 					.setDate("timestamp", calendar.getTime()).list();
 
 			tx.commit();
 
-			if (resultAmountByHour.size() > 0) {
-				// int sex = (Integer) resultAmountByHour.get(0)[2];
-				// int weight = (Integer) resultAmountByHour.get(0)[3];
+			if (resultAmountByHour.size() > 0) {// else FORBIDDEN
 
-//				int sex = pUser.getSex().getValue(); // TODO use enum instead
-//				int weight = pUser.getWeight();
+				Sex sex = (Sex) resultAmountByHour.get(0)[2];
 
-				// TODO stub
-				int sex = 0;
-				int weight = 70;
+				int weight = (Integer) resultAmountByHour.get(0)[3];
+
 				double reductionFactor;
 				double alcoholBreakDown = 0.15; // per mille per hour
-				if (sex == 0) {// male
+				if (sex == Sex.MALE) {
 					reductionFactor = 1 / (weight * 0.69);
-				} else { // female
+				} else {
 					reductionFactor = 1 / (weight * 0.57);
 				}
 
@@ -107,7 +103,6 @@ public class AlcoholLevelResource {
 			}
 
 		}
-		// TODO user empty? user not found?
 		return Response.status(Status.FORBIDDEN).build();
 	}
 }
