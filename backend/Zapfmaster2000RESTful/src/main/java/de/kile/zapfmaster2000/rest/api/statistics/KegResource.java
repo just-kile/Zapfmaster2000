@@ -27,7 +27,7 @@ public class KegResource {
 	 *         <code>pToken</code> is not valid.
 	 */
 	@SuppressWarnings("unchecked")
-	@Path("kegStats")
+	@Path("keg")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveKegStats(@QueryParam("token") String pToken) {

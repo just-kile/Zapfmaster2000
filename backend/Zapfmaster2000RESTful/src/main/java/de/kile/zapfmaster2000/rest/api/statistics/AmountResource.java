@@ -29,7 +29,7 @@ public class AmountResource {
 	 *         <code>pToken</code> is not valid.
 	 */
 	@SuppressWarnings("unchecked")
-	@Path("amountStats")
+	@Path("amount")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveCurrentKegAmount(

@@ -28,7 +28,7 @@ public class AchievementResource {
 	 *         <code>pToken</code> is not valid.
 	 */
 	@SuppressWarnings("unchecked")
-	@Path("achievementsStats")
+	@Path("achievements")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveAchievementStats(
