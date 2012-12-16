@@ -25,6 +25,7 @@ public class TestDrawCount extends AbstractMockingTest {
 	private Account account1;
 	private Box box1;
 	private Keg keg1;
+	private User user2;
 
 	@Before
 	public void setupData() {
@@ -35,8 +36,8 @@ public class TestDrawCount extends AbstractMockingTest {
 
 		User user1 = createUser("Torsten", "img/user1", "user1-pw", 101,
 				Sex.MALE, 85, UserType.USER, account1);
-		User user2 = createUser("Bettina", "img/user2", "user2-pw", 202,
-				Sex.FEMALE, 85, UserType.USER, account1);
+		user2 = createUser("Bettina", "img/user2", "user2-pw", 202, Sex.FEMALE,
+				85, UserType.USER, account1);
 
 		box1 = createBox("pass", "home", "0.5", account1);
 
@@ -56,7 +57,7 @@ public class TestDrawCount extends AbstractMockingTest {
 	public void testSimple() {
 		DrawCountResource drawCountResource = new DrawCountResource();
 
-		Response response = drawCountResource.retrieveDrawCount(null);
+		Response response = drawCountResource.retrieveDrawCount(null, null);
 		assertEquals(response.getStatus(), Status.OK.getStatusCode());
 
 		DrawCountResponse drawCountResponse = (DrawCountResponse) response
@@ -64,5 +65,20 @@ public class TestDrawCount extends AbstractMockingTest {
 
 		assertEquals(3, drawCountResponse.getCount());
 		assertEquals(1.5, drawCountResponse.getAverageOperationsPerHour());
+	}
+
+	@Test
+	public void testUserSpecific() {
+		DrawCountResource drawCountResource = new DrawCountResource();
+
+		Response response = drawCountResource.retrieveDrawCount(null,
+				String.valueOf(user2.getId()));
+		assertEquals(response.getStatus(), Status.OK.getStatusCode());
+
+		DrawCountResponse drawCountResponse = (DrawCountResponse) response
+				.getEntity();
+
+		assertEquals(2, drawCountResponse.getCount());
+		assertEquals(2.0, drawCountResponse.getAverageOperationsPerHour());
 	}
 }

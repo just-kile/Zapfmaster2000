@@ -18,14 +18,21 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
 @Path("statistics")
 public class AchievementResource {
-
-	// TODO add specific to user
-
+	/**
+	 * Returns {@link AchievementResponse} either for everyone or specific to
+	 * user with id <code>pUser</code>.
+	 * 
+	 * @param pToken
+	 * @param pUser can be <code>null</code>.
+	 * @return either {@link AchievementResponse} or <code>null</code> if
+	 *         <code>pToken</code> is not valid.
+	 */
 	@SuppressWarnings("unchecked")
 	@Path("achievementsStats")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response retrieveAchievementStats(@QueryParam("token") String pToken) {
+	public Response retrieveAchievementStats(
+			@QueryParam("token") String pToken, @QueryParam("user") String pUser) {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 
@@ -35,17 +42,45 @@ public class AchievementResource {
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 
-			// TODO restrict to box
-			List<Object> resultAchievementCount = session.createQuery(
-					"SELECT COUNT(g.id) FROM GainedAchievement g").list();
+			List<Object> resultAchievementCount;
+			List<Object> resultMostActivity;
 
-			List<Object> resultMostActivity = session
-					.createQuery(
-							"SELECT HOUR(g.date) FROM GainedAchievement g"
-									+ " GROUP BY HOUR(g.date)"
-									+ " ORDER BY COUNT(g.id) DESC")
-					.setMaxResults(1).list();
+			if (pUser == null) {
+				resultAchievementCount = session
+						.createQuery(
+								"SELECT COUNT(g.id) FROM GainedAchievement g, User u"
+										+ " WHERE g.user = u"
+										+ " AND u.account = :account")
+						.setEntity("account", account).list();
 
+				resultMostActivity = session
+						.createQuery(
+								"SELECT HOUR(g.date) FROM GainedAchievement g, User u "
+										+ " WHERE g.user = u "
+										+ " AND u.account = :account "
+										+ " GROUP BY HOUR(g.date)"
+										+ " ORDER BY COUNT(g.id) DESC")
+						.setEntity("account", account).setMaxResults(1).list();
+			} else {
+				resultAchievementCount = session
+						.createQuery(
+								"SELECT COUNT(g.id) "
+										+ " FROM GainedAchievement g, User u "
+										+ " WHERE u.id = :user AND g.user = u"
+										+ " AND u.account = :account")
+						.setLong("user", Long.valueOf(pUser))
+						.setEntity("account", account).list();
+
+				resultMostActivity = session
+						.createQuery(
+								"SELECT HOUR(g.date) FROM GainedAchievement g, User u "
+										+ " WHERE g.user = u AND u.id = :user"
+										+ " AND u.account = :account"
+										+ " GROUP BY HOUR(g.date)"
+										+ " ORDER BY COUNT(g.id) DESC")
+						.setMaxResults(1).setEntity("account", account)
+						.setLong("user", Long.valueOf(pUser)).list();
+			}
 			tx.commit();
 
 			AchievementResponse response = new AchievementResponse();

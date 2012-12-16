@@ -28,16 +28,18 @@ public class TestAmountStats extends AbstractMockingTest {
 	private Keg keg1;
 	private Keg keg2;
 	private Keg keg3;
-
+	private User user1;
+	private User user2;
+	
 	@Before
 	public void setupData() {
 		truncate();
 
 		account1 = createAccount("foo-account");
 
-		User user1 = createUser("Torsten", "img/user1", "user1-pw", 101,
+		user1 = createUser("Torsten", "img/user1", "user1-pw", 101,
 				Sex.MALE, 85, UserType.USER, account1);
-		User user2 = createUser("Bettina", "img/user2", "user2-pw", 202,
+		user2 = createUser("Bettina", "img/user2", "user2-pw", 202,
 				Sex.FEMALE, 85, UserType.USER, account1);
 
 		box1 = createBox("pass", "home", "0.5", account1);
@@ -52,7 +54,7 @@ public class TestAmountStats extends AbstractMockingTest {
 		createDrawing(0.7, createDate(2012, 1, 1, 1, 0, 0), keg1, user1);
 		createDrawing(0.3, createDate(2012, 1, 1, 1, 30, 0), keg1, user2);
 		createDrawing(3.5, createDate(2012, 1, 3, 3, 0, 0), keg3, user1);
-		createDrawing(3.0, createDate(2012, 1, 2, 4, 0, 0), keg2, user2);
+		createDrawing(3.0, createDate(2012, 1, 2, 4, 1, 0), keg2, user2);
 
 		AuthService authService = mock(AuthService.class);
 		when(authService.retrieveAccount(anyString())).thenReturn(account1);
@@ -63,15 +65,28 @@ public class TestAmountStats extends AbstractMockingTest {
 	public void testSimple() {
 		AmountResource amountResource = new AmountResource();
 
-		Response response = amountResource.retrieveCurrentKegAmount(null);
+		Response response = amountResource.retrieveCurrentKegAmount(null,null);
 		assertEquals(response.getStatus(), Status.OK.getStatusCode());
 
 		AmountResponse amountResponse = (AmountResponse) response.getEntity();
 
-		assertEquals(3.5, amountResponse.getAmountCurrentKeg());
 		assertEquals(7.5, amountResponse.getAmountTotal());
 		assertEquals(3.5, amountResponse.getGreatestDrawing());
 		assertEquals(3, amountResponse.getMostActivityHour());
+	}
+	
+	//TODO add user specific
+	@Test
+	public void testUserSpecific() {
+		AmountResource amountResource = new AmountResource();
 
+		Response response = amountResource.retrieveCurrentKegAmount(null,String.valueOf(user2.getId()));
+		assertEquals(response.getStatus(), Status.OK.getStatusCode());
+
+		AmountResponse amountResponse = (AmountResponse) response.getEntity();
+
+		assertEquals(3.3, amountResponse.getAmountTotal());
+		assertEquals(3.0, amountResponse.getGreatestDrawing());
+		assertEquals(4, amountResponse.getMostActivityHour());
 	}
 }

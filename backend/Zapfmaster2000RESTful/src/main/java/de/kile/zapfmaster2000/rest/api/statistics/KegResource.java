@@ -20,6 +20,12 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 @Path("statistics")
 public class KegResource {
 
+	
+	/**
+	 * @param pToken
+	 * @return either {@link KegResponse} or <code>null</code> if
+	 *         <code>pToken</code> is not valid.
+	 */
 	@SuppressWarnings("unchecked")
 	@Path("kegStats")
 	@GET
@@ -33,27 +39,30 @@ public class KegResource {
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 
-			// TODO restrict to Box?
-
 			List<Object> resultCurrentKeg = session
 					.createQuery(
 							"SELECT k.id, k.brand, k.size, k.startDate "
-									+ " FROM Keg k, Drawing d "
-									+ " WHERE d.keg = k "
-									+ " ORDER BY d.date DESC").setMaxResults(1)
-					.list();
+									+ " FROM Keg k, Drawing d, User u "
+									+ " WHERE d.keg = k AND d.user = u "
+									+ " AND u.account = :account"
+									+ " ORDER BY d.date DESC")
+					.setEntity("account", account).setMaxResults(1).list();
 
-			List<Object> resultNumberKegs = session.createQuery(
-					"SELECT COUNT (DISTINCT k.id) FROM Keg k, Drawing d"
-							+ " WHERE d.keg = k").list();
+			List<Object> resultNumberKegs = session
+					.createQuery(
+							"SELECT COUNT (DISTINCT k.id) FROM Keg k, Drawing d, User u"
+									+ " WHERE d.keg = k AND d.user = u "
+									+ " AND u.account= :account")
+					.setEntity("account", account).list();
 
 			List<Object> resultCurrentAmount = session
 					.createQuery(
-							"SELECT (k.size-SUM(d.amount)) FROM Drawing d, Keg k "
-									+ " WHERE d.keg = k"
+							"SELECT (k.size-SUM(d.amount)) FROM Drawing d, Keg k, User u "
+									+ " WHERE d.keg = k AND d.user = u "
+									+ " AND u.account = :account"
 									+ " GROUP BY (k.id)"
 									+ " ORDER BY MAX(d.date) DESC")
-					.setMaxResults(1).list();
+					.setEntity("account", account).setMaxResults(1).list();
 
 			tx.commit();
 

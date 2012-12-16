@@ -19,11 +19,21 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 @Path("statistics")
 public class AmountResource {
 
+	/**
+	 * Returns {@link AmountResponse} either for everyone or specific to
+	 * user with id <code>pUser</code>.
+	 * 
+	 * @param pToken
+	 * @param pUser can be <code>null</code>.
+	 * @return either {@link AmountResponse} or <code>null</code> if
+	 *         <code>pToken</code> is not valid.
+	 */
 	@SuppressWarnings("unchecked")
 	@Path("amountStats")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response retrieveCurrentKegAmount(@QueryParam("token") String pToken) {
+	public Response retrieveCurrentKegAmount(
+			@QueryParam("token") String pToken, @QueryParam("user") String pUser) {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 
@@ -33,31 +43,48 @@ public class AmountResource {
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 
-			// TODO restrict to box
+			List<Object[]> resultAmounts;
+			List<Object> resultMostActivity;
 
-			List<Object> resultAmountCurrentKeg = session
-					.createQuery(
-							"SELECT SUM(d.amount)" + " FROM Keg k, Drawing d"
-									+ " WHERE d.keg = k GROUP BY k.id "
-									+ " ORDER BY MAX(d.date) DESC")
-					.setMaxResults(1).list();
+			if (pUser == null) {
+				resultAmounts = session
+						.createQuery(
+								"SELECT SUM(d.amount), MAX(d.amount) FROM Drawing d, User u"
+										+ " WHERE d.user = u "
+										+ " AND u.account = :account")
+						.setEntity("account", account).list();
 
-			// TODO restrict to box
-			List<Object[]> resultAmounts = session.createQuery(
-					"SELECT SUM(d.amount), MAX(d.amount) FROM Drawing d")
-					.list();
+				resultMostActivity = session
+						.createQuery(
+								"SELECT HOUR(d.date) FROM Drawing d, User u "
+										+ " WHERE d.user = u"
+										+ " AND u.account = :account"
+										+ " GROUP BY HOUR(d.date)"
+										+ " ORDER BY SUM(d.amount) DESC")
+						.setMaxResults(1).setEntity("account", account).list();
+			} else {
+				resultAmounts = session
+						.createQuery(
+								"SELECT SUM(d.amount), MAX(d.amount) FROM Drawing d, User u"
+										+ " WHERE d.user = u AND u.id = :user"
+										+ " AND u.account = :account")
+						.setEntity("account", account)
+						.setLong("user", Long.valueOf(pUser)).list();
 
-			List<Object> resultMostActivity = session
-					.createQuery(
-							"SELECT HOUR(d.date) FROM Drawing d"
-									+ " GROUP BY HOUR(d.date)"
-									+ " ORDER BY SUM(d.amount) DESC")
-					.setMaxResults(1).list();
+				resultMostActivity = session
+						.createQuery(
+								"SELECT HOUR(d.date) FROM Drawing d, User u "
+										+ " WHERE d.user = u AND u.id = :user"
+										+ " AND u.account = :account"
+										+ " GROUP BY HOUR(d.date)"
+										+ " ORDER BY SUM(d.amount) DESC")
+						.setMaxResults(1).setEntity("account", account)
+						.setLong("user", Long.valueOf(pUser)).list();
 
+			}
 			tx.commit();
 
 			AmountResponse response = new AmountResponse();
-			response.setAmountCurrentKeg((Double) resultAmountCurrentKeg.get(0));
 			response.setAmountTotal((Double) resultAmounts.get(0)[0]);
 			response.setGreatestDrawing((Double) resultAmounts.get(0)[1]);
 			response.setMostActivityHour((Integer) resultMostActivity.get(0));

@@ -6,6 +6,10 @@ public class AchievementResponse {
 	 * Overall number of achievements gained.
 	 */
 	private long count;
+	
+	/**
+	 * Most achievement gains per hour.
+	 */
 	private int mostAchievementHour;
 
 	// private double achievementspeed;

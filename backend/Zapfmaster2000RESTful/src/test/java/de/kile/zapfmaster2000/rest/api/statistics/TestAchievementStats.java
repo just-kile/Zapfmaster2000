@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 public class TestAchievementStats extends AbstractMockingTest {
 
 	private Account account1;
+	private User user1;
 
 	@Before
 	public void setupData() {
@@ -30,8 +31,8 @@ public class TestAchievementStats extends AbstractMockingTest {
 
 		account1 = createAccount("foo-account");
 
-		User user1 = createUser("Torsten", "img/user1", "user1-pw", 101,
-				Sex.MALE, 85, UserType.USER, account1);
+		user1 = createUser("Torsten", "img/user1", "user1-pw", 101, Sex.MALE,
+				85, UserType.USER, account1);
 		User user2 = createUser("Bettina", "img/user2", "user2-pw", 202,
 				Sex.FEMALE, 85, UserType.USER, account1);
 
@@ -56,7 +57,8 @@ public class TestAchievementStats extends AbstractMockingTest {
 	public void simpleTest() {
 		AchievementResource achievementResource = new AchievementResource();
 
-		Response response = achievementResource.retrieveAchievementStats(null);
+		Response response = achievementResource.retrieveAchievementStats(null,
+				null);
 		assertEquals(response.getStatus(), Status.OK.getStatusCode());
 
 		AchievementResponse achievementResponse = (AchievementResponse) response
@@ -66,4 +68,17 @@ public class TestAchievementStats extends AbstractMockingTest {
 		assertEquals(2, achievementResponse.getMostAchievementHour());
 	}
 
+	@Test
+	public void testUserSpecific() {
+		AchievementResource achievementResource = new AchievementResource();
+
+		Response response = achievementResource.retrieveAchievementStats(null,
+				String.valueOf(user1.getId()));
+		assertEquals(response.getStatus(), Status.OK.getStatusCode());
+
+		AchievementResponse achievementResponse = (AchievementResponse) response
+				.getEntity();
+
+		assertEquals(2, achievementResponse.getCount());
+	}
 }

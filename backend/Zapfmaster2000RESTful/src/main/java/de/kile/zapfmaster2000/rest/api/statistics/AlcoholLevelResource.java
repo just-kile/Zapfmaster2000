@@ -22,6 +22,17 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 @Path("statistics")
 public class AlcoholLevelResource {
 
+	// TODO add user independent
+
+	/**
+	 * Returns the {@link AlcoholLevelResponse} calculated by the Widmark
+	 * formula with alcohol break down of 0.15 per mille per hour.
+	 * 
+	 * @param pToken
+	 * @param pUser
+	 * @return either {@link AlcoholLevelResponse} or <code>null</code> if
+	 *         <code>pUser</code> does not exist or has not drawn anything.
+	 */
 	@SuppressWarnings("unchecked")
 	@Path("alcoholLevel")
 	@GET
