@@ -16,8 +16,8 @@ ZMO.modules.challenges = (function($,ajax){
     		var sum = team1Amount+team2Amount;
     		var percent1 = team1Amount/sum;
     		var percent2 = team2Amount/sum;
-    		team1Div.css("width",(percent1*100)+"%");
-    		team2Div.css("width",(percent2*100)+"%");
+    		team1Div.css("width",(percent2*100)+"%");
+    		team2Div.css("width",(percent1*100)+"%");
     	}
     	return newsRow;
 	};
@@ -27,8 +27,8 @@ ZMO.modules.challenges = (function($,ajax){
 			team2:model.team2Images.join(""),
 			type:function(){
 				//model.challenge_type,
-				var am1 = Math.round(model.team1Amount*100)/100;
-				var am2 =Math.round(model.team2Amount*100)/100;
+				var am1 = model.team1Amount.toFixed(2);
+				var am2 = model.team2Amount.toFixed(2);
 				return am1+"l -- "+am2+"l";
 			}(),
 			active:model.finished==0?"Fertig":"Aktiv",
@@ -46,7 +46,7 @@ ZMO.modules.challenges = (function($,ajax){
 	};
 	var onChallengesReceive = function(datas){
 		ZMO.log("challenges datas received!");
-		$.each(datas.CHALLENGES,function(ind,val){
+		$.each(datas,function(ind,val){
 			fillContainer(new ZMO.GlobalChallengeModel(val));
 		});
 	};
