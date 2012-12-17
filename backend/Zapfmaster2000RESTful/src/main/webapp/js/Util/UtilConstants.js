@@ -6,5 +6,7 @@ ZMO.UtilConstants ={
 			NO_DATA_RECEIVED_CODE:503
 		},
 		throbberUrl:"images/view/throbber.gif",
-		tokenName:"token"
-}
+		tokenName:"token",
+		serverDateFormat:"yyyyMMdd-HHmmss",
+		clientDateFormat:"dd. MM. yyyy HH:mm:ss"
+};

@@ -57,9 +57,6 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				case c.types.CHALLENGE_DONE:
 					 news = parseChallengesDone(val);
 					 break;
-				case c.types.CHALLENGE_DECLINED:
-					 news = parseChallengesDeclined(val);
-					 break;
 			}
 			if(typeof top!="undefined" && top ==true){
 				if(val.refreshType!= "REFRESH"){

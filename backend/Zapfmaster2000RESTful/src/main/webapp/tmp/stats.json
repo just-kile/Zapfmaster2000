@@ -1,30 +1,33 @@
 {
     "keg":[ {
-        "keg_id": "2",
+        "kegId": "2",
         "brand": "Warsteiner",
         "size": "30",
-        "start_date": "2012-09-01 01:58:22",
-        "keg_numbers": "2",
-        "current_amount": "22.38",
-        "propably_empty":"2.43"
+
+        "startDate": "20120901-015822",
+        "kegNumber": "2",
+        "currentAmount": "22.38",
+        "lastsUntil":"2.43"
+
     },{
-        "keg_id": "3",
+        "kegId": "3",
         "brand": "Oettinger",
         "size": "50",
-        "start_date": "2012-09-01 01:58:22",
-        "keg_numbers": "2",
-        "current_amount": "13.38",
-         "propably_empty":"2.43"
+
+        "startDate": "20120901-015822",
+        "kegNumber": "2",
+        "currentAmount": "13.38",
+        "lastsUntil":"2.44"
+
     }],
     "amount": {
-
         "complete": "57.62",
         "once": "1.20",
         "mostActivityHour": "15"
     },
     "achievements": {
-        "count": "197",
-        "achievementspeed": "50",
+        "count": "57",
+        "achievementspeed": "1.20",
         "mostAchievementHour": "15"
     },
     "drawCount": {
@@ -33,196 +36,65 @@
     },
     "bestUserList": [
         {
-            "user_name": "Tim",
-            "user_id": "9",
-            "user_image": "/images/bla",
+            "userName": "Tim",
+            "userId": "9",
+            "userImage": "/images/bla",
             "amount": "5.57"
         },
         {
-            "user_name": "Felix",
-            "user_id": "12",
-            "user_image": "/images/bla",
-            "amount": "4.97"
-        },        {
-            "user_name": "Tim",
-            "user_id": "9",
-            "user_image": "/images/bla",
-            "amount": "5.57"
-        },
-        {
-            "user_name": "Felix",
-            "user_id": "12",
-            "user_image": "/images/bla",
-            "amount": "4.97"
-        },        {
-            "user_name": "Tim",
-            "user_id": "9",
-            "user_image": "/images/bla",
-            "amount": "5.57"
-        },
-        {
-            "user_name": "Felix",
-            "user_id": "12",
-            "user_image": "/images/bla",
+            "userName": "Felix",
+            "userId": "12",
+            "userImage": "/images/bla",
             "amount": "4.97"
         }
     ],
     "bestUserListHour": [
         {
-            "user_name": "Flo",
-            "user_id": "13",
-            "user_image": "/images/bla",
+            "userName": "Tim",
+            "userId": "9",
+            "userImage": "/images/bla",
             "amount": "5.57"
         }
     ],
-    "achievementUserList": [
+    "achievementUserList":[
         {
-            "user_id": "12",
-            "user_name": "Felix",
-            "user_image": "images/bla.jpg",
-            "achievement_count": "45"
+            "userName": "Tim",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "achievementCount": "3"
         },
         {
-            "user_id": "13",
-            "user_name": "Flo",
-            "user_image": "images/bla.jpg",
-            "achievement_count": "30"
-        },        {
-            "user_id": "12",
-            "user_name": "Felix",
-            "user_image": "images/bla.jpg",
-            "achievement_count": "29"
-        },
-        {
-            "user_id": "13",
-            "user_name": "Flo",
-            "user_image": "images/bla.jpg",
-            "achievement_count": "20"
-        },        {
-            "user_id": "12",
-            "user_name": "Felix",
-            "user_image": "images/bla.jpg",
-            "achievement_count": "17"
-        },
-        {
-            "user_id": "13",
-            "user_name": "Flo",
-            "user_image": "images/bla.jpg",
-            "achievement_count": "12"
-        },        {
-            "user_id": "12",
-            "user_name": "Felix",
-            "user_image": "images/bla.jpg",
-            "achievement_count": "5"
-        },
-        {
-            "user_id": "13",
-            "user_name": "Flo",
-            "user_image": "images/bla.jpg",
-            "achievement_count": "2"
+            "userName": "Felix",
+            "userId": "12",
+            "userImage": "/images/bla",
+            "achievementCount": "2"
         }
     ],
     "drawCountUserList": [
         {
-            "user_id": "12",
-            "user_name": "Felix",
-            "user_image": "images/bla.jpg",
-            "draw_count": "15"
+            "userName": "Tim",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "drawCount": "5.57"
         },
         {
-            "user_id": "13",
-            "user_name": "Flo",
-            "user_image": "images/bla.jpg",
-            "draw_count": "10"
-        },        {
-            "user_id": "12",
-            "user_name": "Felix",
-            "user_image": "images/bla.jpg",
-            "draw_count": "9"
-        },
-        {
-            "user_id": "13",
-            "user_name": "Flo",
-            "user_image": "images/bla.jpg",
-            "draw_count": "8"
-        },        {
-            "user_id": "12",
-            "user_name": "Felix",
-            "user_image": "images/bla.jpg",
-            "draw_count": "7"
-        },
-        {
-            "user_id": "13",
-            "user_name": "Flo",
-            "user_image": "images/bla.jpg",
-            "draw_count": "6"
-        },        {
-            "user_id": "12",
-            "user_name": "Felix",
-            "user_image": "images/bla.jpg",
-            "draw_count": "6"
-        },
-        {
-            "user_id": "13",
-            "user_name": "Flo",
-            "user_image": "images/bla.jpg",
-            "draw_count": "5"
-        },        {
-            "user_id": "12",
-            "user_name": "Felix",
-            "user_image": "images/bla.jpg",
-            "draw_count": "4"
-        },
-        {
-            "user_id": "13",
-            "user_name": "Flo",
-            "user_image": "images/bla.jpg",
-            "draw_count": "2"
+            "userName": "Felix",
+            "userId": "12",
+            "userImage": "/images/bla",
+            "drawCount": "4.97"
         }
     ],
-    "promille": {
-        "average": "0"
-    },
+    "promille":{
+    "alcoholLevel": 0.234
+},
     "progress": {
-        "start_date": "26.01.2012 16:43",
+        "startDate": "20120925-164332",
         "interval": "30",
         "data": [
             7,
             6.9,
             9.5,
-            14.5,
-            18.2,
-            21.5,
-            25.2,
-            26.5,
-            23.3,
-            18.3,
-            13.9,
-            9.6,
-            7,
-            6.9,
-            9.5,
-            14.5,
-            18.2,
-            21.5,
-            25.2,
-            26.5,
-            23.3,
-            18.3,
-            13.9,
-            9.6,
-            7,
-            6.9,
-            9.5,
-            14.5,
-            18.2,
-            21.5,
-            25.2,
-            26.5,
-            23.3,
-            18.3,
-            13.9,
-            9.6
+            14.5
         ]
     }
 }
