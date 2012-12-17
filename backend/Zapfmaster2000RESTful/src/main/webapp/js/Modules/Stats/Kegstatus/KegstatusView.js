@@ -137,9 +137,9 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		var obj = {description:description,isLink:true};
 		
 		if(statsList && ZMO.exists(statsList[0])){
-			obj.user_name = statsList[0].user_name;
-			obj.user_id = statsList[0].user_id;
-			obj.amount  = (statsList[0].amount || statsList[0].draw_count ||statsList[0].achievement_count)+" "+unit;
+			obj.user_name = statsList[0].userName;
+			obj.user_id = statsList[0].userId;
+			obj.amount  = (statsList[0].amount || statsList[0].drawCount ||statsList[0].achievementCount)+" "+unit;
 		}else{
 			obj.user_name = "Noch niemand";
 			obj.user_id = "";

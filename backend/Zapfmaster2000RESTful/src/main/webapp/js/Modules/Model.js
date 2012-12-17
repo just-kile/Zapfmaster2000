@@ -51,7 +51,7 @@ ZMO.NewsModel =function(config){
 	this.name = config.userName;
 	this.amount = Math.round(config.amount*100)/100;
 	this.duration = config.duration;
-	this.date = config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
+	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"",//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 	this.place = config.place;
 	this.keg =config.keg;
 	this.brand = config.brand;
@@ -62,8 +62,8 @@ ZMO.NewsModel =function(config){
 ZMO.AchievementModel = function(config){
 	this.userid = config.userId;
 	this.username = config.userName;
-	this.date = config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
-	
+	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"",//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
+			
 	this.type = config.type;
 	this.achievement_id = config.achievementId;
 	this.name = config.achievementName;
@@ -74,8 +74,8 @@ ZMO.OtherModel = function(config){
 	this.text = config.text;
 	this.image = config.image||config.IMAGE_PATH||config.imagepath;
 	this.type = config.type;
-	this.date = config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
-	
+	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
+			
 	
 };
 
@@ -118,7 +118,9 @@ ZMO.GlobalChallengeModel = function(config){
 	this.team1Amount = sumArr(parseTeam(config.team1,"amount"));
 	this.team2Amount = sumArr(parseTeam(config.team2,"amount"));
 	this.image = config.image||config.challengeImage;
-	this.date = config.start_time||config.startDate;
+	this.date = config.startDate?new ZMO.TimeParser(config.startDate).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
+			
+	//this.date = config.start_time||config.startDate;
 
 };
 

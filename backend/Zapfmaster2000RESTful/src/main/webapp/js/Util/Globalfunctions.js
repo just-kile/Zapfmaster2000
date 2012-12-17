@@ -66,3 +66,37 @@ ZMO.hashHandler = (function($){
 	};
 	return pub;
 })(jQuery);
+
+
+
+ZMO.TimeParser = function(serverDateString){
+	var serverTimeFormat = ZMO.UtilConstants.serverDateFormat;
+	var clientTimeFormat = ZMO.UtilConstants.clientDateFormat;
+	var date;
+	if(typeof serverDateString=="number"){
+		date = new Date(serverDateString);
+	}else{
+		date = new Date(getDateFromFormat(serverDateString,serverTimeFormat));
+		
+	}
+	
+	var getDefaultTime = function(){
+		return formatDate(date,clientTimeFormat);
+ 
+	};
+	var getTimestamp = function(){
+		return date.getTime();
+	};
+	//public
+	this.getDefaultTime = getDefaultTime;
+	this.getTimestamp = getTimestamp;
+};
+
+
+
+
+
+
+
+
+

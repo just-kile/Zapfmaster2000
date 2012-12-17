@@ -7,6 +7,7 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
  --><script src="libs/jquery.ba-bbq.min.js"></script>
 <script src="libs/ICanHaz.min.js"></script>
+<script src="libs/datefunctions/date.js"></script>
 <script src="libs/highcharts/highcharts.js" type="text/javascript"></script>
 <script type="text/javascript" src="libs/highcharts/themes/grayzm.js"></script>
 <!-- Style -->
@@ -202,12 +203,12 @@
 {{rank}}.
 </td>
 	<td class="name">
-		<a href="#stats?userid={{user_id}}">{{user_name}}</a>	
+		<a href="#stats?userid={{userId}}">{{userName}}</a>	
 	</td>
 	<td class="amount">
 		{{#amount}}{{amount}}{{/amount}}
-		{{#achievement_count}}{{achievement_count}}{{/achievement_count}}
-		{{#draw_count}}{{draw_count}}{{/draw_count}}
+		{{#achievementCount}}{{achievementCount}}{{/achievementCount}}
+		{{#drawCount}}{{drawCount}}{{/drawCount}}
  {{unit}}
 	</td>
 </tr>
