@@ -103,9 +103,9 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 	var init = function(){
 		ajax.getDatas("tmp/stats.json",function(kegDatas){
 			containerHandler = new ContainerHandler();
-			$.each(kegDatas["keg"],function(ind,kegData){
-				var kegModel = new ZMO.modules.KegModel(kegData); 
-				initKegStats(kegModel);
+			var kegModelArr = new ZMO.modules.kegModel(kegDatas.keg);
+			$.each(kegModelArr,function(ind,kegData){
+				initKegStats(kegData);
 			});
 		});
 	};
