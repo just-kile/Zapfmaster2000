@@ -182,29 +182,38 @@ ZMO.Util.Net.Ajax = (function($){
 		
 	};
 	var connectToNewsPush = function(callback){
-		
 		connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
 	};
-	var rfidLogin = function(callback){
-		connectToChannel(ZMO.modules.Constants.push.RFID,callback);
+	var connectToNewsUpdate = function(boxId,callback){
+		connectToChannel(ZMO.modules.Constants.push.NEWSUPDATE+"/"+boxId,callback);
 	};
 
 	var abortReq = function(url){
-		var push = pushRequests[url];
-		if(ZMO.exists(push))push.abort();
-		ZMO.log(" Push aborted: "+url);
-		pushRequests[url] = null;
+		
+		$.each(pushRequests,function(reqUrl,req){
+			var regex = new RegExp("^"+url+"");
+			if(regex.test(reqUrl)&& ZMO.exists(req)){
+				pushRequests[reqUrl] = null;
+				req.abort();
+				ZMO.log(" Push aborted: "+url);
+				
+			}
+		});
+//		var push = pushRequests[url];
+//		if(ZMO.exists(push))push.abort();
+//		ZMO.log(" Push aborted: "+url);
+//		pushRequests[url] = null;
 	};
 	var abortNewsPush = function(){
 		abortReq(ZMO.modules.Constants.push.NEWS);
 	};
-	var abortRfidPush = function(){
-		abortReq(ZMO.modules.Constants.push.RFID);
+	var abortNewsUpdatePush = function(){
+		abortReq(ZMO.modules.Constants.push.NEWSUPDATE);
 	};
 
 	var abortPushRequests = function(){
 		abortNewsPush();
-		abortRfidPush();
+		abortNewsUpdatePush();
 	};
 	
 	/*****
@@ -219,6 +228,7 @@ ZMO.Util.Net.Ajax = (function($){
 	var sendChallengeConfirmation = function(data){
 			
 	};
+	
 	var sendChallengeRequest = function(datas,callback){
 		if(callback)callback();
 	};
@@ -231,9 +241,9 @@ ZMO.Util.Net.Ajax = (function($){
 			
 			connectToChannel:connectToChannel,
 			connectToNewsPush:connectToNewsPush,
-			rfidLogin:rfidLogin,
+			connectToNewsUpdate:connectToNewsUpdate,
 			abortNewsPush:abortNewsPush,
-			abortRfidPush:abortRfidPush,
+			abortNewsUpdatePush:abortNewsUpdatePush,
 			abortPushRequests:abortPushRequests,
 			
 			connectChallengeReceive:connectChallengeReceive,

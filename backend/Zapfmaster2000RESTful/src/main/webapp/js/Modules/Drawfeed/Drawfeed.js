@@ -143,7 +143,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		 updateNewslist(0,mC.drawfeed.listLength);
 		 Ajax.connectToNewsPush(onMessageReceive);
 
-		 Ajax.rfidLogin(onRfidLogin);
+		 //Ajax.rfidLogin(onRfidLogin);
 	 };
 	 
 	 var onRfidLogin = function(data){ 

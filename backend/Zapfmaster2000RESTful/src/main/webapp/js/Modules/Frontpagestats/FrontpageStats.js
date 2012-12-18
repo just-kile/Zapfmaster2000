@@ -168,7 +168,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 	 *****/
 	var initUserStats =  function(newsModel){
 		var boxId = newsModel.boxId;
-		ajax.getDatas("tmp/kegstatus.json",function(userRank){
+		ajax.getDatas(ZMO.modules.Constants.urls.USERFRONTPAGESTATS,function(userRank){
 			var userContainer = containerHandler.getUserContainer(boxId);
 			var content = ich["ZMO-frontpagestats-general-template"]({
 				news:newsModel,
@@ -180,8 +180,6 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 			userid:newsModel.userId
 		});
 	};
-	
-	
 	function roundAHalf(val) { 
 		  if((val - Math.floor(val)) >= 0.5) {
 		    maxSize = Math.ceil(val);
@@ -217,7 +215,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 		containerHandler.switchContainerToUser(newsModel);
 	};
 	var switchContainerToKeg =function(boxId){
-		ajax.getDatas("tmp/stats_fp.json",function(fpStats){
+		ajax.getDatas(ZMO.modules.Constants.urls.FRONTPAGESTATS,function(fpStats){
 			updateGeneralStats(fpStats);
 			var kegModelArr = new ZMO.modules.kegModel(fpStats.keg);
 			$.each(kegModelArr,function(ind,kegData){
@@ -227,14 +225,27 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 			containerHandler.switchContainerToKeg(boxId);
 		});
 	};
+	/*****
+	 * Init push functionality
+	 *****/
 	var initPush = function(kegModel){
-		
+		ajax.connectToNewsUpdate(kegModel.boxId,function(pushResponse){
+			var newsModel =  new ZMO.NewsModel(pushResponse);
+			var type = newsModel.type;
+			if(type.toLowerCase() == "login"){
+				switchContainerToUser(newsModel);
+			}else if(type.toLowerCase() == "draw"){
+				updateUserStats(newsModel);
+			}else if(type.toLowerCase() == "logout"){
+				switchContainerToKeg(newsModel.boxId);
+			}
+		});
 	};
 	/*****
 	 * Initialization
 	 */
 	var init = function(){
-		ajax.getDatas("tmp/stats_fp.json",function(fpStats){
+		ajax.getDatas(ZMO.modules.Constants.urls.FRONTPAGESTATS,function(fpStats){
 			//general stats
 			initGeneralStats(fpStats);
 			//Kegcharts
@@ -280,9 +291,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 	    }));
 	}
 	
-	/*****
-	 * Init push functionality
-	 *****/
+
 
 	
 	/**
