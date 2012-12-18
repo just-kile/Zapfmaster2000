@@ -47,7 +47,6 @@ public class RankingsResource {
 	 * @param pRequest
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@Path("bestUserList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,74 +57,82 @@ public class RankingsResource {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 		if (account != null) {
-			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionService().getSessionFactory()
-					.getCurrentSession();
-			Transaction tx = session.beginTransaction();
-
-			session.update(account);
-
-			SimpleDateFormat df = new SimpleDateFormat(
-					PlatformConstants.DATE_TIME_FORMAT);
-
-			List<Object[]> list;
+			UserAmountResponse[] response = null;
 			try {
-				if (pFrom == null) {// Full list
-					list = session
-							.createQuery(
-									"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
-											+ " FROM User u, Drawing d "
-											+ " WHERE d.user = u AND u.account = :account "
-											+ " GROUP BY u.id ORDER BY amt DESC")
-							.setEntity("account", account).list();
-
-				} else if (pTo == null) {// List until now
-					Date dFrom = df.parse(pFrom);
-					list = session
-							// createCriteria
-							.createQuery(
-									"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
-											+ " FROM User u, Drawing d "
-											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date > :from"
-											+ " GROUP BY u.id ORDER BY amt DESC")
-							.setEntity("account", account)
-							.setTimestamp("from", dFrom).list();
-				} else { // general list
-					Date dFrom = df.parse(pFrom);
-					Date dTo = df.parse(pTo);
-					list = session
-							.createQuery(
-									"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
-											+ " FROM User u, Drawing d "
-											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date BETWEEN :from AND :to"
-											+ " GROUP BY u.id ORDER BY amt DESC")
-							.setEntity("account", account)
-							.setTimestamp("from", dFrom)
-							.setTimestamp("to", dTo).list();
-				}
+				response = createUserAmountResponse(pFrom, pTo, account);
 			} catch (ParseException e) {
 				LOG.error("Could not parse date", e);
 				return Response.status(Status.BAD_REQUEST).build();
 			}
 
-			tx.commit();
+			return Response.ok(response).build();
 
-			List<UserAmountResponse> resp = new ArrayList<>();
-			for (Object[] object : list) {
-				UserAmountResponse userAmountResponse = new UserAmountResponse();
-				userAmountResponse.setName((String) object[1]);
-				userAmountResponse.setId((Long) object[0]);
-				userAmountResponse.setAmount((Double) object[2]);
-				userAmountResponse.setImage((String) object[3]);
-				resp.add(userAmountResponse);
-			}
-
-			return Response.ok(resp.toArray()).build();
 		}
 
 		return Response.status(Status.FORBIDDEN).build();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public UserAmountResponse[] createUserAmountResponse(String pFrom,
+			String pTo, Account account) throws ParseException {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		session.update(account);
+
+		SimpleDateFormat df = new SimpleDateFormat(
+				PlatformConstants.DATE_TIME_FORMAT);
+
+		List<Object[]> list;
+		if (pFrom == null) {// Full list
+			list = session
+					.createQuery(
+							"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
+									+ " FROM User u, Drawing d "
+									+ " WHERE d.user = u AND u.account = :account "
+									+ " GROUP BY u.id ORDER BY amt DESC")
+					.setEntity("account", account).list();
+
+		} else if (pTo == null) {// List until now
+			Date dFrom = df.parse(pFrom);
+			list = session
+					.createQuery(
+							"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
+									+ " FROM User u, Drawing d "
+									+ " WHERE d.user = u AND u.account = :account AND "
+									+ " d.date > :from"
+									+ " GROUP BY u.id ORDER BY amt DESC")
+					.setEntity("account", account).setTimestamp("from", dFrom)
+					.list();
+		} else { // general list
+			Date dFrom = df.parse(pFrom);
+			Date dTo = df.parse(pTo);
+			list = session
+					.createQuery(
+							"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
+									+ " FROM User u, Drawing d "
+									+ " WHERE d.user = u AND u.account = :account AND "
+									+ " d.date BETWEEN :from AND :to"
+									+ " GROUP BY u.id ORDER BY amt DESC")
+					.setEntity("account", account).setTimestamp("from", dFrom)
+					.setTimestamp("to", dTo).list();
+		}
+
+		tx.commit();
+
+		List<UserAmountResponse> resp = new ArrayList<UserAmountResponse>();
+		for (Object[] object : list) {
+			UserAmountResponse userAmountResponse = new UserAmountResponse();
+			userAmountResponse.setName((String) object[1]);
+			userAmountResponse.setId((Long) object[0]);
+			userAmountResponse.setAmount((Double) object[2]);
+			userAmountResponse.setImage((String) object[3]);
+			resp.add(userAmountResponse);
+		}
+
+		return resp.toArray(new UserAmountResponse[resp.size()]);
 
 	}
 
@@ -143,7 +150,6 @@ public class RankingsResource {
 	 * @param pRequest
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@Path("drawCountUserList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -154,74 +160,83 @@ public class RankingsResource {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 		if (account != null) {
-			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionService().getSessionFactory()
-					.getCurrentSession();
-			Transaction tx = session.beginTransaction();
+			DrawCountUserListResponse[] drawCountUserListResponses;
 
-			session.update(account);
-
-			SimpleDateFormat df = new SimpleDateFormat(
-					PlatformConstants.DATE_TIME_FORMAT);
-
-			List<Object[]> list;
 			try {
-				if (pFrom == null) {// Full list
-					list = session
-							.createQuery(
-									"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
-											+ " FROM User u, Drawing d "
-											+ " WHERE d.user = u AND u.account = :account "
-											+ " GROUP BY u.id ORDER BY cnt DESC")
-							.setEntity("account", account).list();
-
-				} else if (pTo == null) {// List until now
-					Date dFrom = df.parse(pFrom);
-					list = session
-							.createQuery(
-									"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
-											+ " FROM User u, Drawing d "
-											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date > :from"
-											+ " GROUP BY u.id ORDER BY cnt DESC")
-							.setEntity("account", account)
-							.setTimestamp("from", dFrom).list();
-				} else { // general list
-					Date dFrom = df.parse(pFrom);
-					Date dTo = df.parse(pTo);
-					list = session
-							.createQuery(
-									"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
-											+ " FROM User u, Drawing d "
-											+ " WHERE d.user = u AND u.account = :account AND "
-											+ " d.date BETWEEN :from AND :to"
-											+ " GROUP BY u.id ORDER BY cnt DESC")
-							.setEntity("account", account)
-							.setTimestamp("from", dFrom)
-							.setTimestamp("to", dTo).list();
-
-				}
+				drawCountUserListResponses = createDrawCountUserListResponse(
+						pFrom, pTo, account);
 			} catch (ParseException e) {
 				LOG.error("Could not parse date", e);
 				return Response.status(Status.BAD_REQUEST).build();
 			}
 
-			tx.commit();
-
-			List<DrawCountUserListResponse> resp = new ArrayList<>();
-			for (Object[] object : list) {
-				DrawCountUserListResponse drawCountResponse = new DrawCountUserListResponse();
-				drawCountResponse.setName((String) object[1]);
-				drawCountResponse.setId((Long) object[0]);
-				drawCountResponse.setDrawCount((long) object[2]);
-				drawCountResponse.setImage((String) object[3]);
-				resp.add(drawCountResponse);
-			}
-
-			return Response.ok(resp.toArray()).build();
+			return Response.ok(drawCountUserListResponses).build();
 		}
 
 		return Response.status(Status.FORBIDDEN).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	public DrawCountUserListResponse[] createDrawCountUserListResponse(
+			String pFrom, String pTo, Account account) throws ParseException {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		session.update(account);
+
+		SimpleDateFormat df = new SimpleDateFormat(
+				PlatformConstants.DATE_TIME_FORMAT);
+
+		List<Object[]> list;
+		if (pFrom == null) {// Full list
+			list = session
+					.createQuery(
+							"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
+									+ " FROM User u, Drawing d "
+									+ " WHERE d.user = u AND u.account = :account "
+									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setEntity("account", account).list();
+
+		} else if (pTo == null) {// List until now
+			Date dFrom = df.parse(pFrom);
+			list = session
+					.createQuery(
+							"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
+									+ " FROM User u, Drawing d "
+									+ " WHERE d.user = u AND u.account = :account AND "
+									+ " d.date > :from"
+									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setEntity("account", account).setTimestamp("from", dFrom)
+					.list();
+		} else { // general list
+			Date dFrom = df.parse(pFrom);
+			Date dTo = df.parse(pTo);
+			list = session
+					.createQuery(
+							"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
+									+ " FROM User u, Drawing d "
+									+ " WHERE d.user = u AND u.account = :account AND "
+									+ " d.date BETWEEN :from AND :to"
+									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setEntity("account", account).setTimestamp("from", dFrom)
+					.setTimestamp("to", dTo).list();
+
+		}
+
+		tx.commit();
+
+		List<DrawCountUserListResponse> resp = new ArrayList<DrawCountUserListResponse>();
+		for (Object[] object : list) {
+			DrawCountUserListResponse drawCountResponse = new DrawCountUserListResponse();
+			drawCountResponse.setName((String) object[1]);
+			drawCountResponse.setId((Long) object[0]);
+			drawCountResponse.setDrawCount((long) object[2]);
+			drawCountResponse.setImage((String) object[3]);
+			resp.add(drawCountResponse);
+		}
+
+		return resp.toArray(new DrawCountUserListResponse[resp.size()]);
 	}
 
 	/**
@@ -238,7 +253,6 @@ public class RankingsResource {
 	 * @param pRequest
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@Path("achievementUserList")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -249,74 +263,84 @@ public class RankingsResource {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 		if (account != null) {
-			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionService().getSessionFactory()
-					.getCurrentSession();
-			Transaction tx = session.beginTransaction();
+			AchievementUserListResponse[] achievementUserListResponses;
 
-			session.update(account);
-
-			SimpleDateFormat df = new SimpleDateFormat(
-					PlatformConstants.DATE_TIME_FORMAT);
-
-			List<Object[]> list;
 			try {
-				if (pFrom == null) {// Full list
-					list = session
-							.createQuery(
-									"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
-											+ " FROM User u, GainedAchievement g "
-											+ " WHERE g.user = u AND u.account = :account "
-											+ " GROUP BY u.id ORDER BY cnt DESC")
-							.setEntity("account", account).list();
-
-				} else if (pTo == null) {// List until now
-					Date dFrom = df.parse(pFrom);
-					list = session
-							.createQuery(
-									"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
-											+ " FROM User u, GainedAchievement g "
-											+ " WHERE g.user = u AND u.account = :account AND "
-											+ " g.date > :from"
-											+ " GROUP BY u.id ORDER BY cnt DESC")
-							.setEntity("account", account)
-							.setTimestamp("from", dFrom).list();
-				} else { // general list
-					Date dFrom = df.parse(pFrom);
-					Date dTo = df.parse(pTo);
-					list = session
-							.createQuery(
-									"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
-											+ " FROM User u, GainedAchievement g "
-											+ " WHERE g.user = u AND u.account = :account AND "
-											+ " g.date BETWEEN :from AND :to"
-											+ " GROUP BY u.id ORDER BY cnt DESC")
-							.setEntity("account", account)
-							.setTimestamp("from", dFrom)
-							.setTimestamp("to", dTo).list();
-
-				}
+				achievementUserListResponses = createAchievementUserListResponse(
+						pFrom, pTo, account);
 			} catch (ParseException e) {
 				LOG.error("Could not parse date", e);
 				return Response.status(Status.BAD_REQUEST).build();
 			}
 
-			tx.commit();
+			return Response.ok(achievementUserListResponses).build();
 
-			List<AchievementUserListResponse> resp = new ArrayList<>();
-			for (Object[] object : list) {
-				AchievementUserListResponse achievementCountResponse = new AchievementUserListResponse();
-				achievementCountResponse.setName((String) object[1]);
-				achievementCountResponse.setId((Long) object[0]);
-				achievementCountResponse.setCount((Long) object[2]);
-				achievementCountResponse.setImage((String) object[3]);
-				resp.add(achievementCountResponse);
-			}
-
-			return Response.ok(resp.toArray()).build();
 		}
 
 		return Response.status(Status.FORBIDDEN).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	public AchievementUserListResponse[] createAchievementUserListResponse(
+			String pFrom, String pTo, Account account) throws ParseException {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		session.update(account);
+
+		SimpleDateFormat df = new SimpleDateFormat(
+				PlatformConstants.DATE_TIME_FORMAT);
+
+		List<Object[]> list;
+		if (pFrom == null) {// Full list
+			list = session
+					.createQuery(
+							"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
+									+ " FROM User u, GainedAchievement g "
+									+ " WHERE g.user = u AND u.account = :account "
+									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setEntity("account", account).list();
+
+		} else if (pTo == null) {// List until now
+			Date dFrom = df.parse(pFrom);
+			list = session
+					.createQuery(
+							"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
+									+ " FROM User u, GainedAchievement g "
+									+ " WHERE g.user = u AND u.account = :account AND "
+									+ " g.date > :from"
+									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setEntity("account", account).setTimestamp("from", dFrom)
+					.list();
+		} else { // general list
+			Date dFrom = df.parse(pFrom);
+			Date dTo = df.parse(pTo);
+			list = session
+					.createQuery(
+							"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
+									+ " FROM User u, GainedAchievement g "
+									+ " WHERE g.user = u AND u.account = :account AND "
+									+ " g.date BETWEEN :from AND :to"
+									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setEntity("account", account).setTimestamp("from", dFrom)
+					.setTimestamp("to", dTo).list();
+
+		}
+
+		tx.commit();
+
+		List<AchievementUserListResponse> resp = new ArrayList<AchievementUserListResponse>();
+		for (Object[] object : list) {
+			AchievementUserListResponse achievementCountResponse = new AchievementUserListResponse();
+			achievementCountResponse.setName((String) object[1]);
+			achievementCountResponse.setId((Long) object[0]);
+			achievementCountResponse.setCount((Long) object[2]);
+			achievementCountResponse.setImage((String) object[3]);
+			resp.add(achievementCountResponse);
+		}
+
+		return resp.toArray(new AchievementUserListResponse[resp.size()]);
 	}
 
 }

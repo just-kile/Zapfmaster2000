@@ -20,13 +20,11 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 @Path("statistics")
 public class KegResource {
 
-	
 	/**
 	 * @param pToken
 	 * @return either {@link KegResponse} or <code>null</code> if
 	 *         <code>pToken</code> is not valid.
 	 */
-	@SuppressWarnings("unchecked")
 	@Path("keg")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -34,51 +32,56 @@ public class KegResource {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 		if (account != null) {
-			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionService().getSessionFactory()
-					.getCurrentSession();
-			Transaction tx = session.beginTransaction();
-
-			List<Object> resultCurrentKeg = session
-					.createQuery(
-							"SELECT k.id, k.brand, k.size, k.startDate "
-									+ " FROM Keg k, Drawing d, User u "
-									+ " WHERE d.keg = k AND d.user = u "
-									+ " AND u.account = :account"
-									+ " ORDER BY d.date DESC")
-					.setEntity("account", account).setMaxResults(1).list();
-
-			List<Object> resultNumberKegs = session
-					.createQuery(
-							"SELECT COUNT (DISTINCT k.id) FROM Keg k, Drawing d, User u"
-									+ " WHERE d.keg = k AND d.user = u "
-									+ " AND u.account= :account")
-					.setEntity("account", account).list();
-
-			List<Object> resultCurrentAmount = session
-					.createQuery(
-							"SELECT (k.size-SUM(d.amount)) FROM Drawing d, Keg k, User u "
-									+ " WHERE d.keg = k AND d.user = u "
-									+ " AND u.account = :account"
-									+ " GROUP BY (k.id)"
-									+ " ORDER BY MAX(d.date) DESC")
-					.setEntity("account", account).setMaxResults(1).list();
-
-			tx.commit();
-
-			KegResponse response = new KegResponse();
-
-			Object[] resultRow = (Object[]) resultCurrentKeg.get(0);
-			response.setKegId((Long) resultRow[0]);
-			response.setBrand((String) resultRow[1]);
-			response.setSize((Integer) resultRow[2]);
-			response.setStart_date((Date) resultRow[3]);
-			response.setKegNumbers((Long) resultNumberKegs.get(0));
-			response.setCurrentAmount((Double) resultCurrentAmount.get(0));
-
+			KegResponse response = createKegResponse(account);
 			return Response.ok(response).build();
 		}
 
 		return Response.status(Status.FORBIDDEN).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	public KegResponse createKegResponse(Account account) {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		List<Object> resultCurrentKeg = session
+				.createQuery(
+						"SELECT k.id, k.brand, k.size, k.startDate "
+								+ " FROM Keg k, Drawing d, User u "
+								+ " WHERE d.keg = k AND d.user = u "
+								+ " AND u.account = :account"
+								+ " ORDER BY d.date DESC")
+				.setEntity("account", account).setMaxResults(1).list();
+
+		List<Object> resultNumberKegs = session
+				.createQuery(
+						"SELECT COUNT (DISTINCT k.id) FROM Keg k, Drawing d, User u"
+								+ " WHERE d.keg = k AND d.user = u "
+								+ " AND u.account= :account")
+				.setEntity("account", account).list();
+
+		List<Object> resultCurrentAmount = session
+				.createQuery(
+						"SELECT (k.size-SUM(d.amount)) FROM Drawing d, Keg k, User u "
+								+ " WHERE d.keg = k AND d.user = u "
+								+ " AND u.account = :account"
+								+ " GROUP BY (k.id)"
+								+ " ORDER BY MAX(d.date) DESC")
+				.setEntity("account", account).setMaxResults(1).list();
+
+		tx.commit();
+
+		KegResponse response = new KegResponse();
+
+		Object[] resultRow = (Object[]) resultCurrentKeg.get(0);
+		response.setKegId((Long) resultRow[0]);
+		response.setBrand((String) resultRow[1]);
+		response.setSize((Integer) resultRow[2]);
+		response.setStart_date((Date) resultRow[3]);
+		response.setKegNumbers((Long) resultNumberKegs.get(0));
+		response.setCurrentAmount((Double) resultCurrentAmount.get(0));
+
+		return response;
 	}
 }

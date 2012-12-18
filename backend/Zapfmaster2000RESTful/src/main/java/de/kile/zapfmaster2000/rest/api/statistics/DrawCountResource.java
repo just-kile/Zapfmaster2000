@@ -19,16 +19,17 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 @Path("statistics")
 public class DrawCountResource {
 
-	
+	// TODO handle user parse error
 	/**
-	 * Returns {@link DrawCountResponse} either for everyone or specific to
-	 * user with id <code>pUser</code>.
+	 * Returns {@link DrawCountResponse} either for everyone or specific to user
+	 * with id <code>pUser</code>.
+	 * 
 	 * @param pToken
-	 * @param pUser can be <code>null</code>.
-	 * @return  either {@link DrawCountResponse} or <code>null</code> if
+	 * @param pUser
+	 *            can be <code>null</code>.
+	 * @return either {@link DrawCountResponse} or <code>null</code> if
 	 *         <code>pToken</code> is not valid.
 	 */
-	@SuppressWarnings("unchecked")
 	@Path("drawCount")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -38,49 +39,55 @@ public class DrawCountResource {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 		if (account != null) {
-			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionService().getSessionFactory()
-					.getCurrentSession();
-			Transaction tx = session.beginTransaction();
-
-			session.update(account);
-
-			List<Object> countByHourResult;
-			if (pUser == null) {
-				countByHourResult = session
-						.createQuery(
-								"SELECT COUNT(d.id) FROM Drawing d, User u "
-										+ " WHERE d.user = u AND u.account = :account"
-										+ " GROUP BY HOUR(d.date)")
-						.setEntity("account", account).list();
-
-			} else {
-				countByHourResult = session
-						.createQuery(
-								"SELECT COUNT(d.id) FROM Drawing d, User u "
-										+ " WHERE u.id = :user AND d.user = u "
-										+ " AND u.account = :account "
-										+ " GROUP BY HOUR(d.date)")
-						.setEntity("account", account)
-						.setLong("user", Long.valueOf(pUser)).list();
-			}
-
-			tx.commit();
-
-			long sum = 0;
-			for (Object n : countByHourResult) {
-				sum += (Long) n;
-			}
-
-			DrawCountResponse drawCountResponse = new DrawCountResponse();
-			drawCountResponse.setCount(sum);
-			drawCountResponse.setAverageOperationsPerHour(Double.valueOf(sum)
-					/ countByHourResult.size());
-
+			DrawCountResponse drawCountResponse = createCountResponse(pUser,
+					account);
 			return Response.ok(drawCountResponse).build();
 
 		}
 
 		return Response.status(Status.FORBIDDEN).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	public DrawCountResponse createCountResponse(String pUser, Account account) {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		session.update(account);
+
+		List<Object> countByHourResult;
+		if (pUser == null) {
+			countByHourResult = session
+					.createQuery(
+							"SELECT COUNT(d.id) FROM Drawing d, User u "
+									+ " WHERE d.user = u AND u.account = :account"
+									+ " GROUP BY HOUR(d.date)")
+					.setEntity("account", account).list();
+
+		} else {
+			countByHourResult = session
+					.createQuery(
+							"SELECT COUNT(d.id) FROM Drawing d, User u "
+									+ " WHERE u.id = :user AND d.user = u "
+									+ " AND u.account = :account "
+									+ " GROUP BY HOUR(d.date)")
+					.setEntity("account", account)
+					.setLong("user", Long.valueOf(pUser)).list();
+		}
+
+		tx.commit();
+
+		long sum = 0;
+		for (Object n : countByHourResult) {
+			sum += (Long) n;
+		}
+
+		DrawCountResponse drawCountResponse = new DrawCountResponse();
+		drawCountResponse.setCount(sum);
+		drawCountResponse.setAverageOperationsPerHour(Double.valueOf(sum)
+				/ countByHourResult.size());
+
+		return drawCountResponse;
 	}
 }

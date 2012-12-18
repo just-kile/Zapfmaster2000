@@ -32,7 +32,6 @@ public class DrinkProgressResource {
 	private Date dTo;
 	private int interval;
 
-	@SuppressWarnings("unchecked")
 	@Path("achievements")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -44,81 +43,87 @@ public class DrinkProgressResource {
 				.retrieveAccount(pToken);
 
 		if (account != null) {
-			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionService().getSessionFactory()
-					.getCurrentSession();
-			Transaction tx = session.beginTransaction();
 
-			SimpleDateFormat df = new SimpleDateFormat(
-					PlatformConstants.DATE_TIME_FORMAT);
-
-			String sQuery = createQuery(pFrom, pTo, pUser);
-
-			Query query = session.createQuery(sQuery);
-
-			if (pUser != null) {
-				try {
-					Long user = Long.valueOf(pUser);
-					query.setLong("user", user);
-
-				} catch (NumberFormatException e) {
-					LOG.error("Could not parse user id", e);
-					return Response.status(Status.BAD_REQUEST).build();
-				}
-			}
-			if (pFrom != null) {
-				try {
-					dFrom = df.parse(pFrom);
-				} catch (ParseException e) {
-					LOG.error("Could not parse date", e);
-					return Response.status(Status.BAD_REQUEST).build();
-				}
-			}
-
-			if (pTo != null) {
-				try {
-					dTo = df.parse(pTo);
-				} catch (ParseException e) {
-					LOG.error("Could not parse date", e);
-					return Response.status(Status.BAD_REQUEST).build();
-				}
-			}
-
-			if (dFrom != null) {
-				query.setTimestamp("from", dFrom);
-			}
-			if (dTo != null) {
-				query.setTimestamp("to", dTo);
-			}
-
-			query.setEntity("account", account);
-			List<Object[]> list = query.list();
-			tx.commit();
-
-			if (list.size() == 0)
+			DrinkProgressResponse response = null;
+			try {
+				response = createDrinkResponse(account, pUser, pFrom, pTo,
+						pInterval);
+			} catch (ParseException e) {
+				LOG.error("Could not parse date", e);
 				return Response.status(Status.BAD_REQUEST).build();
+			} catch (NumberFormatException e) {
+				// TODO distinguish
+				LOG.error("Could not parse user id or interval", e);
+				return Response.status(Status.BAD_REQUEST).build();
+			}
 
-			if (pInterval != null) {
-				try {
-					interval = Integer.parseInt(pInterval);
-				} catch (NumberFormatException e) {
-					LOG.error("Could not parse interval", e);
-					return Response.status(Status.BAD_REQUEST).build();
-				}
-			} else
-				interval = 30;
-
-			double[] amounts = createAmountArray(list);
-
-			DrinkProgressResponse response = new DrinkProgressResponse();
-			response.setAmount(amounts);
-			response.setFrom(dFrom);
-			response.setInterval(interval);
+			if (response == null) {
+				LOG.error("Did not find any drawings.");
+				Response.status(Status.BAD_REQUEST).build();
+			}
 
 			return Response.ok(response).build();
+
 		}
 
 		return Response.status(Status.FORBIDDEN).build();
+	}
+
+	@SuppressWarnings("unchecked")
+	public DrinkProgressResponse createDrinkResponse(Account account,
+			String pUser, String pFrom, String pTo, String pInterval)
+			throws ParseException, NumberFormatException {
+
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		SimpleDateFormat df = new SimpleDateFormat(
+				PlatformConstants.DATE_TIME_FORMAT);
+
+		String sQuery = createQuery(pFrom, pTo, pUser);
+
+		Query query = session.createQuery(sQuery);
+
+		if (pUser != null) {
+			Long user = Long.valueOf(pUser);
+			query.setLong("user", user);
+		}
+		if (pFrom != null) {
+			dFrom = df.parse(pFrom);
+		}
+
+		if (pTo != null) {
+			dTo = df.parse(pTo);
+		}
+
+		if (dFrom != null) {
+			query.setTimestamp("from", dFrom);
+		}
+		if (dTo != null) {
+			query.setTimestamp("to", dTo);
+		}
+
+		query.setEntity("account", account);
+		List<Object[]> list = query.list();
+		tx.commit();
+
+		if (list.size() == 0)
+			return null;
+
+		if (pInterval != null) {
+			interval = Integer.parseInt(pInterval);
+		} else
+			interval = 30;
+
+		double[] amounts = createAmountArray(list);
+
+		DrinkProgressResponse response = new DrinkProgressResponse();
+		response.setAmount(amounts);
+		response.setFrom(dFrom);
+		response.setInterval(interval);
+
+		return response;
 	}
 
 	private double[] createAmountArray(List<Object[]> list) {
