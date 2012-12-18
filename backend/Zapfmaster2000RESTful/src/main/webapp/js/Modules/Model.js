@@ -53,11 +53,13 @@ ZMO.NewsModel =function(config){
 	this.duration = config.duration;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"",//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 	this.place = config.place;
-	this.keg =config.keg;
+	this.kegId =config.kegId;
 	this.brand = config.brand;
 	this.image =config.image;
 	this.userid = config.userid||config.userId;
 	this.type = config.type;
+	this.place = "Alter Markt";
+	this.boxId = config.boxId;
 };
 ZMO.AchievementModel = function(config){
 	this.userid = config.userId;

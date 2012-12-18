@@ -17,7 +17,55 @@
 
  <script src="js/Website/Main.js"></script>
 <!-- Templates ==> Put them to templates.json (same effect) -->
- <script id="ZMO-frontpagestats-template" type="text/html">
+ <script id="ZMO-frontpagestats-general-template" type="text/html">
+
+	<table class="stats-drinker">
+{{#bestUser}}
+<tr class="stats-drinker-row">
+
+	<td>All Time</td><td><a href="#">{{userName}}</a> ({{amount}}l)</td>
+</tr>
+{{/bestUser}}
+{{#bestUserHour}}
+<tr class="stats-drinker-row">
+
+	<td>Trinker der Stunde</td><td><a href="#">{{userName}}</a> ({{amount}}l)</td>
+</tr>
+{{/bestUserHour}}
+{{#bestAchievement}}
+<tr class="stats-drinker-row">
+
+	<td>Achievement Chef</td><td><a href="#">{{userName}}</a> ({{achievementCount}})</td>
+
+</tr>
+{{/bestAchievement}}
+{{#bestDrawCount}}
+<tr class="stats-drinker-row">
+	<td>Treuester Kunde</td><td><a href="#">{{userName}}</a> ({{drawCount}}x)</td>
+</tr>
+{{/bestDrawCount}}
+{{#promille}}
+<tr class="stats-drinker-row">
+	<td>Durchschnittliche Promille</td><td>{{promille}} &permil;</td>
+</tr>
+{{/promille}}
+
+
+<!-- Frontpage User stats -->
+{{#news}}
+<tr class="stats-drinker-row">
+	<td><img src="{{image}}" /> </td><td>{{name}}</td>
+</tr>
+{{/news}}
+{{#userRank}}
+<tr class="stats-drinker-row">
+	<td>Platz</td><td>{{amount}}</td>
+</tr>
+{{/userRank}}
+</table>
+
+ </script>
+  <script id="ZMO-frontpagestats-template" type="text/html">
  <div class="text">
 	<table class="stats-drinker">
 <tr class="stats-drinker-row">
@@ -33,7 +81,7 @@
 	<td>Angezapft am </td><td>{{start_date}}</td>
 </tr>
 <tr class="stats-drinker-row">
-	<td>Leer in </td><td>{{propably_empty}} h</td>
+	<td>Leer um </td><td>{{lastsUntilShort}} Uhr</td>
 </tr>
 </table>
 </div>
@@ -65,7 +113,7 @@
 				<div class="news-drink-box-details-headline">
 					<b>{{name}}</b> zapfte <b>{{amount}}</b>l in <b>{{duration}}s</b>
 				</div>
-				<div class="news-box-info">Ort: <a href="index.php?place">{{place}}</a> Fass: <a href="index.php?keg=1">{{keg}}</a> der Marke {{brand}}
+				<div class="news-box-info">Ort: {{place}}, Fass: {{kegId}} der Marke {{brand}}
 				</div>
 			</div>
 			<div class="news-box-dateline">

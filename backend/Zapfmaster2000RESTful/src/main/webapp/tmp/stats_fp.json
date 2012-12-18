@@ -5,24 +5,53 @@
         "size": "30",
         "startDate": "20120901-015822",
         "kegNumber": "2",
-        "currentAmount": "22.38",
-        "lastsUntil":"2.43"
+        "currentAmount": "20.38",
+        "lastsUntil":"2.43",
+                "boxId":"1"
     },{
         "kegId": "3",
         "brand": "Oettinger",
         "size": "50",
         "startDate": "20120901-015822",
-        "kegNumber": "2",
+        "kegNumber": "1",
         "currentAmount": "13.38",
-        "lastsUntil":"2.44"
+        "lastsUntil":"2.44",
+                "boxId":"2"
     }],
-   "rank:
-   {
-    "amount": 2,
-    "achievements": 4,
-    "drawCount": 4
+  "bestUserList":[
+        {
+            "userName": "Pete",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "amount": "5.57"
+        }
+    ],
+     "bestUserListHour": [
+        {
+            "userName": "Ben",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "amount": "5.57"
+        }
+    ], "achievementUserList":[
+        {
+            "userName": "Thomas",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "achievementCount": "3"
+        }
+    ],
+    "drawCountUserList": [
+        {
+            "userName": "Felix",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "drawCount": "5.57"
+        }
+    ],
+        "promille":{
+    "alcoholLevel": 0.234
 }
-  
     
     
     }

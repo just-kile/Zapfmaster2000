@@ -61,6 +61,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			if(typeof top!="undefined" && top ==true){
 				if(val.refreshType!= "REFRESH"){
 					cont.prepend(news);
+					//news.fadeIn("slow");
 					lastContainer = news;
 				}else{
 					lastContainer.replaceWith(news);

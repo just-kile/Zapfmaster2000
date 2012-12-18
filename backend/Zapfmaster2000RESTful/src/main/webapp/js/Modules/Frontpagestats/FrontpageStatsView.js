@@ -31,7 +31,7 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 		if(typeof keglistModelOrId =="string" ){
 			return keglistMod[keglistModelOrId];
 		}else if(typeof keglistModelOrId == "object"){
-			keglistMod[keglistModelOrId.keg_id] = keglistModelOrId;
+			keglistMod[keglistModelOrId.boxId] = keglistModelOrId;
 		}else{
 			return keglistMod;
 		}
@@ -47,7 +47,7 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 				//var kegName = keg.brand;
 				var amount = parseFloat(keg.current_amount);
 				var complAmount = parseFloat(keg.size);
-				seriesObj.categories.push( keg.keg_id);
+				seriesObj.categories.push( keg.boxId);
 				//seriesObj.stack.push(keg.brand);
 				remaining.push(complAmount-amount);
 				complete.push( amount);
@@ -66,12 +66,24 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 	var updateAmountChart = function(){
 		
 	};
-	var updateChart = function(kegModel,chart){
+	var updateChart = function(kegModel,chart,titleText){
 		var actAmount =  parseFloat(kegModel.current_amount);
 		var completeDiff =  parseFloat(kegModel.size)-actAmount;
 		chart.series[0].data[0].update(actAmount,false);
 		chart.series[1].data[0].update(completeDiff);
+		if(titleText)chart.setTitle({
+			text:titleText
+		});
 	};
+	var updateChartUser = function(kegModel,chart,titleText){
+		var actAmount =  parseFloat(kegModel.current_amount);
+		var completeDiff =  parseFloat(kegModel.size)-actAmount;
+		chart.series[0].data[0].update(completeDiff,false);
+		chart.series[1].data[0].update(actAmount);
+		if(titleText)chart.setTitle({
+			text:titleText
+		});
+	}
 	
 	var createBarChart = function(keglistModel,container){
 		barContainer =container;
@@ -124,7 +136,8 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 	var pub = {
 			init:init,
 			createBarChart:createBarChart,
-			updateChart:updateChart
+			updateChart:updateChart,
+			updateChartUser:updateChartUser
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

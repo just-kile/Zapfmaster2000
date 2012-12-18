@@ -8,5 +8,6 @@ ZMO.UtilConstants ={
 		throbberUrl:"images/view/throbber.gif",
 		tokenName:"token",
 		serverDateFormat:"yyyyMMdd-HHmmss",
-		clientDateFormat:"dd. MM. yyyy HH:mm:ss"
+		clientDateFormat:"dd.MM.yyyy HH:mm:ss",
+		shortFormat:"HH:mm"
 };

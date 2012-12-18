@@ -7,8 +7,8 @@
         "startDate": "20120901-015822",
         "kegNumber": "2",
         "currentAmount": "22.38",
-        "lastsUntil":"2.43"
-
+        "lastsUntil":"2.43",
+        "boxId":"2"
     },{
         "kegId": "3",
         "brand": "Oettinger",
@@ -17,8 +17,8 @@
         "startDate": "20120901-015822",
         "kegNumber": "2",
         "currentAmount": "13.38",
-        "lastsUntil":"2.44"
-
+        "lastsUntil":"2.44",
+        "boxId":"3"
     }],
     "amount": {
         "complete": "57.62",

@@ -17,10 +17,12 @@ var ZMO = ZMO || {};
 			"js/Util/UtilConstants.js",
 			"js/Util/Browser/Throbber.js",
 			"js/Util/Browser/ChangePage.js",
+			"js/Util/Date/TimeParser.js",
 			"js/Util/Net/Ajax.js",
 			"js/Util/Net/Ajax.js",
 			"js/Util/Object/Exists.js",
 			"js/Util/Globalfunctions.js",
+
 			//Modules
 			"js/Modules/Model.js" ,
 			"js/Modules/Constants.js",

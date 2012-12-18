@@ -77,6 +77,7 @@ ZMO.modules.kegModel = function(config){
 	var kegArr = [];
 	if("undefined"!=typeof config){
 	jQuery.each(config,function(ind,keg){
+		var date = new ZMO.TimeParser(keg.lastsUntil);
 		kegArr.push({
 			 keg_id: keg.keg_id||keg.kegId,
 		      brand:keg.brand,
@@ -84,7 +85,9 @@ ZMO.modules.kegModel = function(config){
 		      start_date:new ZMO.TimeParser(keg.start_date||keg.startDate).getDefaultTime(),
 		      keg_numbers:keg.keg_numbers||keg.kegNumber,
 		      current_amount : keg.current_amount||keg.currentAmount,
-		      lastsUntil :new ZMO.TimeParser(keg.lastsUntil).getDefaultTime(),
+		      lastsUntil :date.getDefaultTime(),
+		      lastsUntilShort:date.getHoursMinutes(),
+		      boxId:keg.boxId
 		});
 	});
 
