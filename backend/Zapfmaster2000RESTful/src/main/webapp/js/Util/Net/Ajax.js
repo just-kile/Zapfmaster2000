@@ -15,7 +15,7 @@ ZMO.Util.Net.Ajax = (function($){
 	 */
 	var getDatas = function(url,callback,datas,type){
 		if(!ZMO.exists(datas))datas = {};
-		if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
+		//if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
 		datas["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		$.ajax({
 			url:url,
@@ -39,7 +39,7 @@ ZMO.Util.Net.Ajax = (function($){
 	};
 	var postDatas = function(url,callback,datas){
 		getDatas(url,callback,datas,"POST");
-	}
+	};
 	/*****
 	 * Interval pull
 	 *****/
@@ -230,7 +230,7 @@ ZMO.Util.Net.Ajax = (function($){
 	};
 	var sendChallengeConfirmation = function(data){
 		var datas = {
-				pendingChallengeId:data[pendingChallengeId]
+				pendingChallengeId:data["pendingChallengeId"]
 		};
 		var url = ZMO.modules.Constants.urls.ACCEPTCHALLENGE;
 		
@@ -240,7 +240,7 @@ ZMO.Util.Net.Ajax = (function($){
 	};
 	var sendChallengeRejection = function(data){
 		var datas = {
-				pendingChallengeId:data[pendingChallengeId]
+				pendingChallengeId:data["pendingChallengeId"]
 		};
 		var url = ZMO.modules.Constants.urls.DENYCHALLENGE;
 		
