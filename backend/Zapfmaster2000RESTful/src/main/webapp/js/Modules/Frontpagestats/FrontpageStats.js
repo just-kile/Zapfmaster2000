@@ -168,11 +168,15 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 	 *****/
 	var initUserStats =  function(newsModel){
 		var boxId = newsModel.boxId;
-		ajax.getDatas(ZMO.modules.Constants.urls.USERFRONTPAGESTATS,function(userRank){
+		ajax.getDatas(ZMO.modules.Constants.urls.USERFRONTPAGESTATS,function(stats){
 			var userContainer = containerHandler.getUserContainer(boxId);
+			var statsModel = new ZMO.modules.StatsModel(stats)
 			var content = ich["ZMO-frontpagestats-general-template"]({
 				news:newsModel,
-				userRank:userRank.rank
+				amount:stats.amount,
+				achievements:stats.achievements,
+				drawCount:stats.drawCount,
+				userRank:stats.rank
 			});
 			
 			userContainer.empty().append(content);

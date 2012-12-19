@@ -13,13 +13,13 @@ ZMO.Util.Net.Ajax = (function($){
 	/**
 	 * Get datas instant
 	 */
-	var getDatas = function(url,callback,datas){
+	var getDatas = function(url,callback,datas,type){
 		if(!ZMO.exists(datas))datas = {};
 		if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
 		datas["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		$.ajax({
 			url:url,
-			type:"GET",
+			type:type?type:"GET",
 			data:datas,
 			complete:function(resp){
 			if(resp.status==200){
@@ -27,7 +27,7 @@ ZMO.Util.Net.Ajax = (function($){
 				try{
 					data = $.parseJSON(resp.responseText);
 				}catch(e){
-					ZMO.logger.erro(e);
+					ZMO.logger.error(e);
 				}
 				callback(data);
 			}else{
@@ -37,6 +37,9 @@ ZMO.Util.Net.Ajax = (function($){
 			}
 		});
 	};
+	var postDatas = function(url,callback,datas){
+		getDatas(url,callback,datas,"POST");
+	}
 	/*****
 	 * Interval pull
 	 *****/
@@ -226,14 +229,37 @@ ZMO.Util.Net.Ajax = (function($){
 		connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback);
 	};
 	var sendChallengeConfirmation = function(data){
+		var datas = {
+				pendingChallengeId:data[pendingChallengeId]
+		};
+		var url = ZMO.modules.Constants.urls.ACCEPTCHALLENGE;
+		
+		postDatas(url,function(){
 			
+		},datas);
 	};
-	
-	var sendChallengeRequest = function(datas,callback){
-		if(callback)callback();
+	var sendChallengeRejection = function(data){
+		var datas = {
+				pendingChallengeId:data[pendingChallengeId]
+		};
+		var url = ZMO.modules.Constants.urls.DENYCHALLENGE;
+		
+		postDatas(url,function(){
+			
+		},datas);
+	};
+	var sendChallengeRequest = function(type,challengeeId,duration,callback){
+		
+		var url = ZMO.modules.Constants.urls.STARTCHALLENGE.replace("{0}",type);
+		var datas = {
+						challengeeId:challengeeId,
+						duration:duration
+					};
+		postDatas(url,callback,datas);
 	};
 	var pub = {
 			getDatas:getDatas,
+			postDatas:postDatas,
 			enqueueDatas:enqueueDatas,
 			stopPull:stopPull,
 			startPull:startPull,
@@ -249,6 +275,7 @@ ZMO.Util.Net.Ajax = (function($){
 			connectChallengeReceive:connectChallengeReceive,
 			abortChallengePush:abortChallengePush,
 			sendChallengeConfirmation:sendChallengeConfirmation,
+			sendChallengeRejection:sendChallengeRejection,
 			sendChallengeRequest:sendChallengeRequest
 	};
 	return pub;

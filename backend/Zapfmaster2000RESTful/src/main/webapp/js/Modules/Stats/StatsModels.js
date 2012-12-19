@@ -20,10 +20,17 @@ ZMO.modules.StatsModel = function(config){
 		this.bestUserListHour = new ZMO.modules.BestUserListModel(config.bestUserListHour);
 		this.achievementUserList = new ZMO.modules.AchievementUserListModel(config.achievementUserList);
 		this.drawCountUserList = new ZMO.modules.DrawCountUserListModel(config.drawCountUserList);
+		this.rank = new ZMO.modules.RankModel(config.rank)
 	}
 
 };
-
+ZMO.modules.RankModel =function(config){
+	if("undefined"!=typeof config){
+		this.amount = config.amount;
+		this.achievements = config.achievements;
+		this.drawCount = config.drawCount;
+	}
+}
 ZMO.modules.BestUserListModel = function(config){
 	var arr = [];
 	if("undefined"!=typeof config){
