@@ -129,7 +129,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 	 * Keg chart overview creation/update
 	 *****/
 	var updateChart = function(kegModel){
-		view.updateChart(kegModel,containerHandler.getChart(kegModel),"Fass "+kegModel.boxId);
+		view.updateChart(kegModel,containerHandler.getChart(kegModel),"Fass "+kegModel.keg_id);
 	};
 	var updateNormalKegstats = function(kegModel){
 		var kegStatsContainer = $(containerHandler.getKegContainer(kegModel));
