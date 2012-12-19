@@ -122,7 +122,7 @@ ZMO.modules.AmountStatsModel = function(config){
 ZMO.modules.AchievementStatsModel=function(config){
 	if("undefined"!=typeof config){
         this.count=config.count,
-        this.achievementspeed = config.achievementspeed;
+        //this.achievementspeed = config.achievementspeed;
         this.mostAchievementHour=config.mostAchievementHour; 
 	}
 };
