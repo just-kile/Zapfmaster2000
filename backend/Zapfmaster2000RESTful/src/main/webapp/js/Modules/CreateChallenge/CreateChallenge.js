@@ -12,7 +12,7 @@ ZMO.modules.createChallenge = (function($,view,ajax){
 	};
 	resetChallengeDatas();
 	var sendChallengeRequest = function(){
-		ZMO.log(challengeDatas);
+		ZMO.logger.log(challengeDatas);
 		ajax.sendChallengeRequest(challengeDatas,function(){
 			alert("Challenge verschickt!");
 			resetChallengeDatas();

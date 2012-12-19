@@ -18,7 +18,7 @@ ZMO.modules.bestlistView = (function($,ajax){
 				seriesArr.push([username,amount]);
 			});
 		}catch(e){
-			ZMO.log("Parse Error Beslist!")
+			ZMO.logger.error("Parse Error Beslist!")
 		}
 		return seriesArr;
 		

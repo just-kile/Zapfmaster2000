@@ -52,7 +52,7 @@ ZMO.modules.kegstatusView = (function($,ajax){
 			
 			});
 		}catch(e){
-			ZMO.log("Parse Error Kegstatus!");
+			ZMO.logger.error("Parse Error Kegstatus!");
 		}
 		seriesObj.series=[{name:wording.COMPLETE,data:complete},{name:wording.REMAINING,data:remaining,showInLegend:false}];
 		

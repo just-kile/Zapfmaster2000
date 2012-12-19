@@ -238,6 +238,8 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 				updateUserStats(newsModel);
 			}else if(type.toLowerCase() == "logout"){
 				switchContainerToKeg(newsModel.boxId);
+			}else{
+				ZMO.logger.warning("No fitting push actioin detected!")
 			}
 		});
 	};

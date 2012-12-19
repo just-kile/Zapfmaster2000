@@ -55,7 +55,7 @@ ZMO.view=(function(){
 						||!ZMO.exists(newList[posKey][1].position)
 						||!newList[posKey][1].position.equals(elObj[1].position)
 						||newList[posKey][1].nocache){
-					ZMO.log("remove "+posKey);
+					ZMO.logger.log("remove "+posKey);
 					$(oldList[posKey][0]).remove();
 				}
 		});

@@ -45,7 +45,7 @@ ZMO.modules.challenges = (function($,ajax){
 		duelsContainerUl.append(stretchLengthStatus(news,globalChallengeModel));
 	};
 	var onChallengesReceive = function(datas){
-		ZMO.log("challenges datas received!");
+		ZMO.logger.log("challenges datas received!");
 		$.each(datas,function(ind,val){
 			fillContainer(new ZMO.GlobalChallengeModel(val));
 		});

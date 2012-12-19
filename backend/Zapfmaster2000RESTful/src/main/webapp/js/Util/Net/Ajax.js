@@ -27,11 +27,11 @@ ZMO.Util.Net.Ajax = (function($){
 				try{
 					data = $.parseJSON(resp.responseText);
 				}catch(e){
-					ZMO.log(e);
+					ZMO.logger.erro(e);
 				}
 				callback(data);
 			}else{
-				ZMO.log("AJAX ERROR "+resp.status);
+				ZMO.logger.error("AJAX ERROR "+resp.status);
 			}
 			if(ZMO.throbber)ZMO.throbber.hide();
 			}
@@ -163,14 +163,14 @@ ZMO.Util.Net.Ajax = (function($){
 			},
 			error:function(e){
 				if(e.status==0){
-					ZMO.log("Request abort success!");
+					ZMO.logger.log("Request abort success!");
 				}else if(e.status==c.NO_DATAS_RECEIVED_CODE){
-					ZMO.log("No Datas Received! Reconnect...");
+					ZMO.logger.warning("No Datas Received! Reconnect...");
 //					if(errorCb)errorCb(e);
 					connectToChannel(url,successCb,errorCb,data);
 				}else{
-					ZMO.log("Error! Status "+e.status);
-					ZMO.log("Reconnect in 5s...");
+					ZMO.logger.error("Error! Status "+e.status);
+					ZMO.logger.log("Reconnect in 5s...");
 				
 					if(errorCb)errorCb(e);
 					setTimeout(function(){
@@ -195,7 +195,7 @@ ZMO.Util.Net.Ajax = (function($){
 			if(regex.test(reqUrl)&& ZMO.exists(req)){
 				pushRequests[reqUrl] = null;
 				req.abort();
-				ZMO.log(" Push aborted: "+url);
+				ZMO.logger.log(" Push aborted: "+url);
 				
 			}
 		});

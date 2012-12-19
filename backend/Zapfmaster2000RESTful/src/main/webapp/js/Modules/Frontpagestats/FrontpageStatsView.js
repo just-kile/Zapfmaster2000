@@ -53,7 +53,7 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 				complete.push( amount);
 			
 		}catch(e){
-			ZMO.log("Parse Error Kegstatus!");
+			ZMO.logger.error("Parse Error Kegstatus!");
 		}
 		seriesObj.series=[{name:wording.COMPLETE,data:complete,showInLegend:false},{name:wording.REMAINING,data:remaining,showInLegend:false}];
 		
