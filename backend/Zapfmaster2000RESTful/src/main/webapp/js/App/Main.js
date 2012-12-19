@@ -32,6 +32,7 @@ var ZMO = ZMO || {};
 			"js/Modules/CreateChallenge/CreateChallengeView.js",
 			"js/Modules/CreateChallenge/CreateChallenge.js",
 			"js/Modules/ReceiveChallenge/ReceiveChallenge.js",
+			"js/Modules/Logout/Logout.js" ,
 			//main
 			"js/Modules/Core/View.js",
 			"js/App/modules_properties.js",

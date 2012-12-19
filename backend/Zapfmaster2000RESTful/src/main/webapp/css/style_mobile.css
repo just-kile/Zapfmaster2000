@@ -619,4 +619,18 @@ box-shadow: 0px 1px 5px #000, 0px -1px 5px #000;
 	margin-top:0.2em;
 }
 
-
+.ZMO-logout{
+	height:2em;
+	line-height:2em;
+	width:5em;
+	text-align:center;
+	right:5px;
+	position:absolute;
+	background:#222;
+	box-shadow:0 0 5px #000;
+	color:white;
+	border-radius:0 0 5px 5px;
+	border:1px solid #999;
+	border-top:0;
+	
+}
