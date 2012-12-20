@@ -109,8 +109,8 @@ ZMO.modules.kegModel = function(config){
  */
 ZMO.modules.AmountStatsModel = function(config){
 	if("undefined"!=typeof config){
-        this.complete = config.complete;
-        this.once=config.once;
+        this.complete = config.total;
+        this.once=config.greatestDrawing;
         this.mostActivityHour=config.mostActivityHour;
 	}
 };
