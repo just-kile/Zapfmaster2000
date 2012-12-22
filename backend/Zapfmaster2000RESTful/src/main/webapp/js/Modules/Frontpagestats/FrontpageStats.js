@@ -243,7 +243,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 			}else if(type.toLowerCase() == "logout"){
 				switchContainerToKeg(newsModel.boxId);
 			}else{
-				ZMO.logger.warning("No fitting push actioin detected!")
+				ZMO.logger.warning("No fitting push action detected!")
 			}
 		});
 	};

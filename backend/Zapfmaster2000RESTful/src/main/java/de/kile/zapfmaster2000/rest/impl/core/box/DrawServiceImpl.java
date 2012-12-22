@@ -17,6 +17,7 @@ import de.kile.zapfmaster2000.rest.core.box.DrawService;
 import de.kile.zapfmaster2000.rest.core.box.DrawServiceListener;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
+import de.kile.zapfmaster2000.rest.impl.core.transaction.SharedQueries;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
@@ -295,7 +296,7 @@ public class DrawServiceImpl implements DrawService {
 						ConfigurationConstants.BOX_DRAW_MIN_AMOUNT);
 		if (currentUser != null && drewMinAmount) {
 			// add drawing to database
-			Keg activeKeg = findActiveKeg();
+			Keg activeKeg = SharedQueries.retrieveActiveKeg(getBox());
 
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
@@ -334,37 +335,4 @@ public class DrawServiceImpl implements DrawService {
 		currentUser = null;
 	}
 
-	/**
-	 * Returns the active keg for the box.
-	 * 
-	 * @return the keg, never <code>null</code>
-	 * @throws WebServiceException
-	 *             if there is no active
-	 */
-	private Keg findActiveKeg() {
-		Keg keg = null;
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
-				.getSessionFactory().getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		session.update(getBox());
-		try {
-			@SuppressWarnings("unchecked")
-			List<Keg> kegs = session
-					.createQuery(
-							"FROM Keg k WHERE k.box = :box ORDER BY k.startDate DESC")
-					.setEntity("box", getBox()).list();
-			if (kegs.isEmpty()) {
-				// problem over here
-				throw new WebServiceException("Box " + getBox().getId()
-						+ " has no active keg. Drawing not allowed.");
-			}
-			keg = kegs.get(0); // active keg
-			tx.commit();
-		} catch (RuntimeException ex) {
-			tx.rollback();
-			throw ex;
-		}
-		return keg;
-
-	}
 }

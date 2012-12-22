@@ -77,6 +77,8 @@ public class MockClient {
 	}
 
 	private void performDraw(double pAmount, double pDuration) throws Exception {
+		Thread.sleep(10000);
+		performLogin(100);
 		int rawTicks = (int) (pAmount * 5200);
 
 		int numRequests = (int) (pDuration * 1000) / UPDATE_RATE;
