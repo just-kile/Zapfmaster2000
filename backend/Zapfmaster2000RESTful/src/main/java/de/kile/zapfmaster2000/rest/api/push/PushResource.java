@@ -2,6 +2,7 @@ package de.kile.zapfmaster2000.rest.api.push;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -22,7 +23,8 @@ public class PushResource {
 	@GET
 	@Path("/news")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void getNews(final @Suspend(TIMEOUT) AsynchronousResponse pResponse,
+	public void retrieveNews(
+			final @Suspend(TIMEOUT) AsynchronousResponse pResponse,
 			@QueryParam(value = "token") String pToken) {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
@@ -32,7 +34,16 @@ public class PushResource {
 		} else {
 			pResponse.setResponse(Response.status(Status.FORBIDDEN).build());
 		}
+	}
 
+	@GET
+	@Path("/draftkit/{boxid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void retrieveBoxUpdate(
+			final @Suspend(TIMEOUT) AsynchronousResponse pResponse,
+			@PathParam("boxid") int pBoxId, @QueryParam("token") String pToken) {
+		// we don't to anything yet.
+		// TODO: do something!
 	}
 
 }

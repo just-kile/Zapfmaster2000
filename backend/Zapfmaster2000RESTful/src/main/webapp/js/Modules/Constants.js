@@ -30,7 +30,7 @@ ZMO.modules.Constants = {
 		},
 		push:{
 			NEWS:"rest/push/news",
-			NEWSUPDATE:"rest/push/newsupdate",
+			NEWSUPDATE:"rest/push/draftkit",
 			CHALLENGE:"rest/push/challenge"
 		},
 		member:{
