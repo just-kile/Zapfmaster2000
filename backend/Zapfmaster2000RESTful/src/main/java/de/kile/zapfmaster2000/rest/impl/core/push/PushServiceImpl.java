@@ -18,7 +18,8 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 
 public class PushServiceImpl implements PushService {
 
-	private final Map<Account, PushQueue> pendingNewsResponses = new HashMap<>();
+	/** pending responsed for news pushs: AccountId -> PushQueue */
+	private final Map<Long, PushQueue> pendingNewsResponses = new HashMap<>();
 
 	public PushServiceImpl(NewsService pNewsService) {
 		pNewsService.addListener(createNewsListener());
@@ -27,11 +28,11 @@ public class PushServiceImpl implements PushService {
 	@Override
 	public void addNewsRequest(AsynchronousResponse pResponse,
 			Account pAccount, String pToken) {
-		if (!pendingNewsResponses.containsKey(pAccount)) {
+		if (!pendingNewsResponses.containsKey(pAccount.getId())) {
 			PushQueue queue = new PushQueue();
-			pendingNewsResponses.put(pAccount, queue);
+			pendingNewsResponses.put(pAccount.getId(), queue);
 		}
-		PushQueue queue = pendingNewsResponses.get(pAccount);
+		PushQueue queue = pendingNewsResponses.get(pAccount.getId());
 		assert (queue != null);
 		queue.addRequest(pResponse);
 	}
@@ -48,12 +49,12 @@ public class PushServiceImpl implements PushService {
 
 	private void pushNews(News pNews) {
 		Account account = pNews.getAccount();
-		if (pendingNewsResponses.containsKey(account)) {
+		if (pendingNewsResponses.containsKey(account.getId())) {
 			AbstractNewsResponse news = new NewsAdapter().adapt(pNews);
 			Response response = Response.ok(news)
 					.type(MediaType.APPLICATION_JSON).build();
 
-			PushQueue queue = pendingNewsResponses.get(account);
+			PushQueue queue = pendingNewsResponses.get(account.getId());
 			queue.push(response, true);
 		}
 

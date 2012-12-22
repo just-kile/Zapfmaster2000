@@ -30,7 +30,7 @@ public class PushQueue extends Thread {
 
 	private static final Logger LOG = Logger.getLogger(PushQueue.class);
 
-	private static final long MIN_DELAY = 1000; // in ms
+	private static final long MIN_DELAY = 200; // in ms
 
 	private final List<AsynchronousResponse> pendingRequests = new ArrayList<>();
 
