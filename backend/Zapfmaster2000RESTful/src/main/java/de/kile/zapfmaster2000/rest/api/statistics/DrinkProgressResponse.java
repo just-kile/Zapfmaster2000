@@ -3,20 +3,20 @@ package de.kile.zapfmaster2000.rest.api.statistics;
 import java.util.Date;
 
 public class DrinkProgressResponse {
-	private double[] amount;
+	private double[] data;
 
 	/**
 	 * in minutes
 	 */
 	private int interval;
-	private Date from;
+	private Date startDate;
 
 	public double[] getAmount() {
-		return amount;
+		return data;
 	}
 
 	public void setAmount(double[] amount) {
-		this.amount = amount;
+		this.data = amount;
 	}
 
 	public int getInterval() {
@@ -28,10 +28,10 @@ public class DrinkProgressResponse {
 	}
 
 	public Date getFrom() {
-		return from;
+		return startDate;
 	}
 
 	public void setFrom(Date from) {
-		this.from = from;
+		this.startDate = from;
 	}
 }
