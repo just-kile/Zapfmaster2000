@@ -21,6 +21,7 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 	private Box box1;
 	private Keg keg1;
 	private User user1;
+	private User userEmpty;
 
 	@Before
 	public void setupData() {
@@ -32,6 +33,9 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 		user1 = createUser("Torsten", "img/user1", "user1-pw", 101, Sex.MALE,
 				85, UserType.USER, account1);
 		User user2 = createUser("Bettina", "img/user2", "user2-pw", 202,
+				Sex.FEMALE, 85, UserType.USER, account1);
+		
+		userEmpty = createUser("Franz", "img/user3", "user3-pw", 302,
 				Sex.FEMALE, 85, UserType.USER, account1);
 
 		box1 = createBox("pass", "home", "0.5", account1);
@@ -59,8 +63,25 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 	public void testSimple() {
 
 		AlcoholLevelResponse alcoholLevelResponse = AlcoholResponseBuilder
-				.buildAlcoholLevelResponse(user1.getId(), account1);
+				.retrieveAlcoholLevelResponse(user1.getId(), account1);
 		// realistic alcohol level 1-3 per mille
+		//TODO detailed calculation
 		assertEquals(2, alcoholLevelResponse.getAlcoholLevel(), 1);
 	}
+	
+	@Test
+	public void testUserEmpty(){
+		AlcoholLevelResponse alcoholLevelResponse = AlcoholResponseBuilder
+				.retrieveAlcoholLevelResponse(userEmpty.getId(), account1);
+		assertEquals(0.0, alcoholLevelResponse.getAlcoholLevel());
+	}
+	
+	@Test
+	public void testUserNonExistent(){
+		AlcoholLevelResponse alcoholLevelResponse = AlcoholResponseBuilder
+				.retrieveAlcoholLevelResponse(666, account1);
+		assertEquals(0.0, alcoholLevelResponse.getAlcoholLevel());
+	}
+	
+	
 }

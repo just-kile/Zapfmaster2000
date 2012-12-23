@@ -27,6 +27,8 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 
 public class TestDrinkProgress extends AbstractMockingTest {
 
+	//TODO test empty user
+	
 	private Account account1;
 	private Box box1;
 	private Keg keg1;

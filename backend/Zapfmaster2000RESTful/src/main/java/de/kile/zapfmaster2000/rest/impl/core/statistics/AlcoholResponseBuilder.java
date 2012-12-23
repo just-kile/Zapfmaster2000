@@ -11,10 +11,21 @@ import de.kile.zapfmaster2000.rest.api.statistics.AlcoholLevelResponse;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 public class AlcoholResponseBuilder {
+
+	/**
+	 * Calculates the alcohol level of a given {@link User} taken the last
+	 * 36 hours into account using the Widmark formula.
+	 * 
+	 * @param user
+	 *            must be a valid user id.
+	 * @param account
+	 * @return alcohol level 0 if no user or no drawings were found.
+	 */
 	@SuppressWarnings("unchecked")
-	public static AlcoholLevelResponse buildAlcoholLevelResponse(long user,
+	public static AlcoholLevelResponse retrieveAlcoholLevelResponse(long user,
 			Account account) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
@@ -40,14 +51,13 @@ public class AlcoholResponseBuilder {
 								+ " FROM Drawing d, User u"
 								+ " WHERE u.id = :user AND d.user = u AND u.account = :account"
 								+ " AND d.date > :timestamp "
-								+ " ORDER BY d.date ASC")
-				.setLong("user", user)
+								+ " ORDER BY d.date ASC").setLong("user", user)
 				.setEntity("account", account)
 				.setDate("timestamp", calendar.getTime()).list();
 
 		tx.commit();
 
-		if (resultAmountByHour.size() > 0) {// else FORBIDDEN
+		if (resultAmountByHour.size() > 0) {
 
 			Sex sex = (Sex) resultAmountByHour.get(0)[2];
 
@@ -83,8 +93,11 @@ public class AlcoholResponseBuilder {
 			response.setAlcoholLevel(oldConcentration);
 
 			return response;
-		} else
-			return null;
+		} else {
+			AlcoholLevelResponse response = new AlcoholLevelResponse();
+			response.setAlcoholLevel(0);
+			return response;
+		}
 	}
 
 }

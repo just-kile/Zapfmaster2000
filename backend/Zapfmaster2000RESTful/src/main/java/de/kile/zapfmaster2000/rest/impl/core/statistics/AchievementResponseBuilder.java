@@ -8,12 +8,20 @@ import org.hibernate.Transaction;
 import de.kile.zapfmaster2000.rest.api.statistics.AchievementResponse;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 public class AchievementResponseBuilder {
-	
-	
+
+	/**
+	 * Builds {@link AchievementResponse} for given {@link User} (or all users).
+	 * 
+	 * @param user
+	 *            set -1 for all users.
+	 * @param account
+	 * @return <code>MostActivityHour</code> is -1 if the user has no achievements.
+	 */
 	@SuppressWarnings("unchecked")
-	public static AchievementResponse buildAchievementResponse(long user,
+	public static AchievementResponse retrieveAchievementResponse(long user,
 			Account account) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
@@ -45,8 +53,7 @@ public class AchievementResponseBuilder {
 									+ " FROM GainedAchievement g, User u "
 									+ " WHERE u.id = :user AND g.user = u"
 									+ " AND u.account = :account")
-					.setLong("user", user)
-					.setEntity("account", account).list();
+					.setLong("user", user).setEntity("account", account).list();
 
 			resultMostActivity = session
 					.createQuery(
@@ -63,7 +70,11 @@ public class AchievementResponseBuilder {
 		AchievementResponse response = new AchievementResponse();
 
 		response.setCount((Long) resultAchievementCount.get(0));
-		response.setMostAchievementHour((Integer) resultMostActivity.get(0));
+		if (resultMostActivity.size() > 0) {
+			response.setMostAchievementHour((Integer) resultMostActivity.get(0));
+		} else {
+			response.setMostAchievementHour(-1);
+		}
 
 		return response;
 	}

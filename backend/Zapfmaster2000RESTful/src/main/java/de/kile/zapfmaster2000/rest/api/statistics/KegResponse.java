@@ -10,13 +10,14 @@ public class KegResponse {
 	private long kegId;
 	private String brand;
 	private int size;
-	private Date start_date;
+	private Date startDate;
 	private double currentAmount;
 
 	/**
 	 * Number of kegs drunk so far (including the current one)
 	 */
-	private long kegNumbers;
+	private long kegNumber;
+	private Date lastsUntil;
 
 	public long getKegId() {
 		return kegId;
@@ -43,19 +44,19 @@ public class KegResponse {
 	}
 
 	public Date getStartDate() {
-		return start_date;
+		return startDate;
 	}
 
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
 	public long getKegNumber() {
-		return kegNumbers;
+		return kegNumber;
 	}
 
-	public void setKegNumbers(long kegNumbers) {
-		this.kegNumbers = kegNumbers;
+	public void setKegNumber(long kegNumber) {
+		this.kegNumber = kegNumber;
 	}
 
 	public double getCurrentAmount() {
@@ -64,6 +65,14 @@ public class KegResponse {
 
 	public void setCurrentAmount(double currentAmount) {
 		this.currentAmount = currentAmount;
+	}
+
+	public Date getLastsUntil() {
+		return lastsUntil;
+	}
+
+	public void setLastsUntil(Date lastsUntil) {
+		this.lastsUntil = lastsUntil;
 	}
 
 }

@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.AlcoholResponseBuilder;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 @Path("statistics")
 public class AlcoholLevelResource {
@@ -22,13 +23,18 @@ public class AlcoholLevelResource {
 	// TODO add user independent
 
 	/**
-	 * Returns the {@link AlcoholLevelResponse} calculated by the Widmark
-	 * formula with alcohol break down of 0.15 per mille per hour.
+	 * Returns {@link AlcoholLevelResponse} for an user with id
+	 * <code>pUser</code>.
 	 * 
 	 * @param pToken
+	 *            Token of {@link Account} used for authentication.
 	 * @param pUser
-	 * @return either {@link AlcoholLevelResponse} or <code>null</code> if
-	 *         <code>pUser</code> does not exist or has not drawn anything.
+	 *            Valid {@link User} id.
+	 * @return <ul>
+	 *         <li>OK: {@link AlcoholLevelResponse}</li>
+	 *         <li>BAD_REQUEST: if <code>pUser</code> cannot be parsed.</li>
+	 *         <li>FORBIDDEN: if authentication with <code>pToken</code> fails.</li>
+	 *         </ul>
 	 */
 	@Path("alcoholLevel")
 	@GET
@@ -49,14 +55,9 @@ public class AlcoholLevelResource {
 
 		if (account != null) {
 			AlcoholLevelResponse response = AlcoholResponseBuilder
-					.buildAlcoholLevelResponse(user, account);
+					.retrieveAlcoholLevelResponse(user, account);
 
-			if (response != null)
-				return Response.ok(response).build();
-			else {
-				LOG.error("No drawings found");
-				return Response.status(Status.BAD_REQUEST).build();
-			}
+			return Response.ok(response).build();
 		}
 		return Response.status(Status.FORBIDDEN).build();
 	}

@@ -9,6 +9,7 @@ public class AchievementResponse {
 	
 	/**
 	 * Most achievement gains per hour.
+	 * -1 if there are no achievements at all.
 	 */
 	private int mostAchievementHour;
 
