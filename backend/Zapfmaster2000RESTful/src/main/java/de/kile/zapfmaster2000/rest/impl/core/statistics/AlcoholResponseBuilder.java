@@ -15,6 +15,8 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 public class AlcoholResponseBuilder {
 
+	//TODO user independent average
+	
 	/**
 	 * Calculates the alcohol level of a given {@link User} taken the last
 	 * 36 hours into account using the Widmark formula.
@@ -45,16 +47,30 @@ public class AlcoholResponseBuilder {
 		// r reduction factor (M: .69, F: .57)
 		// m mass of user
 
-		List<Object[]> resultAmountByHour = session
-				.createQuery(
-						"SELECT (d.amount*1000*0.048*0.8), d.date, u.sex, u.weight"
-								+ " FROM Drawing d, User u"
-								+ " WHERE u.id = :user AND d.user = u AND u.account = :account"
-								+ " AND d.date > :timestamp "
-								+ " ORDER BY d.date ASC").setLong("user", user)
-				.setEntity("account", account)
-				.setDate("timestamp", calendar.getTime()).list();
+		List<Object[]> resultAmountByHour;
+		if (user != -1){ 
+			resultAmountByHour = session
+					.createQuery(
+							"SELECT (d.amount*1000*0.048*0.8), d.date, u.sex, u.weight"
+									+ " FROM Drawing d, User u"
+									+ " WHERE u.id = :user AND d.user = u AND u.account = :account"
+									+ " AND d.date > :timestamp "
+									+ " ORDER BY d.date ASC").setLong("user", user)
+					.setEntity("account", account)
+					.setDate("timestamp", calendar.getTime()).list();
 
+		} else {
+			resultAmountByHour = session
+					.createQuery(
+							"SELECT (d.amount*1000*0.048*0.8), d.date, u.sex, u.weight"
+									+ " FROM Drawing d, User u"
+									+ " WHERE d.user = u AND u.account = :account"
+									+ " AND d.date > :timestamp "
+									+ " ORDER BY d.date ASC")
+					.setEntity("account", account)
+					.setDate("timestamp", calendar.getTime()).list();
+		}
+		
 		tx.commit();
 
 		if (resultAmountByHour.size() > 0) {

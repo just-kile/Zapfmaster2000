@@ -16,7 +16,7 @@ public class KegResponseBuilder {
 	/**
 	 * Builds {@link KegResponse}.
 	 * @param account
-	 * @return
+	 * @return {@link KegResponse}
 	 */
 	@SuppressWarnings("unchecked")
 	public static KegResponse[] retrieveKegResponse(Account account) {
