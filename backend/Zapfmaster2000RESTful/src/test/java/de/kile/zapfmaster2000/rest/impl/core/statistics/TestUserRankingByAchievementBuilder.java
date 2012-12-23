@@ -77,7 +77,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 	public void testAchievementList() {
 
 		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
-				.retrieveAchievementUserListResponse(null, null, account);
+				.retrieveAchievementUserListResponse(null, null, -1, account);
 
 		assertEquals(3, achievementUserListResponses.length);
 
@@ -93,7 +93,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 
 		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
 				.retrieveAchievementUserListResponse(calFrom.getTime(), null,
-						account);
+						-1, account);
 
 		assertEquals(3, achievementUserListResponses.length);
 
@@ -115,7 +115,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 
 		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
 				.retrieveAchievementUserListResponse(calFrom.getTime(),
-						calTo.getTime(), account);
+						calTo.getTime(), -1, account);
 
 		assertEquals(2, achievementUserListResponses.length);
 
@@ -124,6 +124,18 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		assertEquals(user1.getGained().size(),
 				achievementUserListResponses[0].getCount());
 	}
+	
+	@Test
+	public void testMax() {
+
+		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+				.retrieveAchievementUserListResponse(null, null, 1, account);
+
+		assertEquals(1, achievementUserListResponses.length);
+
+		assertConforms(user3, achievementUserListResponses[0]);
+	}
+
 
 	public void assertConforms(User user, AchievementUserListResponse response) {
 		assertEquals(user.getName(), response.getName());

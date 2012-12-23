@@ -24,17 +24,23 @@ public class RankingsBuilder {
 	 *            can be <code>null</code> for all available drawings
 	 * @param dTo
 	 *            can be <code>null</code> for until now
+	 * @param maxResults
+	 *            maximal number of results. -1 for all results.
 	 * @param account
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public static UserAmountResponse[] retrieveUserAmountResponse(Date dFrom,
-			Date dTo, Account account) {
+			Date dTo, int maxResults, Account account) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
 		session.update(account);
+
+		if (maxResults == -1) {
+			maxResults = Integer.MAX_VALUE;
+		}
 
 		List<Object[]> list;
 		if (dFrom == null) {// Full list
@@ -44,7 +50,8 @@ public class RankingsBuilder {
 									+ " FROM User u, Drawing d "
 									+ " WHERE d.user = u AND u.account = :account "
 									+ " GROUP BY u.id ORDER BY amt DESC")
-					.setEntity("account", account).list();
+					.setEntity("account", account).setMaxResults(maxResults)
+					.list();
 
 		} else if (dTo == null) {// List until now
 			list = session
@@ -55,7 +62,7 @@ public class RankingsBuilder {
 									+ " d.date > :from"
 									+ " GROUP BY u.id ORDER BY amt DESC")
 					.setEntity("account", account).setTimestamp("from", dFrom)
-					.list();
+					.setMaxResults(maxResults).list();
 		} else { // general list
 			list = session
 					.createQuery(
@@ -65,7 +72,7 @@ public class RankingsBuilder {
 									+ " d.date BETWEEN :from AND :to"
 									+ " GROUP BY u.id ORDER BY amt DESC")
 					.setEntity("account", account).setTimestamp("from", dFrom)
-					.setTimestamp("to", dTo).list();
+					.setTimestamp("to", dTo).setMaxResults(maxResults).list();
 		}
 
 		tx.commit();
@@ -92,17 +99,23 @@ public class RankingsBuilder {
 	 *            optional (default: full list)
 	 * @param dTo
 	 *            optional (default: until now)
+	 * @param maxResults
+	 *            maximal number of results. -1 for all results.
 	 * @param account
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public static DrawCountUserListResponse[] retrieveDrawCountUserListResponse(
-			Date dFrom, Date dTo, Account account) {
+			Date dFrom, Date dTo, int maxResults, Account account) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
 		session.update(account);
+
+		if (maxResults == -1) {
+			maxResults = Integer.MAX_VALUE;
+		}
 
 		List<Object[]> list;
 		if (dFrom == null) {// Full list
@@ -112,7 +125,8 @@ public class RankingsBuilder {
 									+ " FROM User u, Drawing d "
 									+ " WHERE d.user = u AND u.account = :account "
 									+ " GROUP BY u.id ORDER BY cnt DESC")
-					.setEntity("account", account).list();
+					.setEntity("account", account).setMaxResults(maxResults)
+					.list();
 
 		} else if (dTo == null) {// List until now
 			list = session
@@ -123,7 +137,7 @@ public class RankingsBuilder {
 									+ " d.date > :from"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
 					.setEntity("account", account).setTimestamp("from", dFrom)
-					.list();
+					.setMaxResults(maxResults).list();
 		} else { // general list
 			list = session
 					.createQuery(
@@ -133,7 +147,7 @@ public class RankingsBuilder {
 									+ " d.date BETWEEN :from AND :to"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
 					.setEntity("account", account).setTimestamp("from", dFrom)
-					.setTimestamp("to", dTo).list();
+					.setMaxResults(maxResults).setTimestamp("to", dTo).list();
 		}
 
 		tx.commit();
@@ -159,17 +173,23 @@ public class RankingsBuilder {
 	 *            optional (default: full list)
 	 * @param dTo
 	 *            optional (default: until now)
+	 * @param maxResults
+	 *            maximal number of results. -1 for all results.
 	 * @param account
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public static AchievementUserListResponse[] retrieveAchievementUserListResponse(
-			Date dFrom, Date dTo, Account account) {
+			Date dFrom, Date dTo, int maxResults, Account account) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
 		session.update(account);
+
+		if (maxResults == -1) {
+			maxResults = Integer.MAX_VALUE;
+		}
 
 		List<Object[]> list;
 		if (dFrom == null) {// Full list
@@ -179,7 +199,8 @@ public class RankingsBuilder {
 									+ " FROM User u, GainedAchievement g "
 									+ " WHERE g.user = u AND u.account = :account "
 									+ " GROUP BY u.id ORDER BY cnt DESC")
-					.setEntity("account", account).list();
+					.setEntity("account", account).setMaxResults(maxResults)
+					.list();
 
 		} else if (dTo == null) {// List until now
 			list = session
@@ -190,7 +211,7 @@ public class RankingsBuilder {
 									+ " g.date > :from"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
 					.setEntity("account", account).setTimestamp("from", dFrom)
-					.list();
+					.setMaxResults(maxResults).list();
 		} else { // general list
 			list = session
 					.createQuery(
@@ -200,7 +221,7 @@ public class RankingsBuilder {
 									+ " g.date BETWEEN :from AND :to"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
 					.setEntity("account", account).setTimestamp("from", dFrom)
-					.setTimestamp("to", dTo).list();
+					.setTimestamp("to", dTo).setMaxResults(maxResults).list();
 		}
 
 		tx.commit();

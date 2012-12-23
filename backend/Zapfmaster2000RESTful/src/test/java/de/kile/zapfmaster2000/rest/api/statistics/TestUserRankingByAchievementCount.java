@@ -115,7 +115,7 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 	public void testAchievementList() {
 		RankingsResource rankingsResource = new RankingsResource();
 		Response response = rankingsResource
-				.retrieveUserRankingByAchievementCount(null, null, null);
+				.retrieveUserRankingByAchievementCount(null, null, null, null);
 
 		Object[] rawAchievementListResponse = (Object[]) response.getEntity();
 
@@ -134,7 +134,7 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 		RankingsResource rankingsResource = new RankingsResource();
 
 		Response response = rankingsResource
-				.retrieveUserRankingByAchievementCount(fromString, null, null);
+				.retrieveUserRankingByAchievementCount(fromString, null, null, null);
 
 		Object[] rawAchievementListResponse = (Object[]) response.getEntity();
 
@@ -155,7 +155,7 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 
 		Response response = rankingsResource
 				.retrieveUserRankingByAchievementCount(fromString, toString,
-						null);
+						null, null);
 
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 

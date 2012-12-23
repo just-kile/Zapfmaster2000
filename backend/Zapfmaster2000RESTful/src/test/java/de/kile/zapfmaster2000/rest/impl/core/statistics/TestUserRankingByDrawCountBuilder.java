@@ -18,6 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 
+	
 	private Account account;
 	private Account account2;
 
@@ -83,7 +84,7 @@ public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 	@Test
 	public void testDrawCountRanking() {
 		DrawCountUserListResponse[] drawCountUserListResponses = RankingsBuilder
-				.retrieveDrawCountUserListResponse(null, null, account);
+				.retrieveDrawCountUserListResponse(null, null,-1, account);
 		assertEquals(3, drawCountUserListResponses.length);
 
 		assertConforms(user3,
@@ -99,7 +100,7 @@ public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 		calFrom.add(Calendar.MINUTE, -1);
 
 		DrawCountUserListResponse[] drawCountUserListResponses = RankingsBuilder
-				.retrieveDrawCountUserListResponse(calFrom.getTime(), null,
+				.retrieveDrawCountUserListResponse(calFrom.getTime(), null,-1,
 						account);
 
 		assertEquals(3, drawCountUserListResponses.length);
@@ -120,7 +121,7 @@ public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 
 		DrawCountUserListResponse[] drawCountUserListResponses = RankingsBuilder
 				.retrieveDrawCountUserListResponse(calFrom.getTime(),
-						calTo.getTime(), account);
+						calTo.getTime(),-1, account);
 
 		assertEquals(2, drawCountUserListResponses.length);
 
@@ -135,6 +136,16 @@ public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 		assertEquals(user.getId(), response.getId());
 		assertEquals(user.getImagePath(), response.getImage());
 		assertEquals(user.getDrawings().size(), response.getDrawCount());
+	}
+	
+	@Test
+	public void testMax() {
+		DrawCountUserListResponse[] drawCountUserListResponses = RankingsBuilder
+				.retrieveDrawCountUserListResponse(null, null,1, account);
+		assertEquals(1, drawCountUserListResponses.length);
+
+		assertConforms(user3,
+				(DrawCountUserListResponse) drawCountUserListResponses[0]);
 	}
 
 }

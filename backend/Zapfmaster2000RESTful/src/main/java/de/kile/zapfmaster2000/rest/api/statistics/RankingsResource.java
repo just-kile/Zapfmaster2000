@@ -44,10 +44,12 @@ public class RankingsResource {
 	 * @param pTo
 	 *            end of time span. For format see {@link PlatformConstants}.
 	 *            <code>null</code> results in list until now.
+	 * @param pMax
+	 *            number of results. <code>null</code> gives all results.
 	 * @return <ul>
 	 *         <li>OK: {@link UserAmountResponse}</li>
-	 *         <li>BAD_REQUEST: if <code>pUser</code>, <code>pFrom</code> or
-	 *         <code>pTo</code> cannot be parsed.</li>
+	 *         <li>BAD_REQUEST: if <code>pUser</code>, <code>pFrom</code>,
+	 *         <code>pTo</code> or <code>pMaxResults</code> cannot be parsed.</li>
 	 *         <li>FORBIDDEN: if authentication with <code>pToken</code> fails.</li>
 	 *         </ul>
 	 */
@@ -56,6 +58,7 @@ public class RankingsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveUserRankingByAmount(
 			@QueryParam("from") String pFrom, @QueryParam("to") String pTo,
+			@QueryParam("max") String pMaxResults,
 			@QueryParam("token") String pToken) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
@@ -84,8 +87,19 @@ public class RankingsResource {
 				}
 			}
 
+			int maxResults = -1;
+			if (pMaxResults != null) {
+				try {
+					maxResults = Integer.parseInt(pMaxResults);
+				} catch (NumberFormatException e) {
+					LOG.error("Could not parse integer pMaxResults "
+							+ pMaxResults, e);
+					return Response.status(Status.BAD_REQUEST).build();
+				}
+			}
+
 			UserAmountResponse[] userAmountResponses = RankingsBuilder
-					.retrieveUserAmountResponse(dFrom, dTo, account);
+					.retrieveUserAmountResponse(dFrom, dTo, maxResults, account);
 
 			return Response.ok(userAmountResponses).build();
 
@@ -109,10 +123,12 @@ public class RankingsResource {
 	 * @param pTo
 	 *            end of time span. For format see {@link PlatformConstants}.
 	 *            <code>null</code> results in list until now.
+	 * @param pMax
+	 *            number of results. <code>null</code> gives all results.
 	 * @return <ul>
 	 *         <li>OK: {@link DrawCountUserListResponse}</li>
-	 *         <li>BAD_REQUEST: if <code>pUser</code>, <code>pFrom</code> or
-	 *         <code>pTo</code> cannot be parsed.</li>
+	 *         <li>BAD_REQUEST: if <code>pUser</code>, <code>pFrom</code>,
+	 *         <code>pTo</code> or <code>pMaxResults</code> cannot be parsed.</li>
 	 *         <li>FORBIDDEN: if authentication with <code>pToken</code> fails.</li>
 	 *         </ul>
 	 */
@@ -121,6 +137,7 @@ public class RankingsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveUserRankingByDrawCount(
 			@QueryParam("from") String pFrom, @QueryParam("to") String pTo,
+			@QueryParam("max") String pMaxResults,
 			@QueryParam("token") String pToken) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
@@ -148,8 +165,20 @@ public class RankingsResource {
 				}
 			}
 
+			int maxResults = -1;
+			if (pMaxResults != null) {
+				try {
+					maxResults = Integer.parseInt(pMaxResults);
+				} catch (NumberFormatException e) {
+					LOG.error("Could not parse integer pMaxResults "
+							+ pMaxResults, e);
+					return Response.status(Status.BAD_REQUEST).build();
+				}
+			}
+
 			DrawCountUserListResponse[] drawCountUserListResponses = RankingsBuilder
-					.retrieveDrawCountUserListResponse(dFrom, dTo, account);
+					.retrieveDrawCountUserListResponse(dFrom, dTo, maxResults,
+							account);
 
 			return Response.ok(drawCountUserListResponses).build();
 		}
@@ -171,10 +200,12 @@ public class RankingsResource {
 	 * @param pTo
 	 *            end of time span. For format see {@link PlatformConstants}.
 	 *            <code>null</code> results in list until now.
+	 * @param pMax
+	 *            number of results. <code>null</code> gives all results.
 	 * @return <ul>
 	 *         <li>OK: {@link AchievementUserListResponse}</li>
-	 *         <li>BAD_REQUEST: if <code>pUser</code>, <code>pFrom</code> or
-	 *         <code>pTo</code> cannot be parsed.</li>
+	 *         <li>BAD_REQUEST: if <code>pUser</code>, <code>pFrom</code>,
+	 *         <code>pTo</code> or <code>pMaxResults</code> cannot be parsed.</li>
 	 *         <li>FORBIDDEN: if authentication with <code>pToken</code> fails.</li>
 	 *         </ul>
 	 */
@@ -183,6 +214,7 @@ public class RankingsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveUserRankingByAchievementCount(
 			@QueryParam("from") String pFrom, @QueryParam("to") String pTo,
+			@QueryParam("max") String pMaxResults,
 			@QueryParam("token") String pToken) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
@@ -210,8 +242,20 @@ public class RankingsResource {
 				}
 			}
 
+			int maxResults = -1;
+			if (pMaxResults != null) {
+				try {
+					maxResults = Integer.parseInt(pMaxResults);
+				} catch (NumberFormatException e) {
+					LOG.error("Could not parse integer pMaxResults "
+							+ pMaxResults, e);
+					return Response.status(Status.BAD_REQUEST).build();
+				}
+			}
+
 			AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
-					.retrieveAchievementUserListResponse(dFrom, dTo, account);
+					.retrieveAchievementUserListResponse(dFrom, dTo,
+							maxResults, account);
 
 			return Response.ok(achievementUserListResponses).build();
 

@@ -121,7 +121,7 @@ public class TestUserRankingByDrawCount extends AbstractMockingTest {
 	public void testDrawCountRanking() {
 		RankingsResource rankingsResource = new RankingsResource();
 		Response response = rankingsResource.retrieveUserRankingByDrawCount(
-				null, null, null);
+				null, null, null, null);
 
 		Object[] rawDrawCountResponse = (Object[]) response.getEntity();
 
@@ -140,7 +140,7 @@ public class TestUserRankingByDrawCount extends AbstractMockingTest {
 		RankingsResource rankingsResource = new RankingsResource();
 
 		Response response = rankingsResource.retrieveUserRankingByDrawCount(
-				fromString, null, null);
+				fromString, null, null, null);
 
 		Object[] rawDrawCountResponse = (Object[]) response.getEntity();
 
@@ -157,7 +157,7 @@ public class TestUserRankingByDrawCount extends AbstractMockingTest {
 		RankingsResource rankingsResource = new RankingsResource();
 
 		Response response = rankingsResource.retrieveUserRankingByDrawCount(
-				fromString, toString, null);
+				fromString, toString, null, null);
 
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 
