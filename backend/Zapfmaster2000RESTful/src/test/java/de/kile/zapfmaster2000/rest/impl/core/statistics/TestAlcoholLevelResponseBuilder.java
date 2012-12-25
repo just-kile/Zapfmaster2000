@@ -83,5 +83,14 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 		assertEquals(0.0, alcoholLevelResponse.getAlcoholLevel());
 	}
 	
+	@Test
+	public void testUserIndependent(){
+		AlcoholLevelResponse alcoholLevelResponse = AlcoholResponseBuilder
+				.retrieveAlcoholLevelResponse(account1);
+		// realistic alcohol level 1-3 per mille
+		//TODO detailed calculation
+		assertEquals(2, alcoholLevelResponse.getAlcoholLevel(), 1);
+	}
+	
 	
 }
