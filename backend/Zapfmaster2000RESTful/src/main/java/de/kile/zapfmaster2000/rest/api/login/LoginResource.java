@@ -21,11 +21,29 @@ public class LoginResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/account")
-	public Response userLogin(@FormParam("accountName") String pAccountName) {
+	public Response loginAccount(@FormParam("accountName") String pAccountName) {
 		LOG.debug("Login request for account " + pAccountName);
 
 		String token = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.loginAccount(pAccountName);
+		if (token == null) {
+			// log in failed
+			return Response.status(Status.FORBIDDEN).build();
+		}
+
+		// log in succeeded
+		return Response.ok(token).build();
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/user")
+	public Response loginUser(@FormParam("userName") String pUserName,
+			@FormParam("password") String pPassword) {
+		LOG.debug("Login request for account " + pUserName);
+
+		String token = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.loginUser(pUserName, pPassword);
 		if (token == null) {
 			// log in failed
 			return Response.status(Status.FORBIDDEN).build();

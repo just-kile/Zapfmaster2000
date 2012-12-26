@@ -12,6 +12,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
 public class AuthServiceImpl implements AuthService {
@@ -52,6 +53,39 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
+	public String loginUser(String pUserName, String pPassword) {
+		String token = null;
+		if (pUserName != null && pPassword != null) {
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			
+			@SuppressWarnings("unchecked")
+			List<User> results = session.createQuery(
+					"SELECT u FROM User u " +
+					"WHERE u.name = :name AND u.password = :password").setString("name", pUserName).setString("password", pPassword).list();
+
+			if (results.size() == 1) {
+				// login succeeded
+				User user = results.get(0);
+				Account account = user.getAccount();
+				token = createNextToken();
+
+				Token tokenEntity = Zapfmaster2000Factory.eINSTANCE
+						.createToken();
+				tokenEntity.setAccount(account);
+				tokenEntity.setUser(user);
+				tokenEntity.setToken(token);
+				session.save(tokenEntity);
+
+			}
+			tx.commit();
+		}
+		return token;
+	}
+
+	@Override
 	public Account retrieveAccount(String pToken) {
 		Account account = null;
 
@@ -73,6 +107,30 @@ public class AuthServiceImpl implements AuthService {
 
 		tx.commit();
 		return account;
+	}
+
+	@Override
+	public User retrieveUser(String pToken) {
+		User user = null;
+
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		@SuppressWarnings("unchecked")
+		List<Token> result = session
+				.createQuery(
+						"SELECT t FROM Token t JOIN FETCH t.user "
+								+ "WHERE t.token = :token ")
+				.setString("token", pToken).list();
+
+		if (result.size() == 1) {
+			Token token = result.get(0);
+			user = token.getUser();
+		}
+
+		tx.commit();
+		return user;
 	}
 
 	private String createNextToken() {
