@@ -8,6 +8,9 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
@@ -122,6 +125,27 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * @generated
 	 */
 	private EClass otherNewsEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass challenge1v1StartedNewsEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass challenge1v1DeclinedNewsEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass challenge1v1DoneNewsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -769,6 +793,60 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getChallenge1v1StartedNews() {
+		return challenge1v1StartedNewsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getChallenge1v1StartedNews_Challenge() {
+		return (EReference)challenge1v1StartedNewsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getChallenge1v1DeclinedNews() {
+		return challenge1v1DeclinedNewsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getChallenge1v1DeclinedNews_Challenge() {
+		return (EReference)challenge1v1DeclinedNewsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getChallenge1v1DoneNews() {
+		return challenge1v1DoneNewsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getChallenge1v1DoneNews_Challenge() {
+		return (EReference)challenge1v1DoneNewsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMappingQrRfid() {
 		return mappingQrRfidEClass;
 	}
@@ -1088,6 +1166,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(otherNewsEClass, OTHER_NEWS__CONTENTS);
 		createEAttribute(otherNewsEClass, OTHER_NEWS__IMAGE_PATH);
 
+		challenge1v1StartedNewsEClass = createEClass(CHALLENGE1V1_STARTED_NEWS);
+		createEReference(challenge1v1StartedNewsEClass, CHALLENGE1V1_STARTED_NEWS__CHALLENGE);
+
+		challenge1v1DeclinedNewsEClass = createEClass(CHALLENGE1V1_DECLINED_NEWS);
+		createEReference(challenge1v1DeclinedNewsEClass, CHALLENGE1V1_DECLINED_NEWS__CHALLENGE);
+
+		challenge1v1DoneNewsEClass = createEClass(CHALLENGE1V1_DONE_NEWS);
+		createEReference(challenge1v1DoneNewsEClass, CHALLENGE1V1_DONE_NEWS__CHALLENGE);
+
 		mappingQrRfidEClass = createEClass(MAPPING_QR_RFID);
 		createEAttribute(mappingQrRfidEClass, MAPPING_QR_RFID__ID);
 		createEAttribute(mappingQrRfidEClass, MAPPING_QR_RFID__QR_CODE);
@@ -1151,6 +1238,9 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		drawingNewsEClass.getESuperTypes().add(this.getNews());
 		achievementNewsEClass.getESuperTypes().add(this.getNews());
 		otherNewsEClass.getESuperTypes().add(this.getNews());
+		challenge1v1StartedNewsEClass.getESuperTypes().add(this.getNews());
+		challenge1v1DeclinedNewsEClass.getESuperTypes().add(this.getNews());
+		challenge1v1DoneNewsEClass.getESuperTypes().add(this.getNews());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(achievementEClass, Achievement.class, "Achievement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1223,6 +1313,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEClass(otherNewsEClass, OtherNews.class, "OtherNews", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOtherNews_Contents(), ecorePackage.getEString(), "contents", null, 0, 1, OtherNews.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOtherNews_ImagePath(), ecorePackage.getEString(), "imagePath", null, 0, 1, OtherNews.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(challenge1v1StartedNewsEClass, Challenge1v1StartedNews.class, "Challenge1v1StartedNews", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getChallenge1v1StartedNews_Challenge(), this.getChallenge1v1(), null, "challenge", null, 0, 1, Challenge1v1StartedNews.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(challenge1v1DeclinedNewsEClass, Challenge1v1DeclinedNews.class, "Challenge1v1DeclinedNews", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getChallenge1v1DeclinedNews_Challenge(), this.getChallenge1v1(), null, "challenge", null, 0, 1, Challenge1v1DeclinedNews.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(challenge1v1DoneNewsEClass, Challenge1v1DoneNews.class, "Challenge1v1DoneNews", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getChallenge1v1DoneNews_Challenge(), this.getChallenge1v1(), null, "challenge", null, 0, 1, Challenge1v1DoneNews.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingQrRfidEClass, MappingQrRfid.class, "MappingQrRfid", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMappingQrRfid_Id(), ecorePackage.getELong(), "id", null, 0, 1, MappingQrRfid.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

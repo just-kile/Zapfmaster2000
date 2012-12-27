@@ -825,6 +825,171 @@ public interface Zapfmaster2000Package extends EPackage {
 	int OTHER_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl <em>Challenge1v1 Started News</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1StartedNews()
+	 * @generated
+	 */
+	int CHALLENGE1V1_STARTED_NEWS = 12;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS__ID = NEWS__ID;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS__ACCOUNT = NEWS__ACCOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS__DATE = NEWS__DATE;
+
+	/**
+	 * The feature id for the '<em><b>Challenge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS__CHALLENGE = NEWS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Challenge1v1 Started News</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DeclinedNewsImpl <em>Challenge1v1 Declined News</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DeclinedNewsImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DeclinedNews()
+	 * @generated
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS = 13;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS__ID = NEWS__ID;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS__ACCOUNT = NEWS__ACCOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS__DATE = NEWS__DATE;
+
+	/**
+	 * The feature id for the '<em><b>Challenge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS__CHALLENGE = NEWS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Challenge1v1 Declined News</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DoneNewsImpl <em>Challenge1v1 Done News</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DoneNewsImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DoneNews()
+	 * @generated
+	 */
+	int CHALLENGE1V1_DONE_NEWS = 14;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS__ID = NEWS__ID;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS__ACCOUNT = NEWS__ACCOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS__DATE = NEWS__DATE;
+
+	/**
+	 * The feature id for the '<em><b>Challenge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS__CHALLENGE = NEWS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Challenge1v1 Done News</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl <em>Mapping Qr Rfid</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -832,7 +997,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getMappingQrRfid()
 	 * @generated
 	 */
-	int MAPPING_QR_RFID = 12;
+	int MAPPING_QR_RFID = 15;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -878,7 +1043,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUser()
 	 * @generated
 	 */
-	int USER = 13;
+	int USER = 16;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -996,7 +1161,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getToken()
 	 * @generated
 	 */
-	int TOKEN = 14;
+	int TOKEN = 17;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1051,7 +1216,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 15;
+	int SEX = 18;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType <em>Challenge Type</em>}' enum.
@@ -1061,7 +1226,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeType()
 	 * @generated
 	 */
-	int CHALLENGE_TYPE = 16;
+	int CHALLENGE_TYPE = 19;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType <em>User Type</em>}' enum.
@@ -1071,7 +1236,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUserType()
 	 * @generated
 	 */
-	int USER_TYPE = 17;
+	int USER_TYPE = 20;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState <em>Challenge State</em>}' enum.
@@ -1081,7 +1246,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeState()
 	 * @generated
 	 */
-	int CHALLENGE_STATE = 18;
+	int CHALLENGE_STATE = 21;
 
 
 	/**
@@ -1720,6 +1885,69 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOtherNews_ImagePath();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews <em>Challenge1v1 Started News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Challenge1v1 Started News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews
+	 * @generated
+	 */
+	EClass getChallenge1v1StartedNews();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews#getChallenge <em>Challenge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Challenge</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews#getChallenge()
+	 * @see #getChallenge1v1StartedNews()
+	 * @generated
+	 */
+	EReference getChallenge1v1StartedNews_Challenge();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews <em>Challenge1v1 Declined News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Challenge1v1 Declined News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews
+	 * @generated
+	 */
+	EClass getChallenge1v1DeclinedNews();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews#getChallenge <em>Challenge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Challenge</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews#getChallenge()
+	 * @see #getChallenge1v1DeclinedNews()
+	 * @generated
+	 */
+	EReference getChallenge1v1DeclinedNews_Challenge();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews <em>Challenge1v1 Done News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Challenge1v1 Done News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews
+	 * @generated
+	 */
+	EClass getChallenge1v1DoneNews();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews#getChallenge <em>Challenge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Challenge</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews#getChallenge()
+	 * @see #getChallenge1v1DoneNews()
+	 * @generated
+	 */
+	EReference getChallenge1v1DoneNews_Challenge();
 
 	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid <em>Mapping Qr Rfid</em>}'.
@@ -2506,6 +2734,60 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute OTHER_NEWS__IMAGE_PATH = eINSTANCE.getOtherNews_ImagePath();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl <em>Challenge1v1 Started News</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1StartedNews()
+		 * @generated
+		 */
+		EClass CHALLENGE1V1_STARTED_NEWS = eINSTANCE.getChallenge1v1StartedNews();
+
+		/**
+		 * The meta object literal for the '<em><b>Challenge</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHALLENGE1V1_STARTED_NEWS__CHALLENGE = eINSTANCE.getChallenge1v1StartedNews_Challenge();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DeclinedNewsImpl <em>Challenge1v1 Declined News</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DeclinedNewsImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DeclinedNews()
+		 * @generated
+		 */
+		EClass CHALLENGE1V1_DECLINED_NEWS = eINSTANCE.getChallenge1v1DeclinedNews();
+
+		/**
+		 * The meta object literal for the '<em><b>Challenge</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHALLENGE1V1_DECLINED_NEWS__CHALLENGE = eINSTANCE.getChallenge1v1DeclinedNews_Challenge();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DoneNewsImpl <em>Challenge1v1 Done News</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DoneNewsImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DoneNews()
+		 * @generated
+		 */
+		EClass CHALLENGE1V1_DONE_NEWS = eINSTANCE.getChallenge1v1DoneNews();
+
+		/**
+		 * The meta object literal for the '<em><b>Challenge</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHALLENGE1V1_DONE_NEWS__CHALLENGE = eINSTANCE.getChallenge1v1DoneNews_Challenge();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl <em>Mapping Qr Rfid</em>}' class.

@@ -116,6 +116,18 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 				return createOtherNewsAdapter();
 			}
 			@Override
+			public Adapter caseChallenge1v1StartedNews(Challenge1v1StartedNews object) {
+				return createChallenge1v1StartedNewsAdapter();
+			}
+			@Override
+			public Adapter caseChallenge1v1DeclinedNews(Challenge1v1DeclinedNews object) {
+				return createChallenge1v1DeclinedNewsAdapter();
+			}
+			@Override
+			public Adapter caseChallenge1v1DoneNews(Challenge1v1DoneNews object) {
+				return createChallenge1v1DoneNewsAdapter();
+			}
+			@Override
 			public Adapter caseMappingQrRfid(MappingQrRfid object) {
 				return createMappingQrRfidAdapter();
 			}
@@ -312,6 +324,48 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOtherNewsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews <em>Challenge1v1 Started News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews
+	 * @generated
+	 */
+	public Adapter createChallenge1v1StartedNewsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews <em>Challenge1v1 Declined News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews
+	 * @generated
+	 */
+	public Adapter createChallenge1v1DeclinedNewsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews <em>Challenge1v1 Done News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews
+	 * @generated
+	 */
+	public Adapter createChallenge1v1DoneNewsAdapter() {
 		return null;
 	}
 

@@ -43,7 +43,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 
 	/** the push service */
 	private PushService pushService;
-	
+
 	/** the challenge service */
 	private ChallengeService challengeService;
 
@@ -54,9 +54,11 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 		authService = new AuthServiceImpl();
 		achievementService = new AchievementServiceImpl(boxService,
 				transactionService);
-		newsService = new NewsServiceImpl(boxService, achievementService);
 		challengeService = new ChallengeServiceImpl();
-		pushService = new PushServiceImpl(newsService, boxService, challengeService);
+		newsService = new NewsServiceImpl(boxService, achievementService,
+				challengeService);
+		pushService = new PushServiceImpl(newsService, boxService,
+				challengeService);
 	}
 
 	/**

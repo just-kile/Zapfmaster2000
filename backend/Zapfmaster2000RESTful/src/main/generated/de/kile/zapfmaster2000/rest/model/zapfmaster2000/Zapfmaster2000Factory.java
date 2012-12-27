@@ -112,6 +112,33 @@ public interface Zapfmaster2000Factory extends EFactory {
 	OtherNews createOtherNews();
 
 	/**
+	 * Returns a new object of class '<em>Challenge1v1 Started News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Challenge1v1 Started News</em>'.
+	 * @generated
+	 */
+	Challenge1v1StartedNews createChallenge1v1StartedNews();
+
+	/**
+	 * Returns a new object of class '<em>Challenge1v1 Declined News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Challenge1v1 Declined News</em>'.
+	 * @generated
+	 */
+	Challenge1v1DeclinedNews createChallenge1v1DeclinedNews();
+
+	/**
+	 * Returns a new object of class '<em>Challenge1v1 Done News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Challenge1v1 Done News</em>'.
+	 * @generated
+	 */
+	Challenge1v1DoneNews createChallenge1v1DoneNews();
+
+	/**
 	 * Returns a new object of class '<em>Mapping Qr Rfid</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
