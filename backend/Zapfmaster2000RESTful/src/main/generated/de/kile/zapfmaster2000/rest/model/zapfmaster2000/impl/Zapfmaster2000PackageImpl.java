@@ -8,7 +8,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
@@ -17,7 +17,6 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewsType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
@@ -80,13 +79,6 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass challengeParticipantEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass drawingEClass = null;
 
 	/**
@@ -115,27 +107,6 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass mappingQrRfidEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass userEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass tokenEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass drawingNewsEClass = null;
 
 	/**
@@ -157,6 +128,27 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass mappingQrRfidEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass userEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tokenEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum sexEEnum = null;
 
 	/**
@@ -172,6 +164,13 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * @generated
 	 */
 	private EEnum userTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum challengeStateEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -329,6 +328,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBox_Passphrase() {
+		return (EAttribute)boxEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getBox_Kegs() {
 		return (EReference)boxEClass.getEStructuralFeatures().get(4);
 	}
@@ -340,15 +348,6 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 */
 	public EAttribute getBox_Location() {
 		return (EAttribute)boxEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBox_Passphrase() {
-		return (EAttribute)boxEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -428,7 +427,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChallenge_Type() {
+	public EAttribute getChallenge_Finished() {
 		return (EAttribute)challengeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -437,7 +436,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChallenge_Finished() {
+	public EAttribute getChallenge_StartTime() {
 		return (EAttribute)challengeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -446,17 +445,8 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChallenge_StartTime() {
+	public EAttribute getChallenge_State() {
 		return (EAttribute)challengeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getChallenge_Participants() {
-		return (EReference)challengeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -473,8 +463,8 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChallenge1v1_Id() {
-		return (EAttribute)challenge1v1EClass.getEStructuralFeatures().get(0);
+	public EReference getChallenge1v1_User1() {
+		return (EReference)challenge1v1EClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -482,7 +472,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getChallenge1v1_Challenge() {
+	public EReference getChallenge1v1_User2() {
 		return (EReference)challenge1v1EClass.getEStructuralFeatures().get(1);
 	}
 
@@ -491,8 +481,8 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getChallenge1v1_ChallengeEnd() {
-		return (EAttribute)challenge1v1EClass.getEStructuralFeatures().get(2);
+	public EReference getChallenge1v1_Winner() {
+		return (EReference)challenge1v1EClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -500,53 +490,8 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getChallengeParticipant() {
-		return challengeParticipantEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getChallengeParticipant_Id() {
-		return (EAttribute)challengeParticipantEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getChallengeParticipant_Challenge() {
-		return (EReference)challengeParticipantEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getChallengeParticipant_Team() {
-		return (EAttribute)challengeParticipantEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getChallengeParticipant_Won() {
-		return (EAttribute)challengeParticipantEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getChallengeParticipant_User() {
-		return (EReference)challengeParticipantEClass.getEStructuralFeatures().get(4);
+	public EAttribute getChallenge1v1_Duration() {
+		return (EAttribute)challenge1v1EClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -761,6 +706,69 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDrawingNews() {
+		return drawingNewsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDrawingNews_Drawing() {
+		return (EReference)drawingNewsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAchievementNews() {
+		return achievementNewsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAchievementNews_GainedAchievment() {
+		return (EReference)achievementNewsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOtherNews() {
+		return otherNewsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOtherNews_Contents() {
+		return (EAttribute)otherNewsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOtherNews_ImagePath() {
+		return (EAttribute)otherNewsEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMappingQrRfid() {
 		return mappingQrRfidEClass;
 	}
@@ -887,17 +895,8 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getUser_ChallengeParticipations() {
-		return (EReference)userEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getUser_Type() {
-		return (EAttribute)userEClass.getEStructuralFeatures().get(10);
+		return (EAttribute)userEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -906,7 +905,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * @generated
 	 */
 	public EReference getUser_Account() {
-		return (EReference)userEClass.getEStructuralFeatures().get(11);
+		return (EReference)userEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -959,69 +958,6 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDrawingNews() {
-		return drawingNewsEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDrawingNews_Drawing() {
-		return (EReference)drawingNewsEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAchievementNews() {
-		return achievementNewsEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAchievementNews_GainedAchievment() {
-		return (EReference)achievementNewsEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getOtherNews() {
-		return otherNewsEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getOtherNews_Contents() {
-		return (EAttribute)otherNewsEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getOtherNews_ImagePath() {
-		return (EAttribute)otherNewsEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getSex() {
 		return sexEEnum;
 	}
@@ -1042,6 +978,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 */
 	public EEnum getUserType() {
 		return userTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getChallengeState() {
+		return challengeStateEEnum;
 	}
 
 	/**
@@ -1096,22 +1041,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 
 		challengeEClass = createEClass(CHALLENGE);
 		createEAttribute(challengeEClass, CHALLENGE__ID);
-		createEAttribute(challengeEClass, CHALLENGE__TYPE);
 		createEAttribute(challengeEClass, CHALLENGE__FINISHED);
 		createEAttribute(challengeEClass, CHALLENGE__START_TIME);
-		createEReference(challengeEClass, CHALLENGE__PARTICIPANTS);
+		createEAttribute(challengeEClass, CHALLENGE__STATE);
 
 		challenge1v1EClass = createEClass(CHALLENGE1V1);
-		createEAttribute(challenge1v1EClass, CHALLENGE1V1__ID);
-		createEReference(challenge1v1EClass, CHALLENGE1V1__CHALLENGE);
-		createEAttribute(challenge1v1EClass, CHALLENGE1V1__CHALLENGE_END);
-
-		challengeParticipantEClass = createEClass(CHALLENGE_PARTICIPANT);
-		createEAttribute(challengeParticipantEClass, CHALLENGE_PARTICIPANT__ID);
-		createEReference(challengeParticipantEClass, CHALLENGE_PARTICIPANT__CHALLENGE);
-		createEAttribute(challengeParticipantEClass, CHALLENGE_PARTICIPANT__TEAM);
-		createEAttribute(challengeParticipantEClass, CHALLENGE_PARTICIPANT__WON);
-		createEReference(challengeParticipantEClass, CHALLENGE_PARTICIPANT__USER);
+		createEReference(challenge1v1EClass, CHALLENGE1V1__USER1);
+		createEReference(challenge1v1EClass, CHALLENGE1V1__USER2);
+		createEReference(challenge1v1EClass, CHALLENGE1V1__WINNER);
+		createEAttribute(challenge1v1EClass, CHALLENGE1V1__DURATION);
 
 		drawingEClass = createEClass(DRAWING);
 		createEAttribute(drawingEClass, DRAWING__ID);
@@ -1165,7 +1103,6 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(userEClass, USER__WEIGHT);
 		createEReference(userEClass, USER__GAINED);
 		createEReference(userEClass, USER__DRAWINGS);
-		createEReference(userEClass, USER__CHALLENGE_PARTICIPATIONS);
 		createEAttribute(userEClass, USER__TYPE);
 		createEReference(userEClass, USER__ACCOUNT);
 
@@ -1179,6 +1116,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		sexEEnum = createEEnum(SEX);
 		challengeTypeEEnum = createEEnum(CHALLENGE_TYPE);
 		userTypeEEnum = createEEnum(USER_TYPE);
+		challengeStateEEnum = createEEnum(CHALLENGE_STATE);
 	}
 
 	/**
@@ -1209,6 +1147,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		challenge1v1EClass.getESuperTypes().add(this.getChallenge());
 		drawingNewsEClass.getESuperTypes().add(this.getNews());
 		achievementNewsEClass.getESuperTypes().add(this.getNews());
 		otherNewsEClass.getESuperTypes().add(this.getNews());
@@ -1236,28 +1175,21 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getAccount_Name(), ecorePackage.getEString(), "name", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAccount_Users(), this.getUser(), this.getUser_Account(), "users", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(challengeEClass, Challenge.class, "Challenge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(challengeEClass, Challenge.class, "Challenge", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getChallenge_Id(), ecorePackage.getELong(), "id", null, 0, 1, Challenge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getChallenge_Type(), this.getChallengeType(), "type", null, 0, 1, Challenge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getChallenge_Finished(), ecorePackage.getEBoolean(), "finished", null, 0, 1, Challenge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getChallenge_StartTime(), ecorePackage.getEDate(), "startTime", null, 0, 1, Challenge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getChallenge_Participants(), this.getChallengeParticipant(), this.getChallengeParticipant_Challenge(), "participants", null, 0, -1, Challenge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChallenge_State(), this.getChallengeState(), "state", null, 0, 1, Challenge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(challenge1v1EClass, Challenge1v1.class, "Challenge1v1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getChallenge1v1_Id(), ecorePackage.getELong(), "id", null, 0, 1, Challenge1v1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getChallenge1v1_Challenge(), this.getChallenge(), null, "challenge", null, 1, 1, Challenge1v1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getChallenge1v1_ChallengeEnd(), ecorePackage.getEDate(), "challengeEnd", null, 0, 1, Challenge1v1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(challengeParticipantEClass, ChallengeParticipant.class, "ChallengeParticipant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getChallengeParticipant_Id(), ecorePackage.getELong(), "id", null, 0, 1, ChallengeParticipant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getChallengeParticipant_Challenge(), this.getChallenge(), this.getChallenge_Participants(), "challenge", null, 0, 1, ChallengeParticipant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getChallengeParticipant_Team(), ecorePackage.getEInt(), "team", null, 0, 1, ChallengeParticipant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getChallengeParticipant_Won(), ecorePackage.getEBoolean(), "won", null, 0, 1, ChallengeParticipant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getChallengeParticipant_User(), this.getUser(), this.getUser_ChallengeParticipations(), "user", null, 0, -1, ChallengeParticipant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getChallenge1v1_User1(), this.getUser(), null, "user1", null, 0, 1, Challenge1v1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getChallenge1v1_User2(), this.getUser(), null, "user2", null, 0, 1, Challenge1v1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getChallenge1v1_Winner(), this.getUser(), null, "winner", null, 0, 1, Challenge1v1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getChallenge1v1_Duration(), ecorePackage.getEInt(), "duration", null, 0, 1, Challenge1v1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(drawingEClass, Drawing.class, "Drawing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDrawing_Id(), ecorePackage.getELong(), "id", null, 0, 1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDrawing_User(), this.getUser(), this.getUser_Drawings(), "user", null, 1, 1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDrawing_User(), this.getUser(), this.getUser_Drawings(), "user", null, 1, 1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDrawing_Keg(), this.getKeg(), this.getKeg_Drawings(), "keg", null, 1, 1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDrawing_Amount(), ecorePackage.getEDouble(), "amount", null, 0, 1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDrawing_Date(), ecorePackage.getEDate(), "date", null, 0, 1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1306,8 +1238,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getUser_Sex(), this.getSex(), "sex", null, 0, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUser_Weight(), ecorePackage.getEInt(), "weight", null, 0, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUser_Gained(), this.getGainedAchievement(), this.getGainedAchievement_User(), "gained", null, 0, -1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUser_Drawings(), this.getDrawing(), this.getDrawing_User(), "drawings", null, 0, -1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUser_ChallengeParticipations(), this.getChallengeParticipant(), this.getChallengeParticipant_User(), "challengeParticipations", null, 0, -1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUser_Drawings(), this.getDrawing(), this.getDrawing_User(), "drawings", null, 0, -1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUser_Type(), this.getUserType(), "type", "USER", 0, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUser_Account(), this.getAccount(), this.getAccount_Users(), "account", null, 0, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1328,6 +1259,12 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEEnum(userTypeEEnum, UserType.class, "UserType");
 		addEEnumLiteral(userTypeEEnum, UserType.USER);
 		addEEnumLiteral(userTypeEEnum, UserType.GUEST);
+
+		initEEnum(challengeStateEEnum, ChallengeState.class, "ChallengeState");
+		addEEnumLiteral(challengeStateEEnum, ChallengeState.PENDING);
+		addEEnumLiteral(challengeStateEEnum, ChallengeState.DECLINED);
+		addEEnumLiteral(challengeStateEEnum, ChallengeState.RUNNING);
+		addEEnumLiteral(challengeStateEEnum, ChallengeState.FINISHED);
 
 		// Create resource
 		createResource(eNS_URI);

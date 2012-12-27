@@ -230,7 +230,7 @@ ZMO.Util.Net.Ajax = (function($){
 	};
 	var sendChallengeConfirmation = function(data){
 		var datas = {
-				pendingChallengeId:data["pendingChallengeId"]
+				pendingChallengeId:data["challengeId"]
 		};
 		var url = ZMO.modules.Constants.urls.ACCEPTCHALLENGE;
 		
@@ -240,7 +240,7 @@ ZMO.Util.Net.Ajax = (function($){
 	};
 	var sendChallengeRejection = function(data){
 		var datas = {
-				pendingChallengeId:data["pendingChallengeId"]
+				pendingChallengeId:data["challengeId"]
 		};
 		var url = ZMO.modules.Constants.urls.DENYCHALLENGE;
 		

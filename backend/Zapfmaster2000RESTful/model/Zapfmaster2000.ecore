@@ -33,31 +33,18 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="users" upperBound="-1"
         eType="#//User" eOpposite="#//User/account"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Challenge">
+  <eClassifiers xsi:type="ecore:EClass" name="Challenge" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ChallengeType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="finished" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="participants" upperBound="-1"
-        eType="#//ChallengeParticipant" containment="true" eOpposite="#//ChallengeParticipant/challenge"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//ChallengeState"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Challenge1v1">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="challenge" lowerBound="1"
-        eType="#//Challenge"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="challengeEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ChallengeParticipant">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="challenge" eType="#//Challenge"
-        eOpposite="#//Challenge/participants"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="team" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="won" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//User"
-        eOpposite="#//User/challengeParticipations"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Challenge1v1" eSuperTypes="#//Challenge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user1" eType="#//User"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user2" eType="#//User"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="winner" eType="#//User"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Drawing">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
@@ -125,8 +112,6 @@
         eType="#//GainedAchievement" eOpposite="#//GainedAchievement/user"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="drawings" upperBound="-1"
         eType="#//Drawing" eOpposite="#//Drawing/user"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="challengeParticipations"
-        upperBound="-1" eType="#//ChallengeParticipant" eOpposite="#//ChallengeParticipant/user"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//UserType"
         defaultValueLiteral="USER"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" eType="#//Account"
@@ -149,5 +134,11 @@
   <eClassifiers xsi:type="ecore:EEnum" name="UserType">
     <eLiterals name="USER"/>
     <eLiterals name="GUEST" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ChallengeState">
+    <eLiterals name="PENDING"/>
+    <eLiterals name="DECLINED" value="1"/>
+    <eLiterals name="RUNNING" value="2"/>
+    <eLiterals name="FINISHED" value="3"/>
   </eClassifiers>
 </ecore:EPackage>

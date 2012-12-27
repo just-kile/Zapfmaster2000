@@ -60,11 +60,14 @@ public class AuthServiceImpl implements AuthService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			
+
 			@SuppressWarnings("unchecked")
-			List<User> results = session.createQuery(
-					"SELECT u FROM User u " +
-					"WHERE u.name = :name AND u.password = :password").setString("name", pUserName).setString("password", pPassword).list();
+			List<User> results = session
+					.createQuery(
+							"SELECT u FROM User u "
+									+ "WHERE u.name = :name AND u.password = :password")
+					.setString("name", pUserName)
+					.setString("password", pPassword).list();
 
 			if (results.size() == 1) {
 				// login succeeded
@@ -120,8 +123,9 @@ public class AuthServiceImpl implements AuthService {
 		@SuppressWarnings("unchecked")
 		List<Token> result = session
 				.createQuery(
-						"SELECT t FROM Token t JOIN FETCH t.user "
-								+ "WHERE t.token = :token ")
+						"SELECT t FROM Token t JOIN FETCH t.user AS u "
+								+ "JOIN FETCH u.account "
+								+ "WHERE t.token = :token")
 				.setString("token", pToken).list();
 
 		if (result.size() == 1) {

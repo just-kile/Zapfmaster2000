@@ -18,8 +18,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Drawing</b></em>'.
@@ -57,6 +55,16 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * @ordered
 	 */
 	protected long id = ID_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getUser() <em>User</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUser()
+	 * @generated
+	 * @ordered
+	 */
+	protected User user;
 
 	/**
 	 * The cached value of the '{@link #getKeg() <em>Keg</em>}' reference.
@@ -154,8 +162,24 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * @generated
 	 */
 	public User getUser() {
-		if (eContainerFeatureID() != Zapfmaster2000Package.DRAWING__USER) return null;
-		return (User)eContainer();
+		if (user != null && user.eIsProxy()) {
+			InternalEObject oldUser = (InternalEObject)user;
+			user = (User)eResolveProxy(oldUser);
+			if (user != oldUser) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.DRAWING__USER, oldUser, user));
+			}
+		}
+		return user;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public User basicGetUser() {
+		return user;
 	}
 
 	/**
@@ -164,7 +188,12 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * @generated
 	 */
 	public NotificationChain basicSetUser(User newUser, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newUser, Zapfmaster2000Package.DRAWING__USER, msgs);
+		User oldUser = user;
+		user = newUser;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.DRAWING__USER, oldUser, newUser);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
 		return msgs;
 	}
 
@@ -174,12 +203,10 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * @generated
 	 */
 	public void setUser(User newUser) {
-		if (newUser != eInternalContainer() || (eContainerFeatureID() != Zapfmaster2000Package.DRAWING__USER && newUser != null)) {
-			if (EcoreUtil.isAncestor(this, newUser))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+		if (newUser != user) {
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
+			if (user != null)
+				msgs = ((InternalEObject)user).eInverseRemove(this, Zapfmaster2000Package.USER__DRAWINGS, User.class, msgs);
 			if (newUser != null)
 				msgs = ((InternalEObject)newUser).eInverseAdd(this, Zapfmaster2000Package.USER__DRAWINGS, User.class, msgs);
 			msgs = basicSetUser(newUser, msgs);
@@ -300,8 +327,8 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case Zapfmaster2000Package.DRAWING__USER:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
+				if (user != null)
+					msgs = ((InternalEObject)user).eInverseRemove(this, Zapfmaster2000Package.USER__DRAWINGS, User.class, msgs);
 				return basicSetUser((User)otherEnd, msgs);
 			case Zapfmaster2000Package.DRAWING__KEG:
 				if (keg != null)
@@ -333,26 +360,13 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case Zapfmaster2000Package.DRAWING__USER:
-				return eInternalContainer().eInverseRemove(this, Zapfmaster2000Package.USER__DRAWINGS, User.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case Zapfmaster2000Package.DRAWING__ID:
 				return getId();
 			case Zapfmaster2000Package.DRAWING__USER:
-				return getUser();
+				if (resolve) return getUser();
+				return basicGetUser();
 			case Zapfmaster2000Package.DRAWING__KEG:
 				if (resolve) return getKeg();
 				return basicGetKeg();
@@ -429,7 +443,7 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 			case Zapfmaster2000Package.DRAWING__ID:
 				return id != ID_EDEFAULT;
 			case Zapfmaster2000Package.DRAWING__USER:
-				return getUser() != null;
+				return user != null;
 			case Zapfmaster2000Package.DRAWING__KEG:
 				return keg != null;
 			case Zapfmaster2000Package.DRAWING__AMOUNT:

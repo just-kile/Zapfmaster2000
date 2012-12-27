@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.kile.de/zapfmaster2000/1.0"
+            class="de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package"
+            genModel="model/Zapfmaster2000.genmodel"/>
+   </extension>
+
+</plugin>

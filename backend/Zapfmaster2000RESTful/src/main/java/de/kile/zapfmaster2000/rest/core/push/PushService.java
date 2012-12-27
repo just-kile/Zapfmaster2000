@@ -4,6 +4,7 @@ import org.jboss.resteasy.spi.AsynchronousResponse;
 
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 public interface PushService {
 
@@ -32,5 +33,15 @@ public interface PushService {
 	 */
 	public void addDraftkitRequest(AsynchronousResponse pResponse, Box pBox,
 			String pToken);
+
+	/**
+	 * Adds a request to push challenge updates to
+	 * 
+	 * @param pResponse
+	 *            response to push updates to
+	 * @param pUser
+	 *            user to push updates for
+	 */
+	public void addChallengeRequest(AsynchronousResponse pResponse, User pUser);
 
 }

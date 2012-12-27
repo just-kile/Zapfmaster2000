@@ -240,6 +240,27 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getPassphrase() {
+		return passphrase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPassphrase(String newPassphrase) {
+		String oldPassphrase = passphrase;
+		passphrase = newPassphrase;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__PASSPHRASE, oldPassphrase, passphrase));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Keg> getKegs() {
 		if (kegs == null) {
 			kegs = new EObjectContainmentWithInverseEList<Keg>(Keg.class, this, Zapfmaster2000Package.BOX__KEGS, Zapfmaster2000Package.KEG__BOX);
@@ -266,27 +287,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 		location = newLocation;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__LOCATION, oldLocation, location));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getPassphrase() {
-		return passphrase;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPassphrase(String newPassphrase) {
-		String oldPassphrase = passphrase;
-		passphrase = newPassphrase;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__PASSPHRASE, oldPassphrase, passphrase));
 	}
 
 	/**
