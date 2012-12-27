@@ -6,10 +6,14 @@ ZMO.Util.Browser.throbber = (function($){
 	var iconArr;
 	var getIcon = function(imgUrl){
 		var container =  $("<div>").addClass("throbber");
+		var throbberContainer =$("<div>");
 		var img = $("<img>").attr({
 			src:imgUrl
 		});
-		return container.append(img);
+		throbberContainer.append(img);
+		container.append(throbberContainer);
+		
+		return container;
 	}
 	var show =function(){
 		if(!isActive){
@@ -20,7 +24,9 @@ ZMO.Util.Browser.throbber = (function($){
 	}
 	var hide = function(){
 		isActive = false;
-		if(icon)icon.remove();
+		if(icon)icon.fadeOut("slow",function(){
+			$(this).remove();
+		});
 
 	}
 	var get = function(){

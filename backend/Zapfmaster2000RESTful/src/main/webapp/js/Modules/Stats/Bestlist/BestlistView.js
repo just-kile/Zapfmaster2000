@@ -13,12 +13,12 @@ ZMO.modules.bestlistView = (function($,ajax){
 		var seriesArr =[];
 		try{
 			$.each(userlistModel,function(ind,user){
-				var username = user.user_name;
+				var username = user.userName;
 				var amount = parseFloat(user.amount);
 				seriesArr.push([username,amount]);
 			});
 		}catch(e){
-			ZMO.log("Parse Error Beslist!")
+			ZMO.logger.error("Parse Error Beslist!")
 		}
 		return seriesArr;
 		

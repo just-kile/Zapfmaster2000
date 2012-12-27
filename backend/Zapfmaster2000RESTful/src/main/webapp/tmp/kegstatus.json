@@ -1,0 +1,21 @@
+{
+    "rank": {
+        "amount": 2,
+        "achievements": 4,
+        "drawCount": 4
+    },
+    "amount": {
+        "total": "57.62",
+        "greatestDrawing": "1.20",
+        "mostActivityHour": "15"
+    },
+    "achievements": {
+        "count": "57",
+        "achievementspeed": "1.20",
+        "mostAchievementHour": "15"
+    },
+    "drawCount": {
+        "operations": "147",
+        "average": "15"
+    }
+}

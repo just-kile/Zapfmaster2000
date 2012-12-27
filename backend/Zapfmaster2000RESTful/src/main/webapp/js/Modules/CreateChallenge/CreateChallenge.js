@@ -12,8 +12,11 @@ ZMO.modules.createChallenge = (function($,view,ajax){
 	};
 	resetChallengeDatas();
 	var sendChallengeRequest = function(){
-		ZMO.log(challengeDatas);
-		ajax.sendChallengeRequest(challengeDatas,function(){
+		ZMO.logger.log(challengeDatas);
+		var duration = challengeDatas.mode.duration;
+		var type = challengeDatas.type.id;
+		var challengeeId = challengeDatas.victim.userId;
+		ajax.sendChallengeRequest(type,challengeeId,duration,function(){
 			alert("Challenge verschickt!");
 			resetChallengeDatas();
 			init();
@@ -21,7 +24,7 @@ ZMO.modules.createChallenge = (function($,view,ajax){
 
 	};
 	var showMemberlist = function(){
-		ajax.getDatas(c.urls.ACTIVEMEMBERS,function(resp){
+		ajax.getDatas(c.urls.CHALLENGEEMEMBERS,function(resp){
 			var memberModelArr = [];
 			$.each(resp,function(ind,member){
 				memberModelArr.push(new ZMO.MemberModel(member));

@@ -17,10 +17,12 @@ var ZMO = ZMO || {};
 			"js/Util/UtilConstants.js",
 			"js/Util/Browser/Throbber.js",
 			"js/Util/Browser/ChangePage.js",
+			"js/Util/Date/TimeParser.js",
 			"js/Util/Net/Ajax.js",
 			"js/Util/Net/Ajax.js",
 			"js/Util/Object/Exists.js",
 			"js/Util/Globalfunctions.js",
+
 			//Modules
 			"js/Modules/Model.js" ,
 			"js/Modules/Constants.js",
@@ -30,6 +32,7 @@ var ZMO = ZMO || {};
 			"js/Modules/CreateChallenge/CreateChallengeView.js",
 			"js/Modules/CreateChallenge/CreateChallenge.js",
 			"js/Modules/ReceiveChallenge/ReceiveChallenge.js",
+			"js/Modules/Logout/Logout.js" ,
 			//main
 			"js/Modules/Core/View.js",
 			"js/App/modules_properties.js",

@@ -9,12 +9,16 @@ ZMO.modules_properties ={
 					ratio:"100%",
 					position:[0,0],
 					params:{}
+				},{
+					moduleId:"logout",
+					ratio:"100%",
+					position:[0,0],
 				}],
 				main:[{
 					moduleId:"drawfeed",
 					ratio:"100%",
 					position:[0,0],
-					params:{length:4}
+					params:{}
 				}],
 				  
 				footer:[{
@@ -30,6 +34,10 @@ ZMO.modules_properties ={
 					moduleId:"receiveChallenge",
 					ratio:"100%",
 					position:[0,0]
+				},{
+					moduleId:"logout",
+					ratio:"100%",
+					position:[0,0],
 				}],
 				main:[{
 					moduleId:"challenges",
@@ -50,6 +58,10 @@ ZMO.modules_properties ={
 					moduleId:"receiveChallenge",
 					ratio:"100%",
 					position:[0,0]
+				},{
+					moduleId:"logout",
+					ratio:"100%",
+					position:[0,0],
 				}],
 				main:[{
 					moduleId:"createChallenge",

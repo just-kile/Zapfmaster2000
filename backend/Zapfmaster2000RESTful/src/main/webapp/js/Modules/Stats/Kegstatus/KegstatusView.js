@@ -47,12 +47,12 @@ ZMO.modules.kegstatusView = (function($,ajax){
 				var complAmount = parseFloat(keg.size);
 				seriesObj.categories.push( keg.keg_id);
 				//seriesObj.stack.push(keg.brand);
-				remaining.push(amount);
-				complete.push(complAmount - amount);
+				remaining.push(complAmount-amount);
+				complete.push( amount);
 			
 			});
 		}catch(e){
-			ZMO.log("Parse Error Kegstatus!");
+			ZMO.logger.error("Parse Error Kegstatus!");
 		}
 		seriesObj.series=[{name:wording.COMPLETE,data:complete},{name:wording.REMAINING,data:remaining,showInLegend:false}];
 		
@@ -109,10 +109,10 @@ ZMO.modules.kegstatusView = (function($,ajax){
                 formatter: function() {
                 	if(this.series.name == wording.REMAINING){
                 		 return ''+
-                         this.series.name +': '+ this.y +' Liter '+keglist(this.key).brand;
+                         this.series.name +': '+ this.y.toFixed(2) +' Liter '+keglist(this.key).brand;
                 	}else{
                 		 return ''+
-                         this.series.name +': '+ this.point.total +' Liter '+keglist(this.key).brand;
+                         this.series.name +': '+ this.point.total.toFixed(2) +' Liter '+keglist(this.key).brand;
                 	}
                    
                 }
@@ -137,9 +137,9 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		var obj = {description:description,isLink:true};
 		
 		if(statsList && ZMO.exists(statsList[0])){
-			obj.user_name = statsList[0].user_name;
-			obj.user_id = statsList[0].user_id;
-			obj.amount  = (statsList[0].amount || statsList[0].draw_count ||statsList[0].achievement_count)+" "+unit;
+			obj.user_name = statsList[0].userName;
+			obj.user_id = statsList[0].userId;
+			obj.amount  = (statsList[0].amount || statsList[0].drawCount ||statsList[0].achievementCount)+" "+unit;
 		}else{
 			obj.user_name = "Noch niemand";
 			obj.user_id = "";

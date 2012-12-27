@@ -10,13 +10,15 @@
 <meta name="HandheldFriendly" content="true">
 <meta name="MobileOptimized" content="width">
 <!-- <link rel="apple-touch-startup-image" href="img/splash.png" />  -->
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="New Draft Experience!" />
 <!-- Scripts -->
 <!-- Libraries -->
  <script src="libs/headjs/head.load.min.js"></script>
  <script src="libs/jquery/jquery-1.8.1.js"></script> 
 <script src="libs/jquery.ba-bbq.min.js"></script>
 <script src="libs/ICanHaz.min.js"></script>
+<script src="libs/datefunctions/date.js"></script>
 <script src="libs/highcharts/highcharts.js" type="text/javascript"></script>
 <script type="text/javascript" src="libs/highcharts/themes/grayzm.js"></script>
 
@@ -61,7 +63,7 @@
 				<div class="news-drink-box-details-headline">
 					<b>{{name}}</b> zapfte <b>{{amount}}</b>l in <b>{{duration}}s</b>
 				</div>
-				<div class="news-box-info">Ort: <a href="index.php?place">{{place}}</a> Fass: <a href="index.php?keg=1">{{keg}}</a> der Marke {{brand}}
+				<div class="news-box-info">Ort:{{place}} Fass: {{kegId}} der Marke {{brand}}
 				</div>
 			</div>
 			<div class="news-box-dateline">
@@ -80,7 +82,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			<a>{{username}}</a> erreichte den  �ffentlichen  Erfolg <br>
+			<a>{{username}}</a> erreichte den  öffentlichen  Erfolg <br>
 			<b>
 				<a>{{name}}</a>
 			</b>
@@ -120,7 +122,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}}</a> beginnt eine {{duration}} min�tigen Challenge {{type}} gegen {{team2}}!
+			{{team1}}</a> beginnt eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}!
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="place.php">{{place}}</a>
@@ -143,7 +145,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}} hatte eine {{duration}} min�tigen Challenge {{type}} gegen {{team2}}.<br /> Gewonnen hat: {{winner}}
+			{{team1}} hatte eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}.<br /> Gewonnen hat: {{winner}}
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="place.php">{{place}}</a>
@@ -165,7 +167,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}} hat eine {{duration}} min�tige Challenge {{type}} gegen {{team2}} abgelehnt mit der Begr�ndung <br /> &quot;{{reason}}&quot;
+			{{team1}} hat eine {{duration}} minütige Challenge {{type}} gegen {{team2}} abgelehnt mit der BegrÔøΩndung <br /> &quot;{{reason}}&quot;
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="place.php">Kackegal, hier wird g'trunken!</a>

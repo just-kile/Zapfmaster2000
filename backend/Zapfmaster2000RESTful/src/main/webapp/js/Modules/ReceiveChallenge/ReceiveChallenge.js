@@ -10,10 +10,21 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var onChallengeReceive = function(datas){
-		var yep = confirm("Pete hat dich herausgefordert zu: 1v1 den ganzen Abend. Nimmst du die Herausforderung an?");
-		if(yep){
-			ajax.sendChallengeConfirmation(datas);
-		}else{
+		if(ZMO.exists(datas.type)){
+			var type = datas.type.toLowerCase();
+			if(type=="challengerequest"){
+				var yep = confirm(datas.challengerUserName+" hat dich zu einem Duell herausgefordert! Nimmst du an?");
+				if(yep){
+					ajax.sendChallengeConfirmation(datas);
+				}else{
+					ajax.sendChallengeRejection(datas);
+				}
+			}else if(type=="challengeaccepted"){
+				alert("Die Herausforderung zwischen "+user1Name+" und "+ user2Name+ " wurde gestartet!");
+			}else if(type=="challengedeclined"){
+				alert("Die Herausforderung zwischen "+user1Name+" und "+ user2Name+ " wurde abgelehnt!");
+			}
+
 		}
 	};
 	var init = function(hashParams,moduleParams){

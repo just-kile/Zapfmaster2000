@@ -57,13 +57,11 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				case c.types.CHALLENGE_DONE:
 					 news = parseChallengesDone(val);
 					 break;
-				case c.types.CHALLENGE_DECLINED:
-					 news = parseChallengesDeclined(val);
-					 break;
 			}
 			if(typeof top!="undefined" && top ==true){
 				if(val.refreshType!= "REFRESH"){
 					cont.prepend(news);
+					//news.fadeIn("slow");
 					lastContainer = news;
 				}else{
 					lastContainer.replaceWith(news);
@@ -137,7 +135,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			if(data.refreshType=="REFRESH")data.kind="refresh";
 			fillContainer(container,data,true);
 		}else{
-			ZMO.log("Warning: Drawfeed data empty!");
+			ZMO.logger.warning(" Drawfeed data empty!");
 		}
 	}
 	
@@ -145,7 +143,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		 updateNewslist(0,mC.drawfeed.listLength);
 		 Ajax.connectToNewsPush(onMessageReceive);
 
-		 Ajax.rfidLogin(onRfidLogin);
+		 //Ajax.rfidLogin(onRfidLogin);
 	 };
 	 
 	 var onRfidLogin = function(data){ 
@@ -166,7 +164,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				 actLoadingFlag = true;
 				 var len = container.children().length;
 				 updateNewslist(len,mC.drawfeed.listLength,function(datas){if(datas.length!=0)actLoadingFlag = false;});
-				 ZMO.log("Loading newsfeed..."+len+"/"+mC.drawfeed.listLength);
+				 ZMO.logger.log("Loading newsfeed..."+len+"/"+mC.drawfeed.listLength);
 			 }
 			 
 		 });

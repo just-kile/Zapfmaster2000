@@ -13,13 +13,13 @@ ZMO.Util.Net.Ajax = (function($){
 	/**
 	 * Get datas instant
 	 */
-	var getDatas = function(url,callback,datas){
+	var getDatas = function(url,callback,datas,type){
 		if(!ZMO.exists(datas))datas = {};
-		if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
+		//if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
 		datas["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		$.ajax({
 			url:url,
-			type:"GET",
+			type:type?type:"GET",
 			data:datas,
 			complete:function(resp){
 			if(resp.status==200){
@@ -27,15 +27,18 @@ ZMO.Util.Net.Ajax = (function($){
 				try{
 					data = $.parseJSON(resp.responseText);
 				}catch(e){
-					ZMO.log(e);
+					ZMO.logger.error(e);
 				}
 				callback(data);
 			}else{
-				ZMO.log("AJAX ERROR "+resp.status);
+				ZMO.logger.error("AJAX ERROR "+resp.status);
 			}
 			if(ZMO.throbber)ZMO.throbber.hide();
 			}
 		});
+	};
+	var postDatas = function(url,callback,datas){
+		getDatas(url,callback,datas,"POST");
 	};
 	/*****
 	 * Interval pull
@@ -163,14 +166,14 @@ ZMO.Util.Net.Ajax = (function($){
 			},
 			error:function(e){
 				if(e.status==0){
-					ZMO.log("Request abort success!");
+					ZMO.logger.log("Request abort success!");
 				}else if(e.status==c.NO_DATAS_RECEIVED_CODE){
-					ZMO.log("No Datas Received! Reconnect...");
+					ZMO.logger.warning("No Datas Received! Reconnect...");
 //					if(errorCb)errorCb(e);
 					connectToChannel(url,successCb,errorCb,data);
 				}else{
-					ZMO.log("Error! Status "+e.status);
-					ZMO.log("Reconnect in 5s...");
+					ZMO.logger.error("Error! Status "+e.status);
+					ZMO.logger.log("Reconnect in 5s...");
 				
 					if(errorCb)errorCb(e);
 					setTimeout(function(){
@@ -182,29 +185,38 @@ ZMO.Util.Net.Ajax = (function($){
 		
 	};
 	var connectToNewsPush = function(callback){
-		
 		connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
 	};
-	var rfidLogin = function(callback){
-		connectToChannel(ZMO.modules.Constants.push.RFID,callback);
+	var connectToNewsUpdate = function(boxId,callback){
+		connectToChannel(ZMO.modules.Constants.push.NEWSUPDATE+"/"+boxId,callback);
 	};
 
 	var abortReq = function(url){
-		var push = pushRequests[url];
-		if(ZMO.exists(push))push.abort();
-		ZMO.log(" Push aborted: "+url);
-		pushRequests[url] = null;
+		
+		$.each(pushRequests,function(reqUrl,req){
+			var regex = new RegExp("^"+url+"");
+			if(regex.test(reqUrl)&& ZMO.exists(req)){
+				pushRequests[reqUrl] = null;
+				req.abort();
+				ZMO.logger.log(" Push aborted: "+url);
+				
+			}
+		});
+//		var push = pushRequests[url];
+//		if(ZMO.exists(push))push.abort();
+//		ZMO.log(" Push aborted: "+url);
+//		pushRequests[url] = null;
 	};
 	var abortNewsPush = function(){
 		abortReq(ZMO.modules.Constants.push.NEWS);
 	};
-	var abortRfidPush = function(){
-		abortReq(ZMO.modules.Constants.push.RFID);
+	var abortNewsUpdatePush = function(){
+		abortReq(ZMO.modules.Constants.push.NEWSUPDATE);
 	};
 
 	var abortPushRequests = function(){
 		abortNewsPush();
-		abortRfidPush();
+		abortNewsUpdatePush();
 	};
 	
 	/*****
@@ -217,13 +229,37 @@ ZMO.Util.Net.Ajax = (function($){
 		connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback);
 	};
 	var sendChallengeConfirmation = function(data){
+		var datas = {
+				pendingChallengeId:data["pendingChallengeId"]
+		};
+		var url = ZMO.modules.Constants.urls.ACCEPTCHALLENGE;
+		
+		postDatas(url,function(){
 			
+		},datas);
 	};
-	var sendChallengeRequest = function(datas,callback){
-		if(callback)callback();
+	var sendChallengeRejection = function(data){
+		var datas = {
+				pendingChallengeId:data["pendingChallengeId"]
+		};
+		var url = ZMO.modules.Constants.urls.DENYCHALLENGE;
+		
+		postDatas(url,function(){
+			
+		},datas);
+	};
+	var sendChallengeRequest = function(type,challengeeId,duration,callback){
+		
+		var url = ZMO.modules.Constants.urls.STARTCHALLENGE.replace("{0}",type);
+		var datas = {
+						challengeeId:challengeeId,
+						duration:duration
+					};
+		postDatas(url,callback,datas);
 	};
 	var pub = {
 			getDatas:getDatas,
+			postDatas:postDatas,
 			enqueueDatas:enqueueDatas,
 			stopPull:stopPull,
 			startPull:startPull,
@@ -231,14 +267,15 @@ ZMO.Util.Net.Ajax = (function($){
 			
 			connectToChannel:connectToChannel,
 			connectToNewsPush:connectToNewsPush,
-			rfidLogin:rfidLogin,
+			connectToNewsUpdate:connectToNewsUpdate,
 			abortNewsPush:abortNewsPush,
-			abortRfidPush:abortRfidPush,
+			abortNewsUpdatePush:abortNewsUpdatePush,
 			abortPushRequests:abortPushRequests,
 			
 			connectChallengeReceive:connectChallengeReceive,
 			abortChallengePush:abortChallengePush,
 			sendChallengeConfirmation:sendChallengeConfirmation,
+			sendChallengeRejection:sendChallengeRejection,
 			sendChallengeRequest:sendChallengeRequest
 	};
 	return pub;

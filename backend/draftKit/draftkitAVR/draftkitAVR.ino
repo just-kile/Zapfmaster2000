@@ -25,10 +25,15 @@
 
 #include <PinChangeInt.h>
 
-// interrupts
+// PINS
+// interrupt pin for flow meter
 const int intFlowmeter = 2;
 
-// PINS
+// RGB LED Pins
+const int pinR = 12;
+const int pinG = 13;
+const int pinB = 14;
+
 // BAUDRATES
 const unsigned long brPC = 57600;
 const unsigned long brRFID = 9600;
@@ -44,10 +49,8 @@ const char ticksMessage = 'T';
 const char rfidMessage = 'R';
 
 // RX
-// message contains login status
+// message signals current login status
 const char loginMessage = 'L';
-// message contains pouring speed
-const char speedMessage = 'S';
 
 // successful login
 const byte statusOk = 1;
@@ -67,8 +70,16 @@ long previousMillis = 0;
 // length of RFID Reader serial messages
 int rfidLength = 5;
 
+// keeps track of the last login status
+int loginStatus = statusNone;
+
 // pin of green led
 int ledGreen = 16;
+
+// holds the last rgb values
+int valR = 0;
+int valG = 0;
+int valB = 0;
 
 // setup pins and ports
 // executed once after startup
@@ -86,6 +97,14 @@ void setup() {
   
   // green led
   pinMode(16, OUTPUT);
+  
+  // set up rgb led ports
+  pinMode(pinR, OUTPUT);
+  pinMode(pinG, OUTPUT);
+  pinMode(pinB, OUTPUT);
+  
+  // set rgb leds to orange
+  turnOrange();
 }
 
 // main loop
@@ -132,15 +151,59 @@ void loop() {
     PCintPort::attachInterrupt(intFlowmeter, count, RISING);
   }    
   
-  if (Serial.available() > 0) {
-    digitalWrite(ledGreen, HIGH);
-    Serial.read();
-    delay(1000);
-    digitalWrite(ledGreen, LOW);
+  if (Serial.available() > 1) {
+    // read first byte of message
+    char symbol = (char) Serial.read();
+    // interpret first byte
+    if (symbol == loginMessage) {
+      // read next byte of login message containing login status
+      loginStatus = Serial.parseInt();
+    } 
   }
+  
+  showLogin();
 }
 
 // flow meter interrupt function
 void count() {
   numTicks++;
+}
+
+// change rgb colors according to login status
+void showLogin() {
+  if (loginStatus == statusOk) {
+    turnGreen();
+  } else if (loginStatus == statusError) {
+    turnRed();
+  } else if (loginStatus == statusNone) {
+    turnOrange();
+  }
+}
+// led color fade functions
+// turns rgb leds green
+void turnGreen() {
+  analogWrite(pinR, 45);
+  analogWrite(pinG, 255);
+  analogWrite(pinB, 10);
+}
+
+// turns rgb leds orange
+void turnOrange() {
+  analogWrite(pinR, 255);
+  analogWrite(pinG, 128);
+  analogWrite(pinB, 0);
+}
+
+// turns rgb leds red
+void turnRed() {
+  analogWrite(pinR, 255);
+  analogWrite(pinG, 0);
+  analogWrite(pinB, 0);
+}
+
+// turns rgb leds white
+void turnWhite() {
+  analogWrite(pinR, 255);
+  analogWrite(pinG, 255);
+  analogWrite(pinB, 255);
 }

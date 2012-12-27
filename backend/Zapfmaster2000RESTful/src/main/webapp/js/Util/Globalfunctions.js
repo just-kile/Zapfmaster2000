@@ -18,7 +18,7 @@ ZMO.getTemplates = function(callback){
 				//datas = jQuery.parseJSON(resp.responseText);
 				datas = eval("("+resp.responseText+")");
 			}catch(e){
-				ZMO.log("WARNING:Parsing error! No ICH Templates loaded: "+e.toLocaleString());
+				ZMO.logger.warning("Parsing error! No ICH Templates loaded: "+e.toLocaleString());
 			}
 			callback(datas.templates);
 		}
@@ -26,11 +26,32 @@ ZMO.getTemplates = function(callback){
 };
 
 
-ZMO.log = function(str){
-	if(console && ZMO.Constants.debugMode){
+ZMO.logger = (function(){
+	var log = function(str){
+		if(console && ZMO.Constants.debugMode){
+	
 		console.log(str);
+		}
+	};
+	var warning = function(str){
+		if(console && ZMO.Constants.debugMode){
+	
+		console.log(str);
+		}
+	};
+	var error = function(str){
+		if(console && ZMO.Constants.debugMode){
+			
+			console.log(str);
+			}
 	}
-};
+	var pub = {
+			log:log,
+			warning:warning,
+			error:error
+	};
+	return pub;
+})();
 
 //ZMO.changePage = function(pageId,datas){
 //	var hash= hashHandler.objToQuery(pageId,datas);
@@ -66,3 +87,15 @@ ZMO.hashHandler = (function($){
 	};
 	return pub;
 })(jQuery);
+
+
+
+
+
+
+
+
+
+
+
+

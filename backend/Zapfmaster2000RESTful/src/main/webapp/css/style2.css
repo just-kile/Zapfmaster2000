@@ -204,7 +204,9 @@ ul#topnav li#topnav-5 a:hover {
 	background-image: url(../images/view/news_background2.png);
 	color: #FFF;
 }
-
+.frontPageStats{
+	margin-left:10px;
+}
 .drinkstats {
 	margin-top: 10px !important;
 }
@@ -455,12 +457,19 @@ ul#topnav li#topnav-5 a:hover {
 	width:100%;
 	height:100%;
 	
-	opacity:0.5;
 	z-index:26000;
 }
-.throbber img{
-	top:48%;
+.throbber > div{
+	top:55%;
+	left:48%;
 	position:absolute;
+	background:#222;
+	padding:5px;
+	box-shadow:0 0 10px;
+	border-radius:10px;
+}
+.throbber img{
+
 }
 
 .linechart {
@@ -565,6 +574,6 @@ tr.stats-drinker-row >td{
 padding:5px;
 
 }
-tr.stats-drinker-row:nth-child(even){
+tr.stats-drinker-row:nth-child(odd){
 	background:rgba(0,0,0,0.4);
 }

@@ -13,21 +13,24 @@ ZMO.modules.Constants = {
 			listLength:10
 		},
 		urls:{
-			FRONTPAGESTATS:"/tmp/stats_fp.json",
-			// NEWSLIST:"tmp/news.json"
+			FRONTPAGESTATS:"tmp/stats_fp.json",
+			USERFRONTPAGESTATS:"tmp/kegstatus.json",
+
 			NEWSLIST:"rest/news",
-			// NEWSLIST:"//thomas-notebook-ubuntu/rest/news",
-			// STATS:"rest/stats/getStatsAsJson"
 			STATS:"tmp/stats.json",
-			CHALLENGES:"tmp/challenges.json",
+			
 			MEMBERS:"rest/members",
-			ACTIVEMEMBERS:"rest/members"
+			
+			CHALLENGES:"tmp/challenges.json",
+			CHALLENGEEMEMBERS:"rest/members",
+			STARTCHALLENGE:"rest/challenge/start/{0}",
+			ACCEPTCHALLENGE:"rest/challenge/accept",
+			DENYCHALLENGE:"rest/challenge/deny"
 			// NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
 		push:{
 			NEWS:"rest/push/news",
-			RFID:"rest/push/login",
-			NEWSUPDATE:"rest/push/newsupdate",
+			NEWSUPDATE:"rest/push/draftkit",
 			CHALLENGE:"rest/push/challenge"
 		},
 		member:{
@@ -55,10 +58,10 @@ ZMO.modules.Constants = {
 				}]
 			},
 			types:[{
-				id:"challenge-normal",
+				id:"1v1",
 				name:"1 vs 1",
 				image:"images/challenges/1v1.png",//"images/avatars/felix.jpg",
-				description:"Fordere einen Mittrinker zum Wettrinken auf!"
+				description:"Fordere einen Mitzapfer zum Wettzapfen auf!"
 			}]
 		}
 		,navbar :	[{
