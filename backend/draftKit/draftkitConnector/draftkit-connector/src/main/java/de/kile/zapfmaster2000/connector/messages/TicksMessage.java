@@ -28,7 +28,7 @@ public class TicksMessage extends Message {
 	}
 	
 	@Override
-	public String getMessageType() {
+	public int getMessageType() {
 		return messageType;
 	}
 

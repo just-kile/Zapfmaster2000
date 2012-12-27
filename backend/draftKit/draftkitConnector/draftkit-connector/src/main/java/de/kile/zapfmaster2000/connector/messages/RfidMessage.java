@@ -23,7 +23,7 @@ public class RfidMessage extends Message {
 	 * returns rfid as the message type
 	 */
 	@Override
-	public String getMessageType() {
+	public int getMessageType() {
 		return messageType;
 	}
 	
