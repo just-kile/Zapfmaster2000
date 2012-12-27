@@ -3,17 +3,11 @@ package de.kile.zapfmaster2000.connector.serial;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
-import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.Observer;
-
-import de.kile.zapfmaster2000.connector.messages.Message;
 
 /**
  * 
@@ -122,76 +116,4 @@ public class SerialCommunicator {
 			}
 		}
 	}
-
-	/**
-	 * Handles the input coming from the serial port. A new line character is
-	 * treated as the end of a block in this example.
-	 */
-	public static class SerialReader extends Observable implements
-			SerialPortEventListener {
-		private InputStream in;
-		private byte[] buffer = new byte[1024];
-
-		public SerialReader(InputStream in) {
-			this.in = in;
-		}
-
-		/**
-		 * triggered once new data is available on the serial port read the
-		 * available data bytes and processes the contained messages notifies
-		 * observers with message content, if applicable
-		 */
-		public void serialEvent(SerialPortEvent arg0) {
-			int data;
-
-			try {
-				int len = 0;
-				while ((data = in.read()) > -1) {
-					if (data == '\n') {
-						break;
-					}
-					buffer[len++] = (byte) data;
-				}
-				System.out.print(new String(buffer, 0, len));
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.exit(-1);
-			}
-			
-			// get message from received data
-			Message message = SerialDecoder.decodeMessage(buffer);
-			
-			// notify observers
-			if (message != null) {
-				notifyObservers(message);					
-			}
-		}
-	}
-
-	/**
-	 * sends data to the draftkitAVR component via serial port
-	 */
-	public static class SerialWriter {
-		OutputStream out;
-
-		public SerialWriter(OutputStream out) {
-			this.out = out;
-		}
-
-		/**
-		 * writes
-		 * 
-		 * @param outBuffer
-		 */
-		public void writeOut(byte[] outBuffer) {
-			try {
-				out.write(outBuffer);
-			} catch (IOException e) {
-				// TODO add logger
-				e.printStackTrace();
-			}
-		}
-
-	}
-
 }
