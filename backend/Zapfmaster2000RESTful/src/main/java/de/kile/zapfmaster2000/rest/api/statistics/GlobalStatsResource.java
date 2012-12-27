@@ -30,9 +30,9 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
  * @author PB
  * 
  */
+@Path("statistics")
 public class GlobalStatsResource {
 
-	// TODO add tests
 	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
 
 	/**
@@ -146,6 +146,8 @@ public class GlobalStatsResource {
 			globalStatsResponse.setKeg(kegResponses);
 			globalStatsResponse.setProgress(progress);
 			globalStatsResponse.setPromille(promille);
+			
+			return Response.ok(globalStatsResponse).build();
 
 		}
 

@@ -23,9 +23,8 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
  * @author PB
  * 
  */
+@Path("statistics")
 public class FrontpageStatsResource {
-
-	// TODO testing!
 
 	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
 
@@ -43,10 +42,10 @@ public class FrontpageStatsResource {
 	 *         <li>FORBIDDEN: if authentication with <code>pToken</code> fails.</li>
 	 *         </ul>
 	 */
-	@Path("globalStats")
+	@Path("FrontpageStats")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response retrieveGlobalStats(@QueryParam("token") String pToken,
+	public Response retrieveFrontpageStats(@QueryParam("token") String pToken,
 			@QueryParam("max") String pMax) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
@@ -92,6 +91,8 @@ public class FrontpageStatsResource {
 					.setDrawCountUserList(drawCountUserListResponses);
 			frontpageStatsResponse.setKegs(kegResponses);
 			frontpageStatsResponse.setPromille(promille);
+
+			return Response.ok(frontpageStatsResponse).build();
 
 		}
 

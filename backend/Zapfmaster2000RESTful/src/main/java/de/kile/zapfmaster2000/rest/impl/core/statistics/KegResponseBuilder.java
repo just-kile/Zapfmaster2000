@@ -12,11 +12,14 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
 public class KegResponseBuilder {
-	
+
 	/**
 	 * Builds {@link KegResponse}.
+	 * 
 	 * @param account
-	 * @return {@link KegResponse}
+	 * @return {@link KegResponse}. <code>LastsUntil</code> may be
+	 *         <code>null</code> if there was no drawing in the last 3 hours in
+	 *         a current keg.
 	 */
 	@SuppressWarnings("unchecked")
 	public static KegResponse[] retrieveKegResponse(Account account) {
@@ -38,15 +41,15 @@ public class KegResponseBuilder {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.HOUR, -3);
 
-		List<Object> resultLastThree = session
+		List<Object[]> resultLastThreeHours = session
 				.createQuery(
-						"SELECT SUM(d.amount)"
+						"SELECT k.id, SUM(d.amount)"
 								+ " FROM Keg k, Drawing d, User u "
 								+ " WHERE d.keg = k AND d.user = u "
 								+ " AND k.endDate IS NULL "
 								+ " AND d.date > :time"
 								+ " AND u.account = :account "
-								+ " GROUP BY (k.id) " + " ORDER BY k.id")
+								+ " GROUP BY (k.id) ORDER BY k.id")
 				.setTimestamp("time", calendar.getTime())
 				.setEntity("account", account).list();
 
@@ -61,6 +64,7 @@ public class KegResponseBuilder {
 
 		KegResponse[] response = new KegResponse[resultCurrentKegs.size()];
 
+		int idxKeg = 0;
 		for (int i = 0; i < resultCurrentKegs.size(); i++) {
 			Object[] resultRow = (Object[]) resultCurrentKegs.get(i);
 			response[i] = new KegResponse();
@@ -71,20 +75,25 @@ public class KegResponseBuilder {
 			response[i].setCurrentAmount((Double) resultRow[4]);
 			response[i].setKegNumber((Long) resultNumberKegs.get(0));
 
-			// lasts until
-			double amount = (Double) resultLastThree.get(i);
-			calendar = Calendar.getInstance();
+			if (idxKeg < resultLastThreeHours.size()
+					&& response[i].getKegId() == (Long) resultLastThreeHours
+							.get(idxKeg)[0]) {
 
-			calendar.add(
-					Calendar.SECOND,
-					(int) Math.ceil(response[i].getCurrentAmount() / amount
-							* (3 * 60 * 60)));
+				// lasts until
+				double amount = (Double) resultLastThreeHours.get(idxKeg)[1];
+				calendar = Calendar.getInstance();
 
-			response[i].setLastsUntil(calendar.getTime());
+				calendar.add(
+						Calendar.SECOND,
+						(int) Math.ceil(response[i].getCurrentAmount() / amount
+								* (3 * 60 * 60)));
 
+				response[i].setLastsUntil(calendar.getTime());
+				
+				idxKeg++;
+			}
 		}
 
 		return response;
 	}
-
 }

@@ -113,6 +113,17 @@ public class DrinkProgressResponseBuilder {
 				.getTime() - minDate.getTime())
 				/ 1000 / 60 / interval)];
 
+		if (amounts.length == 0){//only one drawing
+			DrinkProgressResponse response = new DrinkProgressResponse();
+			amounts = new double [1];
+			amounts[0] = (Double) list.get(0)[0];
+			
+			response.setFrom(dFrom);
+			response.setInterval(interval);
+			
+			return response;
+		}
+		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(minDate);
 		cal.add(Calendar.MINUTE, interval);

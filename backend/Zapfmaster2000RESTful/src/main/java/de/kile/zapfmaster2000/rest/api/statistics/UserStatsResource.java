@@ -25,11 +25,15 @@ import de.kile.zapfmaster2000.rest.impl.core.statistics.RankBuilder;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
+
+/**
+ * 
+ * @author PB
+ *
+ */
 @Path("statistics")
 public class UserStatsResource {
 
-	
-	//TODO add tests
 	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
 
 	/**
