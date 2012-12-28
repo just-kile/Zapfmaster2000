@@ -15,7 +15,6 @@ import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
@@ -23,19 +22,14 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import static org.junit.Assert.assertEquals;
 
 import static org.mockito.Matchers.anyString;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- * Tests the method retrieveUserRankingByAmount in the class
- * {@link RankingsResource}. Different users, multiple {@link Drawing}, multiple
- * {@link Account}
- * 
- * @author PB
- * 
- */
-public class TestUserRankingByDrawCount extends AbstractMockingTest {
+public class TestUserStats extends AbstractMockingTest {
 
+	//TODO add test of output
+	
 	private Account account;
 	private Account account2;
 
@@ -114,69 +108,50 @@ public class TestUserRankingByDrawCount extends AbstractMockingTest {
 		AuthService authService = mock(AuthService.class);
 		when(authService.retrieveAccount(anyString())).thenReturn(account);
 		mockAuthService(authService);
-
 	}
 
 	@Test
-	public void testDrawCountRanking() {
-		RankingsResource rankingsResource = new RankingsResource();
-		Response response = rankingsResource.retrieveUserRankingByDrawCount(
-				null, null, null, null);
+	public void testSimple() {
+		UserStatsResource userStatsResource = new UserStatsResource();
 
-		Object[] rawDrawCountResponse = (Object[]) response.getEntity();
-
+		Response response = userStatsResource.retrieveUserStats(
+				String.valueOf(user1.getId()), null, null, null, null);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-
-		assertEquals(3, rawDrawCountResponse.length);
-
-		assertConforms(user3,
-				(DrawCountUserListResponse) rawDrawCountResponse[0]);
-		assertConforms(user1,
-				(DrawCountUserListResponse) rawDrawCountResponse[1]);
 	}
 
 	@Test
-	public void testDrawCountFrom() {
-		RankingsResource rankingsResource = new RankingsResource();
+	public void testBadInput() {
+		UserStatsResource userStatsResource = new UserStatsResource();
 
-		Response response = rankingsResource.retrieveUserRankingByDrawCount(
-				fromString, null, null, null);
+		Response response = userStatsResource.retrieveUserStats(null, null,
+				null, null, null);
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
 
-		Object[] rawDrawCountResponse = (Object[]) response.getEntity();
+		response = userStatsResource.retrieveUserStats("noUser", null, null,
+				null, null);
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
 
-		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+		response = userStatsResource.retrieveUserStats(
+				String.valueOf(user1.getId()), "noDate", null, null, null);
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
 
-		assertEquals(3, rawDrawCountResponse.length);
+		response = userStatsResource.retrieveUserStats(
+				String.valueOf(user1.getId()), null, "noDate", null, null);
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
 
-		assertConforms(user1,
-				(DrawCountUserListResponse) rawDrawCountResponse[0]);
+		response = userStatsResource.retrieveUserStats(
+				String.valueOf(user1.getId()), null, null, "noInterval", null);
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
 	}
 
 	@Test
-	public void testDrawCountFromTo() {
-		RankingsResource rankingsResource = new RankingsResource();
+	public void TestFullInput() {
+		UserStatsResource userStatsResource = new UserStatsResource();
 
-		Response response = rankingsResource.retrieveUserRankingByDrawCount(
-				fromString, toString, null, null);
+		Response response = userStatsResource
+				.retrieveUserStats(String.valueOf(user1.getId()), fromString,
+						toString, "30", null);
 
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-
-		Object[] rawDrawCountResponse = (Object[]) response.getEntity();
-
-		assertEquals(2, rawDrawCountResponse.length);
-
-		// test only number of drawings, order of users is not important as
-		// everybody has drawcount 1
-		assertEquals(user1.getDrawings().size(),
-				((DrawCountUserListResponse) rawDrawCountResponse[0])
-						.getDrawCount());
 	}
-
-	public void assertConforms(User user, DrawCountUserListResponse response) {
-		assertEquals(user.getName(), response.getName());
-		assertEquals(user.getId(), response.getId());
-		assertEquals(user.getImagePath(), response.getImage());
-		assertEquals(user.getDrawings().size(), response.getDrawCount());
-	}
-
 }
