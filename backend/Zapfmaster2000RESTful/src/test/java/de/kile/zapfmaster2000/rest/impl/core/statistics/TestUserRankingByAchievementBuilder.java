@@ -1,39 +1,21 @@
-package de.kile.zapfmaster2000.rest.api.statistics;
+package de.kile.zapfmaster2000.rest.impl.core.statistics;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
-import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
-import de.kile.zapfmaster2000.rest.core.auth.AuthService;
+import de.kile.zapfmaster2000.rest.api.statistics.AchievementUserListResponse;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import static org.junit.Assert.assertEquals;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-/**
- * Tests the method retrieveUserRankingByAchievementCount in the class
- * {@link RankingsResource}. Different users, multiple {@link Drawing}, multiple
- * {@link Account}
- * 
- * @author PB
- * 
- */
-public class TestUserRankingByAchievementCount extends AbstractMockingTest {
+public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 
 	private Account account;
 	private Account account2;
@@ -50,8 +32,6 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 	private Date midDate;
 	private Date midDate2;
 	private Date tooLate;
-	private String fromString;
-	private String toString;
 
 	@Before
 	public void setupData() {
@@ -76,24 +56,11 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 		createUser("Wilfried", "/imagePath/image.jpg", "user-pw", 401,
 				Sex.MALE, 85, UserType.USER, account);
 
-		SimpleDateFormat df = new SimpleDateFormat(
-				PlatformConstants.DATE_TIME_FORMAT);
-
 		tooEarly = createDate(2011, 1, 1, 11, 0, 0);
 		tooLate = createDate(2012, 1, 1, 14, 0, 0);
 
 		midDate = createDate(2012, 1, 1, 11, 0, 0);
 		midDate2 = createDate(2012, 1, 1, 12, 0, 0);
-
-		Calendar cal = Calendar.getInstance();
-
-		cal.setTime(midDate);
-		cal.add(Calendar.MINUTE, -1);
-		fromString = df.format(cal.getTime());
-
-		cal.setTime(midDate2);
-		cal.add(Calendar.MINUTE, 1);
-		toString = df.format(cal.getTime());
 
 		// Achievements
 		achievement1 = createAchievement("achievement-1", "desc1", "img/ach1");
@@ -104,71 +71,71 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 		createGainedAchievement(tooEarly, user3, achievement1);
 		createGainedAchievement(tooLate, user3, achievement2);
 		createGainedAchievement(midDate, userForeignAcc, achievement1);
-
-		AuthService authService = mock(AuthService.class);
-		when(authService.retrieveAccount(anyString())).thenReturn(account);
-		mockAuthService(authService);
-
 	}
 
 	@Test
 	public void testAchievementList() {
-		RankingsResource rankingsResource = new RankingsResource();
-		Response response = rankingsResource
-				.retrieveUserRankingByAchievementCount(null, null, null, null);
 
-		Object[] rawAchievementListResponse = (Object[]) response.getEntity();
+		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+				.retrieveAchievementUserListResponse(null, null, -1, account);
 
-		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+		assertEquals(3, achievementUserListResponses.length);
 
-		assertEquals(3, rawAchievementListResponse.length);
-
-		assertConforms(user3,
-				(AchievementUserListResponse) rawAchievementListResponse[0]);
-		assertConforms(user1,
-				(AchievementUserListResponse) rawAchievementListResponse[1]);
+		assertConforms(user3, achievementUserListResponses[0]);
+		assertConforms(user1, achievementUserListResponses[1]);
 	}
 
 	@Test
 	public void testAchievementListFrom() {
-		RankingsResource rankingsResource = new RankingsResource();
+		Calendar calFrom = Calendar.getInstance();
+		calFrom.setTime(midDate);
+		calFrom.add(Calendar.MINUTE, -1);
 
-		Response response = rankingsResource
-				.retrieveUserRankingByAchievementCount(fromString, null, null, null);
+		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+				.retrieveAchievementUserListResponse(calFrom.getTime(), null,
+						-1, account);
 
-		Object[] rawAchievementListResponse = (Object[]) response.getEntity();
-
-		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-
-		assertEquals(3, rawAchievementListResponse.length);
+		assertEquals(3, achievementUserListResponses.length);
 
 		// test only number of drawings, order of users is not important as
 		// everybody has achievement count 1
 		assertEquals(user1.getGained().size(),
-				((AchievementUserListResponse) rawAchievementListResponse[0])
-						.getCount());
+				achievementUserListResponses[0].getCount());
 	}
 
 	@Test
 	public void testAchievementListFromTo() {
-		RankingsResource rankingsResource = new RankingsResource();
+		Calendar calFrom = Calendar.getInstance();
+		calFrom.setTime(midDate);
+		calFrom.add(Calendar.MINUTE, -1);
 
-		Response response = rankingsResource
-				.retrieveUserRankingByAchievementCount(fromString, toString,
-						null, null);
+		Calendar calTo = Calendar.getInstance();
+		calTo.setTime(midDate2);
+		calTo.add(Calendar.MINUTE, 1);
 
-		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+				.retrieveAchievementUserListResponse(calFrom.getTime(),
+						calTo.getTime(), -1, account);
 
-		Object[] rawAchievementListResponse = (Object[]) response.getEntity();
-
-		assertEquals(2, rawAchievementListResponse.length);
+		assertEquals(2, achievementUserListResponses.length);
 
 		// test only number of drawings, order of users is not important as
 		// everybody has achievement 1
 		assertEquals(user1.getGained().size(),
-				((AchievementUserListResponse) rawAchievementListResponse[0])
-						.getCount());
+				achievementUserListResponses[0].getCount());
 	}
+	
+	@Test
+	public void testMax() {
+
+		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+				.retrieveAchievementUserListResponse(null, null, 1, account);
+
+		assertEquals(1, achievementUserListResponses.length);
+
+		assertConforms(user3, achievementUserListResponses[0]);
+	}
+
 
 	public void assertConforms(User user, AchievementUserListResponse response) {
 		assertEquals(user.getName(), response.getName());

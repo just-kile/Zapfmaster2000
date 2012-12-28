@@ -1,37 +1,37 @@
 package de.kile.zapfmaster2000.rest.api.statistics;
 
 public class DrawCountUserListResponse {
-	
-private String name;
-	
-	private long id;
-	
-	private String image;
-	
+
+	private String userName;
+
+	private long userId;
+
+	private String userImage;
+
 	private long drawCount;
 
 	public String getName() {
-		return name;
+		return userName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.userName = name;
 	}
 
 	public long getId() {
-		return id;
+		return userId;
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.userId = id;
 	}
 
 	public String getImage() {
-		return image;
+		return userImage;
 	}
 
 	public void setImage(String image) {
-		this.image = image;
+		this.userImage = image;
 	}
 
 	public long getDrawCount() {
@@ -41,6 +41,5 @@ private String name;
 	public void setDrawCount(long drawcount) {
 		this.drawCount = drawcount;
 	}
-	
 
 }
