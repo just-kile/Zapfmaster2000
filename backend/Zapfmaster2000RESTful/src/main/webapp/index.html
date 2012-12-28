@@ -31,10 +31,10 @@ $(document).ready(function(){
 			}
 		})
 	});
-	$("#submitApp").on("click",function(e){
+	$(".applogin #submitApp").on("click",function(e){
 		e.preventDefault();
-		var userName = $("#userName").val();
-		var pass = $("#password").val();
+		var userName = $(".applogin #userName").val();
+		var pass = $(".applogin #password").val();
 		$.ajax({
 			type:"POST",
 			url:"rest/login/user",
@@ -52,6 +52,48 @@ $(document).ready(function(){
 			}
 		})
 	})
+	$("#registerUser").on("click",function(e){
+		e.preventDefault();
+		var userName = $("#userName").val();
+		var pass = $("#password").val();
+		var data = {};
+		$.each(".registerItem",function(ind,item){
+			data[$(item).attr("name")] =$(item).val(); 
+		});
+		$.ajax({
+			type:"POST",
+			url:"rest/register/user",
+			data:{
+				userName:userName,
+				password:pass
+			},
+			success:function(token){
+				if(localStorage){
+					//localStorage.setItem('token',token );
+					//window.location.replace(window.location.pathname+"app.html");
+				}else{
+					alert("Use a normal browser! Localstorage is not available")
+				}
+			}
+		})
+	});
+	
+$("#uploadImage").on("click",function(e){
+	e.preventDefault();
+	var formData = new FormData ($("#imageForm")[0]);
+	formData.append("token",localStorage.getItem("token"));
+	$.ajax({
+	    url: 'rest/register/image',
+	    data: formData,
+	    cache: false,
+	    contentType: false,
+	    processData: false,
+	    type: 'POST',
+	    success: function(data){
+	        alert("Image uploaded");
+	    }
+	});
+})
 })
 
 
@@ -70,5 +112,26 @@ $(document).ready(function(){
 
 <input id ="submitApp" type="submit" value="Anmelden">
 </div>
+<hr />
+<div class="register">
+
+<p>Name:<br /><input class="registerItem" id="rUserName" name="userName" type="text" size="30" maxlength="30" value=""></p>
+<p>Pass:<br /><input class="registerItem" id="rPassword" name="password" type="text" size="30" maxlength="30" value=""></p>
+<p>Gender:<br />
+ <select class="registerItem" name="rGender" size="1">
+      <option>m</option>
+      <option>w</option>
+    </select>
+</p>
+<p>Weight:<br /><input class="registerItem" id="rWeight" name="userWeight" type="text" size="30" maxlength="30" value=""></p>
+<p>Gruppe:<br /><input class="registerItem" id="rAccount" name="account" type="text" size="30" maxlength="30" value=""></p>
+
+<input id ="registerUser" type="submit" value="Registrieren">
+</div>
+<hr/>
+<form id="imageForm">
+<p>Image:<br /><input class="registerItem" id="rImage" name="image" type="file"></p>
+<input id ="uploadImage" type="submit" value="ImageUpload">
+</form>
 </body>
 </html>
