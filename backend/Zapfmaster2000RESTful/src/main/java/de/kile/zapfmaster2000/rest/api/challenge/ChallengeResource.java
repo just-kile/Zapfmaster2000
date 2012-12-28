@@ -229,11 +229,11 @@ public class ChallengeResource {
 						+ pChallengeId);
 				return Response.status(Status.BAD_REQUEST).build();
 			}
+			tx.commit();
 
 			Zapfmaster2000Core.INSTANCE.getChallengeService().declineChallenge(
 					challenge1v1);
 
-			tx.commit();
 
 			return Response.ok().build();
 		} else {

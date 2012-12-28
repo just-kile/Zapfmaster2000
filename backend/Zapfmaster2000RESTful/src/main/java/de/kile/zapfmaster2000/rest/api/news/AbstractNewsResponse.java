@@ -3,10 +3,14 @@ package de.kile.zapfmaster2000.rest.api.news;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 
 public class AbstractNewsResponse {
 
+	private static final Logger LOG = Logger.getLogger(AbstractNewsResponse.class);
+	
 	private Type type;
 
 	private String image;
@@ -46,9 +50,15 @@ public class AbstractNewsResponse {
 	}
 
 	protected String doLoadDate(Date pDate) {
-		SimpleDateFormat format = new SimpleDateFormat(
-				PlatformConstants.DATE_TIME_FORMAT);
-		return format.format(pDate);
+		if (pDate != null) {
+			SimpleDateFormat format = new SimpleDateFormat(
+					PlatformConstants.DATE_TIME_FORMAT);
+			return format.format(pDate);
+		} else {
+			LOG.warn("Could not load date: Date is null.");
+			return null;
+		}
+
 	}
 
 	public enum Type {

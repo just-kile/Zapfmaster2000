@@ -77,7 +77,6 @@ ZMO.OtherModel = function(config){
 	this.image = config.image||config.IMAGE_PATH||config.imagepath;
 	this.type = config.type;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
-			
 	
 };
 
