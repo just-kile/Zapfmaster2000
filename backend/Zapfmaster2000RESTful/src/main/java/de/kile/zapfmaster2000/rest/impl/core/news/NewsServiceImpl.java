@@ -13,6 +13,7 @@ import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.achievement.AchievementServiceListener;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
+import de.kile.zapfmaster2000.rest.core.box.LoginFailureReason;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeServiceListener;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
@@ -88,6 +89,11 @@ public class NewsServiceImpl implements NewsService {
 
 			@Override
 			public void onLogout(Box pBox, User pUser) {
+			}
+
+			@Override
+			public void onLoginFailed(Box pBox, LoginFailureReason pReason,
+					long pTag) {
 			}
 		};
 	}

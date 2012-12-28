@@ -15,6 +15,7 @@ import org.hibernate.Transaction;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.box.DrawService;
 import de.kile.zapfmaster2000.rest.core.box.DrawServiceListener;
+import de.kile.zapfmaster2000.rest.core.box.LoginFailureReason;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.impl.core.transaction.SharedQueries;
@@ -78,7 +79,13 @@ public class DrawServiceImpl implements DrawService {
 						lastDrawing = System.currentTimeMillis();
 						notifyLoginSuccessful(currentUser);
 						return currentUser;
+					} else {
+						notifyLoginFailed(LoginFailureReason.INVALID_RFID_TAG,
+								pRfidId);
 					}
+				} else {
+					notifyLoginFailed(
+							LoginFailureReason.OTHER_USER_IS_LOGGED_IN, pRfidId);
 				}
 			} else {
 				// current user logs in
@@ -207,10 +214,16 @@ public class DrawServiceImpl implements DrawService {
 			listener.onEndDrawing(pDrawing);
 		}
 	}
-	
+
 	private void notifyLogout(User pUser) {
 		for (DrawServiceListener listener : listeners) {
 			listener.onLogout(pUser);
+		}
+	}
+
+	private void notifyLoginFailed(LoginFailureReason pReason, long pRfidId) {
+		for (DrawServiceListener listener : listeners) {
+			listener.onLoginFailed(pReason, pRfidId);
 		}
 	}
 
@@ -327,9 +340,9 @@ public class DrawServiceImpl implements DrawService {
 		}
 
 		if (currentUser != null) {
-			notifyLogout(currentUser);	
+			notifyLogout(currentUser);
 		}
-		
+
 		// reset values
 		totalTicks = 0;
 		currentUser = null;
