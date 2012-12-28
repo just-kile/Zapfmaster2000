@@ -1,157 +1,20 @@
 {
-	"PI" : {
-		"POSITION" : 45104,
-		"VALUE" : 2
-	},
-	
-	"PROGRESSWEEK_LAST" : [0, 7],
-	"PROGRESSWEEK" : [{
-				"7" : "1.2"
-			}]
-}
-
-
-
-{
-	"USER_COMPLETE_AMOUNT" : "5.44",
-	"ACT_AMOUNT" : "21.18",
-	"COMPLETE_AMOUNT" : 58.82,
-	"BEST" : "Tim",
-	"BEST_USER_ID" : "9",
-	"NICE_WORD" : "delizioesem",
-	"ACHIEVEMENT_OF_USER" : [{
-				"ACHIEVEMENT_ID" : "4",
-				"NAME" : "Carl",
-				"DESCRIPTION" : "F\u00fcnf Bier gezapft.",
-				"IMAGE_PATH" : "images\/achievements\/carl.png",
-				"PUBLIC" : "1",
-				"TYPE" : "SINGLE"
-			}, {
-				"ACHIEVEMENT_ID" : "16",
-				"NAME" : "Trinker der Stunde",
-				"DESCRIPTION" : "Einmal Trinker der Stunde gewesen.",
-				"IMAGE_PATH" : "images\/achievements\/trinkerderstunde.png",
-				"PUBLIC" : "1",
-				"TYPE" : "SINGLE"
-			}, {
-				"ACHIEVEMENT_ID" : "17",
-				"NAME" : "Lindsay Lohan",
-				"DESCRIPTION" : "B von einem Promille erreicht.",
-				"IMAGE_PATH" : "images\/achievements\/lindsaylohan.png",
-				"PUBLIC" : "1",
-				"TYPE" : "SINGLE"
-			}, {
-				"ACHIEVEMENT_ID" : "14",
-				"NAME" : "Mega Kill",
-				"DESCRIPTION" : "Zwei Bier innerhalb von einer Stunde gezapft.",
-				"IMAGE_PATH" : "images\/achievements\/megakill.png",
-				"PUBLIC" : "1",
-				"TYPE" : "SINGLE"
-			}, {
-				"ACHIEVEMENT_ID" : "1",
-				"NAME" : "Moe",
-				"DESCRIPTION" : "Du hast mindestens ein Bier getrunken",
-				"IMAGE_PATH" : "images\/achievements\/moe.png",
-				"PUBLIC" : "1",
-				"TYPE" : "SINGLE"
-			}],
-	"DRINK_SPEED" : "48.38",
-	"LONGEST_DURATION" : "73.00",
-	"MOST_AMOUNT" : "1.20",
-	"OPERATIONS" : "15",
-	"MOST_ACTIVITY_HOUR" : "14",
-	"PI" : {
-		"POSITION" : 81492,
-		"VALUE" : 8
-	},
-	"AVERAGE_DRAW_DURATION" : "27.00",
-	"COMPLETE_DRAW_DURATION" : "405.00",
-	"AVERAGE_PROMILLE" : "0.823",
-	"BESTLIST" : {
-		"USER_ID" : "13",
-		"AMOUNT" : "5.44",
-		"NAME" : "Flo",
-		"PLACE" : 2
-	},
-	"MOST_ACHIEVEMENTS" : [{
-				"USER_ID" : "9",
-				"ACHIEVEMENT_COUNT" : "10",
-				"NAME" : "Tim"
-			}, {
-				"USER_ID" : "12",
-				"ACHIEVEMENT_COUNT" : "7",
-				"NAME" : "Felix"
-			}, {
-				"USER_ID" : "17",
-				"ACHIEVEMENT_COUNT" : "7",
-				"NAME" : "Benni"
-			}, {
-				"USER_ID" : "6",
-				"ACHIEVEMENT_COUNT" : "6",
-				"NAME" : "Thomas"
-			}, {
-				"USER_ID" : "14",
-				"ACHIEVEMENT_COUNT" : "6",
-				"NAME" : "Paul"
-			}, {
-				"USER_ID" : "3",
-				"ACHIEVEMENT_COUNT" : "6",
-				"NAME" : "Kevin"
-			}, {
-				"USER_ID" : "8",
-				"ACHIEVEMENT_COUNT" : "5",
-				"NAME" : "Olli"
-			}, {
-				"USER_ID" : "19",
-				"ACHIEVEMENT_COUNT" : "5",
-				"NAME" : "Andrej"
-			}, {
-				"USER_ID" : "13",
-				"ACHIEVEMENT_COUNT" : "5",
-				"NAME" : "Flo"
-			}, {
-				"USER_ID" : "11",
-				"ACHIEVEMENT_COUNT" : "5",
-				"NAME" : "Winnii"
-			}, {
-				"USER_ID" : "10",
-				"ACHIEVEMENT_COUNT" : "4",
-				"NAME" : "Osi"
-			}, {
-				"USER_ID" : "5",
-				"ACHIEVEMENT_COUNT" : "4",
-				"NAME" : "Meike"
-			}, {
-				"USER_ID" : "4",
-				"ACHIEVEMENT_COUNT" : "2",
-				"NAME" : "Chris"
-			}, {
-				"USER_ID" : "2",
-				"ACHIEVEMENT_COUNT" : "1",
-				"NAME" : "Ben"
-			}, {
-				"USER_ID" : "15",
-				"ACHIEVEMENT_COUNT" : "1",
-				"NAME" : "Miss Sophie"
-			}, {
-				"USER_ID" : "18",
-				"ACHIEVEMENT_COUNT" : "1",
-				"NAME" : "Stefan"
-			}],
-	"PROGRESSWEEK_LAST" : [0, 7],
-	"PROGRESSWEEK" : [{
-				"7" : "1.2"
-			}],
-	"DRINK_DISTRIBUTION" : [{
-				"KEG_ID" : "1",
-				"BRAND" : "Warsteiner",
-				"AMOUNT" : "3.34",
-				"KEG_SIZE" : "50"
-			}, {
-				"KEG_ID" : "2",
-				"BRAND" : "Warsteiner",
-				"AMOUNT" : "2.10",
-				"KEG_SIZE" : "30"
-			}],
-	"LAST_DRAW" : "1.33"
+    "achievementName": "Charlie Sheen",
+    "achievementId": "19",
+    "achievementImage": "images/achievements/charliesheen.png",
+    "description": "Zehn Bier gezapft",
+    "users": [
+        {
+            "userId": "4",
+            "userName": "Pete",
+            "userImage": "images/achievements/carl.png",
+            "date": "2012-08-31 20:26:45"
+        },
+        {
+            "userId": "4",
+            "userName": "Gustave",
+            "userImage": "images/achievements/carl.png",
+            "date": "2012-08-31 20:26:45"
+        }
+    ]
 }

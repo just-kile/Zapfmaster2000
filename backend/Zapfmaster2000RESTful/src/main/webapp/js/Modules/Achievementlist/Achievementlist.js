@@ -6,11 +6,15 @@ ZMO.modules = ZMO.modules || {};
 ZMO.modules.achievementlist = (function($,ajax){
 	var mC = ZMO.modules.Constants;
 	var container;
-	var onMembersReceive = function(members){
-		container.append("<div class=\"member-headline\">Members: " + members.length + "</div>");
-		$.each(members,function(ind,val){
-			var m = ich["ZMO-members-template-box"](new ZMO.MemberModel(val));
-			container.append(m);
+	var onMembersReceive = function(achievement){
+		container.empty();
+		container.append("<div class=\"member-headline\">Achievement: " + achievement.achievementName + "</div>");
+		var listDiv = $("<div>").addClass("statsdiv").appendTo(container);
+		var table= $("<table>").addClass("stats-drinker").appendTo(listDiv);
+		$.each(achievement.users,function(ind,val){
+			var m = ich["ZMO-achievementsstats-list-template"](val);
+			
+			table.append(m);
 		});
 	};
 	/**
@@ -19,10 +23,8 @@ ZMO.modules.achievementlist = (function($,ajax){
 	 */
 	var init = function(data){
 		//you can access with data.id to the wanted id
-		var text = JSON.stringify(data);
-		container.append(text);
 		ajax.enqueueDatas({
-			url:mC.urls.MEMBERS,
+			url:mC.urls.ACHIEVEMENTSSTATS,
 			callback:onMembersReceive,
 			data:data,
 			onlyOnce:true,
