@@ -83,7 +83,7 @@ $("#uploadImage").on("click",function(e){
 	var formData = new FormData ($("#imageForm")[0]);
 	formData.append("token",localStorage.getItem("token"));
 	$.ajax({
-	    url: 'rest/register/image',
+	    url: 'rest/image/user',
 	    data: formData,
 	    cache: false,
 	    contentType: false,
