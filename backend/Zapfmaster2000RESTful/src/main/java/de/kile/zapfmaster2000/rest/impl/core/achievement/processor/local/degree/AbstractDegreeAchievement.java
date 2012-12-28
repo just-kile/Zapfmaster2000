@@ -10,6 +10,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.AbstractAchievementProcessor;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public abstract class AbstractDegreeAchievement extends
 		AbstractAchievementProcessor {
@@ -34,7 +35,8 @@ public abstract class AbstractDegreeAchievement extends
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		session.update(user);
+		user = (User) session.load(Zapfmaster2000Package.eINSTANCE.getUser()
+				.getName(), user.getId());
 
 		for (int i = 0; i < NUM_DAYS; ++i) {
 			Calendar previous = (Calendar) current.clone();

@@ -30,6 +30,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class PushServiceImpl implements PushService {
 
@@ -231,7 +232,9 @@ public class PushServiceImpl implements PushService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(pChallenge);
+			pChallenge = (Challenge) session.load(
+					Zapfmaster2000Package.eINSTANCE.getChallenge().getName(),
+					pChallenge.getId());
 
 			ChallengeAcceptedReponse entity = new ChallengeAcceptedReponse();
 			entity.setUser1Id(challenge1v1.getUser1().getId());
@@ -266,7 +269,9 @@ public class PushServiceImpl implements PushService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(pChallenge);
+			pChallenge = (Challenge) session.load(
+					Zapfmaster2000Package.eINSTANCE.getChallenge().getName(),
+					pChallenge.getId());
 
 			ChallengeDeclinedReponse entity = new ChallengeDeclinedReponse();
 			entity.setUser1Id(challenge1v1.getUser1().getId());

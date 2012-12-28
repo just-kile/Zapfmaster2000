@@ -9,6 +9,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.AbstractAchievementProcessor;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public abstract class AbstractUniqueDrawingAchievement extends
 		AbstractAchievementProcessor {
@@ -16,11 +17,12 @@ public abstract class AbstractUniqueDrawingAchievement extends
 	@Override
 	public void process(Drawing pDrawing) {
 		User user = pDrawing.getUser();
-		
+
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		session.update(user);
+		user = (User) session.load(Zapfmaster2000Package.eINSTANCE.getUser()
+				.getName(), user.getId());
 		List<?> result = session
 				.createQuery(
 						"SELECT d FROM Drawing d "
