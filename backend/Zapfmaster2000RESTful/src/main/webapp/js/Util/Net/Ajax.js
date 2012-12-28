@@ -103,7 +103,9 @@ ZMO.Util.Net.Ajax = (function($){
 		$.each(aspirantModules,function(url,modulesArr){
 			getDatas(url,function(response){
 				//send datas to aspirants
-				var statsModel = new ZMO.modules.StatsModel(response);
+				var statsModel =  ZMO.modules.StatsModel
+							?new ZMO.modules.StatsModel(response)
+							:null;
 				$.each(modulesArr[conf.MODULE_DATA],function(ind,val){
 					if(val.callback)val.callback(val.rawData?response:statsModel);
 				});
@@ -230,7 +232,7 @@ ZMO.Util.Net.Ajax = (function($){
 	};
 	var sendChallengeConfirmation = function(data){
 		var datas = {
-				pendingChallengeId:data["pendingChallengeId"]
+				pendingChallengeId:data["challengeId"]
 		};
 		var url = ZMO.modules.Constants.urls.ACCEPTCHALLENGE;
 		
@@ -240,7 +242,7 @@ ZMO.Util.Net.Ajax = (function($){
 	};
 	var sendChallengeRejection = function(data){
 		var datas = {
-				pendingChallengeId:data["pendingChallengeId"]
+				pendingChallengeId:data["challengeId"]
 		};
 		var url = ZMO.modules.Constants.urls.DENYCHALLENGE;
 		

@@ -16,20 +16,21 @@ import org.hibernate.Transaction;
 import org.jboss.resteasy.annotations.Suspend;
 import org.jboss.resteasy.spi.AsynchronousResponse;
 
+import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.challenge.StatusAwareAsynchronousResponse;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
 @Path("/push")
 public class PushResource {
-
-	private static final int TIMEOUT = 60000;
 
 	@GET
 	@Path("/news")
 	@Produces(MediaType.APPLICATION_JSON)
 	public void retrieveNews(
-			final @Suspend(TIMEOUT) AsynchronousResponse pResponse,
+			final @Suspend(PlatformConstants.ASYNC_TIMEOUT) AsynchronousResponse pResponse,
 			@QueryParam(value = "token") String pToken) {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
@@ -41,12 +42,11 @@ public class PushResource {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	@GET
 	@Path("/draftkit/{boxid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public void retrieveBoxUpdate(
-			final @Suspend(TIMEOUT) AsynchronousResponse pResponse,
+			final @Suspend(PlatformConstants.ASYNC_TIMEOUT) AsynchronousResponse pResponse,
 			@PathParam("boxid") int pBoxId, @QueryParam("token") String pToken) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
@@ -74,13 +74,34 @@ public class PushResource {
 						.addDraftkitRequest(pResponse, box, pToken);
 			} else {
 				// TODO
-//				pResponse
-//						.setResponse(Response.status(Status.FORBIDDEN).build());
+				// pResponse
+				// .setResponse(Response.status(Status.FORBIDDEN).build());
 			}
 		}
 		// TODO
-//		pResponse.setResponse(Response.status(Status.FORBIDDEN).build());
+		// pResponse.setResponse(Response.status(Status.FORBIDDEN).build());
 
+	}
+
+	@GET
+	@Path("/challenge")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void retrieveChallengeUpdates(
+			final @Suspend(PlatformConstants.ASYNC_TIMEOUT) AsynchronousResponse pResponse,
+			@QueryParam("token") String pToken) {
+
+		User user = Zapfmaster2000Core.INSTANCE.getAuthService().retrieveUser(
+				pToken);
+		if (user != null) {
+			StatusAwareAsynchronousResponse statusAwareAsynchronousResponse = new StatusAwareAsynchronousResponse(
+					pResponse);
+			Zapfmaster2000Core.INSTANCE.getChallengeService().rememberUser(
+					user, statusAwareAsynchronousResponse);
+			Zapfmaster2000Core.INSTANCE.getPushService().addChallengeRequest(
+					statusAwareAsynchronousResponse, user);
+		} else {
+			// TODO: forbidden
+		}
 	}
 
 }

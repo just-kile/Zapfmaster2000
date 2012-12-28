@@ -2,8 +2,8 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 import java.util.Date;
@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,64 +22,65 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getId <em>Id</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getChallenge <em>Challenge</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getChallengeEnd <em>Challenge End</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getUser1 <em>User1</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getUser2 <em>User2</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getWinner <em>Winner</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl#getDuration <em>Duration</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
+public class Challenge1v1Impl extends ChallengeImpl implements Challenge1v1 {
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The cached value of the '{@link #getUser1() <em>User1</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #getUser1()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long ID_EDEFAULT = 0L;
+	protected User user1;
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The cached value of the '{@link #getUser2() <em>User2</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #getUser2()
 	 * @generated
 	 * @ordered
 	 */
-	protected long id = ID_EDEFAULT;
+	protected User user2;
 
 	/**
-	 * The cached value of the '{@link #getChallenge() <em>Challenge</em>}' reference.
+	 * The cached value of the '{@link #getWinner() <em>Winner</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getChallenge()
+	 * @see #getWinner()
 	 * @generated
 	 * @ordered
 	 */
-	protected Challenge challenge;
+	protected User winner;
 
 	/**
-	 * The default value of the '{@link #getChallengeEnd() <em>Challenge End</em>}' attribute.
+	 * The default value of the '{@link #getDuration() <em>Duration</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getChallengeEnd()
+	 * @see #getDuration()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Date CHALLENGE_END_EDEFAULT = null;
+	protected static final int DURATION_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getChallengeEnd() <em>Challenge End</em>}' attribute.
+	 * The cached value of the '{@link #getDuration() <em>Duration</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getChallengeEnd()
+	 * @see #getDuration()
 	 * @generated
 	 * @ordered
 	 */
-	protected Date challengeEnd = CHALLENGE_END_EDEFAULT;
+	protected int duration = DURATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,37 +106,16 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setId(long newId) {
-		long oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.CHALLENGE1V1__ID, oldId, id));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Challenge getChallenge() {
-		if (challenge != null && challenge.eIsProxy()) {
-			InternalEObject oldChallenge = (InternalEObject)challenge;
-			challenge = (Challenge)eResolveProxy(oldChallenge);
-			if (challenge != oldChallenge) {
+	public User getUser1() {
+		if (user1 != null && user1.eIsProxy()) {
+			InternalEObject oldUser1 = (InternalEObject)user1;
+			user1 = (User)eResolveProxy(oldUser1);
+			if (user1 != oldUser1) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE, oldChallenge, challenge));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.CHALLENGE1V1__USER1, oldUser1, user1));
 			}
 		}
-		return challenge;
+		return user1;
 	}
 
 	/**
@@ -144,8 +123,8 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Challenge basicGetChallenge() {
-		return challenge;
+	public User basicGetUser1() {
+		return user1;
 	}
 
 	/**
@@ -153,11 +132,11 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setChallenge(Challenge newChallenge) {
-		Challenge oldChallenge = challenge;
-		challenge = newChallenge;
+	public void setUser1(User newUser1) {
+		User oldUser1 = user1;
+		user1 = newUser1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE, oldChallenge, challenge));
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.CHALLENGE1V1__USER1, oldUser1, user1));
 	}
 
 	/**
@@ -165,8 +144,16 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Date getChallengeEnd() {
-		return challengeEnd;
+	public User getUser2() {
+		if (user2 != null && user2.eIsProxy()) {
+			InternalEObject oldUser2 = (InternalEObject)user2;
+			user2 = (User)eResolveProxy(oldUser2);
+			if (user2 != oldUser2) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.CHALLENGE1V1__USER2, oldUser2, user2));
+			}
+		}
+		return user2;
 	}
 
 	/**
@@ -174,11 +161,79 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setChallengeEnd(Date newChallengeEnd) {
-		Date oldChallengeEnd = challengeEnd;
-		challengeEnd = newChallengeEnd;
+	public User basicGetUser2() {
+		return user2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUser2(User newUser2) {
+		User oldUser2 = user2;
+		user2 = newUser2;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE_END, oldChallengeEnd, challengeEnd));
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.CHALLENGE1V1__USER2, oldUser2, user2));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public User getWinner() {
+		if (winner != null && winner.eIsProxy()) {
+			InternalEObject oldWinner = (InternalEObject)winner;
+			winner = (User)eResolveProxy(oldWinner);
+			if (winner != oldWinner) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.CHALLENGE1V1__WINNER, oldWinner, winner));
+			}
+		}
+		return winner;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public User basicGetWinner() {
+		return winner;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWinner(User newWinner) {
+		User oldWinner = winner;
+		winner = newWinner;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.CHALLENGE1V1__WINNER, oldWinner, winner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getDuration() {
+		return duration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDuration(int newDuration) {
+		int oldDuration = duration;
+		duration = newDuration;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.CHALLENGE1V1__DURATION, oldDuration, duration));
 	}
 
 	/**
@@ -189,13 +244,17 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Zapfmaster2000Package.CHALLENGE1V1__ID:
-				return getId();
-			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE:
-				if (resolve) return getChallenge();
-				return basicGetChallenge();
-			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE_END:
-				return getChallengeEnd();
+			case Zapfmaster2000Package.CHALLENGE1V1__USER1:
+				if (resolve) return getUser1();
+				return basicGetUser1();
+			case Zapfmaster2000Package.CHALLENGE1V1__USER2:
+				if (resolve) return getUser2();
+				return basicGetUser2();
+			case Zapfmaster2000Package.CHALLENGE1V1__WINNER:
+				if (resolve) return getWinner();
+				return basicGetWinner();
+			case Zapfmaster2000Package.CHALLENGE1V1__DURATION:
+				return getDuration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -208,14 +267,17 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Zapfmaster2000Package.CHALLENGE1V1__ID:
-				setId((Long)newValue);
+			case Zapfmaster2000Package.CHALLENGE1V1__USER1:
+				setUser1((User)newValue);
 				return;
-			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE:
-				setChallenge((Challenge)newValue);
+			case Zapfmaster2000Package.CHALLENGE1V1__USER2:
+				setUser2((User)newValue);
 				return;
-			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE_END:
-				setChallengeEnd((Date)newValue);
+			case Zapfmaster2000Package.CHALLENGE1V1__WINNER:
+				setWinner((User)newValue);
+				return;
+			case Zapfmaster2000Package.CHALLENGE1V1__DURATION:
+				setDuration((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -229,14 +291,17 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Zapfmaster2000Package.CHALLENGE1V1__ID:
-				setId(ID_EDEFAULT);
+			case Zapfmaster2000Package.CHALLENGE1V1__USER1:
+				setUser1((User)null);
 				return;
-			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE:
-				setChallenge((Challenge)null);
+			case Zapfmaster2000Package.CHALLENGE1V1__USER2:
+				setUser2((User)null);
 				return;
-			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE_END:
-				setChallengeEnd(CHALLENGE_END_EDEFAULT);
+			case Zapfmaster2000Package.CHALLENGE1V1__WINNER:
+				setWinner((User)null);
+				return;
+			case Zapfmaster2000Package.CHALLENGE1V1__DURATION:
+				setDuration(DURATION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -250,12 +315,14 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Zapfmaster2000Package.CHALLENGE1V1__ID:
-				return id != ID_EDEFAULT;
-			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE:
-				return challenge != null;
-			case Zapfmaster2000Package.CHALLENGE1V1__CHALLENGE_END:
-				return CHALLENGE_END_EDEFAULT == null ? challengeEnd != null : !CHALLENGE_END_EDEFAULT.equals(challengeEnd);
+			case Zapfmaster2000Package.CHALLENGE1V1__USER1:
+				return user1 != null;
+			case Zapfmaster2000Package.CHALLENGE1V1__USER2:
+				return user2 != null;
+			case Zapfmaster2000Package.CHALLENGE1V1__WINNER:
+				return winner != null;
+			case Zapfmaster2000Package.CHALLENGE1V1__DURATION:
+				return duration != DURATION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -270,10 +337,8 @@ public class Challenge1v1Impl extends EObjectImpl implements Challenge1v1 {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
-		result.append(", challengeEnd: ");
-		result.append(challengeEnd);
+		result.append(" (duration: ");
+		result.append(duration);
 		result.append(')');
 		return result.toString();
 	}

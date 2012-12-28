@@ -3,7 +3,6 @@
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
@@ -24,7 +23,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -44,7 +42,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getWeight <em>Weight</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getGained <em>Gained</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getDrawings <em>Drawings</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getChallengeParticipations <em>Challenge Participations</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl#getAccount <em>Account</em>}</li>
  * </ul>
@@ -204,7 +201,7 @@ public class UserImpl extends EObjectImpl implements User {
 	protected EList<GainedAchievement> gained;
 
 	/**
-	 * The cached value of the '{@link #getDrawings() <em>Drawings</em>}' containment reference list.
+	 * The cached value of the '{@link #getDrawings() <em>Drawings</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDrawings()
@@ -212,16 +209,6 @@ public class UserImpl extends EObjectImpl implements User {
 	 * @ordered
 	 */
 	protected EList<Drawing> drawings;
-
-	/**
-	 * The cached value of the '{@link #getChallengeParticipations() <em>Challenge Participations</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getChallengeParticipations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ChallengeParticipant> challengeParticipations;
 
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -438,21 +425,9 @@ public class UserImpl extends EObjectImpl implements User {
 	 */
 	public EList<Drawing> getDrawings() {
 		if (drawings == null) {
-			drawings = new EObjectContainmentWithInverseEList<Drawing>(Drawing.class, this, Zapfmaster2000Package.USER__DRAWINGS, Zapfmaster2000Package.DRAWING__USER);
+			drawings = new EObjectWithInverseResolvingEList<Drawing>(Drawing.class, this, Zapfmaster2000Package.USER__DRAWINGS, Zapfmaster2000Package.DRAWING__USER);
 		}
 		return drawings;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ChallengeParticipant> getChallengeParticipations() {
-		if (challengeParticipations == null) {
-			challengeParticipations = new EObjectWithInverseResolvingEList.ManyInverse<ChallengeParticipant>(ChallengeParticipant.class, this, Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS, Zapfmaster2000Package.CHALLENGE_PARTICIPANT__USER);
-		}
-		return challengeParticipations;
 	}
 
 	/**
@@ -549,8 +524,6 @@ public class UserImpl extends EObjectImpl implements User {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGained()).basicAdd(otherEnd, msgs);
 			case Zapfmaster2000Package.USER__DRAWINGS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDrawings()).basicAdd(otherEnd, msgs);
-			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChallengeParticipations()).basicAdd(otherEnd, msgs);
 			case Zapfmaster2000Package.USER__ACCOUNT:
 				if (account != null)
 					msgs = ((InternalEObject)account).eInverseRemove(this, Zapfmaster2000Package.ACCOUNT__USERS, Account.class, msgs);
@@ -571,8 +544,6 @@ public class UserImpl extends EObjectImpl implements User {
 				return ((InternalEList<?>)getGained()).basicRemove(otherEnd, msgs);
 			case Zapfmaster2000Package.USER__DRAWINGS:
 				return ((InternalEList<?>)getDrawings()).basicRemove(otherEnd, msgs);
-			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
-				return ((InternalEList<?>)getChallengeParticipations()).basicRemove(otherEnd, msgs);
 			case Zapfmaster2000Package.USER__ACCOUNT:
 				return basicSetAccount(null, msgs);
 		}
@@ -605,8 +576,6 @@ public class UserImpl extends EObjectImpl implements User {
 				return getGained();
 			case Zapfmaster2000Package.USER__DRAWINGS:
 				return getDrawings();
-			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
-				return getChallengeParticipations();
 			case Zapfmaster2000Package.USER__TYPE:
 				return getType();
 			case Zapfmaster2000Package.USER__ACCOUNT:
@@ -654,10 +623,6 @@ public class UserImpl extends EObjectImpl implements User {
 				getDrawings().clear();
 				getDrawings().addAll((Collection<? extends Drawing>)newValue);
 				return;
-			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
-				getChallengeParticipations().clear();
-				getChallengeParticipations().addAll((Collection<? extends ChallengeParticipant>)newValue);
-				return;
 			case Zapfmaster2000Package.USER__TYPE:
 				setType((UserType)newValue);
 				return;
@@ -703,9 +668,6 @@ public class UserImpl extends EObjectImpl implements User {
 			case Zapfmaster2000Package.USER__DRAWINGS:
 				getDrawings().clear();
 				return;
-			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
-				getChallengeParticipations().clear();
-				return;
 			case Zapfmaster2000Package.USER__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -742,8 +704,6 @@ public class UserImpl extends EObjectImpl implements User {
 				return gained != null && !gained.isEmpty();
 			case Zapfmaster2000Package.USER__DRAWINGS:
 				return drawings != null && !drawings.isEmpty();
-			case Zapfmaster2000Package.USER__CHALLENGE_PARTICIPATIONS:
-				return challengeParticipations != null && !challengeParticipations.isEmpty();
 			case Zapfmaster2000Package.USER__TYPE:
 				return type != TYPE_EDEFAULT;
 			case Zapfmaster2000Package.USER__ACCOUNT:

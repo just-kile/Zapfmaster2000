@@ -3,6 +3,7 @@ package de.kile.zapfmaster2000.rest.core;
 import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
+import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
 import de.kile.zapfmaster2000.rest.core.push.PushService;
@@ -72,5 +73,12 @@ public interface Zapfmaster2000Core {
 	 * @return the push service.
 	 */
 	public PushService getPushService();
+	
+	/**
+	 * Returns the challenge service.
+	 * 
+	 * @return the challenge service.
+	 */
+	public ChallengeService getChallengeService();
 
 }

@@ -4,6 +4,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
+import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
 import de.kile.zapfmaster2000.rest.core.push.PushService;
@@ -11,6 +12,7 @@ import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.AchievementServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.auth.AuthServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.box.BoxServiceImpl;
+import de.kile.zapfmaster2000.rest.impl.core.challenge.ChallengeServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.configuration.FileConfiguratioServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.news.NewsServiceImpl;
 import de.kile.zapfmaster2000.rest.impl.core.push.PushServiceImpl;
@@ -42,6 +44,9 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	/** the push service */
 	private PushService pushService;
 
+	/** the challenge service */
+	private ChallengeService challengeService;
+
 	private Zapfmaster2000CoreImpl() {
 		transactionService = new TransactionServiceImpl();
 		configurationService = new FileConfiguratioServiceImpl();
@@ -49,8 +54,11 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 		authService = new AuthServiceImpl();
 		achievementService = new AchievementServiceImpl(boxService,
 				transactionService);
-		newsService = new NewsServiceImpl(boxService, achievementService);
-		pushService = new PushServiceImpl(newsService, boxService);
+		challengeService = new ChallengeServiceImpl();
+		newsService = new NewsServiceImpl(boxService, achievementService,
+				challengeService);
+		pushService = new PushServiceImpl(newsService, boxService,
+				challengeService);
 	}
 
 	/**
@@ -99,6 +107,11 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	@Override
 	public PushService getPushService() {
 		return pushService;
+	}
+
+	@Override
+	public ChallengeService getChallengeService() {
+		return challengeService;
 	}
 
 	/**

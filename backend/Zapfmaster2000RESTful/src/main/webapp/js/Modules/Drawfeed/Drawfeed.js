@@ -13,19 +13,19 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		rfid = $(document.createElement("span")).attr("id","rfid").addClass("statstext");
 		var newscut  =$(document.createElement("div")).text(" ").addClass("newscut");
 		
-		return container.append(newsText).append(rfid).append(newscut)
-	}
+		return container.append(newsText).append(rfid).append(newscut);
+	};
 	
 	var createContainer =function(){
 		var container = $(document.createElement("div")).addClass("news-backgrnd");
 		var newsFeedContainer = $(document.createElement("div")).addClass("newsfeed");
 		var rfidHeadline= initRfid();
-		newsfeed  =  $(document.createElement("div")).attr("id","drawfeed-news")
+		newsfeed  =  $(document.createElement("div")).attr("id","drawfeed-news");
 		newsFeedContainer.append(rfidHeadline).append(newsfeed);
 		container.append(newsFeedContainer);
 		scrollElement = $("<div>").addClass("scrollElement").appendTo(container);
 		return container;
-	}
+	};
 	/**
 	 * ##########################################################
 	 * Newsfeed creation
@@ -57,6 +57,9 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				case c.types.CHALLENGE_DONE:
 					 news = parseChallengesDone(val);
 					 break;
+				case c.types.CHALLENGE_DECLINED:
+					 news = parseChallengesDeclined(val);
+					 break;
 			}
 			if(typeof top!="undefined" && top ==true){
 				if(val.refreshType!= "REFRESH"){
@@ -86,7 +89,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		var parseChallengesDone = function(val){
 			var model = new ZMO.GlobalChallengeModel(val);
 			var winner,loser;
-			if(typeof model.team1!="undefined" &&typeof model.team1[0]!="undefined" && model.team1[0].won==1){
+			if(typeof model.team1Won!="undefined" &&typeof model.team1Won[0]!="undefined" && model.team1Won[0]){
 				winner=model.team1;
 				loser=model.team2;
 			}else{
@@ -98,21 +101,29 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				team2:model.team2.join(","),
 				duration:model.duration,
 				type:model.challenge_type,
-				winner:model.team1[0].won?model.team1.join(","):model.team2.join(","),
+				winner:winner.join(","),
 				image:model.image,
 				date:model.date
-			})
-		}
+			});
+		};
 		var parseChallengesDeclined = function(val){
-			var model = new ZMO.GlobalChallengeModel(val)
+			var model = new ZMO.GlobalChallengeModel(val);
+			var exNumber =0;
+			if(ZMO.exists(val.dateParser)){
+				exNumber = val.dateParser.getTimestamp()%mC.badExcuses.length;
+			}else{
+				exNumber = Math.round(Math.random()*10)%(mC.badExcuses.length);				
+			}
+
+			var excuse = mC.badExcuses[exNumber];
 			return ich["ZMO-news-template-challenge-declined"]({
 				team1:model.team1.join(","),
 				team2:model.team2.join(","),
 				duration:model.duration,
 				type:model.challenge_type,
-				reason:ZMO.Constants.badExcuses[Math.round(Math.random()*10)%(ZMO.Constants.badExcuses.length)],
-			image:model.image,
-			date:model.date
+				reason:excuse,
+				image:model.image,
+				date:model.date
 			})
 		}
 	 
@@ -155,12 +166,12 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		 }
 	 };
 	 var bindScrollHandler = function(scrollElement){
-		 var windowHeight = $(window).height();
 		 var actLoadingFlag = false;
 		 $(window).bind("scroll",function(e){
 			 var top = scrollElement.offset().top;
+			 var windowHeight = $(window).height();
 			 var windowTop = $(window).scrollTop()+windowHeight+200;
-			 if(windowTop>top && top>windowHeight&& !actLoadingFlag){
+			 if(windowTop>top && top>=windowHeight&& !actLoadingFlag){
 				 actLoadingFlag = true;
 				 var len = container.children().length;
 				 updateNewslist(len,mC.drawfeed.listLength,function(datas){if(datas.length!=0)actLoadingFlag = false;});

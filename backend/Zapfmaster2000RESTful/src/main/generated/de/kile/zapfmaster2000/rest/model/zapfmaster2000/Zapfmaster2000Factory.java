@@ -49,15 +49,6 @@ public interface Zapfmaster2000Factory extends EFactory {
 	Account createAccount();
 
 	/**
-	 * Returns a new object of class '<em>Challenge</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Challenge</em>'.
-	 * @generated
-	 */
-	Challenge createChallenge();
-
-	/**
 	 * Returns a new object of class '<em>Challenge1v1</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,15 +56,6 @@ public interface Zapfmaster2000Factory extends EFactory {
 	 * @generated
 	 */
 	Challenge1v1 createChallenge1v1();
-
-	/**
-	 * Returns a new object of class '<em>Challenge Participant</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Challenge Participant</em>'.
-	 * @generated
-	 */
-	ChallengeParticipant createChallengeParticipant();
 
 	/**
 	 * Returns a new object of class '<em>Drawing</em>'.
@@ -103,33 +85,6 @@ public interface Zapfmaster2000Factory extends EFactory {
 	Keg createKeg();
 
 	/**
-	 * Returns a new object of class '<em>Mapping Qr Rfid</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Qr Rfid</em>'.
-	 * @generated
-	 */
-	MappingQrRfid createMappingQrRfid();
-
-	/**
-	 * Returns a new object of class '<em>User</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>User</em>'.
-	 * @generated
-	 */
-	User createUser();
-
-	/**
-	 * Returns a new object of class '<em>Token</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Token</em>'.
-	 * @generated
-	 */
-	Token createToken();
-
-	/**
 	 * Returns a new object of class '<em>Drawing News</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -155,6 +110,60 @@ public interface Zapfmaster2000Factory extends EFactory {
 	 * @generated
 	 */
 	OtherNews createOtherNews();
+
+	/**
+	 * Returns a new object of class '<em>Challenge1v1 Started News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Challenge1v1 Started News</em>'.
+	 * @generated
+	 */
+	Challenge1v1StartedNews createChallenge1v1StartedNews();
+
+	/**
+	 * Returns a new object of class '<em>Challenge1v1 Declined News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Challenge1v1 Declined News</em>'.
+	 * @generated
+	 */
+	Challenge1v1DeclinedNews createChallenge1v1DeclinedNews();
+
+	/**
+	 * Returns a new object of class '<em>Challenge1v1 Done News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Challenge1v1 Done News</em>'.
+	 * @generated
+	 */
+	Challenge1v1DoneNews createChallenge1v1DoneNews();
+
+	/**
+	 * Returns a new object of class '<em>Mapping Qr Rfid</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Qr Rfid</em>'.
+	 * @generated
+	 */
+	MappingQrRfid createMappingQrRfid();
+
+	/**
+	 * Returns a new object of class '<em>User</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>User</em>'.
+	 * @generated
+	 */
+	User createUser();
+
+	/**
+	 * Returns a new object of class '<em>Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Token</em>'.
+	 * @generated
+	 */
+	Token createToken();
 
 	/**
 	 * Returns the package supported by this factory.
