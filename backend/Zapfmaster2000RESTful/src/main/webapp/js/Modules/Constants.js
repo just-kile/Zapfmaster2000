@@ -17,8 +17,8 @@ ZMO.modules.Constants = {
 			USERFRONTPAGESTATS:"tmp/kegstatus.json",
 
 			NEWSLIST:"rest/news",
-			STATS:"tmp/stats.json",
-			
+			//STATS:"tmp/stats.json",
+			STATS:"rest/statistics/globalStats",
 			MEMBERS:"rest/members",
 			
 			CHALLENGES:"rest/challenge",
