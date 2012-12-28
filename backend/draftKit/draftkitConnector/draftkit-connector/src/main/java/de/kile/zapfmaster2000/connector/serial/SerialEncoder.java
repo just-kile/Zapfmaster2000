@@ -19,7 +19,7 @@ public class SerialEncoder {
 	 * @param message
 	 * @return
 	 */
-	public byte[] encodeMessage(Message message) {
+	public static byte[] encodeMessage(Message message) {
 		byte[] data = null;
 
 		// determine message type

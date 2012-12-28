@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Observer;
 
+import de.kile.zapfmaster2000.connector.messages.Message;
+
 /**
  * 
  * Provides the serial communication with the draftkitAVR Component.
@@ -68,9 +70,13 @@ public class SerialCommunicator {
 				OutputStream out = serialPort.getOutputStream();
 
 				writer = new SerialWriter(out);
+				
+				System.out.println("Writer created");
 
 				// create reader as listener for the serial port
 				reader = new SerialReader(in);
+				
+				System.out.println("Reader created");
 				serialPort.addEventListener(reader);
 				serialPort.notifyOnDataAvailable(true);
 
@@ -83,6 +89,19 @@ public class SerialCommunicator {
 			}
 		}
 	}
+	
+	/**
+	 * sends a message to the draftkitAVR via serial port
+	 * 
+	 * @param message - message to be send to the draftkitAVR
+	 */
+	public void sendMessage(Message message) {
+		// encode message 
+		byte[] data = SerialEncoder.encodeMessage(message);
+		// send data over serial port
+		if (data != null) 
+			writer.writeOut(data);
+	}
 
 	/**
 	 * add an observer to the list of observers, that will be attached to the
@@ -90,13 +109,13 @@ public class SerialCommunicator {
 	 * 
 	 * @param newObserver
 	 */
-	void addObserver(Observer newObserver) {
+	public void addObserver(Observer newObserver) {
 		observers.add(newObserver);
 		if (reader != null)
 			reader.addObserver(newObserver);
 	}
 
-	void removeObserver(Observer oldObserver) {
+	public void removeObserver(Observer oldObserver) {
 		observers.remove(oldObserver);
 		if (reader != null)
 			reader.deleteObserver(oldObserver);
@@ -106,7 +125,7 @@ public class SerialCommunicator {
 	 * refreshes the list of observers, that are attached to the serial port
 	 * reader
 	 */
-	void updateObservers() {
+	private void updateObservers() {
 		if (reader != null) {
 			// clear reader's observer list
 			reader.deleteObservers();
