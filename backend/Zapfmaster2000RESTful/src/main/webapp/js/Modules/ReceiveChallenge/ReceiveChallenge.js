@@ -20,9 +20,9 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 					ajax.sendChallengeRejection(datas);
 				}
 			}else if(type=="challengeaccepted"){
-				alert("Die Herausforderung zwischen "+user1Name+" und "+ user2Name+ " wurde gestartet!");
+				alert("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde gestartet!");
 			}else if(type=="challengedeclined"){
-				alert("Die Herausforderung zwischen "+user1Name+" und "+ user2Name+ " wurde abgelehnt!");
+				alert("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde abgelehnt!");
 			}
 
 		}

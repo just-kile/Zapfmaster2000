@@ -121,7 +121,7 @@ public class TestUserRankingByAmount extends AbstractMockingTest {
 	public void testAmountRanking() {
 		RankingsResource rankingsResource = new RankingsResource();
 		Response response = rankingsResource.retrieveUserRankingByAmount(null,
-				null, null);
+				null, null, null);
 
 		Object[] rawUserAmountResponse = (Object[]) response.getEntity();
 
@@ -138,7 +138,7 @@ public class TestUserRankingByAmount extends AbstractMockingTest {
 		RankingsResource rankingsResource = new RankingsResource();
 
 		Response response = rankingsResource.retrieveUserRankingByAmount(
-				fromString, null, null);
+				fromString, null, null, null);
 
 		Object[] rawUserAmountResponse = (Object[]) response.getEntity();
 
@@ -153,7 +153,7 @@ public class TestUserRankingByAmount extends AbstractMockingTest {
 		RankingsResource rankingsResource = new RankingsResource();
 
 		Response response = rankingsResource.retrieveUserRankingByAmount(
-				fromString, toString, null);
+				fromString, toString, null, null);
 
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 

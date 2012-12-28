@@ -2,11 +2,15 @@ package de.kile.zapfmaster2000.rest.core.util;
 
 import org.apache.log4j.Logger;
 
+import de.kile.zapfmaster2000.rest.api.challenge.ChallengeOverviewReponse;
 import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse;
+import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse.Type;
 import de.kile.zapfmaster2000.rest.api.news.AchievementNewsResponse;
 import de.kile.zapfmaster2000.rest.api.news.DrawingNewsResponse;
-import de.kile.zapfmaster2000.rest.api.news.NewsResource;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
@@ -29,13 +33,25 @@ public class NewsAdapter {
 			AchievementNews achievementNews = (AchievementNews) pNews;
 			newsResponse = adaptAchievementNews(achievementNews);
 			break;
-		case Zapfmaster2000Package.OTHER_NEWS:
+		case Zapfmaster2000Package.CHALLENGE1V1_STARTED_NEWS:
+			Challenge1v1StartedNews startedNews = (Challenge1v1StartedNews) pNews;
+			newsResponse = adaptChallenge1v1StartedNews(startedNews);
+			break;
+		case Zapfmaster2000Package.CHALLENGE1V1_DECLINED_NEWS:
+			Challenge1v1DeclinedNews declinedNews = (Challenge1v1DeclinedNews) pNews;
+			newsResponse = adaptChallenge1v1DeclinedNews(declinedNews);
+			break;
+		case Zapfmaster2000Package.CHALLENGE1V1_DONE_NEWS:
+			Challenge1v1DoneNews doneNews = (Challenge1v1DoneNews) pNews;
+			newsResponse = adaptChallenge1v1DonedNews(doneNews);
+			break;
+
 		default:
 			LOG.error("Unsupported news type: " + pNews.getClass().getName());
 		}
 
 		if (newsResponse != null) {
-			newsResponse.setDate(pNews.getDate());
+			newsResponse.loadDate(pNews.getDate());
 		}
 		return newsResponse;
 	}
@@ -44,7 +60,7 @@ public class NewsAdapter {
 		DrawingNewsResponse drawingResp = new DrawingNewsResponse();
 		Drawing drawing = pNews.getDrawing();
 
-		drawingResp.setDate(pNews.getDate());
+		drawingResp.loadDate(pNews.getDate());
 		drawingResp.setAmount(drawing.getAmount());
 		drawingResp.setKegId(drawing.getKeg().getId());
 		drawingResp.setBrand(drawing.getKeg().getBrand());
@@ -60,7 +76,7 @@ public class NewsAdapter {
 		AchievementNewsResponse achievementResp = new AchievementNewsResponse();
 		GainedAchievement gainedAchievement = pNews.getGainedAchievment();
 
-		achievementResp.setDate(pNews.getDate());
+		achievementResp.loadDate(pNews.getDate());
 		achievementResp.setImage(gainedAchievement.getAchievement()
 				.getImagePath());
 		achievementResp.setUserName(gainedAchievement.getUser().getName());
@@ -71,4 +87,33 @@ public class NewsAdapter {
 
 		return achievementResp;
 	}
+
+	private AbstractNewsResponse adaptChallenge1v1StartedNews(
+			Challenge1v1StartedNews pStartedNews) {
+		ChallengeOverviewReponse news = new ChallengeAdapter()
+				.adaptChallenge(pStartedNews.getChallenge());
+		news.loadDate(pStartedNews.getDate());
+		news.setType(Type.CHALLENGE_STARTED); // it is a challenge started news!
+												// However, previous adaption
+												// may detect that the challenge
+												// is done already
+		return news;
+	}
+
+	private AbstractNewsResponse adaptChallenge1v1DeclinedNews(
+			Challenge1v1DeclinedNews pDeclinedNews) {
+		AbstractNewsResponse news = new ChallengeAdapter()
+				.adaptChallenge(pDeclinedNews.getChallenge());
+		news.loadDate(pDeclinedNews.getDate());
+		return news;
+	}
+
+	private AbstractNewsResponse adaptChallenge1v1DonedNews(
+			Challenge1v1DoneNews pDoneNews) {
+		AbstractNewsResponse news = new ChallengeAdapter()
+				.adaptChallenge(pDoneNews.getChallenge());
+		news.loadDate(pDoneNews.getDate());
+		return news;
+	}
+
 }

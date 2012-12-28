@@ -21,11 +21,11 @@ ZMO.modules.Constants = {
 			
 			MEMBERS:"rest/members",
 			
-			CHALLENGES:"tmp/challenges.json",
-			CHALLENGEEMEMBERS:"rest/members",
+			CHALLENGES:"rest/challenge",
+			CHALLENGEEMEMBERS:"rest/challenge/users",
 			STARTCHALLENGE:"rest/challenge/start/{0}",
 			ACCEPTCHALLENGE:"rest/challenge/accept",
-			DENYCHALLENGE:"rest/challenge/deny"
+			DENYCHALLENGE:"rest/challenge/decline"
 			// NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
 		push:{
@@ -106,5 +106,8 @@ ZMO.modules.Constants = {
 			title:"Dare",
 			image:"images/icons/22-skull-n-bones.png"
 		
-}]
+}],
+badExcuses:["1","2","und 3"]
+	
+
 };

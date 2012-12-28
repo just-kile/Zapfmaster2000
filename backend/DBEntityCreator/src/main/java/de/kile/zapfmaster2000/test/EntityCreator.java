@@ -38,6 +38,7 @@ public class EntityCreator {
 		user1.setSex(Sex.MALE);
 		user1.setType(UserType.USER);
 		user1.setWeight(75);
+		user1.setAccount(account);
 
 		User user2 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user2.setName("user-2");
@@ -47,6 +48,7 @@ public class EntityCreator {
 		user2.setSex(Sex.MALE);
 		user2.setType(UserType.USER);
 		user2.setWeight(75);
+		user2.setAccount(account);
 		
 		User user3 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		user3.setName("user-3");
@@ -56,6 +58,7 @@ public class EntityCreator {
 		user3.setSex(Sex.FEMALE);
 		user3.setType(UserType.USER);
 		user3.setWeight(75);
+		user3.setAccount(account);
 		
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();

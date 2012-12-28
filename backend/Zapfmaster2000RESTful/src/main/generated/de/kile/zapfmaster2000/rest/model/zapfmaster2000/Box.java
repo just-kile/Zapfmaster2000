@@ -109,6 +109,32 @@ public interface Box extends EObject {
 	void setAccount(Account value);
 
 	/**
+	 * Returns the value of the '<em><b>Passphrase</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Passphrase</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Passphrase</em>' attribute.
+	 * @see #setPassphrase(String)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_Passphrase()
+	 * @model
+	 * @generated
+	 */
+	String getPassphrase();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Passphrase</em>' attribute.
+	 * @see #getPassphrase()
+	 * @generated
+	 */
+	void setPassphrase(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Kegs</b></em>' containment reference list.
 	 * The list contents are of type {@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg}.
 	 * It is bidirectional and its opposite is '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg#getBox <em>Box</em>}'.
@@ -151,31 +177,5 @@ public interface Box extends EObject {
 	 * @generated
 	 */
 	void setLocation(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Passphrase</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Passphrase</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Passphrase</em>' attribute.
-	 * @see #setPassphrase(String)
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_Passphrase()
-	 * @model
-	 * @generated
-	 */
-	String getPassphrase();
-
-	/**
-	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Passphrase</em>' attribute.
-	 * @see #getPassphrase()
-	 * @generated
-	 */
-	void setPassphrase(String value);
 
 } // Box

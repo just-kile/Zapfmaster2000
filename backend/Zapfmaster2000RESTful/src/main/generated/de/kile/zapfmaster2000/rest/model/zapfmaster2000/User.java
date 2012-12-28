@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getWeight <em>Weight</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getGained <em>Gained</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getDrawings <em>Drawings</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getChallengeParticipations <em>Challenge Participations</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getType <em>Type</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getAccount <em>Account</em>}</li>
  * </ul>
@@ -238,40 +237,22 @@ public interface User extends EObject {
 	EList<GainedAchievement> getGained();
 
 	/**
-	 * Returns the value of the '<em><b>Drawings</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Drawings</b></em>' reference list.
 	 * The list contents are of type {@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing}.
 	 * It is bidirectional and its opposite is '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getUser <em>User</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Drawings</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Drawings</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Drawings</em>' containment reference list.
+	 * @return the value of the '<em>Drawings</em>' reference list.
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getUser_Drawings()
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getUser
-	 * @model opposite="user" containment="true"
-	 * @generated
-	 */
-	EList<Drawing> getDrawings();
-
-	/**
-	 * Returns the value of the '<em><b>Challenge Participations</b></em>' reference list.
-	 * The list contents are of type {@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant}.
-	 * It is bidirectional and its opposite is '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getUser <em>User</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Challenge Participations</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Challenge Participations</em>' reference list.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getUser_ChallengeParticipations()
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getUser
 	 * @model opposite="user"
 	 * @generated
 	 */
-	EList<ChallengeParticipant> getChallengeParticipations();
+	EList<Drawing> getDrawings();
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

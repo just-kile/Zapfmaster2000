@@ -13,11 +13,18 @@ import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.achievement.AchievementServiceListener;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
+import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
+import de.kile.zapfmaster2000.rest.core.challenge.ChallengeServiceListener;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
 import de.kile.zapfmaster2000.rest.core.news.NewsServiceListener;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
@@ -34,8 +41,37 @@ public class NewsServiceImpl implements NewsService {
 	private static List<NewsServiceListener> listeners = new ArrayList<>();
 
 	public NewsServiceImpl(BoxService pBoxService,
-			AchievementService pAchievementService) {
-		pBoxService.addListener(new BoxServiceListener() {
+			AchievementService pAchievementService,
+			ChallengeService pChallengeService) {
+		pBoxService.addListener(createBoxServiceListener());
+		pAchievementService.addListener(createAchievementServiceListener());
+		pChallengeService.addListener(createChallengeServiceListener());
+	}
+
+	@Override
+	public void addListener(NewsServiceListener pListener) {
+		if (pListener != null) {
+			listeners.add(pListener);
+		}
+
+	}
+
+	@Override
+	public void removeListener(NewsServiceListener pListener) {
+		listeners.remove(pListener);
+	}
+
+	private AchievementServiceListener createAchievementServiceListener() {
+		return new AchievementServiceListener() {
+			@Override
+			public void onAchievementGained(GainedAchievement pGainedAchievement) {
+				postNewsAchievementGained(pGainedAchievement);
+			}
+		};
+	}
+
+	private BoxServiceListener createBoxServiceListener() {
+		return new BoxServiceListener() {
 
 			@Override
 			public void onLoginsuccessful(Box pBox, User pUser) {
@@ -53,27 +89,32 @@ public class NewsServiceImpl implements NewsService {
 			@Override
 			public void onLogout(Box pBox, User pUser) {
 			}
-		});
+		};
+	}
 
-		pAchievementService.addListener(new AchievementServiceListener() {
+	private ChallengeServiceListener createChallengeServiceListener() {
+		return new ChallengeServiceListener() {
+
 			@Override
-			public void onAchievementGained(GainedAchievement pGainedAchievement) {
-				postNewsAchievementGained(pGainedAchievement);
+			public void onPendingChallengeCreated(Challenge pChallenge) {
 			}
-		});
-	}
 
-	@Override
-	public void addListener(NewsServiceListener pListener) {
-		if (pListener != null) {
-			listeners.add(pListener);
-		}
+			@Override
+			public void onChallengeStarted(Challenge pChallenge) {
+				postNewsChallengeStarted(pChallenge);
+			}
 
-	}
+			@Override
+			public void onChallengeFinished(Challenge pChallenge) {
+				postNewsChallengeFinished(pChallenge);
 
-	@Override
-	public void removeListener(NewsServiceListener pListener) {
-		listeners.remove(pListener);
+			}
+
+			@Override
+			public void onChallengeDeclined(Challenge pChallenge) {
+				postNewsChallengeDeclined(pChallenge);
+			}
+		};
 	}
 
 	private void postNewsDrawFinished(Box pBox, Drawing pDrawing) {
@@ -120,7 +161,7 @@ public class NewsServiceImpl implements NewsService {
 		session.update(pGainedAchievement);
 		session.update(pGainedAchievement.getUser());
 		session.update(pGainedAchievement.getUser().getAccount());
-		
+
 		AchievementNews news = Zapfmaster2000Factory.eINSTANCE
 				.createAchievementNews();
 		news.setAccount(pGainedAchievement.getUser().getAccount());
@@ -130,6 +171,84 @@ public class NewsServiceImpl implements NewsService {
 
 		tx.commit();
 		notifiyListenersNewsPosted(news);
+	}
+
+	private void postNewsChallengeStarted(Challenge pChallenge) {
+		if (pChallenge instanceof Challenge1v1) {
+			Challenge1v1 challenge1v1 = (Challenge1v1) pChallenge;
+
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			session.update(challenge1v1);
+			session.update(challenge1v1.getUser1());
+			session.update(challenge1v1.getUser1().getAccount());
+
+			Challenge1v1StartedNews news = Zapfmaster2000Factory.eINSTANCE
+					.createChallenge1v1StartedNews();
+			news.setAccount(challenge1v1.getUser1().getAccount());
+			news.setDate(new Date());
+			news.setChallenge(challenge1v1);
+			session.save(news);
+
+			tx.commit();
+			notifiyListenersNewsPosted(news);
+		} else {
+			LOG.error("Unknown challenge type:" + pChallenge.eClass().getName());
+		}
+	}
+
+	private void postNewsChallengeFinished(Challenge pChallenge) {
+		if (pChallenge instanceof Challenge1v1) {
+			Challenge1v1 challenge1v1 = (Challenge1v1) pChallenge;
+
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			session.update(challenge1v1);
+			session.update(challenge1v1.getUser1());
+			session.update(challenge1v1.getUser1().getAccount());
+
+			Challenge1v1DoneNews news = Zapfmaster2000Factory.eINSTANCE
+					.createChallenge1v1DoneNews();
+			news.setAccount(challenge1v1.getUser1().getAccount());
+			news.setDate(new Date());
+			news.setChallenge(challenge1v1);
+			session.save(news);
+
+			tx.commit();
+			notifiyListenersNewsPosted(news);
+		} else {
+			LOG.error("Unknown challenge type:" + pChallenge.eClass().getName());
+		}
+	}
+
+	private void postNewsChallengeDeclined(Challenge pChallenge) {
+		if (pChallenge instanceof Challenge1v1) {
+			Challenge1v1 challenge1v1 = (Challenge1v1) pChallenge;
+
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			session.update(challenge1v1);
+			session.update(challenge1v1.getUser1());
+			session.update(challenge1v1.getUser1().getAccount());
+
+			Challenge1v1DeclinedNews news = Zapfmaster2000Factory.eINSTANCE
+					.createChallenge1v1DeclinedNews();
+			news.setAccount(challenge1v1.getUser1().getAccount());
+			news.setDate(new Date());
+			news.setChallenge(challenge1v1);
+			session.save(news);
+
+			tx.commit();
+			notifiyListenersNewsPosted(news);
+		} else {
+			LOG.error("Unknown challenge type:" + pChallenge.eClass().getName());
+		}
 	}
 
 	private void notifiyListenersNewsPosted(News pNews) {

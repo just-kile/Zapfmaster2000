@@ -2,28 +2,28 @@ package de.kile.zapfmaster2000.rest.api.statistics;
 
 public class UserAmountResponse {
 	
-	private String name;
+	private String userName;
 	
-	private long id;
+	private long userId;
 	
-	private String image;
+	private String userImage;
 	
 	private double amount;
 
 	public String getName() {
-		return name;
+		return userName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.userName = name;
 	}
 
 	public long getId() {
-		return id;
+		return userId;
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.userId = id;
 	}
 
 	public double getAmount() {
@@ -35,11 +35,11 @@ public class UserAmountResponse {
 	}
 
 	public String getImage() {
-		return image;
+		return userImage;
 	}
 
 	public void setImage(String image) {
-		this.image = image;
+		this.userImage = image;
 	}
 	
 	
