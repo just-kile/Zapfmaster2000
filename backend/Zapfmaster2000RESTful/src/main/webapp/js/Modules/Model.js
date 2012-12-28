@@ -159,7 +159,22 @@ ZMO.MemberModel = function(config) {
 	}
 	
 };
-
+ZMO.AchievementsModel = function(config) {
+	this.achievementName = config.achievementName;
+	this.achievementId = config.achievementId;
+	this.users = config.users;
+	this.achievementImage = config.imagePath||config.achievementImage;
+	this.totalAmount = config.totalAmount != undefined?config.totalAmount:0;
+	
+	// ignore all achievements if there are way to many
+	var max = ZMO.modules.Constants.member.MAX_ACHIEVEMENTS;
+	if (this.users != undefined && this.users.length > max) {
+		this.additional = true;
+		this.additionalCount = config.users.length - max;
+		this.users.splice(max, this.users.length - max);
+	}
+	
+};
 //ZMO.GlobalChallengeModel = function(config){
 //	this.type = config.type;
 //	this.challenge_type = config.challenge_type;
