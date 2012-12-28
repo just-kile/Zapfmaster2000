@@ -47,6 +47,7 @@ ZMO.modules.challenges = (function($,ajax){
 	};
 	var onChallengesReceive = function(datas){
 		ZMO.logger.log("challenges datas received!");
+		duelsContainerUl.empty();
 		$.each(datas,function(ind,val){
 			fillContainer(new ZMO.GlobalChallengeModel(val));
 		});
@@ -62,6 +63,7 @@ ZMO.modules.challenges = (function($,ajax){
 			callback:onChallengesReceive,
 			rawData:true
 		});
+		ajax.startPull();
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM
