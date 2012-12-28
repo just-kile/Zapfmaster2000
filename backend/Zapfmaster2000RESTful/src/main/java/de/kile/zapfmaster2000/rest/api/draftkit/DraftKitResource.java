@@ -64,7 +64,7 @@ public class DraftKitResource {
 	@GET
 	@Path("/{draftKitId}/rfid")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void retrieveNews(
+	public void retrieveUnknownRfidTags(
 			final @Suspend(PlatformConstants.ASYNC_TIMEOUT) AsynchronousResponse pResponse,
 			@QueryParam(value = "token") String pToken,
 			@PathParam("draftKitId") long pDraftKitId) {

@@ -104,4 +104,33 @@ public class RegisterResource {
 		}
 
 	}
+
+	@POST
+	@Path("/rfid")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response changeRfidTag(@FormParam("token") String pToken,
+			@FormParam("rfid") long pRfid) {
+
+		User user = Zapfmaster2000Core.INSTANCE.getAuthService().retrieveUser(
+				pToken);
+
+		if (user != null) {
+
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			user = (User) session.load(Zapfmaster2000Package.eINSTANCE
+					.getUser().getName(), user.getId());
+			user.setRfidTag(pRfid);
+			session.update(user);
+
+			tx.commit();
+			
+			return Response.ok().build();
+		} else {
+			return Response.status(Status.FORBIDDEN).build();
+		}
+	}
 }
