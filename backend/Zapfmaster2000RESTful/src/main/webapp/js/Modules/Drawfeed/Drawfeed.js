@@ -113,7 +113,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				team2:model.team2.join(","),
 				duration:model.duration,
 				type:model.challenge_type,
-				reason:ZMO.Constants.badExcuses[Math.round(Math.random()*10)%(ZMO.Constants.badExcuses.length)],
+				//reason:ZMO.Constants.badExcuses[Math.round(Math.random()*10)%(ZMO.Constants.badExcuses.length)],
 			image:model.image,
 			date:model.date
 			})
