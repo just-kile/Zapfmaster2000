@@ -62,6 +62,7 @@ public class ChallengeResource {
 			} else {
 				rawQuery += "AND (c.state = :running OR c.state = :done)";
 			}
+			rawQuery += " ORDER BY c.startTime DESC";
 
 			Query query = session.createQuery(rawQuery)
 					.setLong("accountId", account.getId())

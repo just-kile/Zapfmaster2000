@@ -1,6 +1,7 @@
 package de.kile.zapfmaster2000.rest.impl.core.challenge;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,6 +14,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeServiceListener;
 import de.kile.zapfmaster2000.rest.core.challenge.StatusAwareAsynchronousResponse;
+import de.kile.zapfmaster2000.rest.impl.core.transaction.SharedQueries;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
@@ -25,6 +27,13 @@ public class ChallengeServiceImpl implements ChallengeService {
 	public final List<UserLoginStatus> users = new LinkedList<>();
 
 	private final List<ChallengeServiceListener> listeners = new ArrayList<>();
+	
+	private final ChallengeEvaluator evaluator;
+	
+	public ChallengeServiceImpl() {
+		evaluator = new ChallengeEvaluator(this);
+		evaluator.start();
+	}
 
 	@Override
 	public void rememberUser(User pUser,
@@ -85,10 +94,14 @@ public class ChallengeServiceImpl implements ChallengeService {
 			pChallenge.setState(ChallengeState.RUNNING);
 			session.save(pChallenge);
 			tx.commit();
-			
+
 			notifiyChallengeStarted(pChallenge);
 		}
-
+		
+		synchronized (evaluator) {
+			evaluator.notify();
+		}
+		
 	}
 
 	@Override
@@ -103,7 +116,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 			pChallenge.setState(ChallengeState.DECLINED);
 			session.save(pChallenge);
 			tx.commit();
-			
+
 			notifyChallengeDeclined(pChallenge);
 		}
 	}
@@ -118,7 +131,47 @@ public class ChallengeServiceImpl implements ChallengeService {
 	@Override
 	public void removeListener(ChallengeServiceListener pListener) {
 		listeners.remove(pListener);
+	}
 
+	/**
+	 * Evaluates the given challenge, will set its state to done and notify all
+	 * listeners afterwards.
+	 * 
+	 * @param pChallenge
+	 *            the challenge to evaluate
+	 */
+	void evaluateChallenge(Challenge1v1 pChallenge) {
+		if (pChallenge != null) {
+
+			Date startTime = pChallenge.getStartTime();
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MINUTE, pChallenge.getDuration());
+			Date endTime = cal.getTime();
+
+			double amountUser1 = SharedQueries.retrieveDrawingAmount(pChallenge
+					.getUser1().getId(), startTime, endTime);
+			double amountUser2 = SharedQueries.retrieveDrawingAmount(pChallenge
+					.getUser2().getId(), startTime, endTime);
+			
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			session.update(pChallenge);
+			
+			pChallenge.setState(ChallengeState.FINISHED);
+			
+			if (amountUser1 > amountUser2) {
+				pChallenge.setWinner(pChallenge.getUser1());
+			} else if (amountUser2 > amountUser1) {
+				pChallenge.setWinner(pChallenge.getUser2());
+			} // else no one wins
+			
+			session.save(pChallenge);
+			tx.commit();
+		}
+		
+		notifyChallengeFinished(pChallenge);
 	}
 
 	private void removeUsers() {
@@ -132,19 +185,6 @@ public class ChallengeServiceImpl implements ChallengeService {
 				}
 			}
 			users.removeAll(usersToRemove);
-		}
-	}
-
-	private class UserLoginStatus {
-		private long time;
-		private User user;
-		private StatusAwareAsynchronousResponse reponse;
-
-		private UserLoginStatus(long pTime, User pUser,
-				StatusAwareAsynchronousResponse pReponse) {
-			time = pTime;
-			user = pUser;
-			reponse = pReponse;
 		}
 	}
 
@@ -172,4 +212,16 @@ public class ChallengeServiceImpl implements ChallengeService {
 		}
 	}
 
+	private class UserLoginStatus {
+		private long time;
+		private User user;
+		private StatusAwareAsynchronousResponse reponse;
+
+		private UserLoginStatus(long pTime, User pUser,
+				StatusAwareAsynchronousResponse pReponse) {
+			time = pTime;
+			user = pUser;
+			reponse = pReponse;
+		}
+	}
 }
