@@ -277,22 +277,13 @@ public interface Zapfmaster2000Package extends EPackage {
 	int CHALLENGE__ID = 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHALLENGE__TYPE = 1;
-
-	/**
 	 * The feature id for the '<em><b>Finished</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHALLENGE__FINISHED = 2;
+	int CHALLENGE__FINISHED = 1;
 
 	/**
 	 * The feature id for the '<em><b>Start Time</b></em>' attribute.
@@ -301,16 +292,16 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CHALLENGE__START_TIME = 3;
+	int CHALLENGE__START_TIME = 2;
 
 	/**
-	 * The feature id for the '<em><b>Participants</b></em>' containment reference list.
+	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHALLENGE__PARTICIPANTS = 4;
+	int CHALLENGE__STATE = 3;
 
 	/**
 	 * The number of structural features of the '<em>Challenge</em>' class.
@@ -319,7 +310,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CHALLENGE_FEATURE_COUNT = 5;
+	int CHALLENGE_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl <em>Challenge1v1</em>}' class.
@@ -338,25 +329,70 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CHALLENGE1V1__ID = 0;
+	int CHALLENGE1V1__ID = CHALLENGE__ID;
 
 	/**
-	 * The feature id for the '<em><b>Challenge</b></em>' reference.
+	 * The feature id for the '<em><b>Finished</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHALLENGE1V1__CHALLENGE = 1;
+	int CHALLENGE1V1__FINISHED = CHALLENGE__FINISHED;
 
 	/**
-	 * The feature id for the '<em><b>Challenge End</b></em>' attribute.
+	 * The feature id for the '<em><b>Start Time</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHALLENGE1V1__CHALLENGE_END = 2;
+	int CHALLENGE1V1__START_TIME = CHALLENGE__START_TIME;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1__STATE = CHALLENGE__STATE;
+
+	/**
+	 * The feature id for the '<em><b>User1</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1__USER1 = CHALLENGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>User2</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1__USER2 = CHALLENGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Winner</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1__WINNER = CHALLENGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Duration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1__DURATION = CHALLENGE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Challenge1v1</em>' class.
@@ -365,71 +401,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CHALLENGE1V1_FEATURE_COUNT = 3;
-
-	/**
-	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeParticipantImpl <em>Challenge Participant</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeParticipantImpl
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeParticipant()
-	 * @generated
-	 */
-	int CHALLENGE_PARTICIPANT = 5;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHALLENGE_PARTICIPANT__ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Challenge</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHALLENGE_PARTICIPANT__CHALLENGE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Team</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHALLENGE_PARTICIPANT__TEAM = 2;
-
-	/**
-	 * The feature id for the '<em><b>Won</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHALLENGE_PARTICIPANT__WON = 3;
-
-	/**
-	 * The feature id for the '<em><b>User</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHALLENGE_PARTICIPANT__USER = 4;
-
-	/**
-	 * The number of structural features of the '<em>Challenge Participant</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CHALLENGE_PARTICIPANT_FEATURE_COUNT = 5;
+	int CHALLENGE1V1_FEATURE_COUNT = CHALLENGE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl <em>Drawing</em>}' class.
@@ -439,7 +411,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getDrawing()
 	 * @generated
 	 */
-	int DRAWING = 6;
+	int DRAWING = 5;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -451,7 +423,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	int DRAWING__ID = 0;
 
 	/**
-	 * The feature id for the '<em><b>User</b></em>' container reference.
+	 * The feature id for the '<em><b>User</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -503,7 +475,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getGainedAchievement()
 	 * @generated
 	 */
-	int GAINED_ACHIEVEMENT = 7;
+	int GAINED_ACHIEVEMENT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -558,7 +530,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getKeg()
 	 * @generated
 	 */
-	int KEG = 8;
+	int KEG = 7;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -640,7 +612,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getNews()
 	 * @generated
 	 */
-	int NEWS = 9;
+	int NEWS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -679,26 +651,6 @@ public interface Zapfmaster2000Package extends EPackage {
 	int NEWS_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl <em>Mapping Qr Rfid</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getMappingQrRfid()
-	 * @generated
-	 */
-	int MAPPING_QR_RFID = 13;
-
-	/**
-	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl <em>User</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUser()
-	 * @generated
-	 */
-	int USER = 14;
-
-	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingNewsImpl <em>Drawing News</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -706,7 +658,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getDrawingNews()
 	 * @generated
 	 */
-	int DRAWING_NEWS = 10;
+	int DRAWING_NEWS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -761,7 +713,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAchievementNews()
 	 * @generated
 	 */
-	int ACHIEVEMENT_NEWS = 11;
+	int ACHIEVEMENT_NEWS = 10;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -816,7 +768,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getOtherNews()
 	 * @generated
 	 */
-	int OTHER_NEWS = 12;
+	int OTHER_NEWS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -873,6 +825,181 @@ public interface Zapfmaster2000Package extends EPackage {
 	int OTHER_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl <em>Challenge1v1 Started News</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1StartedNews()
+	 * @generated
+	 */
+	int CHALLENGE1V1_STARTED_NEWS = 12;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS__ID = NEWS__ID;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS__ACCOUNT = NEWS__ACCOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS__DATE = NEWS__DATE;
+
+	/**
+	 * The feature id for the '<em><b>Challenge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS__CHALLENGE = NEWS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Challenge1v1 Started News</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_STARTED_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DeclinedNewsImpl <em>Challenge1v1 Declined News</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DeclinedNewsImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DeclinedNews()
+	 * @generated
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS = 13;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS__ID = NEWS__ID;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS__ACCOUNT = NEWS__ACCOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS__DATE = NEWS__DATE;
+
+	/**
+	 * The feature id for the '<em><b>Challenge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS__CHALLENGE = NEWS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Challenge1v1 Declined News</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DECLINED_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DoneNewsImpl <em>Challenge1v1 Done News</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DoneNewsImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DoneNews()
+	 * @generated
+	 */
+	int CHALLENGE1V1_DONE_NEWS = 14;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS__ID = NEWS__ID;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS__ACCOUNT = NEWS__ACCOUNT;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS__DATE = NEWS__DATE;
+
+	/**
+	 * The feature id for the '<em><b>Challenge</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS__CHALLENGE = NEWS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Challenge1v1 Done News</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHALLENGE1V1_DONE_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl <em>Mapping Qr Rfid</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getMappingQrRfid()
+	 * @generated
+	 */
+	int MAPPING_QR_RFID = 15;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -907,6 +1034,16 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_QR_RFID_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl <em>User</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.UserImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUser()
+	 * @generated
+	 */
+	int USER = 16;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -981,7 +1118,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	int USER__GAINED = 7;
 
 	/**
-	 * The feature id for the '<em><b>Drawings</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Drawings</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -990,22 +1127,13 @@ public interface Zapfmaster2000Package extends EPackage {
 	int USER__DRAWINGS = 8;
 
 	/**
-	 * The feature id for the '<em><b>Challenge Participations</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USER__CHALLENGE_PARTICIPATIONS = 9;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER__TYPE = 10;
+	int USER__TYPE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Account</b></em>' reference.
@@ -1014,7 +1142,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USER__ACCOUNT = 11;
+	int USER__ACCOUNT = 10;
 
 	/**
 	 * The number of structural features of the '<em>User</em>' class.
@@ -1023,7 +1151,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int USER_FEATURE_COUNT = 12;
+	int USER_FEATURE_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl <em>Token</em>}' class.
@@ -1033,7 +1161,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getToken()
 	 * @generated
 	 */
-	int TOKEN = 15;
+	int TOKEN = 17;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1088,7 +1216,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 16;
+	int SEX = 18;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType <em>Challenge Type</em>}' enum.
@@ -1098,7 +1226,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeType()
 	 * @generated
 	 */
-	int CHALLENGE_TYPE = 17;
+	int CHALLENGE_TYPE = 19;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType <em>User Type</em>}' enum.
@@ -1108,7 +1236,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUserType()
 	 * @generated
 	 */
-	int USER_TYPE = 18;
+	int USER_TYPE = 20;
+
+	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState <em>Challenge State</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeState()
+	 * @generated
+	 */
+	int CHALLENGE_STATE = 21;
 
 
 	/**
@@ -1220,6 +1358,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EReference getBox_Account();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Passphrase</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_Passphrase();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getKegs <em>Kegs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1240,17 +1389,6 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBox_Location();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Passphrase</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase()
-	 * @see #getBox()
-	 * @generated
-	 */
-	EAttribute getBox_Passphrase();
 
 	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account <em>Account</em>}'.
@@ -1339,17 +1477,6 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getChallenge_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge#getType()
-	 * @see #getChallenge()
-	 * @generated
-	 */
-	EAttribute getChallenge_Type();
-
-	/**
 	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge#isFinished <em>Finished</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1372,15 +1499,15 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getChallenge_StartTime();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge#getParticipants <em>Participants</em>}'.
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge#getState <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Participants</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge#getParticipants()
+	 * @return the meta object for the attribute '<em>State</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge#getState()
 	 * @see #getChallenge()
 	 * @generated
 	 */
-	EReference getChallenge_Participants();
+	EAttribute getChallenge_State();
 
 	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1 <em>Challenge1v1</em>}'.
@@ -1393,102 +1520,48 @@ public interface Zapfmaster2000Package extends EPackage {
 	EClass getChallenge1v1();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getId <em>Id</em>}'.
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getUser1 <em>User1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getId()
+	 * @return the meta object for the reference '<em>User1</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getUser1()
 	 * @see #getChallenge1v1()
 	 * @generated
 	 */
-	EAttribute getChallenge1v1_Id();
+	EReference getChallenge1v1_User1();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getChallenge <em>Challenge</em>}'.
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getUser2 <em>User2</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Challenge</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getChallenge()
+	 * @return the meta object for the reference '<em>User2</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getUser2()
 	 * @see #getChallenge1v1()
 	 * @generated
 	 */
-	EReference getChallenge1v1_Challenge();
+	EReference getChallenge1v1_User2();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getChallengeEnd <em>Challenge End</em>}'.
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getWinner <em>Winner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Challenge End</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getChallengeEnd()
+	 * @return the meta object for the reference '<em>Winner</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getWinner()
 	 * @see #getChallenge1v1()
 	 * @generated
 	 */
-	EAttribute getChallenge1v1_ChallengeEnd();
+	EReference getChallenge1v1_Winner();
 
 	/**
-	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant <em>Challenge Participant</em>}'.
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getDuration <em>Duration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Challenge Participant</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant
+	 * @return the meta object for the attribute '<em>Duration</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1#getDuration()
+	 * @see #getChallenge1v1()
 	 * @generated
 	 */
-	EClass getChallengeParticipant();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getId()
-	 * @see #getChallengeParticipant()
-	 * @generated
-	 */
-	EAttribute getChallengeParticipant_Id();
-
-	/**
-	 * Returns the meta object for the container reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getChallenge <em>Challenge</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Challenge</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getChallenge()
-	 * @see #getChallengeParticipant()
-	 * @generated
-	 */
-	EReference getChallengeParticipant_Challenge();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getTeam <em>Team</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Team</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getTeam()
-	 * @see #getChallengeParticipant()
-	 * @generated
-	 */
-	EAttribute getChallengeParticipant_Team();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#isWon <em>Won</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Won</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#isWon()
-	 * @see #getChallengeParticipant()
-	 * @generated
-	 */
-	EAttribute getChallengeParticipant_Won();
-
-	/**
-	 * Returns the meta object for the reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getUser <em>User</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>User</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeParticipant#getUser()
-	 * @see #getChallengeParticipant()
-	 * @generated
-	 */
-	EReference getChallengeParticipant_User();
+	EAttribute getChallenge1v1_Duration();
 
 	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing <em>Drawing</em>}'.
@@ -1512,10 +1585,10 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getDrawing_Id();
 
 	/**
-	 * Returns the meta object for the container reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getUser <em>User</em>}'.
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getUser <em>User</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>User</em>'.
+	 * @return the meta object for the reference '<em>User</em>'.
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getUser()
 	 * @see #getDrawing()
 	 * @generated
@@ -1740,6 +1813,143 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getNews_Date();
 
 	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews <em>Drawing News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Drawing News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews
+	 * @generated
+	 */
+	EClass getDrawingNews();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews#getDrawing <em>Drawing</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Drawing</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews#getDrawing()
+	 * @see #getDrawingNews()
+	 * @generated
+	 */
+	EReference getDrawingNews_Drawing();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews <em>Achievement News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Achievement News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews
+	 * @generated
+	 */
+	EClass getAchievementNews();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews#getGainedAchievment <em>Gained Achievment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Gained Achievment</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews#getGainedAchievment()
+	 * @see #getAchievementNews()
+	 * @generated
+	 */
+	EReference getAchievementNews_GainedAchievment();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews <em>Other News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Other News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews
+	 * @generated
+	 */
+	EClass getOtherNews();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getContents <em>Contents</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Contents</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getContents()
+	 * @see #getOtherNews()
+	 * @generated
+	 */
+	EAttribute getOtherNews_Contents();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getImagePath <em>Image Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Image Path</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getImagePath()
+	 * @see #getOtherNews()
+	 * @generated
+	 */
+	EAttribute getOtherNews_ImagePath();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews <em>Challenge1v1 Started News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Challenge1v1 Started News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews
+	 * @generated
+	 */
+	EClass getChallenge1v1StartedNews();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews#getChallenge <em>Challenge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Challenge</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews#getChallenge()
+	 * @see #getChallenge1v1StartedNews()
+	 * @generated
+	 */
+	EReference getChallenge1v1StartedNews_Challenge();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews <em>Challenge1v1 Declined News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Challenge1v1 Declined News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews
+	 * @generated
+	 */
+	EClass getChallenge1v1DeclinedNews();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews#getChallenge <em>Challenge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Challenge</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews#getChallenge()
+	 * @see #getChallenge1v1DeclinedNews()
+	 * @generated
+	 */
+	EReference getChallenge1v1DeclinedNews_Challenge();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews <em>Challenge1v1 Done News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Challenge1v1 Done News</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews
+	 * @generated
+	 */
+	EClass getChallenge1v1DoneNews();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews#getChallenge <em>Challenge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Challenge</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews#getChallenge()
+	 * @see #getChallenge1v1DoneNews()
+	 * @generated
+	 */
+	EReference getChallenge1v1DoneNews_Challenge();
+
+	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid <em>Mapping Qr Rfid</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1881,26 +2091,15 @@ public interface Zapfmaster2000Package extends EPackage {
 	EReference getUser_Gained();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getDrawings <em>Drawings</em>}'.
+	 * Returns the meta object for the reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getDrawings <em>Drawings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Drawings</em>'.
+	 * @return the meta object for the reference list '<em>Drawings</em>'.
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getDrawings()
 	 * @see #getUser()
 	 * @generated
 	 */
 	EReference getUser_Drawings();
-
-	/**
-	 * Returns the meta object for the reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getChallengeParticipations <em>Challenge Participations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Challenge Participations</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getChallengeParticipations()
-	 * @see #getUser()
-	 * @generated
-	 */
-	EReference getUser_ChallengeParticipations();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getType <em>Type</em>}'.
@@ -1979,80 +2178,6 @@ public interface Zapfmaster2000Package extends EPackage {
 	EReference getToken_User();
 
 	/**
-	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews <em>Drawing News</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Drawing News</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews
-	 * @generated
-	 */
-	EClass getDrawingNews();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews#getDrawing <em>Drawing</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Drawing</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews#getDrawing()
-	 * @see #getDrawingNews()
-	 * @generated
-	 */
-	EReference getDrawingNews_Drawing();
-
-	/**
-	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews <em>Achievement News</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Achievement News</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews
-	 * @generated
-	 */
-	EClass getAchievementNews();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews#getGainedAchievment <em>Gained Achievment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Gained Achievment</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews#getGainedAchievment()
-	 * @see #getAchievementNews()
-	 * @generated
-	 */
-	EReference getAchievementNews_GainedAchievment();
-
-	/**
-	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews <em>Other News</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Other News</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews
-	 * @generated
-	 */
-	EClass getOtherNews();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getContents <em>Contents</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Contents</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getContents()
-	 * @see #getOtherNews()
-	 * @generated
-	 */
-	EAttribute getOtherNews_Contents();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getImagePath <em>Image Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Image Path</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getImagePath()
-	 * @see #getOtherNews()
-	 * @generated
-	 */
-	EAttribute getOtherNews_ImagePath();
-
-	/**
 	 * Returns the meta object for enum '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2081,6 +2206,16 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EEnum getUserType();
+
+	/**
+	 * Returns the meta object for enum '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState <em>Challenge State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Challenge State</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState
+	 * @generated
+	 */
+	EEnum getChallengeState();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2189,6 +2324,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		EReference BOX__ACCOUNT = eINSTANCE.getBox_Account();
 
 		/**
+		 * The meta object literal for the '<em><b>Passphrase</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__PASSPHRASE = eINSTANCE.getBox_Passphrase();
+
+		/**
 		 * The meta object literal for the '<em><b>Kegs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2203,14 +2346,6 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute BOX__LOCATION = eINSTANCE.getBox_Location();
-
-		/**
-		 * The meta object literal for the '<em><b>Passphrase</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BOX__PASSPHRASE = eINSTANCE.getBox_Passphrase();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.
@@ -2281,14 +2416,6 @@ public interface Zapfmaster2000Package extends EPackage {
 		EAttribute CHALLENGE__ID = eINSTANCE.getChallenge_Id();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CHALLENGE__TYPE = eINSTANCE.getChallenge_Type();
-
-		/**
 		 * The meta object literal for the '<em><b>Finished</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2305,12 +2432,12 @@ public interface Zapfmaster2000Package extends EPackage {
 		EAttribute CHALLENGE__START_TIME = eINSTANCE.getChallenge_StartTime();
 
 		/**
-		 * The meta object literal for the '<em><b>Participants</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CHALLENGE__PARTICIPANTS = eINSTANCE.getChallenge_Participants();
+		EAttribute CHALLENGE__STATE = eINSTANCE.getChallenge_State();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1Impl <em>Challenge1v1</em>}' class.
@@ -2323,78 +2450,36 @@ public interface Zapfmaster2000Package extends EPackage {
 		EClass CHALLENGE1V1 = eINSTANCE.getChallenge1v1();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>User1</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CHALLENGE1V1__ID = eINSTANCE.getChallenge1v1_Id();
+		EReference CHALLENGE1V1__USER1 = eINSTANCE.getChallenge1v1_User1();
 
 		/**
-		 * The meta object literal for the '<em><b>Challenge</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>User2</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CHALLENGE1V1__CHALLENGE = eINSTANCE.getChallenge1v1_Challenge();
+		EReference CHALLENGE1V1__USER2 = eINSTANCE.getChallenge1v1_User2();
 
 		/**
-		 * The meta object literal for the '<em><b>Challenge End</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Winner</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CHALLENGE1V1__CHALLENGE_END = eINSTANCE.getChallenge1v1_ChallengeEnd();
+		EReference CHALLENGE1V1__WINNER = eINSTANCE.getChallenge1v1_Winner();
 
 		/**
-		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeParticipantImpl <em>Challenge Participant</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ChallengeParticipantImpl
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeParticipant()
-		 * @generated
-		 */
-		EClass CHALLENGE_PARTICIPANT = eINSTANCE.getChallengeParticipant();
-
-		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Duration</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CHALLENGE_PARTICIPANT__ID = eINSTANCE.getChallengeParticipant_Id();
-
-		/**
-		 * The meta object literal for the '<em><b>Challenge</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CHALLENGE_PARTICIPANT__CHALLENGE = eINSTANCE.getChallengeParticipant_Challenge();
-
-		/**
-		 * The meta object literal for the '<em><b>Team</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CHALLENGE_PARTICIPANT__TEAM = eINSTANCE.getChallengeParticipant_Team();
-
-		/**
-		 * The meta object literal for the '<em><b>Won</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CHALLENGE_PARTICIPANT__WON = eINSTANCE.getChallengeParticipant_Won();
-
-		/**
-		 * The meta object literal for the '<em><b>User</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CHALLENGE_PARTICIPANT__USER = eINSTANCE.getChallengeParticipant_User();
+		EAttribute CHALLENGE1V1__DURATION = eINSTANCE.getChallenge1v1_Duration();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl <em>Drawing</em>}' class.
@@ -2415,7 +2500,7 @@ public interface Zapfmaster2000Package extends EPackage {
 		EAttribute DRAWING__ID = eINSTANCE.getDrawing_Id();
 
 		/**
-		 * The meta object literal for the '<em><b>User</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>User</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2589,6 +2674,122 @@ public interface Zapfmaster2000Package extends EPackage {
 		EAttribute NEWS__DATE = eINSTANCE.getNews_Date();
 
 		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingNewsImpl <em>Drawing News</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingNewsImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getDrawingNews()
+		 * @generated
+		 */
+		EClass DRAWING_NEWS = eINSTANCE.getDrawingNews();
+
+		/**
+		 * The meta object literal for the '<em><b>Drawing</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DRAWING_NEWS__DRAWING = eINSTANCE.getDrawingNews_Drawing();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AchievementNewsImpl <em>Achievement News</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AchievementNewsImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAchievementNews()
+		 * @generated
+		 */
+		EClass ACHIEVEMENT_NEWS = eINSTANCE.getAchievementNews();
+
+		/**
+		 * The meta object literal for the '<em><b>Gained Achievment</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACHIEVEMENT_NEWS__GAINED_ACHIEVMENT = eINSTANCE.getAchievementNews_GainedAchievment();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.OtherNewsImpl <em>Other News</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.OtherNewsImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getOtherNews()
+		 * @generated
+		 */
+		EClass OTHER_NEWS = eINSTANCE.getOtherNews();
+
+		/**
+		 * The meta object literal for the '<em><b>Contents</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OTHER_NEWS__CONTENTS = eINSTANCE.getOtherNews_Contents();
+
+		/**
+		 * The meta object literal for the '<em><b>Image Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OTHER_NEWS__IMAGE_PATH = eINSTANCE.getOtherNews_ImagePath();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl <em>Challenge1v1 Started News</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1StartedNews()
+		 * @generated
+		 */
+		EClass CHALLENGE1V1_STARTED_NEWS = eINSTANCE.getChallenge1v1StartedNews();
+
+		/**
+		 * The meta object literal for the '<em><b>Challenge</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHALLENGE1V1_STARTED_NEWS__CHALLENGE = eINSTANCE.getChallenge1v1StartedNews_Challenge();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DeclinedNewsImpl <em>Challenge1v1 Declined News</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DeclinedNewsImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DeclinedNews()
+		 * @generated
+		 */
+		EClass CHALLENGE1V1_DECLINED_NEWS = eINSTANCE.getChallenge1v1DeclinedNews();
+
+		/**
+		 * The meta object literal for the '<em><b>Challenge</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHALLENGE1V1_DECLINED_NEWS__CHALLENGE = eINSTANCE.getChallenge1v1DeclinedNews_Challenge();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DoneNewsImpl <em>Challenge1v1 Done News</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1DoneNewsImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DoneNews()
+		 * @generated
+		 */
+		EClass CHALLENGE1V1_DONE_NEWS = eINSTANCE.getChallenge1v1DoneNews();
+
+		/**
+		 * The meta object literal for the '<em><b>Challenge</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHALLENGE1V1_DONE_NEWS__CHALLENGE = eINSTANCE.getChallenge1v1DoneNews_Challenge();
+
+		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.MappingQrRfidImpl <em>Mapping Qr Rfid</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2697,20 +2898,12 @@ public interface Zapfmaster2000Package extends EPackage {
 		EReference USER__GAINED = eINSTANCE.getUser_Gained();
 
 		/**
-		 * The meta object literal for the '<em><b>Drawings</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Drawings</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference USER__DRAWINGS = eINSTANCE.getUser_Drawings();
-
-		/**
-		 * The meta object literal for the '<em><b>Challenge Participations</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference USER__CHALLENGE_PARTICIPATIONS = eINSTANCE.getUser_ChallengeParticipations();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
@@ -2771,68 +2964,6 @@ public interface Zapfmaster2000Package extends EPackage {
 		EReference TOKEN__USER = eINSTANCE.getToken_User();
 
 		/**
-		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingNewsImpl <em>Drawing News</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingNewsImpl
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getDrawingNews()
-		 * @generated
-		 */
-		EClass DRAWING_NEWS = eINSTANCE.getDrawingNews();
-
-		/**
-		 * The meta object literal for the '<em><b>Drawing</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DRAWING_NEWS__DRAWING = eINSTANCE.getDrawingNews_Drawing();
-
-		/**
-		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AchievementNewsImpl <em>Achievement News</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AchievementNewsImpl
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAchievementNews()
-		 * @generated
-		 */
-		EClass ACHIEVEMENT_NEWS = eINSTANCE.getAchievementNews();
-
-		/**
-		 * The meta object literal for the '<em><b>Gained Achievment</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACHIEVEMENT_NEWS__GAINED_ACHIEVMENT = eINSTANCE.getAchievementNews_GainedAchievment();
-
-		/**
-		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.OtherNewsImpl <em>Other News</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.OtherNewsImpl
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getOtherNews()
-		 * @generated
-		 */
-		EClass OTHER_NEWS = eINSTANCE.getOtherNews();
-
-		/**
-		 * The meta object literal for the '<em><b>Contents</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OTHER_NEWS__CONTENTS = eINSTANCE.getOtherNews_Contents();
-
-		/**
-		 * The meta object literal for the '<em><b>Image Path</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OTHER_NEWS__IMAGE_PATH = eINSTANCE.getOtherNews_ImagePath();
-
-		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2861,6 +2992,16 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EEnum USER_TYPE = eINSTANCE.getUserType();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState <em>Challenge State</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeState()
+		 * @generated
+		 */
+		EEnum CHALLENGE_STATE = eINSTANCE.getChallengeState();
 
 	}
 

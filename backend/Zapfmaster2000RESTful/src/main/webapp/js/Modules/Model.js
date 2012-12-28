@@ -77,7 +77,6 @@ ZMO.OtherModel = function(config){
 	this.image = config.image||config.IMAGE_PATH||config.imagepath;
 	this.type = config.type;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
-			
 	
 };
 
@@ -119,7 +118,11 @@ ZMO.GlobalChallengeModel = function(config){
 	this.team2Images = parseTeam(config.team2,"userImage");
 	this.team1Amount = sumArr(parseTeam(config.team1,"amount"));
 	this.team2Amount = sumArr(parseTeam(config.team2,"amount"));
+	this.team1Won =  parseTeam(config.team1,"won");
+	this.team2Won =  parseTeam(config.team2,"won");
+	
 	this.image = config.image||config.challengeImage;
+	this.dateParser = config.startDate?new ZMO.TimeParser(config.startDate):null;
 	this.date = config.startDate?new ZMO.TimeParser(config.startDate).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 			
 	//this.date = config.start_time||config.startDate;

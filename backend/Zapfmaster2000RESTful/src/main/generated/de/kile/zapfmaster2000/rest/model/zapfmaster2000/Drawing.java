@@ -54,28 +54,28 @@ public interface Drawing extends EObject {
 	void setId(long value);
 
 	/**
-	 * Returns the value of the '<em><b>User</b></em>' container reference.
+	 * Returns the value of the '<em><b>User</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getDrawings <em>Drawings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>User</em>' container reference isn't clear,
+	 * If the meaning of the '<em>User</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>User</em>' container reference.
+	 * @return the value of the '<em>User</em>' reference.
 	 * @see #setUser(User)
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getDrawing_User()
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.User#getDrawings
-	 * @model opposite="drawings" required="true" transient="false"
+	 * @model opposite="drawings" required="true"
 	 * @generated
 	 */
 	User getUser();
 
 	/**
-	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getUser <em>User</em>}' container reference.
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getUser <em>User</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>User</em>' container reference.
+	 * @param value the new value of the '<em>User</em>' reference.
 	 * @see #getUser()
 	 * @generated
 	 */

@@ -35,7 +35,8 @@ ZMO.modules.challenges = (function($,ajax){
 			time:(function(){
 				var oneMinute = 1000*60;
 				var duration = parseInt(model.duration)*oneMinute*1;
-				var time =Math.ceil((parseInt(model.date)*1000+duration-(new Date()).getTime())/oneMinute);
+				var startDate = ZMO.exists(model.dateParser)?model.dateParser.getTimestamp():0;
+				var time =Math.ceil((startDate+duration-(new Date()).getTime())/oneMinute);
 				return time>0?time +"min verbleibend":"Challenge beendet!";
 			})()
 		});
@@ -46,6 +47,7 @@ ZMO.modules.challenges = (function($,ajax){
 	};
 	var onChallengesReceive = function(datas){
 		ZMO.logger.log("challenges datas received!");
+		duelsContainerUl.empty();
 		$.each(datas,function(ind,val){
 			fillContainer(new ZMO.GlobalChallengeModel(val));
 		});
@@ -55,7 +57,13 @@ ZMO.modules.challenges = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(){
-		ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
+//		ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
+		ajax.enqueueDatas({
+			url:c.urls.CHALLENGES,
+			callback:onChallengesReceive,
+			rawData:true
+		});
+		ajax.startPull();
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM

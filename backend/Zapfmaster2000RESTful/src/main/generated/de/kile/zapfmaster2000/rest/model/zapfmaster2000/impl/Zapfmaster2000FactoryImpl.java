@@ -60,15 +60,16 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.ACHIEVEMENT: return createAchievement();
 			case Zapfmaster2000Package.BOX: return createBox();
 			case Zapfmaster2000Package.ACCOUNT: return createAccount();
-			case Zapfmaster2000Package.CHALLENGE: return createChallenge();
 			case Zapfmaster2000Package.CHALLENGE1V1: return createChallenge1v1();
-			case Zapfmaster2000Package.CHALLENGE_PARTICIPANT: return createChallengeParticipant();
 			case Zapfmaster2000Package.DRAWING: return createDrawing();
 			case Zapfmaster2000Package.GAINED_ACHIEVEMENT: return createGainedAchievement();
 			case Zapfmaster2000Package.KEG: return createKeg();
 			case Zapfmaster2000Package.DRAWING_NEWS: return createDrawingNews();
 			case Zapfmaster2000Package.ACHIEVEMENT_NEWS: return createAchievementNews();
 			case Zapfmaster2000Package.OTHER_NEWS: return createOtherNews();
+			case Zapfmaster2000Package.CHALLENGE1V1_STARTED_NEWS: return createChallenge1v1StartedNews();
+			case Zapfmaster2000Package.CHALLENGE1V1_DECLINED_NEWS: return createChallenge1v1DeclinedNews();
+			case Zapfmaster2000Package.CHALLENGE1V1_DONE_NEWS: return createChallenge1v1DoneNews();
 			case Zapfmaster2000Package.MAPPING_QR_RFID: return createMappingQrRfid();
 			case Zapfmaster2000Package.USER: return createUser();
 			case Zapfmaster2000Package.TOKEN: return createToken();
@@ -91,6 +92,8 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return createChallengeTypeFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.USER_TYPE:
 				return createUserTypeFromString(eDataType, initialValue);
+			case Zapfmaster2000Package.CHALLENGE_STATE:
+				return createChallengeStateFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -110,6 +113,8 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return convertChallengeTypeToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.USER_TYPE:
 				return convertUserTypeToString(eDataType, instanceValue);
+			case Zapfmaster2000Package.CHALLENGE_STATE:
+				return convertChallengeStateToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -150,29 +155,9 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Challenge createChallenge() {
-		ChallengeImpl challenge = new ChallengeImpl();
-		return challenge;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Challenge1v1 createChallenge1v1() {
 		Challenge1v1Impl challenge1v1 = new Challenge1v1Impl();
 		return challenge1v1;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ChallengeParticipant createChallengeParticipant() {
-		ChallengeParticipantImpl challengeParticipant = new ChallengeParticipantImpl();
-		return challengeParticipant;
 	}
 
 	/**
@@ -210,36 +195,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MappingQrRfid createMappingQrRfid() {
-		MappingQrRfidImpl mappingQrRfid = new MappingQrRfidImpl();
-		return mappingQrRfid;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public User createUser() {
-		UserImpl user = new UserImpl();
-		return user;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Token createToken() {
-		TokenImpl token = new TokenImpl();
-		return token;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public DrawingNews createDrawingNews() {
 		DrawingNewsImpl drawingNews = new DrawingNewsImpl();
 		return drawingNews;
@@ -263,6 +218,66 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	public OtherNews createOtherNews() {
 		OtherNewsImpl otherNews = new OtherNewsImpl();
 		return otherNews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Challenge1v1StartedNews createChallenge1v1StartedNews() {
+		Challenge1v1StartedNewsImpl challenge1v1StartedNews = new Challenge1v1StartedNewsImpl();
+		return challenge1v1StartedNews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Challenge1v1DeclinedNews createChallenge1v1DeclinedNews() {
+		Challenge1v1DeclinedNewsImpl challenge1v1DeclinedNews = new Challenge1v1DeclinedNewsImpl();
+		return challenge1v1DeclinedNews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Challenge1v1DoneNews createChallenge1v1DoneNews() {
+		Challenge1v1DoneNewsImpl challenge1v1DoneNews = new Challenge1v1DoneNewsImpl();
+		return challenge1v1DoneNews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingQrRfid createMappingQrRfid() {
+		MappingQrRfidImpl mappingQrRfid = new MappingQrRfidImpl();
+		return mappingQrRfid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public User createUser() {
+		UserImpl user = new UserImpl();
+		return user;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Token createToken() {
+		TokenImpl token = new TokenImpl();
+		return token;
 	}
 
 	/**
@@ -322,6 +337,26 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * @generated
 	 */
 	public String convertUserTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ChallengeState createChallengeStateFromString(EDataType eDataType, String initialValue) {
+		ChallengeState result = ChallengeState.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertChallengeStateToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
