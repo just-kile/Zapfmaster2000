@@ -15,9 +15,9 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 /**
  * Shared queries.
  * 
- *  <p>
- *  TODO: This class is ugly. Use DAOs?
- *  </p>
+ * <p>
+ * TODO: This class is ugly. Use DAOs?
+ * </p>
  * 
  * @author Thomas Kipar
  */
@@ -57,22 +57,27 @@ public final class SharedQueries {
 		}
 		return keg;
 	}
-	
-	public static double retrieveDrawingAmount(long pUserId, Date pFrom, Date pTo) {
+
+	public static double retrieveDrawingAmount(long pUserId, Date pFrom,
+			Date pTo) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		
+
 		@SuppressWarnings("unchecked")
-		List<Double> result = session.createQuery("SELECT sum(d.amount) FROM Drawing d " +
-				"WHERE d.user.id = :userId AND d.date >= :from AND d.date <= :to " +
-				"GROUP BY d.user.id").list();
+		List<Double> result = session
+				.createQuery(
+						"SELECT sum(d.amount) FROM Drawing d "
+								+ "WHERE d.user.id = :userId AND d.date >= :from AND d.date <= :to "
+								+ "GROUP BY d.user.id")
+				.setLong("userId", pUserId).setTimestamp("from", pFrom)
+				.setTimestamp("to", pTo).list();
 		tx.commit();
-		
+
 		if (result.size() == 1) {
 			return result.get(0);
 		}
-		
+
 		return 0;
 	}
 

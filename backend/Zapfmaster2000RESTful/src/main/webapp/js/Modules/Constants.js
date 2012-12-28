@@ -21,7 +21,7 @@ ZMO.modules.Constants = {
 			
 			MEMBERS:"rest/members",
 			
-			CHALLENGES:"tmp/challenges.json",
+			CHALLENGES:"rest/challenge",
 			CHALLENGEEMEMBERS:"rest/challenge/users",
 			STARTCHALLENGE:"rest/challenge/start/{0}",
 			ACCEPTCHALLENGE:"rest/challenge/accept",

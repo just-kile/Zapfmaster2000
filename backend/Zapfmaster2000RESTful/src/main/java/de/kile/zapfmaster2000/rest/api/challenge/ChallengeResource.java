@@ -22,6 +22,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.util.ChallengeAdapter;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
@@ -30,6 +32,50 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 public class ChallengeResource {
 
 	private static final Logger LOG = Logger.getLogger(ChallengeResource.class);
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrieveOverview(@QueryParam("token") String pToken) {
+		return retrieveOverview(pToken, false);
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrieveOverview(@QueryParam("token") String pToken,
+			@QueryParam("onlyRunning") boolean pOnlyRunning) {
+
+		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAccount(pToken);
+		if (account != null) {
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			String query = "FROM Challenge1v1 c "
+					+ "JOIN FETCH c.user1 JOIN FETCH c.user2 "
+					+ "WHERE c.user1.account.id = :accountId ";
+			if (pOnlyRunning) {
+				query += "AND c.state = RUNNING";
+			} else {
+				query += "AND (c.state = RUNNING OR c.state = DONE)";
+			}
+
+			@SuppressWarnings("unchecked")
+			List<Challenge1v1> result = session.createQuery(query)
+					.setLong("accountId", account.getId()).list();
+			tx.commit();
+
+			List<ChallengeOverviewReponse> response = new ArrayList<>();
+			ChallengeAdapter adapter = new ChallengeAdapter();
+			for (Challenge1v1 c : result) {
+				response.add(adapter.adaptChallenge(c));
+			}
+			return Response.ok(response).build();
+		} else {
+			return Response.status(Status.FORBIDDEN).build();
+		}
+	}
 
 	/**
 	 * Retrieve the users that may be challenged. This is the list of currently
@@ -147,7 +193,7 @@ public class ChallengeResource {
 			}
 
 			tx.commit();
-			
+
 			Zapfmaster2000Core.INSTANCE.getChallengeService().startChallenge(
 					challenge1v1);
 
