@@ -48,7 +48,7 @@ ZMO.modules.lineChartView = (function($,ajax){
                 formatter: function() {
                 	   var date = new Date(this.x); //in ms not s
                         return '<b>'+ this.series.name +'</b><br/>'+
-                         +date.getHours()+":"+date.getMinutes()+"Uhr: "+this.y +'L';
+                         +date.getHours()+":"+date.getMinutes()+"Uhr: "+this.y.toFixed(2) +'L';
                 }
             },
             legend: {

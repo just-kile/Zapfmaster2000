@@ -30,7 +30,7 @@ ZMO.modules.RankModel =function(config){
 		this.achievements = config.achievements;
 		this.drawCount = config.drawCount;
 	}
-}
+};
 ZMO.modules.BestUserListModel = function(config){
 	var arr = [];
 	if("undefined"!=typeof config){
@@ -39,7 +39,7 @@ ZMO.modules.BestUserListModel = function(config){
 				userId:user.userId||user.id,
 				userName:user.userName||user.name,
 				userImage:user.userImage||user.image,
-				amount:user.amount
+				amount:user.amount.toFixed(2)
 			});
 		});
 	}
@@ -91,7 +91,7 @@ ZMO.modules.kegModel = function(config){
 		      size : keg.size,
 		      start_date:new ZMO.TimeParser(keg.start_date||keg.startDate).getDefaultTime(),
 		      keg_numbers:keg.keg_numbers||keg.kegNumber,
-		      current_amount : keg.current_amount||keg.currentAmount,
+		      current_amount : keg.currentAmount.toFixed(2),
 		      lastsUntil :date.getDefaultTime(),
 		      lastsUntilShort:date.getHoursMinutes(),
 		      boxId:keg.boxId
@@ -109,7 +109,7 @@ ZMO.modules.kegModel = function(config){
  */
 ZMO.modules.AmountStatsModel = function(config){
 	if("undefined"!=typeof config){
-        this.complete = config.amountTotal;
+        this.complete = config.amountTotal.toFixed(2);
         this.once=config.greatestDrawing;
         this.mostActivityHour=config.mostActivityHour;
 	}
