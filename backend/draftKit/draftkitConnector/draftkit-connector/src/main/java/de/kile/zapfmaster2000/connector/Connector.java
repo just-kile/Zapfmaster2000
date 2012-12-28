@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.kile.zapfmaster2000.connector.messages.IntervalMessage;
 import de.kile.zapfmaster2000.connector.messages.LoginMessage;
 import de.kile.zapfmaster2000.connector.messages.Message;
 import de.kile.zapfmaster2000.connector.messages.RfidMessage;
@@ -30,24 +31,24 @@ public class Connector implements Runnable, Observer {
 
 	// default tick counting interval in ms
 	int defaultInterval = 250;
-	
+
 	// for how long is the last rfid tag reception valid
 	int idInterval = 1000;
-	
+
 	// for how long a failed login will be signaled
 	int errorInterval = 3000;
 
 	// default serial port
 	String serialPort = "COM9";
-	
+
 	// last time of tag id reception
 	long lastIdTime = 0;
-	
+
 	// last tag id
 	long tagId = 0;
-	
+
 	// last login status
-	byte loginStatus = SerialConstants.STATUSNONE;
+	char loginStatus = SerialConstants.STATUSNONE;
 
 	@Override
 	public void run() {
@@ -58,10 +59,10 @@ public class Connector implements Runnable, Observer {
 
 		InputStreamReader is = new InputStreamReader(System.in);
 		BufferedReader in = new BufferedReader(is);
-		
+
 		// keeps last tagId in order to compare to tagId
 		long lastTagId = 0;
-		
+
 		// last time at which login was performed
 		long lastLoginTime = 0;
 
@@ -70,17 +71,40 @@ public class Connector implements Runnable, Observer {
 				String command = in.readLine();
 				String[] segments = command.split(" ");
 
+				switch (segments[0]) {
+				case "start":
+					start();
+					break;
+				case "interval":
+					assertParameterCount(segments, 1);
+					defaultInterval = Integer.parseInt(segments[1]);
+					setNewInterval();
+					System.out.println("New interval is: "+defaultInterval);
+					break;
+				case "serial":
+					assertParameterCount(segments, 1);
+					serialPort = segments[1];
+					System.out.println("New serial port is: "+serialPort);
+					break;
+				case "help":
+					showOptions();
+					break;
+				case "exit":
+					running = false;
+					break;
+				}
+
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			
+
 			// check for login
 			if (tagId == lastTagId) {
 				// check status
 				if (loginStatus == SerialConstants.STATUSOK) {
 					// login was ok
 					// check how old the last tagId reception is
-					if ((System.currentTimeMillis()-lastIdTime) > idInterval) {
+					if ((System.currentTimeMillis() - lastIdTime) > idInterval) {
 						// age has surpassed limit
 						// send logout message
 						loginStatus = SerialConstants.STATUSNONE;
@@ -90,7 +114,7 @@ public class Connector implements Runnable, Observer {
 				} else if (loginStatus == SerialConstants.STATUSERROR) {
 					// login had failed
 					// check how much time has passed since failed login
-					if ((System.currentTimeMillis()-lastLoginTime) > errorInterval) {
+					if ((System.currentTimeMillis() - lastLoginTime) > errorInterval) {
 						// time has surpassed limit
 						// send logout message, return status to none
 						loginStatus = SerialConstants.STATUSNONE;
@@ -99,20 +123,22 @@ public class Connector implements Runnable, Observer {
 					}
 				}
 			} else {
-				// get login response 
+				// get login response
 				int response = web.performLogin(tagId);
-				
+
 				LoginMessage message;
-				
+
 				// check whether login was successful
 				if (response == 200) {
 					// was successful
 					loginStatus = SerialConstants.STATUSOK;
 					message = new LoginMessage(loginStatus);
+					System.out.println("Login ok");
 				} else {
 					// was unsuccessful
 					loginStatus = SerialConstants.STATUSERROR;
 					message = new LoginMessage(loginStatus);
+					System.out.println("Login error");
 				}
 				// send message with login status to draftkitAVR
 				serial.sendMessage(message);
@@ -125,12 +151,46 @@ public class Connector implements Runnable, Observer {
 
 	}
 
+	/**
+	 * sends the defaultInterval as new tick interval to the draftkitAVR
+	 */
+	private void setNewInterval() {
+		if (serial != null) {
+			// create message containing the new tick interval
+			IntervalMessage message = new IntervalMessage(defaultInterval);
+			// send message to draftkitAVR
+			serial.sendMessage(message);
+		}
+
+	}
+
+	/**
+	 * starts the serial connection to the draftkitAVR
+	 */
+	private void start() {
+		// restart serial communicator in case there is an old one
+		if (serial != null)
+			restart();
+		else {
+			// create new serial communicator
+			serial = new SerialCommunicator();
+			// add this class as observer for incoming
+			serial.addObserver(this);
+			// connect to serial port
+			serial.connect(serialPort);
+			System.out.println("Connector is now running");
+		}
+	}
+
+	private void restart() {
+		serial.connect(serialPort);
+		System.out.println("Connector is reconnected");
+	}
+
 	@Override
 	public void update(Observable origin, Object message) {
 		// cast object
 		Message nMessage = (Message) message;
-		// initialize response
-		int response = 0;
 		if (nMessage != null) {
 			// message contains rfid tag id
 			if (nMessage.getMessageType() == Message.RFIDMESSAGE) {
@@ -145,17 +205,10 @@ public class Connector implements Runnable, Observer {
 				// cast to ticks message type
 				TicksMessage tMessage = (TicksMessage) nMessage;
 				System.out.println("ticks: " + tMessage.getTicks());
-				// get response status
-				response = web.sendTicks(tMessage.getTicks());
-				// deal with response
-				if (response != 0) {
-					
-				}
+				// send ticks
+				web.sendTicks(tMessage.getTicks());
 			}
 		}
-
-		// deal with response
-
 	}
 
 	/**
@@ -190,7 +243,6 @@ public class Connector implements Runnable, Observer {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		new Connector().run();
 	}
 }
