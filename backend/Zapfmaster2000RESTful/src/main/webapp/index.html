@@ -10,7 +10,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-
+/**
+ * Login website
+ */
 	$("#submitWebsite").on("click",function(e){
 		e.preventDefault();
 		var accountName = $("#account").val();
@@ -31,6 +33,9 @@ $(document).ready(function(){
 			}
 		})
 	});
+	/**
+	* Login App
+	*/
 	$(".applogin #submitApp").on("click",function(e){
 		e.preventDefault();
 		var userName = $(".applogin #userName").val();
@@ -51,33 +56,32 @@ $(document).ready(function(){
 				}
 			}
 		})
-	})
-	$("#registerUser").on("click",function(e){
+	});
+	/**
+	 * Register user
+	 */
+ 	$("#registerUserBtn").on("click",function(e){
 		e.preventDefault();
 		var userName = $("#userName").val();
 		var pass = $("#password").val();
 		var data = {};
-		$.each(".registerItem",function(ind,item){
+		$.each($(".registerItem"),function(ind,item){
 			data[$(item).attr("name")] =$(item).val(); 
 		});
+		data["token"] = localStorage.getItem("token");
 		$.ajax({
 			type:"POST",
 			url:"rest/register/user",
-			data:{
-				userName:userName,
-				password:pass
-			},
+			data:data,
 			success:function(token){
-				if(localStorage){
-					//localStorage.setItem('token',token );
-					//window.location.replace(window.location.pathname+"app.html");
-				}else{
-					alert("Use a normal browser! Localstorage is not available")
-				}
+				alert("Token"+token);
+				localStorage.setItem("token",token);
 			}
 		})
 	});
-	
+/**
+ * Upload Image
+ */
 $("#uploadImage").on("click",function(e){
 	e.preventDefault();
 	var formData = new FormData ($("#imageForm")[0]);
@@ -93,7 +97,10 @@ $("#uploadImage").on("click",function(e){
 	        alert("Image uploaded");
 	    }
 	});
-})
+});
+
+
+
 })
 
 
@@ -114,24 +121,35 @@ $("#uploadImage").on("click",function(e){
 </div>
 <hr />
 <div class="register">
-
+<form id="registerUser">
 <p>Name:<br /><input class="registerItem" id="rUserName" name="userName" type="text" size="30" maxlength="30" value=""></p>
 <p>Pass:<br /><input class="registerItem" id="rPassword" name="password" type="text" size="30" maxlength="30" value=""></p>
-<p>Gender:<br />
- <select class="registerItem" name="rGender" size="1">
+<p>Sex:<br />
+ <select class="registerItem" name="sex" size="1">
       <option>m</option>
       <option>w</option>
     </select>
 </p>
-<p>Weight:<br /><input class="registerItem" id="rWeight" name="userWeight" type="text" size="30" maxlength="30" value=""></p>
-<p>Gruppe:<br /><input class="registerItem" id="rAccount" name="account" type="text" size="30" maxlength="30" value=""></p>
+<p>Weight:<br /><input class="registerItem" id="weight" name="weight" type="text" size="30" maxlength="30" value=""></p>
 
-<input id ="registerUser" type="submit" value="Registrieren">
+<input id ="registerUserBtn" type="submit" value="Registrieren">
+</form>
 </div>
 <hr/>
 <form id="imageForm">
-<p>Image:<br /><input class="registerItem" id="rImage" name="image" type="file"></p>
+<p>Image:<br /><input id="rImage" name="image" type="file"></p>
 <input id ="uploadImage" type="submit" value="ImageUpload">
 </form>
+
+<hr/>
+<p>Choose Box:<br />
+ <select size="1">
+    
+   </select>
+</p>
+<p>RFID:<br /><input class="registerItem" id="rfid" name="rfid" type="text" size="30" maxlength="30" value=""></p>
+
+<input id ="registerUserBtn" type="submit" value="Registrieren">
+
 </body>
 </html>
