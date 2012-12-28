@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -25,6 +26,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.util.ChallengeAdapter;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
@@ -52,18 +54,24 @@ public class ChallengeResource {
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 
-			String query = "FROM Challenge1v1 c "
+			String rawQuery = "FROM Challenge1v1 c "
 					+ "JOIN FETCH c.user1 JOIN FETCH c.user2 "
 					+ "WHERE c.user1.account.id = :accountId ";
 			if (pOnlyRunning) {
-				query += "AND c.state = RUNNING";
+				rawQuery += "AND c.state = :running";
 			} else {
-				query += "AND (c.state = RUNNING OR c.state = DONE)";
+				rawQuery += "AND (c.state = :running OR c.state = :done)";
+			}
+
+			Query query = session.createQuery(rawQuery)
+					.setLong("accountId", account.getId())
+					.setParameter("running", ChallengeState.RUNNING);
+			if (!pOnlyRunning) {
+				query.setParameter("done", ChallengeState.FINISHED);
 			}
 
 			@SuppressWarnings("unchecked")
-			List<Challenge1v1> result = session.createQuery(query)
-					.setLong("accountId", account.getId()).list();
+			List<Challenge1v1> result = query.list();
 			tx.commit();
 
 			List<ChallengeOverviewReponse> response = new ArrayList<>();
@@ -233,7 +241,6 @@ public class ChallengeResource {
 
 			Zapfmaster2000Core.INSTANCE.getChallengeService().declineChallenge(
 					challenge1v1);
-
 
 			return Response.ok().build();
 		} else {
