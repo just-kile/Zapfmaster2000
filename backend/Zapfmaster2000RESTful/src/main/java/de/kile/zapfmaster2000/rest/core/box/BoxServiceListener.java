@@ -53,4 +53,16 @@ public interface BoxServiceListener {
 	 */
 	public void onEndDrawing(Box pBox, Drawing pDrawing);
 
+	/**
+	 * Invoked when a login failed (via rfid).
+	 * 
+	 * @param pBox
+	 *            the box the login failed at
+	 * @param pReason
+	 *            the reason for the failure.
+	 * @param pTag
+	 *            the tag that tried to login
+	 */
+	public void onLoginFailed(Box pBox, LoginFailureReason pReason, long pTag);
+
 }

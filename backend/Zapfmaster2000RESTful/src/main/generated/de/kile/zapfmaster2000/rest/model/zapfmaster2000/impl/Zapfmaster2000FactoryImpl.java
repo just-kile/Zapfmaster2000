@@ -4,6 +4,7 @@ package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.*;
 
+import java.sql.Blob;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -73,6 +74,7 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.MAPPING_QR_RFID: return createMappingQrRfid();
 			case Zapfmaster2000Package.USER: return createUser();
 			case Zapfmaster2000Package.TOKEN: return createToken();
+			case Zapfmaster2000Package.IMAGE: return createImage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -94,6 +96,8 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return createUserTypeFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.CHALLENGE_STATE:
 				return createChallengeStateFromString(eDataType, initialValue);
+			case Zapfmaster2000Package.BLOB:
+				return createBlobFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -115,6 +119,8 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return convertUserTypeToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.CHALLENGE_STATE:
 				return convertChallengeStateToString(eDataType, instanceValue);
+			case Zapfmaster2000Package.BLOB:
+				return convertBlobToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -285,6 +291,16 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Image createImage() {
+		ImageImpl image = new ImageImpl();
+		return image;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Sex createSexFromString(EDataType eDataType, String initialValue) {
 		Sex result = Sex.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -358,6 +374,24 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 */
 	public String convertChallengeStateToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Blob createBlobFromString(EDataType eDataType, String initialValue) {
+		return (Blob)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertBlobToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

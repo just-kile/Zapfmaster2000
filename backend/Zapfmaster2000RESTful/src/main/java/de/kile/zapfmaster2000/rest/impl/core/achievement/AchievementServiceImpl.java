@@ -13,6 +13,7 @@ import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.achievement.AchievementServiceListener;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
+import de.kile.zapfmaster2000.rest.core.box.LoginFailureReason;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.AbstractAchievementProcessor;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.AchievementProcessorListener;
@@ -141,6 +142,10 @@ public class AchievementServiceImpl implements AchievementService {
 
 			@Override
 			public void onLogout(Box pBox, User pUser) {
+			}
+
+			@Override
+			public void onLoginFailed(Box pBox, LoginFailureReason pReason, long pTag) {
 			}
 		};
 	}

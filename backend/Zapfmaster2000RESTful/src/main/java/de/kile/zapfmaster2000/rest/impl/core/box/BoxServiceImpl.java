@@ -12,6 +12,7 @@ import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
 import de.kile.zapfmaster2000.rest.core.box.DrawService;
 import de.kile.zapfmaster2000.rest.core.box.DrawServiceListener;
+import de.kile.zapfmaster2000.rest.core.box.LoginFailureReason;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
@@ -100,6 +101,13 @@ public class BoxServiceImpl implements BoxService {
 				for (BoxServiceListener listener : boxServiceListeners) {
 					listener.onLogout(box, pUser);
 				}				
+			}
+
+			@Override
+			public void onLoginFailed(LoginFailureReason pReason, long pTag) {
+				for (BoxServiceListener listener : boxServiceListeners) {
+					listener.onLoginFailed(box, pReason, pTag);
+				}		
 			}
 		};
 	}
