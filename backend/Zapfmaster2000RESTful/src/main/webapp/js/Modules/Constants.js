@@ -107,7 +107,7 @@ ZMO.modules.Constants = {
 			image:"images/icons/22-skull-n-bones.png"
 		
 }],
-badExcuses:{
+badExcuses:["1","2","und 3"]
 	
-}
+
 };

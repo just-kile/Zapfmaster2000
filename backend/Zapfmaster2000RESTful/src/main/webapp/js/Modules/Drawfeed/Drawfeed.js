@@ -13,19 +13,19 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		rfid = $(document.createElement("span")).attr("id","rfid").addClass("statstext");
 		var newscut  =$(document.createElement("div")).text(" ").addClass("newscut");
 		
-		return container.append(newsText).append(rfid).append(newscut)
-	}
+		return container.append(newsText).append(rfid).append(newscut);
+	};
 	
 	var createContainer =function(){
 		var container = $(document.createElement("div")).addClass("news-backgrnd");
 		var newsFeedContainer = $(document.createElement("div")).addClass("newsfeed");
 		var rfidHeadline= initRfid();
-		newsfeed  =  $(document.createElement("div")).attr("id","drawfeed-news")
+		newsfeed  =  $(document.createElement("div")).attr("id","drawfeed-news");
 		newsFeedContainer.append(rfidHeadline).append(newsfeed);
 		container.append(newsFeedContainer);
 		scrollElement = $("<div>").addClass("scrollElement").appendTo(container);
 		return container;
-	}
+	};
 	/**
 	 * ##########################################################
 	 * Newsfeed creation
@@ -104,18 +104,26 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				winner:model.team1[0].won?model.team1.join(","):model.team2.join(","),
 				image:model.image,
 				date:model.date
-			})
-		}
+			});
+		};
 		var parseChallengesDeclined = function(val){
-			var model = new ZMO.GlobalChallengeModel(val)
+			var model = new ZMO.GlobalChallengeModel(val);
+			var exNumber =0;
+			if(ZMO.exists(val.dateParser)){
+				exNumber = val.dateParser.getTimestamp()%mC.badExcuses.length;
+			}else{
+				exNumber = Math.round(Math.random()*10)%(mC.badExcuses.length);				
+			}
+
+			var excuse = mC.badExcuses[exNumber];
 			return ich["ZMO-news-template-challenge-declined"]({
 				team1:model.team1.join(","),
 				team2:model.team2.join(","),
 				duration:model.duration,
 				type:model.challenge_type,
-				reason:ZMO.Constants.badExcuses[Math.round(Math.random()*10)%(ZMO.Constants.badExcuses.length)],
-			image:model.image,
-			date:model.date
+				reason:excuse,
+				image:model.image,
+				date:model.date
 			})
 		}
 	 
