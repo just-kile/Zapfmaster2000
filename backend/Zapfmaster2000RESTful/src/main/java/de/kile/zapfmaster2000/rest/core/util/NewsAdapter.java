@@ -2,7 +2,9 @@ package de.kile.zapfmaster2000.rest.core.util;
 
 import org.apache.log4j.Logger;
 
+import de.kile.zapfmaster2000.rest.api.challenge.ChallengeOverviewReponse;
 import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse;
+import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse.Type;
 import de.kile.zapfmaster2000.rest.api.news.AchievementNewsResponse;
 import de.kile.zapfmaster2000.rest.api.news.DrawingNewsResponse;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
@@ -88,9 +90,13 @@ public class NewsAdapter {
 
 	private AbstractNewsResponse adaptChallenge1v1StartedNews(
 			Challenge1v1StartedNews pStartedNews) {
-		AbstractNewsResponse news = new ChallengeAdapter()
+		ChallengeOverviewReponse news = new ChallengeAdapter()
 				.adaptChallenge(pStartedNews.getChallenge());
 		news.loadDate(pStartedNews.getDate());
+		news.setType(Type.CHALLENGE_STARTED); // it is a challenge started news!
+												// However, previous adaption
+												// may detect that the challenge
+												// is done already
 		return news;
 	}
 
