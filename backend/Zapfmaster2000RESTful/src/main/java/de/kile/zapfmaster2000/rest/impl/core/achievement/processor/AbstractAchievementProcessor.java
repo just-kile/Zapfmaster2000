@@ -16,6 +16,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 /**
  * Checks if a user earned a specific achievement.
@@ -81,8 +82,11 @@ public abstract class AbstractAchievementProcessor {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		session.update(achievement);
-		session.update(pUser);
+		achievement = (Achievement) session.load(
+				Zapfmaster2000Package.eINSTANCE.getAchievement().getName(),
+				achievement.getId());
+		pUser = (User) session.load(Zapfmaster2000Package.eINSTANCE.getUser()
+				.getName(), pUser.getId());
 
 		GainedAchievement gained = Zapfmaster2000Factory.eINSTANCE
 				.createGainedAchievement();

@@ -11,6 +11,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.AbstractTimedAchievementProcessor;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class Abstinenzler extends AbstractTimedAchievementProcessor {
 
@@ -41,7 +42,8 @@ public class Abstinenzler extends AbstractTimedAchievementProcessor {
 					session = Zapfmaster2000Core.INSTANCE
 							.getTransactionService().getSessionFactory()
 							.getCurrentSession();
-					session.update(user);
+					user = (User) session.load(Zapfmaster2000Package.eINSTANCE
+							.getUser().getName(), user.getId());
 					tx = session.beginTransaction();
 					List<?> result2 = session
 							.createQuery(

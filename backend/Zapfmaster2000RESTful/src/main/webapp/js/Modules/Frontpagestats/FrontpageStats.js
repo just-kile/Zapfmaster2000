@@ -173,15 +173,15 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 			var statsModel = new ZMO.modules.StatsModel(stats)
 			var content = ich["ZMO-frontpagestats-general-template"]({
 				news:newsModel,
-				amount:stats.amount,
-				achievements:stats.achievements,
-				drawCount:stats.drawCount,
-				userRank:stats.rank
+				amount:statsModel.amount,
+				achievements:statsModel.achievements,
+				drawCount:statsModel.drawCount,
+				userRank:statsModel.rank
 			});
 			
 			userContainer.empty().append(content);
 		},{
-			userid:newsModel.userId
+			user:newsModel.userid
 		});
 	};
 	function roundAHalf(val) { 
@@ -221,7 +221,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 	var switchContainerToKeg =function(boxId){
 		ajax.getDatas(ZMO.modules.Constants.urls.FRONTPAGESTATS,function(fpStats){
 			updateGeneralStats(fpStats);
-			var kegModelArr = new ZMO.modules.kegModel(fpStats.keg);
+			var kegModelArr = new ZMO.modules.kegModel(fpStats.kegs);
 			$.each(kegModelArr,function(ind,kegData){
 				if(kegData.boxId==boxId)
 					updateKegStats(kegData);
@@ -256,7 +256,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 			initGeneralStats(fpStats);
 			//Kegcharts
 			containerHandler = new ContainerHandler();
-			var kegModelArr = new ZMO.modules.kegModel(fpStats.keg);
+			var kegModelArr = new ZMO.modules.kegModel(fpStats.kegs);
 			$.each(kegModelArr,function(ind,kegData){
 				initBox(kegData);
 				initPush(kegData);

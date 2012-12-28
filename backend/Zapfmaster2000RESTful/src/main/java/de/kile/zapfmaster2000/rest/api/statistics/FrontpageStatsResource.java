@@ -42,7 +42,7 @@ public class FrontpageStatsResource {
 	 *         <li>FORBIDDEN: if authentication with <code>pToken</code> fails.</li>
 	 *         </ul>
 	 */
-	@Path("FrontpageStats")
+	@Path("frontpageStats")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveFrontpageStats(@QueryParam("token") String pToken,

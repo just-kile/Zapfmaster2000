@@ -13,12 +13,12 @@ ZMO.modules.Constants = {
 			listLength:10
 		},
 		urls:{
-			FRONTPAGESTATS:"tmp/stats_fp.json",
-			USERFRONTPAGESTATS:"tmp/kegstatus.json",
+			FRONTPAGESTATS:"rest/statistics/frontpageStats",
+			USERFRONTPAGESTATS:"rest/statistics/frontpageUserStats",
 
 			NEWSLIST:"rest/news",
-			STATS:"tmp/stats.json",
-			
+			//STATS:"tmp/stats.json",
+			STATS:"rest/statistics/globalStats",
 			MEMBERS:"rest/members",
 			
 			CHALLENGES:"rest/challenge",
