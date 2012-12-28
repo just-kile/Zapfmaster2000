@@ -52,7 +52,8 @@ public class SerialCommunicator {
 	 * @param portName
 	 * @throws Exception
 	 */
-	void connect(String portName) throws Exception {
+	int connect(String portName) throws Exception {
+		int status = -1;
 		CommPortIdentifier portIdentifier = CommPortIdentifier
 				.getPortIdentifier(portName);
 		if (portIdentifier.isCurrentlyOwned()) {
@@ -82,12 +83,16 @@ public class SerialCommunicator {
 
 				// attach observers to the reader
 				updateObservers();
+				
+				status = 1;
 
 			} else {
 				System.out
 						.println("Error: Only serial ports are handled by this example.");
 			}
 		}
+		
+		return status;
 	}
 	
 	/**

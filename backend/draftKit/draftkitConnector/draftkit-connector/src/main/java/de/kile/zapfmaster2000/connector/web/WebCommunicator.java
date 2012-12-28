@@ -13,7 +13,7 @@ public class WebCommunicator {
 	private static final String URL = "http://localhost:8080/Zapfmaster2000RESTful/rest/";
 	private String boxPassphrase = "box-1";
 	
-	private int performLogin(long tagId) {
+	public int performLogin(long tagId) {
 		LoginRequest loginRequest = new LoginRequest();
 		loginRequest.setBoxPassphrase(boxPassphrase);
 		loginRequest.setRfidTag(tagId);
@@ -35,7 +35,7 @@ public class WebCommunicator {
 		return status;
 	}
 	
-	private int sendTicks(int ticks) {
+	public int sendTicks(int ticks) {
 		DrawRequest drawRequest = new DrawRequest();
 		drawRequest.setBoxPassphrase(boxPassphrase);
 		drawRequest.setTicks(ticks);
