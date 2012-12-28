@@ -19,11 +19,12 @@ public interface DrawServiceListener {
 	 *            the user, never <code>null</code>.
 	 */
 	public void onLoginsuccessful(User pUser);
-	
+
 	/**
 	 * Invoked when a user was logged out.
 	 * 
-	 * @param pUser the user that was logged out.
+	 * @param pUser
+	 *            the user that was logged out.
 	 */
 	public void onLogout(User pUser);
 
@@ -40,9 +41,19 @@ public interface DrawServiceListener {
 	/**
 	 * Invoked when the user finished drawing.
 	 * 
-	 * @param Drawing pDrawing
-	 *            the drawing that was written to db
+	 * @param Drawing
+	 *            pDrawing the drawing that was written to db
 	 */
 	public void onEndDrawing(Drawing pDrawing);
-	
+
+	/**
+	 * Invoked if a login failed for a user (via rfid).
+	 * 
+	 * @param pReason
+	 *            the reason for the failure.
+	 * @param pTag
+	 *            the tag that tried to log in.
+	 */
+	public void onLoginFailed(LoginFailureReason pReason, long pTag);
+
 }

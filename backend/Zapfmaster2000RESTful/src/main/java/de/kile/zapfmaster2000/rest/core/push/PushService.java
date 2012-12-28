@@ -44,4 +44,14 @@ public interface PushService {
 	 */
 	public void addChallengeRequest(AsynchronousResponse pResponse, User pUser);
 
+	/**
+	 * Ads a request to push unknown rfid tags to.
+	 * 
+	 * @param pResponse
+	 *            response to push tags to
+	 * @param pBox
+	 *            box to push tags for
+	 */
+	public void addUnkownRfidRequest(AsynchronousResponse pResponse, Box pBox);
+
 }

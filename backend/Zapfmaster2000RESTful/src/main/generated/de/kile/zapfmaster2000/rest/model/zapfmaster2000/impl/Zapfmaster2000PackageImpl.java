@@ -16,6 +16,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
@@ -27,8 +28,10 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
+import java.sql.Blob;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -173,6 +176,13 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass imageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum sexEEnum = null;
 
 	/**
@@ -195,6 +205,13 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * @generated
 	 */
 	private EEnum challengeStateEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType blobEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1036,6 +1053,51 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getImage() {
+		return imageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImage_Id() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImage_Path() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImage_ContentType() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImage_Content() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSex() {
 		return sexEEnum;
 	}
@@ -1065,6 +1127,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 */
 	public EEnum getChallengeState() {
 		return challengeStateEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getBlob() {
+		return blobEDataType;
 	}
 
 	/**
@@ -1199,11 +1270,20 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEReference(tokenEClass, TOKEN__ACCOUNT);
 		createEReference(tokenEClass, TOKEN__USER);
 
+		imageEClass = createEClass(IMAGE);
+		createEAttribute(imageEClass, IMAGE__ID);
+		createEAttribute(imageEClass, IMAGE__PATH);
+		createEAttribute(imageEClass, IMAGE__CONTENT_TYPE);
+		createEAttribute(imageEClass, IMAGE__CONTENT);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		challengeTypeEEnum = createEEnum(CHALLENGE_TYPE);
 		userTypeEEnum = createEEnum(USER_TYPE);
 		challengeStateEEnum = createEEnum(CHALLENGE_STATE);
+
+		// Create data types
+		blobEDataType = createEDataType(BLOB);
 	}
 
 	/**
@@ -1347,6 +1427,12 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEReference(getToken_Account(), this.getAccount(), null, "account", null, 0, 1, Token.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getToken_User(), this.getUser(), null, "user", null, 0, 1, Token.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(imageEClass, Image.class, "Image", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImage_Id(), ecorePackage.getELong(), "id", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_Path(), ecorePackage.getEString(), "path", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_ContentType(), ecorePackage.getEString(), "contentType", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_Content(), this.getBlob(), "content", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
 		addEEnumLiteral(sexEEnum, Sex.MALE);
@@ -1365,8 +1451,31 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		addEEnumLiteral(challengeStateEEnum, ChallengeState.RUNNING);
 		addEEnumLiteral(challengeStateEEnum, ChallengeState.FINISHED);
 
+		// Initialize data types
+		initEDataType(blobEDataType, Blob.class, "Blob", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// teneo.jpa
+		createTeneoAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>teneo.jpa</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createTeneoAnnotations() {
+		String source = "teneo.jpa";		
+		addAnnotation
+		  (getImage_Content(), 
+		   source, 
+		   new String[] {
+			 "value", "@Lob\n@Column(length=1048576)\n@Type(type=\"blob\")"
+		   });
 	}
 
 } //Zapfmaster2000PackageImpl
