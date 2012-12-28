@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest.impl.core.transaction;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.ws.WebServiceException;
@@ -11,6 +12,15 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 
+/**
+ * Shared queries.
+ * 
+ *  <p>
+ *  TODO: This class is ugly. Use DAOs?
+ *  </p>
+ * 
+ * @author Thomas Kipar
+ */
 public final class SharedQueries {
 
 	private SharedQueries() {
@@ -46,7 +56,24 @@ public final class SharedQueries {
 			throw ex;
 		}
 		return keg;
-
+	}
+	
+	public static double retrieveDrawingAmount(long pUserId, Date pFrom, Date pTo) {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		
+		@SuppressWarnings("unchecked")
+		List<Double> result = session.createQuery("SELECT sum(d.amount) FROM Drawing d " +
+				"WHERE d.user.id = :userId AND d.date >= :from AND d.date <= :to " +
+				"GROUP BY d.user.id").list();
+		tx.commit();
+		
+		if (result.size() == 1) {
+			return result.get(0);
+		}
+		
+		return 0;
 	}
 
 }

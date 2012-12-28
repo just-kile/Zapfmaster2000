@@ -182,6 +182,8 @@ public class NewsServiceImpl implements NewsService {
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 			session.update(challenge1v1);
+			session.update(challenge1v1.getUser1());
+			session.update(challenge1v1.getUser1().getAccount());
 
 			Challenge1v1StartedNews news = Zapfmaster2000Factory.eINSTANCE
 					.createChallenge1v1StartedNews();
@@ -206,6 +208,8 @@ public class NewsServiceImpl implements NewsService {
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 			session.update(challenge1v1);
+			session.update(challenge1v1.getUser1());
+			session.update(challenge1v1.getUser1().getAccount());
 
 			Challenge1v1DoneNews news = Zapfmaster2000Factory.eINSTANCE
 					.createChallenge1v1DoneNews();
@@ -230,6 +234,8 @@ public class NewsServiceImpl implements NewsService {
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 			session.update(challenge1v1);
+			session.update(challenge1v1.getUser1());
+			session.update(challenge1v1.getUser1().getAccount());
 
 			Challenge1v1DeclinedNews news = Zapfmaster2000Factory.eINSTANCE
 					.createChallenge1v1DeclinedNews();
