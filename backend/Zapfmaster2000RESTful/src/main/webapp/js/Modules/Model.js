@@ -119,6 +119,7 @@ ZMO.GlobalChallengeModel = function(config){
 	this.team1Amount = sumArr(parseTeam(config.team1,"amount"));
 	this.team2Amount = sumArr(parseTeam(config.team2,"amount"));
 	this.image = config.image||config.challengeImage;
+	this.dateParser = config.startDate?new ZMO.TimeParser(config.startDate):null;
 	this.date = config.startDate?new ZMO.TimeParser(config.startDate).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 			
 	//this.date = config.start_time||config.startDate;
