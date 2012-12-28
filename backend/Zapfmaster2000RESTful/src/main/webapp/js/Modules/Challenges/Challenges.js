@@ -36,7 +36,7 @@ ZMO.modules.challenges = (function($,ajax){
 				var oneMinute = 1000*60;
 				var duration = parseInt(model.duration)*oneMinute*1;
 				var startDate = ZMO.exists(model.dateParser)?model.dateParser.getTimestamp():0;
-				var time =Math.ceil((startDate*1000+duration-(new Date()).getTime())/oneMinute);
+				var time =Math.ceil((startDate+duration-(new Date()).getTime())/oneMinute);
 				return time>0?time +"min verbleibend":"Challenge beendet!";
 			})()
 		});
