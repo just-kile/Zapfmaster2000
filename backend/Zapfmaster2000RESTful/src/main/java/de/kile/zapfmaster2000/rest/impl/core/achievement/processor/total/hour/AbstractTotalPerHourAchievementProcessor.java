@@ -11,6 +11,7 @@ import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.AbstractAchievementProcessor;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public abstract class AbstractTotalPerHourAchievementProcessor extends
 		AbstractAchievementProcessor {
@@ -27,7 +28,8 @@ public abstract class AbstractTotalPerHourAchievementProcessor extends
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		session.update(user);
+		user = (User) session.load(Zapfmaster2000Package.eINSTANCE.getUser()
+				.getName(), user.getId());
 		List<?> result = session
 				.createQuery(
 						"SELECT SUM(d.amount) FROM Drawing d "

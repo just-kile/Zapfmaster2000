@@ -64,7 +64,7 @@ ZMO.modules.kegstatusView = (function($,ajax){
 	 */
 	var keglistMod ={};
 	var keglist = function(keglistModelOrId){
-		if(typeof keglistModelOrId =="string" ){
+		if(typeof keglistModelOrId =="string"||typeof keglistModelOrId =="number" ){
 			var model;
 			$.each(keglistMod,function(ind,keg){
 				if(keg.keg_id==keglistModelOrId){

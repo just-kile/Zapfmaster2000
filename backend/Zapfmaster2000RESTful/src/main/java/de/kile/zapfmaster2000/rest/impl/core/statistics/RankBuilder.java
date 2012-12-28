@@ -9,6 +9,7 @@ import de.kile.zapfmaster2000.rest.api.statistics.RankResponse;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class RankBuilder {
 
@@ -26,7 +27,7 @@ public class RankBuilder {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		session.update(account);
+		account = (Account) session.load(Zapfmaster2000Package.eINSTANCE.getAccount().getName(), account.getId());
 
 		// TODO full hql solution
 		List<Object> listDrawCount = session
