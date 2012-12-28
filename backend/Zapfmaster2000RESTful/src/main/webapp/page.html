@@ -94,6 +94,30 @@
 </table>
 </div>
  </script>
+   <script id="ZMO-achievementsstats-list-template" type="text/html">
+<tr class="stats-drinker-row">
+<td><img src="{{userImage}}" /></td>
+<td><a href="#userStats?id={{userId}}">{{userName}}</a></td>
+<td>Erreicht am {{date}}</td>
+</tr>
+ </script>
+    <script id="ZMO-achievementsstats-description-template" type="text/html">
+<table class="stats-drinker">
+<tr >
+	<td>Illustration</td>
+	<td><img src="{{achievementImage}}" /></td>
+
+</tr>
+<tr >
+	<td>Name</td>
+<td>{{achievementName}}</td>
+</tr>
+<tr >
+	<td>Beschreibung</td>
+<td>{{description}}</td>
+</tr>
+</table>
+ </script>
  <script id="ZMO-duelsRow" type="text/html">
  <li class="row">
 	<div class="rowContainer">
@@ -105,8 +129,6 @@
 	<span class="type">({{type}})</span>
 	<span class="team2"><img src="{{team2}}"/></span>
 	<span class="time">{{time}}</span>
-
-	
 </div>
 </li>
  </script>
@@ -125,7 +147,7 @@
 				</div>
 			</div>
 			<div class="news-box-dateline">
-				<abbr title="{{date}}" class="timeago">am {{date}}</abbr>
+				<abbr title="{{date}}" class="timeago">am {{date}} Uhr</abbr>
 			</div>
 		</div>
 </script>
