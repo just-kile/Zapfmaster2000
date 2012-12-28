@@ -56,7 +56,12 @@ ZMO.modules.challenges = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(){
-		ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
+//		ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
+		ajax.enqueueDatas({
+			url:c.urls.CHALLENGES,
+			callback:onChallengesReceive,
+			rawData:true
+		});
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM

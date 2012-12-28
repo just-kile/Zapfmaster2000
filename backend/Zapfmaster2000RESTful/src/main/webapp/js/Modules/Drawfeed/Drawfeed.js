@@ -89,7 +89,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		var parseChallengesDone = function(val){
 			var model = new ZMO.GlobalChallengeModel(val);
 			var winner,loser;
-			if(typeof model.team1!="undefined" &&typeof model.team1[0]!="undefined" && model.team1[0].won==1){
+			if(typeof model.team1!="undefined" &&typeof model.team1[0]!="undefined" && model.team1[0].won){
 				winner=model.team1;
 				loser=model.team2;
 			}else{
@@ -166,12 +166,12 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		 }
 	 };
 	 var bindScrollHandler = function(scrollElement){
-		 var windowHeight = $(window).height();
 		 var actLoadingFlag = false;
 		 $(window).bind("scroll",function(e){
 			 var top = scrollElement.offset().top;
+			 var windowHeight = $(window).height();
 			 var windowTop = $(window).scrollTop()+windowHeight+200;
-			 if(windowTop>top && top>windowHeight&& !actLoadingFlag){
+			 if(windowTop>top && top>=windowHeight&& !actLoadingFlag){
 				 actLoadingFlag = true;
 				 var len = container.children().length;
 				 updateNewslist(len,mC.drawfeed.listLength,function(datas){if(datas.length!=0)actLoadingFlag = false;});
