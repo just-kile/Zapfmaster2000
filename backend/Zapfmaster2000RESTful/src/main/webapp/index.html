@@ -7,12 +7,55 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="true">
 <meta name="MobileOptimized" content="width">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script>
+ <script src="libs/jquery/jquery-1.8.1.js"></script>
+ <link rel="stylesheet" type="text/css" href="css/login.css" />
+ <script>
 $(document).ready(function(){
 /**
  * Login website
- */
+ */	/**
+	 * General Server Push Connection Function
+	 * @param {String} url
+	 * 			The Url to the channel
+	 * @param {Function} successCb
+	 * 			The function that will be executed, when data received
+	 * @param {Function} errorCb
+	 * 			The function that will be executed, when error occurs, or timeout
+	 */
+	 var pushReq = null;
+	var connectToChannel = function(url,successCb,errorCb,data){
+		if(!data)data ={};
+		data["token"] = localStorage.getItem("token");
+		pushReq = $.ajax({
+			type:"GET",
+			url:url,
+			timeout:10000000, 
+			data:data,
+			success:function(data){
+				if(successCb && data!="")successCb(data);
+				connectToChannel(url,successCb,errorCb,data);
+			},
+			error:function(e){
+				if(e.status==0){
+					console.log("Request abort success!");
+				}else if(e.status==503){
+					console.log("No Datas Received! Reconnect...");
+//					if(errorCb)errorCb(e);
+					connectToChannel(url,successCb,errorCb,data);
+				}else{
+					console.log("Error! Status "+e.status);
+					console.log("Reconnect in 5s...");
+				
+					if(errorCb)errorCb(e);
+					setTimeout(function(){
+						connectToChannel(url,successCb,errorCb,data);
+					},5000);
+				}
+			}
+		});
+	}
+		
+		
 	$("#submitWebsite").on("click",function(e){
 		e.preventDefault();
 		var accountName = $("#account").val();
@@ -98,6 +141,62 @@ $("#uploadImage").on("click",function(e){
 	    }
 	});
 });
+/**
+ * Request Boxes
+ */
+$("#requestBoxes").on("click",function(e){
+	e.preventDefault();
+	var data = {};
+	data["token"] = localStorage.getItem("token");
+	$.ajax({
+	    url: 'rest/draftkit',
+	    type: 'GET',
+	    data:data,
+	    success: function(data){
+	        var selectBox = $("#registerSelectBox");
+	        var firstObj;
+	        $.each(data,function(ind,obj){
+	        	$("<option>").attr("value",obj.boxId).text(obj.boxId+obj.name).appendTo(selectBox);
+	        	if(!firstObj)firstObj =obj;
+	        });
+	        initRfidPush(firstObj.boxId);
+	       
+	    }
+	});
+});
+$("#registerSelectBox").on("change",function(e){
+	//initRfidPush();
+	console.log(e)
+	initRfidPush($(e.currentTarget).val());
+});
+/**
+ * Set RFID Card
+ */
+ function setRFID(rfid){
+	$("#rfid").val(rfid);
+	var yep = confirm("Soll die Karte wirklich registriert werden?")
+	if(yep){
+		var data = {};
+		data["token"] = localStorage.getItem("token");
+		data["rfid"] = rfid;
+		$.ajax({
+		    url: 'rest/register/rfid',
+		    type: 'POST',
+		    data:data,
+		    success: function(data){
+				alert("RFID registriert")
+		       
+		    }
+		});
+	}else{
+		
+	}
+}
+	function initRfidPush(id){
+		if(pushReq)pushReq.abort();
+		pushReq = null;
+		connectToChannel("rest/draftkit/"+id+"/rfid",setRFID);
+	}
 
 
 
@@ -142,9 +241,10 @@ $("#uploadImage").on("click",function(e){
 </form>
 
 <hr/>
+<input id ="requestBoxes" type="submit" value="Box Anfrage">
 <p>Choose Box:<br />
- <select size="1">
-    
+ <select size="1" id="registerSelectBox">
+<!--  <option value="4">test</option>-->
    </select>
 </p>
 <p>RFID:<br /><input class="registerItem" id="rfid" name="rfid" type="text" size="30" maxlength="30" value=""></p>
