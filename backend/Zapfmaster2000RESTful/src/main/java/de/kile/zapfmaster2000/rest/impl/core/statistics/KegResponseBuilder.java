@@ -27,12 +27,22 @@ public class KegResponseBuilder {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		
+//		List<Object[]> resultCurrentKegs = session
+//				.createQuery(
+//						"SELECT k.id, k.brand, k.size, k.startDate, k.size-SUM(d.amount), k.box.id"
+//								+ " FROM Drawing d LEFT OUTER JOIN d.keg AS k"
+//								+ " WHERE d.keg = k "
+//								+ " AND k.box.account = :account "
+//								+ " AND k.endDate IS NULL "
+//								+ " GROUP BY k.id, k.brand, k.size, k.startDate "
+//								+ " ORDER BY k.id")
+//				.setEntity("account", account).list();
+		
 		List<Object[]> resultCurrentKegs = session
 				.createQuery(
 						"SELECT k.id, k.brand, k.size, k.startDate, k.size-SUM(d.amount), k.box.id"
-								+ " FROM Drawing d JOIN d.keg AS k"
-								+ " WHERE d.keg = k "
-								+ " AND k.box.account = :account "
+								+ " FROM Keg k LEFT JOIN k.drawings AS d"
+								+ " WHERE k.box.account = :account "
 								+ " AND k.endDate IS NULL "
 								+ " GROUP BY k.id, k.brand, k.size, k.startDate "
 								+ " ORDER BY k.id")
@@ -72,7 +82,13 @@ public class KegResponseBuilder {
 			response[i].setBrand((String) resultRow[1]);
 			response[i].setSize((Integer) resultRow[2]);
 			response[i].setStartDate((Date) resultRow[3]);
-			response[i].setCurrentAmount((Double) resultRow[4]);
+			Double amountLeft = (Double) resultRow[4];
+			if (amountLeft == null) {
+				// no one drawed something from keg
+				response[i].setCurrentAmount((Integer) resultRow[2]);
+			} else {
+				response[i].setCurrentAmount((Double) resultRow[4]);
+			}
 			response[i].setKegNumber((Long) resultNumberKegs.get(0));
 			response[i].setBoxId((Long) resultRow[5]);
 

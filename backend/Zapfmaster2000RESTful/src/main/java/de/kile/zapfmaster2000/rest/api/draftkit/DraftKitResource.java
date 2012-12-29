@@ -3,7 +3,10 @@ package de.kile.zapfmaster2000.rest.api.draftkit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -22,6 +25,7 @@ import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 @Path("/draftkit")
 public class DraftKitResource {
@@ -99,5 +103,38 @@ public class DraftKitResource {
 			// pResponse.setResponse(Response.status(Status.FORBIDDEN).build());
 			LOG.warn("Forbidden");
 		}
+	}
+
+	@POST
+	@Path("/{draftKitId}/switchkeg")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response switchKeg(@FormParam("token") String pToken,
+			@FormParam("size") int pSize, @FormParam("brand") String pBrand,
+			@PathParam("draftKitId") long pDraftKitId) {
+
+		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAccount(pToken);
+		if (account != null) {
+			// check that the chosen box exists for given account
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			Box box = (Box) session.load(Zapfmaster2000Package.eINSTANCE
+					.getBox().getName(), pDraftKitId);
+
+			boolean canSwitch = box != null
+					&& box.getAccount().getId() == account.getId();
+			tx.commit();
+			
+			if (canSwitch) {
+				Zapfmaster2000Core.INSTANCE.getKegService().switchKeg(box, pBrand, pSize);
+			}
+
+		}
+
+		return Response.status(Status.FORBIDDEN).build();
+
 	}
 }
