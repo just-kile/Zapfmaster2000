@@ -9,8 +9,9 @@ import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 
 public class AbstractNewsResponse {
 
-	private static final Logger LOG = Logger.getLogger(AbstractNewsResponse.class);
-	
+	private static final Logger LOG = Logger
+			.getLogger(AbstractNewsResponse.class);
+
 	private Type type;
 
 	private String image;
@@ -62,7 +63,7 @@ public class AbstractNewsResponse {
 	}
 
 	public enum Type {
-		DRAWING, ACHIEVEMENT, CHALLENGE_STARTED, CHALLENGE_DECLINED, CHALLENGE_DONE
+		DRAWING, ACHIEVEMENT, CHALLENGE_STARTED, CHALLENGE_DECLINED, CHALLENGE_DONE, NEW_KEG
 	}
 
 }

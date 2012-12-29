@@ -102,6 +102,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Challenge1v1DoneNews" eSuperTypes="#//News">
     <eStructuralFeatures xsi:type="ecore:EReference" name="challenge" eType="#//Challenge1v1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NewKegNews" eSuperTypes="#//News">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keg" eType="#//Keg"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingQrRfid">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         iD="true"/>
