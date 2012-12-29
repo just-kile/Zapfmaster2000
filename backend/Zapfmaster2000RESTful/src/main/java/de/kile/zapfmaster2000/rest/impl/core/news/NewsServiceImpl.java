@@ -13,6 +13,7 @@ import de.kile.zapfmaster2000.rest.core.achievement.AchievementService;
 import de.kile.zapfmaster2000.rest.core.achievement.AchievementServiceListener;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
+import de.kile.zapfmaster2000.rest.core.box.LoginFailureReason;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeServiceListener;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
@@ -31,6 +32,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class NewsServiceImpl implements NewsService {
 
@@ -89,6 +91,11 @@ public class NewsServiceImpl implements NewsService {
 			@Override
 			public void onLogout(Box pBox, User pUser) {
 			}
+
+			@Override
+			public void onLoginFailed(Box pBox, LoginFailureReason pReason,
+					long pTag) {
+			}
 		};
 	}
 
@@ -129,7 +136,8 @@ public class NewsServiceImpl implements NewsService {
 		List<Account> accounts = session
 				.createQuery("SELECT b.account FROM Box b WHERE b.id = :id")
 				.setLong("id", pBox.getId()).list();
-		session.update(pDrawing);
+		pDrawing = (Drawing) session.load(Zapfmaster2000Package.eINSTANCE
+				.getDrawing().getName(), pDrawing.getId());
 
 		DrawingNews news = null;
 		if (accounts.size() == 1) {
@@ -158,9 +166,9 @@ public class NewsServiceImpl implements NewsService {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		session.update(pGainedAchievement);
-		session.update(pGainedAchievement.getUser());
-		session.update(pGainedAchievement.getUser().getAccount());
+		pGainedAchievement = (GainedAchievement) session.load(
+				Zapfmaster2000Package.eINSTANCE.getGainedAchievement()
+						.getName(), pGainedAchievement.getId());
 
 		AchievementNews news = Zapfmaster2000Factory.eINSTANCE
 				.createAchievementNews();
@@ -181,9 +189,9 @@ public class NewsServiceImpl implements NewsService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(challenge1v1);
-			session.update(challenge1v1.getUser1());
-			session.update(challenge1v1.getUser1().getAccount());
+			challenge1v1 = (Challenge1v1) session
+					.load(Zapfmaster2000Package.eINSTANCE.getChallenge1v1()
+							.getName(), challenge1v1.getId());
 
 			Challenge1v1StartedNews news = Zapfmaster2000Factory.eINSTANCE
 					.createChallenge1v1StartedNews();
@@ -207,9 +215,9 @@ public class NewsServiceImpl implements NewsService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(challenge1v1);
-			session.update(challenge1v1.getUser1());
-			session.update(challenge1v1.getUser1().getAccount());
+			challenge1v1 = (Challenge1v1) session
+					.load(Zapfmaster2000Package.eINSTANCE.getChallenge1v1()
+							.getName(), challenge1v1.getId());
 
 			Challenge1v1DoneNews news = Zapfmaster2000Factory.eINSTANCE
 					.createChallenge1v1DoneNews();
@@ -233,9 +241,8 @@ public class NewsServiceImpl implements NewsService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(challenge1v1);
-			session.update(challenge1v1.getUser1());
-			session.update(challenge1v1.getUser1().getAccount());
+			challenge1v1 = (Challenge1v1) session.load(Zapfmaster2000Package.eINSTANCE.getChallenge1v1().getName(),
+					challenge1v1.getId());
 
 			Challenge1v1DeclinedNews news = Zapfmaster2000Factory.eINSTANCE
 					.createChallenge1v1DeclinedNews();

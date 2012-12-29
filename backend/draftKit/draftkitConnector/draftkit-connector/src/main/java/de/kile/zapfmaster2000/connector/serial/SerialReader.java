@@ -33,12 +33,12 @@ public class SerialReader extends Observable implements
 		try {
 			int len = 0;
 			while ((data = in.read()) > -1) {
+				buffer[len++] = (byte) data;
 				if (data == '\n') {
 					break;
 				}
-				buffer[len++] = (byte) data;
 			}
-			System.out.print(new String(buffer, 0, len));
+			System.out.print(new String(buffer, 0, len)+"\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(-1);
@@ -49,7 +49,9 @@ public class SerialReader extends Observable implements
 		
 		// notify observers
 		if (message != null) {
-			notifyObservers(message);					
+			setChanged();
+			notifyObservers(message);
+			clearChanged();
 		}
 	}
 }

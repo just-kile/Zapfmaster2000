@@ -135,10 +135,11 @@ public class AlcoholResponseBuilder {
 		List<Object[]> resultUsers = session
 				.createQuery(
 						"SELECT u.sex, u.weight, u.id"
-								+ " FROM Drawing d, User u"
-								+ " WHERE d.user = u AND u.account = :account"
+								+ " FROM Drawing d "
+								+ " JOIN d.user AS u "
+								+ " WHERE u.account = :account"
 								+ " AND d.date > :timestamp "
-								+ " GROUP BY (u.id, u.sex, u.weight)")
+								+ " GROUP BY u.id, u.sex, u.weight")
 				.setEntity("account", account)
 				.setDate("timestamp", calendar.getTime()).list();
 

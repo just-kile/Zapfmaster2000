@@ -13,8 +13,8 @@ public final class SerialConstants {
 	public final static char INTERVALSYMBOL = 'I';
 
 	// login status
-	public final static byte STATUSOK = 1;
-	public final static byte STATUSERROR = 2;
-	public final static byte STATUSNONE = 3;
+	public final static char STATUSOK = '1';
+	public final static char STATUSERROR = '2';
+	public final static char STATUSNONE = '3';
 
 }

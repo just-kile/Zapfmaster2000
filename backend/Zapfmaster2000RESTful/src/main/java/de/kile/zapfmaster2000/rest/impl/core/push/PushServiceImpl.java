@@ -17,6 +17,7 @@ import de.kile.zapfmaster2000.rest.api.push.LogoutDraftKitResponse;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
+import de.kile.zapfmaster2000.rest.core.box.LoginFailureReason;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeServiceListener;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
@@ -30,17 +31,21 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class PushServiceImpl implements PushService {
 
-	/** pending responsed for news pushs: AccountId -> PushQueue */
+	/** pending responses for news pushs: AccountId -> PushQueue */
 	private final Map<Long, PushQueue> pendingNewsResponses = new HashMap<>();
 
 	/** pending responses for draft kit pushs: BoxId -> PushQueue */
 	private final Map<Long, PushQueue> pendingDraftKitReponses = new HashMap<>();
 
-	/** pending reponsed for challenge pushs: UserId -> PushQueue */
+	/** pending reponses for challenge pushs: UserId -> PushQueue */
 	private final Map<Long, PushQueue> pendingChallengeResponses = new HashMap<>();
+	
+	/** pending responses for unknown rfid tag pushes: BoxId -> PushQueue */
+	private final Map<Long, PushQueue> pendingUnkownRfidResponses = new HashMap<>();
 
 	public PushServiceImpl(NewsService pNewsService, BoxService pBoxService,
 			ChallengeService pChallengeService) {
@@ -84,6 +89,17 @@ public class PushServiceImpl implements PushService {
 		queue.addRequest(pResponse);
 	}
 
+	@Override
+	public void addUnkownRfidRequest(AsynchronousResponse pResponse, Box pBox) {
+		if (!pendingUnkownRfidResponses.containsKey(pBox.getId())){
+			PushQueue queue = new PushQueue();
+			pendingUnkownRfidResponses.put(pBox.getId(), queue);
+		}
+		PushQueue queue = pendingUnkownRfidResponses.get(pBox.getId());
+		assert (queue != null);
+		queue.addRequest(pResponse);
+	}
+
 	private NewsServiceListener createNewsListener() {
 		return new NewsServiceListener() {
 
@@ -116,6 +132,13 @@ public class PushServiceImpl implements PushService {
 			@Override
 			public void onDrawing(Box pBox, User pUser, double pAmount) {
 				pushDrawing(pBox, pUser, pAmount);
+			}
+
+			@Override
+			public void onLoginFailed(Box pBox, LoginFailureReason pReason, long pTag) {
+				if (pReason == LoginFailureReason.INVALID_RFID_TAG) {
+					pushInvalidRfidTag(pBox, pTag);
+				}
 			}
 
 		};
@@ -231,7 +254,9 @@ public class PushServiceImpl implements PushService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(pChallenge);
+			pChallenge = (Challenge) session.load(
+					Zapfmaster2000Package.eINSTANCE.getChallenge().getName(),
+					pChallenge.getId());
 
 			ChallengeAcceptedReponse entity = new ChallengeAcceptedReponse();
 			entity.setUser1Id(challenge1v1.getUser1().getId());
@@ -266,7 +291,9 @@ public class PushServiceImpl implements PushService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(pChallenge);
+			pChallenge = (Challenge) session.load(
+					Zapfmaster2000Package.eINSTANCE.getChallenge().getName(),
+					pChallenge.getId());
 
 			ChallengeDeclinedReponse entity = new ChallengeDeclinedReponse();
 			entity.setUser1Id(challenge1v1.getUser1().getId());
@@ -291,6 +318,15 @@ public class PushServiceImpl implements PushService {
 				queue.push(response, true);
 			}
 		}
+	}
+	
+	private void pushInvalidRfidTag(Box pBox, long pTag) {
+		if (pendingUnkownRfidResponses.containsKey(pBox.getId())) {
+			PushQueue queue = pendingUnkownRfidResponses.get(pBox.getId());
+			
+			Response response = Response.ok(pTag).build();
+			queue.push(response, false);
+		} // else nobody cares
 	}
 
 }

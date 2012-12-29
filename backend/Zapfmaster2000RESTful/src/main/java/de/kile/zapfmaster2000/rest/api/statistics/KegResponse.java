@@ -12,6 +12,7 @@ public class KegResponse {
 	private int size;
 	private Date startDate;
 	private double currentAmount;
+	private long boxId;
 
 	/**
 	 * Number of kegs drunk so far (including the current one)
@@ -73,6 +74,14 @@ public class KegResponse {
 
 	public void setLastsUntil(Date lastsUntil) {
 		this.lastsUntil = lastsUntil;
+	}
+
+	public long getBoxId() {
+		return boxId;
+	}
+
+	public void setBoxId(long boxId) {
+		this.boxId = boxId;
 	}
 
 }

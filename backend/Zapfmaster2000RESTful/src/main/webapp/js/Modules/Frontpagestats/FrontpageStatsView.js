@@ -28,7 +28,7 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 	 */
 	var keglistMod ={};
 	var keglist = function(keglistModelOrId){
-		if(typeof keglistModelOrId =="string" ){
+		if(typeof keglistModelOrId =="string" ||typeof keglistModelOrId =="number" ){
 			return keglistMod[keglistModelOrId];
 		}else if(typeof keglistModelOrId == "object"){
 			keglistMod[keglistModelOrId.boxId] = keglistModelOrId;

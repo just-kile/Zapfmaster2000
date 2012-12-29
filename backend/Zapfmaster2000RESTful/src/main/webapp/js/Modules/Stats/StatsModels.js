@@ -14,13 +14,13 @@ ZMO.modules.StatsModel = function(config){
 		this.drawCount  =new ZMO.modules.DrawCountModel (config.drawCount);
 		this.progress = new ZMO.modules.ProgressModel(config.progress);
 	
-		this.promille = config.promille?config.promille.average||config.promille.alcoholLevel:null;
+		this.promille = config.promille?config.promille.average||config.promille.alcoholLevel.toFixed(2):null;
 		
 		this.bestUserList = new ZMO.modules.BestUserListModel(config.bestUserList);
 		this.bestUserListHour = new ZMO.modules.BestUserListModel(config.bestUserListHour);
 		this.achievementUserList = new ZMO.modules.AchievementUserListModel(config.achievementUserList);
 		this.drawCountUserList = new ZMO.modules.DrawCountUserListModel(config.drawCountUserList);
-		this.rank = new ZMO.modules.RankModel(config.rank)
+		this.rank = new ZMO.modules.RankModel(config.rank);
 	}
 
 };
@@ -30,16 +30,16 @@ ZMO.modules.RankModel =function(config){
 		this.achievements = config.achievements;
 		this.drawCount = config.drawCount;
 	}
-}
+};
 ZMO.modules.BestUserListModel = function(config){
 	var arr = [];
 	if("undefined"!=typeof config){
 		jQuery.each(config,function(ind,user){
 			arr.push({
-				userId:user.userId,
-				userName:user.userName,
-				userImage:user.userImage,
-				amount:user.amount
+				userId:user.userId||user.id,
+				userName:user.userName||user.name,
+				userImage:user.userImage||user.image,
+				amount:user.amount.toFixed(2)
 			});
 		});
 	}
@@ -50,10 +50,10 @@ ZMO.modules.AchievementUserListModel = function(config){
 	if("undefined"!=typeof config){
 	jQuery.each(config,function(ind,user){
 		arr.push({
-			userId:user.userId,
-			userName:user.userName,
-			userImage:user.userImage,
-			achievementCount:user.achievementCount
+			userId:user.userId||user.id,
+			userName:user.userName||user.name,
+			userImage:user.userImage||user.image,
+			achievementCount:user.count
 		});
 	});
 	}
@@ -65,9 +65,9 @@ ZMO.modules.DrawCountUserListModel = function(config){
 	if("undefined"!=typeof config){
 	jQuery.each(config,function(ind,user){
 		arr.push({
-			userId:user.userId,
-			userName:user.userName,
-			userImage:user.userImage,
+			userId:user.userId||user.id,
+			userName:user.userName||user.name,
+			userImage:user.userImage||user.image,
 			drawCount:user.drawCount
 		});
 	});
@@ -91,7 +91,7 @@ ZMO.modules.kegModel = function(config){
 		      size : keg.size,
 		      start_date:new ZMO.TimeParser(keg.start_date||keg.startDate).getDefaultTime(),
 		      keg_numbers:keg.keg_numbers||keg.kegNumber,
-		      current_amount : keg.current_amount||keg.currentAmount,
+		      current_amount : keg.currentAmount.toFixed(2),
 		      lastsUntil :date.getDefaultTime(),
 		      lastsUntilShort:date.getHoursMinutes(),
 		      boxId:keg.boxId
@@ -109,7 +109,7 @@ ZMO.modules.kegModel = function(config){
  */
 ZMO.modules.AmountStatsModel = function(config){
 	if("undefined"!=typeof config){
-        this.complete = config.total;
+        this.complete = config.amountTotal.toFixed(2);
         this.once=config.greatestDrawing;
         this.mostActivityHour=config.mostActivityHour;
 	}
@@ -133,9 +133,9 @@ ZMO.modules.AchievementStatsModel=function(config){
  */
 ZMO.modules.DrawCountModel =function(config){
 	if("undefined"!=typeof config){
-		this.operations = config.operations;
+		this.operations = config.count;
 	
-	this.average = config.average;
+	this.average = config.averageOperationsPerHour.toFixed(2);
 	}
 };
 /**
@@ -145,9 +145,9 @@ ZMO.modules.DrawCountModel =function(config){
  */
 ZMO.modules.ProgressModel = function(config){
 	if("undefined"!=typeof config){
-	this.data = config.data;
+	this.data = config.data||config.amount;
 	//this.start_date = Date.UTC(2012, 12, 31);// config.start_date;
-	this.start_date =new ZMO.TimeParser(config.startDate).getTimestamp();
+	this.start_date =new ZMO.TimeParser(config.from).getTimestamp();
 	
 	this.interval = config.interval;
 	}

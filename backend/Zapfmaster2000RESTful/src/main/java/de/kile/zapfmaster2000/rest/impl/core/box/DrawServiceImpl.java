@@ -15,15 +15,18 @@ import org.hibernate.Transaction;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.box.DrawService;
 import de.kile.zapfmaster2000.rest.core.box.DrawServiceListener;
+import de.kile.zapfmaster2000.rest.core.box.LoginFailureReason;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.impl.core.transaction.SharedQueries;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class DrawServiceImpl implements DrawService {
 
@@ -78,7 +81,13 @@ public class DrawServiceImpl implements DrawService {
 						lastDrawing = System.currentTimeMillis();
 						notifyLoginSuccessful(currentUser);
 						return currentUser;
+					} else {
+						notifyLoginFailed(LoginFailureReason.INVALID_RFID_TAG,
+								pRfidId);
 					}
+				} else {
+					notifyLoginFailed(
+							LoginFailureReason.OTHER_USER_IS_LOGGED_IN, pRfidId);
 				}
 			} else {
 				// current user logs in
@@ -207,10 +216,16 @@ public class DrawServiceImpl implements DrawService {
 			listener.onEndDrawing(pDrawing);
 		}
 	}
-	
+
 	private void notifyLogout(User pUser) {
 		for (DrawServiceListener listener : listeners) {
 			listener.onLogout(pUser);
+		}
+	}
+
+	private void notifyLoginFailed(LoginFailureReason pReason, long pRfidId) {
+		for (DrawServiceListener listener : listeners) {
+			listener.onLoginFailed(pReason, pRfidId);
 		}
 	}
 
@@ -264,20 +279,22 @@ public class DrawServiceImpl implements DrawService {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
+		Account account = box.getAccount();
 		@SuppressWarnings("unchecked")
 		List<User> guests = session
 				.createQuery(
 						"FROM User u WHERE u.type = :guest AND u.account.id = :accountId")
 				.setParameter("guest", UserType.GUEST)
-				.setLong("accountId", box.getAccount().getId()).list();
+				.setLong("accountId", account.getId()).list();
 		if (guests.isEmpty()) {
-			session.update(box.getAccount());
+			account = (Account) session.load(Zapfmaster2000Package.eINSTANCE
+					.getAccount().getName(), account.getId());
 			User newUser = Zapfmaster2000Factory.eINSTANCE.createUser();
 			newUser.setName("Guest");
 			newUser.setImagePath("img/guest.png");
 			newUser.setWeight(100);
 			newUser.setType(UserType.GUEST);
-			newUser.setAccount(box.getAccount());
+			newUser.setAccount(account);
 			session.save(newUser);
 			user = newUser;
 		} else {
@@ -306,8 +323,11 @@ public class DrawServiceImpl implements DrawService {
 			Drawing drawing = null;
 
 			try {
-				session.update(activeKeg);
-				session.update(currentUser);
+				activeKeg = (Keg) session.load(Zapfmaster2000Package.eINSTANCE
+						.getKeg().getName(), activeKeg.getId());
+				currentUser = (User) session.load(
+						Zapfmaster2000Package.eINSTANCE.getUser().getName(),
+						currentUser.getId());
 
 				drawing = Zapfmaster2000Factory.eINSTANCE.createDrawing();
 				drawing.setAmount(realAmount);
@@ -327,9 +347,9 @@ public class DrawServiceImpl implements DrawService {
 		}
 
 		if (currentUser != null) {
-			notifyLogout(currentUser);	
+			notifyLogout(currentUser);
 		}
-		
+
 		// reset values
 		totalTicks = 0;
 		currentUser = null;

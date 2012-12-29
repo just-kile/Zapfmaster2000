@@ -2,12 +2,17 @@ package de.kile.zapfmaster2000.connector.serial;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
+import gnu.io.NoSuchPortException;
+import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
+import gnu.io.UnsupportedCommOperationException;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Observer;
+import java.util.TooManyListenersException;
 
 import de.kile.zapfmaster2000.connector.messages.Message;
 
@@ -41,8 +46,7 @@ public class SerialCommunicator {
 	 * @param port
 	 *            - serial port, the draftkitAVR is attached to
 	 */
-	public SerialCommunicator(String port) {
-		serialPort = port;
+	public SerialCommunicator() {
 	}
 
 	/**
@@ -52,54 +56,96 @@ public class SerialCommunicator {
 	 * @param portName
 	 * @throws Exception
 	 */
-	void connect(String portName) throws Exception {
-		CommPortIdentifier portIdentifier = CommPortIdentifier
-				.getPortIdentifier(portName);
-		if (portIdentifier.isCurrentlyOwned()) {
-			System.out.println("Error: Port is currently in use");
-		} else {
-			CommPort commPort = portIdentifier.open(this.getClass().getName(),
-					2000);
-
-			if (commPort instanceof SerialPort) {
-				SerialPort serialPort = (SerialPort) commPort;
-				serialPort.setSerialPortParams(57600, SerialPort.DATABITS_8,
-						SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-
-				InputStream in = serialPort.getInputStream();
-				OutputStream out = serialPort.getOutputStream();
-
-				writer = new SerialWriter(out);
-				
-				System.out.println("Writer created");
-
-				// create reader as listener for the serial port
-				reader = new SerialReader(in);
-				
-				System.out.println("Reader created");
-				serialPort.addEventListener(reader);
-				serialPort.notifyOnDataAvailable(true);
-
-				// attach observers to the reader
-				updateObservers();
-
+	public int connect(String portName) {
+		int status = -1;
+		CommPortIdentifier portIdentifier = null;
+		try {
+			portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
+		} catch (NoSuchPortException e) {
+			// TODO add logger
+			e.printStackTrace();
+		}
+		if (portIdentifier != null) {
+			if (portIdentifier.isCurrentlyOwned()) {
+				System.out.println("Error: Port is currently in use");
 			} else {
-				System.out
-						.println("Error: Only serial ports are handled by this example.");
+				CommPort commPort = null;
+				try {
+					commPort = portIdentifier.open(this.getClass().getName(),
+							2000);
+				} catch (PortInUseException e1) {
+					// TODO add logger
+					e1.printStackTrace();
+				}
+
+				if (commPort != null) {
+					if (commPort instanceof SerialPort) {
+						SerialPort serialPort = (SerialPort) commPort;
+						try {
+							serialPort.setSerialPortParams(57600,
+									SerialPort.DATABITS_8,
+									SerialPort.STOPBITS_1,
+									SerialPort.PARITY_NONE);
+						} catch (UnsupportedCommOperationException e) {
+							// TODO add loger
+							e.printStackTrace();
+						}
+
+						InputStream in = null;
+						OutputStream out = null;
+						try {
+							in = serialPort.getInputStream();
+							out = serialPort.getOutputStream();
+						} catch (IOException e) {
+							// TODO add logger
+							e.printStackTrace();
+						}
+
+						if ((in != null) && (out != null)) {
+							writer = new SerialWriter(out);
+
+							System.out.println("Writer created");
+
+							// create reader as listener for the serial port
+							reader = new SerialReader(in);
+
+							System.out.println("Reader created");
+							try {
+								serialPort.addEventListener(reader);
+							} catch (TooManyListenersException e) {
+								// TODO add logger
+								e.printStackTrace();
+							}
+							serialPort.notifyOnDataAvailable(true);
+
+							// attach observers to the reader
+							updateObservers();
+
+							status = 1;
+						}
+
+					} else {
+						System.out
+								.println("Error: Only serial ports are handled by this example.");
+					}
+				}
 			}
 		}
+
+		return status;
 	}
-	
+
 	/**
 	 * sends a message to the draftkitAVR via serial port
 	 * 
-	 * @param message - message to be send to the draftkitAVR
+	 * @param message
+	 *            - message to be send to the draftkitAVR
 	 */
 	public void sendMessage(Message message) {
-		// encode message 
+		// encode message
 		byte[] data = SerialEncoder.encodeMessage(message);
 		// send data over serial port
-		if (data != null) 
+		if (data != null)
 			writer.writeOut(data);
 	}
 
