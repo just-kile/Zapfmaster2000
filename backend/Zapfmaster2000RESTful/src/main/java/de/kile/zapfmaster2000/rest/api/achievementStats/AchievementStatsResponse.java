@@ -1,27 +1,23 @@
-package de.kile.zapfmaster2000.rest.api.achievements;
+package de.kile.zapfmaster2000.rest.api.achievementStats;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class AchievementResonse {
+import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 
-	private long achievementId;
+public class AchievementStatsResponse {
 
 	private String achievementName;
 
-	private String achievementDescription;
+	private long achievementId;
 
 	private String achievementImage;
 
+	private String description;
+
 	private final List<UserThatGained> users = new ArrayList<>();
-
-	public long getAchievementId() {
-		return achievementId;
-	}
-
-	public void setAchievementId(long achivementId) {
-		this.achievementId = achivementId;
-	}
 
 	public String getAchievementName() {
 		return achievementName;
@@ -31,12 +27,12 @@ public class AchievementResonse {
 		this.achievementName = achievementName;
 	}
 
-	public String getAchievementDescription() {
-		return achievementDescription;
+	public long getAchievementId() {
+		return achievementId;
 	}
 
-	public void setAchievementDescription(String achievementDescription) {
-		this.achievementDescription = achievementDescription;
+	public void setAchievementId(long achievementId) {
+		this.achievementId = achievementId;
 	}
 
 	public String getAchievementImage() {
@@ -45,6 +41,14 @@ public class AchievementResonse {
 
 	public void setAchievementImage(String achievementImage) {
 		this.achievementImage = achievementImage;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public List<UserThatGained> getUsers() {
@@ -58,6 +62,8 @@ public class AchievementResonse {
 		private String userName;
 
 		private String userImage;
+
+		private String date;
 
 		public long getUserId() {
 			return userId;
@@ -83,6 +89,23 @@ public class AchievementResonse {
 			this.userImage = userImage;
 		}
 
+		public String getDate() {
+			return date;
+		}
+
+		public void setDate(String date) {
+			this.date = date;
+		}
+
+		public void loadDate(Date pDate) {
+			if (pDate != null) {
+				SimpleDateFormat format = new SimpleDateFormat(
+						PlatformConstants.DATE_TIME_FORMAT);
+				date = format.format(pDate);
+			} else {
+				date = null;
+			}
+		}
 	}
 
 }
