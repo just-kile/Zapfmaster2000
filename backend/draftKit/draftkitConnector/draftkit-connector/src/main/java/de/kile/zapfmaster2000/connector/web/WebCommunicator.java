@@ -10,7 +10,7 @@ import de.kile.zapfmaster2000.rest.api.box.LoginRequest;
 
 public class WebCommunicator {
 
-	private static final String URL = "http://localhost:8080/Zapfmaster2000RESTful/rest/";
+	private static final String URL = "http://zapfmaster2000.dyndns.org:9130/zapfmaster2000-restful-1.0.0-SNAPSHOT/rest/";
 	private String boxPassphrase = "box-1";
 	
 	public int performLogin(long tagId) {

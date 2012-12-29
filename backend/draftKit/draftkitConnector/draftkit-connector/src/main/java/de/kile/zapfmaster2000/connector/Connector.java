@@ -1,7 +1,5 @@
 package de.kile.zapfmaster2000.connector;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -28,6 +26,8 @@ public class Connector implements Runnable, Observer {
 	SerialCommunicator serial;
 	// connects to the Zapfmaster2000RESTful service
 	WebCommunicator web;
+	// manages the user input
+	ConsoleInput console;
 
 	// default tick counting interval in ms
 	int defaultInterval = 250;
@@ -36,7 +36,7 @@ public class Connector implements Runnable, Observer {
 	int idInterval = 1000;
 
 	// for how long a failed login will be signaled
-	int errorInterval = 3000;
+	int errorInterval = 2000;
 
 	// default serial port
 	String serialPort = "COM9";
@@ -44,21 +44,21 @@ public class Connector implements Runnable, Observer {
 	// last time of tag id reception
 	long lastIdTime = 0;
 
-	// last tag id
-	long tagId = 0;
+	// latest rfid tag id
+	long curTagId = 0;
 
 	// last login status
 	char loginStatus = SerialConstants.STATUSNONE;
 
+	public Connector() {
+
+		// initialize web connection
+		web = new WebCommunicator();
+
+	}
+
 	@Override
 	public void run() {
-
-		boolean running = true;
-
-		showOptions();
-
-		InputStreamReader is = new InputStreamReader(System.in);
-		BufferedReader in = new BufferedReader(is);
 
 		// keeps last tagId in order to compare to tagId
 		long lastTagId = 0;
@@ -66,108 +66,87 @@ public class Connector implements Runnable, Observer {
 		// last time at which login was performed
 		long lastLoginTime = 0;
 
-		while (running) {
-			try {
-				String command = in.readLine();
-				String[] segments = command.split(" ");
-
-				switch (segments[0]) {
-				case "start":
-					start();
-					break;
-				case "interval":
-					assertParameterCount(segments, 1);
-					defaultInterval = Integer.parseInt(segments[1]);
-					setNewInterval();
-					System.out.println("New interval is: "+defaultInterval);
-					break;
-				case "serial":
-					assertParameterCount(segments, 1);
-					serialPort = segments[1];
-					System.out.println("New serial port is: "+serialPort);
-					break;
-				case "help":
-					showOptions();
-					break;
-				case "exit":
-					running = false;
-					break;
-				}
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-			// check for login
-			if (tagId == lastTagId) {
-				// check status
-				if (loginStatus == SerialConstants.STATUSOK) {
-					// login was ok
-					// check how old the last tagId reception is
-					if ((System.currentTimeMillis() - lastIdTime) > idInterval) {
-						// age has surpassed limit
-						// send logout message
-						loginStatus = SerialConstants.STATUSNONE;
-						LoginMessage message = new LoginMessage(loginStatus);
-						serial.sendMessage(message);
+		// main loop
+		while (true) {
+			// idle id is 0, see if there's a new id 
+			if (curTagId != 0) {
+				// check for login
+				if (curTagId == lastTagId) {
+					// check status
+					if (loginStatus == SerialConstants.STATUSOK) {
+						// login was ok
+						// check how old the last tagId reception is
+						if ((System.currentTimeMillis() - lastIdTime) > idInterval) {
+							// age has surpassed limit
+							// send logout message
+							loginStatus = SerialConstants.STATUSNONE;
+							LoginMessage message = new LoginMessage(loginStatus);
+							serial.sendMessage(message);
+							System.out.println("status: none");
+							// reset tagIds
+							curTagId = 0;
+							lastTagId = 0;
+						}
+					} else if (loginStatus == SerialConstants.STATUSERROR) {
+						// login had failed
+						// check how much time has passed since failed login
+						if ((System.currentTimeMillis() - lastLoginTime) > errorInterval) {
+							// time has surpassed limit
+							// send logout message, return status to none
+							loginStatus = SerialConstants.STATUSNONE;
+							LoginMessage message = new LoginMessage(loginStatus);
+							serial.sendMessage(message);
+							System.out.println("status: none");
+							// reset tagIds
+							curTagId = 0;
+							lastTagId = 0;
+						}
 					}
-				} else if (loginStatus == SerialConstants.STATUSERROR) {
-					// login had failed
-					// check how much time has passed since failed login
-					if ((System.currentTimeMillis() - lastLoginTime) > errorInterval) {
-						// time has surpassed limit
-						// send logout message, return status to none
-						loginStatus = SerialConstants.STATUSNONE;
-						LoginMessage message = new LoginMessage(loginStatus);
-						serial.sendMessage(message);
-					}
-				}
-			} else {
-				// get login response
-				int response = web.performLogin(tagId);
-
-				LoginMessage message;
-
-				// check whether login was successful
-				if (response == 200) {
-					// was successful
-					loginStatus = SerialConstants.STATUSOK;
-					message = new LoginMessage(loginStatus);
-					System.out.println("Login ok");
 				} else {
-					// was unsuccessful
-					loginStatus = SerialConstants.STATUSERROR;
-					message = new LoginMessage(loginStatus);
-					System.out.println("Login error");
+					// get login response
+					int response = web.performLogin(curTagId);
+
+					LoginMessage message = null;
+
+					// check whether login was successful
+					if (response == 200) {
+						// was successful
+						loginStatus = SerialConstants.STATUSOK;
+						message = new LoginMessage(loginStatus);
+						System.out.println("Login ok");
+					} else {
+						// was unsuccessful
+						loginStatus = SerialConstants.STATUSERROR;
+						message = new LoginMessage(loginStatus);
+						System.out.println("Login error");
+					}
+					// send message with login status to draftkitAVR
+					serial.sendMessage(message);
+					// save tagId
+					lastTagId = curTagId;
+					// save time of this login
+					lastLoginTime = System.currentTimeMillis();
 				}
-				// send message with login status to draftkitAVR
-				serial.sendMessage(message);
-				// save tagId
-				lastTagId = tagId;
-				// save time of this login
-				lastLoginTime = System.currentTimeMillis();
 			}
 		}
-
 	}
 
 	/**
 	 * sends the defaultInterval as new tick interval to the draftkitAVR
 	 */
-	private void setNewInterval() {
+	public void sendNewInterval() {
 		if (serial != null) {
 			// create message containing the new tick interval
 			IntervalMessage message = new IntervalMessage(defaultInterval);
 			// send message to draftkitAVR
 			serial.sendMessage(message);
 		}
-
 	}
 
 	/**
 	 * starts the serial connection to the draftkitAVR
 	 */
-	private void start() {
+	public void start() {
 		// restart serial communicator in case there is an old one
 		if (serial != null)
 			restart();
@@ -196,7 +175,12 @@ public class Connector implements Runnable, Observer {
 			if (nMessage.getMessageType() == Message.RFIDMESSAGE) {
 				// cast to rfid message type
 				RfidMessage rMessage = (RfidMessage) nMessage;
-				System.out.println("login with id: " + rMessage.getRfidTagId());
+				long newTagId = rMessage.getRfidTagId();
+				System.out.println("rfid tag id: " + newTagId);
+				// only update global tag id, if there's a new card on the
+				// reader
+				if (newTagId != curTagId)
+					curTagId = newTagId;
 				// set time of id renewal
 				lastIdTime = System.currentTimeMillis();
 			} else
@@ -211,38 +195,31 @@ public class Connector implements Runnable, Observer {
 		}
 	}
 
-	/**
-	 * print available user options to console
-	 */
-	public void showOptions() {
-		System.out.println("Commands: ");
-		System.out.println("\tstart connector: start");
-		System.out.println("\tset a new tick count interval ["
-				+ defaultInterval + "]: interval <int>");
-		System.out.println("\tset a new serial port [" + serialPort
-				+ "]: serial <portname>");
-		System.out.println("\tshow program options: help");
-		System.out.println("\tclose the program: exit");
+	public void setDefaultInterval(int newInterval) {
+		defaultInterval = newInterval;
 	}
 
-	/**
-	 * assert amount of parameters for chosen option
-	 * 
-	 * @param pCommand
-	 * @param pExpectedCount
-	 */
-	private static void assertParameterCount(String[] pCommand,
-			int pExpectedCount) {
-		if ((pCommand.length - 1) != pExpectedCount) {
-			throw new IllegalArgumentException("Wrong parmaeter count: "
-					+ pExpectedCount + " parameter expected.");
-		}
+	public int getDefaultInterval() {
+		return defaultInterval;
+	}
+
+	public void setSerialPort(String newSerialPort) {
+		serialPort = newSerialPort;
+	}
+
+	public String getSerialPort() {
+		return serialPort;
 	}
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new Connector().run();
+		Connector connector = new Connector();
+		Thread tConnector = new Thread(connector);
+		ConsoleInput console = new ConsoleInput(connector);
+		Thread tConsole = new Thread(console);
+		tConnector.start();
+		tConsole.start();
 	}
 }

@@ -30,7 +30,7 @@ public class SerialMock {
 	}
 
 	public static void main(String[] args) {
-		String comPort = "COM20";
+		String comPort = "COM9";
 
 		SerialCommunicator comm = new SerialCommunicator();
 		comm.addObserver(new Observer() {

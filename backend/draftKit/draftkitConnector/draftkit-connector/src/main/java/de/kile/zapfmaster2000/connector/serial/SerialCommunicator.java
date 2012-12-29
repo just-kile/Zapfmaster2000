@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observer;
 import java.util.TooManyListenersException;
 
@@ -147,6 +148,7 @@ public class SerialCommunicator {
 		// send data over serial port
 		if (data != null)
 			writer.writeOut(data);
+		System.out.println("sent message: "+Arrays.toString(data));
 	}
 
 	/**
