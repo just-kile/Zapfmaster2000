@@ -9,5 +9,5 @@ ZMO.UtilConstants ={
 		tokenName:"token",
 		serverDateFormat:"yyyyMMdd-HHmmss",
 		clientDateFormat:"dd.MM.yyyy HH:mm:ss",
-		shortFormat:"HH:mm"
+		shortFormat:"E, HH:mm"
 };
