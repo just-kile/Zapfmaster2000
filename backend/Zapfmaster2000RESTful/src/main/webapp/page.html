@@ -141,7 +141,7 @@
 			</div>
 			<div class="news-drink-box-details">
 				<div class="news-drink-box-details-headline">
-					<b>{{name}}</b> zapfte <b>{{amount}}</b>l
+					<a href="#">{{name}}</a> zapfte <b>{{amount}}</b>l
 				</div>
 				<div class="news-box-info">Ort: {{place}}, Fass: {{kegId}} der Marke {{brand}}
 				</div>
@@ -162,10 +162,10 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			<a>{{username}}</a> erreichte den Erfolg <br>
-			<b>
+			<a href="#">{{username}}</a> erreichte den Erfolg 
+			
 				<a href="#achievementstats?id={{achievement_id}}">{{name}}</a>
-			</b>
+			
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="place.php">{{place}}</a>
@@ -202,7 +202,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}}</a> beginnt eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}!
+			<a href="#">{{team1}}</a> beginnt eine {{duration}} minütigen Challenge {{type}} gegen <a href="#">{{team2}}</a>!
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="#">{{place}}</a>
@@ -225,7 +225,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}} hatte eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}.<br /> Gewonnen hat: {{winner}}
+			<a href="#">{{team1}}</a> hatte eine {{duration}} minütigen Challenge {{type}} gegen <a href="#">{{team2}}</a>.<br /> Gewonnen hat: {{winner}}
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="#">{{place}}</a>
@@ -272,7 +272,7 @@
 			<a href="#achievementstats?id={{achievementId}}">{{achievementName}}</a>
 		</div>
 		<div class="members-box-amount">
-			Erreicht: {{totalAmount}} x
+			Erreicht: {{count}}x
 		</div>
 	</div>
 

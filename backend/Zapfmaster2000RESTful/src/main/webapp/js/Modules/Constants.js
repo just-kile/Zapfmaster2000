@@ -13,8 +13,8 @@ ZMO.modules.Constants = {
 			listLength:10
 		},
 		urls:{
-			ACHIEVEMENTS:"tmp/example.json",
-			ACHIEVEMENTSSTATS:"tmp/tmp.json",
+			ACHIEVEMENTS:"rest/achievements",
+			ACHIEVEMENTSSTATS:"rest/achievementStats",
 			FRONTPAGESTATS:"rest/statistics/frontpageStats",
 			USERFRONTPAGESTATS:"rest/statistics/frontpageUserStats",
 
