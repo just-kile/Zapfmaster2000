@@ -21,6 +21,7 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 	private Box box1;
 	private Keg keg1;
 	private User user1;
+	private User user2;
 	private User userEmpty;
 
 	@Before
@@ -32,9 +33,9 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 
 		user1 = createUser("Torsten", "img/user1", "user1-pw", 101, Sex.MALE,
 				85, UserType.USER, account1);
-		User user2 = createUser("Bettina", "img/user2", "user2-pw", 202,
-				Sex.FEMALE, 85, UserType.USER, account1);
-		
+		user2 = createUser("Bettina", "img/user2", "user2-pw", 202, Sex.FEMALE,
+				85, UserType.USER, account1);
+
 		userEmpty = createUser("Franz", "img/user3", "user3-pw", 302,
 				Sex.FEMALE, 85, UserType.USER, account1);
 
@@ -65,32 +66,39 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 		AlcoholLevelResponse alcoholLevelResponse = AlcoholResponseBuilder
 				.retrieveAlcoholLevelResponse(user1.getId(), account1);
 		// realistic alcohol level 1-3 per mille
-		//TODO detailed calculation
+		// TODO detailed calculation
 		assertEquals(2, alcoholLevelResponse.getAlcoholLevel(), 1);
 	}
-	
+
 	@Test
-	public void testUserEmpty(){
+	public void testUserEmpty() {
 		AlcoholLevelResponse alcoholLevelResponse = AlcoholResponseBuilder
 				.retrieveAlcoholLevelResponse(userEmpty.getId(), account1);
 		assertEquals(0.0, alcoholLevelResponse.getAlcoholLevel());
 	}
-	
+
 	@Test
-	public void testUserNonExistent(){
+	public void testUserNonExistent() {
 		AlcoholLevelResponse alcoholLevelResponse = AlcoholResponseBuilder
 				.retrieveAlcoholLevelResponse(666, account1);
 		assertEquals(0.0, alcoholLevelResponse.getAlcoholLevel());
 	}
-	
+
 	@Test
-	public void testUserIndependent(){
+	public void testUserIndependent() {
 		AlcoholLevelResponse alcoholLevelResponse = AlcoholResponseBuilder
 				.retrieveAlcoholLevelResponse(account1);
 		// realistic alcohol level 1-3 per mille
-		//TODO detailed calculation
-		assertEquals(2, alcoholLevelResponse.getAlcoholLevel(), 1);
+
+		AlcoholLevelResponse alcoholLevelResponse1 = AlcoholResponseBuilder
+				.retrieveAlcoholLevelResponse(user1.getId(), account1);
+		AlcoholLevelResponse alcoholLevelResponse2 = AlcoholResponseBuilder
+				.retrieveAlcoholLevelResponse(user2.getId(), account1);
+
+		double avg = (alcoholLevelResponse1.getAlcoholLevel() + alcoholLevelResponse2
+				.getAlcoholLevel()) / 2;
+
+		assertEquals(avg, alcoholLevelResponse.getAlcoholLevel(), 0.3);
 	}
-	
-	
+
 }

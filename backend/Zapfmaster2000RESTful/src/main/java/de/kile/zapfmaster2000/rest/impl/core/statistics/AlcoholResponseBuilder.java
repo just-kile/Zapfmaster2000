@@ -103,7 +103,6 @@ public class AlcoholResponseBuilder {
 	}
 
 	
-	//TODO fix
 	/**
 	 * Calculates an average alcohol level for all users that have been drawing
 	 * in the last 36 hours.
@@ -184,7 +183,7 @@ public class AlcoholResponseBuilder {
 
 			AlcoholLevelResponse response = new AlcoholLevelResponse();
 
-			response.setAlcoholLevel(oldConcentration);
+			response.setAlcoholLevel(oldConcentration / resultUsers.size());
 
 			return response;
 		} else {
