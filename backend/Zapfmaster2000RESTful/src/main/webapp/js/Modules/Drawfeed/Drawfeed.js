@@ -60,6 +60,9 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				case c.types.CHALLENGE_DECLINED:
 					 news = parseChallengesDeclined(val);
 					 break;
+				case c.types.NEW_KEG:
+					news = ich["ZMO-news-new-keg"](new ZMO.NewKegNewsModel(val));
+					break;
 			}
 			if(typeof top!="undefined" && top ==true){
 				if(val.refreshType!= "REFRESH"){

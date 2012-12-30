@@ -98,6 +98,8 @@ public class NewsAdapter {
 		ChallengeOverviewReponse news = new ChallengeAdapter()
 				.adaptChallenge(pStartedNews.getChallenge());
 		news.loadDate(pStartedNews.getDate());
+		
+		news.setImage("images/others/challengeStarted.jpg");
 		news.setType(Type.CHALLENGE_STARTED); // it is a challenge started news!
 												// However, previous adaption
 												// may detect that the challenge
@@ -125,7 +127,7 @@ public class NewsAdapter {
 		NewKegNewsReponse response = new NewKegNewsReponse();
 		
 		response.loadDate(pNewKegNews.getDate());
-		response.setImage("image/newkeg.png");
+		response.setImage("images/others/newkeg.jpg");
 		response.setSize(pNewKegNews.getKeg().getSize());
 		response.setBrand(pNewKegNews.getKeg().getBrand());
 		response.setKegId(pNewKegNews.getKeg().getId());

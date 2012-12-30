@@ -29,12 +29,15 @@ public class ChallengeAdapter {
 		switch (pChallenge.getState()) {
 		case RUNNING:
 			news.setType(Type.CHALLENGE_STARTED);
+			news.setImage("images/others/challengeStarted.jpg");
 			break;
 		case DECLINED:
 			news.setType(Type.CHALLENGE_DECLINED);
+			news.setImage("images/others/challengeDeclined.jpg");
 			break;
 		case FINISHED:
 			news.setType(Type.CHALLENGE_DONE);
+			news.setImage("images/others/challengeDone.jpg");
 			break;
 		default:
 			LOG.warn("Unsupported challenge type (for news): "
