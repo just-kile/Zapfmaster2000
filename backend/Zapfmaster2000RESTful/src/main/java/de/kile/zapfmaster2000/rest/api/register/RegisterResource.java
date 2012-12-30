@@ -50,7 +50,7 @@ public class RegisterResource {
 			if ("m".equals(pSex)) {
 				sex = Sex.MALE;
 			} else if ("f".equals(pSex)) {
-				sex = Sex.MALE;
+				sex = Sex.FEMALE;
 			} else {
 				LOG.error("Invalid sex: " + pSex);
 				return Response.status(Status.BAD_REQUEST).build();

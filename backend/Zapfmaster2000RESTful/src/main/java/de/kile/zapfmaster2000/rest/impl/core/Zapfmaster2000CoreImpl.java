@@ -50,10 +50,10 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 
 	/** the challenge service */
 	private ChallengeService challengeService;
-	
+
 	/** the keg service */
 	private KegService kegService;
-	
+
 	/** the registration service */
 	private RegistrationService registrationService;
 
@@ -66,11 +66,11 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 				transactionService);
 		challengeService = new ChallengeServiceImpl();
 		kegService = new KegServiceImpl();
+		registrationService = new RegistrationServiceImpl();
 		newsService = new NewsServiceImpl(boxService, achievementService,
-				challengeService, kegService);
+				challengeService, kegService, registrationService);
 		pushService = new PushServiceImpl(newsService, boxService,
 				challengeService);
-		registrationService = new RegistrationServiceImpl();
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	public RegistrationService getRegistrationService() {
 		return registrationService;
 	}
-	
+
 	/**
 	 * Sets a transaction service. Use only for mocking in unit tests!
 	 * 
