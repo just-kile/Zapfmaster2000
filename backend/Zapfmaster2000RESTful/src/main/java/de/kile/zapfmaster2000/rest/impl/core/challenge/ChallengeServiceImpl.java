@@ -9,6 +9,10 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
+
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
@@ -25,7 +29,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class ChallengeServiceImpl implements ChallengeService {
 
-	public final List<UserLoginStatus> users = new LinkedList<>();
+	public List<UserLoginStatus> users = new LinkedList<>();
 
 	private final List<ChallengeServiceListener> listeners = new ArrayList<>();
 
@@ -37,12 +41,23 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 
 	@Override
-	public void rememberUser(User pUser,
+	public void rememberUser(final User pUser,
 			StatusAwareAsynchronousResponse pReponse) {
-		removeUsers();
-		synchronized (users) {
-			users.add(new UserLoginStatus(System.currentTimeMillis(), pUser,
-					pReponse));
+		if (pUser != null && pReponse != null) {
+			removeUsers();
+			synchronized (users) {
+				// if the user is already in the list, remove him before adding
+				// once more
+				users = Lists.newArrayList(Collections2.filter(users,
+						new Predicate<UserLoginStatus>() {
+							public boolean apply(UserLoginStatus pStatus) {
+								return pUser.getId() != pStatus.user.getId();
+							}
+						}));
+
+				users.add(new UserLoginStatus(System.currentTimeMillis(),
+						pUser, pReponse));
+			}
 		}
 	}
 
