@@ -76,7 +76,7 @@ $(document).ready(function(){
 				    type: 'POST',
 				    data:data,
 				    success: function(data){
-						alert("RFID registriert")
+						//alert("RFID registriert")
 						redirect();
 				    }
 				});
@@ -120,6 +120,9 @@ $(document).ready(function(){
 				}else{
 					alert("Use a normal browser! Localstorage is not available")
 				}
+			},
+			error:function(){
+				alert("Fehler")
 			}
 		})
 	});
@@ -145,6 +148,9 @@ $(document).ready(function(){
 				}else{
 					alert("Use a normal browser! Localstorage is not available")
 				}
+			},
+			error:function(){
+				alert("Username oder Passwort falsch")
 			}
 		})
 	});
@@ -169,6 +175,9 @@ $(document).ready(function(){
 				localStorage.setItem("token",token);
 				$(".container").hide();
 				$("#imageFormContainer").show();
+			},
+			error:function(){
+				alert("Fehler! Der Nutzername ist wahrscheinlich schon vergeben.")
 			}
 		})
 	});
@@ -192,6 +201,10 @@ $("#uploadImage").on("click",function(e){
 			$("#setRfidContainer").show();
 			startRFIDPush();
 	    }
+	    ,
+		error:function(){
+			alert("Fehler beim Bild hochladen")
+		}
 	});
 });
 
@@ -221,7 +234,10 @@ function startRFIDPush(e){
 	        });
 	        RfidPush.initRfidPush(firstObj.boxId);
 	       
-	    }
+	    },
+		error:function(){
+			alert("Draftkit können nicht geladen werden.")
+		}
 	});
 };
 $("#registerSelectBox").on("change",function(e){
@@ -261,6 +277,9 @@ $("#updateImageRfid").on("click",function(e){
 			}else{
 				alert("Use a normal browser! Localstorage is not available")
 			}
+		},
+		error:function(){
+			alert("Username oder Passwort falsch")
 		}
 	})
 	
@@ -309,7 +328,7 @@ $("#updateImageRfid").on("click",function(e){
 <div id="registerUserContainer" class="register container" style="display:none">
 <form id="registerUser">
 <p>Name:<br /><input class="registerItem" id="rUserName" name="userName" type="text" size="30" maxlength="30" value=""></p>
-<p>Pass:<br /><input class="registerItem" id="rPassword" name="password" type="text" size="30" maxlength="30" value=""></p>
+<p>Pass:<br /><input class="registerItem" id="rPassword" name="password" type="password" size="30" maxlength="30" value=""></p>
 <p>Sex:<br />
  <select class="registerItem" name="sex" size="1">
       <option>m</option>
@@ -325,7 +344,7 @@ $("#updateImageRfid").on("click",function(e){
  <!-- Image upload -->
  <div class="container" id="imageFormContainer" class="container" style="display:none">
 <form id="imageForm"  >
-<p>Image:<br /><input id="rImage" name="image" type="file"></p>
+<p>Lade ein Bild von dir hoch</p><p><input id="rImage" name="image" type="file"></p>
 <input id ="uploadImage" type="submit" value="ImageUpload">
 <input id ="uploadImageSkip" type="submit" value="Skip">
 
@@ -336,14 +355,16 @@ $("#updateImageRfid").on("click",function(e){
  <!-- Set RFID -->
  <div id="setRfidContainer" class="container" style="display:none">
 <!--  <input id ="requestBoxes" type="submit" value="Box Anfrage">-->
+<p>Lege deine RFID Karte auf die ausgewählte ZM2k Box. Die Karte wird dann automatisch auf dich registriert.</p>
 <p>Wähle Box aus<br />
  <select size="1" id="registerSelectBox">
   <!-- <option value="4">test</option> -->
    </select>
 </p>
-<p>RFID:<br /><input class="registerItem" id="rfid" name="rfid" type="text" size="30" maxlength="30" value=""></p>
+<p>Warte...</p>
+<!-- <p>RFID:<br /><input class="registerItem" id="rfid" name="rfid" type="text" size="30" maxlength="30" value=""></p> -->
 <input class ="cancelBtn" type="submit" value="Abbrechen">
-<input id ="registerUserBtn" type="submit" value="Registrieren">
+<!-- <input id ="registerUserBtn" type="submit" value="Registrieren"> -->
 </div>
 </div>
 </div>
