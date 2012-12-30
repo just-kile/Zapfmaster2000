@@ -62,7 +62,7 @@ public class RegisterResource {
 
 			try {
 				Zapfmaster2000Core.INSTANCE.getRegistrationService()
-						.registerUser(account, pUserName, pToken, sex, pWeight);
+						.registerUser(account, pUserName, pPassword, sex, pWeight);
 			} catch (RegistrationException e) {
 				LOG.warn("User registration failed", e);
 				return Response.status(Status.BAD_REQUEST).build();
