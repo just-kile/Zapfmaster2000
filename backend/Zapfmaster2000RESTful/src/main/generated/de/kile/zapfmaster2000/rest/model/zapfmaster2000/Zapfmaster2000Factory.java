@@ -139,6 +139,15 @@ public interface Zapfmaster2000Factory extends EFactory {
 	Challenge1v1DoneNews createChallenge1v1DoneNews();
 
 	/**
+	 * Returns a new object of class '<em>New Keg News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>New Keg News</em>'.
+	 * @generated
+	 */
+	NewKegNews createNewKegNews();
+
+	/**
 	 * Returns a new object of class '<em>Mapping Qr Rfid</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

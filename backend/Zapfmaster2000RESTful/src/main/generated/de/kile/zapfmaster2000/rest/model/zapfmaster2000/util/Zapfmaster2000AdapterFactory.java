@@ -128,6 +128,10 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 				return createChallenge1v1DoneNewsAdapter();
 			}
 			@Override
+			public Adapter caseNewKegNews(NewKegNews object) {
+				return createNewKegNewsAdapter();
+			}
+			@Override
 			public Adapter caseMappingQrRfid(MappingQrRfid object) {
 				return createMappingQrRfidAdapter();
 			}
@@ -370,6 +374,20 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createChallenge1v1DoneNewsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews <em>New Keg News</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews
+	 * @generated
+	 */
+	public Adapter createNewKegNewsAdapter() {
 		return null;
 	}
 

@@ -3,8 +3,6 @@ package de.kile.zapfmaster2000.rest.impl.core.transaction;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.ws.WebServiceException;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -44,12 +42,9 @@ public final class SharedQueries {
 					.createQuery(
 							"FROM Keg k WHERE k.box.id = :boxId ORDER BY k.startDate DESC")
 					.setLong("boxId", pBox.getId()).list();
-			if (kegs.isEmpty()) {
-				// problem over here
-				throw new WebServiceException("Box " + pBox.getId()
-						+ " has no active keg.");
+			if (!kegs.isEmpty()) {
+				keg = kegs.get(0); // active keg	
 			}
-			keg = kegs.get(0); // active keg
 			tx.commit();
 		} catch (RuntimeException ex) {
 			tx.rollback();
