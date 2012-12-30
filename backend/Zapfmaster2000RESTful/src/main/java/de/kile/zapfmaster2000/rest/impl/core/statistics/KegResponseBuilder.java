@@ -85,7 +85,7 @@ public class KegResponseBuilder {
 			Double amountLeft = (Double) resultRow[4];
 			if (amountLeft == null) {
 				// no one drawed something from keg
-				response[i].setCurrentAmount((Integer) resultRow[2]);
+				response[i].setCurrentAmount(0);
 			} else {
 				response[i].setCurrentAmount((Double) resultRow[4]);
 			}
