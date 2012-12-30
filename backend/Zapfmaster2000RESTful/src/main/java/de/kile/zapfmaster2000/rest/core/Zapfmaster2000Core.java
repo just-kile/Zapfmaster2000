@@ -5,6 +5,7 @@ import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
+import de.kile.zapfmaster2000.rest.core.keg.KegService;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
 import de.kile.zapfmaster2000.rest.core.push.PushService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
@@ -80,5 +81,12 @@ public interface Zapfmaster2000Core {
 	 * @return the challenge service.
 	 */
 	public ChallengeService getChallengeService();
+	
+	/**
+	 * Return the keg service.
+	 * 
+	 * @return the keg serive.
+	 */
+	public KegService getKegService();
 
 }

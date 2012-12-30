@@ -19,6 +19,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
@@ -149,6 +150,13 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * @generated
 	 */
 	private EClass challenge1v1DoneNewsEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass newKegNewsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -864,6 +872,24 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNewKegNews() {
+		return newKegNewsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNewKegNews_Keg() {
+		return (EReference)newKegNewsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMappingQrRfid() {
 		return mappingQrRfidEClass;
 	}
@@ -1246,6 +1272,9 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		challenge1v1DoneNewsEClass = createEClass(CHALLENGE1V1_DONE_NEWS);
 		createEReference(challenge1v1DoneNewsEClass, CHALLENGE1V1_DONE_NEWS__CHALLENGE);
 
+		newKegNewsEClass = createEClass(NEW_KEG_NEWS);
+		createEReference(newKegNewsEClass, NEW_KEG_NEWS__KEG);
+
 		mappingQrRfidEClass = createEClass(MAPPING_QR_RFID);
 		createEAttribute(mappingQrRfidEClass, MAPPING_QR_RFID__ID);
 		createEAttribute(mappingQrRfidEClass, MAPPING_QR_RFID__QR_CODE);
@@ -1321,6 +1350,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		challenge1v1StartedNewsEClass.getESuperTypes().add(this.getNews());
 		challenge1v1DeclinedNewsEClass.getESuperTypes().add(this.getNews());
 		challenge1v1DoneNewsEClass.getESuperTypes().add(this.getNews());
+		newKegNewsEClass.getESuperTypes().add(this.getNews());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(achievementEClass, Achievement.class, "Achievement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1402,6 +1432,9 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 
 		initEClass(challenge1v1DoneNewsEClass, Challenge1v1DoneNews.class, "Challenge1v1DoneNews", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getChallenge1v1DoneNews_Challenge(), this.getChallenge1v1(), null, "challenge", null, 0, 1, Challenge1v1DoneNews.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(newKegNewsEClass, NewKegNews.class, "NewKegNews", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNewKegNews_Keg(), this.getKeg(), null, "keg", null, 0, 1, NewKegNews.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingQrRfidEClass, MappingQrRfid.class, "MappingQrRfid", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMappingQrRfid_Id(), ecorePackage.getELong(), "id", null, 0, 1, MappingQrRfid.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

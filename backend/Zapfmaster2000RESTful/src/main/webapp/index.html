@@ -100,6 +100,32 @@ $("#uploadImage").on("click",function(e){
 });
 
 
+/**
+ * new keg
+ */
+	$("#newKegBtn").on("click",function(e){
+	e.preventDefault();
+	var brand = $("#brand").val();
+	var size = $("#size").val();
+	var boxid = $("#boxId").val();
+	var data = {};
+	var theUrl = 'rest/draftkit/'+boxid+'/switchkeg';
+	$.each($(".registerItem"),function(ind,item){
+		data[$(item).attr("name")] =$(item).val(); 
+	});
+	data["token"] = localStorage.getItem("token");
+	data["size"] = size;
+	$.ajax({
+		type:"POST",
+		url:theUrl,
+		data:data,
+		success:function(token){
+			alert("Did switch keg");
+
+		}
+	})
+});
+
 
 })
 
@@ -150,6 +176,15 @@ $("#uploadImage").on("click",function(e){
 <p>RFID:<br /><input class="registerItem" id="rfid" name="rfid" type="text" size="30" maxlength="30" value=""></p>
 
 <input id ="registerUserBtn" type="submit" value="Registrieren">
+
+<hr/>
+<p>Marke:<br />
+<input class="registerItem" id="brand" name="brand" type="text" size="30" maxlength="30" value=""></p>
+</p>
+<p>Menge:<br /><input class="registerItem" id="size" name="rfid" type="text" size="30" maxlength="30" value=""></p>
+<p>BoxId:<br /><input class="registerItem" id="boxId" name="rfid" type="text" size="30" maxlength="30" value=""></p>
+
+<input id ="newKegBtn" type="submit" value="Neues Fass">
 
 </body>
 </html>
