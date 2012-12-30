@@ -1,10 +1,13 @@
 package de.kile.zapfmaster2000.rest.api.image;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,6 +22,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.imgscalr.Scalr;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -32,7 +36,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 @Path("image/user")
 public class UserImageResource {
 
-	private static final int MAX_FILE_SIZE = 1 * 1000 * 1000; // 1MB
+	private static final int IMAGE_SIZE = 48;
 
 	private static final Logger LOG = Logger.getLogger(UserImageResource.class);
 
@@ -89,14 +93,32 @@ public class UserImageResource {
 
 				InputStream inputStream = image
 						.getBody(InputStream.class, null);
-				byte[] bytes = ByteStreams.toByteArray(inputStream);
-				if (bytes.length > MAX_FILE_SIZE) {
-					return Response.status(Status.BAD_REQUEST).build();
+
+				// scale image
+				BufferedImage bufferedImage = ImageIO.read(inputStream);
+				double ratio = bufferedImage.getWidth()
+						/ (double) bufferedImage.getHeight();
+				if (ratio > 1) {
+					int newWidth = bufferedImage.getHeight();
+					int pixelsToCrop = (bufferedImage.getWidth() - newWidth) / 2;
+					bufferedImage = Scalr.crop(bufferedImage, pixelsToCrop, 0,
+							newWidth, bufferedImage.getHeight());
+				} else if (ratio < 1) {
+					int newHeight = bufferedImage.getWidth();
+					int pixelsToCrop = (bufferedImage.getHeight() - newHeight) / 2;
+					bufferedImage = Scalr.crop(bufferedImage, 0, pixelsToCrop,
+							bufferedImage.getWidth(), newHeight);
 				}
+
+				bufferedImage = Scalr.resize(bufferedImage,
+						Scalr.Mode.FIT_EXACT, IMAGE_SIZE);
+				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				ImageIO.write(bufferedImage, "png", outputStream);
+				byte[] bytes = outputStream.toByteArray();
 
 				// write data to db
 				String path = "rest/image/user/" + user.getId();
-				String contentType = image.getMediaType().toString();
+				// String contentType = image.getMediaType().toString();
 
 				Session session = Zapfmaster2000Core.INSTANCE
 						.getTransactionService().getSessionFactory()
@@ -111,7 +133,7 @@ public class UserImageResource {
 				// create new image
 				Image newImage = Zapfmaster2000Factory.eINSTANCE.createImage();
 				newImage.setPath(path);
-				newImage.setContentType(contentType);
+				newImage.setContentType("image/png");
 				newImage.setContent(Hibernate.getLobCreator(session)
 						.createBlob(bytes));
 
