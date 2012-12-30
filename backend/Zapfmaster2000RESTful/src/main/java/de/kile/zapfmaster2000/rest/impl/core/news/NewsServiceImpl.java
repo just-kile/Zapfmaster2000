@@ -20,6 +20,8 @@ import de.kile.zapfmaster2000.rest.core.keg.KegService;
 import de.kile.zapfmaster2000.rest.core.keg.KegServiceListener;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
 import de.kile.zapfmaster2000.rest.core.news.NewsServiceListener;
+import de.kile.zapfmaster2000.rest.core.registration.RegistrationService;
+import de.kile.zapfmaster2000.rest.core.registration.RegistrationServiceListener;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
@@ -33,6 +35,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewUserNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
@@ -48,11 +51,13 @@ public class NewsServiceImpl implements NewsService {
 
 	public NewsServiceImpl(BoxService pBoxService,
 			AchievementService pAchievementService,
-			ChallengeService pChallengeService, KegService pKegService) {
+			ChallengeService pChallengeService, KegService pKegService,
+			RegistrationService pRegistrationService) {
 		pBoxService.addListener(createBoxServiceListener());
 		pAchievementService.addListener(createAchievementServiceListener());
 		pChallengeService.addListener(createChallengeServiceListener());
 		pKegService.addListener(createKegServiceListener());
+		pRegistrationService.addListener(createRegistrationServiceListener());
 	}
 
 	@Override
@@ -134,6 +139,16 @@ public class NewsServiceImpl implements NewsService {
 			@Override
 			public void onNewKeg(Keg pKeg) {
 				postNewsNewKeg(pKeg);
+			}
+		};
+	}
+
+	public RegistrationServiceListener createRegistrationServiceListener() {
+		return new RegistrationServiceListener() {
+			
+			@Override
+			public void onNewUserRegistered(User pUser) {
+				postNewUserNews(pUser);
 			}
 		};
 	}
@@ -289,9 +304,26 @@ public class NewsServiceImpl implements NewsService {
 
 		tx.commit();
 		notifiyListenersNewsPosted(news);
-
 	}
 
+	private void postNewUserNews(User pUser) {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		pUser = (User) session.load(Zapfmaster2000Package.eINSTANCE.getUser()
+				.getName(), pUser.getId());
+
+		NewUserNews news = Zapfmaster2000Factory.eINSTANCE.createNewUserNews();
+		news.setAccount(pUser.getAccount());
+		news.setDate(new Date());
+		news.setUser(pUser);
+		session.save(news);
+
+		tx.commit();
+		notifiyListenersNewsPosted(news);
+	}
+	
 	private void notifiyListenersNewsPosted(News pNews) {
 		for (NewsServiceListener listener : listeners) {
 			listener.onNewsPosted(pNews);

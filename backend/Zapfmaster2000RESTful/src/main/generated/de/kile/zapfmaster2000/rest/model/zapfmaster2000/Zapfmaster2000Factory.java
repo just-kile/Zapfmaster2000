@@ -148,6 +148,15 @@ public interface Zapfmaster2000Factory extends EFactory {
 	NewKegNews createNewKegNews();
 
 	/**
+	 * Returns a new object of class '<em>New User News</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>New User News</em>'.
+	 * @generated
+	 */
+	NewUserNews createNewUserNews();
+
+	/**
 	 * Returns a new object of class '<em>Mapping Qr Rfid</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

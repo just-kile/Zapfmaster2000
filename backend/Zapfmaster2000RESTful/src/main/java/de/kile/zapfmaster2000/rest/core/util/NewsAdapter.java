@@ -8,6 +8,7 @@ import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse.Type;
 import de.kile.zapfmaster2000.rest.api.news.AchievementNewsResponse;
 import de.kile.zapfmaster2000.rest.api.news.DrawingNewsResponse;
 import de.kile.zapfmaster2000.rest.api.news.NewKegNewsReponse;
+import de.kile.zapfmaster2000.rest.api.news.NewUserNewsResponse;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews;
@@ -16,6 +17,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewUserNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
@@ -50,6 +52,10 @@ public class NewsAdapter {
 		case Zapfmaster2000Package.NEW_KEG_NEWS:
 			NewKegNews newKegNews = (NewKegNews) pNews;
 			newsResponse = adaptNewKegNews(newKegNews);
+			break;
+		case Zapfmaster2000Package.NEW_USER_NEWS:
+			NewUserNews newUserNews = (NewUserNews) pNews;
+			newsResponse = adaptNewUserNews(newUserNews);
 			break;
 		default:
 			LOG.error("Unsupported news type: " + pNews.getClass().getName());
@@ -135,6 +141,18 @@ public class NewsAdapter {
 		response.setLocation(pNewKegNews.getKeg().getBox().getLocation());
 		
 		return response;
+	}
+	
+	private AbstractNewsResponse adaptNewUserNews(NewUserNews pNews) {
+		NewUserNewsResponse response = new NewUserNewsResponse();
+		
+		response.loadDate(pNews.getDate());
+		response.setImage("images/others/newuser.jpg");
+		response.setUserId(pNews.getUser().getId());
+		response.setUserName(pNews.getUser().getName());
+		
+		return response;
+		
 	}
 
 }
