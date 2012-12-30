@@ -85,9 +85,11 @@ public class AlcoholResponseBuilder {
 				curConcentration = (Double) resultAmountByHour.get(i)[0]
 						* reductionFactor;
 
-				oldConcentration = curConcentration + oldConcentration
-						* (curDate.getTime() - oldDate.getTime()) / 1000 / 60
-						/ 60 * alcoholBreakDown;
+				oldConcentration = curConcentration
+						+ Math.max(0.0, oldConcentration
+								- (curDate.getTime() - oldDate.getTime())
+								/ 1000 / 60 / 60 * alcoholBreakDown);
+				oldDate = curDate;
 			}
 
 			AlcoholLevelResponse response = new AlcoholLevelResponse();
@@ -102,7 +104,6 @@ public class AlcoholResponseBuilder {
 		}
 	}
 
-	
 	/**
 	 * Calculates an average alcohol level for all users that have been drawing
 	 * in the last 36 hours.
@@ -133,8 +134,7 @@ public class AlcoholResponseBuilder {
 
 		List<Object[]> resultUsers = session
 				.createQuery(
-						"SELECT u.sex, u.weight, u.id"
-								+ " FROM Drawing d "
+						"SELECT u.sex, u.weight, u.id FROM Drawing d "
 								+ " JOIN d.user AS u "
 								+ " WHERE u.account = :account"
 								+ " AND d.date > :timestamp "
@@ -160,7 +160,8 @@ public class AlcoholResponseBuilder {
 				weight += (Integer) rawUser[1];
 
 			}
-			double reductionFactor = resultUsers.size() / weight / sexReduction;
+			double reductionFactor = resultUsers.size() * resultUsers.size()
+					/ weight / sexReduction;
 			double alcoholBreakDown = 0.15 * resultUsers.size(); // per mille
 																	// per hour
 
@@ -176,9 +177,11 @@ public class AlcoholResponseBuilder {
 				curConcentration = (Double) resultAmountByHour.get(i)[0]
 						* reductionFactor;
 
-				oldConcentration = curConcentration + oldConcentration
-						* (curDate.getTime() - oldDate.getTime()) / 1000 / 60
-						/ 60 * alcoholBreakDown;
+				oldConcentration = curConcentration
+						+ Math.max(0.0, oldConcentration
+								- (curDate.getTime() - oldDate.getTime())
+								/ 1000 / 60 / 60 * alcoholBreakDown);
+				oldDate = curDate;
 			}
 
 			AlcoholLevelResponse response = new AlcoholLevelResponse();
@@ -192,5 +195,4 @@ public class AlcoholResponseBuilder {
 			return response;
 		}
 	}
-
 }

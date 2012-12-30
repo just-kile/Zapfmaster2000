@@ -49,15 +49,19 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 
 		cal.add(Calendar.MINUTE, -1);
 
-		createDrawing(2, cal.getTime(), keg1, user1);
+		createDrawing(1, cal.getTime(), keg1, user1);
+		createDrawing(0.5, cal.getTime(), keg1, user2);
 		cal.add(Calendar.HOUR, -1);
-		createDrawing(2, cal.getTime(), keg1, user1);
+		createDrawing(1, cal.getTime(), keg1, user1);
+		createDrawing(0.5, cal.getTime(), keg1, user2);
 		cal.add(Calendar.HOUR, -1);
-		createDrawing(2, cal.getTime(), keg1, user1);
+		createDrawing(1, cal.getTime(), keg1, user1);
+		createDrawing(0.5, cal.getTime(), keg1, user2);
 		cal.add(Calendar.HOUR, -1);
-		createDrawing(2, cal.getTime(), keg1, user1);
+		createDrawing(1, cal.getTime(), keg1, user1);
+		createDrawing(0.5, cal.getTime(), keg1, user2);
 		cal.add(Calendar.HOUR, -1);
-		createDrawing(2, cal.getTime(), keg1, user2);
+		createDrawing(1, cal.getTime(), keg1, user2);
 	}
 
 	@Test
@@ -65,9 +69,7 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 
 		AlcoholLevelResponse alcoholLevelResponse = AlcoholResponseBuilder
 				.retrieveAlcoholLevelResponse(user1.getId(), account1);
-		// realistic alcohol level 1-3 per mille
-		// TODO detailed calculation
-		assertEquals(2, alcoholLevelResponse.getAlcoholLevel(), 1);
+		assertEquals(2.15, alcoholLevelResponse.getAlcoholLevel(), 0.1);
 	}
 
 	@Test
@@ -98,7 +100,7 @@ public class TestAlcoholLevelResponseBuilder extends AbstractMockingTest {
 		double avg = (alcoholLevelResponse1.getAlcoholLevel() + alcoholLevelResponse2
 				.getAlcoholLevel()) / 2;
 
-		assertEquals(avg, alcoholLevelResponse.getAlcoholLevel(), 0.3);
+		assertEquals(avg, alcoholLevelResponse.getAlcoholLevel(), 0.1);
 	}
 
 }
