@@ -85,13 +85,17 @@ $(document).ready(function(){
 			}
 		}
 		var initRfidPush = function (id){
-				if(pushReq)pushReq.abort();
-				pushReq = null;
+				abortPush();
 				connectToChannel("rest/draftkit/"+id+"/rfid",setRFID);
 			}
+		var abortPush = function(){
+			if(pushReq)pushReq.abort();
+			pushReq = null;
+		}
 		var pub = {
 				initRfidPush:initRfidPush,
 				setRFID:setRFID,
+				abortPush:abortPush,
 				connectToChannel:connectToChannel
 				
 		};
@@ -254,6 +258,7 @@ $("#registerApp").on("click",function(e){
 })
 $(".cancelBtn").on("click",function(e){
 	e.preventDefault();
+	RfidPush.abortPush();
 	$(".container").hide();
 	$("#loginContainer").show();
 })
@@ -331,7 +336,7 @@ $("#updateImageRfid").on("click",function(e){
 <p>Gender
  <select class="registerItem" name="sex" size="1">
       <option>m</option>
-      <option>w</option>
+      <option>f</option>
     </select>
 </p>
 <p><input placeholder="Gewicht" class="registerItem" id="weight" name="weight" type="text" size="30" maxlength="30" value=""></p>
