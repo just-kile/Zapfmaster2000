@@ -295,8 +295,8 @@ $("#updateImageRfid").on("click",function(e){
 <body>
 <!-- Frontbox -->
 <div class="login">
+<img class="zmlogo" src="images/view/zapfmaster2000_klein.png" />
 	<div id="loginContainer" class="applogin container">
-		<img class="zmlogo" src="images/view/zapfmaster2000_klein.png" />
 		<p><input placeholder="Username" id="userName" name="userName" type="text" size="30" maxlength="30" value=""></p>
 		<p><input placeholder="Passwort" id="password" name="password" type="password" size="30" maxlength="30" value=""></p>
 		<div><input id ="submitApp" type="submit" value="Anmelden"></div>
@@ -306,8 +306,7 @@ $("#updateImageRfid").on("click",function(e){
 		<hr />
 	<input id ="registerApp" type="submit" value="Registrieren">
 	
-	<div class="firm"><div class="firmText">Ein Produkt von </div>
-	<div class="firmImg"><img class="jklogo" src="images/view/justKile.png" /></div></div>
+	
 		
 	</div>
 	
@@ -327,15 +326,15 @@ $("#updateImageRfid").on("click",function(e){
  <!-- register User -->
 <div id="registerUserContainer" class="register container" style="display:none">
 <form id="registerUser">
-<p>Name:<br /><input class="registerItem" id="rUserName" name="userName" type="text" size="30" maxlength="30" value=""></p>
-<p>Pass:<br /><input class="registerItem" id="rPassword" name="password" type="password" size="30" maxlength="30" value=""></p>
-<p>Sex:<br />
+<p><input placeholder="Username" class="registerItem" id="rUserName" name="userName" type="text" size="30" maxlength="30" value=""></p>
+<p><input  placeholder="Password" class="registerItem" id="rPassword" name="password" type="password" size="30" maxlength="30" value=""></p>
+<p>Gender
  <select class="registerItem" name="sex" size="1">
       <option>m</option>
       <option>w</option>
     </select>
 </p>
-<p>Weight:<br /><input class="registerItem" id="weight" name="weight" type="text" size="30" maxlength="30" value=""></p>
+<p><input placeholder="Gewicht" class="registerItem" id="weight" name="weight" type="text" size="30" maxlength="30" value=""></p>
 <input class ="cancelBtn" type="submit" value="Abbrechen">
 <input id ="registerUserBtn" type="submit" value="Registrieren">
 </form>
@@ -367,6 +366,10 @@ $("#updateImageRfid").on("click",function(e){
 <!-- <input id ="registerUserBtn" type="submit" value="Registrieren"> -->
 </div>
 </div>
+<div class="firm">
+		<div class="firmText">Ein Produkt von </div>
+		<div class="firmImg"><img class="jklogo" src="images/view/justKile.png" /></div>
+	</div>
 </div>
 
 </body>
