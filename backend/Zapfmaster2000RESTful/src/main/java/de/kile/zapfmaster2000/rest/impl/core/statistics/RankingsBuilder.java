@@ -12,6 +12,7 @@ import de.kile.zapfmaster2000.rest.api.statistics.DrawCountUserListResponse;
 import de.kile.zapfmaster2000.rest.api.statistics.UserAmountResponse;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class RankingsBuilder {
 
@@ -36,7 +37,7 @@ public class RankingsBuilder {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		session.update(account);
+		account = (Account) session.load(Zapfmaster2000Package.eINSTANCE.getAccount().getName(), account.getId());
 
 		if (maxResults == -1) {
 			maxResults = Integer.MAX_VALUE;
@@ -111,7 +112,8 @@ public class RankingsBuilder {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		session.update(account);
+		account = (Account) session.load(Zapfmaster2000Package.eINSTANCE
+				.getAccount().getName(), account.getId());
 
 		if (maxResults == -1) {
 			maxResults = Integer.MAX_VALUE;
@@ -185,7 +187,7 @@ public class RankingsBuilder {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		session.update(account);
+		account = (Account) session.load(Zapfmaster2000Package.eINSTANCE.getAccount().getName(), account.getId());
 
 		if (maxResults == -1) {
 			maxResults = Integer.MAX_VALUE;

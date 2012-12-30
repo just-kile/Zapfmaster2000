@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AchievementResonse {
 
-	private long achivementId;
+	private long achievementId;
 
 	private String achievementName;
 
@@ -15,12 +15,12 @@ public class AchievementResonse {
 
 	private final List<UserThatGained> users = new ArrayList<>();
 
-	public long getAchivementId() {
-		return achivementId;
+	public long getAchievementId() {
+		return achievementId;
 	}
 
-	public void setAchivementId(long achivementId) {
-		this.achivementId = achivementId;
+	public void setAchievementId(long achivementId) {
+		this.achievementId = achivementId;
 	}
 
 	public String getAchievementName() {

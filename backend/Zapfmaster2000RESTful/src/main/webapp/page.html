@@ -59,15 +59,15 @@
 {{/news}}
 {{#amount}}
 <tr class="stats-drinker-row">
-	<td>Getrunkene Menge</td><td>{{complete}}</td>
+	<td>Getrunkene Menge</td><td>{{complete}} L</td>
 </tr>
 <tr class="stats-drinker-row">
-	<td>Most Activity Hour</td><td>{{mostActivityHour}}</td>
+	<td>Most Activity Hour</td><td>{{mostActivityHour}} Uhr</td>
 </tr>
 {{/amount}}
 {{#userRank}}
 <tr class="stats-drinker-row">
-	<td>Rangliste</td><td>{{amount}}</td>
+	<td>Rangliste</td><td>{{amount}}.</td>
 </tr>
 {{/userRank}}
 </table>
@@ -94,6 +94,30 @@
 </table>
 </div>
  </script>
+   <script id="ZMO-achievementsstats-list-template" type="text/html">
+<tr class="stats-drinker-row">
+<td><img src="{{userImage}}" /></td>
+<td><a href="#userStats?id={{userId}}">{{userName}}</a></td>
+<td>Erreicht am {{date}}</td>
+</tr>
+ </script>
+    <script id="ZMO-achievementsstats-description-template" type="text/html">
+<table class="stats-drinker">
+<tr >
+	<td>Illustration</td>
+	<td><img src="{{achievementImage}}" /></td>
+
+</tr>
+<tr >
+	<td>Name</td>
+<td>{{achievementName}}</td>
+</tr>
+<tr >
+	<td>Beschreibung</td>
+<td>{{description}}</td>
+</tr>
+</table>
+ </script>
  <script id="ZMO-duelsRow" type="text/html">
  <li class="row">
 	<div class="rowContainer">
@@ -105,8 +129,6 @@
 	<span class="type">({{type}})</span>
 	<span class="team2"><img src="{{team2}}"/></span>
 	<span class="time">{{time}}</span>
-
-	
 </div>
 </li>
  </script>
@@ -119,13 +141,13 @@
 			</div>
 			<div class="news-drink-box-details">
 				<div class="news-drink-box-details-headline">
-					<b>{{name}}</b> zapfte <b>{{amount}}</b>l
+					<a href="#">{{name}}</a> zapfte <b>{{amount}}</b>l
 				</div>
 				<div class="news-box-info">Ort: {{place}}, Fass: {{kegId}} der Marke {{brand}}
 				</div>
 			</div>
 			<div class="news-box-dateline">
-				<abbr title="{{date}}" class="timeago">am {{date}}</abbr>
+				<abbr title="{{date}}" class="timeago">am {{date}} Uhr</abbr>
 			</div>
 		</div>
 </script>
@@ -140,10 +162,10 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			<a>{{username}}</a> erreichte den Erfolg <br>
-			<b>
+			<a href="#">{{username}}</a> erreichte den Erfolg 
+			
 				<a href="#achievementstats?id={{achievement_id}}">{{name}}</a>
-			</b>
+			
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="place.php">{{place}}</a>
@@ -180,7 +202,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}}</a> beginnt eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}!
+			<a href="#">{{team1}}</a> beginnt eine {{duration}} minütigen Challenge {{type}} gegen <a href="#">{{team2}}</a>!
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="#">{{place}}</a>
@@ -203,7 +225,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			{{team1}} hatte eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}.<br /> Gewonnen hat: {{winner}}
+			<a href="#">{{team1}}</a> hatte eine {{duration}} minütigen Challenge {{type}} gegen <a href="#">{{team2}}</a>.<br /> Gewonnen hat: {{winner}}
 		</div>
 		<div class="news-box-info">
 			Ort: <a href="#">{{place}}</a>
@@ -230,6 +252,64 @@
 		<div class="news-box-info">
 			Ort: <a href="#">{{place}}</a>
 		</div>
+	</div>
+	<div class="news-box-dateline">
+		<abbr class="timeago" title="{{date}}">am {{date}} Uhr</abbr>
+	</div>
+</div>
+</script>
+<script type="text/html" id="ZMO-achievements-template-box">
+<div class="news-drink-box">
+	<div class="member-box-left">
+		<div class="news-drink-box-mugshot">
+			<div>
+				<a href="#achievementstats?id={{achievementId}}">
+					<img width="48" height="48" border="0" src="{{achievementImage}}">
+				</a>
+			</div>
+		</div>
+		<div class="members-box-headline">
+			<a href="#achievementstats?id={{achievementId}}">{{achievementName}}</a>
+		</div>
+		<div class="members-box-amount">
+			Erreicht: {{count}}x
+		</div>
+	</div>
+
+{{#additional}}
+	<div class="member-box-additional">
+		+ {{additionalCount}}
+	</div>
+{{/additional}}
+
+{{#users}}	
+	<div class="member-box-achievement-mugshot">
+		<div>
+			<a href="#users?id={{userId}}">
+				<img width="48" height="48" border="0" src="{{userImage}}" title="{{userName}}">
+			</a>
+		</div>
+	</div>	
+{{/users}}
+
+<div style="clear:both;"></div>
+</div>
+
+
+</script>
+
+<script id="ZMO-news-new-keg" type="text/html">
+<div class="news-drink-box">
+	<div class="news-drink-box-mugshot">
+		<div>
+			<img src="{{image}}" border="0" height="48" width="48">
+		</div>
+	</div>
+	<div class="news-drink-box-details">
+		<div class="news-drink-box-details-headline">
+				Ein neues {{size}} Liter Fass {{brand}} wurde angezapft.
+		</div>
+		<div class="news-box-info">Ort: {{location}}</div>
 	</div>
 	<div class="news-box-dateline">
 		<abbr class="timeago" title="{{date}}">am {{date}} Uhr</abbr>

@@ -3,13 +3,13 @@ package de.kile.zapfmaster2000.connector.messages;
 
 public class LoginMessage extends Message {
 
-	byte status;
+	char status;
 	
 	/**
 	 * sets the message type to login and sets the login status field
 	 * @param newStatus - login status according to SerialConstants
 	 */
-	public LoginMessage(byte newStatus) {
+	public LoginMessage(char newStatus) {
 		messageType = Message.LOGINMESSAGE;
 		status = newStatus;
 	}
@@ -18,7 +18,7 @@ public class LoginMessage extends Message {
 	 * 
 	 * @return - login status (according to SerialConstants)
 	 */
-	public byte getLoginStatus() {
+	public char getLoginStatus() {
 		return status;
 	}
 	

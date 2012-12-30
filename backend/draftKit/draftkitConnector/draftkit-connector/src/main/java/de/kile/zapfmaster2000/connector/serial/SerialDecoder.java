@@ -24,10 +24,11 @@ public class SerialDecoder {
 			// message contains ticks
 			// get the bytes up to the end message
 			// these bytes contain the number of ticks
-			char[] rawNumber = extract(data, 1, findEnd(data));
+			int end = findEnd(data);
+			char[] rawNumber = extract(data, 1, end);
 
 			// convert the string number to an integer
-			int ticks = Integer.valueOf(String.valueOf(rawNumber));
+			int ticks = Integer.parseInt(String.valueOf(rawNumber));
 
 			// create message about ticks reception for observers
 			message = new TicksMessage(ticks);
@@ -36,7 +37,8 @@ public class SerialDecoder {
 			// message contains the rfid s/n
 			// get the bytes up to the end message
 			// bytes contain the s/n
-			char[] rawNumber = extract(data, 1, findEnd(data));
+			int end = findEnd(data);
+			char[] rawNumber = extract(data, 1, end);
 
 			// new rfid tag id
 			long tagId = 0;
@@ -63,7 +65,8 @@ public class SerialDecoder {
 	 */
 	private static int findEnd(byte[] buffer) {
 		for (int i = 1; i < buffer.length; ++i) {
-			if (buffer[i] == SerialConstants.ENDSYMBOL) {
+			char curByte = (char) buffer[i];
+			if (curByte == SerialConstants.ENDSYMBOL) {
 				return i;
 			}
 		}
@@ -83,7 +86,7 @@ public class SerialDecoder {
 		int length = end - begin;
 		char[] chars = new char[length];
 		for (int i = 0; i < length; ++i) {
-			chars[i] = (char) buffer[i];
+			chars[i] = (char) buffer[i+begin];
 		}
 		return chars;
 	}

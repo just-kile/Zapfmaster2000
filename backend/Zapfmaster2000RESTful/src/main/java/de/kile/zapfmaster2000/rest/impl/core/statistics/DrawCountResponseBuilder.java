@@ -9,6 +9,7 @@ import de.kile.zapfmaster2000.rest.api.statistics.DrawCountResponse;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class DrawCountResponseBuilder {
 
@@ -27,7 +28,8 @@ public class DrawCountResponseBuilder {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		session.update(account);
+		account = (Account) session.load(Zapfmaster2000Package.eINSTANCE
+				.getAccount().getName(), account.getId());
 
 		List<Object> countByHourResult;
 		if (user == -1) {

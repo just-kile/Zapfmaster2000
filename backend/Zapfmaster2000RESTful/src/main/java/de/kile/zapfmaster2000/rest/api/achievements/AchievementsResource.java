@@ -58,7 +58,7 @@ public class AchievementsResource {
 					resp = mapIdToResp.get(id);
 				} else {
 					resp = new AchievementResonse();
-					resp.setAchivementId((Long) resultRow[0]);
+					resp.setAchievementId((Long) resultRow[0]);
 					resp.setAchievementName((String) resultRow[1]);
 					resp.setAchievementDescription((String) resultRow[2]);
 					resp.setAchievementImage((String) resultRow[3]);

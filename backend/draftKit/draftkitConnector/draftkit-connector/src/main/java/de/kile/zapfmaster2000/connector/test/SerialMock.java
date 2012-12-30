@@ -21,7 +21,8 @@ import de.kile.zapfmaster2000.connector.serial.SerialConstants;
  */
 public class SerialMock {
 
-	private static void assertParameterCount(String[] pCommand, int pExpectedCount) {
+	private static void assertParameterCount(String[] pCommand,
+			int pExpectedCount) {
 		if ((pCommand.length - 1) != pExpectedCount) {
 			throw new IllegalArgumentException("Wrong parmaeter count: "
 					+ pExpectedCount + " parameter expected.");
@@ -30,8 +31,8 @@ public class SerialMock {
 
 	public static void main(String[] args) {
 		String comPort = "COM9";
-		
-		SerialCommunicator comm = new SerialCommunicator(comPort);
+
+		SerialCommunicator comm = new SerialCommunicator();
 		comm.addObserver(new Observer() {
 			@Override
 			public void update(Observable origin, Object message) {
@@ -50,49 +51,56 @@ public class SerialMock {
 			}
 		});
 
-		System.out.println("Commands: ");
-		System.out.println("\tlogin 1|2|3");
-		System.out.println("\tinterval <int>");
+		if (comm.connect(comPort) == 1) {
 
-		InputStreamReader is = new InputStreamReader(System.in);
-		BufferedReader in = new BufferedReader(is);
+			System.out.println("Commands: ");
+			System.out.println("\tlogin 1|2|3");
+			System.out.println("\tinterval <int>");
 
-		while (true) {
-			try {
-				String command = in.readLine();
-				String[] segments = command.split(" ");
+			InputStreamReader is = new InputStreamReader(System.in);
+			BufferedReader in = new BufferedReader(is);
 
-				switch (segments[0]) {
-				case "login":
-					assertParameterCount(segments, 1);
-					int status = Integer.parseInt(segments[1]);
-					LoginMessage lMessage;
-					switch (status) {
-					case 1:
-						lMessage = new LoginMessage(SerialConstants.STATUSOK);
+			while (true) {
+				try {
+					String command = in.readLine();
+					String[] segments = command.split(" ");
+
+					switch (segments[0]) {
+					case "login":
+						assertParameterCount(segments, 1);
+						int status = Integer.parseInt(segments[1]);
+						LoginMessage lMessage;
+						switch (status) {
+						case 1:
+							lMessage = new LoginMessage(
+									SerialConstants.STATUSOK);
+							break;
+						case 2:
+							lMessage = new LoginMessage(
+									SerialConstants.STATUSERROR);
+							break;
+						case 3:
+							lMessage = new LoginMessage(
+									SerialConstants.STATUSNONE);
+							break;
+						default:
+							lMessage = new LoginMessage(
+									SerialConstants.STATUSNONE);
+						}
+						comm.sendMessage(lMessage);
 						break;
-					case 2: 
-						lMessage = new LoginMessage(SerialConstants.STATUSERROR);
-						break;
-					case 3:
-						lMessage = new LoginMessage(SerialConstants.STATUSNONE);
+					case "interval":
+						assertParameterCount(segments, 1);
+						int interval = Integer.parseInt(segments[1]);
+						IntervalMessage iMessage = new IntervalMessage(interval);
+						comm.sendMessage(iMessage);
 						break;
 					default:
-						lMessage = new LoginMessage(SerialConstants.STATUSNONE);
+						System.out.println("unknown command: " + segments[0]);
 					}
-					comm.sendMessage(lMessage);
-					break;
-				case "interval":
-					assertParameterCount(segments, 1);
-					int interval = Integer.parseInt(segments[1]);
-					IntervalMessage iMessage = new IntervalMessage(interval);
-					comm.sendMessage(iMessage);
-					break;
-				default:
-					System.out.println("unknown command: " + segments[0]);
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
 			}
 		}
 	}

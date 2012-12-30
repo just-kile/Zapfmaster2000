@@ -26,15 +26,25 @@ public class KegResponseBuilder {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-
+		
+//		List<Object[]> resultCurrentKegs = session
+//				.createQuery(
+//						"SELECT k.id, k.brand, k.size, k.startDate, k.size-SUM(d.amount), k.box.id"
+//								+ " FROM Drawing d LEFT OUTER JOIN d.keg AS k"
+//								+ " WHERE d.keg = k "
+//								+ " AND k.box.account = :account "
+//								+ " AND k.endDate IS NULL "
+//								+ " GROUP BY k.id, k.brand, k.size, k.startDate "
+//								+ " ORDER BY k.id")
+//				.setEntity("account", account).list();
+		
 		List<Object[]> resultCurrentKegs = session
 				.createQuery(
-						"SELECT k.id, k.brand, k.size, k.startDate,  (k.size-SUM(d.amount))"
-								+ " FROM Keg k, Drawing d, User u "
-								+ " WHERE d.keg = k AND d.user = u "
+						"SELECT k.id, k.brand, k.size, k.startDate, k.size-SUM(d.amount), k.box.id"
+								+ " FROM Keg k LEFT JOIN k.drawings AS d"
+								+ " WHERE k.box.account = :account "
 								+ " AND k.endDate IS NULL "
-								+ " AND u.account = :account "
-								+ " GROUP BY (k.id, k.brand, k.size, k.startDate) "
+								+ " GROUP BY k.id, k.brand, k.size, k.startDate "
 								+ " ORDER BY k.id")
 				.setEntity("account", account).list();
 
@@ -72,8 +82,15 @@ public class KegResponseBuilder {
 			response[i].setBrand((String) resultRow[1]);
 			response[i].setSize((Integer) resultRow[2]);
 			response[i].setStartDate((Date) resultRow[3]);
-			response[i].setCurrentAmount((Double) resultRow[4]);
+			Double amountLeft = (Double) resultRow[4];
+			if (amountLeft == null) {
+				// no one drawed something from keg
+				response[i].setCurrentAmount((Integer) resultRow[2]);
+			} else {
+				response[i].setCurrentAmount((Double) resultRow[4]);
+			}
 			response[i].setKegNumber((Long) resultNumberKegs.get(0));
+			response[i].setBoxId((Long) resultRow[5]);
 
 			if (idxKeg < resultLastThreeHours.size()
 					&& response[i].getKegId() == (Long) resultLastThreeHours
@@ -89,7 +106,7 @@ public class KegResponseBuilder {
 								* (3 * 60 * 60)));
 
 				response[i].setLastsUntil(calendar.getTime());
-				
+
 				idxKeg++;
 			}
 		}

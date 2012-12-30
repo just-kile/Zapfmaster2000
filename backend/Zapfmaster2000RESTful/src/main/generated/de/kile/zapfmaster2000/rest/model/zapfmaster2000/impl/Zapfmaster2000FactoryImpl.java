@@ -71,6 +71,7 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.CHALLENGE1V1_STARTED_NEWS: return createChallenge1v1StartedNews();
 			case Zapfmaster2000Package.CHALLENGE1V1_DECLINED_NEWS: return createChallenge1v1DeclinedNews();
 			case Zapfmaster2000Package.CHALLENGE1V1_DONE_NEWS: return createChallenge1v1DoneNews();
+			case Zapfmaster2000Package.NEW_KEG_NEWS: return createNewKegNews();
 			case Zapfmaster2000Package.MAPPING_QR_RFID: return createMappingQrRfid();
 			case Zapfmaster2000Package.USER: return createUser();
 			case Zapfmaster2000Package.TOKEN: return createToken();
@@ -254,6 +255,16 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	public Challenge1v1DoneNews createChallenge1v1DoneNews() {
 		Challenge1v1DoneNewsImpl challenge1v1DoneNews = new Challenge1v1DoneNewsImpl();
 		return challenge1v1DoneNews;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NewKegNews createNewKegNews() {
+		NewKegNewsImpl newKegNews = new NewKegNewsImpl();
+		return newKegNews;
 	}
 
 	/**

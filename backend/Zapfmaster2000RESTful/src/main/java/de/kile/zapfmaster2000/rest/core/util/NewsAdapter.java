@@ -7,6 +7,7 @@ import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse;
 import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse.Type;
 import de.kile.zapfmaster2000.rest.api.news.AchievementNewsResponse;
 import de.kile.zapfmaster2000.rest.api.news.DrawingNewsResponse;
+import de.kile.zapfmaster2000.rest.api.news.NewKegNewsReponse;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews;
@@ -14,6 +15,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
@@ -45,7 +47,10 @@ public class NewsAdapter {
 			Challenge1v1DoneNews doneNews = (Challenge1v1DoneNews) pNews;
 			newsResponse = adaptChallenge1v1DonedNews(doneNews);
 			break;
-
+		case Zapfmaster2000Package.NEW_KEG_NEWS:
+			NewKegNews newKegNews = (NewKegNews) pNews;
+			newsResponse = adaptNewKegNews(newKegNews);
+			break;
 		default:
 			LOG.error("Unsupported news type: " + pNews.getClass().getName());
 		}
@@ -83,7 +88,7 @@ public class NewsAdapter {
 		achievementResp.setUserId(gainedAchievement.getUser().getId());
 		achievementResp.setAchievementName(gainedAchievement.getAchievement()
 				.getName());
-		achievementResp.setAchievementId(gainedAchievement.getUser().getId());
+		achievementResp.setAchievementId(gainedAchievement.getAchievement().getId());
 
 		return achievementResp;
 	}
@@ -93,6 +98,8 @@ public class NewsAdapter {
 		ChallengeOverviewReponse news = new ChallengeAdapter()
 				.adaptChallenge(pStartedNews.getChallenge());
 		news.loadDate(pStartedNews.getDate());
+		
+		news.setImage("images/others/challengeStarted.jpg");
 		news.setType(Type.CHALLENGE_STARTED); // it is a challenge started news!
 												// However, previous adaption
 												// may detect that the challenge
@@ -114,6 +121,20 @@ public class NewsAdapter {
 				.adaptChallenge(pDoneNews.getChallenge());
 		news.loadDate(pDoneNews.getDate());
 		return news;
+	}
+
+	private AbstractNewsResponse adaptNewKegNews(NewKegNews pNewKegNews) {
+		NewKegNewsReponse response = new NewKegNewsReponse();
+		
+		response.loadDate(pNewKegNews.getDate());
+		response.setImage("images/others/newkeg.jpg");
+		response.setSize(pNewKegNews.getKeg().getSize());
+		response.setBrand(pNewKegNews.getKeg().getBrand());
+		response.setKegId(pNewKegNews.getKeg().getId());
+		response.setBoxId(pNewKegNews.getKeg().getBox().getId());
+		response.setLocation(pNewKegNews.getKeg().getBox().getLocation());
+		
+		return response;
 	}
 
 }

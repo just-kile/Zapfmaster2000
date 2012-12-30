@@ -61,6 +61,15 @@ ZMO.NewsModel =function(config){
 	this.place = "Alter Markt";
 	this.boxId = config.boxId;
 };
+ZMO.NewKegNewsModel =function(config){
+	this.brand = config.brand;
+	this.size = config.size;
+	this.location = config.location;
+	this.kegId = config.kegId;
+	this.boxId = config.boxId;
+	this.image = config.image;
+	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";
+};
 ZMO.AchievementModel = function(config){
 	this.userid = config.userId;
 	this.username = config.userName;
@@ -159,7 +168,22 @@ ZMO.MemberModel = function(config) {
 	}
 	
 };
-
+ZMO.AchievementsModel = function(config) {
+	this.achievementName = config.achievementName;
+	this.achievementId = config.achievementId;
+	this.users = config.users;
+	this.achievementImage = config.imagePath||config.achievementImage;
+	this.count = config.users ?config.users.length :0;
+	
+	// ignore all achievements if there are way to many
+	var max = ZMO.modules.Constants.member.MAX_ACHIEVEMENTS;
+	if (this.users != undefined && this.users.length > max) {
+		this.additional = true;
+		this.additionalCount = config.users.length - max;
+		this.users.splice(max, this.users.length - max);
+	}
+	
+};
 //ZMO.GlobalChallengeModel = function(config){
 //	this.type = config.type;
 //	this.challenge_type = config.challenge_type;

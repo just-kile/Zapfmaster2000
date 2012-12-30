@@ -10,12 +10,13 @@ import de.kile.zapfmaster2000.rest.api.box.LoginRequest;
 
 public class WebCommunicator {
 
-	private static final String URL = "http://localhost:8080/Zapfmaster2000RESTful/rest/";
-	private String boxPassphrase = "box-1";
+	 // TODO: Extract to a configuration file!
+	private static final String URL = "http://zapfmaster2000.dyndns.org:9130/zapfmaster2000-restful-1.0.0-SNAPSHOT/rest/";
+	private static String BOX_PASSPHRASE = "box-1";
 	
-	private int performLogin(long tagId) {
+	public int performLogin(long tagId) {
 		LoginRequest loginRequest = new LoginRequest();
-		loginRequest.setBoxPassphrase(boxPassphrase);
+		loginRequest.setBoxPassphrase(BOX_PASSPHRASE);
 		loginRequest.setRfidTag(tagId);
 
 		ClientRequest request = new ClientRequest(URL + "box/login");
@@ -35,9 +36,9 @@ public class WebCommunicator {
 		return status;
 	}
 	
-	private int sendTicks(int ticks) {
+	public int sendTicks(int ticks) {
 		DrawRequest drawRequest = new DrawRequest();
-		drawRequest.setBoxPassphrase(boxPassphrase);
+		drawRequest.setBoxPassphrase(BOX_PASSPHRASE);
 		drawRequest.setTicks(ticks);
 
 		ClientRequest request = new ClientRequest(URL + "box/draw");

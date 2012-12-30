@@ -102,7 +102,7 @@ public class TestAchievementsResource extends AbstractMockingTest {
 
 	private void assertConforms(Achievement pAchievement,
 			AchievementResonse pResponse) {
-		assertEquals(pAchievement.getId(), pResponse.getAchivementId());
+		assertEquals(pAchievement.getId(), pResponse.getAchievementId());
 		assertEquals(pAchievement.getName(), pResponse.getAchievementName());
 		assertEquals(pAchievement.getDescription(),
 				pResponse.getAchievementDescription());

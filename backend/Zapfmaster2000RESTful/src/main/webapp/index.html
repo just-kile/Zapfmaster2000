@@ -38,8 +38,8 @@ $(document).ready(function(){
 				url:url,
 				timeout:10000000, 
 				data:data,
-				success:function(data){
-					if(successCb && data!="")successCb(data);
+				success:function(token){
+					if(successCb && token!="")successCb(token);
 					connectToChannel(url,successCb,errorCb,data);
 				},
 				error:function(e){
@@ -194,6 +194,7 @@ $("#uploadImage").on("click",function(e){
 	    }
 	});
 });
+
 $("#uploadImageSkip").on("click",function(e){
 	e.preventDefault();
 	$(".container").hide();
@@ -264,6 +265,7 @@ $("#updateImageRfid").on("click",function(e){
 	})
 	
 })
+
 
 })
 
@@ -345,5 +347,6 @@ $("#updateImageRfid").on("click",function(e){
 </div>
 </div>
 </div>
+
 </body>
 </html>

@@ -3,6 +3,7 @@ package de.kile.zapfmaster2000.rest.api.statistics;
 public class GlobalStatsResponse {
 	private KegResponse[] keg;
 	private AmountResponse amount;
+	private AchievementResponse achievements;
 	private DrawCountResponse drawCount;
 	private DrawCountUserListResponse[] drawCountUserList;
 	private UserAmountResponse[] bestUserList;
@@ -83,6 +84,14 @@ public class GlobalStatsResponse {
 
 	public void setBestUserListHour(UserAmountResponse[] bestUserListHour) {
 		this.bestUserListHour = bestUserListHour;
+	}
+
+	public AchievementResponse getAchievements() {
+		return achievements;
+	}
+
+	public void setAchievements(AchievementResponse achievements) {
+		this.achievements = achievements;
 	}
 
 }

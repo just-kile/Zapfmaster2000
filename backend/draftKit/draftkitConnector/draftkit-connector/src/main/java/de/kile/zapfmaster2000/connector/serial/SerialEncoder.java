@@ -31,7 +31,7 @@ public class SerialEncoder {
 			// cast message to login message
 			LoginMessage lMessage = (LoginMessage) message;
 			// set second byte to login status symbol from message
-			data[1] = lMessage.getLoginStatus();
+			data[1] = (byte) lMessage.getLoginStatus();
 			// set third byte to end symbol
 			data[2] = (byte) SerialConstants.ENDSYMBOL;
 

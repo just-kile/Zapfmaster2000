@@ -9,6 +9,10 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
+
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
@@ -21,27 +25,39 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class ChallengeServiceImpl implements ChallengeService {
 
-	public final List<UserLoginStatus> users = new LinkedList<>();
+	public List<UserLoginStatus> users = new LinkedList<>();
 
 	private final List<ChallengeServiceListener> listeners = new ArrayList<>();
-	
+
 	private final ChallengeEvaluator evaluator;
-	
+
 	public ChallengeServiceImpl() {
 		evaluator = new ChallengeEvaluator(this);
 		evaluator.start();
 	}
 
 	@Override
-	public void rememberUser(User pUser,
+	public void rememberUser(final User pUser,
 			StatusAwareAsynchronousResponse pReponse) {
-		removeUsers();
-		synchronized (users) {
-			users.add(new UserLoginStatus(System.currentTimeMillis(), pUser,
-					pReponse));
+		if (pUser != null && pReponse != null) {
+			removeUsers();
+			synchronized (users) {
+				// if the user is already in the list, remove him before adding
+				// once more
+				users = Lists.newArrayList(Collections2.filter(users,
+						new Predicate<UserLoginStatus>() {
+							public boolean apply(UserLoginStatus pStatus) {
+								return pUser.getId() != pStatus.user.getId();
+							}
+						}));
+
+				users.add(new UserLoginStatus(System.currentTimeMillis(),
+						pUser, pReponse));
+			}
 		}
 	}
 
@@ -65,8 +81,10 @@ public class ChallengeServiceImpl implements ChallengeService {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		session.update(pUser1);
-		session.update(pUser2);
+		pUser1 = (User) session.load(Zapfmaster2000Package.eINSTANCE.getUser()
+				.getName(), pUser1.getId());
+		pUser2 = (User) session.load(Zapfmaster2000Package.eINSTANCE.getUser()
+				.getName(), pUser2.getId());
 		Challenge1v1 challenge = Zapfmaster2000Factory.eINSTANCE
 				.createChallenge1v1();
 		challenge.setUser1(pUser1);
@@ -89,7 +107,9 @@ public class ChallengeServiceImpl implements ChallengeService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(pChallenge);
+			pChallenge = (Challenge) session.load(
+					Zapfmaster2000Package.eINSTANCE.getChallenge().getName(),
+					pChallenge.getId());
 			pChallenge.setStartTime(new Date());
 			pChallenge.setState(ChallengeState.RUNNING);
 			session.save(pChallenge);
@@ -97,11 +117,11 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 			notifiyChallengeStarted(pChallenge);
 		}
-		
+
 		synchronized (evaluator) {
 			evaluator.notify();
 		}
-		
+
 	}
 
 	@Override
@@ -112,7 +132,9 @@ public class ChallengeServiceImpl implements ChallengeService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(pChallenge);
+			pChallenge = (Challenge) session.load(
+					Zapfmaster2000Package.eINSTANCE.getChallenge().getName(),
+					pChallenge.getId());
 			pChallenge.setState(ChallengeState.DECLINED);
 			session.save(pChallenge);
 			tx.commit();
@@ -152,25 +174,27 @@ public class ChallengeServiceImpl implements ChallengeService {
 					.getUser1().getId(), startTime, endTime);
 			double amountUser2 = SharedQueries.retrieveDrawingAmount(pChallenge
 					.getUser2().getId(), startTime, endTime);
-			
+
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(pChallenge);
-			
+			pChallenge = (Challenge1v1) session
+					.load(Zapfmaster2000Package.eINSTANCE.getChallenge1v1()
+							.getName(), pChallenge.getId());
+
 			pChallenge.setState(ChallengeState.FINISHED);
-			
+
 			if (amountUser1 > amountUser2) {
 				pChallenge.setWinner(pChallenge.getUser1());
 			} else if (amountUser2 > amountUser1) {
 				pChallenge.setWinner(pChallenge.getUser2());
 			} // else no one wins
-			
+
 			session.save(pChallenge);
 			tx.commit();
 		}
-		
+
 		notifyChallengeFinished(pChallenge);
 	}
 

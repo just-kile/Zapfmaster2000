@@ -16,6 +16,8 @@ import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
 import de.kile.zapfmaster2000.rest.core.box.LoginFailureReason;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeServiceListener;
+import de.kile.zapfmaster2000.rest.core.keg.KegService;
+import de.kile.zapfmaster2000.rest.core.keg.KegServiceListener;
 import de.kile.zapfmaster2000.rest.core.news.NewsService;
 import de.kile.zapfmaster2000.rest.core.news.NewsServiceListener;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
@@ -29,9 +31,12 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class NewsServiceImpl implements NewsService {
 
@@ -43,10 +48,11 @@ public class NewsServiceImpl implements NewsService {
 
 	public NewsServiceImpl(BoxService pBoxService,
 			AchievementService pAchievementService,
-			ChallengeService pChallengeService) {
+			ChallengeService pChallengeService, KegService pKegService) {
 		pBoxService.addListener(createBoxServiceListener());
 		pAchievementService.addListener(createAchievementServiceListener());
 		pChallengeService.addListener(createChallengeServiceListener());
+		pKegService.addListener(createKegServiceListener());
 	}
 
 	@Override
@@ -123,6 +129,15 @@ public class NewsServiceImpl implements NewsService {
 		};
 	}
 
+	private KegServiceListener createKegServiceListener() {
+		return new KegServiceListener() {
+			@Override
+			public void onNewKeg(Keg pKeg) {
+				postNewsNewKeg(pKeg);
+			}
+		};
+	}
+
 	private void postNewsDrawFinished(Box pBox, Drawing pDrawing) {
 		LOG.debug("Posting news (draw finished): " + pDrawing.getId());
 
@@ -135,7 +150,8 @@ public class NewsServiceImpl implements NewsService {
 		List<Account> accounts = session
 				.createQuery("SELECT b.account FROM Box b WHERE b.id = :id")
 				.setLong("id", pBox.getId()).list();
-		session.update(pDrawing);
+		pDrawing = (Drawing) session.load(Zapfmaster2000Package.eINSTANCE
+				.getDrawing().getName(), pDrawing.getId());
 
 		DrawingNews news = null;
 		if (accounts.size() == 1) {
@@ -164,9 +180,9 @@ public class NewsServiceImpl implements NewsService {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		session.update(pGainedAchievement);
-		session.update(pGainedAchievement.getUser());
-		session.update(pGainedAchievement.getUser().getAccount());
+		pGainedAchievement = (GainedAchievement) session.load(
+				Zapfmaster2000Package.eINSTANCE.getGainedAchievement()
+						.getName(), pGainedAchievement.getId());
 
 		AchievementNews news = Zapfmaster2000Factory.eINSTANCE
 				.createAchievementNews();
@@ -187,9 +203,9 @@ public class NewsServiceImpl implements NewsService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(challenge1v1);
-			session.update(challenge1v1.getUser1());
-			session.update(challenge1v1.getUser1().getAccount());
+			challenge1v1 = (Challenge1v1) session
+					.load(Zapfmaster2000Package.eINSTANCE.getChallenge1v1()
+							.getName(), challenge1v1.getId());
 
 			Challenge1v1StartedNews news = Zapfmaster2000Factory.eINSTANCE
 					.createChallenge1v1StartedNews();
@@ -213,9 +229,9 @@ public class NewsServiceImpl implements NewsService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(challenge1v1);
-			session.update(challenge1v1.getUser1());
-			session.update(challenge1v1.getUser1().getAccount());
+			challenge1v1 = (Challenge1v1) session
+					.load(Zapfmaster2000Package.eINSTANCE.getChallenge1v1()
+							.getName(), challenge1v1.getId());
 
 			Challenge1v1DoneNews news = Zapfmaster2000Factory.eINSTANCE
 					.createChallenge1v1DoneNews();
@@ -239,9 +255,9 @@ public class NewsServiceImpl implements NewsService {
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-			session.update(challenge1v1);
-			session.update(challenge1v1.getUser1());
-			session.update(challenge1v1.getUser1().getAccount());
+			challenge1v1 = (Challenge1v1) session
+					.load(Zapfmaster2000Package.eINSTANCE.getChallenge1v1()
+							.getName(), challenge1v1.getId());
 
 			Challenge1v1DeclinedNews news = Zapfmaster2000Factory.eINSTANCE
 					.createChallenge1v1DeclinedNews();
@@ -255,6 +271,25 @@ public class NewsServiceImpl implements NewsService {
 		} else {
 			LOG.error("Unknown challenge type:" + pChallenge.eClass().getName());
 		}
+	}
+
+	private void postNewsNewKeg(Keg pKeg) {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		pKeg = (Keg) session.load(Zapfmaster2000Package.eINSTANCE.getKeg()
+				.getName(), pKeg.getId());
+
+		NewKegNews news = Zapfmaster2000Factory.eINSTANCE.createNewKegNews();
+		news.setAccount(pKeg.getBox().getAccount());
+		news.setDate(new Date());
+		news.setKeg(pKeg);
+		session.save(news);
+
+		tx.commit();
+		notifiyListenersNewsPosted(news);
+
 	}
 
 	private void notifiyListenersNewsPosted(News pNews) {

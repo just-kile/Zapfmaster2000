@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.impl.core.statistics.AchievementResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.AlcoholResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.AmountResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.DrawCountResponseBuilder;
@@ -112,6 +113,8 @@ public class GlobalStatsResource {
 					.retrieveKegResponse(account);
 			AmountResponse amountResponse = AmountResponseBuilder
 					.retrieveAmountResponse(-1, account);
+			AchievementResponse achievementResponse = AchievementResponseBuilder
+					.retrieveAchievementResponse(-1, account);
 			DrawCountResponse drawCountResponse = DrawCountResponseBuilder
 					.retrieveDrawCountResponse(-1, account);
 			DrawCountUserListResponse[] drawCountUserListResponses = RankingsBuilder
@@ -136,6 +139,7 @@ public class GlobalStatsResource {
 
 			GlobalStatsResponse globalStatsResponse = new GlobalStatsResponse();
 
+			globalStatsResponse.setAchievements(achievementResponse);
 			globalStatsResponse.setAchievementUserList(achievementUserList);
 			globalStatsResponse.setAmount(amountResponse);
 			globalStatsResponse.setBestUserList(bestUserList);
@@ -146,7 +150,7 @@ public class GlobalStatsResource {
 			globalStatsResponse.setKeg(kegResponses);
 			globalStatsResponse.setProgress(progress);
 			globalStatsResponse.setPromille(promille);
-			
+
 			return Response.ok(globalStatsResponse).build();
 
 		}
