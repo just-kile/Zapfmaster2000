@@ -61,6 +61,15 @@ ZMO.NewsModel =function(config){
 	this.place = "Alter Markt";
 	this.boxId = config.boxId;
 };
+ZMO.NewKegNewsModel =function(config){
+	this.brand = config.brand;
+	this.size = config.size;
+	this.location = config.location;
+	this.kegId = config.kegId;
+	this.boxId = config.boxId;
+	this.image = config.image;
+	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";
+};
 ZMO.AchievementModel = function(config){
 	this.userid = config.userId;
 	this.username = config.userName;
