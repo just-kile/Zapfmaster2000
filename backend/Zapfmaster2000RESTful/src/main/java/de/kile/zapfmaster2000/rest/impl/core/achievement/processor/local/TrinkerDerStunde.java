@@ -29,15 +29,18 @@ public class TrinkerDerStunde extends AbstractAchievementProcessor {
 		List<?> result = session
 				.createQuery(
 						"SELECT d.user.id, SUM(d.amount) AS drawSum FROM Drawing d "
-								+ "WHERE d.date > :date GROUP BY d.user.id "
+								+ "WHERE d.date > :date AND d.user.account.id = :accountId "
+								+ "GROUP BY d.user.id "
 								+ "ORDER BY drawSum DESC")
-				.setTimestamp("date", date).setMaxResults(1).list();
+				.setTimestamp("date", date)
+				.setLong("accountId", getAccount().getId()).setMaxResults(1)
+				.list();
 		tx.commit();
 
 		if (!result.isEmpty() && result.get(0) instanceof Object[]) {
 			Object[] first = (Object[]) result.get(0);
-			if (first.length == 2 && first[0] instanceof Integer) {
-				Integer id = (Integer) first[0];
+			if (first.length == 2 && first[0] instanceof Long) {
+				Long id = (Long) first[0];
 				if (id == user.getId()) {
 					gain(user);
 				}

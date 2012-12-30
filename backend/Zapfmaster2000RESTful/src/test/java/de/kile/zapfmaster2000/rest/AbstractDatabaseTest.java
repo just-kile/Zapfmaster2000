@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.After;
+import org.junit.Before;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.transaction.SessionReconfigurator;
@@ -33,7 +34,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
  */
 public abstract class AbstractDatabaseTest {
 
-	@After
+	@Before
 	public void truncate() {
 		SessionReconfigurator.reconfigure();
 	}
