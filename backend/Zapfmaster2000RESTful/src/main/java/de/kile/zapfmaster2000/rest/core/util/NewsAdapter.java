@@ -88,7 +88,7 @@ public class NewsAdapter {
 		achievementResp.setUserId(gainedAchievement.getUser().getId());
 		achievementResp.setAchievementName(gainedAchievement.getAchievement()
 				.getName());
-		achievementResp.setAchievementId(gainedAchievement.getUser().getId());
+		achievementResp.setAchievementId(gainedAchievement.getAchievement().getId());
 
 		return achievementResp;
 	}
