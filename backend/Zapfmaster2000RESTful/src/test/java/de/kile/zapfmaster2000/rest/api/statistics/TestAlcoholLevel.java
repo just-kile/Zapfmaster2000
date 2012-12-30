@@ -29,6 +29,8 @@ public class TestAlcoholLevel extends AbstractMockingTest {
 	private Box box1;
 	private Keg keg1;
 	private User user1;
+	private User user2;
+	private User userEmpty;
 
 	@Before
 	public void setupData() {
@@ -37,9 +39,12 @@ public class TestAlcoholLevel extends AbstractMockingTest {
 
 		account1 = createAccount("foo-account");
 
-		user1 = createUser("Torsten", "img/user1", "user1-pw", 101,
-				Sex.MALE, 85, UserType.USER, account1);
-		User user2 = createUser("Bettina", "img/user2", "user2-pw", 202,
+		user1 = createUser("Torsten", "img/user1", "user1-pw", 101, Sex.MALE,
+				85, UserType.USER, account1);
+		user2 = createUser("Bettina", "img/user2", "user2-pw", 202, Sex.FEMALE,
+				85, UserType.USER, account1);
+
+		userEmpty = createUser("Franz", "img/user3", "user3-pw", 302,
 				Sex.FEMALE, 85, UserType.USER, account1);
 
 		box1 = createBox("pass", "home", "0.5", account1);
@@ -49,18 +54,22 @@ public class TestAlcoholLevel extends AbstractMockingTest {
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
-		
+
 		cal.add(Calendar.MINUTE, -1);
-		
-		createDrawing(2, cal.getTime(), keg1, user1);
+
+		createDrawing(1, cal.getTime(), keg1, user1);
+		createDrawing(0.5, cal.getTime(), keg1, user2);
 		cal.add(Calendar.HOUR, -1);
-		createDrawing(2, cal.getTime(), keg1, user1);
+		createDrawing(1, cal.getTime(), keg1, user1);
+		createDrawing(0.5, cal.getTime(), keg1, user2);
 		cal.add(Calendar.HOUR, -1);
-		createDrawing(2, cal.getTime(), keg1, user1);
+		createDrawing(1, cal.getTime(), keg1, user1);
+		createDrawing(0.5, cal.getTime(), keg1, user2);
 		cal.add(Calendar.HOUR, -1);
-		createDrawing(2, cal.getTime(), keg1, user1);
+		createDrawing(1, cal.getTime(), keg1, user1);
+		createDrawing(0.5, cal.getTime(), keg1, user2);
 		cal.add(Calendar.HOUR, -1);
-		createDrawing(2, cal.getTime(), keg1, user2);
+		createDrawing(1, cal.getTime(), keg1, user2);
 
 		AuthService authService = mock(AuthService.class);
 		when(authService.retrieveAccount(anyString())).thenReturn(account1);
@@ -71,12 +80,26 @@ public class TestAlcoholLevel extends AbstractMockingTest {
 	public void testSimple() {
 		AlcoholLevelResource alcoholLevelResource = new AlcoholLevelResource();
 
-		Response response = alcoholLevelResource.retrieveAlcoholLevel(null, Long.toString(user1.getId()));
+		Response response = alcoholLevelResource.retrieveAlcoholLevel(null,
+				Long.toString(user1.getId()));
+		assertEquals(response.getStatus(), Status.OK.getStatusCode());
+	}
+
+	public void testEmptyUser() {
+		AlcoholLevelResource alcoholLevelResource = new AlcoholLevelResource();
+
+		Response response = alcoholLevelResource.retrieveAlcoholLevel("noID",
+				Long.toString(user1.getId()));
+		assertEquals(response.getStatus(), Status.BAD_REQUEST.getStatusCode());
+
+		response = alcoholLevelResource
+				.retrieveAlcoholLevel(String.valueOf(userEmpty.getId()),
+						Long.toString(user1.getId()));
 		assertEquals(response.getStatus(), Status.OK.getStatusCode());
 
-		AlcoholLevelResponse alcoholLevelResponse = (AlcoholLevelResponse) response.getEntity();
-		
+		response = alcoholLevelResource.retrieveAlcoholLevel("666",
+				Long.toString(user1.getId()));
+		assertEquals(response.getStatus(), Status.OK.getStatusCode());
 
-		assertEquals(2, alcoholLevelResponse.getAlcoholLevel(), 2);
 	}
 }
