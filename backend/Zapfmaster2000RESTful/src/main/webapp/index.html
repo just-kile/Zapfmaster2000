@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!-- Meta Tags for mobile -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />  
@@ -11,6 +12,13 @@
  <link rel="stylesheet" type="text/css" href="css/login.css" />
  <script>
 $(document).ready(function(){
+	function redirect(){
+	       if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
+	    	   window.location.replace(window.location.pathname+"app.html");
+	       }else{
+	    	   window.location.replace(window.location.pathname+"page.html");
+	       }
+	}
 	var RfidPush = (function(){
 		/**
 		 * General Server Push Connection Function
@@ -58,7 +66,7 @@ $(document).ready(function(){
 		 */
 		var setRFID=  function(rfid){
 			$("#rfid").val(rfid);
-			var yep = confirm("Soll die Karte wirklich registriert werden?")
+			var yep = confirm("Karte erkannt! Ist das deine Karte?")
 			if(yep){
 				var data = {};
 				data["token"] = localStorage.getItem("token");
@@ -69,7 +77,7 @@ $(document).ready(function(){
 				    data:data,
 				    success: function(data){
 						alert("RFID registriert")
-				       
+						redirect();
 				    }
 				});
 			}else{
@@ -93,8 +101,6 @@ $(document).ready(function(){
 /**
  * Login website
  */	
-		
-		
 	$("#submitWebsite").on("click",function(e){
 		e.preventDefault();
 		var accountName = $("#account").val();
@@ -108,7 +114,9 @@ $(document).ready(function(){
 				if(localStorage){
 					localStorage.setItem('token',token );
 					//if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
-					window.location.replace(window.location.pathname+"page.html");
+					//window.location.replace(window.location.pathname+"page.html");
+					$(".container").hide();
+					$("#registerUserContainer").show();
 				}else{
 					alert("Use a normal browser! Localstorage is not available")
 				}
@@ -132,7 +140,8 @@ $(document).ready(function(){
 			success:function(token){
 				if(localStorage){
 					localStorage.setItem('token',token );
-					window.location.replace(window.location.pathname+"app.html");
+					redirect();
+					//window.location.replace(window.location.pathname+"app.html");
 				}else{
 					alert("Use a normal browser! Localstorage is not available")
 				}
@@ -156,8 +165,10 @@ $(document).ready(function(){
 			url:"rest/register/user",
 			data:data,
 			success:function(token){
-				alert("Token"+token);
+				//alert("Token"+token);
 				localStorage.setItem("token",token);
+				$(".container").hide();
+				$("#imageFormContainer").show();
 			}
 		})
 	});
@@ -177,14 +188,23 @@ $("#uploadImage").on("click",function(e){
 	    type: 'POST',
 	    success: function(data){
 	        alert("Image uploaded");
+			$(".container").hide();
+			$("#setRfidContainer").show();
+			startRFIDPush();
 	    }
 	});
+});
+$("#uploadImageSkip").on("click",function(e){
+	e.preventDefault();
+	$(".container").hide();
+	$("#setRfidContainer").show();
+	startRFIDPush();
 });
 /**
  * Request Boxes
  */
-$("#requestBoxes").on("click",function(e){
-	e.preventDefault();
+function startRFIDPush(e){
+	//e.preventDefault();
 	var data = {};
 	data["token"] = localStorage.getItem("token");
 	$.ajax({
@@ -192,7 +212,7 @@ $("#requestBoxes").on("click",function(e){
 	    type: 'GET',
 	    data:data,
 	    success: function(data){
-	        var selectBox = $("#registerSelectBox");
+	        var selectBox = $("#registerSelectBox").empty();
 	        var firstObj;
 	        $.each(data,function(ind,obj){
 	        	$("<option>").attr("value",obj.boxId).text(obj.boxId+obj.name).appendTo(selectBox);
@@ -202,15 +222,48 @@ $("#requestBoxes").on("click",function(e){
 	       
 	    }
 	});
-});
+};
 $("#registerSelectBox").on("change",function(e){
 	//initRfidPush();
 	console.log(e)
 	RfidPush.initRfidPush($(e.currentTarget).val());
 });
-
-
-
+//loginContainer,registerUserContainer,accountloginContainer,imageFormContainer,setRfidContainer
+$("#registerApp").on("click",function(e){
+	e.preventDefault();
+	$(".container").hide();
+	$("#accountloginContainer").show();
+	
+})
+$(".cancelBtn").on("click",function(e){
+	e.preventDefault();
+	$(".container").hide();
+	$("#loginContainer").show();
+})
+$("#updateImageRfid").on("click",function(e){
+	e.preventDefault();
+	var userName = $(".applogin #userName").val();
+	var pass = $(".applogin #password").val();
+	$.ajax({
+		type:"POST",
+		url:"rest/login/user",
+		data:{
+			userName:userName,
+			password:pass
+		},
+		success:function(token){
+			if(localStorage){
+				localStorage.setItem('token',token );
+				$(".container").hide();
+				$("#imageFormContainer").show();
+				//window.location.replace(window.location.pathname+"app.html");
+			}else{
+				alert("Use a normal browser! Localstorage is not available")
+			}
+		}
+	})
+	
+})
 
 })
 
@@ -219,30 +272,39 @@ $("#registerSelectBox").on("change",function(e){
 
 </head>
 <body>
+<!-- Frontbox -->
 <div class="login">
-<div class="applogin">
-<img class="zmlogo" src="images/view/zapfmaster2000_klein.png" />
-<p><input placeholder="Username" id="userName" name="userName" type="text" size="30" maxlength="30" value=""></p>
-<p><input placeholder="Passwort" id="password" name="password" type="password" size="30" maxlength="30" value=""></p>
-
-<input id ="submitApp" type="submit" value="Anmelden">
-</div>
-<hr />
+	<div id="loginContainer" class="applogin container">
+		<img class="zmlogo" src="images/view/zapfmaster2000_klein.png" />
+		<p><input placeholder="Username" id="userName" name="userName" type="text" size="30" maxlength="30" value=""></p>
+		<p><input placeholder="Passwort" id="password" name="password" type="password" size="30" maxlength="30" value=""></p>
+		<div><input id ="submitApp" type="submit" value="Anmelden"></div>
+		
+		<div><input id ="updateImageRfid" type="submit" value="Bild/RFID Updaten">
+		</div>
+		<hr />
 	<input id ="registerApp" type="submit" value="Registrieren">
-<div class="firm"><div class="firmText">Ein Produkt von </div>
-<div class="firmImg"><img class="jklogo" src="images/view/justKile.png" /></div></div>
+	
+	<div class="firm"><div class="firmText">Ein Produkt von </div>
+	<div class="firmImg"><img class="jklogo" src="images/view/justKile.png" /></div></div>
+		
+	</div>
+	
 
 
-
- <div style="display:none">
-<div class="websitelogin">
+ <div style="display:block">
+ <!-- accountlogin -->
+<div id="accountloginContainer" class="websitelogin container" style="display:none" >
  <p><input placeholder="Gruppenname" id="account" name="account" type="text" size="30" maxlength="30" value="account-1"></p>
-<input id ="submitWebsite" type="submit" value="Anmelden">
-</div>
-<hr/>
 
-<hr />
-<div class="register">
+<input class ="cancelBtn" type="submit" value="Abbrechen">
+<input id ="submitWebsite" type="submit" value="Anmelden">
+
+</div>
+
+
+ <!-- register User -->
+<div id="registerUserContainer" class="register container" style="display:none">
 <form id="registerUser">
 <p>Name:<br /><input class="registerItem" id="rUserName" name="userName" type="text" size="30" maxlength="30" value=""></p>
 <p>Pass:<br /><input class="registerItem" id="rPassword" name="password" type="text" size="30" maxlength="30" value=""></p>
@@ -253,26 +315,34 @@ $("#registerSelectBox").on("change",function(e){
     </select>
 </p>
 <p>Weight:<br /><input class="registerItem" id="weight" name="weight" type="text" size="30" maxlength="30" value=""></p>
-
+<input class ="cancelBtn" type="submit" value="Abbrechen">
 <input id ="registerUserBtn" type="submit" value="Registrieren">
 </form>
 </div>
-<hr/>
-<form id="imageForm">
+
+ <!-- Image upload -->
+ <div class="container" id="imageFormContainer" class="container" style="display:none">
+<form id="imageForm"  >
 <p>Image:<br /><input id="rImage" name="image" type="file"></p>
 <input id ="uploadImage" type="submit" value="ImageUpload">
-</form>
+<input id ="uploadImageSkip" type="submit" value="Skip">
 
-<hr/>
-<input id ="requestBoxes" type="submit" value="Box Anfrage">
-<p>Choose Box:<br />
+</form>
+<input class ="cancelBtn" type="submit" value="Abbrechen">
+</div>
+
+ <!-- Set RFID -->
+ <div id="setRfidContainer" class="container" style="display:none">
+<!--  <input id ="requestBoxes" type="submit" value="Box Anfrage">-->
+<p>Wähle Box aus<br />
  <select size="1" id="registerSelectBox">
-  <option value="4">test</option>
+  <!-- <option value="4">test</option> -->
    </select>
 </p>
 <p>RFID:<br /><input class="registerItem" id="rfid" name="rfid" type="text" size="30" maxlength="30" value=""></p>
-
+<input class ="cancelBtn" type="submit" value="Abbrechen">
 <input id ="registerUserBtn" type="submit" value="Registrieren">
+</div>
 </div>
 </div>
 </body>
