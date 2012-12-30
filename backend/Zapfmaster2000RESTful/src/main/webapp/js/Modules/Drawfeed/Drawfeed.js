@@ -63,6 +63,9 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				case c.types.NEW_KEG:
 					news = ich["ZMO-news-new-keg"](new ZMO.NewKegNewsModel(val));
 					break;
+				case c.types.NEW_USER:
+					news = ich["ZMO-news-new-user"](new ZMO.NewUserNewsModel(val));
+					break;
 			}
 			if(typeof top!="undefined" && top ==true){
 				if(val.refreshType!= "REFRESH"){

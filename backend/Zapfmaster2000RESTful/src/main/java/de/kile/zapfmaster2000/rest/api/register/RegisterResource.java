@@ -1,7 +1,5 @@
 package de.kile.zapfmaster2000.rest.api.register;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -11,15 +9,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.registration.RegistrationException;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 @Path("/register")
 public class RegisterResource {
@@ -52,52 +46,34 @@ public class RegisterResource {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 		if (account != null) {
-			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionService().getSessionFactory()
-					.getCurrentSession();
-			Transaction tx = session.beginTransaction();
+			Sex sex;
+			if ("m".equals(pSex)) {
+				sex = Sex.MALE;
+			} else if ("f".equals(pSex)) {
+				sex = Sex.FEMALE;
+			} else {
+				LOG.error("Invalid sex: " + pSex);
+				return Response.status(Status.BAD_REQUEST).build();
+			}
 
 			try {
-				// check if a user with the given name does already exist
-				List<?> result = session
-						.createQuery("FROM User u WHERE u.name = :userName")
-						.setString("userName", pUserName).list();
-				if (!result.isEmpty()) {
-					LOG.error("User with name " + pUserName
-							+ " does already exist");
-					return Response.status(Status.BAD_REQUEST).build();
-				}
-
-				// create the new user
-				account = (Account) session.load(
-						Zapfmaster2000Package.eINSTANCE.getAccount().getName(),
-						account.getId());
-				User user = Zapfmaster2000Factory.eINSTANCE.createUser();
-				user.setAccount(account);
-				user.setImagePath("images/defaultUser.png");
-				user.setName(pUserName);
-				user.setPassword(pPassword);
-				user.setWeight(pWeight);
-
-				if ("m".equals(pSex)) {
-					user.setSex(Sex.MALE);
-				} else if ("f".equals(pSex)) {
-					user.setSex(Sex.FEMALE);
-				} else {
-					LOG.error("Invalid sex: " + pSex);
-					return Response.status(Status.BAD_REQUEST).build();
-				}
-
-				session.save(user);
-
-			} finally {
-				tx.commit();
+				Zapfmaster2000Core.INSTANCE.getRegistrationService()
+						.registerUser(account, pUserName, pToken, sex, pWeight);
+			} catch (RegistrationException e) {
+				LOG.warn("User registration failed", e);
+				return Response.status(Status.BAD_REQUEST).build();
 			}
 
 			// login to newly created user
 			String token = Zapfmaster2000Core.INSTANCE.getAuthService()
 					.loginUser(pUserName, pPassword);
-			return Response.ok(token).build();
+			if (token != null) {
+				return Response.ok(token).build();
+			} else {
+				LOG.error("Could not log in to previously created user "
+						+ pUserName);
+				return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			}
 
 		} else {
 			return Response.status(Status.FORBIDDEN).build();

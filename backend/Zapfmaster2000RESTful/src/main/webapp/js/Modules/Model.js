@@ -70,6 +70,12 @@ ZMO.NewKegNewsModel =function(config){
 	this.image = config.image;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";
 };
+ZMO.NewUserNewsModel =function(config){
+	this.image = config.image;
+	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";
+	this.userId = config.userId;
+	this.userName = config.userName
+};
 ZMO.AchievementModel = function(config){
 	this.userid = config.userId;
 	this.username = config.userName;

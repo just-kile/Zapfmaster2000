@@ -20,6 +20,7 @@ import de.kile.zapfmaster2000.rest.core.box.BoxServiceListener;
 import de.kile.zapfmaster2000.rest.core.box.DrawService;
 import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.keg.KegService;
+import de.kile.zapfmaster2000.rest.core.registration.RegistrationService;
 import de.kile.zapfmaster2000.rest.impl.core.news.NewsServiceImpl;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
@@ -74,7 +75,8 @@ public class TestNewsService extends AbstractDatabaseTest {
 	public void simpleEndDraw() {
 		BoxServiceMock boxServiceMock = new BoxServiceMock();
 		new NewsServiceImpl(boxServiceMock, mock(AchievementService.class),
-				mock(ChallengeService.class), mock(KegService.class));
+				mock(ChallengeService.class), mock(KegService.class),
+				mock(RegistrationService.class));
 
 		for (BoxServiceListener listener : boxServiceMock.listeners) {
 			listener.onEndDrawing(box, drawing);
