@@ -130,6 +130,7 @@ public class DraftKitResource {
 			
 			if (canSwitch) {
 				Zapfmaster2000Core.INSTANCE.getKegService().switchKeg(box, pBrand, pSize);
+				return Response.ok().build();
 			}
 
 		}
