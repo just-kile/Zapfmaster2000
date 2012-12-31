@@ -47,12 +47,12 @@ public class UserImageResource {
 	@Path("/{userId}")
 	public Response retrieveImage(@PathParam("userId") long pUserId,
 			@QueryParam("token") String pToken) {
-		return retrieveImage(pUserId, pToken, false);
+		return retrieveImage(pUserId, pToken, "false");
 	}
 	@GET
 	@Path("/{userId}")
 	public Response retrieveImage(@PathParam("userId") long pUserId,
-			@QueryParam("token") String pToken, @QueryParam("big") boolean pBig) {
+			@QueryParam("token") String pToken, @QueryParam("big") String pBig) {
 
 		// TODO: Check token
 		String path = "rest/image/user/" + pUserId;
@@ -69,7 +69,7 @@ public class UserImageResource {
 			if (!result.isEmpty()) {
 				Image image = result.get(0);
 				InputStream stream;
-				if (pBig) {
+				if ("true".equals(pBig)) {
 					stream = image.getContentBig().getBinaryStream();
 				} else {
 					stream = image.getContent().getBinaryStream();
