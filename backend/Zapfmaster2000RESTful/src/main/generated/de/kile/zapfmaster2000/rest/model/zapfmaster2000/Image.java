@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image#getPath <em>Path</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image#getContentType <em>Content Type</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image#getContent <em>Content</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image#getContentBig <em>Content Big</em>}</li>
  * </ul>
  * </p>
  *
@@ -129,5 +130,32 @@ public interface Image extends EObject {
 	 * @generated
 	 */
 	void setContent(Blob value);
+
+	/**
+	 * Returns the value of the '<em><b>Content Big</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Content Big</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Content Big</em>' attribute.
+	 * @see #setContentBig(Blob)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getImage_ContentBig()
+	 * @model dataType="de.kile.zapfmaster2000.rest.model.zapfmaster2000.Blob"
+	 *        annotation="teneo.jpa value='@Lob\n@Column(length=1048576)\n@Type(type=\"blob\")'"
+	 * @generated
+	 */
+	Blob getContentBig();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image#getContentBig <em>Content Big</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Content Big</em>' attribute.
+	 * @see #getContentBig()
+	 * @generated
+	 */
+	void setContentBig(Blob value);
 
 } // Image

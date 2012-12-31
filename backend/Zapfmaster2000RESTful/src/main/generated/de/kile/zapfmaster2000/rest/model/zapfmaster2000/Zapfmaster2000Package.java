@@ -1366,13 +1366,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int IMAGE__CONTENT = 3;
 
 	/**
+	 * The feature id for the '<em><b>Content Big</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMAGE__CONTENT_BIG = 4;
+
+	/**
 	 * The number of structural features of the '<em>Image</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMAGE_FEATURE_COUNT = 4;
+	int IMAGE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.
@@ -2451,6 +2460,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getImage_Content();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image#getContentBig <em>Content Big</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Content Big</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image#getContentBig()
+	 * @see #getImage()
+	 * @generated
+	 */
+	EAttribute getImage_ContentBig();
+
+	/**
 	 * Returns the meta object for enum '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3324,6 +3344,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMAGE__CONTENT = eINSTANCE.getImage_Content();
+
+		/**
+		 * The meta object literal for the '<em><b>Content Big</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMAGE__CONTENT_BIG = eINSTANCE.getImage_ContentBig();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.

@@ -149,6 +149,11 @@
         <details key="value" value="@Lob&#xA;@Column(length=1048576)&#xA;@Type(type=&quot;blob&quot;)"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentBig" eType="#//Blob">
+      <eAnnotations source="teneo.jpa">
+        <details key="value" value="@Lob&#xA;@Column(length=1048576)&#xA;@Type(type=&quot;blob&quot;)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Sex">
     <eLiterals name="male" literal="male"/>

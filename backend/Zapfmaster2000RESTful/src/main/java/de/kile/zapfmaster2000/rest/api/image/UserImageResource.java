@@ -38,12 +38,21 @@ public class UserImageResource {
 
 	private static final int IMAGE_SIZE = 48;
 
+	private static final int IMAGE_SIZE_BIG = 160;
+	
 	private static final Logger LOG = Logger.getLogger(UserImageResource.class);
 
+	
 	@GET
 	@Path("/{userId}")
 	public Response retrieveImage(@PathParam("userId") long pUserId,
 			@QueryParam("token") String pToken) {
+		return retrieveImage(pUserId, pToken, false);
+	}
+	@GET
+	@Path("/{userId}")
+	public Response retrieveImage(@PathParam("userId") long pUserId,
+			@QueryParam("token") String pToken, @QueryParam("big") boolean pBig) {
 
 		// TODO: Check token
 		String path = "rest/image/user/" + pUserId;
@@ -59,7 +68,12 @@ public class UserImageResource {
 					.setString("path", path).list();
 			if (!result.isEmpty()) {
 				Image image = result.get(0);
-				InputStream stream = image.getContent().getBinaryStream();
+				InputStream stream;
+				if (pBig) {
+					stream = image.getContentBig().getBinaryStream();
+				} else {
+					stream = image.getContent().getBinaryStream();
+				}
 				byte[] bytes = ByteStreams.toByteArray(stream);
 				return Response.ok().type(image.getContentType()).entity(bytes)
 						.build();
@@ -110,11 +124,17 @@ public class UserImageResource {
 							bufferedImage.getWidth(), newHeight);
 				}
 
-				bufferedImage = Scalr.resize(bufferedImage,
+				BufferedImage imageSmall = Scalr.resize(bufferedImage,
 						Scalr.Mode.FIT_EXACT, IMAGE_SIZE);
 				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-				ImageIO.write(bufferedImage, "png", outputStream);
-				byte[] bytes = outputStream.toByteArray();
+				ImageIO.write(imageSmall, "png", outputStream);
+				byte[] bytesSmall = outputStream.toByteArray();
+				
+				BufferedImage imageBig = Scalr.resize(bufferedImage,
+						Scalr.Mode.FIT_EXACT, IMAGE_SIZE_BIG);
+				outputStream = new ByteArrayOutputStream();
+				ImageIO.write(imageBig, "png", outputStream);
+				byte[] bytesBig = outputStream.toByteArray();
 
 				// write data to db
 				String path = "rest/image/user/" + user.getId();
@@ -135,8 +155,10 @@ public class UserImageResource {
 				newImage.setPath(path);
 				newImage.setContentType("image/png");
 				newImage.setContent(Hibernate.getLobCreator(session)
-						.createBlob(bytes));
-
+						.createBlob(bytesSmall));
+				newImage.setContentBig(Hibernate.getLobCreator(session)
+						.createBlob(bytesBig));
+				
 				session.save(newImage);
 				user.setImagePath(path);
 				session.save(user);

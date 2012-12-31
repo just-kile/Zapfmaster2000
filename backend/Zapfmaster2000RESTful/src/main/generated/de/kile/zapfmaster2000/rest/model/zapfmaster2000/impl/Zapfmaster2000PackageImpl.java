@@ -1150,6 +1150,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getImage_ContentBig() {
+		return (EAttribute)imageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSex() {
 		return sexEEnum;
 	}
@@ -1333,6 +1342,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(imageEClass, IMAGE__PATH);
 		createEAttribute(imageEClass, IMAGE__CONTENT_TYPE);
 		createEAttribute(imageEClass, IMAGE__CONTENT);
+		createEAttribute(imageEClass, IMAGE__CONTENT_BIG);
 
 		// Create enums
 		sexEEnum = createEEnum(SEX);
@@ -1498,6 +1508,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getImage_Path(), ecorePackage.getEString(), "path", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImage_ContentType(), ecorePackage.getEString(), "contentType", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImage_Content(), this.getBlob(), "content", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImage_ContentBig(), this.getBlob(), "contentBig", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
@@ -1538,6 +1549,12 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		String source = "teneo.jpa";		
 		addAnnotation
 		  (getImage_Content(), 
+		   source, 
+		   new String[] {
+			 "value", "@Lob\n@Column(length=1048576)\n@Type(type=\"blob\")"
+		   });		
+		addAnnotation
+		  (getImage_ContentBig(), 
 		   source, 
 		   new String[] {
 			 "value", "@Lob\n@Column(length=1048576)\n@Type(type=\"blob\")"
