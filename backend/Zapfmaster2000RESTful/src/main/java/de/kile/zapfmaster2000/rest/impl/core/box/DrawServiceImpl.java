@@ -291,7 +291,7 @@ public class DrawServiceImpl implements DrawService {
 					.getAccount().getName(), account.getId());
 			User newUser = Zapfmaster2000Factory.eINSTANCE.createUser();
 			newUser.setName("Guest");
-			newUser.setImagePath("img/guest.png");
+			newUser.setImagePath("images/others/guest.png");
 			newUser.setWeight(100);
 			newUser.setType(UserType.GUEST);
 			newUser.setAccount(account);
