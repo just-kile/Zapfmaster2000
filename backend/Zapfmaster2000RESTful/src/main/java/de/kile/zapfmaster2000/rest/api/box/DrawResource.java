@@ -50,19 +50,21 @@ public class DrawResource {
 	@Path("/draw")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response login(DrawRequest pDrawRequest) {
+	public Response draw(DrawRequest pDrawRequest) {
 
 		LOG.info("Draw occurrs at box " + pDrawRequest.getBoxPassphrase());
 
+		DrawResponse response = new DrawResponse();
 		try {
-			Zapfmaster2000Core.INSTANCE.getBoxService()
+			double amount = Zapfmaster2000Core.INSTANCE.getBoxService()
 					.getDrawService(pDrawRequest.getBoxPassphrase())
 					.draw(pDrawRequest.getTicks());
+			response.setTotalAmount(amount);
 		} catch (IllegalArgumentException ex) {
 			LOG.warn("Box with passphrase " + pDrawRequest.getBoxPassphrase()
 					+ " does not exist", ex);
 		}
 
-		return Response.status(Status.OK).build();
+		return Response.ok(response).build();
 	}
 }
