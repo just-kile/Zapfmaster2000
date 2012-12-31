@@ -56,52 +56,84 @@ public class SerialMock {
 			System.out.println("Commands: ");
 			System.out.println("\tlogin 1|2|3");
 			System.out.println("\tinterval <int>");
-
-			InputStreamReader is = new InputStreamReader(System.in);
-			BufferedReader in = new BufferedReader(is);
-
+			
+			int counter = 0;
 			while (true) {
+				System.out.println("foo");
 				try {
-					String command = in.readLine();
-					String[] segments = command.split(" ");
-
-					switch (segments[0]) {
-					case "login":
-						assertParameterCount(segments, 1);
-						int status = Integer.parseInt(segments[1]);
-						LoginMessage lMessage;
-						switch (status) {
-						case 1:
-							lMessage = new LoginMessage(
-									SerialConstants.STATUSOK);
-							break;
-						case 2:
-							lMessage = new LoginMessage(
-									SerialConstants.STATUSERROR);
-							break;
-						case 3:
-							lMessage = new LoginMessage(
-									SerialConstants.STATUSNONE);
-							break;
-						default:
-							lMessage = new LoginMessage(
-									SerialConstants.STATUSNONE);
-						}
-						comm.sendMessage(lMessage);
-						break;
-					case "interval":
-						assertParameterCount(segments, 1);
-						int interval = Integer.parseInt(segments[1]);
-						IntervalMessage iMessage = new IntervalMessage(interval);
-						comm.sendMessage(iMessage);
-						break;
-					default:
-						System.out.println("unknown command: " + segments[0]);
-					}
-				} catch (Exception ex) {
-					ex.printStackTrace();
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+				
+
+				LoginMessage lMessage;
+				switch (counter++ % 3) {
+				case 0:
+					lMessage = new LoginMessage(
+							SerialConstants.STATUSOK);
+					break;
+				case 1:
+					lMessage = new LoginMessage(
+							SerialConstants.STATUSERROR);
+					break;
+				case 2:
+					lMessage = new LoginMessage(
+							SerialConstants.STATUSNONE);
+					break;
+				default:
+					lMessage = new LoginMessage(
+							SerialConstants.STATUSNONE);
+				}
+				comm.sendMessage(lMessage);
 			}
+
+//			InputStreamReader is = new InputStreamReader(System.in);
+//			BufferedReader in = new BufferedReader(is);
+//
+//			while (true) {
+//				try {
+//					String command = in.readLine();
+//					String[] segments = command.split(" ");
+//
+//					switch (segments[0]) {
+//					case "login":
+//						assertParameterCount(segments, 1);
+//						int status = Integer.parseInt(segments[1]);
+//						LoginMessage lMessage;
+//						switch (status) {
+//						case 1:
+//							lMessage = new LoginMessage(
+//									SerialConstants.STATUSOK);
+//							break;
+//						case 2:
+//							lMessage = new LoginMessage(
+//									SerialConstants.STATUSERROR);
+//							break;
+//						case 3:
+//							lMessage = new LoginMessage(
+//									SerialConstants.STATUSNONE);
+//							break;
+//						default:
+//							lMessage = new LoginMessage(
+//									SerialConstants.STATUSNONE);
+//						}
+//						comm.sendMessage(lMessage);
+//						break;
+//					case "interval":
+//						assertParameterCount(segments, 1);
+//						int interval = Integer.parseInt(segments[1]);
+//						IntervalMessage iMessage = new IntervalMessage(interval);
+//						comm.sendMessage(iMessage);
+//						break;
+//					default:
+//						System.out.println("unknown command: " + segments[0]);
+//					}
+//				} catch (Exception ex) {
+//					ex.printStackTrace();
+//				}
+//			}
 		}
 	}
 

@@ -1,8 +1,14 @@
 package de.kile.zapfmaster2000.connector;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.jboss.resteasy.client.ClientResponse;
+
+import de.kile.zapfmaster2000.connector.gui.ZapfScreen;
 import de.kile.zapfmaster2000.connector.messages.IntervalMessage;
 import de.kile.zapfmaster2000.connector.messages.LoginMessage;
 import de.kile.zapfmaster2000.connector.messages.Message;
@@ -11,6 +17,8 @@ import de.kile.zapfmaster2000.connector.messages.TicksMessage;
 import de.kile.zapfmaster2000.connector.serial.SerialCommunicator;
 import de.kile.zapfmaster2000.connector.serial.SerialConstants;
 import de.kile.zapfmaster2000.connector.web.WebCommunicator;
+import de.kile.zapfmaster2000.rest.api.box.BoxUserLoginResponse;
+import de.kile.zapfmaster2000.rest.api.box.DrawResponse;
 
 /**
  * Main class of draftkitConnector Makes the connection between the draftkitAVR
@@ -49,10 +57,13 @@ public class Connector implements Runnable, Observer {
 
 	private final Object SYNC_LOCK = new Object();
 
-	public Connector() {
+	private final List<ConnectorListener> listeners = new ArrayList<>();
+	
+	public Connector() throws IOException {
 
 		// initialize web connection
 		web = new WebCommunicator();
+
 
 	}
 
@@ -73,7 +84,6 @@ public class Connector implements Runnable, Observer {
 			// System.out.println("loop");
 			// idle id is 0, see if there's a new id
 
-			
 			try {
 				long now = System.currentTimeMillis();
 				long timeSinceLastId = now - getLastIdTime();
@@ -83,7 +93,11 @@ public class Connector implements Runnable, Observer {
 					// did not receive update for a while -> set status to none
 					setCurTagId(0);
 					lastTagId = 0;
+					notifyLogout();
+					
 					System.out.println("status: none");
+					
+					
 
 					// wait -> we are notified when next tag is placed on the
 					// reader
@@ -129,20 +143,26 @@ public class Connector implements Runnable, Observer {
 	 * @return login result
 	 */
 	private LoginMessage performLogin(long pRfidTag) {
-		int response = web.performLogin(getCurTagId());
+		ClientResponse response = web.performLogin(getCurTagId());
 		LoginMessage message = null;
 
 		// check whether login was successful
-		if (response == 200) {
+		if (response.getStatus() == 200) {
 			// was successful
 			loginStatus = SerialConstants.STATUSOK;
 			message = new LoginMessage(loginStatus);
+			
+			BoxUserLoginResponse entity = (BoxUserLoginResponse) response.getEntity(BoxUserLoginResponse.class);
+			notifyLoginSucceeded(entity.getUserName(), entity.getImagePath());
+			
 			System.out.println("Login ok");
 		} else {
 			// was unsuccessful
 			loginStatus = SerialConstants.STATUSERROR;
 			message = new LoginMessage(loginStatus);
 			System.out.println("Login error");
+			
+			notifyLoginFailure();
 		}
 
 		return message;
@@ -208,7 +228,9 @@ public class Connector implements Runnable, Observer {
 				TicksMessage tMessage = (TicksMessage) nMessage;
 				System.out.println("ticks: " + tMessage.getTicks());
 				// send ticks
-				web.sendTicks(tMessage.getTicks());
+				ClientResponse response = web.sendTicks(tMessage.getTicks());
+				DrawResponse entity = (DrawResponse) response.getEntity(DrawResponse.class);
+				notifyDrawing(entity.getTotalAmount());
 
 			}
 
@@ -258,15 +280,73 @@ public class Connector implements Runnable, Observer {
 		}
 	}
 
+	public void addListener(ConnectorListener pListener) {
+		if (pListener != null) {
+			listeners.add(pListener);
+		}
+	}
+
+	private void notifyLogout() {
+		new Thread() {
+			@Override
+			public synchronized void start() {
+				for (ConnectorListener listener : listeners) {
+					listener.onLogout();
+				}
+			}
+		}.start();
+	}
+	
+
+	private void notifyLoginFailure() {
+		new Thread() {
+			@Override
+			public synchronized void start() {
+				for (ConnectorListener listener : listeners) {
+					listener.onLoginFailure();
+				}
+			}
+		}.start();
+	}
+	
+
+	private void notifyLoginSucceeded(final String pUserName, final String pImagePath) {
+		new Thread() {
+			@Override
+			public synchronized void start() {
+				for (ConnectorListener listener : listeners) {
+					listener.onLogin(pUserName, pImagePath);
+				}
+			}
+		}.start();
+	}
+	
+	private void notifyDrawing(final double pAmount) {
+		new Thread() {
+			@Override
+			public synchronized void start() {
+				for (ConnectorListener listener : listeners) {
+					listener.onDraw(pAmount);
+				}
+			}
+		}.start();
+	}
+
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Connector connector = new Connector();
+
+
 		Thread tConnector = new Thread(connector);
 		ConsoleInput console = new ConsoleInput(connector);
 		Thread tConsole = new Thread(console);
 		tConnector.start();
 		tConsole.start();
+		
+		ZapfScreen screen = new ZapfScreen(connector);
+		screen.show();
 	}
 }

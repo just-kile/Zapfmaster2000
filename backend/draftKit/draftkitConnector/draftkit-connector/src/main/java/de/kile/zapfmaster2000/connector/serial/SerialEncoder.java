@@ -25,15 +25,15 @@ public class SerialEncoder {
 		// determine message type
 		if (message.getMessageType() == Message.LOGINMESSAGE) {
 			// initialize data array
-			data = new byte[3];
+			data = new byte[1];
 			// set first byte to login message symbol
 			data[0] = (byte) SerialConstants.LOGINSYMBOL;
 			// cast message to login message
 			LoginMessage lMessage = (LoginMessage) message;
 			// set second byte to login status symbol from message
-			data[1] = (byte) lMessage.getLoginStatus();
+			//data[1] = (byte) lMessage.getLoginStatus();
 			// set third byte to end symbol
-			data[2] = (byte) SerialConstants.ENDSYMBOL;
+			//data[2] = (byte) SerialConstants.ENDSYMBOL;
 
 		} else if (message.getMessageType() == Message.INTERVALMESSAGE) {
 
