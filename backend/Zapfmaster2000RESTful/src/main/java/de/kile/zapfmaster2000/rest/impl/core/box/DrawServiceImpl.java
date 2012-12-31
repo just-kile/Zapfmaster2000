@@ -101,7 +101,7 @@ public class DrawServiceImpl implements DrawService {
 	}
 
 	@Override
-	public void draw(int pRawAmount) {
+	public double draw(int pRawAmount) {
 		ConfigurationService config = Zapfmaster2000Core.INSTANCE
 				.getConfigurationService();
 
@@ -109,7 +109,7 @@ public class DrawServiceImpl implements DrawService {
 				.getInt(ConfigurationConstants.BOX_DRAW_MIN_TICKS)) {
 			// ignore too little tick counts, otherwise a user might not get
 			// logged out even if he is not doing anything
-			return;
+			return calcRealAmount(totalTicks);
 		}
 		pRawAmount -= config
 				.getInt(ConfigurationConstants.BOX_DRAW_TICK_REDUCTION);
@@ -133,8 +133,10 @@ public class DrawServiceImpl implements DrawService {
 				notifyDrawing(guestUser, realAmount);
 				scheduleAutoLogout();
 			}
+			
 		}
-
+		
+		return realAmount;
 	}
 
 	@Override

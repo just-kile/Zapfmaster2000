@@ -28,8 +28,10 @@ public interface DrawService {
 	 * 
 	 * @param pRawAmount
 	 *            raw draw amount (in ticks)
+	 * @param total
+	 *            amount for current draw process.
 	 */
-	public void draw(int pRawAmount);
+	public double draw(int pRawAmount);
 
 	/**
 	 * Returns the box this service is working for.
