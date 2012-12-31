@@ -39,20 +39,24 @@ public class UserImageResource {
 	private static final int IMAGE_SIZE = 48;
 
 	private static final int IMAGE_SIZE_BIG = 160;
-	
+
 	private static final Logger LOG = Logger.getLogger(UserImageResource.class);
 
-	
 	@GET
 	@Path("/{userId}")
 	public Response retrieveImage(@PathParam("userId") long pUserId,
 			@QueryParam("token") String pToken) {
-		return retrieveImage(pUserId, pToken, "false");
+		return retrieveImage(pUserId, pToken, false);
 	}
+
 	@GET
-	@Path("/{userId}")
-	public Response retrieveImage(@PathParam("userId") long pUserId,
-			@QueryParam("token") String pToken, @QueryParam("big") String pBig) {
+	@Path("/{userId}/big")
+	public Response retrieveBigImage(@PathParam("userId") long pUserId,
+			@QueryParam("token") String pToken) {
+		return retrieveImage(pUserId, pToken, true);
+	}
+
+	private Response retrieveImage(long pUserId, String pToken, boolean pBig) {
 
 		// TODO: Check token
 		String path = "rest/image/user/" + pUserId;
@@ -69,7 +73,7 @@ public class UserImageResource {
 			if (!result.isEmpty()) {
 				Image image = result.get(0);
 				InputStream stream;
-				if ("true".equals(pBig)) {
+				if (pBig) {
 					stream = image.getContentBig().getBinaryStream();
 				} else {
 					stream = image.getContent().getBinaryStream();
@@ -129,7 +133,7 @@ public class UserImageResource {
 				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 				ImageIO.write(imageSmall, "png", outputStream);
 				byte[] bytesSmall = outputStream.toByteArray();
-				
+
 				BufferedImage imageBig = Scalr.resize(bufferedImage,
 						Scalr.Mode.FIT_EXACT, IMAGE_SIZE_BIG);
 				outputStream = new ByteArrayOutputStream();
@@ -158,7 +162,7 @@ public class UserImageResource {
 						.createBlob(bytesSmall));
 				newImage.setContentBig(Hibernate.getLobCreator(session)
 						.createBlob(bytesBig));
-				
+
 				session.save(newImage);
 				user.setImagePath(path);
 				session.save(user);
