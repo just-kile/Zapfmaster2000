@@ -69,11 +69,11 @@ public class UserImageResource {
 			if (!result.isEmpty()) {
 				Image image = result.get(0);
 				InputStream stream;
-				if ("true".equals(pBig)) {
-					stream = image.getContentBig().getBinaryStream();
-				} else {
-					stream = image.getContent().getBinaryStream();
-				}
+//				if ("true".equals(pBig)) {
+				stream = image.getContentBig().getBinaryStream();
+//				} else {
+//					stream = image.getContent().getBinaryStream();
+//				}
 				byte[] bytes = ByteStreams.toByteArray(stream);
 				return Response.ok().type(image.getContentType()).entity(bytes)
 						.build();
