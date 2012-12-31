@@ -47,6 +47,8 @@ public class Connector implements Runnable, Observer {
 	// last login status
 	char loginStatus = SerialConstants.STATUSNONE;
 
+	private final Object SYNC_LOCK = new Object();
+
 	public Connector() {
 
 		// initialize web connection
@@ -56,60 +58,94 @@ public class Connector implements Runnable, Observer {
 
 	@Override
 	public void run() {
-		
+
 		System.out.println("running ");
 
 		// keeps last tagId in order to compare to tagId
 		long lastTagId = 0;
 
+		final long polling = 1000;
+
+		long lastRequest = 0;
+
 		// main loop
 		while (true) {
-//			System.out.println("loop");
-			// idle id is 0, see if there's a new id 
-			if (getCurTagId() != 0) {
-				// check for login
-				if (getCurTagId() == lastTagId) {
-					// check status
-					if (loginStatus != SerialConstants.STATUSNONE) {
-						// check how old the last tagId reception is
-						if ((System.currentTimeMillis() - getLastIdTime()) > idInterval) {
-							// age has surpassed limit
-							// send logout message
-							loginStatus = SerialConstants.STATUSNONE;
-							LoginMessage message = new LoginMessage(loginStatus);
-							//serial.sendMessage(message);
-							System.out.println("status: none");
-							// reset tagIds
-							setCurTagId(0);
-							lastTagId = 0;
-						}
+			// System.out.println("loop");
+			// idle id is 0, see if there's a new id
+
+			
+			try {
+				long now = System.currentTimeMillis();
+				long timeSinceLastId = now - getLastIdTime();
+				long currentId = getCurTagId();
+
+				if (timeSinceLastId >= idInterval) {
+					// did not receive update for a while -> set status to none
+					setCurTagId(0);
+					lastTagId = 0;
+					System.out.println("status: none");
+
+					// wait -> we are notified when next tag is placed on the
+					// reader
+					synchronized (this) {
+						wait();
 					}
 				} else {
-					// get login response
-					System.out.println("other tag");
-					int response = web.performLogin(getCurTagId());
-
-					LoginMessage message = null;
-
-					// check whether login was successful
-					if (response == 200) {
-						// was successful
-						loginStatus = SerialConstants.STATUSOK;
-						message = new LoginMessage(loginStatus);
-						System.out.println("Login ok");
+					if (currentId == lastTagId) {
+						// we have got a tag that was processed before
+						if (now - lastRequest > polling) {
+							// resend the request
+							performLogin(currentId);
+							lastRequest = now;
+						} // else just ignore the rfid tag for now
+					} else if (currentId != 0) {
+						// new id!
+						performLogin(currentId);
+						lastRequest = now;
+						lastTagId = currentId;
 					} else {
-						// was unsuccessful
-						loginStatus = SerialConstants.STATUSERROR;
-						message = new LoginMessage(loginStatus);
-						System.out.println("Login error");
+						lastTagId = 0;
 					}
-					// send message with login status to draftkitAVR
-					//serial.sendMessage(message);
-					// save tagId
-					lastTagId = getCurTagId();
+
+					// wait at least until we should perform an logout
+					long delta = idInterval - timeSinceLastId;
+					synchronized (this) {
+						wait(delta);
+					}
+					System.out.println("notified");
 				}
+
+			} catch (InterruptedException ex) {
+				ex.printStackTrace(); // most likely not going to happen
 			}
 		}
+	}
+
+	/**
+	 * Will send a login request for a given rfid tag to the web service.
+	 * 
+	 * @param pRfidTag
+	 *            the tag to perform the login with
+	 * @return login result
+	 */
+	private LoginMessage performLogin(long pRfidTag) {
+		int response = web.performLogin(getCurTagId());
+		LoginMessage message = null;
+
+		// check whether login was successful
+		if (response == 200) {
+			// was successful
+			loginStatus = SerialConstants.STATUSOK;
+			message = new LoginMessage(loginStatus);
+			System.out.println("Login ok");
+		} else {
+			// was unsuccessful
+			loginStatus = SerialConstants.STATUSERROR;
+			message = new LoginMessage(loginStatus);
+			System.out.println("Login error");
+		}
+
+		return message;
 	}
 
 	/**
@@ -162,7 +198,7 @@ public class Connector implements Runnable, Observer {
 				// reader
 				if (newTagId != getCurTagId()) {
 					System.out.println("setting tag");
-					setCurTagId( newTagId );
+					setCurTagId(newTagId);
 				}
 				// set time of id renewal
 				setLastIdTime(System.currentTimeMillis());
@@ -173,7 +209,11 @@ public class Connector implements Runnable, Observer {
 				System.out.println("ticks: " + tMessage.getTicks());
 				// send ticks
 				web.sendTicks(tMessage.getTicks());
-			
+
+			}
+
+			synchronized (this) {
+				this.notify();
 			}
 		}
 	}
@@ -193,29 +233,27 @@ public class Connector implements Runnable, Observer {
 	public String getSerialPort() {
 		return serialPort;
 	}
-	
-	
 
 	public long getCurTagId() {
-		synchronized (this) {
+		synchronized (SYNC_LOCK) {
 			return curTagId;
 		}
 	}
 
 	public void setCurTagId(long curTagId) {
-		synchronized (this) {
+		synchronized (SYNC_LOCK) {
 			this.curTagId = curTagId;
-		}	
+		}
 	}
 
 	public long getLastIdTime() {
-		synchronized (this) {
+		synchronized (SYNC_LOCK) {
 			return lastIdTime;
 		}
 	}
 
 	public void setLastIdTime(long lastIdTime) {
-		synchronized (this) {
+		synchronized (SYNC_LOCK) {
 			this.lastIdTime = lastIdTime;
 		}
 	}
