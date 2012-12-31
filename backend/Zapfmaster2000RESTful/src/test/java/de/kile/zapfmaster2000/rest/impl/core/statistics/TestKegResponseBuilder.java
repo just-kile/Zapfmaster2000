@@ -93,7 +93,7 @@ public class TestKegResponseBuilder extends AbstractMockingTest {
 			amount += d.getAmount();
 		}
 
-		assertEquals(keg.getSize() - amount, kegResponse.getCurrentAmount());
+		assertEquals(amount, kegResponse.getCurrentAmount());
 
 		// TODO test lasts until
 
