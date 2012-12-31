@@ -28,7 +28,7 @@ import de.kile.zapfmaster2000.connector.messages.Message;
 public class SerialCommunicator {
 
 	// baudrate
-	final int baud = 57600;
+	final int baud = 9600;
 
 	// serial port
 	String serialPort = "";
@@ -83,7 +83,7 @@ public class SerialCommunicator {
 					if (commPort instanceof SerialPort) {
 						SerialPort serialPort = (SerialPort) commPort;
 						try {
-							serialPort.setSerialPortParams(57600,
+							serialPort.setSerialPortParams(baud,
 									SerialPort.DATABITS_8,
 									SerialPort.STOPBITS_1,
 									SerialPort.PARITY_NONE);
@@ -142,12 +142,13 @@ public class SerialCommunicator {
 	 * @param message
 	 *            - message to be send to the draftkitAVR
 	 */
-	public void sendMessage(Message message) {
+	public synchronized void sendMessage(Message message) {
 		// encode message
 		byte[] data = SerialEncoder.encodeMessage(message);
 		// send data over serial port
-		if (data != null)
+		if (data != null) {
 			writer.writeOut(data);
+		}
 		System.out.println("sent message: "+Arrays.toString(data));
 	}
 

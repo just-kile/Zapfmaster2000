@@ -21,6 +21,7 @@ public class SerialWriter {
 	public void writeOut(byte[] outBuffer) {
 		try {
 			out.write(outBuffer);
+			out.flush();
 		} catch (IOException e) {
 			// TODO add logger
 			e.printStackTrace();

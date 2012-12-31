@@ -15,6 +15,7 @@ public class WebCommunicator {
 	private static String BOX_PASSPHRASE = "box-1";
 	
 	public int performLogin(long tagId) {
+		System.out.println("perfoming login");
 		LoginRequest loginRequest = new LoginRequest();
 		loginRequest.setBoxPassphrase(BOX_PASSPHRASE);
 		loginRequest.setRfidTag(tagId);

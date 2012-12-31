@@ -33,10 +33,7 @@ public class Connector implements Runnable, Observer {
 	int defaultInterval = 250;
 
 	// for how long is the last rfid tag reception valid
-	int idInterval = 1000;
-
-	// for how long a failed login will be signaled
-	int errorInterval = 2000;
+	int idInterval = 500;
 
 	// default serial port
 	String serialPort = "COM9";
@@ -59,52 +56,38 @@ public class Connector implements Runnable, Observer {
 
 	@Override
 	public void run() {
+		
+		System.out.println("running ");
 
 		// keeps last tagId in order to compare to tagId
 		long lastTagId = 0;
 
-		// last time at which login was performed
-		long lastLoginTime = 0;
-
 		// main loop
 		while (true) {
+//			System.out.println("loop");
 			// idle id is 0, see if there's a new id 
-			if (curTagId != 0) {
+			if (getCurTagId() != 0) {
 				// check for login
-				if (curTagId == lastTagId) {
+				if (getCurTagId() == lastTagId) {
 					// check status
-					if (loginStatus == SerialConstants.STATUSOK) {
-						// login was ok
+					if (loginStatus != SerialConstants.STATUSNONE) {
 						// check how old the last tagId reception is
-						if ((System.currentTimeMillis() - lastIdTime) > idInterval) {
+						if ((System.currentTimeMillis() - getLastIdTime()) > idInterval) {
 							// age has surpassed limit
 							// send logout message
 							loginStatus = SerialConstants.STATUSNONE;
 							LoginMessage message = new LoginMessage(loginStatus);
-							serial.sendMessage(message);
+							//serial.sendMessage(message);
 							System.out.println("status: none");
 							// reset tagIds
-							curTagId = 0;
-							lastTagId = 0;
-						}
-					} else if (loginStatus == SerialConstants.STATUSERROR) {
-						// login had failed
-						// check how much time has passed since failed login
-						if ((System.currentTimeMillis() - lastLoginTime) > errorInterval) {
-							// time has surpassed limit
-							// send logout message, return status to none
-							loginStatus = SerialConstants.STATUSNONE;
-							LoginMessage message = new LoginMessage(loginStatus);
-							serial.sendMessage(message);
-							System.out.println("status: none");
-							// reset tagIds
-							curTagId = 0;
+							setCurTagId(0);
 							lastTagId = 0;
 						}
 					}
 				} else {
 					// get login response
-					int response = web.performLogin(curTagId);
+					System.out.println("other tag");
+					int response = web.performLogin(getCurTagId());
 
 					LoginMessage message = null;
 
@@ -121,11 +104,9 @@ public class Connector implements Runnable, Observer {
 						System.out.println("Login error");
 					}
 					// send message with login status to draftkitAVR
-					serial.sendMessage(message);
+					//serial.sendMessage(message);
 					// save tagId
-					lastTagId = curTagId;
-					// save time of this login
-					lastLoginTime = System.currentTimeMillis();
+					lastTagId = getCurTagId();
 				}
 			}
 		}
@@ -179,18 +160,20 @@ public class Connector implements Runnable, Observer {
 				System.out.println("rfid tag id: " + newTagId);
 				// only update global tag id, if there's a new card on the
 				// reader
-				if (newTagId != curTagId)
-					curTagId = newTagId;
+				if (newTagId != getCurTagId()) {
+					System.out.println("setting tag");
+					setCurTagId( newTagId );
+				}
 				// set time of id renewal
-				lastIdTime = System.currentTimeMillis();
-			} else
-			// message contains ticks
-			if (nMessage.getMessageType() == Message.TICKSMESSAGE) {
+				setLastIdTime(System.currentTimeMillis());
+			} else if (nMessage.getMessageType() == Message.TICKSMESSAGE) {
+				// message contains ticks
 				// cast to ticks message type
 				TicksMessage tMessage = (TicksMessage) nMessage;
 				System.out.println("ticks: " + tMessage.getTicks());
 				// send ticks
 				web.sendTicks(tMessage.getTicks());
+			
 			}
 		}
 	}
@@ -209,6 +192,32 @@ public class Connector implements Runnable, Observer {
 
 	public String getSerialPort() {
 		return serialPort;
+	}
+	
+	
+
+	public long getCurTagId() {
+		synchronized (this) {
+			return curTagId;
+		}
+	}
+
+	public void setCurTagId(long curTagId) {
+		synchronized (this) {
+			this.curTagId = curTagId;
+		}	
+	}
+
+	public long getLastIdTime() {
+		synchronized (this) {
+			return lastIdTime;
+		}
+	}
+
+	public void setLastIdTime(long lastIdTime) {
+		synchronized (this) {
+			this.lastIdTime = lastIdTime;
+		}
 	}
 
 	/**
