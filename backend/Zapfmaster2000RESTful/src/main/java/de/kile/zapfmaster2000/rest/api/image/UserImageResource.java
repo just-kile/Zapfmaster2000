@@ -73,7 +73,7 @@ public class UserImageResource {
 			if (!result.isEmpty()) {
 				Image image = result.get(0);
 				InputStream stream;
-				if ("true".equals(pBig)) {
+				if (pBig) {
 					stream = image.getContentBig().getBinaryStream();
 				} else {
 					stream = image.getContent().getBinaryStream();
