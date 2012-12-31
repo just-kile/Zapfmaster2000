@@ -118,6 +118,9 @@ public class ZapfScreen extends JFrame {
 
 		setSize(640, 480);
 		setResizable(false);
+		setUndecorated(true);
+		setAlwaysOnTop(true);
+		setLocation(0, 0);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
