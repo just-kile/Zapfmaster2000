@@ -35,7 +35,7 @@ const int pinG = 13;
 const int pinB = 14;
 
 // BAUDRATES
-const unsigned long brPC = 57600;
+const unsigned long brPC = 9600;
 const unsigned long brRFID = 9600;
 
 // MESSAGE CODES
@@ -53,25 +53,22 @@ const char rfidMessage = 'R';
 const char loginMessage = 'L';
 
 // successful login
-const byte statusOk = 1;
+const char statusOk = '1';
 // unsuccessful login
-const byte statusError = 2;
+const char statusError = '2';
 // no current login
-const byte statusNone = 3;
+const char statusNone = '3';
 
 // GLOBALS
 
 // initial ticks on flow meter
 unsigned int numTicks = 0;
 // interval for flow meter frequency
-int interval = 1000;
+int interval = 250;
 // 
 long previousMillis = 0;
 // length of RFID Reader serial messages
 int rfidLength = 5;
-
-// keeps track of the last login status
-int loginStatus = statusNone;
 
 // pin of green led
 int ledGreen = 16;
@@ -123,8 +120,22 @@ void loop() {
       // send byte to computer
       Serial.write(byte);    
     } 
+    Serial1.flush();
     // close message to computer with end symbol
     Serial.write(endMessage);
+    // clean buffer
+    Serial.flush();
+  }
+  
+  if (Serial.available() > 1) {
+    // read first byte of message
+    char symbol = (char) Serial.read();
+    // interpret first byte
+    if (symbol == loginMessage) {
+      // read next byte of login message containing login status
+      char newStatus = (char) Serial.read();
+      showLogin(newStatus);
+    } 
   }
   
   // send draw-count if a interval passed
@@ -143,6 +154,8 @@ void loop() {
       // send closing symbol
       Serial.print(endMessage);
     }
+    // clean buffer
+    Serial.flush();
     // reset amount of ticks
     numTicks = 0;
     // set new start value for interval counter
@@ -150,18 +163,6 @@ void loop() {
     // reattach interrupt
     PCintPort::attachInterrupt(intFlowmeter, count, RISING);
   }    
-  
-  if (Serial.available() > 1) {
-    // read first byte of message
-    char symbol = (char) Serial.read();
-    // interpret first byte
-    if (symbol == loginMessage) {
-      // read next byte of login message containing login status
-      loginStatus = Serial.parseInt();
-    } 
-  }
-  
-  showLogin();
 }
 
 // flow meter interrupt function
@@ -170,12 +171,12 @@ void count() {
 }
 
 // change rgb colors according to login status
-void showLogin() {
-  if (loginStatus == statusOk) {
+void showLogin(int newStatus) {
+  if (newStatus == statusOk) {
     turnGreen();
-  } else if (loginStatus == statusError) {
+  } else if (newStatus == statusError) {
     turnRed();
-  } else if (loginStatus == statusNone) {
+  } else if (newStatus == statusNone) {
     turnOrange();
   }
 }
