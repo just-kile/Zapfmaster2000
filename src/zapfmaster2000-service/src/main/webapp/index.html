@@ -1,0 +1,382 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Meta Tags for mobile -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />  
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="true">
+<meta name="MobileOptimized" content="width">
+ <script src="libs/jquery/jquery-1.8.1.js"></script>
+ <link rel="stylesheet" type="text/css" href="css/login.css" />
+ <script>
+$(document).ready(function(){
+	function redirect(){
+	       if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
+	    	   window.location.replace(window.location.pathname+"app.html");
+	       }else{
+	    	   window.location.replace(window.location.pathname+"page.html");
+	       }
+	}
+	var RfidPush = (function(){
+		/**
+		 * General Server Push Connection Function
+		 * @param {String} url
+		 * 			The Url to the channel
+		 * @param {Function} successCb
+		 * 			The function that will be executed, when data received
+		 * @param {Function} errorCb
+		 * 			The function that will be executed, when error occurs, or timeout
+		 */
+		 var pushReq = null;
+		var connectToChannel = function(url,successCb,errorCb,data){
+			if(!data)data ={};
+			data["token"] = localStorage.getItem("token");
+			pushReq = $.ajax({
+				type:"GET",
+				url:url,
+				timeout:10000000, 
+				data:data,
+				success:function(token){
+					if(successCb && token!="")successCb(token);
+					connectToChannel(url,successCb,errorCb,data);
+				},
+				error:function(e){
+					if(e.status==0){
+						console.log("Request abort success!");
+					}else if(e.status==503){
+						console.log("No Datas Received! Reconnect...");
+//						if(errorCb)errorCb(e);
+						connectToChannel(url,successCb,errorCb,data);
+					}else{
+						console.log("Error! Status "+e.status);
+						console.log("Reconnect in 5s...");
+					
+						if(errorCb)errorCb(e);
+						setTimeout(function(){
+							connectToChannel(url,successCb,errorCb,data);
+						},5000);
+					}
+				}
+			});
+		};
+		/**
+		 * Set RFID Card
+		 */
+		var setRFID=  function(rfid){
+			$("#rfid").val(rfid);
+			var yep = confirm("Karte erkannt! Ist das deine Karte?")
+			if(yep){
+				var data = {};
+				data["token"] = localStorage.getItem("token");
+				data["rfid"] = rfid;
+				$.ajax({
+				    url: 'rest/register/rfid',
+				    type: 'POST',
+				    data:data,
+				    success: function(data){
+						//alert("RFID registriert")
+						redirect();
+				    }
+				});
+			}else{
+				
+			}
+		}
+		var initRfidPush = function (id){
+				abortPush();
+				connectToChannel("rest/draftkit/"+id+"/rfid",setRFID);
+			}
+		var abortPush = function(){
+			if(pushReq)pushReq.abort();
+			pushReq = null;
+		}
+		var pub = {
+				initRfidPush:initRfidPush,
+				setRFID:setRFID,
+				abortPush:abortPush,
+				connectToChannel:connectToChannel
+				
+		};
+		return pub;
+	})();
+	
+/**
+ * Login website
+ */	
+	$("#submitWebsite").on("click",function(e){
+		e.preventDefault();
+		var accountName = $("#account").val();
+		$.ajax({
+			type:"POST",
+			url:"rest/login/account",
+			data:{
+				accountName:accountName
+			},
+			success:function(token){
+				if(localStorage){
+					localStorage.setItem('token',token );
+					//if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
+					//window.location.replace(window.location.pathname+"page.html");
+					$(".container").hide();
+					$("#registerUserContainer").show();
+				}else{
+					alert("Use a normal browser! Localstorage is not available")
+				}
+			},
+			error:function(){
+				alert("Fehler")
+			}
+		})
+	});
+	/**
+	* Login App
+	*/
+	$(".applogin #submitApp").on("click",function(e){
+		e.preventDefault();
+		var userName = $(".applogin #userName").val();
+		var pass = $(".applogin #password").val();
+		$.ajax({
+			type:"POST",
+			url:"rest/login/user",
+			data:{
+				userName:userName,
+				password:pass
+			},
+			success:function(token){
+				if(localStorage){
+					localStorage.setItem('token',token );
+					redirect();
+					//window.location.replace(window.location.pathname+"app.html");
+				}else{
+					alert("Use a normal browser! Localstorage is not available")
+				}
+			},
+			error:function(){
+				alert("Username oder Passwort falsch")
+			}
+		})
+	});
+	/**
+	 * Register user
+	 */
+ 	$("#registerUserBtn").on("click",function(e){
+		e.preventDefault();
+		var userName = $("#userName").val();
+		var pass = $("#password").val();
+		var data = {};
+		$.each($(".registerItem"),function(ind,item){
+			data[$(item).attr("name")] =$(item).val(); 
+		});
+		data["token"] = localStorage.getItem("token");
+		$.ajax({
+			type:"POST",
+			url:"rest/register/user",
+			data:data,
+			success:function(token){
+				//alert("Token"+token);
+				localStorage.setItem("token",token);
+				$(".container").hide();
+				$("#imageFormContainer").show();
+			},
+			error:function(){
+				alert("Fehler! Der Nutzername ist wahrscheinlich schon vergeben.")
+			}
+		})
+	});
+/**
+ * Upload Image
+ */
+$("#uploadImage").on("click",function(e){
+	e.preventDefault();
+	var formData = new FormData ($("#imageForm")[0]);
+	formData.append("token",localStorage.getItem("token"));
+	$.ajax({
+	    url: 'rest/image/user',
+	    data: formData,
+	    cache: false,
+	    contentType: false,
+	    processData: false,
+	    type: 'POST',
+	    success: function(data){
+	        alert("Image uploaded");
+			$(".container").hide();
+			$("#setRfidContainer").show();
+			startRFIDPush();
+	    }
+	    ,
+		error:function(){
+			alert("Fehler beim Bild hochladen")
+		}
+	});
+});
+
+$("#uploadImageSkip").on("click",function(e){
+	e.preventDefault();
+	$(".container").hide();
+	$("#setRfidContainer").show();
+	startRFIDPush();
+});
+/**
+ * Request Boxes
+ */
+function startRFIDPush(e){
+	//e.preventDefault();
+	var data = {};
+	data["token"] = localStorage.getItem("token");
+	$.ajax({
+	    url: 'rest/draftkit',
+	    type: 'GET',
+	    data:data,
+	    success: function(data){
+	        var selectBox = $("#registerSelectBox").empty();
+	        var firstObj;
+	        $.each(data,function(ind,obj){
+	        	$("<option>").attr("value",obj.boxId).text(obj.boxId+obj.name).appendTo(selectBox);
+	        	if(!firstObj)firstObj =obj;
+	        });
+	        RfidPush.initRfidPush(firstObj.boxId);
+	       
+	    },
+		error:function(){
+			alert("Draftkit können nicht geladen werden.")
+		}
+	});
+};
+$("#registerSelectBox").on("change",function(e){
+	//initRfidPush();
+	console.log(e)
+	RfidPush.initRfidPush($(e.currentTarget).val());
+});
+//loginContainer,registerUserContainer,accountloginContainer,imageFormContainer,setRfidContainer
+$("#registerApp").on("click",function(e){
+	e.preventDefault();
+	$(".container").hide();
+	$("#accountloginContainer").show();
+	
+})
+$(".cancelBtn").on("click",function(e){
+	e.preventDefault();
+	RfidPush.abortPush();
+	$(".container").hide();
+	$("#loginContainer").show();
+})
+$("#updateImageRfid").on("click",function(e){
+	e.preventDefault();
+	var userName = $(".applogin #userName").val();
+	var pass = $(".applogin #password").val();
+	$.ajax({
+		type:"POST",
+		url:"rest/login/user",
+		data:{
+			userName:userName,
+			password:pass
+		},
+		success:function(token){
+			if(localStorage){
+				localStorage.setItem('token',token );
+				$(".container").hide();
+				$("#imageFormContainer").show();
+				//window.location.replace(window.location.pathname+"app.html");
+			}else{
+				alert("Use a normal browser! Localstorage is not available")
+			}
+		},
+		error:function(){
+			alert("Username oder Passwort falsch")
+		}
+	})
+	
+})
+
+
+})
+
+
+</script>
+
+</head>
+<body>
+<!-- Frontbox -->
+<div class="login">
+<img class="zmlogo" src="images/view/zapfmaster2000_klein.png" />
+	<div id="loginContainer" class="applogin container">
+		<p><input placeholder="Username" id="userName" name="userName" type="text" size="30" maxlength="30" value=""></p>
+		<p><input placeholder="Passwort" id="password" name="password" type="password" size="30" maxlength="30" value=""></p>
+		<div><input id ="submitApp" type="submit" value="Anmelden"></div>
+		
+		<div><input id ="updateImageRfid" type="submit" value="Bild/RFID Updaten">
+		</div>
+		<hr />
+	<input id ="registerApp" type="submit" value="Registrieren">
+	
+	
+		
+	</div>
+	
+
+
+ <div style="display:block">
+ <!-- accountlogin -->
+<div id="accountloginContainer" class="websitelogin container" style="display:none" >
+ <p>Gib den Namen der Gruppe ein, der du beitreten möchtest.</p>
+ <p><input placeholder="Gruppenname" id="account" name="account" type="text" size="30" maxlength="30" value="account-1"></p>
+
+<input class ="cancelBtn" type="submit" value="Abbrechen">
+<input id ="submitWebsite" type="submit" value="Anmelden">
+
+</div>
+
+
+ <!-- register User -->
+<div id="registerUserContainer" class="register container" style="display:none">
+<form id="registerUser">
+<p><input placeholder="Username" class="registerItem" id="rUserName" name="userName" type="text" size="30" maxlength="30" value=""></p>
+<p><input  placeholder="Password" class="registerItem" id="rPassword" name="password" type="password" size="30" maxlength="30" value=""></p>
+<p>Gender
+ <select class="registerItem" name="sex" size="1">
+      <option>m</option>
+      <option>f</option>
+    </select>
+</p>
+<p><input placeholder="Gewicht" class="registerItem" id="weight" name="weight" type="text" size="30" maxlength="30" value=""></p>
+<input class ="cancelBtn" type="submit" value="Abbrechen">
+<input id ="registerUserBtn" type="submit" value="Registrieren">
+</form>
+</div>
+
+ <!-- Image upload -->
+ <div class="container" id="imageFormContainer" class="container" style="display:none">
+<form id="imageForm"  >
+<p>Lade ein Bild von dir hoch</p><p><input id="rImage" name="image" type="file"></p>
+<input id ="uploadImage" type="submit" value="ImageUpload">
+<input id ="uploadImageSkip" type="submit" value="Skip">
+
+</form>
+<input class ="cancelBtn" type="submit" value="Abbrechen">
+</div>
+
+ <!-- Set RFID -->
+ <div id="setRfidContainer" class="container" style="display:none">
+<!--  <input id ="requestBoxes" type="submit" value="Box Anfrage">-->
+<p>Lege deine RFID Karte auf die ausgewählte ZM2k Box. Die Karte wird dann automatisch auf dich registriert.</p>
+<p>Wähle Box aus<br />
+ <select size="1" id="registerSelectBox">
+  <!-- <option value="4">test</option> -->
+   </select>
+</p>
+<p>Warte...</p>
+<!-- <p>RFID:<br /><input class="registerItem" id="rfid" name="rfid" type="text" size="30" maxlength="30" value=""></p> -->
+<input class ="cancelBtn" type="submit" value="Abbrechen">
+<!-- <input id ="registerUserBtn" type="submit" value="Registrieren"> -->
+</div>
+</div>
+<div class="firm">
+		<div class="firmText">Ein Produkt von </div>
+		<div class="firmImg"><img class="jklogo" src="images/view/justKile.png" /></div>
+	</div>
+</div>
+
+</body>
+</html>

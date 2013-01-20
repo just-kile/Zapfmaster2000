@@ -1,0 +1,11 @@
+ {
+        "type": "DRAWING",
+        "image": "img/user3.png",
+        "date": 1355687887000,
+        "userId": 3,
+        "userName": "user-3",
+        "amount": 1,
+        "kegId": 1,
+        "brand": "keg-brand-1",
+        "boxId":"2"
+    }

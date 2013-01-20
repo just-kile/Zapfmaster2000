@@ -1,0 +1,99 @@
+{
+    "keg":[ {
+        "kegId": "2",
+        "brand": "Warsteiner",
+        "size": "30",
+
+        "startDate": "20120901-015822",
+        "kegNumber": "2",
+        "currentAmount": "22.38",
+        "lastsUntil":"2.43",
+        "boxId":"2"
+    },{
+        "kegId": "3",
+        "brand": "Oettinger",
+        "size": "50",
+
+        "startDate": "20120901-015822",
+        "kegNumber": "2",
+        "currentAmount": "13.38",
+        "lastsUntil":"2.44",
+        "boxId":"3"
+    }],
+    "amount": {
+        "total": "57.62",
+        "greatestDrawing": "1.20",
+        "mostActivityHour": "15"
+    },
+    "achievements": {
+        "count": "57",
+        "mostAchievementHour": "15"
+    },
+    "drawCount": {
+        "operations": "147",
+        "average": "15"
+    },
+    "bestUserList": [
+        {
+            "userName": "Tim",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "amount": "5.57"
+        },
+        {
+            "userName": "Felix",
+            "userId": "12",
+            "userImage": "/images/bla",
+            "amount": "4.97"
+        }
+    ],
+    "bestUserListHour": [
+        {
+            "userName": "Tim",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "amount": "5.57"
+        }
+    ],
+    "achievementUserList":[
+        {
+            "userName": "Tim",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "achievementCount": "3"
+        },
+        {
+            "userName": "Felix",
+            "userId": "12",
+            "userImage": "/images/bla",
+            "achievementCount": "2"
+        }
+    ],
+    "drawCountUserList": [
+        {
+            "userName": "Tim",
+            "userId": "9",
+            "userImage": "/images/bla",
+            "drawCount": "5.57"
+        },
+        {
+            "userName": "Felix",
+            "userId": "12",
+            "userImage": "/images/bla",
+            "drawCount": "4.97"
+        }
+    ],
+    "promille":{
+    "alcoholLevel": 0.234
+},
+    "progress": {
+        "startDate": "20120925-164332",
+        "interval": "30",
+        "data": [
+            7,
+            6.9,
+            9.5,
+            14.5
+        ]
+    }
+}
