@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest.impl.core.statistics;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Before;
@@ -7,6 +8,7 @@ import org.junit.Test;
 
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
 import de.kile.zapfmaster2000.rest.api.statistics.DrinkProgressResponse;
+import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
@@ -27,6 +29,9 @@ public class TestDrinkProgressResponseBuilder extends AbstractMockingTest {
 	private Date dFrom;
 	private Date dTo;
 	private Date dStart;
+
+	private SimpleDateFormat sf = new SimpleDateFormat(
+			PlatformConstants.DATE_TIME_FORMAT);
 
 	@Before
 	public void setupData() {
@@ -67,7 +72,8 @@ public class TestDrinkProgressResponseBuilder extends AbstractMockingTest {
 		assertEquals(1.0, drinkProgressResponse.getAmount()[0]);
 		assertEquals(0.0, drinkProgressResponse.getAmount()[2]);
 
-		assertEquals(dStart, drinkProgressResponse.getFrom());
+		assertEquals(sf.format(dStart),
+				drinkProgressResponse.getStartDate());
 		assertEquals(60, drinkProgressResponse.getInterval());
 	}
 
@@ -79,7 +85,8 @@ public class TestDrinkProgressResponseBuilder extends AbstractMockingTest {
 		assertEquals(2, drinkProgressResponse.getAmount().length);
 		assertEquals(0.7, drinkProgressResponse.getAmount()[0]);
 
-		assertEquals(dStart, drinkProgressResponse.getFrom());
+		assertEquals(sf.format(dStart),
+				drinkProgressResponse.getStartDate());
 		assertEquals(60, drinkProgressResponse.getInterval());
 
 	}
@@ -92,7 +99,7 @@ public class TestDrinkProgressResponseBuilder extends AbstractMockingTest {
 		assertEquals(2, drinkProgressResponse.getAmount().length);
 		assertEquals(0.3, drinkProgressResponse.getAmount()[0]);
 
-		assertEquals(dFrom, drinkProgressResponse.getFrom());
+		assertEquals(sf.format(dFrom), drinkProgressResponse.getStartDate());
 		assertEquals(30, drinkProgressResponse.getInterval());
 
 	}
@@ -107,10 +114,9 @@ public class TestDrinkProgressResponseBuilder extends AbstractMockingTest {
 
 		assertEquals(30, drinkProgressResponse.getInterval());
 
-
 		drinkProgressResponse = DrinkProgressResponseBuilder
 				.retrieveDrinkResponse(account1, userEmpty.getId(), null, null);
-		
+
 		assertEquals(1, drinkProgressResponse.getAmount().length);
 		assertEquals(0.0, drinkProgressResponse.getAmount()[0]);
 

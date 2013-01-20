@@ -5,23 +5,23 @@ public class DrawCountResponse {
 	/**
 	 * Total number of drawings.
 	 */
-	private long count;
-	private double averageOperationsPerHour;
+	private long drawCount;
+	private double drawCountPerHour;
 
 	public long getCount() {
-		return count;
+		return drawCount;
 	}
 
-	public void setCount(long count) {
-		this.count = count;
+	public void setDrawCount(long count) {
+		this.drawCount = count;
 	}
 
-	public double getAverageOperationsPerHour() {
-		return averageOperationsPerHour;
+	public double getDrawCountPerHour() {
+		return drawCountPerHour;
 	}
 
-	public void setAverageOperationsPerHour(double averageOperationsPerHour) {
-		this.averageOperationsPerHour = averageOperationsPerHour;
+	public void setDrawCountPerHour(double drawCountPerHour) {
+		this.drawCountPerHour = drawCountPerHour;
 	}
 
 }

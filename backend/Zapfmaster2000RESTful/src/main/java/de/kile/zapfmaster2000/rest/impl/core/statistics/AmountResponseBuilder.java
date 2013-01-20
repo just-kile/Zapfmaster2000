@@ -69,11 +69,11 @@ public class AmountResponseBuilder {
 		if (resultMostActivity.size() > 0) {
 			response.setAmountTotal((Double) resultAmounts.get(0)[0]);
 			response.setGreatestDrawing((Double) resultAmounts.get(0)[1]);
-			response.setMostActivityHour((Integer) resultMostActivity.get(0));
+			response.setAmountMostActivityHour((Integer) resultMostActivity.get(0));
 		} else {
 			response.setAmountTotal(0.0);
 			response.setGreatestDrawing(0.0);
-			response.setMostActivityHour(-1);
+			response.setAmountMostActivityHour(-1);
 		}
 		return response;
 	}

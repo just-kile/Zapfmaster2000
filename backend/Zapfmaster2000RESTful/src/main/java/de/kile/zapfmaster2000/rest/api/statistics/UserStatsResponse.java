@@ -5,9 +5,10 @@ public class UserStatsResponse {
 	private AmountResponse amount;
 	private AchievementResponse achievement;
 	private DrawCountResponse drawCount;
-	private AlcoholLevelResponse promille;
-	private DrinkProgressResponse progress;
+	private AlcoholLevelResponse alcoholLevel;
+	private DrinkProgressResponse drinkProgress;
 	private RankResponse rank;
+	private UserResponse user;
 
 	public AmountResponse getAmount() {
 		return amount;
@@ -33,20 +34,20 @@ public class UserStatsResponse {
 		this.drawCount = drawCount;
 	}
 
-	public AlcoholLevelResponse getPromille() {
-		return promille;
+	public AlcoholLevelResponse getAlcoholLevel() {
+		return alcoholLevel;
 	}
 
-	public void setPromille(AlcoholLevelResponse promille) {
-		this.promille = promille;
+	public void setAlcoholLevel(AlcoholLevelResponse alcoholLevel) {
+		this.alcoholLevel = alcoholLevel;
 	}
 
-	public DrinkProgressResponse getProgress() {
-		return progress;
+	public DrinkProgressResponse getDrinkProgress() {
+		return drinkProgress;
 	}
 
-	public void setProgress(DrinkProgressResponse progress) {
-		this.progress = progress;
+	public void setDrinkProgress(DrinkProgressResponse drinkProgress) {
+		this.drinkProgress = drinkProgress;
 	}
 
 	public RankResponse getRank() {
@@ -55,6 +56,14 @@ public class UserStatsResponse {
 
 	public void setRank(RankResponse rank) {
 		this.rank = rank;
+	}
+
+	public UserResponse getUser() {
+		return user;
+	}
+
+	public void setUser(UserResponse user) {
+		this.user = user;
 	}
 
 }

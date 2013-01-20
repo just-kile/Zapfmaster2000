@@ -233,7 +233,7 @@ public class RankingsBuilder {
 			AchievementUserListResponse achievementCountResponse = new AchievementUserListResponse();
 			achievementCountResponse.setName((String) object[1]);
 			achievementCountResponse.setId((Long) object[0]);
-			achievementCountResponse.setCount((Long) object[2]);
+			achievementCountResponse.setAchievementCount((Long) object[2]);
 			achievementCountResponse.setImage((String) object[3]);
 			resp.add(achievementCountResponse);
 		}

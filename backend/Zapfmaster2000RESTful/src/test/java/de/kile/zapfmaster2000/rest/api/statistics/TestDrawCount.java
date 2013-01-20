@@ -64,7 +64,7 @@ public class TestDrawCount extends AbstractMockingTest {
 				.getEntity();
 
 		assertEquals(3, drawCountResponse.getCount());
-		assertEquals(1.5, drawCountResponse.getAverageOperationsPerHour());
+		assertEquals(1.5, drawCountResponse.getDrawCountPerHour());
 	}
 
 	@Test
@@ -79,6 +79,6 @@ public class TestDrawCount extends AbstractMockingTest {
 				.getEntity();
 
 		assertEquals(2, drawCountResponse.getCount());
-		assertEquals(2.0, drawCountResponse.getAverageOperationsPerHour());
+		assertEquals(2.0, drawCountResponse.getDrawCountPerHour());
 	}
 }

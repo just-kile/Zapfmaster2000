@@ -142,14 +142,14 @@ public class GlobalStatsResource {
 			globalStatsResponse.setAchievements(achievementResponse);
 			globalStatsResponse.setAchievementUserList(achievementUserList);
 			globalStatsResponse.setAmount(amountResponse);
-			globalStatsResponse.setBestUserList(bestUserList);
-			globalStatsResponse.setBestUserListHour(bestUserListHour);
+			globalStatsResponse.setAmountUserList(bestUserList);
+			globalStatsResponse.setAmountUserListHour(bestUserListHour);
 			globalStatsResponse.setDrawCount(drawCountResponse);
 			globalStatsResponse
 					.setDrawCountUserList(drawCountUserListResponses);
 			globalStatsResponse.setKeg(kegResponses);
-			globalStatsResponse.setProgress(progress);
-			globalStatsResponse.setPromille(promille);
+			globalStatsResponse.setDrinkProgress(progress);
+			globalStatsResponse.setAlcoholLevel(promille);
 
 			return Response.ok(globalStatsResponse).build();
 

@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest.impl.core.statistics;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -8,6 +9,7 @@ import org.junit.Test;
 
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
 import de.kile.zapfmaster2000.rest.api.statistics.KegResponse;
+import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
@@ -24,6 +26,9 @@ public class TestKegResponseBuilder extends AbstractMockingTest {
 	private Keg keg2;
 	private Keg keg3;
 	private Calendar start;
+	
+	private SimpleDateFormat sf = new SimpleDateFormat(
+			PlatformConstants.DATE_TIME_FORMAT);
 
 	@Before
 	public void setupData() {
@@ -85,7 +90,7 @@ public class TestKegResponseBuilder extends AbstractMockingTest {
 		assertEquals(keg.getBrand(), kegResponse.getBrand());
 		assertEquals(keg.getId(), kegResponse.getKegId());
 		assertEquals(keg.getSize(), kegResponse.getSize());
-		assertEquals(keg.getStartDate(), kegResponse.getStartDate());
+		assertEquals(sf.format(keg.getStartDate()), kegResponse.getStartDate());
 
 		// current amount
 		double amount = 0;

@@ -4,10 +4,10 @@ public class FrontpageStatsResponse {
 
 	private KegResponse[] kegs;
 	private DrawCountUserListResponse[] drawCountUserList;
-	private UserAmountResponse[] bestUserList;
-	private UserAmountResponse[] bestUserListHour;
+	private UserAmountResponse[] amountUserList;
+	private UserAmountResponse[] amountUserListLastHour;
 	private AchievementUserListResponse[] achievementUserList;
-	private AlcoholLevelResponse promille;
+	private AlcoholLevelResponse alcoholLevel;
 
 	public KegResponse[] getKegs() {
 		return kegs;
@@ -18,19 +18,20 @@ public class FrontpageStatsResponse {
 	}
 
 	public UserAmountResponse[] getBestUserList() {
-		return bestUserList;
+		return amountUserList;
 	}
 
-	public void setBestUserList(UserAmountResponse[] bestUserList) {
-		this.bestUserList = bestUserList;
+	public void setAmountUserList(UserAmountResponse[] amountUserList) {
+		this.amountUserList = amountUserList;
 	}
 
-	public UserAmountResponse[] getBestUserListHour() {
-		return bestUserListHour;
+	public UserAmountResponse[] getAmountUserListLastHour() {
+		return amountUserListLastHour;
 	}
 
-	public void setBestUserListHour(UserAmountResponse[] bestUserListHour) {
-		this.bestUserListHour = bestUserListHour;
+	public void setAmountUserListLastHour(
+			UserAmountResponse[] amountUserListLastHour) {
+		this.amountUserListLastHour = amountUserListLastHour;
 	}
 
 	public AchievementUserListResponse[] getAchievementUserList() {
@@ -42,21 +43,21 @@ public class FrontpageStatsResponse {
 		this.achievementUserList = achievementUserList;
 	}
 
-	public AlcoholLevelResponse getPromille() {
-		return promille;
+	public AlcoholLevelResponse getAlcoholLevel() {
+		return alcoholLevel;
 	}
 
-	public void setPromille(AlcoholLevelResponse promille) {
-		this.promille = promille;
+	public void setAlcoholLevel(AlcoholLevelResponse alcoholLevel) {
+		this.alcoholLevel = alcoholLevel;
 	}
 
 	public DrawCountUserListResponse[] getDrawCountUserList() {
 		return drawCountUserList;
 	}
 
-	public void setDrawCountUserList(DrawCountUserListResponse[] drawCountUserList) {
+	public void setDrawCountUserList(
+			DrawCountUserListResponse[] drawCountUserList) {
 		this.drawCountUserList = drawCountUserList;
 	}
-
 
 }

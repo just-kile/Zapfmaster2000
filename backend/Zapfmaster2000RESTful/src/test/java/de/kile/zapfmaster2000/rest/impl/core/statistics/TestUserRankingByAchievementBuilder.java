@@ -100,7 +100,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		// test only number of drawings, order of users is not important as
 		// everybody has achievement count 1
 		assertEquals(user1.getGained().size(),
-				achievementUserListResponses[0].getCount());
+				achievementUserListResponses[0].getAchievementCount());
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		// test only number of drawings, order of users is not important as
 		// everybody has achievement 1
 		assertEquals(user1.getGained().size(),
-				achievementUserListResponses[0].getCount());
+				achievementUserListResponses[0].getAchievementCount());
 	}
 	
 	@Test
@@ -141,7 +141,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		assertEquals(user.getName(), response.getName());
 		assertEquals(user.getId(), response.getId());
 		assertEquals(user.getImagePath(), response.getImage());
-		assertEquals(user.getGained().size(), response.getCount());
+		assertEquals(user.getGained().size(), response.getAchievementCount());
 	}
 
 }
