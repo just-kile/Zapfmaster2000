@@ -19,6 +19,7 @@ int main() {
 		display.run();
 	} catch (const char* exception) {
 		cerr << "Caught error: " << exception << endl;
+		cerr << "SDL says: " << SDL_GetError() << endl;
 	}
 
 }

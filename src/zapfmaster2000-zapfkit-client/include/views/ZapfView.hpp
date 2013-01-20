@@ -6,6 +6,7 @@
  */
 
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 
 namespace zm2k {
 
@@ -21,6 +22,10 @@ private:
 
 	SDL_Surface* backgroundImage;
 	SDL_Surface* titleImage;
+
+	TTF_Font* font;
+
+	const SDL_Color fontColor = { 255, 255, 255, 255 };
 
 public:
 
@@ -40,6 +45,12 @@ protected:
 	 */
 	virtual void paintView() const = 0;
 
+	void drawText(char* text, int x, int y) const;
+
+	SDL_Surface* getScreen() const {
+		return screen;
+	}
+
 private:
 
 	/**
@@ -51,6 +62,11 @@ private:
 	 * \brief loads the images (for background drawings)
 	 */
 	void loadImages();
+
+	/*
+	 * \breif loads the shared fonts
+	 */
+	void loadFonts();
 };
 
 }

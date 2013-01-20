@@ -6,6 +6,7 @@
  */
 
 #include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 #include "../include/ZapfDisplay.hpp"
 #include "../include/views/StartupView.hpp"
 
@@ -37,10 +38,15 @@ void ZapfDisplay::initSDL() {
 	int systemZ = videoInfo->vfmt->BitsPerPixel;
 
 	//Set up screen
-	screen = SDL_SetVideoMode(systemX, systemY, systemZ,
-			SDL_SWSURFACE | SDL_FULLSCREEN);
+	screen = SDL_SetVideoMode(480, 320, systemZ, SDL_SWSURFACE);
 
 	if (!screen) {
 		throw "SDL_SetVideoMode failed";
 	}
+
+	// initialize SDL_ttf library
+	if (TTF_Init() == -1) {
+		throw "Could not initialize SDL_ttf";
+	}
+
 }

@@ -14,6 +14,10 @@ namespace zm2k {
 
 class StartupView : public ZapfView {
 
+private:
+
+	SDL_Surface* justKileImage;
+
 public:
 
 	StartupView(SDL_Surface* surface);
