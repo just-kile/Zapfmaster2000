@@ -4,14 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/views/IdleView.cpp \
 ../src/views/StartupView.cpp \
 ../src/views/ZapfView.cpp 
 
 OBJS += \
+./src/views/IdleView.o \
 ./src/views/StartupView.o \
 ./src/views/ZapfView.o 
 
 CPP_DEPS += \
+./src/views/IdleView.d \
 ./src/views/StartupView.d \
 ./src/views/ZapfView.d 
 

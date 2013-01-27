@@ -10,9 +10,7 @@
 
 using namespace zm2k;
 
-ZapfView::ZapfView(SDL_Surface* surface) : fontColor({ 255, 255, 255, 255 }){
-	assert(surface != 0);
-	screen = surface;
+ZapfView::ZapfView(): fontColor({ 255, 255, 255, 255 }){
 	loadImages();
 	loadFonts();
 }
@@ -23,17 +21,16 @@ ZapfView::~ZapfView() {
 }
 
 
-void ZapfView::paint() const {
-	paintBackground();
-	paintView();
-	SDL_Flip(screen);
+void ZapfView::paint(SDL_Surface* surface) const {
+	paintBackground(surface);
+	paintView(surface);
 }
 
-void ZapfView::paintBackground() const {
-	SDL_BlitSurface(backgroundImage, NULL, screen, NULL);
-	int x = screen->w / 2 - titleImage->w / 2;
-	SDL_Rect pos = {x, 10, screen->w, screen->h};
-	SDL_BlitSurface(titleImage, NULL, screen, &pos);
+void ZapfView::paintBackground(SDL_Surface* surface) const {
+	SDL_BlitSurface(backgroundImage, NULL, surface, NULL);
+	int x = surface->w / 2 - titleImage->w / 2;
+	SDL_Rect pos = {x, 10, surface->w, surface->h};
+	SDL_BlitSurface(titleImage, NULL, surface, &pos);
 }
 
 void ZapfView::loadImages() {
@@ -55,9 +52,9 @@ void ZapfView::loadFonts() {
 	}
 }
 
-void ZapfView::drawText(char* text, int x, int y) const {
+void ZapfView::drawText(char* text, int x, int y, SDL_Surface* surface) const {
 	SDL_Surface* textSurface = TTF_RenderText_Solid(font, text, fontColor);
-	SDL_Rect position = { x, y, screen->w, screen->h};
-	SDL_BlitSurface(textSurface, NULL, screen, &position);
+	SDL_Rect position = { x, y, surface->w, surface->h};
+	SDL_BlitSurface(textSurface, NULL, surface, &position);
 	SDL_FreeSurface(textSurface);
 }

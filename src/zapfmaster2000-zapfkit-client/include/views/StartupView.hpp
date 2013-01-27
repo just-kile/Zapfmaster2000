@@ -20,12 +20,12 @@ private:
 
 public:
 
-	StartupView(SDL_Surface* surface);
+	StartupView();
 	virtual ~StartupView();
 
 protected:
 
-	void paintView() const;
+	void paintView(SDL_Surface* screen) const;
 
 };
 

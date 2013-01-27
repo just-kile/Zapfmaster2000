@@ -5,6 +5,9 @@
  *      Author: Thomas
  */
 
+#ifndef ZAPFVIEW_HPP_
+#define ZAPFVIEW_HPP_
+
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 
@@ -18,8 +21,6 @@ class ZapfView {
 
 private:
 
-	SDL_Surface* screen;
-
 	SDL_Surface* backgroundImage;
 	SDL_Surface* titleImage;
 
@@ -29,34 +30,30 @@ private:
 
 public:
 
-	ZapfView(SDL_Surface* surface);
+	ZapfView();
 
 	virtual ~ZapfView();
 
 	/**
 	 * \brief Paints whole the view.
 	 */
-	void paint() const;
+	void paint(SDL_Surface* screen) const;
 
 protected:
 
 	/**
 	 * \brief Paints the foreground of the view.
 	 */
-	virtual void paintView() const = 0;
+	virtual void paintView(SDL_Surface* screen) const = 0;
 
-	void drawText(char* text, int x, int y) const;
-
-	SDL_Surface* getScreen() const {
-		return screen;
-	}
+	void drawText(char* text, int x, int y, SDL_Surface* screen) const;
 
 private:
 
 	/**
 	 * \brief Paints the background of the view.
 	 */
-	void paintBackground() const;
+	void paintBackground(SDL_Surface* screen) const;
 
 	/*
 	 * \brief loads the images (for background drawings)
@@ -70,4 +67,6 @@ private:
 };
 
 }
+
+#endif
 

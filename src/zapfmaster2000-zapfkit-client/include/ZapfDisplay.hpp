@@ -12,6 +12,8 @@
 
 namespace zm2k {
 
+class ZapfView;
+
 /**
  * \brief 	The zapf display manages the whole output to the user on to the screen.
  *
@@ -30,7 +32,7 @@ public:
 
 	~ZapfDisplay();
 
-	void run();
+	void paint(ZapfView& view);
 
 private:
 

@@ -20,12 +20,9 @@ ZapfDisplay::~ZapfDisplay() {
 	SDL_Quit();
 }
 
-void ZapfDisplay::run() {
-
-	// 1st: Show startup view
-	StartupView view(screen);
-	view.paint();
-	SDL_Delay(5000);
+void ZapfDisplay::paint(ZapfView& view) {
+	view.paint(screen);
+	SDL_Flip(screen);
 }
 
 void ZapfDisplay::initSDL() {

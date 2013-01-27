@@ -9,7 +9,7 @@
 
 using namespace zm2k;
 
-StartupView::StartupView(SDL_Surface* surface) : ZapfView(surface) {
+StartupView::StartupView() : ZapfView() {
 	justKileImage = IMG_Load("resources/justKile.png");
 	if (justKileImage == NULL) {
 		throw "Could not load just kile image";
@@ -20,17 +20,17 @@ StartupView::~StartupView() {
 	SDL_FreeSurface(justKileImage);
 }
 
-void StartupView::paintView() const {
-	drawText("Brought to you by", 60, 110);
+void StartupView::paintView(SDL_Surface* screen) const {
+	drawText("Brought to you by", 60, 110, screen);
 
-	drawText("Ben Lenser", 120, 140);
-	drawText("Daniel Wittekind", 120, 165);
-	drawText("Paul Boeck", 120, 190);
-	drawText("Thomas Kipar", 120, 215);
+	drawText("Ben Lenser", 120, 140, screen);
+	drawText("Daniel Wittekind", 120, 165, screen);
+	drawText("Paul Boeck", 120, 190, screen);
+	drawText("Thomas Kipar", 120, 215, screen);
 
-	drawText("A product from", 220, 280);
+	drawText("A product from", 220, 280, screen);
 	SDL_Rect position = {360, 280, 479, 319};
-	SDL_BlitSurface(justKileImage, NULL, getScreen(), &position);
+	SDL_BlitSurface(justKileImage, NULL, screen, &position);
 }
 
 

@@ -64,7 +64,7 @@ protected:
 private:
 	long charsToLong(std::string input) {
 		long l = 0;
-		for (int i = 0; i < input.size(); ++i) {
+		for (unsigned int i = 0; i < input.size(); ++i) {
 			l <<= 8;
 			l += input[i];
 		}
