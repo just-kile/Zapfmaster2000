@@ -7,7 +7,7 @@ Welcome to the new drafting experience.
 Releases
 --------
 
-* Current Release: Amazing Alt
+* Current Release: [Amazing Alt](https://github.com/just-kile/Zapfmaster2000/blob/master/release/Zapfmaster2000-1.0.tar.gz)
 * Next Release: Bodacious Bock
 
 Documentation
