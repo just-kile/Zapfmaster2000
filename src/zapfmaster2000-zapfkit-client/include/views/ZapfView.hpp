@@ -25,7 +25,7 @@ private:
 
 	TTF_Font* font;
 
-	const SDL_Color fontColor = { 255, 255, 255, 255 };
+	const SDL_Color fontColor;
 
 public:
 

@@ -38,7 +38,7 @@ void ZapfDisplay::initSDL() {
 	int systemZ = videoInfo->vfmt->BitsPerPixel;
 
 	//Set up screen
-	screen = SDL_SetVideoMode(480, 320, systemZ, SDL_SWSURFACE);
+	screen = SDL_SetVideoMode(systemX, systemY, systemZ, SDL_SWSURFACE);
 
 	if (!screen) {
 		throw "SDL_SetVideoMode failed";

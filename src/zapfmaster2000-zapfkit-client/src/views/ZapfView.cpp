@@ -10,7 +10,7 @@
 
 using namespace zm2k;
 
-ZapfView::ZapfView(SDL_Surface* surface) {
+ZapfView::ZapfView(SDL_Surface* surface) : fontColor({ 255, 255, 255, 255 }){
 	assert(surface != 0);
 	screen = surface;
 	loadImages();
