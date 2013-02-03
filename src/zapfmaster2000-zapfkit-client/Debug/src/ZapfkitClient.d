@@ -7,7 +7,8 @@ src/ZapfkitClient.d: ../src/ZapfkitClient.cpp \
  ../src/../include/views/StartupView.hpp \
  ../src/../include/views/ZapfView.hpp \
  ../src/../include/views/IdleView.hpp \
- ../src/../include/serial/InputService.hpp
+ ../src/../include/serial/InputService.hpp \
+ ../src/../include/serial/WebserviceConnector.hpp
 
 ../src/../include/ZapfDisplay.hpp:
 
@@ -28,3 +29,5 @@ src/ZapfkitClient.d: ../src/ZapfkitClient.cpp \
 ../src/../include/views/IdleView.hpp:
 
 ../src/../include/serial/InputService.hpp:
+
+../src/../include/serial/WebserviceConnector.hpp:

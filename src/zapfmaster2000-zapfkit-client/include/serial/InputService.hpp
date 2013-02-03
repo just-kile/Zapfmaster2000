@@ -12,6 +12,7 @@
 #include "SerialConnector.hpp"
 #include <vector>
 #include <string>
+#include <boost/thread.hpp>
 
 namespace zm2k {
 
@@ -29,16 +30,27 @@ public:
 
 };
 
-class InputService: public Observable<InputServiceListener>,
-		public SerialConnectorListener {
+class InputService: public Observable<InputServiceListener> {
+
+};
+
+class SerialInputService: public InputService, public SerialConnectorListener {
 
 private:
 	std::string buffer;
 	std::vector<MessageProcessor*> processors;
 
 public:
-	InputService(SerialConnector& SerialConnector);
+	SerialInputService(SerialConnector& SerialConnector);
+	virtual ~SerialInputService();
 	virtual void onCharRead(const char c);
+};
+
+class MockInputService : public InputService {
+
+public:
+	MockInputService();
+	void run();
 
 };
 

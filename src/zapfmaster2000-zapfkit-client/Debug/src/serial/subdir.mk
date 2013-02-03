@@ -6,17 +6,20 @@
 CPP_SRCS += \
 ../src/serial/InputService.cpp \
 ../src/serial/MessageProcessor.cpp \
-../src/serial/SerialConnector.cpp 
+../src/serial/SerialConnector.cpp \
+../src/serial/WebserviceConnector.cpp 
 
 OBJS += \
 ./src/serial/InputService.o \
 ./src/serial/MessageProcessor.o \
-./src/serial/SerialConnector.o 
+./src/serial/SerialConnector.o \
+./src/serial/WebserviceConnector.o 
 
 CPP_DEPS += \
 ./src/serial/InputService.d \
 ./src/serial/MessageProcessor.d \
-./src/serial/SerialConnector.d 
+./src/serial/SerialConnector.d \
+./src/serial/WebserviceConnector.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
