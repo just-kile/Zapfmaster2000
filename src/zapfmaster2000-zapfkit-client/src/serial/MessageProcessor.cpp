@@ -5,7 +5,7 @@
  *      Author: thomas
  */
 
-#include "serial/MessageProcessor.hpp"
+#include "../../include/serial/MessageProcessor.hpp"
 #include <algorithm>
 
 using namespace zm2k;

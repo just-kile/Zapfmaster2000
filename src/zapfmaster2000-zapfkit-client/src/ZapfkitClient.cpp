@@ -6,12 +6,14 @@
  */
 
 #include <iostream>
-#include "../include/ZapfDisplay.hpp"
 #include <SDL/SDL.h>
 #include <errno.h>
-#include <serial/InputService.hpp>
 #include <boost/thread.hpp>
-#include <ZapfController.hpp>
+#include <signal.h>
+
+#include "../include/ZapfDisplay.hpp"
+#include "../include/serial/InputService.hpp"
+#include "../include/ZapfController.hpp"
 
 using namespace zm2k;
 using namespace std;
@@ -61,23 +63,32 @@ void displayThread() {
 		exit(-1);
 	}
 }
+
+
+// Exit properly on signal
+void sighandle(int sig) {
+	SDL_Quit();
+	exit(-1);
+}
+
 int main() {
 
 	try {
-
-
 		service.addListener(new MyListener());
 
 		boost::thread t1(inputThread);
 		boost::thread t2(displayThread);
 		controller.setThread(&t2);
+
+		signal(SIGINT, &sighandle);
+
 		t1.join();
 		t2.join();
-
 	} catch (const char* exception) {
 		cerr << "Caught error: " << exception << endl;
 		cerr << "SDL says: " << SDL_GetError() << endl;
 		cerr << "errno: " << errno << ", " << strerror(errno) << endl;
+		exit(-1);
 	}
 
 }

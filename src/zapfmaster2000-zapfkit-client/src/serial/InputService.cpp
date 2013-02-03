@@ -5,8 +5,8 @@
  *      Author: thomas
  */
 
-#include <serial/InputService.hpp>
-#include <serial/MessageProcessor.hpp>
+#include "../../include/serial/InputService.hpp"
+#include "../../include/serial/MessageProcessor.hpp"
 #include <vector>
 
 using namespace zm2k;

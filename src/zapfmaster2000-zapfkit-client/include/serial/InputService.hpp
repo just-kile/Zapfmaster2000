@@ -8,8 +8,8 @@
 #ifndef INPUTSERVICE_HPP_
 #define INPUTSERVICE_HPP_
 
-#include <Observable.hpp>
-#include <serial/SerialConnector.hpp>
+#include "../Observable.hpp"
+#include "SerialConnector.hpp"
 #include <vector>
 #include <string>
 

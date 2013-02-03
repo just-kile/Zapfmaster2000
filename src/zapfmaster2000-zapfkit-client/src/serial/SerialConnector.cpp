@@ -14,7 +14,7 @@
 #include <boost/bind.hpp>
 #include <errno.h>
 
-#include <serial/SerialConnector.hpp>
+#include "../../include/serial/SerialConnector.hpp"
 
 using namespace zm2k;
 using namespace std;

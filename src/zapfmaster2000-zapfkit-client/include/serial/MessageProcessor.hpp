@@ -9,7 +9,7 @@
 #define MESSAGEPROCESSOR_HPP_
 
 #include <string>
-#include <serial/InputService.hpp>
+#include "InputService.hpp"
 
 namespace zm2k {
 
