@@ -38,9 +38,10 @@ public class TestDrawResource extends AbstractMockingTest {
 		LoginRequest request = new LoginRequest();
 		request.setBoxPassphrase("abcde");
 		request.setRfidTag(1123581321);
-		
+
 		DrawResource drawResource = new DrawResource();
-		Response response = drawResource.login(request);
+		Response response = drawResource.login(request.getRfidTag(),
+				request.getBoxPassphrase());
 
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 		BoxUserLoginResponse entity = (BoxUserLoginResponse) response
@@ -61,9 +62,10 @@ public class TestDrawResource extends AbstractMockingTest {
 		LoginRequest request = new LoginRequest();
 		request.setBoxPassphrase("abcde");
 		request.setRfidTag(1123581321);
-		
+
 		DrawResource drawResource = new DrawResource();
-		Response response = drawResource.login(request);
+		Response response = drawResource.login(request.getRfidTag(),
+				request.getBoxPassphrase());
 		assertEquals(Status.FORBIDDEN.getStatusCode(), response.getStatus());
 	}
 
@@ -81,9 +83,10 @@ public class TestDrawResource extends AbstractMockingTest {
 		LoginRequest request = new LoginRequest();
 		request.setBoxPassphrase("abcde");
 		request.setRfidTag(1123581321);
-		
+
 		DrawResource drawResource = new DrawResource();
-		Response response = drawResource.login(request);
+		Response response = drawResource.login(request.getRfidTag(),
+				request.getBoxPassphrase());
 		assertEquals(Status.FORBIDDEN.getStatusCode(), response.getStatus());
 
 		verify(drawManager, times(1)).login(1123581321);
