@@ -1,0 +1,6 @@
+<config>
+	<webservice>
+		<path>http://zapfmaster2000.dyndns.org:9130/zapfmaster2000-restful-1.0.0-SNAPSHOT/</path>
+		<passphrase>box-1</passphrase>
+	</webservice>
+</config>
