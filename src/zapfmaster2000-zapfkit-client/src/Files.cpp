@@ -12,7 +12,7 @@ using namespace std;
 
 string zm2k::toAbsPath(string path) {
 
-	std::string absPath = string("/etc/share/zapfmaster2000-zapfkit-client/") + path;
+	std::string absPath = string("/usr/share/zapfmaster2000-zapfkit-client/") + path;
 	if (ifstream(path.c_str())) {
 		return absPath;
 	}
