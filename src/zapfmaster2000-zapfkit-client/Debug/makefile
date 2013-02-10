@@ -11,6 +11,9 @@ RM := rm -rf
 -include src/views/subdir.mk
 -include src/serial/subdir.mk
 -include src/subdir.mk
+-include build/views/subdir.mk
+-include build/serial/subdir.mk
+-include build/subdir.mk
 -include subdir.mk
 -include objects.mk
 

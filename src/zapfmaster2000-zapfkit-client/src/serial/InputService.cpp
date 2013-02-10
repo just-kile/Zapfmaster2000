@@ -68,6 +68,7 @@ void MockInputService::run() {
 
 	string cmdTicks = "ticks";
 	string cmdLogin = "login";
+	string cmdDraw = "draw";
 
 	while (true) {
 		cout << "LOOP" << endl;
@@ -91,11 +92,29 @@ void MockInputService::run() {
 		if (rawInput.compare(0, cmdLogin.length(), cmdLogin) == 0
 				&& rawInput.length() > cmdLogin.length()) {
 			int offset = cmdLogin.length() + 1;
-			long rfid =
-					atol(
-							rawInput.substr(offset, rawInput.length() - offset).c_str());
+			string rfid = rawInput.substr(offset, rawInput.length() - offset);
 			notifyListeners(
 					boost::bind(&InputServiceListener::onRfidRead, _1, rfid));
+
+		}
+
+		// draw
+		if (rawInput.compare(0, cmdDraw.length(), cmdDraw) == 0
+				&& rawInput.length() > cmdDraw.length()) {
+			int offset = cmdLogin.length() + 1;
+			string parameters = rawInput.substr(offset,
+					rawInput.length() - offset);
+			float amount;
+			float time;
+			sscanf(parameters.c_str(), "%f %f", &amount, &time);
+			int numInvokes = time * 2;
+			int ticksPerInvoke = amount * 5000 / numInvokes;
+			while (numInvokes-- > 0) {
+				notifyListeners(
+						boost::bind(&InputServiceListener::onTicksRead, _1,
+								ticksPerInvoke));
+				boost::this_thread::sleep( boost::posix_time::milliseconds(500) );
+			}
 
 		}
 	}

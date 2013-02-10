@@ -26,4 +26,7 @@ SUBDIRS := \
 src/views \
 src/serial \
 src \
+build/views \
+build/serial \
+build \
 

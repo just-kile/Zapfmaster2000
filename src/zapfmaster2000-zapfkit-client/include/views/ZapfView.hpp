@@ -46,7 +46,7 @@ protected:
 	 */
 	virtual void paintView(SDL_Surface* screen) const = 0;
 
-	void drawText(char* text, int x, int y, SDL_Surface* screen) const;
+	void drawText(const char* text, int x, int y, SDL_Surface* screen) const;
 
 private:
 

@@ -57,18 +57,7 @@ protected:
 
 	virtual InputService::notification doProcess(std::string contents) {
 
-		return boost::bind(&InputServiceListener::onRfidRead, _1,
-				charsToLong(contents));
-	}
-
-private:
-	long charsToLong(std::string input) {
-		long l = 0;
-		for (unsigned int i = 0; i < input.size(); ++i) {
-			l <<= 8;
-			l += input[i];
-		}
-		return l;
+		return boost::bind(&InputServiceListener::onRfidRead, _1, contents);
 	}
 
 };

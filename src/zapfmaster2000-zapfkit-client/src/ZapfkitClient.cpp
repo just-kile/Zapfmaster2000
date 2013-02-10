@@ -17,6 +17,7 @@
 #include "../include/ZapfDisplay.hpp"
 #include "../include/serial/InputService.hpp"
 #include "../include/ZapfController.hpp"
+#include "../include/Files.hpp"
 
 using namespace zm2k;
 using namespace std;
@@ -32,7 +33,7 @@ public:
 class MyListener: public InputServiceListener {
 
 public:
-	virtual void onRfidRead(long rfid) {
+	virtual void onRfidRead(std::string rfid) {
 		cout << "read rfid: " << rfid << endl;
 	}
 	virtual void onTicksRead(int ticks) {
@@ -84,7 +85,7 @@ int main(int argc, const char* argv[]) {
 
 	// load properties
 	boost::property_tree::ptree ptree;
-	boost::property_tree::read_xml("resources/config.xml", ptree);
+	boost::property_tree::read_xml(toAbsPath("resources/config.xml"), ptree);
 
 	WebserviceConnector webservieConnector(
 			ptree.get<string>("config.webservice.path"),

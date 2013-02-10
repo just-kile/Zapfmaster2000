@@ -6,11 +6,12 @@
  */
 
 #include "../../include/views/StartupView.hpp"
+#include "../../include/Files.hpp"
 
 using namespace zm2k;
 
 StartupView::StartupView() : ZapfView() {
-	justKileImage = IMG_Load("resources/justKile.png");
+	justKileImage = IMG_Load(toAbsPath("resources/justKile.png").c_str());
 	if (justKileImage == NULL) {
 		throw "Could not load just kile image";
 	}

@@ -25,7 +25,7 @@ public:
 	virtual ~InputServiceListener() {
 	}
 
-	virtual void onRfidRead(long rfid) = 0;
+	virtual void onRfidRead(std::string rfid) = 0;
 	virtual void onTicksRead(int ticks) = 0;
 
 };
