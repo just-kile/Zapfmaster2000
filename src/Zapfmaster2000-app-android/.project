@@ -34,12 +34,12 @@
 		<link>
 			<name>assets/www/js</name>
 			<type>2</type>
-			<locationURI>copy_PARENT/zapfmaster2000-service/src/main/webapp/js</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/zapfmaster2000-service/src/main/webapp/js</locationURI>
 		</link>
 		<link>
 			<name>assets/www/libs</name>
 			<type>2</type>
-			<locationURI>copy_PARENT/zapfmaster2000-service/src/main/webapp/libs</locationURI>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/zapfmaster2000-service/src/main/webapp/libs</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
