@@ -21,6 +21,7 @@ var ZMO = ZMO || {};
 			"js/Util/Net/Ajax.js",
 			"js/Util/Net/Ajax.js",
 			"js/Util/Object/Exists.js",
+			"js/Util/Localization/Localization.js",
 			"js/Util/Globalfunctions.js",
 
 			//Modules
