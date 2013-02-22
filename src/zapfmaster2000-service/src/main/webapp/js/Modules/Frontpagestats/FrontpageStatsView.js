@@ -6,22 +6,17 @@ ZMO.modules = ZMO.modules || {};
 ZMO.modules.frontPageStatsView = (function($,ajax){
 	var mC = ZMO.modules.Constants;
 	var wording = {
-			REMAINING:"Verbleibend",
-			COMPLETE:"Komplett",
-			TITLE:"Fass Uebersicht",
+			REMAINING:"remaining",
+			COMPLETE:"complete",
+			TITLE:"kegOverview",
 			XBAR:"Liter",
-			PROMILLE:"Ungef&auml;hrer Blutalkohol",
+			KEG:"kegNumber"
 			
-			ONCE_DRAFT:"Gr&ouml;&szlig;te auf einmal gezapfte Menge",
-			COMPLETE_AMOUNT:"Gesamtliteranzahl",
-			COMPLETE_DRAFTS:"Gesamtanzahl Zapfvorg&auml;nge",
-			MID_DRAFTS:"Durchschnittliche Zapfvorg&auml;nge",
-			GAINED_ACHIEVEMENTS:"Bisher erreichte Achievements",
-			MOST_ACTIVITIY_HOUR:"Most Activity&copy; Hour",
-			MOST_ACHIEVEMENT_HOUR:"Most Achievement&copy; Hour"
 		};
 	var init = function(cont){
-		
+		$.each(wording,function(ind,word){
+			wording[ind] = ZMO.Util.localization.translateString(word);
+		});
 	};
 	/**
 	 * Provides further information about keg
@@ -96,7 +91,7 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
                 height:130
             },
             title: {
-                text: "Fass "+keglistModel.keg_id//wording.TITLE
+                text: wording.KEG+keglistModel.keg_id//wording.TITLE
             },
             xAxis: {
                 categories: series.categories
