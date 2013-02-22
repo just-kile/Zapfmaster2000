@@ -31,6 +31,15 @@
 "declinedChallengeTemplate":"{{team1}} declined a {{duration}} minutes Challenge of type {{type}} against {{team2}}  because <br /> &quot;{{reason}}&quot;",
 "newKeg":"A new {{size}} Liter keg of brand {{brand}} has been tapped!",
 "newUser":" registered successfully. Have a lot of fun!",
-"tappedQuantity":"Tapped Amount {{totalAmount}} Liter"
+"tappedQuantity":"Tapped Amount {{totalAmount}} Liter",
 
+"greatestDrawing":"Greatest Drawing",
+"averageDrawCount":"Average Drawcounts",
+"completeDrawCount":"Number of Drawcounts",
+"completeAchievements":"Reached Achievements",
+"mostAchievementHour":"Most Achievement Hour",
+
+"remaining":"Remaining",
+"complete":"Complete",
+"kegOverview":"Keg Overview"
 }

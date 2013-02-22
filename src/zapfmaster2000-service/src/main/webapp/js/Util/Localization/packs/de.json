@@ -31,6 +31,15 @@
 "declinedChallengeTemplate":"{{team1}} hat eine {{duration}} minütige Challenge {{type}} gegen {{team2}} abgelehnt mit der Begründung <br /> &quot;{{reason}}&quot;",
 "newKeg":"Ein neues {{size}} Liter Fass {{brand}} wurde angezapft.",
 "newUser":" hat sich soeben erfolgreich registriert. Viel Spaß beim zapfen!",
-"tappedQuantity":"Gezapfte Menge: {{totalAmount}} Liter"
+"tappedQuantity":"Gezapfte Menge: {{totalAmount}} Liter",
 
+"greatestDrawing":"Größte auf einmal gezapte Menge",
+"averageDrawCount":"Durchschnittliche Zapfvorgänge",
+"completeDrawCount":"Anzahl der Zapfvorgänge",
+"completeAchievements":"Bisher erreichte Achievements",
+"mostAchievementHour":"Most Achievement Hour",
+
+"remaining":"verbleibend",
+"complete":"Komplett",
+"kegOverview":"Fass Übersicht"
 }

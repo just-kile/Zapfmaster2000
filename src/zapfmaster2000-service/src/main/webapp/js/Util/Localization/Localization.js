@@ -23,12 +23,16 @@ ZMO.Util.localization = (function($){
 	var translate = function(msg){
 		return replaceStringByMap(msg,languagePack||{});
 	};
+	var translateString = function(msg){
+		return replaceStringByMap(msg,languagePack||{},true);
+	}
 	var init = function(callb){
 		ZMO.ajax.getDatas("js/Util/Localization/packs/"+getLang()+".json",function(json){
 			languagePack = json;
 			callb();
 		});
 	};
+
 	/**
 	 * This method replaces placeholders ({{foo}}, {{bar}}, {{baz}},...) in a given
 	 * String with values from a given Object. The return value is either the
@@ -41,10 +45,10 @@ ZMO.Util.localization = (function($){
 	 * @param {Object}
 	 *         map object with the values to the keywords
 	 */
-	var replaceStringByMap = function(value, map) {
+	var replaceStringByMap = function(value, map,isSimpleString) {
 	 var tmp = value;
 	 $.each(map, function(key, val) {
-		 var placeHolderRegex = new RegExp("\\[\\["+key+"\\]\\]", "g");
+		 var placeHolderRegex = isSimpleString?new RegExp(key, "g"):new RegExp("\\[\\["+key+"\\]\\]", "g");;
 		 tmp = tmp.replace(placeHolderRegex, val);
 	 });
 	 // replace all elements which are not in map
@@ -63,6 +67,7 @@ ZMO.Util.localization = (function($){
 	var pub = {
 			replaceStringByMap:replaceStringByMap,
 			translate:translate,
+			translateString:translateString,
 			changeLang:changeLang,
 			getLang:getLang,
 			init:init

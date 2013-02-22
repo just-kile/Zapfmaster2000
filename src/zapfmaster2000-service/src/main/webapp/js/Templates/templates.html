@@ -51,6 +51,42 @@
 	<td>[[userRank]]</td><td>{{amount}}.</td>
 </tr>
 {{/userRank}}
+{{#amountComplete}}
+<tr class="stats-drinker-row">
+	<td>[[completeAmount]]</td><td>{{amountComplete}} [[liter]]</td>
+</tr>
+{{/amountComplete}}
+{{#amountAtMost}}
+<tr class="stats-drinker-row">
+	<td>[[greatestDrawing]]</td><td>{{amountAtMost}} [[liter]]</td>
+</tr>
+{{/amountAtMost}}
+{{#amountAverage}}
+<tr class="stats-drinker-row">
+	<td>[[averageDrawCount]]</td><td>{{amountAverage}}.x/l</td>
+</tr>
+{{/amountAverage}}
+{{#mostActivityHour}}
+<tr class="stats-drinker-row">
+	<td>[[mostActivityHour]]</td><td>{{mostActivityHour}}.[[clock]]</td>
+</tr>
+{{/mostActivityHour}}
+{{#drawCount}}
+<tr class="stats-drinker-row">
+	<td>[[completeDrawCount]]</td><td>{{drawCount}}.</td>
+</tr>
+{{/drawCount}}
+{{#achievementCount}}
+<tr class="stats-drinker-row">
+	<td>[[completeAchievements]]</td><td>{{achievementCount}}.</td>
+</tr>
+{{/achievementCount}}
+{{#mostAchievementHour}}
+<tr class="stats-drinker-row">
+	<td>[[mostAchievementHour]]</td><td>{{mostAchievementHour}} [[clock]]</td>
+</tr>
+{{/mostAchievementHour}}
+
 </table>
 
  </template>
