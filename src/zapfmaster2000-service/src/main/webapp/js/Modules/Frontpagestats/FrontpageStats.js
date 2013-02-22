@@ -254,6 +254,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 		ajax.getDatas(ZMO.modules.Constants.urls.FRONTPAGESTATS,function(fpStats){
 			//general stats
 			initGeneralStats(fpStats);
+			view.init();
 			//Kegcharts
 			containerHandler = new ContainerHandler();
 			var kegModelArr = new ZMO.modules.kegModel(fpStats.kegs);

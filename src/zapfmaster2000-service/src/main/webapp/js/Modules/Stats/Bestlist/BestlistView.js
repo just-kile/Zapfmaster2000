@@ -6,8 +6,13 @@ ZMO.modules = ZMO.modules || {};
 ZMO.modules.bestlistView = (function($,ajax){
 	var mC = ZMO.modules.Constants;
 	var chartContainer = null,chart = null,bestlistContainer = null;
+	var wording = {
+			amount:"amount"
+	}
 	var init = function(cont){
-		
+		$.each(wording,function(ind,word){
+			wording[ind] = ZMO.Util.localization.translateString(word);
+		});
 	};
 	var convertToSeries = function(userlistModel){
 		var seriesArr =[];
@@ -59,7 +64,7 @@ ZMO.modules.bestlistView = (function($,ajax){
             },
             series: [{
                 type: 'pie',
-                name: 'Menge',
+                name: wording.amount,
                 data: datas
             }]
         });

@@ -13,7 +13,6 @@ ZMO.modules.achievementlist = (function($,ajax){
 		var table= $("<table>").addClass("stats-drinker").appendTo(listDiv);
 		$.each(achievement.users,function(ind,val){
 			var m = ich["ZMO-achievementsstats-list-template"](val);
-			
 			table.append(m);
 		});
 	};
