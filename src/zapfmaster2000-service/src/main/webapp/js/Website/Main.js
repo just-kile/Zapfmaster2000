@@ -13,6 +13,7 @@ var ZMO = ZMO || {};
 			"js/Util/Date/TimeParser.js",
 			"js/Util/Net/Ajax.js",
 			"js/Util/Object/Exists.js",
+			"js/Util/Localization/Localization.js",
 			"js/Util/Globalfunctions.js",
 			//modules
 			"js/Modules/Stats/StatsModels.js",

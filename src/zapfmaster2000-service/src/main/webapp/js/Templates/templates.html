@@ -1,0 +1,373 @@
+ <template id="ZMO-frontpagestats-general-template">
+
+	<table class="stats-drinker">
+{{#bestUser}}
+<tr class="stats-drinker-row">
+
+	<td>[[alltimeBest]]</td><td><a href="#">{{userName}}</a> ({{amount}}[[liter]])</td>
+</tr>
+{{/bestUser}}
+{{#bestUserHour}}
+<tr class="stats-drinker-row">
+
+	<td>[[drinkerHourBest]]</td><td><a href="#">{{userName}}</a> ({{amount}}[[liter]])</td>
+</tr>
+{{/bestUserHour}}
+{{#bestAchievement}}
+<tr class="stats-drinker-row">
+
+	<td>[[achievementBest]]</td><td><a href="#">{{userName}}</a> ({{achievementCount}})</td>
+
+</tr>
+{{/bestAchievement}}
+{{#bestDrawCount}}
+<tr class="stats-drinker-row">
+	<td>[[drawCountBest]]</td><td><a href="#">{{userName}}</a> ({{drawCount}}x)</td>
+</tr>
+{{/bestDrawCount}}
+{{#promille}}
+<tr class="stats-drinker-row">
+	<td>[[alcohollevelBest]]</td><td>{{promille}} &permil;</td>
+</tr>
+{{/promille}}
+
+
+<!-- Frontpage User stats -->
+{{#news}}
+<tr class="stats-drinker-row">
+	<td><img src="{{image}}" /> </td><td>{{name}}</td>
+</tr>
+{{/news}}
+{{#amount}}
+<tr class="stats-drinker-row">
+	<td>[[completeAmount]]</td><td>{{complete}} [[liter]]</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>[[mostActivitiyHour]]</td><td>{{mostActivityHour}} [[clock]]</td>
+</tr>
+{{/amount}}
+{{#userRank}}
+<tr class="stats-drinker-row">
+	<td>[[userRank]]</td><td>{{amount}}.</td>
+</tr>
+{{/userRank}}
+</table>
+
+ </template>
+  <template id="ZMO-frontpagestats-template" type="text/html">
+ <div class="text">
+	<table class="stats-drinker">
+<tr class="stats-drinker-row">
+	<td>[[kegId]] </td><td>{{keg_id}}</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>[[brand]] </td><td>{{brand}}</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>[[currentAmount]] </td><td>[[currentAmountTemplate]]</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>[[kegStartDate]] </td><td>{{start_date}}</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>[[lastsUntil]] </td><td>{{lastsUntilShort}} [[clock]]</td>
+</tr>
+</table>
+</div>
+ </template>
+   <template id="ZMO-achievementsstats-list-template" type="text/html">
+<tr class="stats-drinker-row">
+<td><img src="{{userImage}}" /></td>
+<td><a href="#userStats?id={{userId}}">{{userName}}</a></td>
+<td>[[reachedAt]]</td>
+</tr>
+ </template>
+    <template id="ZMO-achievementsstats-description-template" type="text/html">
+<table class="stats-drinker">
+<tr >
+	<td>[[image]]</td>
+	<td><img src="{{achievementImage}}" /></td>
+
+</tr>
+<tr >
+	<td>[[achievementName]]</td>
+<td>{{achievementName}}</td>
+</tr>
+<tr >
+	<td>[[description]]</td>
+<td>{{description}}</td>
+</tr>
+</table>
+ </template>
+ <template id="ZMO-duelsRow" type="text/html">
+ <li class="row">
+	<div class="rowContainer">
+<div class="team1_amount"></div>
+	<div class="team2_amount"></div>
+	<!--<span class="backgrnd"><img src="css/images/challenge.png" style="opacity:0.5"/></span>
+	-->
+	<span class="team"><img src="{{team1}}"/></span>
+	<span class="type">({{type}})</span>
+	<span class="team2"><img src="{{team2}}"/></span>
+	<span class="time">{{time}}</span>
+</div>
+</li>
+ </template>
+<template id="ZMO-news-template" type="text/html">
+		<div class="news-drink-box">
+			<div class="news-drink-box-mugshot">
+				<div>
+					<a><img width="48" height="48" border="0" src="{{image}}"></a>
+				</div>
+			</div>
+			<div class="news-drink-box-details">
+				<div class="news-drink-box-details-headline">
+					<a href="#">{{name}}</a> [[draws]] <b>{{amount}}</b>[[liter]]
+				</div>
+				<div class="news-box-info">[[newsboxInfoTemplate]]
+				</div>
+			</div>
+			<div class="news-box-dateline">
+				<abbr title="{{date}}" class="timeago">[[atTime]]</abbr>
+			</div>
+		</div>
+</template>
+<template id="ZMO-news-template-achievement" type="text/html">
+<div class="news-drink-box">
+	<div class="news-drink-box-mugshot">
+		<div>
+			<a>
+				<img src="{{image}}" border="0" height="48" width="48">
+			</a>
+		</div>
+	</div>
+	<div class="news-drink-box-details">
+		<div class="news-drink-box-details-headline">
+			<a href="#">{{username}}</a> [[reachedAchievement]]
+			
+				<a href="#achievementstats?id={{achievement_id}}">{{name}}</a>
+			
+		</div>
+		<div class="news-box-info">
+			[[place]] <a href="place.php">{{place}}</a>
+		</div>
+	</div>
+	<div class="news-box-dateline">
+		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
+	</div>
+</div>
+</template>
+<template id="ZMO-news-template-challenge-started" type="text/html">
+<div class="news-drink-box">
+	<div class="news-drink-box-mugshot">
+		<div>
+			<a>
+				<img src="{{image}}" border="0" height="48" width="48">
+			</a>
+		</div>
+	</div>
+	<div class="news-drink-box-details">
+		<div class="news-drink-box-details-headline">
+			<a href="#">{{team1}}</a> [[startsChallengeAgainst]]<a href="#">{{team2}}</a>!
+		</div>
+		<div class="news-box-info">
+			[[place]] <a href="#">{{place}}</a>
+		</div>
+	</div>
+	<div class="news-box-dateline">
+		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
+	</div>
+</div>
+</template>
+
+<template id="ZMO-news-template-challenge-done">
+<div class="news-drink-box">
+	<div class="news-drink-box-mugshot">
+		<div>
+			<a>
+				<img src="{{image}}" border="0" height="48" width="48">
+			</a>
+		</div>
+	</div>
+	<div class="news-drink-box-details">
+		<div class="news-drink-box-details-headline">
+			<a href="#">{{team1}}</a> [[hadChallengeAgainst]] <a href="#">{{team2}}</a>.<br /> [[winnerIs]]
+		</div>
+		<div class="news-box-info">
+			[[place]] <a href="#">{{place}}</a>
+		</div>
+	</div>
+	<div class="news-box-dateline">
+		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
+	</div>
+</div>
+</template>
+<template id="ZMO-news-template-challenge-declined">
+<div class="news-drink-box">
+	<div class="news-drink-box-mugshot">
+		<div>
+			<a>
+				<img src="{{image}}" border="0" height="48" width="48">
+			</a>
+		</div>
+	</div>
+	<div class="news-drink-box-details">
+		<div class="news-drink-box-details-headline">
+			[[declinedChallengeTemplate]]
+		</div>
+		<div class="news-box-info">
+			[[place]]<a href="#">{{place}}</a>
+		</div>
+	</div>
+	<div class="news-box-dateline">
+		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
+	</div>
+</div>
+</template>
+<template id="ZMO-achievements-template-box">
+<div class="news-drink-box">
+	<div class="member-box-left">
+		<div class="news-drink-box-mugshot">
+			<div>
+				<a href="#achievementstats?id={{achievementId}}">
+					<img width="48" height="48" border="0" src="{{achievementImage}}">
+				</a>
+			</div>
+		</div>
+		<div class="members-box-headline">
+			<a href="#achievementstats?id={{achievementId}}">{{achievementName}}</a>
+		</div>
+		<div class="members-box-amount">
+			[[achievementCountReached]]
+		</div>
+	</div>
+
+{{#additional}}
+	<div class="member-box-additional">
+		+ {{additionalCount}}
+	</div>
+{{/additional}}
+
+{{#users}}	
+	<div class="member-box-achievement-mugshot">
+		<div>
+			<a href="#users?id={{userId}}">
+				<img width="48" height="48" border="0" src="{{userImage}}" title="{{userName}}">
+			</a>
+		</div>
+	</div>	
+{{/users}}
+
+<div style="clear:both;"></div>
+</div>
+
+
+</template>
+
+<template id="ZMO-news-new-keg" type="text/html">
+<div class="news-drink-box">
+	<div class="news-drink-box-mugshot">
+		<div>
+			<img src="{{image}}" border="0" height="48" width="48">
+		</div>
+	</div>
+	<div class="news-drink-box-details">
+		<div class="news-drink-box-details-headline">
+				[[newKeg]]
+		</div>
+		<div class="news-box-info">[[plage]] {{location}}</div>
+	</div>
+	<div class="news-box-dateline">
+		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
+	</div>
+</div>
+</template>
+
+<template id="ZMO-news-new-user" type="text/html">
+<div class="news-drink-box">
+	<div class="news-drink-box-mugshot">
+		<div>
+			<img src="{{image}}" border="0" height="48" width="48">
+		</div>
+	</div>
+	<div class="news-drink-box-details">
+		<div class="news-drink-box-details-headline">
+				<a href="#">{{userName}}</a> [[newUser]]
+		</div>
+	</div>
+	<div class="news-box-dateline">
+		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
+	</div>
+</div>
+</template>
+
+<template id="ZMO-members-template-box">
+<div class="news-drink-box">
+	<div class="member-box-left">
+		<div class="news-drink-box-mugshot">
+			<div>
+				<a href="#user?id={{userId}}">
+					<img width="48" height="48" border="0" src="{{userImage}}">
+				</a>
+			</div>
+		</div>
+		<div class="members-box-headline">
+			<a href="#user?id={{userId}}">{{userName}}</a>
+		</div>
+		<div class="members-box-amount">
+			[[tappedQuantity]]
+		</div>
+	</div>
+
+{{#additional}}
+	<div class="member-box-additional">
+		+ {{additionalCount}}
+	</div>
+{{/additional}}
+
+{{#achievements}}	
+	<div class="member-box-achievement-mugshot">
+		<div>
+			<a href="#achievementstats?id={{achievementId}}">
+				<img width="48" height="48" border="0" src="{{imagePath}}" title="{{achievementName}}">
+			</a>
+		</div>
+	</div>	
+{{/achievements}}
+
+<div style="clear:both;"></div>
+</div>
+
+
+</template>
+<template id="ZMO-stats-bestlist-item">
+<tr class="bestlist-item">
+<td class="rank">
+{{rank}}.
+</td>
+	<td class="name">
+		<a href="#stats?userid={{userId}}">{{userName}}</a>	
+	</td>
+	<td class="amount">
+		{{#amount}}{{amount}}{{/amount}}
+		{{#achievementCount}}{{achievementCount}}{{/achievementCount}}
+		{{#drawCount}}{{drawCount}}{{/drawCount}}
+ {{unit}}
+	</td>
+</tr>
+</template>
+<template id="ZMO-stats-drinker">
+<tr class="stats-drinker-row">
+	<td>
+		{{description}}
+	</td>
+	<td>
+		{{#isLink}}
+			<a href="#stats?userid={{user_id}}">{{user_name}}</a><span>&nbsp;({{amount}})</span>	
+		{{/isLink}}
+		{{#isText}}
+			<span>{{text}}</span><span>&nbsp;{{unit}}</span>	
+		{{/isText}}
+	</td>
+</tr>
+</template>

@@ -8,19 +8,33 @@ ZMO.parseHash = function(str){
 	return str.substr(1);
 }
 ZMO.getTemplates = function(callback){
-	var url = ZMO.Constants.templateUrl;
+	var url = ZMO.UtilConstants.templateUrl;
 	$.ajax({
 		"url":url,
 		type:"GET",
 		complete:function(resp){
-			var datas = {templates:[]};
+			var datas = [];
 			try{
 				//datas = jQuery.parseJSON(resp.responseText);
-				datas = eval("("+resp.responseText+")");
+//				datas = eval("("+resp.responseText+")");
+				var text =  resp.responseText;
+				var templates = $(resp.responseText);
 			}catch(e){
 				ZMO.logger.warning("Parsing error! No ICH Templates loaded: "+e.toLocaleString());
 			}
-			callback(datas.templates);
+			$.each(templates,function(ind,template){
+				if(template.nodeName.toLowerCase()=="template"){
+					template = $(template);
+					var name = template.attr("id");
+					var templateText = new RegExp('<template id=\"'+name+'\"[^>]*>((.|[\r\n])*?)<\/template>').exec(text);
+					datas.push({
+						name:name,
+						template:templateText?templateText[1]:""
+					});
+				}
+			});
+//			callback(datas.templates);
+			callback(datas);
 		}
 	});
 };
