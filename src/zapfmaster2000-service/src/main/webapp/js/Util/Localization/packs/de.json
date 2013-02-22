@@ -41,5 +41,8 @@
 
 "remaining":"verbleibend",
 "complete":"Komplett",
-"kegOverview":"Fass Übersicht"
+"kegOverview":"Fass Übersicht",
+"amount":"Menge",
+"generalStats":"Allgemeine Stats",
+"kegNumber":"Fass "
 }

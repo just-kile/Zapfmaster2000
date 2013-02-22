@@ -41,5 +41,8 @@
 
 "remaining":"Remaining",
 "complete":"Complete",
-"kegOverview":"Keg Overview"
+"kegOverview":"Keg Overview",
+"amount":"Amount",
+"generalStats":"General Stats",
+"kegNumber":"Keg No."
 }
