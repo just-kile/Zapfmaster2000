@@ -11,6 +11,7 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		COMPLETE:"complete",
 		TITLE:"kegOverview",
 		XBAR:"Liter",
+		NOBODY:"nobody"
 		
 	};
 
@@ -131,7 +132,7 @@ ZMO.modules.kegstatusView = (function($,ajax){
 			obj.userId = statsList[0].userId;
 			obj.amount  = (statsList[0].amount || statsList[0].drawCount ||statsList[0].achievementCount);
 		}else{
-			obj.userName = "Noch niemand";
+			obj.userName = wording.NOBODY;
 			obj.userId = "";
 		}
 		
