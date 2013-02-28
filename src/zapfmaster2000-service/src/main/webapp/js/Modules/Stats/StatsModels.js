@@ -12,12 +12,13 @@ ZMO.modules.StatsModel = function(config){
 		this.amount = new ZMO.modules.AmountStatsModel(config.amount);
 		this.achievements = new ZMO.modules.AchievementStatsModel(config.achievements);
 		this.drawCount  =new ZMO.modules.DrawCountModel (config.drawCount);
-		this.progress = new ZMO.modules.ProgressModel(config.progress);
+		this.progress = new ZMO.modules.ProgressModel(config.progress||config.drinkProgress);
 	
-		this.promille = config.promille?config.promille.average||config.promille.alcoholLevel.toFixed(2):null;
+		this.promille = config.promille?config.promille.average||config.promille.alcoholLevel||config.alcoholLevel.alcoholLevel:null;
+		this.promille = this.promille?this.promille.toFixed(2):null;
 		
-		this.bestUserList = new ZMO.modules.BestUserListModel(config.bestUserList);
-		this.bestUserListHour = new ZMO.modules.BestUserListModel(config.bestUserListHour);
+		this.bestUserList = new ZMO.modules.BestUserListModel(config.bestUserList||config.amountUserList);
+		this.bestUserListHour = new ZMO.modules.BestUserListModel(config.amountUserListLastHour);
 		this.achievementUserList = new ZMO.modules.AchievementUserListModel(config.achievementUserList);
 		this.drawCountUserList = new ZMO.modules.DrawCountUserListModel(config.drawCountUserList);
 		this.rank = new ZMO.modules.RankModel(config.rank);
@@ -53,7 +54,7 @@ ZMO.modules.AchievementUserListModel = function(config){
 			userId:user.userId||user.id,
 			userName:user.userName||user.name,
 			userImage:user.userImage||user.image,
-			achievementCount:user.count||config.achievementCount
+			achievementCount:user.count||user.achievementCount
 		});
 	});
 	}
@@ -111,7 +112,7 @@ ZMO.modules.AmountStatsModel = function(config){
 	if("undefined"!=typeof config){
         this.complete = config.amountTotal.toFixed(2);
         this.once=config.greatestDrawing;
-        this.mostActivityHour=config.mostActivityHour;
+        this.mostActivityHour=config.mostActivityHour||config.amountMostActivityHour;
 	}
 };
 /**
