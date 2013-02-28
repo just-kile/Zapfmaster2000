@@ -28,8 +28,8 @@ ZMO.modules.challenges = (function($,ajax){
 	};
 	var parseChallengesOverview = function(model){
 		return ich["ZMO-duelsRow"]({
-			team1:model.team1Images.join(""),
-			team2:model.team2Images.join(""),
+			team1:model.team1,
+			team2:model.team2,
 			type:function(){
 				//model.challenge_type,
 				var am1 = model.team1Amount.toFixed(2);

@@ -83,34 +83,11 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		 }
 	 var parseChallengesStarted = function(val){
 			var model = new ZMO.GlobalChallengeModel(val)
-			return ich["ZMO-news-template-challenge-started"]({
-				team1:model.team1.join(","),
-				team2:model.team2.join(","),
-				duration:model.duration,
-				type:model.challenge_type,
-				image:model.image,
-				date:model.date
-			})
+			return ich["ZMO-news-template-challenge-started"](model);
 		}
 		var parseChallengesDone = function(val){
 			var model = new ZMO.GlobalChallengeModel(val);
-			var winner,loser;
-			if(typeof model.team1Won!="undefined" &&typeof model.team1Won[0]!="undefined" && model.team1Won[0]){
-				winner=model.team1;
-				loser=model.team2;
-			}else{
-				winner=model.team2;
-				loser=model.team1;
-			}
-			return ich["ZMO-news-template-challenge-done"]({
-				team1:model.team1.join(","),
-				team2:model.team2.join(","),
-				duration:model.duration,
-				type:model.challenge_type,
-				winner:winner.join(","),
-				image:model.image,
-				date:model.date
-			});
+			return ich["ZMO-news-template-challenge-done"](model);
 		};
 		var parseChallengesDeclined = function(val){
 			var model = new ZMO.GlobalChallengeModel(val);
@@ -121,16 +98,9 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				exNumber = Math.round(Math.random()*10)%(mC.badExcuses.length);				
 			}
 
-			var excuse = mC.badExcuses[exNumber];
-			return ich["ZMO-news-template-challenge-declined"]({
-				team1:model.team1.join(","),
-				team2:model.team2.join(","),
-				duration:model.duration,
-				type:model.challenge_type,
-				reason:excuse,
-				image:model.image,
-				date:model.date
-			})
+			model.reason = mC.badExcuses[exNumber];
+			
+			return ich["ZMO-news-template-challenge-declined"](model);
 		}
 	 
 	 var updateNewslist = function(startVal,length,callback){

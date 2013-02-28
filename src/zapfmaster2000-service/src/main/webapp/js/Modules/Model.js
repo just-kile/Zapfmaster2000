@@ -104,14 +104,24 @@ ZMO.GlobalChallengeModel = function(config){
 		return count;
 	};
 	
-	this.team1 = parseTeam(config.team1,"userName");
-	this.team2 = parseTeam(config.team2,"userName");
-	this.team1Images = parseTeam(config.team1,"userImage");
-	this.team2Images = parseTeam(config.team2,"userImage");
+	this.team1 = config.team1;
+	this.team2 = config.team2;
+//	this.team1 = parseTeam(config.team1,"userName");
+//	this.team2 = parseTeam(config.team2,"userName");
+//	this.team1Images = parseTeam(config.team1,"userImage");
+//	this.team2Images = parseTeam(config.team2,"userImage");
 	this.team1Amount = sumArr(parseTeam(config.team1,"amount"));
 	this.team2Amount = sumArr(parseTeam(config.team2,"amount"));
 	this.team1Won =  parseTeam(config.team1,"won");
 	this.team2Won =  parseTeam(config.team2,"won");
+	
+	this.winner =(function(){
+		if(typeof config.team1Won!="undefined" &&typeof config.team1Won[0]!="undefined" && config.team1Won[0]){
+			return config.team1;
+		}else{
+			return config.team2;
+		}
+	})();
 	
 	this.image = config.image||config.challengeImage;
 	this.dateParser = config.startDate?new ZMO.TimeParser(config.startDate):null;

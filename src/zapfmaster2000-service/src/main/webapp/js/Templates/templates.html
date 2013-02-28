@@ -142,9 +142,9 @@
 	<div class="team2_amount"></div>
 	<!--<span class="backgrnd"><img src="css/images/challenge.png" style="opacity:0.5"/></span>
 	-->
-	<span class="team"><img src="{{team1}}"/></span>
+	<span class="team">{{#team1}}<img src="{{userImage}}"/>{{/team1}}</span>
 	<span class="type">({{type}})</span>
-	<span class="team2"><img src="{{team2}}"/></span>
+	<span class="team2">{{#team2}}<img src="{{userImage}}"/>{{/team2}}</span>
 	<span class="time">{{time}}</span>
 </div>
 </li>
@@ -226,7 +226,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			<a href="#">{{team1}}</a> [[hadChallengeAgainst]] <a href="#">{{team2}}</a>.<br /> [[winnerIs]]
+			[[hadChallengeAgainst]]
 		</div>
 		<div class="news-box-info">
 			[[place]] <a href="#">{{place}}</a>
