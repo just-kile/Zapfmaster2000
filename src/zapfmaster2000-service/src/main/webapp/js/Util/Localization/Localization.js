@@ -20,7 +20,7 @@ ZMO.loadTemplate = function(name,val,callb){
 ZMO.Util.localization = (function($){
 	var c = ZMO.UtilConstants;
 	var languagePack = null;
-	var translate = function(msg){
+	var translateTemplate = function(msg){
 		return replaceStringByMap(msg,languagePack||{});
 	};
 	var translateString = function(msg){
@@ -66,7 +66,7 @@ ZMO.Util.localization = (function($){
 	};
 	var pub = {
 			replaceStringByMap:replaceStringByMap,
-			translate:translate,
+			translateTemplate:translateTemplate,
 			translateString:translateString,
 			changeLang:changeLang,
 			getLang:getLang,

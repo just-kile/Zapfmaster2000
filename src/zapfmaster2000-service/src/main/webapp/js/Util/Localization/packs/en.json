@@ -45,5 +45,7 @@
 "amount":"Amount",
 "generalStats":"General Stats",
 "kegNumber":"Keg No.",
-"nobody":"Nobody in sight"
+"nobody":"Nobody in sight",
+"challengeRemaining":"{{time}} min remaining",
+"challengeDone":"Challenge done!"
 }

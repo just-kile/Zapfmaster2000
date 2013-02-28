@@ -40,7 +40,7 @@ ZMO.controller = (function($,document,view,ajax,localization){
 				ZMO.getTemplates(function(templates){
 					//Add Templates to ICanHaz - Engine
 					$.each(templates, function (ind,template) {
-						ich.addTemplate(template.name, localization.translate(template.template));
+						ich.addTemplate(template.name, localization.translateTemplate(template.template));
 				    });
 					view.init();
 					$(window).bind("hashchange",onPageChange);

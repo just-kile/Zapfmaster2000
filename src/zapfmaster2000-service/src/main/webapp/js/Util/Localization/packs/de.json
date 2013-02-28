@@ -45,5 +45,8 @@
 "amount":"Menge",
 "generalStats":"Allgemeine Stats",
 "kegNumber":"Fass ",
-"nobody":"Niemand"
+"nobody":"Niemand",
+
+"challengeRemaining":"{{time}} min verbleibend",
+"challengeDone":"Challenge beendet"
 }
