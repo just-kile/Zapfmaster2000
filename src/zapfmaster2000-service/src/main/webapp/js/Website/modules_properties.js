@@ -66,7 +66,7 @@ ZMO.modules_properties ={
 				footer:[]
 			}
 		},
-		achievementstats:{
+		achievement:{
 			sections:{
 				navigation:[{
 					moduleId:"navigation",

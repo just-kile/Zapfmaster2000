@@ -8,8 +8,9 @@ ZMO.modules.achievementstats = (function($,ajax){
 	var container;
 	var onMembersReceive = function(stats){
 		container.empty();
+		var model = new ZMO.modules.AchievementStatisticsModel(stats);
 		//container.append("<div class=\"member-headline\">Members: " + members.length + "</div>");
-		var m = ich["ZMO-achievementsstats-description-template"](stats);
+		var m = ich["ZMO-achievementsstats-description-template"](model);
 		container.append(m);
 	};
 	/**
