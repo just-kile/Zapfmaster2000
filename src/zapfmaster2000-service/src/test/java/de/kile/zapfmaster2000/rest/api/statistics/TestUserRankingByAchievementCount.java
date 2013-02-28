@@ -146,7 +146,7 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 		// everybody has achievement count 1
 		assertEquals(user1.getGained().size(),
 				((AchievementUserListResponse) rawAchievementListResponse[0])
-						.getCount());
+						.getAchievementCount());
 	}
 
 	@Test
@@ -167,14 +167,14 @@ public class TestUserRankingByAchievementCount extends AbstractMockingTest {
 		// everybody has achievement 1
 		assertEquals(user1.getGained().size(),
 				((AchievementUserListResponse) rawAchievementListResponse[0])
-						.getCount());
+						.getAchievementCount());
 	}
 
 	public void assertConforms(User user, AchievementUserListResponse response) {
 		assertEquals(user.getName(), response.getName());
 		assertEquals(user.getId(), response.getId());
 		assertEquals(user.getImagePath(), response.getImage());
-		assertEquals(user.getGained().size(), response.getCount());
+		assertEquals(user.getGained().size(), response.getAchievementCount());
 	}
 
 }

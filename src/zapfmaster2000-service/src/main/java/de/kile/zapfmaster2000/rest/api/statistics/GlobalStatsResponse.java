@@ -6,11 +6,11 @@ public class GlobalStatsResponse {
 	private AchievementResponse achievements;
 	private DrawCountResponse drawCount;
 	private DrawCountUserListResponse[] drawCountUserList;
-	private UserAmountResponse[] bestUserList;
-	private UserAmountResponse[] bestUserListHour;
+	private UserAmountResponse[] amountUserList;
+	private UserAmountResponse[] amountUserListLastHour;
 	private AchievementUserListResponse[] achievementUserList;
-	private DrinkProgressResponse progress;
-	private AlcoholLevelResponse promille;
+	private DrinkProgressResponse drinkProgress;
+	private AlcoholLevelResponse alcoholLevel;
 
 	public KegResponse[] getKeg() {
 		return keg;
@@ -45,12 +45,12 @@ public class GlobalStatsResponse {
 		this.drawCountUserList = drawCountUserList;
 	}
 
-	public UserAmountResponse[] getBestUserList() {
-		return bestUserList;
+	public UserAmountResponse[] getAmountUserList() {
+		return amountUserList;
 	}
 
-	public void setBestUserList(UserAmountResponse[] bestUserList) {
-		this.bestUserList = bestUserList;
+	public void setAmountUserList(UserAmountResponse[] amountUserList) {
+		this.amountUserList = amountUserList;
 	}
 
 	public AchievementUserListResponse[] getAchievementUserList() {
@@ -62,28 +62,28 @@ public class GlobalStatsResponse {
 		this.achievementUserList = achievementUserList;
 	}
 
-	public DrinkProgressResponse getProgress() {
-		return progress;
+	public DrinkProgressResponse getDrinkProgress() {
+		return drinkProgress;
 	}
 
-	public void setProgress(DrinkProgressResponse progress) {
-		this.progress = progress;
+	public void setDrinkProgress(DrinkProgressResponse drinkProgress) {
+		this.drinkProgress = drinkProgress;
 	}
 
-	public AlcoholLevelResponse getPromille() {
-		return promille;
+	public AlcoholLevelResponse getAlcoholLevel() {
+		return alcoholLevel;
 	}
 
-	public void setPromille(AlcoholLevelResponse promille) {
-		this.promille = promille;
+	public void setAlcoholLevel(AlcoholLevelResponse alcoholLevel) {
+		this.alcoholLevel = alcoholLevel;
 	}
 
-	public UserAmountResponse[] getBestUserListHour() {
-		return bestUserListHour;
+	public UserAmountResponse[] getAmountUserListLastHour() {
+		return amountUserListLastHour;
 	}
 
-	public void setBestUserListHour(UserAmountResponse[] bestUserListHour) {
-		this.bestUserListHour = bestUserListHour;
+	public void setAmountUserListHour(UserAmountResponse[] amountUserListHour) {
+		this.amountUserListLastHour = amountUserListHour;
 	}
 
 	public AchievementResponse getAchievements() {

@@ -2,32 +2,32 @@ package de.kile.zapfmaster2000.rest.api.statistics;
 
 public class RankResponse {
 
-	private long achievements;
-	private long amount;
-	private long drawCount;
+	private long rankAchievements;
+	private long rankAmount;
+	private long rankDrawCount;
 
 	public long getAchievements() {
-		return achievements;
+		return rankAchievements;
 	}
 
-	public void setAchievements(long achievements) {
-		this.achievements = achievements;
+	public void setRankAchievements(long rankAchievements) {
+		this.rankAchievements = rankAchievements;
 	}
 
-	public long getAmount() {
-		return amount;
+	public long getRankAmount() {
+		return rankAmount;
 	}
 
-	public void setAmount(long amount) {
-		this.amount = amount;
+	public void setRankAmount(long rankAmount) {
+		this.rankAmount = rankAmount;
 	}
 
-	public long getDrawCount() {
-		return drawCount;
+	public long getRankDrawCount() {
+		return rankDrawCount;
 	}
 
-	public void setDrawCount(long drawCount) {
-		this.drawCount = drawCount;
+	public void setRankDrawCount(long rankDrawCount) {
+		this.rankDrawCount = rankDrawCount;
 	}
 
 }

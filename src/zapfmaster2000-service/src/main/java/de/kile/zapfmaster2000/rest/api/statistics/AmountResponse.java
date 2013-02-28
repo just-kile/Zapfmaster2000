@@ -6,7 +6,7 @@ public class AmountResponse {
 	 */
 	private double amountTotal;
 	private double greatestDrawing;
-	private int mostActivityHour;
+	private int amountMostActivityHour;
 
 	public double getAmountTotal() {
 		return amountTotal;
@@ -24,12 +24,12 @@ public class AmountResponse {
 		this.greatestDrawing = greatestDrawing;
 	}
 
-	public int getMostActivityHour() {
-		return mostActivityHour;
+	public int getAmountMostActivityHour() {
+		return amountMostActivityHour;
 	}
 
-	public void setMostActivityHour(int mostActivityHour) {
-		this.mostActivityHour = mostActivityHour;
+	public void setAmountMostActivityHour(int mostActivityHour) {
+		this.amountMostActivityHour = mostActivityHour;
 	}
 
 }

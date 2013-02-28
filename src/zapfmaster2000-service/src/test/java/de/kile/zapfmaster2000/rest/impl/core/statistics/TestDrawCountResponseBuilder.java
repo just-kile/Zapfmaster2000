@@ -53,7 +53,7 @@ public class TestDrawCountResponseBuilder extends AbstractMockingTest {
 				.retrieveDrawCountResponse(-1, account1);
 
 		assertEquals(3, drawCountResponse.getCount());
-		assertEquals(1.5, drawCountResponse.getAverageOperationsPerHour());
+		assertEquals(1.5, drawCountResponse.getDrawCountPerHour());
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public class TestDrawCountResponseBuilder extends AbstractMockingTest {
 				.retrieveDrawCountResponse(user2.getId(), account1);
 
 		assertEquals(2, drawCountResponse.getCount());
-		assertEquals(2.0, drawCountResponse.getAverageOperationsPerHour());
+		assertEquals(2.0, drawCountResponse.getDrawCountPerHour());
 	}
 	
 	@Test
@@ -71,7 +71,7 @@ public class TestDrawCountResponseBuilder extends AbstractMockingTest {
 				.retrieveDrawCountResponse(userEmpty.getId(), account1);
 
 		assertEquals(0, drawCountResponse.getCount());
-		assertEquals(0.0, drawCountResponse.getAverageOperationsPerHour());
+		assertEquals(0.0, drawCountResponse.getDrawCountPerHour());
 	}
 	
 	@Test
@@ -80,7 +80,7 @@ public class TestDrawCountResponseBuilder extends AbstractMockingTest {
 				.retrieveDrawCountResponse(666, account1);
 
 		assertEquals(0, drawCountResponse.getCount());
-		assertEquals(0.0, drawCountResponse.getAverageOperationsPerHour());
+		assertEquals(0.0, drawCountResponse.getDrawCountPerHour());
 
 	}
 

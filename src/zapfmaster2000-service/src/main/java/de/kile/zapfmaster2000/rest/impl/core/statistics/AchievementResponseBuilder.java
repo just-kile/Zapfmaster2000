@@ -69,11 +69,11 @@ public class AchievementResponseBuilder {
 
 		AchievementResponse response = new AchievementResponse();
 
-		response.setCount((Long) resultAchievementCount.get(0));
+		response.setAchievementCount((Long) resultAchievementCount.get(0));
 		if (resultMostActivity.size() > 0) {
-			response.setMostAchievementHour((Integer) resultMostActivity.get(0));
+			response.setAchievementMostAchievementHour((Integer) resultMostActivity.get(0));
 		} else {
-			response.setMostAchievementHour(-1);
+			response.setAchievementMostAchievementHour(-1);
 		}
 
 		return response;

@@ -66,8 +66,8 @@ public class TestRankResponseBuilder extends AbstractMockingTest {
 		RankResponse rankResponse = RankBuilder.retrieveRank(user1.getId(),
 				account);
 
-		assertEquals(2, rankResponse.getAmount());
-		assertEquals(2, rankResponse.getDrawCount());
+		assertEquals(2, rankResponse.getRankAmount());
+		assertEquals(2, rankResponse.getRankDrawCount());
 		assertEquals(1, rankResponse.getAchievements());
 
 	}
@@ -77,8 +77,8 @@ public class TestRankResponseBuilder extends AbstractMockingTest {
 		RankResponse rankResponse = RankBuilder.retrieveRank(userEmpty.getId(),
 				account);
 
-		assertEquals(4, rankResponse.getAmount());
-		assertEquals(4, rankResponse.getDrawCount());
+		assertEquals(4, rankResponse.getRankAmount());
+		assertEquals(4, rankResponse.getRankDrawCount());
 		assertEquals(3, rankResponse.getAchievements());
 		
 		
@@ -86,8 +86,8 @@ public class TestRankResponseBuilder extends AbstractMockingTest {
 		rankResponse = RankBuilder.retrieveRank(666,
 				account);
 
-		assertEquals(4, rankResponse.getAmount());
-		assertEquals(4, rankResponse.getDrawCount());
+		assertEquals(4, rankResponse.getRankAmount());
+		assertEquals(4, rankResponse.getRankDrawCount());
 		assertEquals(3, rankResponse.getAchievements());
 	}
 }

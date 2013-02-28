@@ -85,12 +85,12 @@ public class FrontpageStatsResource {
 			FrontpageStatsResponse frontpageStatsResponse = new FrontpageStatsResponse();
 
 			frontpageStatsResponse.setAchievementUserList(achievementUserList);
-			frontpageStatsResponse.setBestUserList(bestUserList);
-			frontpageStatsResponse.setBestUserListHour(bestUserListHour);
+			frontpageStatsResponse.setAmountUserList(bestUserList);
+			frontpageStatsResponse.setAmountUserListLastHour(bestUserListHour);
 			frontpageStatsResponse
 					.setDrawCountUserList(drawCountUserListResponses);
 			frontpageStatsResponse.setKegs(kegResponses);
-			frontpageStatsResponse.setPromille(promille);
+			frontpageStatsResponse.setAlcoholLevel(promille);
 
 			return Response.ok(frontpageStatsResponse).build();
 

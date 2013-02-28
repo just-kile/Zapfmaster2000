@@ -1,6 +1,9 @@
 package de.kile.zapfmaster2000.rest.api.statistics;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 
 public class KegResponse {
 
@@ -10,7 +13,7 @@ public class KegResponse {
 	private long kegId;
 	private String brand;
 	private int size;
-	private Date startDate;
+	private String startDate;
 	private double currentAmount;
 	private long boxId;
 
@@ -18,7 +21,7 @@ public class KegResponse {
 	 * Number of kegs drunk so far (including the current one)
 	 */
 	private long kegNumber;
-	private Date lastsUntil;
+	private String lastsUntil;
 
 	public long getKegId() {
 		return kegId;
@@ -44,12 +47,20 @@ public class KegResponse {
 		this.size = size;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		SimpleDateFormat sf = new SimpleDateFormat(
+				PlatformConstants.DATE_TIME_FORMAT);
+
+		this.startDate = sf.format(startDate);
+
 	}
 
 	public long getKegNumber() {
@@ -68,12 +79,20 @@ public class KegResponse {
 		this.currentAmount = currentAmount;
 	}
 
-	public Date getLastsUntil() {
+	public String getLastsUntil() {
 		return lastsUntil;
 	}
 
-	public void setLastsUntil(Date lastsUntil) {
+	public void setLastsUntil(String lastsUntil) {
 		this.lastsUntil = lastsUntil;
+	}
+
+	public void setLastsUntil(Date lastsUntil) {
+		SimpleDateFormat sf = new SimpleDateFormat(
+				PlatformConstants.DATE_TIME_FORMAT);
+
+		this.lastsUntil = sf.format(lastsUntil);
+
 	}
 
 	public long getBoxId() {

@@ -58,12 +58,12 @@ public class DrawCountResponseBuilder {
 		}
 
 		DrawCountResponse drawCountResponse = new DrawCountResponse();
-		drawCountResponse.setCount(sum);
+		drawCountResponse.setDrawCount(sum);
 		if (countByHourResult.size() > 0) {
-			drawCountResponse.setAverageOperationsPerHour(Double.valueOf(sum)
+			drawCountResponse.setDrawCountPerHour(Double.valueOf(sum)
 					/ countByHourResult.size());
 		} else {
-			drawCountResponse.setAverageOperationsPerHour(0);
+			drawCountResponse.setDrawCountPerHour(0);
 		}
 		return drawCountResponse;
 	}

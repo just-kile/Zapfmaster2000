@@ -88,9 +88,9 @@ public class RankBuilder {
 		}
 
 		RankResponse response = new RankResponse();
-		response.setAchievements(rankAchievements);
-		response.setAmount(rankAmount);
-		response.setDrawCount(rankDrawCount);
+		response.setRankAchievements(rankAchievements);
+		response.setRankAmount(rankAmount);
+		response.setRankDrawCount(rankDrawCount);
 
 		return response;
 

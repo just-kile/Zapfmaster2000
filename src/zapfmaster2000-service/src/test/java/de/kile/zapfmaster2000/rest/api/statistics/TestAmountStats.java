@@ -72,7 +72,7 @@ public class TestAmountStats extends AbstractMockingTest {
 
 		assertEquals(7.5, amountResponse.getAmountTotal());
 		assertEquals(3.5, amountResponse.getGreatestDrawing());
-		assertEquals(3, amountResponse.getMostActivityHour());
+		assertEquals(3, amountResponse.getAmountMostActivityHour());
 	}
 	
 	@Test
@@ -86,6 +86,6 @@ public class TestAmountStats extends AbstractMockingTest {
 
 		assertEquals(3.3, amountResponse.getAmountTotal());
 		assertEquals(3.0, amountResponse.getGreatestDrawing());
-		assertEquals(4, amountResponse.getMostActivityHour());
+		assertEquals(4, amountResponse.getAmountMostActivityHour());
 	}
 }

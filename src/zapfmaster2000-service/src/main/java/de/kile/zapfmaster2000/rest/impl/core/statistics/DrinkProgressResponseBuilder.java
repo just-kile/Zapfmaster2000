@@ -85,9 +85,9 @@ public class DrinkProgressResponseBuilder {
 			response.setAmount(new double[] { 0.0 });
 			response.setInterval(interval);
 			if (dFrom != null) {
-				response.setFrom(dFrom);
+				response.setStartDate(dFrom);
 			} else {
-				response.setFrom(new Date());
+				response.setStartDate(new Date());
 			}
 			return response;
 		}
@@ -118,7 +118,7 @@ public class DrinkProgressResponseBuilder {
 			amounts = new double [1];
 			amounts[0] = (Double) list.get(0)[0];
 			
-			response.setFrom(dFrom);
+			response.setStartDate(dFrom);
 			response.setInterval(interval);
 			
 			return response;
@@ -143,7 +143,7 @@ public class DrinkProgressResponseBuilder {
 
 		DrinkProgressResponse response = new DrinkProgressResponse();
 		response.setAmount(amounts);
-		response.setFrom(dFrom);
+		response.setStartDate(dFrom);
 		response.setInterval(interval);
 
 		return response;

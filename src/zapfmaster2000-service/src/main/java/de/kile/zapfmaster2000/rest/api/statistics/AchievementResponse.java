@@ -5,30 +5,30 @@ public class AchievementResponse {
 	/**
 	 * Overall number of achievements gained.
 	 */
-	private long count;
+	private long achievementCount;
 	
 	/**
 	 * Most achievement gains per hour.
 	 * -1 if there are no achievements at all.
 	 */
-	private int mostAchievementHour;
+	private int achievementMostAchievementHour;
 
 	// private double achievementspeed;
 
-	public long getCount() {
-		return count;
+	public long getAchievementCount() {
+		return achievementCount;
 	}
 
-	public void setCount(long count) {
-		this.count = count;
+	public void setAchievementCount(long count) {
+		this.achievementCount = count;
 	}
 
-	public int getMostAchievementHour() {
-		return mostAchievementHour;
+	public int getAchievementMostAchievementHour() {
+		return achievementMostAchievementHour;
 	}
 
-	public void setMostAchievementHour(int mostAchievementHour) {
-		this.mostAchievementHour = mostAchievementHour;
+	public void setAchievementMostAchievementHour(int mostAchievementHour) {
+		this.achievementMostAchievementHour = mostAchievementHour;
 	}
 
 }

@@ -64,8 +64,8 @@ public class TestAchievementStats extends AbstractMockingTest {
 		AchievementResponse achievementResponse = (AchievementResponse) response
 				.getEntity();
 
-		assertEquals(3, achievementResponse.getCount());
-		assertEquals(2, achievementResponse.getMostAchievementHour());
+		assertEquals(3, achievementResponse.getAchievementCount());
+		assertEquals(2, achievementResponse.getAchievementMostAchievementHour());
 	}
 
 	@Test
@@ -79,6 +79,6 @@ public class TestAchievementStats extends AbstractMockingTest {
 		AchievementResponse achievementResponse = (AchievementResponse) response
 				.getEntity();
 
-		assertEquals(2, achievementResponse.getCount());
+		assertEquals(2, achievementResponse.getAchievementCount());
 	}
 }

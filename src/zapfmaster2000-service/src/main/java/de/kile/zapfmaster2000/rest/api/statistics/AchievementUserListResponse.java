@@ -7,7 +7,7 @@ public class AchievementUserListResponse {
 	
 	private String userImage;
 	
-	private long count;
+	private long achievementCount;
 
 	public String getName() {
 		return userName;
@@ -33,11 +33,11 @@ public class AchievementUserListResponse {
 		this.userImage = image;
 	}
 
-	public long getCount() {
-		return count;
+	public long getAchievementCount() {
+		return achievementCount;
 	}
 
-	public void setCount(long count) {
-		this.count = count;
+	public void setAchievementCount(long achievementCount) {
+		this.achievementCount = achievementCount;
 	}
 }

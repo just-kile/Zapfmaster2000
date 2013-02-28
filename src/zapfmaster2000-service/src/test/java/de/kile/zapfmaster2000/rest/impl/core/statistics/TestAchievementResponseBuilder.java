@@ -47,8 +47,8 @@ public class TestAchievementResponseBuilder extends AbstractMockingTest {
 				.retrieveAchievementResponse(-1, account1);
 
 
-		assertEquals(3, achievementResponse.getCount());
-		assertEquals(2, achievementResponse.getMostAchievementHour());
+		assertEquals(3, achievementResponse.getAchievementCount());
+		assertEquals(2, achievementResponse.getAchievementMostAchievementHour());
 	}
 
 	@Test
@@ -56,13 +56,13 @@ public class TestAchievementResponseBuilder extends AbstractMockingTest {
 		AchievementResponse achievementResponse = AchievementResponseBuilder
 				.retrieveAchievementResponse(user1.getId(), account1);
 
-		assertEquals(2, achievementResponse.getCount());
+		assertEquals(2, achievementResponse.getAchievementCount());
 	}
 	
 	@Test
 	public void testUserNotFound(){
 		AchievementResponse achievementResponse = AchievementResponseBuilder
 				.retrieveAchievementResponse(666, account1);
-		assertEquals(-1,achievementResponse.getMostAchievementHour());
+		assertEquals(-1,achievementResponse.getAchievementMostAchievementHour());
 	}
 }

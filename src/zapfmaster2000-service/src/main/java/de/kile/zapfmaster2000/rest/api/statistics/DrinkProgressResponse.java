@@ -1,22 +1,25 @@
 package de.kile.zapfmaster2000.rest.api.statistics;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
+
 public class DrinkProgressResponse {
-	private double[] data;
+	private double[] amount;
 
 	/**
 	 * in minutes
 	 */
 	private int interval;
-	private Date startDate;
+	private String startDate;
 
 	public double[] getAmount() {
-		return data;
+		return amount;
 	}
 
 	public void setAmount(double[] amount) {
-		this.data = amount;
+		this.amount = amount;
 	}
 
 	public int getInterval() {
@@ -27,11 +30,19 @@ public class DrinkProgressResponse {
 		this.interval = interval;
 	}
 
-	public Date getFrom() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setFrom(Date from) {
-		this.startDate = from;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		SimpleDateFormat sf = new SimpleDateFormat(
+				PlatformConstants.DATE_TIME_FORMAT);
+
+		this.startDate = sf.format(startDate);
+
 	}
 }

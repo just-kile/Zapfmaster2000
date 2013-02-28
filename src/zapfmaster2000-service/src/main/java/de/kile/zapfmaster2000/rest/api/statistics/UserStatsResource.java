@@ -22,14 +22,14 @@ import de.kile.zapfmaster2000.rest.impl.core.statistics.AmountResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.DrawCountResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.DrinkProgressResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.RankBuilder;
+import de.kile.zapfmaster2000.rest.impl.core.statistics.UserResponseBuilder;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
-
 
 /**
  * 
  * @author PB
- *
+ * 
  */
 @Path("statistics")
 public class UserStatsResource {
@@ -137,15 +137,18 @@ public class UserStatsResource {
 					.retrieveDrinkResponse(account, user, dProgressFrom,
 							dProgressTo, interval);
 			RankResponse rank = RankBuilder.retrieveRank(user, account);
+			UserResponse userResult = UserResponseBuilder.retrieveUserResponse(
+					user, account);
 
 			UserStatsResponse response = new UserStatsResponse();
 
 			response.setAchievement(achievement);
 			response.setAmount(amount);
 			response.setDrawCount(drawCount);
-			response.setProgress(progress);
-			response.setPromille(promille);
+			response.setDrinkProgress(progress);
+			response.setAlcoholLevel(promille);
 			response.setRank(rank);
+			response.setUser(userResult);
 
 			return Response.ok(response).build();
 		}
