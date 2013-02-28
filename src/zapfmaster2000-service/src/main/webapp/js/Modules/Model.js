@@ -31,32 +31,16 @@ ZMO.PageModel = function(conf){
 };
 
 
-
-/**
- * Not used?
- * @param config
- * @returns {ZMO.DrawfeedModel}
- */
-ZMO.DrawfeedModel = function(config){
-	this.name = config.name;
-	this.id = config.id;
-	this.imageurl =config.imageurl;
-	this.duration = config.duration;
-	this.amount = config.amount;
-	this.timestamp = new Date(config.timestamp);
-	this.place = "Harzj";
-	this.keg = config.keg;
-};
 ZMO.NewsModel =function(config){
-	this.name = config.userName;
+	this.userName = config.userName;
 	this.amount = Math.round(config.amount*100)/100;
 	this.duration = config.duration;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"",//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 	this.place = config.place;
 	this.kegId =config.kegId;
 	this.brand = config.brand;
-	this.image =config.image;
-	this.userid = config.userid||config.userId;
+	this.userImage =config.image;
+	this.userId = config.userid||config.userId;
 	this.type = config.type;
 	this.place = "Alter Markt";
 	this.boxId = config.boxId;
@@ -77,13 +61,13 @@ ZMO.NewUserNewsModel =function(config){
 	this.userName = config.userName
 };
 ZMO.AchievementModel = function(config){
-	this.userid = config.userId;
-	this.username = config.userName;
+	this.userId = config.userId;
+	this.userName = config.userName;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"",//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 			
 	this.type = config.type;
-	this.achievement_id = config.achievementId;
-	this.name = config.achievementName;
+	this.achievementId = config.achievementId;
+	this.achievementName = config.achievementName;
 	this.description = config.description;
 	this.image =config.image;
 };
@@ -95,14 +79,6 @@ ZMO.OtherModel = function(config){
 	
 };
 
-ZMO.ChallengeStartedModel = function(config){
-	this.userid = config.userid||config.userId;
-	this.username = config.username||config.userName;
-	this.userimage = config.userimage||config.userImage;
-
-	this.won =config.won;
-	this.amount =config.amount;
-};
 
 ZMO.GlobalChallengeModel = function(config){
 	this.type = config.type;
@@ -127,6 +103,7 @@ ZMO.GlobalChallengeModel = function(config){
 		}
 		return count;
 	};
+	
 	this.team1 = parseTeam(config.team1,"userName");
 	this.team2 = parseTeam(config.team2,"userName");
 	this.team1Images = parseTeam(config.team1,"userImage");

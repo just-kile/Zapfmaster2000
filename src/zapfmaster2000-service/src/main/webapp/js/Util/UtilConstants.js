@@ -11,5 +11,12 @@ ZMO.UtilConstants ={
 		tokenName:"token",
 		serverDateFormat:"yyyyMMdd-HHmmss",
 		clientDateFormat:"dd.MM.yyyy HH:mm:ss",
-		shortFormat:"E, HH:mm"
+		shortFormat:"E, HH:mm",
+		linkUrls:{
+			user:"#user",
+			achievement:"#achievement",
+			team1:"#user",
+			team2:"#user",
+			winner:"#user"
+		}
 };

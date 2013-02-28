@@ -32,6 +32,28 @@ ZMO.Util.localization = (function($){
 			callb();
 		});
 	};
+	var fillLinks = function(link){
+		 var regexString = "{{\\*(.*?)Name\\*}}";
+		 var linkPlaceHolderRegex = new RegExp(regexString,"g");
+		 var matchArr =[],aTag=null;
+		 while(linkPlaceHolderRegex.test(link)){
+			 var div = $("<div>");
+			 matchArr = new RegExp(regexString,"g").exec(link);
+			 var placeHolder = matchArr[0];
+			 var str = matchArr[1];
+			 if(c.linkUrls[str]){
+				 aTag = $("<a>").attr({
+					 href:c.linkUrls[str]+"?id={{"+str+"Id}}"
+				 }).text("{{"+str+"Name}}");
+				 div.append(aTag);
+				 link = link.replace(placeHolder,div.html());
+			 }else{
+				 link = link.replace(placeHolder,"{{"+str+"Name}}");
+			 }
+			 linkPlaceHolderRegex = new RegExp(regexString,"g");
+		 }
+		return link;
+	};
 
 	/**
 	 * This method replaces placeholders ({{foo}}, {{bar}}, {{baz}},...) in a given
@@ -48,7 +70,9 @@ ZMO.Util.localization = (function($){
 	var replaceStringByMap = function(value, map,isSimpleString) {
 	 var tmp = value;
 	 $.each(map, function(key, val) {
-		 var placeHolderRegex = isSimpleString?new RegExp(key, "g"):new RegExp("\\[\\["+key+"\\]\\]", "g");;
+		 val = fillLinks(val); 
+		 var placeHolderRegex = isSimpleString?new RegExp(key, "g"):new RegExp("\\[\\["+key+"\\]\\]", "g");
+		 
 		 tmp = tmp.replace(placeHolderRegex, val);
 	 });
 	 // replace all elements which are not in map
