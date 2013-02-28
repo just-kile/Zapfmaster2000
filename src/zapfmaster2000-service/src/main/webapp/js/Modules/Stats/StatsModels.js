@@ -26,9 +26,9 @@ ZMO.modules.StatsModel = function(config){
 };
 ZMO.modules.RankModel =function(config){
 	if("undefined"!=typeof config){
-		this.amount = config.amount;
-		this.achievements = config.achievements;
-		this.drawCount = config.drawCount;
+		this.amount = config.amount||config.rankAmount;
+		this.achievements = config.achievements||config.rankAchievements;
+		this.drawCount = config.drawCount||config.rankDrawCount;
 	}
 };
 ZMO.modules.BestUserListModel = function(config){
@@ -53,7 +53,7 @@ ZMO.modules.AchievementUserListModel = function(config){
 			userId:user.userId||user.id,
 			userName:user.userName||user.name,
 			userImage:user.userImage||user.image,
-			achievementCount:user.count
+			achievementCount:user.count||config.achievementCount
 		});
 	});
 	}
@@ -121,9 +121,9 @@ ZMO.modules.AmountStatsModel = function(config){
  */
 ZMO.modules.AchievementStatsModel=function(config){
 	if("undefined"!=typeof config){
-        this.count=config.count,
+        this.count=config.count||config.achievementCount,
         //this.achievementspeed = config.achievementspeed;
-        this.mostAchievementHour=config.mostAchievementHour; 
+        this.mostAchievementHour=config.mostAchievementHour||config.achievementMostActivityHour; 
 	}
 };
 /**
@@ -133,9 +133,10 @@ ZMO.modules.AchievementStatsModel=function(config){
  */
 ZMO.modules.DrawCountModel =function(config){
 	if("undefined"!=typeof config){
-		this.operations = config.count;
+		this.operations = config.count||config.drawCount;
 	
-	this.average = config.averageOperationsPerHour.toFixed(2);
+	this.average = config.averageOperationsPerHour||config.drawCountPerHour;
+	this.average = this.average.toFixed(2)
 	}
 };
 /**
@@ -147,7 +148,8 @@ ZMO.modules.ProgressModel = function(config){
 	if("undefined"!=typeof config){
 	this.data = config.data||config.amount;
 	//this.start_date = Date.UTC(2012, 12, 31);// config.start_date;
-	this.start_date =new ZMO.TimeParser(config.from).getTimestamp();
+	var date = config.from||config.startDate;
+	this.start_date =new ZMO.TimeParser(date).getTimestamp();
 	
 	this.interval = config.interval;
 	}
