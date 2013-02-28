@@ -5,8 +5,13 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.challenges = (function($,ajax){
 	var c = ZMO.modules.Constants;
+	var l = ZMO.Util.localization;
 	var container = null,duelsContainerUl= null;
-	
+	var wording = {
+			REMAINING:"challengeRemaining",
+			DONE:"challengeDone",
+			
+	}
 	var stretchLengthStatus = function(newsRow,globalChallengeModel){
     	var team1Div =newsRow.find(".team1_amount");
     	var team2Div =newsRow.find(".team2_amount");
@@ -23,8 +28,8 @@ ZMO.modules.challenges = (function($,ajax){
 	};
 	var parseChallengesOverview = function(model){
 		return ich["ZMO-duelsRow"]({
-			team1:model.team1Images.join(""),
-			team2:model.team2Images.join(""),
+			team1:model.team1,
+			team2:model.team2,
 			type:function(){
 				//model.challenge_type,
 				var am1 = model.team1Amount.toFixed(2);
@@ -37,7 +42,12 @@ ZMO.modules.challenges = (function($,ajax){
 				var duration = parseInt(model.duration)*oneMinute*1;
 				var startDate = ZMO.exists(model.dateParser)?model.dateParser.getTimestamp():0;
 				var time =Math.ceil((startDate+duration-(new Date()).getTime())/oneMinute);
-				return time>0?time +"min verbleibend":"Challenge beendet!";
+				if(time>0){
+					return l.translateString(wording.REMAINING).replace("{{time}}",time);
+				}else{
+					return l.translateString(wording.DONE);
+				}
+//				return time>0?time +"min verbleibend":"Challenge beendet!";
 			})()
 		});
 	};

@@ -8,13 +8,9 @@ ZMO.modules.achievementlist = (function($,ajax){
 	var container;
 	var onMembersReceive = function(achievement){
 		container.empty();
-		container.append("<div class=\"member-headline\">Achievement: " + achievement.achievementName + "</div>");
-		var listDiv = $("<div>").addClass("statsdiv").appendTo(container);
-		var table= $("<table>").addClass("stats-drinker").appendTo(listDiv);
-		$.each(achievement.users,function(ind,val){
-			var m = ich["ZMO-achievementsstats-list-template"](val);
-			table.append(m);
-		});
+		var model = new ZMO.modules.AchievementStatisticsModel(achievement);
+		var template = ich["ZMO-achievementsstats-list-template"](model);
+		template.appendTo(container);
 	};
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM

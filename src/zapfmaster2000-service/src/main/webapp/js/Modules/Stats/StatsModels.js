@@ -152,4 +152,21 @@ ZMO.modules.ProgressModel = function(config){
 	this.interval = config.interval;
 	}
 };
-
+ZMO.modules.AchievementStatisticsModel = function(config){
+	this.achievementId = config.achievementId;
+	this.achievementName = config.achievementName;
+	this.achievementImage = config.achievementImage;
+	this.description = config.description;
+	this.users = (function(){
+		var arr = [];
+		$.each(config.users,function(ind,user){
+			arr.push({
+				userName:user.userName,
+				userImage:user.userImage,
+				userId:user.userId,
+				date:new ZMO.TimeParser(user.date).getDefaultTime()
+			});
+		});
+		return arr;
+	})();
+};

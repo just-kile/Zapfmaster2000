@@ -4,25 +4,25 @@
 {{#bestUser}}
 <tr class="stats-drinker-row">
 
-	<td>[[alltimeBest]]</td><td><a href="#">{{userName}}</a> ({{amount}}[[liter]])</td>
+	<td>[[alltimeBest]]</td><td><a href="#user?id={{userId}}">{{userName}}</a> ({{amount}}[[liter]])</td>
 </tr>
 {{/bestUser}}
 {{#bestUserHour}}
 <tr class="stats-drinker-row">
 
-	<td>[[drinkerHourBest]]</td><td><a href="#">{{userName}}</a> ({{amount}}[[liter]])</td>
+	<td>[[drinkerHourBest]]</td><td><a href="#user?id={{userId}}">{{userName}}</a> ({{amount}}[[liter]])</td>
 </tr>
 {{/bestUserHour}}
 {{#bestAchievement}}
 <tr class="stats-drinker-row">
 
-	<td>[[achievementBest]]</td><td><a href="#">{{userName}}</a> ({{achievementCount}})</td>
+	<td>[[achievementBest]]</td><td><a href="#user?id={{userId}}">{{userName}}</a> ({{achievementCount}})</td>
 
 </tr>
 {{/bestAchievement}}
 {{#bestDrawCount}}
 <tr class="stats-drinker-row">
-	<td>[[drawCountBest]]</td><td><a href="#">{{userName}}</a> ({{drawCount}}x)</td>
+	<td>[[drawCountBest]]</td><td><a href="#user?id={{userId}}">{{userName}}</a> ({{drawCount}}x)</td>
 </tr>
 {{/bestDrawCount}}
 {{#promille}}
@@ -111,14 +111,8 @@
 </table>
 </div>
  </template>
-   <template id="ZMO-achievementsstats-list-template" type="text/html">
-<tr class="stats-drinker-row">
-<td><img src="{{userImage}}" /></td>
-<td><a href="#userStats?id={{userId}}">{{userName}}</a></td>
-<td>[[reachedAt]]</td>
-</tr>
- </template>
-    <template id="ZMO-achievementsstats-description-template" type="text/html">
+
+<template id="ZMO-achievementsstats-description-template" type="text/html">
 <table class="stats-drinker">
 <tr >
 	<td>[[image]]</td>
@@ -135,6 +129,23 @@
 </tr>
 </table>
  </template>
+ <template id="ZMO-achievementsstats-list-template" type="text/html">
+<div>
+<div class="member-headline">Achievement: {{achievementName}}</div>
+<div class="statsdiv">
+<table class="stats-drinker">
+{{#users}}
+	<tr class="stats-drinker-row">
+		<td><img src="{{userImage}}" /></td>
+		<td><a href="#user?id={{userId}}">{{userName}}</a></td>
+		<td>[[reachedAt]]</td>
+	</tr>
+{{/users}}
+</table>
+</div>
+</div>
+
+ </template>
  <template id="ZMO-duelsRow" type="text/html">
  <li class="row">
 	<div class="rowContainer">
@@ -142,9 +153,9 @@
 	<div class="team2_amount"></div>
 	<!--<span class="backgrnd"><img src="css/images/challenge.png" style="opacity:0.5"/></span>
 	-->
-	<span class="team"><img src="{{team1}}"/></span>
+	<span class="team">{{#team1}}<img src="{{userImage}}"/>{{/team1}}</span>
 	<span class="type">({{type}})</span>
-	<span class="team2"><img src="{{team2}}"/></span>
+	<span class="team2">{{#team2}}<img src="{{userImage}}"/>{{/team2}}</span>
 	<span class="time">{{time}}</span>
 </div>
 </li>
@@ -153,12 +164,12 @@
 		<div class="news-drink-box">
 			<div class="news-drink-box-mugshot">
 				<div>
-					<a><img width="48" height="48" border="0" src="{{image}}"></a>
+					<a href="#user?id={{userId}}"><img width="48" height="48" border="0" src="{{userImage}}"></a>
 				</div>
 			</div>
 			<div class="news-drink-box-details">
 				<div class="news-drink-box-details-headline">
-					<a href="#">{{name}}</a> [[draws]] <b>{{amount}}</b>[[liter]]
+					[[draws]]<!-- <a href="#">{{userName}}</a> [[draws]] <b>{{amount}}</b>[[liter]] -->
 				</div>
 				<div class="news-box-info">[[newsboxInfoTemplate]]
 				</div>
@@ -172,16 +183,15 @@
 <div class="news-drink-box">
 	<div class="news-drink-box-mugshot">
 		<div>
-			<a>
+			<a href="#achievement?id={{achievementId}}">
 				<img src="{{image}}" border="0" height="48" width="48">
 			</a>
 		</div>
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			<a href="#">{{username}}</a> [[reachedAchievement]]
+			 [[reachedAchievement]]
 			
-				<a href="#achievementstats?id={{achievement_id}}">{{name}}</a>
 			
 		</div>
 		<div class="news-box-info">
@@ -204,7 +214,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			<a href="#">{{team1}}</a> [[startsChallengeAgainst]]<a href="#">{{team2}}</a>!
+			[[startsChallengeAgainst]]!
 		</div>
 		<div class="news-box-info">
 			[[place]] <a href="#">{{place}}</a>
@@ -227,7 +237,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-			<a href="#">{{team1}}</a> [[hadChallengeAgainst]] <a href="#">{{team2}}</a>.<br /> [[winnerIs]]
+			[[hadChallengeAgainst]]
 		</div>
 		<div class="news-box-info">
 			[[place]] <a href="#">{{place}}</a>
@@ -265,13 +275,13 @@
 	<div class="member-box-left">
 		<div class="news-drink-box-mugshot">
 			<div>
-				<a href="#achievementstats?id={{achievementId}}">
+				<a href="#achievement?id={{achievementId}}">
 					<img width="48" height="48" border="0" src="{{achievementImage}}">
 				</a>
 			</div>
 		</div>
 		<div class="members-box-headline">
-			<a href="#achievementstats?id={{achievementId}}">{{achievementName}}</a>
+			<a href="#achievement?id={{achievementId}}">{{achievementName}}</a>
 		</div>
 		<div class="members-box-amount">
 			[[achievementCountReached]]
@@ -328,7 +338,7 @@
 	</div>
 	<div class="news-drink-box-details">
 		<div class="news-drink-box-details-headline">
-				<a href="#">{{userName}}</a> [[newUser]]
+				[[newUser]]
 		</div>
 	</div>
 	<div class="news-box-dateline">
@@ -364,7 +374,7 @@
 {{#achievements}}	
 	<div class="member-box-achievement-mugshot">
 		<div>
-			<a href="#achievementstats?id={{achievementId}}">
+			<a href="#achievement?id={{achievementId}}">
 				<img width="48" height="48" border="0" src="{{imagePath}}" title="{{achievementName}}">
 			</a>
 		</div>
@@ -382,28 +392,13 @@
 {{rank}}.
 </td>
 	<td class="name">
-		<a href="#stats?userid={{userId}}">{{userName}}</a>	
+		<a href="#user?id={{userId}}">{{userName}}</a>	
 	</td>
 	<td class="amount">
 		{{#amount}}{{amount}}{{/amount}}
 		{{#achievementCount}}{{achievementCount}}{{/achievementCount}}
 		{{#drawCount}}{{drawCount}}{{/drawCount}}
  {{unit}}
-	</td>
-</tr>
-</template>
-<template id="ZMO-stats-drinker">
-<tr class="stats-drinker-row">
-	<td>
-		{{description}}
-	</td>
-	<td>
-		{{#isLink}}
-			<a href="#stats?userid={{user_id}}">{{user_name}}</a><span>&nbsp;({{amount}})</span>	
-		{{/isLink}}
-		{{#isText}}
-			<span>{{text}}</span><span>&nbsp;{{unit}}</span>	
-		{{/isText}}
 	</td>
 </tr>
 </template>
