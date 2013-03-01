@@ -14,7 +14,7 @@ ZMO.modules.StatsModel = function(config){
 		this.drawCount  =new ZMO.modules.DrawCountModel (config.drawCount);
 		this.progress = new ZMO.modules.ProgressModel(config.progress||config.drinkProgress);
 	
-		this.promille = config.promille?config.promille.average||config.promille.alcoholLevel||config.alcoholLevel.alcoholLevel:null;
+		this.promille = config.promille?config.promille.average||config.promille.alcoholLevel:(config.alcoholLevel?config.alcoholLevel.alcoholLevel:null);
 		this.promille = this.promille?this.promille.toFixed(2):null;
 		
 		this.bestUserList = new ZMO.modules.BestUserListModel(config.bestUserList||config.amountUserList);
