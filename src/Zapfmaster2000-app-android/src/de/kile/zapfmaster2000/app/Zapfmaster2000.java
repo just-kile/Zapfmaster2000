@@ -29,7 +29,7 @@ public class Zapfmaster2000 extends DroidGap
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        super.loadUrl("file:///android_asset/www/index.html");
+        super.loadUrl("file:///android_asset/webapp/index.html");
        // this.appView.getSettings().setJavaScriptEnabled(true);
        // this.appView.addJavascriptInterface(new MyPhoneGap(), "MyPhoneGap");
           

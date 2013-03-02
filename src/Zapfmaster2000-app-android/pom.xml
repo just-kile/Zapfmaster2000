@@ -20,19 +20,39 @@
 			<artifactId>phonegap</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-	
+
 	</dependencies>
 	<build>
 
 		<sourceDirectory>src</sourceDirectory>
 		<pluginManagement>
 			<plugins>
+				<!--<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<wtpversion>1.5</wtpversion>
+						<linkedResources>
+							<linkedResource>
+								<name>js</name>
+								<type>2</type>
+								<location>${project.basedir}\..\Zapfmaster2000-service\src\main\webapp\js</location>
+							</linkedResource>
+							<linkedResource>
+								<name>jslibs</name>
+								<type>2</type>
+								<location>${project.basedir}\..\Zapfmaster2000-service\src\main\webapp\libs</location>
+							</linkedResource>
+						</linkedResources>
+					</configuration>
+				</plugin>-->
 				<plugin>
 					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 					<artifactId>android-maven-plugin</artifactId>
 					<version>3.5.0</version>
 					<extensions>true</extensions>
 				</plugin>
+
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -53,7 +73,8 @@
 				<extensions>true</extensions>
 				<version>3.5.0</version>
 				<configuration>
-					<assetsDirectory>assets</assetsDirectory>
+					<!--  <assetsDirectory>assets</assetsDirectory>-->
+					<assetsDirectory>..\Zapfmaster2000-service\src\main</assetsDirectory>
 					<resourceDirectory>res</resourceDirectory>
 					<sourceDirectory>src</sourceDirectory>
 					<run>
