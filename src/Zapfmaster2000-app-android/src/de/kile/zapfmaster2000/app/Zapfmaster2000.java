@@ -19,7 +19,9 @@
 
 package de.kile.zapfmaster2000.app;
 
-import android.app.Activity;
+import java.io.IOException;
+import java.util.Arrays;
+
 import android.os.Bundle;
 import org.apache.cordova.*;
 
@@ -29,7 +31,18 @@ public class Zapfmaster2000 extends DroidGap
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        super.loadUrl("file:///android_asset/webapp/index.html");
+        try {
+			if(Arrays.asList(getResources().getAssets().list("")).contains("index.html")) {
+	        	super.loadUrl("file:///android_asset/index.html");
+	        }else{
+	        	super.loadUrl("file:///android_asset/webapp/index.html");
+	        }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
        // this.appView.getSettings().setJavaScriptEnabled(true);
        // this.appView.addJavascriptInterface(new MyPhoneGap(), "MyPhoneGap");
           
