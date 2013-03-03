@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.kile.zapfmaster2000</groupId>
+	<artifactId>zapfmaster2000-app-android</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>apk</packaging>
+	<properties>
+		<skip.install>false</skip.install>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>4.1.1.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cordova</groupId>
+			<artifactId>phonegap</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+
+		<sourceDirectory>src</sourceDirectory>
+		<pluginManagement>
+			<plugins>
+				<!--<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<wtpversion>1.5</wtpversion>
+						<linkedResources>
+							<linkedResource>
+								<name>js</name>
+								<type>2</type>
+								<location>${project.basedir}\..\Zapfmaster2000-service\src\main\webapp\js</location>
+							</linkedResource>
+							<linkedResource>
+								<name>jslibs</name>
+								<type>2</type>
+								<location>${project.basedir}\..\Zapfmaster2000-service\src\main\webapp\libs</location>
+							</linkedResource>
+						</linkedResources>
+					</configuration>
+				</plugin>-->
+				<plugin>
+					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+					<artifactId>android-maven-plugin</artifactId>
+					<version>3.5.0</version>
+					<extensions>true</extensions>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<version>3.5.0</version>
+				<configuration>
+					<!--  <assetsDirectory>assets</assetsDirectory>-->
+					<assetsDirectory>..\Zapfmaster2000-service\src\main\webapp</assetsDirectory>
+					<resourceDirectory>res</resourceDirectory>
+					<sourceDirectory>src</sourceDirectory>
+					<run>
+						<debug>true</debug>
+					</run>
+					<sdk>
+						<platform>10</platform>
+					</sdk>
+					<emulator>
+						<avd>10</avd>
+					</emulator>
+					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
