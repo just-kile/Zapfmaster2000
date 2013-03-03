@@ -1,0 +1,19 @@
+===README===
+
+Steps before you can work with it:
+
+1. install the cordova jar --> see libs
+2. make a symbolic link in the assets folder to the Zapfmaster shared modules:
+*Windows:cd to assets folder, then: mklink /D webapp "c:\...\gitrepoFolder\Zapfmaster2000\src\zapfmaster2000-service\src\main\webapp"
+*Mac/linux: make a symlink to the above folder with ln -s ~/git/Zapfmaster2000/src/zapfmaster2000-service/src/main/webapp webapp
+
+3.Then you can either use
+*maven:
+mvn clean install android:deploy android:run
+or
+*Eclipse:
+rightclick on project-> run as -> Android Application
+
+Step 2 is not necessary if you only use maven!
+
+4. Congratulations! Keep  zapfing ;)
