@@ -1,11 +1,24 @@
+html, body {
+    margin: 0;
+    padding: 0;
+	
+}
 body {
-	background: none repeat scroll 0 0 #FFFFFF;
-	background-image: url(../images/view/backgrnd2.jpg);
+	
 	color: black;
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0;
+	width:100%;
+overflow-x:hidden;
+background: none repeat scroll 0 0 #FFFFFF;
+background-image: url(../images/view/backgrnd2.jpg);
 }
 
+.zm-viewport{
+	width:100%;
+	overflow-x:hidden;
+	
+}
 a:link {
 	color: #D3FFC5;
 	font-weight: bold;
@@ -66,13 +79,28 @@ a:hover {
 
 .nav {
 	z-index: 1000;
-	height: 2em;
+	
 	/*margin-top:-80px;*/
-	position: relative;
+	position: absolute;
 	width: 100%;
+	top:0;
 	
 }
-
+.major{
+	 width: 100%;
+	/* position: absolute;*/
+	/*margin- top: 3em;
+	 bottom: 3em;*/
+}
+#wrapper{
+		/*position:absolute;*/
+		 z-index:1;
+	padding-top:45px; 
+	bottom:0; left:0;
+	width:100%;
+	
+	/*overflow:auto;*/
+}
 .zm_col {
 	float: left;
 	
@@ -286,13 +314,24 @@ display:none;
 
 .main {
 	width: 100%;
+	/*height: auto;*/
+	position:relative;
+background: url(../images/view/backgrnd2.jpg) repeat scroll 0 0 #FFFFFF;
+	
+	min-height:100%;
+	z-index:1;
+	
 }
-
+.side{
+	z-index:0;
+}
 .news-backgrnd {
 	float: left;
 	margin-left: 0px;
 	width: 100%;
 	height: auto;
+	/*background: url(../images/view/backgrnd2.jpg) repeat scroll 0 0 #FFFFFF;*/
+	box-shadow:0 0 30px #000;
 }
 
 
@@ -491,7 +530,7 @@ border-radius: 5px;
 	border: 5px solid #99ffff;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
-	background-image: url(../images/view/news_background2.png);
+
 	color: #FFF;
 
 }
@@ -620,17 +659,132 @@ box-shadow: 0px 1px 5px #000, 0px -1px 5px #000;
 }
 
 .ZMO-logout{
-	height:2em;
-	line-height:2em;
-	width:5em;
+	height:3em;
+	margin-top:3em;
+	line-height:3em;
+	width:100%;
 	text-align:center;
-	right:5px;
-	position:absolute;
 	background:#222;
 	box-shadow:0 0 5px #000;
 	color:white;
-	border-radius:0 0 5px 5px;
-	border:1px solid #999;
-	border-top:0;
+	border-radius:5px;
+	border:1px solid #666;
 	
 }
+.ZMO-header > .logo img,.nav,.ZMO-header,.ZMO-header .naviBtn,.ZMO-header .notificationsBtn,.ZMO-header .usersBtn{
+	height:3em;
+}
+.ZMO-header{
+	color:white;
+border: 1px solid #555;
+width: 100%;
+
+background: rgba(55,55,55,0.9);
+/*background: rgba(68,55,55,0.9);*/ /* Old browsers */
+/*box-shadow: 0px 1px 5px #000, 0px -1px 5px #000;*/
+box-shadow: 0px 1px 5px #000;
+position:fixed;
+z-index:1;
+}
+.ZMO-header > .button img{
+	padding:0.5em 1em;
+	width:1.5em;
+	
+}
+
+.ZMO-header .naviBtn{
+
+	width:4em;
+	
+	position:absolute;
+	left:0em;
+	z-index:11;
+}
+.ZMO-header .notificationsBtn{
+	
+	width:100%;
+	z-index:1;
+	background:transparent;
+	text-align:center;
+	
+}
+.ZMO-header .usersBtn{
+	
+	width:4em;
+	
+	position:absolute;
+	right:0em;
+	z-index:11;
+}
+.left{
+	left:-100%;
+	
+}
+.right{
+	left:100%;
+}
+.ZMO-sideNavigation{
+	width:80%;
+	top:0;
+	height:120%;
+	background:rgba(0,0,0,0.8);
+	position:fixed;
+	
+	z-index:2;
+	
+}
+
+.ZMO-sideNavigation ul{
+	color:white;
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+.ZMO-sideNavigation li{
+	color:white;
+	list-style:none;
+	height:3em;
+	padding-left:1em;
+	border-bottom:1px solid #000;
+	background: #333;
+	line-height:3em;
+}
+.ZMO-sideNavigation div{
+position:absolute;
+left:4em;
+}
+.ZMO-sideNavigation img{
+float:left;
+margin-top:0.5em;
+height:2em;
+width:2em;
+}
+
+
+/* This is the element that we apply the animation to. */
+.animate{
+	-webkit-transition-duration:0.2s;
+	 -webkit-transform: translate3d(0, 0, 0);
+}
+
+
+.animateSide {
+-webkit-transform:translate3d(125%,0px,0px);
+}
+
+
+/*Challenge user list*/
+
+.animateChall {
+-webkit-transform:translate3d(-80%,0px,0px);
+}
+
+
+.rAnimate{
+-webkit-transform:translate3d(0,0px,0px);
+}
+
+
+
+
+

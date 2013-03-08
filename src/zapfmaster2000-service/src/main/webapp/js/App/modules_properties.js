@@ -10,7 +10,7 @@ ZMO.modules_properties ={
 					position:[0,0],
 					params:{}
 				},{
-					moduleId:"logout",
+					moduleId:"header",
 					ratio:"100%",
 					position:[0,0],
 				}],
@@ -21,11 +21,16 @@ ZMO.modules_properties ={
 					params:{}
 				}],
 				  
-				footer:[{
-						moduleId:"navigationMobile",
-						ratio:"100%",
-						position:[0,0]
-					}]
+				footer:[],
+				side:[{
+					moduleId:"sideNavigation",
+					ratio:"100%",
+					position:[0,0]
+				},{
+					moduleId:"challengeUserList",
+					ratio:"100%",
+					position:[0,0]
+				}]
 			}
 		},
 		duels:{
@@ -35,7 +40,7 @@ ZMO.modules_properties ={
 					ratio:"100%",
 					position:[0,0]
 				},{
-					moduleId:"logout",
+					moduleId:"header",
 					ratio:"100%",
 					position:[0,0],
 				}],
@@ -45,11 +50,16 @@ ZMO.modules_properties ={
 					position:[0,0]
 				}],
 				  
-				footer:[{
-						moduleId:"navigationMobile",
-						ratio:"100%",
-						position:[0,0]
-					}]
+				footer:[],
+				side:[{
+					moduleId:"sideNavigation",
+					ratio:"100%",
+					position:[0,0]
+				},{
+					moduleId:"challengeUserList",
+					ratio:"100%",
+					position:[0,0]
+				}]
 			}
 		},
 		dare:{
@@ -59,7 +69,7 @@ ZMO.modules_properties ={
 					ratio:"100%",
 					position:[0,0]
 				},{
-					moduleId:"logout",
+					moduleId:"header",
 					ratio:"100%",
 					position:[0,0],
 				}],
@@ -69,11 +79,74 @@ ZMO.modules_properties ={
 					position:[0,0]
 				}],
 				  
-				footer:[{
-						moduleId:"navigationMobile",
-						ratio:"100%",
-						position:[0,0]
-					}]
+				footer:[],
+				side:[{
+					moduleId:"sideNavigation",
+					ratio:"100%",
+					position:[0,0]
+				},{
+					moduleId:"challengeUserList",
+					ratio:"100%",
+					position:[0,0]
+				}]
+			}
+		},
+		settings:{
+			sections:{
+				navigation:[{
+					moduleId:"receiveChallenge",
+					ratio:"100%",
+					position:[0,0]
+				},{
+					moduleId:"header",
+					ratio:"100%",
+					position:[0,0],
+				}],
+				main:[{
+					moduleId:"settings",
+					ratio:"100%",
+					position:[0,0]
+				}],
+				  
+				footer:[],
+				side:[{
+					moduleId:"sideNavigation",
+					ratio:"100%",
+					position:[0,0]
+				},{
+					moduleId:"challengeUserList",
+					ratio:"100%",
+					position:[0,0]
+				}]
+			}
+		},
+		logout:{
+			sections:{
+				navigation:[{
+					moduleId:"receiveChallenge",
+					ratio:"100%",
+					position:[0,0]
+				},{
+					moduleId:"header",
+					ratio:"100%",
+					position:[0,0],
+				}],
+				main:[{
+					moduleId:"logout",
+					ratio:"100%",
+					position:[0,0]
+				}],
+				  
+				footer:[],
+				side:[{
+					moduleId:"sideNavigation",
+					ratio:"100%",
+					position:[0,0]
+				},{
+					moduleId:"challengeUserList",
+					ratio:"100%",
+					position:[0,0]
+				}]
 			}
 		}
 		
