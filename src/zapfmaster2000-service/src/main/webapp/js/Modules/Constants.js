@@ -106,11 +106,23 @@ ZMO.modules.Constants = {
 			image:"images/icons/89-dumbell.png"
 		},{
 			link:"#dare",
-			text:"Dare",
-			title:"Dare",
-			image:"images/icons/22-skull-n-bones.png"
+			text:"Stats",
+			title:"Stats",
+			image:"images/icons/16-line-chart.png"
 		
-}],
+		},{
+			link:"#settings",
+			text:"Einstellungen",
+			title:"Einstellungen",
+			image:"images/icons/102-walk.png"
+		
+		},{
+			link:"#logout",
+			text:"Logout",
+			title:"Logout",
+			image:"images/icons/102-walk.png"
+		
+		}],
 badExcuses:["1","2","und 3"]
 	
 

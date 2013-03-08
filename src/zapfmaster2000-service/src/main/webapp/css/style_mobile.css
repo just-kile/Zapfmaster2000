@@ -19,6 +19,10 @@ background-image: url(../images/view/backgrnd2.jpg);
 	overflow-x:hidden;
 	
 }
+.zm-viewport-disable-scroll{
+		height:100%;
+	overflow-y:hidden;
+}
 a:link {
 	color: #D3FFC5;
 	font-weight: bold;
@@ -729,7 +733,7 @@ z-index:1;
 	height:120%;
 	background:rgba(0,0,0,0.8);
 	position:fixed;
-	
+	box-shadow:0 0 40px #000;
 	z-index:2;
 	
 }
@@ -740,27 +744,64 @@ z-index:1;
 	padding:0;
 	margin:0;
 }
-.ZMO-sideNavigation li{
+.ZMO-sideNavigation li.ZMO-sideNavigation-header{
+	height:2em;
+	color:#999;
+	padding-left:1em;
+	/*padding-top:1em;*/
+	line-height:2em;
+	
+background: #333333; /* Old browsers */
+background: -moz-linear-gradient(top,  #333333 2%, #111111 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(2%,#333333), color-stop(100%,#111111)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #333333 2%,#111111 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #333333 2%,#111111 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #333333 2%,#111111 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #333333 2%,#111111 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#111111',GradientType=0 ); /* IE6-9 */
+
+	
+}
+.ZMO-sideNavigation li.ZMO-sideNavigation-entry{
 	color:white;
 	list-style:none;
 	height:3em;
 	padding-left:1em;
+	border-top:1px solid #444;
 	border-bottom:1px solid #000;
 	background: #333;
 	line-height:3em;
 }
-.ZMO-sideNavigation div{
+.ZMO-sideNavigation div.name-navigation{
+margin-left:2em;
+}
+.ZMO-sideNavigation div.name{
 position:absolute;
 left:4em;
 }
 .ZMO-sideNavigation img{
 float:left;
-margin-top:0.5em;
-height:2em;
-width:2em;
+margin-top:1em;
+height:1em;
+width:1em;
 }
-
-
+img.icon-big{
+	margin-top:0.5em;
+	height:2em;
+	width:2em;
+}
+#challengeUser-wrapper{
+ overflow:auto;
+  width:100%;
+  height:100%;
+  position:relative;
+}
+.scroller{
+	  /*position:absolute;
+  /*    -webkit-touch-callout:none;*/
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  padding:0;*/
+}
 /* This is the element that we apply the animation to. */
 .animate{
 	-webkit-transition-duration:0.2s;
@@ -776,7 +817,7 @@ width:2em;
 /*Challenge user list*/
 
 .animateChall {
--webkit-transform:translate3d(-80%,0px,0px);
+-webkit-transform:translate3d(-100%,0px,0px);
 }
 
 

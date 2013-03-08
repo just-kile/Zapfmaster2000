@@ -9,6 +9,7 @@ ZMO.modules.sideNavigation = (function($,ajax){
 	var visible =false;
 	
 	var show =function(){
+		ZMO.scrolling.disable();
 		ZMO.Utils.animator.animateLeft(mainContainer,container,function(){
 			visible=true;
 		});
@@ -16,6 +17,7 @@ ZMO.modules.sideNavigation = (function($,ajax){
 		
 	};
 	var hide = function(){
+		ZMO.scrolling.enable();
 		ZMO.Utils.animator.animateLeftRev(mainContainer,container,function(){
 			//"container" will be hided at webkiTransitionEnd event
 			visible = false;
@@ -35,10 +37,13 @@ ZMO.modules.sideNavigation = (function($,ajax){
 	var init = function(hashParams,moduleParams){
 		ZMO.Utils.animator.init(container);
 		var ul = $("<ul>").appendTo(container);
+		//Header
+		$("<li>").addClass("ZMO-sideNavigation-header").text("Navigation").appendTo(ul);
+		//entry creation
 		$.each(mC.navbarMobile,function(ind,val){
-			var title = $("<div>").text(val.title);
+			var title = $("<div>").addClass("name-navigation").text(val.title);
 			var image = $("<img>").attr("src",val.image);
-			var li = $("<li>");//.data("link",val.link);
+			var li = $("<li>").addClass("ZMO-sideNavigation-entry");//.data("link",val.link);
 			li.append(image).append(title);
 			new google.ui.FastButton(li[0], function(e){
 				e.preventDefault();
@@ -64,7 +69,7 @@ ZMO.modules.sideNavigation = (function($,ajax){
 
 
 	};
-	/**
+/**
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
