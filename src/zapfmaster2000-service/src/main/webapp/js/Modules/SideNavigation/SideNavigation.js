@@ -57,7 +57,7 @@ ZMO.modules.sideNavigation = (function($,ajax){
 //				$(this).css("background","");
 //			});
 			li.on("mousedown",function(){
-				$(this).css("background","grey");
+				//$(this).css("background","grey");
 			});
 			ul.append(li);
 		});
