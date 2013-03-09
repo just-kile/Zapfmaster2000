@@ -32,7 +32,10 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 //					ZMO.changePage("#");
 //				
 //				});
-				li.on("mouseup",function(e){
+				li.on("mouseup touchend",function(e){
+					if(!getIsScroll()){
+						alert("bliub")
+					}
 //					e.preventDefault();
 //					hide();
 //					alert("User"+val.userName);
@@ -49,11 +52,17 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 			if(!scroller){
 				addScrollHandler();
 			}else{
-				scroller.refresh();
+				setTimeout(function(){
+					scroller.refresh();
+				},0);
 			}
 		});
 	};
 	var scroller = null;
+	var isScroll = false;
+	var getIsScroll = function(){
+		return isScroll;
+	}
 	var addScrollHandler = function(){
 		setTimeout(function(){
 			pullDownOffset = pullDownEl.outerHeight();
@@ -72,6 +81,9 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 						} 
 					},
 					onScrollMove: function () {
+						if(Math.abs(this.distY)>10){
+							isScroll = true;
+						}
 						if (this.y > 5 && !pullDownEl.hasClass('flip')) {
 							pullDownEl.removeClass().addClass('flip');
 							pullDownEl.find('.pullDownLabel').text('Release to refresh...');
@@ -88,6 +100,9 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 							pullDownEl.find('.pullDownLabel').text( 'Loading...');				
 							refreshMemberlist();	// Execute custom function (ajax call?)
 						}
+						setTimeout(function(){
+							isScroll = false;
+						},0);
 					}
 				   //  momentum:false
 				});
