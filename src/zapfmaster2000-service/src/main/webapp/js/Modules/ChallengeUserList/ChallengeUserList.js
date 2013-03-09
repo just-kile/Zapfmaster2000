@@ -6,9 +6,60 @@ ZMO.modules = ZMO.modules || {};
 ZMO.modules.challengeUserList = (function($,ajax,view){
 	
 	var c = ZMO.modules.Constants;
-	var container =null,mainContainer = null,wrapper,scrollContainer,pullDownEl,ul,entryListArr = [];
+	var container =null,mainContainer = null,wrapper,scrollContainer,pullDownEl,ul,entryListArr = [],oldElement = null;
+	var createTimeChooserContainer = function(memberModel){
+		timeArr = c.challenges.modes.params;
+		var cont = $("<div>").addClass("zmo-challenges-timeChooser").hide();
+		
+		$.each(timeArr,function(ind,obj){
+			var textContainer = $("<div>").text(obj.name);
+			textContainer.on("mouseup touchend",function(e){
+				var duration = obj.duration;
+				var type = obj.type;//challengeDatas.type.id;
+				var challengeeId = memberModel.userId;
+				ajax.sendChallengeRequest(type,challengeeId,duration,function(){
+					alert("Challenge "+obj.duration+"min gegen "+memberModel.userName +" gestartet!");
+				});
+					
+			});
+			
+			$("<div>").addClass("zmo-challenges-timeChooser-button").append(textContainer).appendTo(cont);
+			
+		});
+		return cont;
+	};
+	var hideTime = function(li,timeChoser){
+		if(!timeChoser)timeChoser = li.find(".zmo-challenges-timeChooser");
+		var name = li.find(".name");
+		timeChoser.fadeOut(100,function(){
+			name.fadeIn();
+		});
+	};
+	var showTime = function(li,timeChoser){
+		if(!timeChoser)timeChoser = li.find(".zmo-challenges-timeChooser");
+		var name = li.find(".name");
+		name.fadeOut(100,function(){
+			timeChoser.fadeIn();
+		});
+	};
+	var toggleTime = function(li){
+		var timeChoser = li.find(".zmo-challenges-timeChooser");
+		
+		if(timeChoser.is(":visible")){
+//			timeChoser.hide();
+//			name.show();
+			hideTime(li,timeChoser);
+			//image.show();
+		}else{
+			showTime(li,timeChoser);
+//			timeChoser.show();
+//			name.hide();
+			//image.hide();
+		}
+	}
 	var refreshMemberlist = function(){
-		ajax.getDatas(c.urls.MEMBERS,function(resp){
+		//ajax.getDatas(c.urls.MEMBERS,function(resp){
+		ajax.getDatas(c.urls.CHALLENGEEMEMBERS,function(resp){
 			//remove old elements
 			$.each(entryListArr,function(ind,el){
 				el.remove();
@@ -24,8 +75,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 				var title = $("<div>").text(val.userName + ", "+val.totalAmount+"L").addClass("name");
 				var image = $("<img>").attr("src",val.userImage).addClass("icon-big");
 				var li = $("<li>").addClass("ZMO-sideNavigation-entry");//.data("link","#");
-				
-				li.append(image).append(title);
+				li.append(image).append(title).append(createTimeChooserContainer(val));
 //				new google.ui.FastButton(li[0], function(e){
 //					e.preventDefault();
 //					hide();
@@ -34,7 +84,8 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 //				});
 				li.on("mouseup touchend",function(e){
 					if(!getIsScroll()){
-						alert("bliub")
+						//alert("bliub")
+						elementClickHandler(e);
 					}
 //					e.preventDefault();
 //					hide();
@@ -54,7 +105,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 			}else{
 				setTimeout(function(){
 					scroller.refresh();
-				},0);
+				},1000);
 			}
 		});
 	};
@@ -81,7 +132,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 						} 
 					},
 					onScrollMove: function () {
-						if(Math.abs(this.distY)>10){
+						if(Math.abs(this.distY+this.distX)>10){
 							isScroll = true;
 						}
 						if (this.y > 5 && !pullDownEl.hasClass('flip')) {
@@ -129,6 +180,16 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 	var toggle = function(){
 		visible?hide():show();
 	};
+	
+	/**
+	 * Send Challenge Handles
+	 */
+	var elementClickHandler = function(e){
+		var li = $(e.currentTarget);
+		if(oldElement)hideTime(oldElement);
+		toggleTime(li);
+		oldElement =li;
+	}
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */

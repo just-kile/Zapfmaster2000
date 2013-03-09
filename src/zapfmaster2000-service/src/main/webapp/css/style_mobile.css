@@ -872,6 +872,21 @@ img.icon-big{
 	-webkit-animation-timing-function:linear;
 }
 
+
+
+.zmo-challenges-timeChooser-button{
+	display:inline-block;
+}
+.zmo-challenges-timeChooser-button div{
+	border:1px solid #666;
+	margin-left:0.5em;
+	line-height:2em;
+	margin-top:0.5em;
+	padding:0 5px;
+	 -webkit-tap-highlight-color:#ccc;
+	
+}
+
 @-webkit-keyframes loading {
 	from { -webkit-transform:rotate(0deg) translateZ(0); }
 	to { -webkit-transform:rotate(360deg) translateZ(0); }

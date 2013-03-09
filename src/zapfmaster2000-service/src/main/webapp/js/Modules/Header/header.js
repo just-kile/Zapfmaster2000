@@ -18,11 +18,20 @@ ZMO.modules.header = (function($,ajax){
 	var onNaviBtnClick = function(e){
 		//e.stopPropagation();
 		e.preventDefault();
-		ZMO.modules.sideNavigation.toggle();
+		if(ZMO.modules.challengeUserList.isVisible()){
+			ZMO.modules.challengeUserList.toggle();
+		}else{
+			ZMO.modules.sideNavigation.toggle();
+		}
+		
 	};
 	var onUsersBtnClick = function(e){
 		e.preventDefault();
-		ZMO.modules.challengeUserList.toggle();
+		if(ZMO.modules.sideNavigation.isVisible()){
+			ZMO.modules.sideNavigation.toggle();
+		}else{
+			ZMO.modules.challengeUserList.toggle();
+		}
 	};
 	var onNotificationBtnClick = function(){
 		//alert("Not");

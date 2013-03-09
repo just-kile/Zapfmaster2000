@@ -45,28 +45,25 @@ ZMO.modules.Constants = {
 				name:"Laenge",
 				id:"length",
 				params:[{
-					name:"10 Minuten",
+					name:"10min",
 					id:"mode-tenMinutes",
 					image:"images/challenges/10min.jpg",
-					duration:10
+					duration:10,
+					type:"1v1"
 				},{
-					name:"30 Minuten",
+					name:"30min",
 					id:"mode-thirtyMinutes",
 					image:"images/challenges/30min.jpg",
-					duration:30
+					duration:30,
+					type:"1v1"
 				},{
-					name:"1 Stunde",
+					name:"60min",
 					id:"mode-60Minutes",
 					image:"images/challenges/60min.jpg",
-					duration:60
+					duration:60,
+					type:"1v1"
 				}]
-			},
-			types:[{
-				id:"1v1",
-				name:"1 vs 1",
-				image:"images/challenges/1v1.png",//"images/avatars/felix.jpg",
-				description:"Fordere einen Mitzapfer zum Wettzapfen auf!"
-			}]
+			}
 		}
 		,navbar :	[{
 			id:"topnav-1",
