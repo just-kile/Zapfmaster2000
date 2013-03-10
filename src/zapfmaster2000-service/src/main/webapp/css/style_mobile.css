@@ -826,7 +826,7 @@ img.icon-big{
 .rAnimate{
 -webkit-transform:translate3d(0,0px,0px);
 }
-
+/*Challengees list pull to refresh*/
 
 #pullDown, #pullUp {
 	background:#000;
@@ -872,8 +872,11 @@ img.icon-big{
 	-webkit-animation-timing-function:linear;
 }
 
-
-
+@-webkit-keyframes loading {
+	from { -webkit-transform:rotate(0deg) translateZ(0); }
+	to { -webkit-transform:rotate(360deg) translateZ(0); }
+}
+/*Challengees time choose buttons*/
 .zmo-challenges-timeChooser-button{
 	display:inline-block;
 }
@@ -887,9 +890,109 @@ img.icon-big{
 	
 }
 
-@-webkit-keyframes loading {
-	from { -webkit-transform:rotate(0deg) translateZ(0); }
-	to { -webkit-transform:rotate(360deg) translateZ(0); }
+
+/*Header Notification window*/
+.zmo-popupwindow{
+	height:12em;
+	position:absolute;
+	top:3em;
+	width:94%;
+	background-color:#333;
+	left:3%;
+	border-bottom:1px solid #666;
+	border-left:1px solid #666;
+	border-right:1px solid #666;
+	box-shadow:0 5px 10px #000;
+	border-radius:0 0 5px 5px;
+}
+.zmo-popupwindow > div{
+	background-color:#333;
+	margin-left:2%;
+	height:90%;
+	width:96%;
+	box-shadow:0 0 5px #000 inset;
 }
 
+.zmo-notification-list{
+margin:0;
+padding:0;
 
+}
+
+.zmo-notification-list li{
+	list-style: none;
+	height: 4em;
+	
+	margin:0 2px;
+	padding: 5px;
+	border-bottom:1px solid #d3ffc5
+}
+
+/*.zmo-notification-list li:nth-child(odd){
+	background-color:#222;		
+}
+.zmo-notification-list li:nth-child(even){
+	background-color:#000;		
+}*/
+.zmo-button-container{
+	position:relative;
+}
+.zmo-button-container img{
+float:left;
+position:absolute;
+height:4em;
+width:4em;
+}
+.zmo-button{
+		border:1px solid #666;
+	margin-left:0.5em;
+	line-height:1.7em;
+	
+	padding:0 5px;
+	 -webkit-tap-highlight-color:#ccc;
+	 position:absolute;
+	 
+}
+.zmo-notification-label{
+	position:absolute;
+	text-align:center;
+	left:5.5em;
+}
+.accept{
+	right:0em;
+	top:0em;
+	width:4em;
+	text-align:center;
+}
+.decline{
+	right:0;
+	top:2em;
+	width:4em;
+	text-align:center;
+}
+.bold{
+	font-weight:bold;
+	font-size:15pt;
+}
+.badge{
+	position:absolute;
+	height:16px;
+	width:16px;
+	line-height:16px;
+	top:0;
+	left:50%;
+	margin-left:5.5em;
+	font-size:8pt;
+	border-radius:5px;
+	border:2px solid white;
+	box-shadow:0 0 5px #000;
+background: rgb(248,80,50); /* Old browsers */
+background: -moz-linear-gradient(-45deg,  rgba(248,80,50,1) 0%, rgba(241,111,92,1) 37%, rgba(246,41,12,1) 39%, rgba(240,47,23,1) 71%, rgba(231,56,39,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(248,80,50,1)), color-stop(37%,rgba(241,111,92,1)), color-stop(39%,rgba(246,41,12,1)), color-stop(71%,rgba(240,47,23,1)), color-stop(100%,rgba(231,56,39,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  rgba(248,80,50,1) 0%,rgba(241,111,92,1) 37%,rgba(246,41,12,1) 39%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  rgba(248,80,50,1) 0%,rgba(241,111,92,1) 37%,rgba(246,41,12,1) 39%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  rgba(248,80,50,1) 0%,rgba(241,111,92,1) 37%,rgba(246,41,12,1) 39%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%); /* IE10+ */
+background: linear-gradient(135deg,  rgba(248,80,50,1) 0%,rgba(241,111,92,1) 37%,rgba(246,41,12,1) 39%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#e73827',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}

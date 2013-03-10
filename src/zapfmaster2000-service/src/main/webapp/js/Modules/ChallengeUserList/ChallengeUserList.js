@@ -14,12 +14,14 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 		$.each(timeArr,function(ind,obj){
 			var textContainer = $("<div>").text(obj.name);
 			textContainer.on("mouseup touchend",function(e){
-				var duration = obj.duration;
-				var type = obj.type;//challengeDatas.type.id;
-				var challengeeId = memberModel.userId;
-				ajax.sendChallengeRequest(type,challengeeId,duration,function(){
-					alert("Challenge "+obj.duration+"min gegen "+memberModel.userName +" gestartet!");
-				});
+				if(!getIsScroll()){
+					var duration = obj.duration;
+					var type = obj.type;//challengeDatas.type.id;
+					var challengeeId = memberModel.userId;
+					ajax.sendChallengeRequest(type,challengeeId,duration,function(){
+						alert("Challenge "+obj.duration+"min gegen "+memberModel.userName +" gestartet!");
+					});
+				};
 					
 			});
 			
@@ -46,15 +48,9 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 		var timeChoser = li.find(".zmo-challenges-timeChooser");
 		
 		if(timeChoser.is(":visible")){
-//			timeChoser.hide();
-//			name.show();
 			hideTime(li,timeChoser);
-			//image.show();
 		}else{
 			showTime(li,timeChoser);
-//			timeChoser.show();
-//			name.hide();
-			//image.hide();
 		}
 	}
 	var refreshMemberlist = function(){
@@ -87,18 +83,10 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 						//alert("bliub")
 						elementClickHandler(e);
 					}
-//					e.preventDefault();
-//					hide();
-//					alert("User"+val.userName);
-//					ZMO.changePage(val.link);
 				});
 				ul.append(li);
 				entryListArr.push(li);
 			});
-//			ul.on("mouseup","li",function(){
-//				hide();
-//				ZMO.changePage($(this).data("link"));
-//			});
 
 			if(!scroller){
 				addScrollHandler();
@@ -130,7 +118,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 							pullDownEl.removeClass();
 							pullDownEl.find(".pullDownLabel").text('Pull down to refresh...');
 						} 
-					},
+					}, 
 					onScrollMove: function () {
 						if(Math.abs(this.distY+this.distX)>10){
 							isScroll = true;

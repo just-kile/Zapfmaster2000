@@ -62,7 +62,7 @@ ZMO.modules_properties ={
 				}]
 			}
 		},
-		dare:{
+		stats:{
 			sections:{
 				navigation:[{
 					moduleId:"receiveChallenge",
@@ -74,7 +74,7 @@ ZMO.modules_properties ={
 					position:[0,0],
 				}],
 				main:[{
-					moduleId:"createChallenge",
+					moduleId:"drawfeed",
 					ratio:"100%",
 					position:[0,0]
 				}],

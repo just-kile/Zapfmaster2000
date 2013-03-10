@@ -102,7 +102,7 @@ ZMO.modules.Constants = {
 			title:"Duels",
 			image:"images/icons/89-dumbell.png"
 		},{
-			link:"#dare",
+			link:"#stats",
 			text:"Stats",
 			title:"Stats",
 			image:"images/icons/16-line-chart.png"

@@ -23,10 +23,11 @@ ZMO.store = (function($,document){
 	var resetAllChallenges= function(){
 		set(challengeKey,[]);
 	};
-	var removeChallenge = function(index){
+	var removeChallenge = function(challengeId){
 		var chObj = get(challengeKey);
-		chObj = $.grep(cObj,function(val,ind){
-			return ind==index;
+		chObj = $.grep(chObj,function(val,ind){
+//			return ind==index;
+			return challengeId==val.challengeId;
 		},true);
 		set(challengeKey,chObj);
 	};

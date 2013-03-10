@@ -5,7 +5,16 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.receiveChallenge = (function($,ajax){
 	var mC = ZMO.modules.Constants;
+	
 	var container =null;
+	var sendChallengeResponse =function(yep,notId,datas){
+		if(yep){
+			ajax.sendChallengeConfirmation(datas);
+		}else{
+			ajax.sendChallengeRejection(datas);
+		}
+		ZMO.modules.header.clearNotification(notId);
+	}
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
@@ -13,12 +22,13 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 		if(ZMO.exists(datas.type)){
 			var type = datas.type.toLowerCase();
 			if(type=="challengerequest"){
-				var yep = confirm(datas.challengerUserName+" hat dich zu einem Duell herausgefordert! Nimmst du an?");
-				if(yep){
-					ajax.sendChallengeConfirmation(datas);
-				}else{
-					ajax.sendChallengeRejection(datas);
-				}
+//				var yep = confirm(datas.challengerUserName+" hat dich zu einem Duell herausgefordert! Nimmst du an?");
+//				if(yep){
+//					ajax.sendChallengeConfirmation(datas);
+//				}else{
+//					ajax.sendChallengeRejection(datas);
+//				}
+				ZMO.modules.header.pushNotification(datas,sendChallengeResponse);
 			}else if(type=="challengeaccepted"){
 				alert("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde gestartet!");
 			}else if(type=="challengedeclined"){
@@ -41,7 +51,8 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 			getInstance:getInstance,
 			init:init,
 			//debug
-			onChallengeReceive:onChallengeReceive
+			onChallengeReceive:onChallengeReceive,
+			sendChallengeResponse:sendChallengeResponse
 	};
 	return pub;
 }(jQuery,ZMO.ajax));
