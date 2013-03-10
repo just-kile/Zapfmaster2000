@@ -19,6 +19,7 @@ ZapfController::ZapfController(ZapfDisplay& display, InputService& input,
 		display(display), connector(connector) {
 	currentUser = "";
 	amount = 0;
+	unkownUser = false;
 	input.addListener(this);
 }
 
@@ -34,7 +35,11 @@ void ZapfController::run() {
 
 	while (true) {
 		try {
-			if (currentUser == "") {
+			if (unkownUser) {
+				unkownUser = false;
+				display.paint(unkownUserView);
+				boost::this_thread::sleep(boost::posix_time::seconds(1));
+			} else if (currentUser == "") {
 				// idle
 				display.paint(idleView);
 				boost::this_thread::sleep(boost::posix_time::seconds(100));
@@ -68,6 +73,7 @@ void ZapfController::run() {
 
 void ZapfController::onRfidRead(string rfid) {
 	lastRfid = boost::posix_time::second_clock::local_time();
+	unkownUser = false;
 	try {
 		boost::property_tree::ptree pt = connector.postLogin(rfid);
 		string newUser = pt.get("userName", "");
@@ -84,6 +90,7 @@ void ZapfController::onRfidRead(string rfid) {
 		}
 		currentUser = newUser;
 	} catch (const char* e) {
+		unkownUser = true;
 		currentUser = ""; // no user
 		cerr << e << endl;
 	}

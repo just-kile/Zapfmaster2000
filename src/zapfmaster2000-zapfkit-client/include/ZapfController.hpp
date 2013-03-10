@@ -12,6 +12,7 @@
 #include "views/StartupView.hpp"
 #include "views/IdleView.hpp"
 #include "views/DrawView.hpp"
+#include "views/UnkownUserView.hpp"
 #include "serial/InputService.hpp"
 #include "serial/WebserviceConnector.hpp"
 #include <boost/thread.hpp>
@@ -26,8 +27,10 @@ private:
 	StartupView startupView;
 	IdleView idleView;
 	DrawView drawView;
+	UnkownUserView unkownUserView;
 	WebserviceConnector connector;
 
+	bool unkownUser;
 	std::string currentUser;
 	SDL_Surface* userImage;
 	double amount;

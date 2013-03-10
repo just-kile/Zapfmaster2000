@@ -7,18 +7,21 @@ CPP_SRCS += \
 ../src/views/DrawView.cpp \
 ../src/views/IdleView.cpp \
 ../src/views/StartupView.cpp \
+../src/views/UnknownUserView.cpp \
 ../src/views/ZapfView.cpp 
 
 OBJS += \
 ./src/views/DrawView.o \
 ./src/views/IdleView.o \
 ./src/views/StartupView.o \
+./src/views/UnknownUserView.o \
 ./src/views/ZapfView.o 
 
 CPP_DEPS += \
 ./src/views/DrawView.d \
 ./src/views/IdleView.d \
 ./src/views/StartupView.d \
+./src/views/UnknownUserView.d \
 ./src/views/ZapfView.d 
 
 
