@@ -1,6 +1,8 @@
 ZMO.UtilConstants ={
 		debugMode :true,
-		templateUrl : "js/Templates/templates.json",
+		langToken:"zmo-lang",
+		defaultLang:"en",
+		templateUrl : "js/Templates/templates.html",
 		ajax:{
 			pullTimeout:60000,//ms
 			NO_DATA_RECEIVED_CODE:503
@@ -9,5 +11,12 @@ ZMO.UtilConstants ={
 		tokenName:"token",
 		serverDateFormat:"yyyyMMdd-HHmmss",
 		clientDateFormat:"dd.MM.yyyy HH:mm:ss",
-		shortFormat:"E, HH:mm"
+		shortFormat:"E, HH:mm",
+		linkUrls:{
+			user:"#user",
+			achievement:"#achievement",
+			team1:"#user",
+			team2:"#user",
+			winner:"#user"
+		}
 };

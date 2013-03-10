@@ -30,7 +30,8 @@ ZMO.modules.bestlist = (function($,view,ajax){
 	var getInstance = function(){
 		container = $("<div>").addClass("stats").addClass("stats-bestlist");
 		//headline
-		$("<div>").addClass("newsdiv").html("<span>Allgemeine Stats.</span>").appendTo(container);
+		var headlineText = ZMO.Util.localization.translateString("generalStats")
+		$("<div>").addClass("newsdiv").html("<span>"+headlineText+"</span>").appendTo(container);
 		//newscut
 		$("<div>").addClass("newscut").appendTo(container);
 		//chart container

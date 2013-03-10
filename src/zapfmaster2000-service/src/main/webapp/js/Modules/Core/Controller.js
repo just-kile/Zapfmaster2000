@@ -1,4 +1,4 @@
-ZMO.controller = (function($,document,view,ajax){
+ZMO.controller = (function($,document,view,ajax,localization){
 	var mP =ZMO.modules_properties;
 /**
  * Gets called when a page changes
@@ -36,15 +36,18 @@ ZMO.controller = (function($,document,view,ajax){
 	var init = function(){
 		//Getting Templates
 		checkLoginStatus(function(){
-			ZMO.getTemplates(function(templates){
-				//Add Templates to ICanHaz - Engine
-				$.each(templates, function (ind,template) {
-			        ich.addTemplate(template.name, template.template);
-			    });
-				view.init();
-				$(window).bind("hashchange",onPageChange);
-				$(window).trigger( "hashchange" );
+			localization.init(function(){
+				ZMO.getTemplates(function(templates){
+					//Add Templates to ICanHaz - Engine
+					$.each(templates, function (ind,template) {
+						ich.addTemplate(template.name, localization.translateTemplate(template.template));
+				    });
+					view.init();
+					$(window).bind("hashchange",onPageChange);
+					$(window).trigger( "hashchange" );
+				});
 			});
+			
 		},function(){
 			alert("not logged in");
 			var baseUrl = window.location.href.replace(new RegExp("(/[a-zA-Z]*.html)"),"");
@@ -56,5 +59,5 @@ ZMO.controller = (function($,document,view,ajax){
 			init:init
 	};
 	return pub;
-}(jQuery,document,ZMO.view,ZMO.ajax));
+}(jQuery,document,ZMO.view,ZMO.ajax,ZMO.Util.localization));
 

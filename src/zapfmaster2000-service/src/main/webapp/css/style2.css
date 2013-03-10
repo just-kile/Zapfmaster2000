@@ -577,3 +577,10 @@ padding:5px;
 tr.stats-drinker-row:nth-child(odd){
 	background:rgba(0,0,0,0.4);
 }
+
+.language{
+	position:absolute;
+	top:0;
+	right:0;
+	cursor:pointer;
+}
