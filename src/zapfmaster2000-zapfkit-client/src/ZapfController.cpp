@@ -51,6 +51,7 @@ void ZapfController::run() {
 				} else {
 					drawView.setUserName(currentUser);
 					drawView.setAmount(amount);
+					drawView.setUserImage(userImage);
 					display.paint(drawView);
 					boost::posix_time::time_duration sleepTime = logoutTime
 							- diff + boost::posix_time::milliseconds(50); // +50 for "safety"
@@ -72,6 +73,14 @@ void ZapfController::onRfidRead(string rfid) {
 		string newUser = pt.get("userName", "");
 		if (newUser != currentUser) {
 			amount = 0;
+
+			// load the image
+			try {
+				userImage = connector.retrieveImage(pt.get("imagePath", ""));
+			} catch (const char* e) {
+				cerr << e << endl;
+				userImage = 0;
+			}
 		}
 		currentUser = newUser;
 	} catch (const char* e) {

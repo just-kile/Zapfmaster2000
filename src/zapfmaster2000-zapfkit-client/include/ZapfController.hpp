@@ -29,6 +29,7 @@ private:
 	WebserviceConnector connector;
 
 	std::string currentUser;
+	SDL_Surface* userImage;
 	double amount;
 
 	boost::thread* controllerThread;

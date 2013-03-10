@@ -11,6 +11,7 @@
 #include <string>
 #include <curl/curl.h>
 #include <boost/property_tree/ptree.hpp>
+#include <SDL/SDL.h>
 
 namespace zm2k {
 
@@ -30,6 +31,16 @@ public:
 	boost::property_tree::ptree postLogin(std::string rfidTag);
 	boost::property_tree::ptree postTicks(int numTicks);
 
+	SDL_Surface* retrieveImage(std::string pPath);
+
+};
+
+struct SimpleBuffer {
+	SimpleBuffer() : size(0) {
+	}
+
+	char buffer[1000000];
+	int size;
 };
 
 }

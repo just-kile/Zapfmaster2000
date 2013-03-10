@@ -23,4 +23,9 @@ void DrawView::paintView(SDL_Surface* screen) const {
 				+ boost::lexical_cast<string>(amount);
 		drawText(amountMsg.c_str(), 200, 200, screen);
 	}
+
+	if (userImage != 0) {
+		SDL_Rect pos = {15, 50, userImage->w, userImage->h};
+		SDL_BlitSurface(userImage, NULL, screen, &pos);
+	}
 }
