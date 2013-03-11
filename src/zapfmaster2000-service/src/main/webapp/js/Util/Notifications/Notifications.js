@@ -1,8 +1,8 @@
 ZMO.Notifications = (function($){
 	var idCount = 1;
 	var send = function(headline,ticker){
-		console.log("Send local notification"+window.plugins);
-	    if (typeof plugins !== "undefined") {
+		
+	    if (typeof plugins !== "undefined" &&ZMO.onlineRecognizer.isOffline() ) {
 	        plugins.localNotification.add({
 	            date : new Date(),
 	            message : "Zapfmaster2000 \r\n"+headline,
@@ -10,6 +10,7 @@ ZMO.Notifications = (function($){
 	            repeatDaily : false,
 	            id : idCount++
 	        });
+	            navigator.notification.vibrate(1000);
 	    }
 	};
 	var clear = function(){

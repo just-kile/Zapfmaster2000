@@ -77,18 +77,3 @@ if(typeof plugins!="undefined")document.addEventListener("deviceready", appReady
 else appReady();
 
 
-document.addEventListener("deviceready", appRea, false);
-
-function appRea() {
-    console.log("Device ready"+typeof plugins);
-
-    if (typeof plugins !== "undefined") {
-        plugins.localNotification.add({
-            date : new Date(),
-            message : "Phonegap - Local Notification\r\nSubtitle comes after linebreak",
-            ticker : "This is a sample ticker text",
-            repeatDaily : false,
-            id : 4
-    });
-}
-}
