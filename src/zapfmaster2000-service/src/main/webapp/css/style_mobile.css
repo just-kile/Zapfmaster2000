@@ -507,7 +507,8 @@ border-radius: 5px;
 	position:absolute;
 	width:100%;
 	height:100%;
-
+top:0;
+left:0;
 	z-index:26000;
 }
 .throbber > div{
@@ -783,16 +784,22 @@ margin-left:2em;
 position:absolute;
 left:4em;
 }
-.ZMO-sideNavigation img{
+.ZMO-sideNavigation img.small{
 float:left;
 margin-top:1em;
 height:1em;
 width:1em;
 }
+.ZMO-sideNavigation img.big{
+float:left;
+height:3em;
+width:3em;
+}
 img.icon-big{
 	margin-top:0.5em;
 	height:2em;
 	width:2em;
+	float:left;
 }
 #challengeUser-wrapper{
  overflow:auto;

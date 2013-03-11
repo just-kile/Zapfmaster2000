@@ -17,6 +17,7 @@ ZMO.modules.logout = (function($,ajax){
 	 */
 	var init = function(hashParams,moduleParams){
 		container.text("Logout").on("mouseup",logout);
+		if(ZMO.throbber)ZMO.throbber.hide();
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM

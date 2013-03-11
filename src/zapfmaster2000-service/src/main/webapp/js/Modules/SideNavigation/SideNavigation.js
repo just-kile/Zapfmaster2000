@@ -5,7 +5,7 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.sideNavigation = (function($,ajax){
 	var mC = ZMO.modules.Constants;
-	var container =null,mainContainer = null;
+	var container =null,mainContainer = null,ul = null,userInfo = null;
 	var visible =false;
 	
 	var show =function(){
@@ -13,6 +13,7 @@ ZMO.modules.sideNavigation = (function($,ajax){
 		ZMO.Utils.animator.animateLeft(mainContainer,container,function(){
 			visible=true;
 		});
+		createUserInformation();
 		
 		
 	};
@@ -31,18 +32,37 @@ ZMO.modules.sideNavigation = (function($,ajax){
 		visible?hide():show();
 		if(console)console.log(visible?"hide":"show");
 	};
+	var createHeader = function(text){
+		return $("<li>").addClass("ZMO-sideNavigation-header").text(text);
+	}
+	var createUserInformation = function(){
+		ajax.getDatas(mC.urls.USERSTATS,function(userStats){
+			var user = userStats.user;
+			if(userInfo){
+				userInfo.remove();
+			}
+			userInfo = $("<li>").addClass("ZMO-sideNavigation-entry");
+			var img = $("<img>").attr("src",baseUrl+user.userImage).addClass("big");
+			var span = $("<div>").css("margin-left","4em").text(user.userName+" ("+userStats.amount.amountTotal.toFixed(2)+"l; No.: "+userStats.rank.amount+".)");
+			
+			userInfo.append(img).append(span);
+			ul.prepend(userInfo)
+		});
+	}
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(hashParams,moduleParams){
 		ZMO.Utils.animator.init(container);
-		var ul = $("<ul>").appendTo(container);
+		
+		createUserInformation();
+		
 		//Header
-		$("<li>").addClass("ZMO-sideNavigation-header").text("Navigation").appendTo(ul);
+		createHeader("Navigation").appendTo(ul);
 		//entry creation
 		$.each(mC.navbarMobile,function(ind,val){
 			var title = $("<div>").addClass("name-navigation").text(val.title);
-			var image = $("<img>").attr("src",val.image);
+			var image = $("<img>").attr("src",val.image).addClass("small");
 			var li = $("<li>").addClass("ZMO-sideNavigation-entry");//.data("link",val.link);
 			li.append(image).append(title);
 			new google.ui.FastButton(li[0], function(e){
@@ -51,20 +71,11 @@ ZMO.modules.sideNavigation = (function($,ajax){
 				ZMO.changePage(val.link);
 			
 			});
-//			li.on("mouseup",function(){
-//				hide();
-//				ZMO.changePage($(this).data("link"));
-//				$(this).css("background","");
-//			});
 			li.on("mousedown",function(){
 				//$(this).css("background","grey");
 			});
 			ul.append(li);
 		});
-//		ul.on("mouseup","li",function(){
-//			hide();
-//			ZMO.changePage($(this).data("link"));
-//		});
 
 
 
@@ -74,7 +85,9 @@ ZMO.modules.sideNavigation = (function($,ajax){
 	 */
 	var getInstance = function(){
 		mainContainer = ZMO.view.getMainContainer();
-		return (container = $("<div class='ZMO-sideNavigation'>").addClass("left"));
+		container = $("<div class='ZMO-sideNavigation'>").addClass("left")
+		ul = $("<ul>").appendTo(container);
+		return container;
 	};
 	var pub = {
 			show:show,

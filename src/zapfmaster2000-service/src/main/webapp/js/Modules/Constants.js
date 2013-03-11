@@ -27,7 +27,7 @@ ZMO.modules.Constants = {
 			ACHIEVEMENTSSTATS:"rest/achievementStats",
 			FRONTPAGESTATS:"rest/statistics/frontpageStats",
 			USERFRONTPAGESTATS:"rest/statistics/frontpageUserStats",
-
+			USERSTATS:"rest/statistics/userStats",
 			NEWSLIST:"rest/news",
 			//STATS:"tmp/stats.json",
 			STATS:"rest/statistics/globalStats",

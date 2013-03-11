@@ -52,6 +52,7 @@ ZMO.modules.settings = (function($,ajax){
 			e.preventDefault();
 			uploadImage(form);
 		});
+		if(ZMO.throbber)ZMO.throbber.hide();
 		
 	};
 	
