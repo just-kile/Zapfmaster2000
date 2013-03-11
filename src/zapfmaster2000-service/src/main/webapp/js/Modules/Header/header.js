@@ -102,13 +102,13 @@ ZMO.modules.header = (function($,ajax){
 		div.append(buttonContainer);
 		
 		var li = $("<li>").attr("data-notificationid",challengeRequest.challengeId).append(div);
-		acceptBtn.on("touchend",function(){
+		acceptBtn.on(mC.clickEvent,function(){
 			if(!getIsScroll()){
 				if(callback)callb(true,li.attr("data-notificationid"),challengeRequest);
 			}
 			
 		});
-		declineBtn.on("touchend",function(){
+		declineBtn.on(mC.clickEvent,function(){
 			if(!getIsScroll()){
 				if(callback)callb(false,li.attr("data-notificationid"),challengeRequest);
 			}

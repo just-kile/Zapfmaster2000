@@ -11,8 +11,8 @@
  <script src="libs/jquery/jquery-1.8.1.js"></script>
  <link rel="stylesheet" type="text/css" href="css/login.css" />
  <script>
-// baseUrl = "";
- baseUrl ="http://192.168.178.24:8080/zapfmaster2000-service/";
+// baseUrl = "http://192.168.178.24:8080/zapfmaster2000-service/";
+ baseUrl =localStorage.getItem("serverurl")?localStorage.getItem("serverurl"):"";
 $(document).ready(function(){
 	function redirect(){
 	       if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
@@ -45,7 +45,7 @@ $(document).ready(function(){
 					connectToChannel(url,successCb,errorCb,data);
 				},
 				error:function(e){
-					if(e.status==0){
+					if(e.status==0 && e.statusText=="abort"){
 						console.log("Request abort success!");
 					}else if(e.status==503){
 						console.log("No Datas Received! Reconnect...");

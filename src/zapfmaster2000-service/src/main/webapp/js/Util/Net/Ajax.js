@@ -18,7 +18,7 @@ ZMO.Util.Net.Ajax = (function($){
 		//if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
 		datas["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		$.ajax({
-			url:url,
+			url:baseUrl+url,
 			type:type?type:"GET",
 			data:datas,
 			complete:function(resp){
@@ -159,29 +159,34 @@ ZMO.Util.Net.Ajax = (function($){
 		data["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		pushRequests[url] = $.ajax({
 			type:"GET",
-			url:url,
-			timeout:10000000, 
+			url:baseUrl+url,
+			timeout:60000, 
 			data:data,
-			success:function(data){
-				if(successCb && data!="")successCb(data);
-				connectToChannel(url,successCb,errorCb,data);
-			},
-			error:function(e){
-				if(e.status==0){
-					ZMO.logger.log("Request abort success!");
-				}else if(e.status==c.NO_DATAS_RECEIVED_CODE){
-					ZMO.logger.warning("No Datas Received! Reconnect...");
-//					if(errorCb)errorCb(e);
+			complete:function(resp){
+				if(resp.status == 200){
+					var data = $.parseJSON(resp.responseText);
+					if(successCb && data!="")successCb(data);
 					connectToChannel(url,successCb,errorCb,data);
 				}else{
-					ZMO.logger.error("Error! Status "+e.status);
-					ZMO.logger.log("Reconnect in 5s...");
-				
-					if(errorCb)errorCb(e);
-					setTimeout(function(){
+					if(resp.status==c.NO_DATAS_RECEIVED_CODE || (resp.status == 0&&resp.statusText=="timeout")){
+						ZMO.logger.warning("No Datas Received! Reconnect...");
+//						if(errorCb)errorCb(e);
 						connectToChannel(url,successCb,errorCb,data);
-					},5000);
+					}else if(resp.status==0){
+						ZMO.logger.log("Request abort success!");
+					}else{
+						ZMO.logger.error("Error! Status "+e.status);
+						ZMO.logger.log("Reconnect in 5s...");
+					
+						if(errorCb)errorCb(e);
+						setTimeout(function(){
+							connectToChannel(url,successCb,errorCb,data);
+						},5000);
+					}
 				}
+			},
+			error:function(e){
+
 			}
 		});
 		

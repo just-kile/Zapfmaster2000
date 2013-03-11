@@ -6,7 +6,7 @@
 * @constructor
 */
 var ZMO = ZMO || {};
-
+baseUrl = "";
 /**
  * Loads all js and starts, when finished
  */
@@ -54,10 +54,22 @@ function appReady(){
 			"js/Modules/Core/Controller.js",
 			
 			function() {
-				//init controller
-				if(ZMO.controller)ZMO.controller.init();
-				//init swipe control
-				if(ZMO.swipeHandler)ZMO.swipeHandler.init();
+				//Get config url
+				$.ajax({
+					url:"http://zapfmaster2000.de/config.json",
+					type:"GET",
+					complete:function(res){
+						if(res.status==200){
+							baseUrl = $.parseJSON(res.responseText).serverurl;
+							localStorage.setItem("serverurl",baseUrl);
+						}
+						//init controller
+						if(ZMO.controller)ZMO.controller.init();
+						//init swipe control
+						if(ZMO.swipeHandler)ZMO.swipeHandler.init();
+					}
+				});
+				
 			}
 		);
 };

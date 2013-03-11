@@ -2,6 +2,7 @@ var ZMO = ZMO || {};
 /**
  * Loads all js and starts, when finished
  */
+baseUrl = "";
 (function(){
 	head.js(//core models
 			"js/Website/Constants.js" ,

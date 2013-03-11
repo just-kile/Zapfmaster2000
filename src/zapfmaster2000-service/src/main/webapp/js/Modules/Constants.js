@@ -1,8 +1,14 @@
 ZMO.modules = ZMO.modules ||{}
 //var baseUrl = "";
-var baseUrl ="http://192.168.178.24:8080/zapfmaster2000-service/";
+//var baseUrl ="http://192.168.178.24:8080/zapfmaster2000-service/";
 ZMO.modules.Constants = {
-		clickEvent:"touchend",
+		clickEvent:(function(){
+			if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
+				return "touchend";
+			}else{
+				return "mouseup touchend";
+			}
+		})(),
 		drawfeed:{
 			types:{
 				ACHIEVEMENT:"ACHIEVEMENT",
@@ -17,27 +23,27 @@ ZMO.modules.Constants = {
 			listLength:15
 		},
 		urls:{
-			ACHIEVEMENTS:baseUrl+"rest/achievements",
-			ACHIEVEMENTSSTATS:baseUrl+"rest/achievementStats",
-			FRONTPAGESTATS:baseUrl+"rest/statistics/frontpageStats",
-			USERFRONTPAGESTATS:baseUrl+"rest/statistics/frontpageUserStats",
+			ACHIEVEMENTS:"rest/achievements",
+			ACHIEVEMENTSSTATS:"rest/achievementStats",
+			FRONTPAGESTATS:"rest/statistics/frontpageStats",
+			USERFRONTPAGESTATS:"rest/statistics/frontpageUserStats",
 
-			NEWSLIST:baseUrl+"rest/news",
+			NEWSLIST:"rest/news",
 			//STATS:"tmp/stats.json",
-			STATS:baseUrl+"rest/statistics/globalStats",
-			MEMBERS:baseUrl+"rest/members",
+			STATS:"rest/statistics/globalStats",
+			MEMBERS:"rest/members",
 			
-			CHALLENGES:baseUrl+"rest/challenge",
-			CHALLENGEEMEMBERS:baseUrl+"rest/challenge/users",
-			STARTCHALLENGE:baseUrl+"rest/challenge/start/{0}",
-			ACCEPTCHALLENGE:baseUrl+"rest/challenge/accept",
-			DENYCHALLENGE:baseUrl+"rest/challenge/decline"
+			CHALLENGES:"rest/challenge",
+			CHALLENGEEMEMBERS:"rest/challenge/users",
+			STARTCHALLENGE:"rest/challenge/start/{0}",
+			ACCEPTCHALLENGE:"rest/challenge/accept",
+			DENYCHALLENGE:"rest/challenge/decline"
 			// NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
 		push:{
-			NEWS:baseUrl+"rest/push/news",
-			NEWSUPDATE:baseUrl+"rest/push/draftkit",
-			CHALLENGE:baseUrl+"rest/push/challenge"
+			NEWS:"rest/push/news",
+			NEWSUPDATE:"rest/push/draftkit",
+			CHALLENGE:"rest/push/challenge"
 		},
 		member:{
 			MAX_ACHIEVEMENTS:7
