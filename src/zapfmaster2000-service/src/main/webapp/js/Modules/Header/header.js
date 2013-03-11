@@ -51,12 +51,12 @@ ZMO.modules.header = (function($,ajax){
 	}
 	var showNotificationWindow = function(){
 		notificationVisible = true;
-		notificationWindow.show();
+		notificationWindow.css("top","").show();
 		if(scroller&&scroller.refresh)scroller.refresh()
 	}
 	var hideNotificationWindow = function(){
 		notificationVisible = false;
-		notificationWindow.hide();
+		notificationWindow.css("top","-9999px").hide();
 	}
 	var toggleNotificationBtnClick = function(e){
 		//alert("Not");hide
