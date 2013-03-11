@@ -28,7 +28,7 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 //				}else{
 //					ajax.sendChallengeRejection(datas);
 //				}
-				ZMO.Notifications.send(datas.challengerUserName+" hat dich zu einem Duell herausgefordert!","ZAPFMASTA");
+				ZMO.Notifications.send(datas.challengerUserName+" hat dich zu einem Duell herausgefordert!","Du wurdest herausgefordert!");
 				ZMO.modules.header.pushNotification(datas,sendChallengeResponse);
 			}else if(type=="challengeaccepted"){
 				alert("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde gestartet!");
