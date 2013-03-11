@@ -160,7 +160,7 @@ ZMO.Util.Net.Ajax = (function($){
 		pushRequests[url] = $.ajax({
 			type:"GET",
 			url:baseUrl+url,
-			timeout:60000, 
+			timeout:600000, 
 			data:data,
 			complete:function(resp){
 				if(resp.status == 200){

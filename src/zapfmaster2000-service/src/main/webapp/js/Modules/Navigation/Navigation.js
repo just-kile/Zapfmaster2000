@@ -14,7 +14,7 @@ ZMO.modules.navigation = (function($,ajax){
 				title:val.title
 			}).text(val.text).appendTo(li);
 			li.appendTo(ul)
-		})
+		});
 		
 		return ul;
 	}
