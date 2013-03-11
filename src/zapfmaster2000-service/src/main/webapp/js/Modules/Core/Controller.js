@@ -51,6 +51,7 @@ ZMO.controller = (function($,document,view,ajax,localization){
 		},function(){
 			//alert("not logged in");
 			//var baseUrl = window.location.href.replace(new RegExp("(/[a-zA-Z]*.html)"),"");
+			localStorage.clear();
 			window.location.href="index.html";
 		});
 		

@@ -4,7 +4,9 @@
  */
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.challengeUserList = (function($,ajax,view){
-	
+	var wording = {
+			challengeRequest:"challengeRequest"
+	}
 	var c = ZMO.modules.Constants;
 	var container =null,mainContainer = null,wrapper,scrollContainer,pullDownEl,ul,entryListArr = [],oldElement = null;
 	var createTimeChooserContainer = function(memberModel){
@@ -19,7 +21,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 					var type = obj.type;//challengeDatas.type.id;
 					var challengeeId = memberModel.userId;
 					ajax.sendChallengeRequest(type,challengeeId,duration,function(){
-						alert("Challenge "+obj.duration+"min gegen "+memberModel.userName +" gestartet!");
+						alert(ZMO.Util.localization.translateString(wording.challengeRequest));
 					});
 				};
 					

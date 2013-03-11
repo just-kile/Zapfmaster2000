@@ -736,6 +736,8 @@ z-index:1;
 	position:fixed;
 	box-shadow:0 0 40px #000;
 	z-index:2;
+	left:0;
+	
 	
 }
 
@@ -815,7 +817,7 @@ img.icon-big{
 }
 
 .animateSide {
--webkit-transform:translate3d(-5%,0px,0px);
+-webkit-transform:translate3d(0%,0px,0px);
 /*left:0;*/
 }
 

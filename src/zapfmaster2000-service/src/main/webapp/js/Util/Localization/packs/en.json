@@ -46,5 +46,6 @@
 "kegNumber":"Keg No.",
 "nobody":"Nobody in sight",
 "challengeRemaining":"{{time}} min remaining",
-"challengeDone":"Challenge completed!"
+"challengeDone":"Challenge completed!",
+"challengeRequest":"Challenge requested!"
 }

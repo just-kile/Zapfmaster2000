@@ -1,7 +1,13 @@
 ZMO.UtilConstants ={
 		debugMode :true,
 		langToken:"zmo-lang",
-		defaultLang:"en",
+		defaultLang:(function(){
+			if(navigator.language == "de"){
+				return "de";
+			}else{
+				return "en";
+			}
+		})(),
 		templateUrl : "js/Templates/templates.html",
 		ajax:{
 			pullTimeout:60000,//ms

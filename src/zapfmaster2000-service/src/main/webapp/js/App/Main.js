@@ -75,3 +75,20 @@ function appReady(){
 };
 if(typeof plugins!="undefined")document.addEventListener("deviceready", appReady, false);
 else appReady();
+
+
+//document.addEventListener("deviceready", appReady, false);
+//
+//function appReady() {
+//    console.log("Device ready");
+//
+//    if (typeof plugins !== "undefined") {
+//        plugins.localNotification.add({
+//            date : new Date(),
+//            message : "Phonegap - Local Notification\r\nSubtitle comes after linebreak",
+//            ticker : "This is a sample ticker text",
+//            repeatDaily : false,
+//            id : 4
+//    });
+//}
+//}

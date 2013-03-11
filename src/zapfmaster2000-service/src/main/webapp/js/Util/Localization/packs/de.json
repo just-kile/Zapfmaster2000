@@ -48,5 +48,6 @@
 "nobody":"Niemand",
 
 "challengeRemaining":"{{time}} min verbleibend",
-"challengeDone":"Challenge beendet"
+"challengeDone":"Challenge beendet",
+"challengeRequest":"Challenge verschickt!"
 }

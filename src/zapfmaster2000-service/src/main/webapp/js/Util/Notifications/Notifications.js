@@ -1,6 +1,7 @@
 ZMO.Notifications = (function($){
 	var idCount = 1;
 	var send = function(headline,ticker){
+		console.log("Send local notification"+window.plugins);
 	    if (typeof plugins !== "undefined") {
 	        plugins.localNotification.add({
 	            date : new Date(),
