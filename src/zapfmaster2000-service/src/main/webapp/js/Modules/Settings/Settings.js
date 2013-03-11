@@ -17,7 +17,7 @@ ZMO.modules.settings = (function($,ajax){
 		    processData: false,
 		    type: 'POST',
 		    success: function(data){
-		        alert("Bild geŠndert!");
+		        alert("Bild geï¿½ndert!");
 	
 		    }
 		    ,

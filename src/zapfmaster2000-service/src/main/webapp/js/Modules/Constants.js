@@ -1,6 +1,8 @@
 ZMO.modules = ZMO.modules ||{}
-
+//var baseUrl = "";
+var baseUrl ="http://192.168.178.24:8080/zapfmaster2000-service/";
 ZMO.modules.Constants = {
+		clickEvent:"touchend",
 		drawfeed:{
 			types:{
 				ACHIEVEMENT:"ACHIEVEMENT",
@@ -12,30 +14,30 @@ ZMO.modules.Constants = {
 				NEW_KEG:"NEW_KEG",
 				NEW_USER:"NEW_USER"
 			},
-			listLength:10
+			listLength:15
 		},
 		urls:{
-			ACHIEVEMENTS:"rest/achievements",
-			ACHIEVEMENTSSTATS:"rest/achievementStats",
-			FRONTPAGESTATS:"rest/statistics/frontpageStats",
-			USERFRONTPAGESTATS:"rest/statistics/frontpageUserStats",
+			ACHIEVEMENTS:baseUrl+"rest/achievements",
+			ACHIEVEMENTSSTATS:baseUrl+"rest/achievementStats",
+			FRONTPAGESTATS:baseUrl+"rest/statistics/frontpageStats",
+			USERFRONTPAGESTATS:baseUrl+"rest/statistics/frontpageUserStats",
 
-			NEWSLIST:"rest/news",
+			NEWSLIST:baseUrl+"rest/news",
 			//STATS:"tmp/stats.json",
-			STATS:"rest/statistics/globalStats",
-			MEMBERS:"rest/members",
+			STATS:baseUrl+"rest/statistics/globalStats",
+			MEMBERS:baseUrl+"rest/members",
 			
-			CHALLENGES:"rest/challenge",
-			CHALLENGEEMEMBERS:"rest/challenge/users",
-			STARTCHALLENGE:"rest/challenge/start/{0}",
-			ACCEPTCHALLENGE:"rest/challenge/accept",
-			DENYCHALLENGE:"rest/challenge/decline"
+			CHALLENGES:baseUrl+"rest/challenge",
+			CHALLENGEEMEMBERS:baseUrl+"rest/challenge/users",
+			STARTCHALLENGE:baseUrl+"rest/challenge/start/{0}",
+			ACCEPTCHALLENGE:baseUrl+"rest/challenge/accept",
+			DENYCHALLENGE:baseUrl+"rest/challenge/decline"
 			// NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
 		push:{
-			NEWS:"rest/push/news",
-			NEWSUPDATE:"rest/push/draftkit",
-			CHALLENGE:"rest/push/challenge"
+			NEWS:baseUrl+"rest/push/news",
+			NEWSUPDATE:baseUrl+"rest/push/draftkit",
+			CHALLENGE:baseUrl+"rest/push/challenge"
 		},
 		member:{
 			MAX_ACHIEVEMENTS:7
@@ -120,7 +122,7 @@ ZMO.modules.Constants = {
 			image:"images/icons/102-walk.png"
 		
 		}],
-badExcuses:["1","2","und 3"]
+badExcuses:["Muss mir morgen Muttis Haare kämmen","Mutti","und 3"]
 	
 
 };

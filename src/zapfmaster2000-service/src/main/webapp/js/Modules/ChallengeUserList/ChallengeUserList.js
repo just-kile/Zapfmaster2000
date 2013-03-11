@@ -13,7 +13,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 		
 		$.each(timeArr,function(ind,obj){
 			var textContainer = $("<div>").text(obj.name);
-			textContainer.on("mouseup touchend",function(e){
+			textContainer.on(c.clickEvent,function(e){
 				if(!getIsScroll()){
 					var duration = obj.duration;
 					var type = obj.type;//challengeDatas.type.id;
@@ -78,7 +78,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 //					ZMO.changePage("#");
 //				
 //				});
-				li.on("mouseup touchend",function(e){
+				li.on(c.clickEvent,function(e){
 					if(!getIsScroll()){
 						//alert("bliub")
 						elementClickHandler(e);
@@ -182,7 +182,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(hashParams,moduleParams){
-		ZMO.Utils.animator.init(container);
+		ZMO.Utils.animator.init(container,true);
 		//init elements for iscroll
 		wrapper =$("<div>").attr("id","challengeUser-wrapper");
 		scrollContainer = $("<div>").addClass("scroller");

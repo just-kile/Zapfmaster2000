@@ -31,11 +31,12 @@ public class Zapfmaster2000 extends DroidGap
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        super.setIntegerProperty("splashscreen", R.drawable.zapfmaster2000);
         try {
 			if(Arrays.asList(getResources().getAssets().list("")).contains("index.html")) {
-	        	super.loadUrl("file:///android_asset/index.html");
+	        	super.loadUrl("file:///android_asset/app.html",3000);
 	        }else{
-	        	super.loadUrl("file:///android_asset/webapp/index.html");
+	        	super.loadUrl("file:///android_asset/webapp/app.html",3000);
 	        }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

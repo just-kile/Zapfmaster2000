@@ -49,9 +49,9 @@ ZMO.controller = (function($,document,view,ajax,localization){
 			});
 			
 		},function(){
-			alert("not logged in");
-			var baseUrl = window.location.href.replace(new RegExp("(/[a-zA-Z]*.html)"),"");
-			window.location.replace(baseUrl);
+			//alert("not logged in");
+			//var baseUrl = window.location.href.replace(new RegExp("(/[a-zA-Z]*.html)"),"");
+			window.location.href="index.html";
 		});
 		
 	};

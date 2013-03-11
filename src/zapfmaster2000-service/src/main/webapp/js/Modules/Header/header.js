@@ -15,6 +15,7 @@ ZMO.modules.header = (function($,ajax){
 			src:url
 		});
 	};
+	var badgeCounter = 0;
 	var onNaviBtnClick = function(e){
 		//e.stopPropagation();
 		e.preventDefault();
@@ -101,13 +102,13 @@ ZMO.modules.header = (function($,ajax){
 		div.append(buttonContainer);
 		
 		var li = $("<li>").attr("data-notificationid",challengeRequest.challengeId).append(div);
-		acceptBtn.on("mouseup touchend",function(){
+		acceptBtn.on("touchend",function(){
 			if(!getIsScroll()){
 				if(callback)callb(true,li.attr("data-notificationid"),challengeRequest);
 			}
 			
 		});
-		declineBtn.on("mouseup touchend",function(){
+		declineBtn.on("touchend",function(){
 			if(!getIsScroll()){
 				if(callback)callb(false,li.attr("data-notificationid"),challengeRequest);
 			}
@@ -177,7 +178,7 @@ ZMO.modules.header = (function($,ajax){
 		
 		//usersBtn.on("mouseup",onUsersBtnClick);
 		new google.ui.FastButton(usersBtn[0],onUsersBtnClick);
-		notificationsBtn.on("mouseup touchend",toggleNotificationBtnClick);
+		notificationsBtn.on(mC.clickEvent,toggleNotificationBtnClick);
 		initNotificationWindow();
 		
 		fillRecentNotifications();

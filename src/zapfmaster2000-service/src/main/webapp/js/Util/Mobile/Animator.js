@@ -16,8 +16,8 @@ ZMO.Utils.animator = (function($,document){
 	var setContainer = function(container){
 		return sCont = container;
 	};
-	var prepareContainer = function(sideContainer){
-		sideContainer.addClass("animate");
+	var prepareContainer = function(sideContainer,right){
+		sideContainer.addClass(!right?"animate":"animateRight");
 		$(sideContainer)[0].addEventListener( 'webkitTransitionEnd', 
 			    function( event ) {
 
@@ -55,8 +55,8 @@ ZMO.Utils.animator = (function($,document){
 		sideContainer.removeClass("animateSide animateChall");
 		openPanel = false;
 	};
-	var init = function(container){
-		prepareContainer(container);
+	var init = function(container,right){
+		prepareContainer(container,right);
 	}
 	var isPanelOpen = function(){
 		return openPanel;

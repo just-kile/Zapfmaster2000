@@ -5,7 +5,7 @@
 ZMO.swipeHandler = (function(){
 	var initSwipe = function(){
 		var threshold = 30,noSwipeToken=false;
-		$("body").swipe("destroy").swipe({
+		$(document).swipe("destroy").swipe({
 			 swipeStatus:function(event, phase, direction, distance, duration, fingers){
 				 if(phase=="move" && (direction =="up"||direction=="down")&&distance>threshold){
 					 noSwipeToken= true;
