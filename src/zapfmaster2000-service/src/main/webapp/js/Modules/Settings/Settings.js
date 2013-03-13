@@ -38,6 +38,7 @@ ZMO.modules.settings = (function($,ajax){
 			ajax.postDatas('rest/register/rfid',function(){
 				
 				hideRegisterRfid();
+				alert("RFID erfolgreich geändert!");
 			},{
 				rfid:rfid
 			});
