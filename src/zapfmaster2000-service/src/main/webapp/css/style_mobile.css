@@ -664,9 +664,9 @@ box-shadow: 0px 1px 5px #000, 0px -1px 5px #000;
 	margin-top:0.2em;
 }
 
-.ZMO-logout{
+.zmo-clickbutton{
 	height:3em;
-	margin-top:3em;
+	
 	line-height:3em;
 	width:100%;
 	text-align:center;
@@ -1009,4 +1009,12 @@ background: -ms-linear-gradient(-45deg,  rgba(248,80,50,1) 0%,rgba(241,111,92,1)
 background: linear-gradient(135deg,  rgba(248,80,50,1) 0%,rgba(241,111,92,1) 37%,rgba(246,41,12,1) 39%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#e73827',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
+}
+.language{
+	
+}
+.language img{
+	padding:1em;
+	height:3em;
+	width:4em;
 }

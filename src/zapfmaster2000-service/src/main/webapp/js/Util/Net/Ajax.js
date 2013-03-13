@@ -157,7 +157,7 @@ ZMO.Util.Net.Ajax = (function($){
 	var connectToChannel = function(url,successCb,errorCb,data){
 		if(!data)data ={};
 		data["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
-		pushRequests[url] = $.ajax({
+		return pushRequests[url] = $.ajax({
 			type:"GET",
 			url:baseUrl+url,
 			timeout:600000, 
@@ -278,6 +278,7 @@ ZMO.Util.Net.Ajax = (function($){
 			abortNewsPush:abortNewsPush,
 			abortNewsUpdatePush:abortNewsUpdatePush,
 			abortPushRequests:abortPushRequests,
+			abortReq:abortReq,
 			
 			connectChallengeReceive:connectChallengeReceive,
 			abortChallengePush:abortChallengePush,

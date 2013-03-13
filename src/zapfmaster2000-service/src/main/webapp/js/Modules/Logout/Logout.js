@@ -23,7 +23,7 @@ ZMO.modules.logout = (function($,ajax){
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
-		return (container = $("<div>").addClass("ZMO-logout"));
+		return (container = $("<div>").addClass("zmo-clickbutton").css("margin-top","3em"));
 	};
 	var pub = {
 			getInstance:getInstance,

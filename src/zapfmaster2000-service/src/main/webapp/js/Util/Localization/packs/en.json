@@ -47,5 +47,8 @@
 "nobody":"Nobody in sight",
 "challengeRemaining":"{{time}} min remaining",
 "challengeDone":"Challenge completed!",
-"challengeRequest":"Challenge requested!"
+"challengeRequest":"Challenge requested!",
+"choseImage":"Upload an image!",
+"selectLang":"Choose language:  ",
+"registerRfid":"Reregister your RFID Card"
 }

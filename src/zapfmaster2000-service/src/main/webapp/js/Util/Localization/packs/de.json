@@ -49,5 +49,8 @@
 
 "challengeRemaining":"{{time}} min verbleibend",
 "challengeDone":"Challenge beendet",
-"challengeRequest":"Challenge verschickt!"
+"challengeRequest":"Challenge verschickt!",
+"choseImage":"Lade ein Bild von dir hoch!",
+"selectLang":"Wähle die Sprache: ",
+"registerRfid":"Registriere deine RFID Karte"
 }

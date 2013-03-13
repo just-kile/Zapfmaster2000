@@ -48,6 +48,10 @@ ZMO.modules.Constants = {
 		member:{
 			MAX_ACHIEVEMENTS:7
 		},
+		language:{
+			deImg:"images/view/flagDE.png",
+			enImg:"images/view/flagEN.png"
+		},
 		challenges:{
 			modes:{
 				name:"Laenge",
