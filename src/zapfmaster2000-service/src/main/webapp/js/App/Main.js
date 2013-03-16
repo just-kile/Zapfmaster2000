@@ -54,21 +54,35 @@ function appReady(){
 			"js/Modules/Core/Controller.js",
 			
 			function() {
-				//Get config url
-				$.ajax({
-					url:"http://zapfmaster2000.de/config.json",
-					type:"GET",
-					complete:function(res){
-						if(res.status==200){
-							baseUrl = $.parseJSON(res.responseText).serverurl;
-							localStorage.setItem("serverurl",baseUrl);
+				//Get config url if app
+				if(typeof plugins!="undefined"){
+					console.log("Get Json...");
+					localStorage.setItem("serverurl","http://192.168.178.24:8080/zapfmaster2000-service/");
+					console.log("Base url:"+localStorage.getItem("serverurl"));
+					$.ajax({
+						url:"http://zapfmaster2000.de/config.json"+new Date().getTime(),
+						type:"GET",
+						complete:function(res){
+							if(res.status==200){
+								baseUrl = $.parseJSON(res.responseText).serverurl;
+								
+								localStorage.setItem("serverurl",baseUrl);
+								console.log("Base url:"+localStorage.getItem("serverurl"));
+							}
+							//init controller
+							if(ZMO.controller)ZMO.controller.init();
+							//init swipe control
+							if(ZMO.swipeHandler)ZMO.swipeHandler.init();
+							console.log("Base url:"+localStorage.getItem("serverurl"));
 						}
-						//init controller
-						if(ZMO.controller)ZMO.controller.init();
-						//init swipe control
-						if(ZMO.swipeHandler)ZMO.swipeHandler.init();
-					}
-				});
+					});
+				}else{
+					//init controller
+					if(ZMO.controller)ZMO.controller.init();
+					//init swipe control
+					if(ZMO.swipeHandler)ZMO.swipeHandler.init();
+				}
+				
 				
 			}
 		);

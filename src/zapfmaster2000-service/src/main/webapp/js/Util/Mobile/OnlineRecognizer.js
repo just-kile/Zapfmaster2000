@@ -21,8 +21,9 @@ ZMO.onlineRecognizer = function($,document){
 		    states[Connection.CELL_3G]  = true;
 		    states[Connection.CELL_4G]  = true;
 		    states[Connection.NONE]     = false;
-	    return bool;
+	    return states[networkState];
 	   }
+	   return true;
 	}
 	var init = function(){
 		document.addEventListener("pause", onOffline, false);

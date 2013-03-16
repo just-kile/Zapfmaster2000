@@ -50,5 +50,6 @@
 "challengeRequest":"Challenge requested!",
 "choseImage":"Upload an image!",
 "selectLang":"Choose language:  ",
-"registerRfid":"Reregister your RFID Card"
+"registerRfid":"Reregister your RFID Card",
+"Settings":"Settings"
 }

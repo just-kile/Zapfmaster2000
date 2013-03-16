@@ -112,7 +112,7 @@ ZMO.modules.Constants = {
 			link:"#duels",
 			text:"Duels",
 			title:"Duels",
-			image:"images/icons/89-dumbell.png"
+			image:"images/icons/115-bow-and-arrow.png"
 		},{
 			link:"#stats",
 			text:"Stats",
@@ -121,15 +121,15 @@ ZMO.modules.Constants = {
 		
 		},{
 			link:"#settings",
-			text:"Einstellungen",
-			title:"Einstellungen",
-			image:"images/icons/102-walk.png"
+			text:"Settings",
+			title:"Settings",
+			image:"images/icons/19-gear.png"
 		
 		},{
 			link:"#logout",
 			text:"Logout",
 			title:"Logout",
-			image:"images/icons/102-walk.png"
+			image:"images/icons/63-runner.png"
 		
 		}],
 badExcuses:["Muss mir morgen Muttis Haare kämmen","Mutti","und 3"]

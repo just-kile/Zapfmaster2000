@@ -5,6 +5,7 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.sideNavigation = (function($,ajax){
 	var mC = ZMO.modules.Constants;
+	var t = ZMO.Util.localization;
 	var container =null,mainContainer = null,ul = null,userInfo = null;
 	var visible =false;
 	
@@ -61,7 +62,7 @@ ZMO.modules.sideNavigation = (function($,ajax){
 		createHeader("Navigation").appendTo(ul);
 		//entry creation
 		$.each(mC.navbarMobile,function(ind,val){
-			var title = $("<div>").addClass("name-navigation").text(val.title);
+			var title = $("<div>").addClass("name-navigation").text(t.translateString(val.title));
 			var image = $("<img>").attr("src",val.image).addClass("small");
 			var li = $("<li>").addClass("ZMO-sideNavigation-entry");//.data("link",val.link);
 			li.append(image).append(title);

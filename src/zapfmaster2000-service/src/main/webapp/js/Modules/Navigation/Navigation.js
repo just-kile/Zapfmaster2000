@@ -2,6 +2,7 @@ ZMO.modules = ZMO.modules || {};
 
 ZMO.modules.navigation = (function($,ajax){
 	var c = ZMO.modules.Constants;
+	
 	var createNavigation = function(){
 		var links = c.navbar;
 		var ul =jQuery(document.createElement("ul")).attr("id","topnav");
