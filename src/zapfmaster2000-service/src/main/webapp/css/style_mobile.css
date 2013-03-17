@@ -12,6 +12,7 @@ body {
 overflow-x:hidden;
 background: none repeat scroll 0 0 #FFFFFF;
 background-image: url(../images/view/backgrnd2.jpg);
+-webkit-overflow-scrolling: touch;
 }
 
 .zm-viewport{
@@ -97,13 +98,16 @@ a:hover {
 	/*margin- top: 3em;
 	 bottom: 3em;*/
 }
+#drawfeed-news{
+	list-style:none;
+	padding:0;
+}
 #wrapper{
 		/*position:absolute;*/
 		 z-index:1;
 	padding-top:45px; 
 	bottom:0; left:0;
 	width:100%;
-	
 	/*overflow:auto;*/
 }
 .zm_col {

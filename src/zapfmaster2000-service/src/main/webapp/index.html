@@ -11,9 +11,12 @@
  <script src="libs/jquery/jquery-1.8.1.js"></script>
  <link rel="stylesheet" type="text/css" href="css/login.css" />
  <script>
-// baseUrl = "http://192.168.178.24:8080/zapfmaster2000-service/";
- baseUrl =localStorage.getItem("serverurl")?localStorage.getItem("serverurl"):"";
+ baseUrl = "http://192.168.178.24:8080/zapfmaster2000-service/";
+// baseUrl ="";
+ 
 $(document).ready(function(){
+	//localStorage.getItem("serverurl")?localStorage.getItem("serverurl"):"";
+	console.log("BaseUrl"+baseUrl);
 	function redirect(){
 	       if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
 	    	   window.location.replace("app.html");

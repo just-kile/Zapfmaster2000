@@ -584,3 +584,7 @@ tr.stats-drinker-row:nth-child(odd){
 	right:0;
 	cursor:pointer;
 }
+#drawfeed-news{
+	list-style:none;
+	padding:0;
+}

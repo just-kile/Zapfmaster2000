@@ -2,6 +2,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 	var rfid ,newsfeed,container,scrollElement,counter=0,rfid;
 	var mC = ZMO.modules.Constants;
 	var c = mC.drawfeed;
+	var sH = ZMO.Util.scrollHandler;
 	/**
 	 * #######################################################
 	 * Blank Container Creation
@@ -19,9 +20,11 @@ ZMO.modules.drawfeed = (function($,Ajax){
 	var createContainer =function(){
 		var container = $(document.createElement("div")).addClass("news-backgrnd");
 		var newsFeedContainer = $(document.createElement("div")).addClass("newsfeed");
-		var rfidHeadline= initRfid();
-		newsfeed  =  $(document.createElement("div")).attr("id","drawfeed-news");
-		newsFeedContainer.append(rfidHeadline).append(newsfeed);
+		//var rfidHeadline= initRfid();
+		newsfeed  =  $(document.createElement("ul")).attr("id","drawfeed-news");
+		newsFeedContainer
+//			.append(rfidHeadline)
+			.append(newsfeed);
 		container.append(newsFeedContainer);
 		scrollElement = $("<div>").addClass("scrollElement").appendTo(container);
 		return container;
@@ -110,6 +113,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 					fillContainer(container,val);
 				});
 				if(callback)callback(datas);
+				refreshScroller();
 			},{
 				start:startVal,
 				length:length,
@@ -124,8 +128,11 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		}else{
 			ZMO.logger.warning(" Drawfeed data empty!");
 		}
+		refreshScroller();
 	}
-	
+	var refreshScroller = function(){
+		if(scroller)scroller.refresh();
+	}
 	 var fillInitialData = function(){
 		 updateNewslist(0,mC.drawfeed.listLength);
 		 Ajax.connectToNewsPush(onMessageReceive);
@@ -156,17 +163,33 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			 
 		 });
 	 };
+	 var scroller = null;
 	 /**
 	  * Gets called, when container is appended
 	  */
-	 var init = function(){
+	 var init = function(queryparams,data){
 		 rfid = $("#rfid");
 		 container =$("#drawfeed-news")
 		 fillInitialData();
-		 bindScrollHandler(scrollElement);
+		 //if mobile define iscoll
+		 if(data && data.isMobile){
+			 var newsfeed = container.parent()
+			 newsfeed.css("height","100%");
+			 if(scroller)scroller.destroy();
+			 scroller = new iScroll(newsfeed[0],{
+				 
+			 });
+			 //bindScrollHandler(scrollElement);
+		 }else{
+			 //native scroll handler
+			 bindScrollHandler(scrollElement);
+		 }
+		
 		
 	}
-
+var getScroller = function(){
+	return scroller;
+}
 	/**
 	 * Gets called when instance is needed
 	 */
@@ -177,7 +200,8 @@ ZMO.modules.drawfeed = (function($,Ajax){
 	var pub = {
 			getInstance:getInstance,
 			init:init,
-			updateNewslist:updateNewslist
+			updateNewslist:updateNewslist,
+			getScroller:getScroller
 	}
 	return pub;
 }(jQuery,ZMO.ajax))

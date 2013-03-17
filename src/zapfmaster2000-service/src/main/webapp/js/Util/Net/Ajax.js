@@ -18,21 +18,21 @@ ZMO.Util.Net.Ajax = (function($){
 		if(!ZMO.exists(datas))datas = {};
 		//if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
 		datas["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
-		if(r){
-			if(!r.isConnected()||!r.isOffline()){
-				var yep =confirm("Connection unavailable, retry?");
-				if(yep){
-					getDatas(url,callback,datas,type);
-				}
-				return false;
-			}else if(!r.isConnected()){
-				setTimeout(function(){
-					getDatas(url,callback,datas,type);
-				},5000);
-				return false;
-			}
-			
-		}
+//		if(r){
+//			if(!r.isConnected()||!r.isOffline()){
+//				var yep =confirm("Connection unavailable, retry?");
+//				if(yep){
+//					getDatas(url,callback,datas,type);
+//				}
+//				return false;
+//			}else if(!r.isConnected()){
+//				setTimeout(function(){
+//					getDatas(url,callback,datas,type);
+//				},5000);
+//				return false;
+//			}
+//			
+//		}
 		$.ajax({
 			url:baseUrl+url,
 			type:type?type:"GET",
@@ -174,23 +174,23 @@ ZMO.Util.Net.Ajax = (function($){
 		if(!data)data ={};
 		data["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		data["_"] = new Date().getTime();
-		if(r){
-			if(!r.isConnected()||!r.isOffline()){
-				var yep =confirm("Connection unavailable, retry?");
-				if(yep){
-					connectToChannel(url,callback,datas,type);
-				}
-				return false;
-			}else if(!r.isConnected()&&!isAborted(url)){
-				setTimeout(function(){
-					connectToChannel(url,callback,datas,type);
-				},5000);
-				return false;
-			}else if(isAborted(url)){
-				return false;
-			}
-			
-		}
+//		if(r){
+//			if(!r.isConnected()||!r.isOffline()){
+//				var yep =confirm("Connection unavailable, retry?");
+//				if(yep){
+//					connectToChannel(url,callback,datas,type);
+//				}
+//				return false;
+//			}else if(!r.isConnected()&&!isAborted(url)){
+//				setTimeout(function(){
+//					connectToChannel(url,callback,datas,type);
+//				},5000);
+//				return false;
+//			}else if(isAborted(url)){
+//				return false;
+//			}
+//			
+//		}
 		return pushRequests[url] = $.ajax({
 			type:"GET",
 			url:baseUrl+url,

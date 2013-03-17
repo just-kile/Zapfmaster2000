@@ -16,6 +16,7 @@ baseUrl = "";
 			"js/Util/Object/Exists.js",
 			"js/Util/Localization/Localization.js",
 			"js/Util/Globalfunctions.js",
+			"js/Util/Browser/Scroller.js",
 			//modules
 			"js/Modules/Stats/StatsModels.js",
 			"js/Modules/Constants.js",

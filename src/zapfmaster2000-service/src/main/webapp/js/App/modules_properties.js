@@ -18,7 +18,7 @@ ZMO.modules_properties ={
 					moduleId:"drawfeed",
 					ratio:"100%",
 					position:[0,0],
-					params:{}
+					params:{isMobile:true}
 				}],
 				  
 				footer:[],
@@ -74,7 +74,7 @@ ZMO.modules_properties ={
 					position:[0,0],
 				}],
 				main:[{
-					moduleId:"drawfeed",
+					moduleId:"statsMobile",
 					ratio:"100%",
 					position:[0,0]
 				}],

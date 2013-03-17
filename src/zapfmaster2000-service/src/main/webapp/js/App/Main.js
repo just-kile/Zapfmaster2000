@@ -28,6 +28,7 @@ function appReady(){
 			"js/Util/Mobile/Animator.js",
 			"js/Util/Mobile/FastButton.js",
 			"js/Util/Localization/Localization.js",
+			"js/Util/Browser/Scroller.js",
 			//"js/Util/Mobile/Scroller.js",
 			
 			
@@ -47,6 +48,7 @@ function appReady(){
 			"js/Modules/SideNavigation/SideNavigation.js" ,
 			"js/Modules/ChallengeUserList/ChallengeUserList.js" ,
 			"js/Modules/Settings/Settings.js" ,
+			"js/Modules/Stats/Mobile/StatsMobile.js" ,
 			//main
 			"js/Modules/Core/View.js",
 			"js/App/modules_properties.js",
@@ -55,9 +57,10 @@ function appReady(){
 			
 			function() {
 				//Get config url if app
-				if(typeof plugins!="undefined"){
+				if(true || typeof plugins!="undefined"){
 					console.log("Get Json...");
-					localStorage.setItem("serverurl","http://192.168.178.24:8080/zapfmaster2000-service/");
+					//localStorage.setItem("serverurl","http://192.168.178.24:8080/zapfmaster2000-service/");
+//					baseUrl = "http://192.168.178.24:8080/zapfmaster2000-service/";
 					console.log("Base url:"+localStorage.getItem("serverurl"));
 					$.ajax({
 						url:"http://zapfmaster2000.de/config.json"+new Date().getTime(),
