@@ -103,6 +103,17 @@ ZMO.modules.Constants = {
 			text:"Challenges",
 			title:"Challenges"
 		}],
+		navbarStats:[{
+			link:"#stats",
+			text:"Stats",
+			title:"Stats",
+			image:"images/icons/16-line-chart.png"
+		},{
+			link:"#userstats",
+			text:"User",
+			title:"User",
+			image:"images/icons/111-user.png"
+		}],
 		navbarMobile :	[{
 			link:"#",
 			text:"News",

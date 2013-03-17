@@ -65,6 +65,7 @@ ZMO.modules_properties ={
 				}]
 			}
 		},
+		
 		stats:{
 			sections:{
 				navigation:[{
@@ -82,7 +83,47 @@ ZMO.modules_properties ={
 					position:[0,0]
 				}],
 				  
-				footer:[],
+				footer:[{
+					moduleId:"navigationMobile",
+					ratio:"100%",
+					position:[0,0],
+
+				}],
+				side:[{
+					moduleId:"sideNavigation",
+					ratio:"100%",
+					position:[0,0]
+				},{
+					moduleId:"challengeUserList",
+					ratio:"100%",
+					position:[0,0]
+				}]
+			}
+		},
+		
+		userstats:{
+			sections:{
+				navigation:[{
+					moduleId:"receiveChallenge",
+					ratio:"100%",
+					position:[0,0]
+				},{
+					moduleId:"header",
+					ratio:"100%",
+					position:[0,0],
+				}],
+				main:[{
+					moduleId:"statsMobileUser",
+					ratio:"100%",
+					position:[0,0]
+				}],
+				  
+				footer:[{
+					moduleId:"navigationMobile",
+					ratio:"100%",
+					position:[0,0],
+
+				}],
 				side:[{
 					moduleId:"sideNavigation",
 					ratio:"100%",

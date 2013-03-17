@@ -49,6 +49,7 @@ function appReady(){
 			"js/Modules/ChallengeUserList/ChallengeUserList.js" ,
 			"js/Modules/Settings/Settings.js" ,
 			"js/Modules/Stats/Mobile/StatsMobile.js" ,
+			"js/Modules/Stats/Mobile/StatsMobileUser.js" ,
 			//main
 			"js/Modules/Core/View.js",
 			"js/App/modules_properties.js",
