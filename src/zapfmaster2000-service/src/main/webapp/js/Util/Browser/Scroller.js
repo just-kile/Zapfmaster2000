@@ -57,21 +57,23 @@ ZMO.Util.scrollHandler = (function($) {
 			    onScrollMove: function () {
 			        // CHECK if we've 350px gap before reaching end of the page
 			        if ( (this.y < (this.maxScrollY + 350)) && (!actLoadingFlag) ){ 
+			        	actLoadingFlag = true; 
 			          // start loading next page content here
 			        	if (callb)
 			        		callb(loadingOk);
 			          // update this flag inside load more and set to 0 when complete
-			        	actLoadingFlag = true; 
+			        	
 			        }
 			      },
 			      onScrollEnd: function () {
 			        // check if we went down, and then load content
-			        if ( !actLoadingFlag ) {
+			    	  if ( (this.y < (this.maxScrollY + 350)) && (!actLoadingFlag) ){ 
+			    		  actLoadingFlag = true; 
 			          // Load more content
 			        	if (callb)
 			        		callb(loadingOk);
 			          // update this flag inside load more and set to 0 when complete
-			        	actLoadingFlag = true; 
+			        	
 			        } else {
 			          // DO NOTHING
 			        }

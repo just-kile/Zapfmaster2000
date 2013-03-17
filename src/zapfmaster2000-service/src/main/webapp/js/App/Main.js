@@ -58,28 +58,34 @@ function appReady(){
 			function() {
 				//Get config url if app
 				if(typeof device!="undefined" && device.cordova){
-					console.log("Get Json...");
+					
+					console.log("ZM_Request");
 					//localStorage.setItem("serverurl","http://192.168.178.24:8080/zapfmaster2000-service/");
 					//baseUrl = "http://192.168.178.24:8080/zapfmaster2000-service/";
-					console.log("Base url:"+localStorage.getItem("serverurl"));
+					//console.log("Base url:"+localStorage.getItem("zm-serverurl"));
 					$.ajax({
-						url:"http://zapfmaster2000.de/config.json"+new Date().getTime(),
+						url:"http://zapfmaster2000.de/config.json?_="+new Date().getTime(),
 						type:"GET",
 						complete:function(res){
+							console.log("StatusCode : "+res.status);
+							console.log("responseText: "+res.responseText);
 							if(res.status==200){
-								baseUrl = $.parseJSON(res.responseText).serverurl;
 								
-								localStorage.setItem("serverurl",baseUrl);
-								console.log("Base url:"+localStorage.getItem("serverurl"));
+								baseUrl = $.parseJSON(res.responseText).serverurl;
+								console.log("Parsed Base Url: "+baseUrl);
+								localStorage.setItem("zm-serverurl",baseUrl);
+								console.log("Saved Base url:"+localStorage.getItem("zm-serverurl"));
 							}
 							//init controller
 							if(ZMO.controller)ZMO.controller.init();
 							//init swipe control
 							if(ZMO.swipeHandler)ZMO.swipeHandler.init();
-							console.log("Base url:"+localStorage.getItem("serverurl"));
+							localStorage.setItem("zm-serverurl",baseUrl);
+							console.log("afterwards Base url:"+localStorage.getItem("zm-serverurl"));
 						}
 					});
 				}else{
+					console.log("NO Request!");
 					//init controller
 					if(ZMO.controller)ZMO.controller.init();
 					//init swipe control
@@ -90,7 +96,8 @@ function appReady(){
 			}
 		);
 };
-if(typeof plugins!="undefined")document.addEventListener("deviceready", appReady, false);
+var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
+if(app)document.addEventListener("deviceready", appReady, false);
 else appReady();
 
 

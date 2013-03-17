@@ -30,7 +30,7 @@
         android:resizeable="true"
         android:smallScreens="true"
         android:xlargeScreens="true" />
-
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />

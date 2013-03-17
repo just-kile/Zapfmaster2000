@@ -6,6 +6,7 @@ ZMO.modules = ZMO.modules || {};
 ZMO.modules.challenges = (function($,ajax){
 	var c = ZMO.modules.Constants;
 	var l = ZMO.Util.localization;
+	var sH = ZMO.Util.scrollHandler;
 	var container = null,duelsContainerUl= null;
 	var wording = {
 			REMAINING:"challengeRemaining",
@@ -74,6 +75,7 @@ ZMO.modules.challenges = (function($,ajax){
 			rawData:true
 		});
 		ajax.startPull();
+		//sH.initScrolling(container,);
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM
