@@ -95,8 +95,8 @@ a:hover {
 .major{
 	 width: 100%;
 	/* position: absolute;*/
-	/*margin- top: 3em;
-	 bottom: 3em;*/
+	margin-top: 3em;
+	/* bottom: 3em;*/
 }
 #drawfeed-news{
 	list-style:none;
@@ -105,7 +105,7 @@ a:hover {
 #wrapper{
 		/*position:absolute;*/
 		 z-index:1;
-	padding-top:45px; 
+	/*padding-top:45px; */
 	bottom:0; left:0;
 	width:100%;
 	/*overflow:auto;*/
@@ -370,7 +370,7 @@ background: url(../images/view/backgrnd2.jpg) repeat scroll 0 0 #FFFFFF;
 	list-style-type: none;
 	padding-left: 0;
 	font-size: 1em;
-	margin-bottom:4em;
+	margin-bottom:40em;
 }
 
 #ZMO-duels-container .rowContainer {

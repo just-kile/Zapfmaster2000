@@ -55,6 +55,7 @@ ZMO.modules.challenges = (function($,ajax){
 	var fillContainer = function(globalChallengeModel){
 		var news = $(parseChallengesOverview(globalChallengeModel));
 		duelsContainerUl.append(stretchLengthStatus(news,globalChallengeModel));
+		
 	};
 	var onChallengesReceive = function(datas){
 		ZMO.logger.log("challenges datas received!");
@@ -62,6 +63,7 @@ ZMO.modules.challenges = (function($,ajax){
 		$.each(datas,function(ind,val){
 			fillContainer(new ZMO.GlobalChallengeModel(val));
 		});
+		sH.refresh();
 	};
 	
 	/**
@@ -75,7 +77,7 @@ ZMO.modules.challenges = (function($,ajax){
 			rawData:true
 		});
 		ajax.startPull();
-		//sH.initScrolling(container,);
+		sH.initScrolling(container,null,true);
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM
