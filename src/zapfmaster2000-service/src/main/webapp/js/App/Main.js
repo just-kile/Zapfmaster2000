@@ -57,10 +57,10 @@ function appReady(){
 			
 			function() {
 				//Get config url if app
-				if(true || typeof plugins!="undefined"){
+				if(typeof device!="undefined" && device.cordova){
 					console.log("Get Json...");
 					//localStorage.setItem("serverurl","http://192.168.178.24:8080/zapfmaster2000-service/");
-//					baseUrl = "http://192.168.178.24:8080/zapfmaster2000-service/";
+					//baseUrl = "http://192.168.178.24:8080/zapfmaster2000-service/";
 					console.log("Base url:"+localStorage.getItem("serverurl"));
 					$.ajax({
 						url:"http://zapfmaster2000.de/config.json"+new Date().getTime(),

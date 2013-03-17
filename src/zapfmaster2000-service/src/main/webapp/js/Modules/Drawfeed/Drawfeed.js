@@ -1,5 +1,5 @@
 ZMO.modules.drawfeed = (function($,Ajax){
-	var rfid ,newsfeed,container,scrollElement,counter=0,rfid;
+	var rfid ,newsfeed,container,counter=0,rfid;
 	var mC = ZMO.modules.Constants;
 	var c = mC.drawfeed;
 	var sH = ZMO.Util.scrollHandler;
@@ -26,7 +26,6 @@ ZMO.modules.drawfeed = (function($,Ajax){
 //			.append(rfidHeadline)
 			.append(newsfeed);
 		container.append(newsFeedContainer);
-		scrollElement = $("<div>").addClass("scrollElement").appendTo(container);
 		return container;
 	};
 	/**
@@ -131,7 +130,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		refreshScroller();
 	}
 	var refreshScroller = function(){
-		if(scroller)scroller.refresh();
+		sH.refresh();
 	}
 	 var fillInitialData = function(){
 		 updateNewslist(0,mC.drawfeed.listLength);
@@ -148,21 +147,12 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			 rfid.text("Hallo "+rfidModel.userName+". Du kannst jetzt zapfen!");
 		 }
 	 };
-	 var bindScrollHandler = function(scrollElement){
-		 var actLoadingFlag = false;
-		 $(window).bind("scroll",function(e){
-			 var top = scrollElement.offset().top;
-			 var windowHeight = $(window).height();
-			 var windowTop = $(window).scrollTop()+windowHeight+200;
-			 if(windowTop>top && top>=windowHeight&& !actLoadingFlag){
-				 actLoadingFlag = true;
-				 var len = container.children().length;
-				 updateNewslist(len,mC.drawfeed.listLength,function(datas){if(datas.length!=0)actLoadingFlag = false;});
-				 ZMO.logger.log("Loading newsfeed..."+len+"/"+mC.drawfeed.listLength);
-			 }
-			 
-		 });
-	 };
+	 var reloadingNewsfeed = function(ok){
+		 var len = container.children().length;
+		 updateNewslist(len,mC.drawfeed.listLength,function(datas){if(datas.length!=0)ok();});
+		 ZMO.logger.log("Loading newsfeed..."+len+"/"+mC.drawfeed.listLength);
+	 }
+
 	 var scroller = null;
 	 /**
 	  * Gets called, when container is appended
@@ -172,18 +162,9 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		 container =$("#drawfeed-news")
 		 fillInitialData();
 		 //if mobile define iscoll
-		 if(data && data.isMobile){
-			 var newsfeed = container.parent()
-			 newsfeed.css("height","100%");
-			 if(scroller)scroller.destroy();
-			 scroller = new iScroll(newsfeed[0],{
-				 
-			 });
-			 //bindScrollHandler(scrollElement);
-		 }else{
-			 //native scroll handler
-			 bindScrollHandler(scrollElement);
-		 }
+		 var newsfeed = container.parent();
+		 sH.initScrolling(newsfeed,reloadingNewsfeed,data.isMobile);
+
 		
 		
 	}
