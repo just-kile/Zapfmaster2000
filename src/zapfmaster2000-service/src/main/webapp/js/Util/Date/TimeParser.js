@@ -11,7 +11,11 @@ ZMO.TimeParser = function(serverDateString){
 	}
 	
 	var getDefaultTime = function(){
-		return formatDate(date,clientTimeFormat);
+		 if(serverDateString!=0){
+			 return formatDate(date,clientTimeFormat);
+		 }else{
+			return false;
+		 }
  
 	};
 	var getHoursMinutes = function(){

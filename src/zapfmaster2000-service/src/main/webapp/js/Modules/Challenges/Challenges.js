@@ -69,7 +69,7 @@ ZMO.modules.challenges = (function($,ajax){
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
-	var init = function(){
+	var init = function(queryparams,data){
 //		ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
 		ajax.enqueueDatas({
 			url:c.urls.CHALLENGES,
@@ -77,7 +77,8 @@ ZMO.modules.challenges = (function($,ajax){
 			rawData:true
 		});
 		ajax.startPull();
-		sH.initScrolling(container,null,true);
+		
+		sH.initScrolling(container,null,data.isMobile);
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM

@@ -90,7 +90,7 @@ ZMO.modules.kegModel = function(config){
 			 keg_id: keg.keg_id||keg.kegId,
 		      brand:keg.brand,
 		      size : keg.size,
-		      start_date:new ZMO.TimeParser(keg.start_date||keg.startDate).getDefaultTime(),
+		      start_date:new ZMO.TimeParser(keg.start_date||keg.startDate).getDefaultTime()||ZMO.translateString("Never"),
 		      keg_numbers:keg.keg_numbers||keg.kegNumber,
 		      current_amount : keg.currentAmount.toFixed(2),
 		      lastsUntil :date.getDefaultTime(),

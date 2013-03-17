@@ -33,7 +33,7 @@ function appReady(){
 			
 			
 			"js/Util/Globalfunctions.js",
-
+			"js/Modules/Stats/StatsModels.js",
 			//Modules
 			"js/Modules/Model.js" ,
 			"js/Modules/Constants.js",

@@ -47,7 +47,10 @@ ZMO.modules_properties ={
 				main:[{
 					moduleId:"challenges",
 					ratio:"100%",
-					position:[0,0]
+					position:[0,0],
+					params:{
+						isMobile:true
+					}
 				}],
 				  
 				footer:[],
