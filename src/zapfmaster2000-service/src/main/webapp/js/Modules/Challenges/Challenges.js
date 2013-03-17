@@ -78,15 +78,23 @@ ZMO.modules.challenges = (function($,ajax){
 		});
 		ajax.startPull();
 		
-		sH.initScrolling(container,null,data.isMobile);
+		sH.initScrolling({
+			element:container,
+			isMobile:data.isMobile,
+			pullDownCallback:function(){
+				ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
+			}
+		})
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
 		container = $("<div>").addClass("newsfeed");
+		var ulWrapper =$("<div>");
 		duelsContainerUl = $("<ul>").attr("id","ZMO-duels-container");
-		container.append(duelsContainerUl);
+		ulWrapper.append(duelsContainerUl);
+		container.append(ulWrapper);
 		return container;
 	};
 	var pub = {

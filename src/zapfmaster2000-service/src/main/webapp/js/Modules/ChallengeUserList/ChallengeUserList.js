@@ -95,7 +95,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 			}else{
 				setTimeout(function(){
 					scroller.refresh();
-				},1000);
+				},0);
 			}
 		});
 	};

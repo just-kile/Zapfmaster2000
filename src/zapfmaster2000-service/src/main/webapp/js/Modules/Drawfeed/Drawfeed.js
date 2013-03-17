@@ -163,7 +163,11 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		 fillInitialData();
 		 //if mobile define iscoll
 		 var newsfeed = container.parent();
-		 sH.initScrolling(newsfeed,reloadingNewsfeed,data.isMobile);
+		 sH.initScrolling({
+			element: newsfeed,
+			loadMoreCallback:reloadingNewsfeed,
+			isMobile:data.isMobile
+		 });
 
 		
 		
