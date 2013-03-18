@@ -85,6 +85,7 @@ ZMO.modules.challenges = (function($,ajax){
 				ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
 			}
 		})
+		
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM

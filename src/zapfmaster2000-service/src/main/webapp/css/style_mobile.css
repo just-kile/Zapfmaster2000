@@ -445,9 +445,9 @@ background: url(../images/view/backgrnd2.jpg) repeat scroll 0 0 #FFFFFF;
 	height: 48px;
 	opacity: .7;
 	width: 50%;
-	-moz-box-shadow: 0px 0px 20px #ffa3ea;
+	/*-moz-box-shadow: 0px 0px 20px #ffa3ea;
 	-webkit-box-shadow: 0px 0px 20px #ffa3ea;
-	box-shadow: 0px 0px 20px #ffa3ea;
+	box-shadow: 0px 0px 20px #ffa3ea;*/
 }
 
 /*CHALLENGES*/
@@ -497,9 +497,9 @@ border-radius: 5px;
 	position: absolute;
 	height: 48px;
 	opacity: .7;
-	-moz-box-shadow: 0px 0px 20px #ffe88e;
+	/*-moz-box-shadow: 0px 0px 20px #ffe88e;
 	-webkit-box-shadow: 0px 0px 20px #ffe88e;
-	box-shadow: 0px 0px 20px #ffe88e;
+	box-shadow: 0px 0px 20px #ffe88e;*/
 	width: 50%;
 }
 

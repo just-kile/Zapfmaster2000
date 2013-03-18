@@ -74,7 +74,7 @@ ZMO.Util.scrollHandler = (function($) {
 		var isPullDownMode = !!defaultSettings.pullDownCallback;
 		if (defaultSettings.isMobile) {
 			reset();
-			var pullDownOffset = 0;
+			var pullDownOffset;
 			if(isPullDownMode){
 				pullDownEl = createPullDownElement().prependTo(defaultSettings.element.children(":first"))
 				pullDownOffset = pullDownEl.outerHeight();
@@ -89,7 +89,7 @@ ZMO.Util.scrollHandler = (function($) {
 			    vScrollbar:false,
 			    hScrollbar:false,
 			    checkDOMChanges: false,
-			    useTransition: true,
+			   //useTransition: true,
 				topOffset: pullDownOffset,
 				onRefresh: function () {
 					if (isPullDownMode&&pullDownEl.hasClass('loading')) {
