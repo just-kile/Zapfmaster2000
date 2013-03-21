@@ -90,11 +90,11 @@ ZMO.modules.kegModel = function(config){
 			 keg_id: keg.keg_id||keg.kegId,
 		      brand:keg.brand,
 		      size : keg.size,
-		      start_date:new ZMO.TimeParser(keg.start_date||keg.startDate).getDefaultTime()||ZMO.translateString("Never"),
+		      start_date:new ZMO.TimeParser(keg.start_date||keg.startDate).getDefaultTime(),
 		      keg_numbers:keg.keg_numbers||keg.kegNumber,
 		      current_amount : keg.currentAmount.toFixed(2),
-		      lastsUntil :date.getDefaultTime(),
-		      lastsUntilShort:date.getHoursMinutes(),
+		      lastsUntil :date.getDefaultTime()||ZMO.translateString("Never"),
+		      lastsUntilShort:date.getHoursMinutes()||ZMO.translateString("Never"),
 		      boxId:keg.boxId
 		});
 	});

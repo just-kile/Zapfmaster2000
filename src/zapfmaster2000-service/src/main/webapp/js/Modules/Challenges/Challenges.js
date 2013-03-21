@@ -81,9 +81,9 @@ ZMO.modules.challenges = (function($,ajax){
 		sH.initScrolling({
 			element:container,
 			isMobile:data.isMobile,
-			pullDownCallback:function(){
-				ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
-			}
+//			pullDownCallback:function(){
+//				ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
+//			}
 		})
 		
 	};

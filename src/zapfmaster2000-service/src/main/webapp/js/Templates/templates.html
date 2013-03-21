@@ -409,3 +409,23 @@
 	<span>{{name}}{{userName}} {{#description}}:{{description}}{{/description}}</span>
 </li>
  </template>
+<template id="ZMO-stats-mobile-kegstatus">
+<table>
+{{#keg}}
+	<tr>
+		<td>[[brand]]</td>
+		<td>{{brand}}</td>
+	</tr>
+	<tr>
+		<td>[[completeAmount]]</td>
+		<td>{{current_amount}}</td>
+	</tr>
+	<tr>
+		<td>lasts until</td>
+		<td>{{lastsUntil}}</td>
+	</tr>
+	
+{{/keg}}
+	
+</table>
+</template>

@@ -90,6 +90,7 @@ a:hover {
 	width: 100%;
 	top:0;
 	left:0;
+	margin-top:-3em;
 	
 }
 .major{
@@ -1025,4 +1026,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', end
 	padding:1em;
 	height:3em;
 	width:4em;
+}
+
+.statsMobileList{
+padding:0;
+margin:0;
+list-style:none;
+}
+.statsMobile table{
+	width:100%;
+}
+.statsMobile td{
+	color:white;
+}
+.statsMobile .headline{
+	font-size:2em;
+}
+
+
+/*Plot styles*/
+
+.jqplot-axis,.jqplot-title{
+	color:white;
 }
