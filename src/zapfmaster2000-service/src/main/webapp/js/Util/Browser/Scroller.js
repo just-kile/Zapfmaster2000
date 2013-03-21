@@ -1,25 +1,37 @@
 ZMO.scrolling = (function() {
 	var isScroll = true;
+	var isActScroll = false;
 	var getIsScroll = function() {
 		return isScroll;
+	};
+	var isActuallyScrolling = function(){
+		return isActScroll;
+	}
+	var enableScrolling = function(){
+		isActScroll = false;
 	}
 	var preventScrolling = function(e) {
+		isActScroll = true;
 		if (!getIsScroll()) {
 			e.preventDefault();
 		}
 
-	}
+	};
 	var enable = function() {
 		isScroll = true;
-	}
+	};
 	var disable = function() {
 		isScroll = false;
-	}
+	};
+	
 	document.addEventListener('touchmove', preventScrolling, false);
+	document.addEventListener('touchend', enableScrolling, false);
 	var pub = {
 		enable : enable,
-		disable : disable
-	}
+		disable : disable,
+		getIsScroll:getIsScroll,
+		isActuallyScrolling:isActuallyScrolling
+	};
 	return pub;
 })();
 

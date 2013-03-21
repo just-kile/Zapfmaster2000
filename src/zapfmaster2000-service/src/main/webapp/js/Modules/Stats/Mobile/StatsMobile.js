@@ -120,16 +120,19 @@ ZMO.modules.statsMobile = (function($,ajax){
 	}
 	
 	var	toggleContainer = function(e,globalStatsModel){
-		var el = $(e.currentTarget);
-		var content = el.siblings(".content");
-		if(!content.is(":visible")){
-			el.siblings().show();
-		}else{
-			el.siblings().hide();
-		}
-		var chartId = el.data("chart");
-		if(chartId &&$("#"+chartId).children().length==0){
-			chartFcts[chartId](chartId,globalStatsModel);	
+		if(!ZMO.scrolling.isActuallyScrolling()){
+			var el = $(e.currentTarget);
+			var content = el.siblings(".content");
+			if(!content.is(":visible")){
+				el.siblings().show();
+			}else{
+				el.siblings().hide();
+			}
+			var chartId = el.data("chart");
+			if(chartId &&$("#"+chartId).children().length==0){
+				chartFcts[chartId](chartId,globalStatsModel);	
+			}
+
 		}
 	}
 	var initAccordion = function(globalStatsModel){
