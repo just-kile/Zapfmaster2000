@@ -80,7 +80,7 @@ ZMO.modules.challenges = (function($,ajax){
 		
 		sH.initScrolling({
 			element:container,
-			isMobile:data.isMobile,
+			isMobile:false//data.isMobile,
 //			pullDownCallback:function(){
 //				ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
 //			}

@@ -166,7 +166,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		 sH.initScrolling({
 			element: newsfeed,
 			loadMoreCallback:reloadingNewsfeed,
-			isMobile:data.isMobile
+			isMobile:false//data.isMobile
 		 });
 
 		

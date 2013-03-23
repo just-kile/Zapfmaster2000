@@ -4,6 +4,22 @@
  */
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.statsMobile = (function($,ajax){
+	var plotOptions = {
+			 grid: {
+	        	    drawGridLines: true,        // wether to draw lines across the grid or not.
+	        	        gridLineColor: 'rgba(0,0,0,0.2)',   // CSS color spec of the grid lines.
+	        	        background: 'rgba(255,255,255,0.2)',      // CSS color spec for background color of grid.
+	        	        borderColor: 'rgba(0,0,0,0.2)',     // CSS color spec for border around grid.
+	        	        borderWidth: 2.0,           // pixel width of border around grid.
+	        	        shadow: true,               // draw a shadow for grid.
+	        	        shadowAngle: 45,            // angle of the shadow.  Clockwise from x axis.
+	        	        shadowOffset: 1.5,          // offset from the line of the shadow.
+	        	        shadowWidth: 3,             // width of the stroke for the shadow.
+	        	        shadowDepth: 3
+	        	}, 
+	        	seriesColors: [ "#dddf0d", "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
+	        	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
+	};
 	var mC = ZMO.modules.Constants;
 	var container =null;
 	var chartsFcts = {};
@@ -22,7 +38,39 @@ ZMO.modules.statsMobile = (function($,ajax){
 		});
 		return retArr;
 	}
-	var initProgressChart = function(container,globalStatsModel){
+	var calcBestlist = function(list){
+		var arr = [];
+		$.each(list,function(ind,user){
+			arr.push([user.userName,user.amount]);
+		});
+		return arr;
+		
+	}
+	var initPieChart = function(id,globalStatsModel){
+		var rankList = globalStatsModel.bestUserList;
+		var data = calcBestlist(rankList);
+		$("#"+id).css("height","250px");
+//		['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
+//	    ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+		jQuery.jqplot (id, [data], 
+			    $.extend({ 
+			      seriesDefaults: {
+			        // Make this a pie chart.
+			        renderer: jQuery.jqplot.PieRenderer, 
+			        rendererOptions: {
+			          // Put data labels on the pie slices.
+			          // By default, labels show the percentage of the slice.
+			          showDataLabels: true,
+			          dataLabels: 'label',
+//			          dataLabelFormatString:'%.4f'
+			        }
+			      }, 
+		          
+			      legend: { show:false, location: 'e' }
+			    }
+			  ,plotOptions));
+	}
+	var initProgressChart = function(id,globalStatsModel){
 		var progressStats= globalStatsModel.progress;
 		var progress = progressStats.data;
 		var interval = progressStats.interval;
@@ -31,7 +79,7 @@ ZMO.modules.statsMobile = (function($,ajax){
 //		var line1=[['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
 //		           ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
 //		           ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
-		var plot1 = $.jqplot(container, [datas], {
+		var plot1 = $.jqplot(id, [datas],$.extend( {
 		           title:'Draw Analytics',
 		           axes:{
 		             xaxis:{
@@ -48,28 +96,15 @@ ZMO.modules.statsMobile = (function($,ajax){
 		                 min:0
 		             }
 		           },
-		           grid: {
-		        	    drawGridLines: true,        // wether to draw lines across the grid or not.
-		        	        gridLineColor: 'rgba(0,0,0,0.2)',   // CSS color spec of the grid lines.
-		        	        background: 'rgba(255,255,255,0.2)',      // CSS color spec for background color of grid.
-		        	        borderColor: 'rgba(0,0,0,0.2)',     // CSS color spec for border around grid.
-		        	        borderWidth: 2.0,           // pixel width of border around grid.
-		        	        shadow: true,               // draw a shadow for grid.
-		        	        shadowAngle: 45,            // angle of the shadow.  Clockwise from x axis.
-		        	        shadowOffset: 1.5,          // offset from the line of the shadow.
-		        	        shadowWidth: 3,             // width of the stroke for the shadow.
-		        	        shadowDepth: 3
-		        	}, 
-		        	seriesColors: [ "#dddf0d", "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
-		        	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
+		          
 		           cursor: {
 		             show: false
 		           }
-		       });
+		       },plotOptions));
 	}
 	var initBasicContainer = function(chartid){
 		 var container = $("<li>").addClass("statsMobile keg statsDiv");
-		 var headline = $("<div>").addClass("headline");
+		 var headline = $("<div>").addClass("headline").data("chart",chartid);
 		 var body = $("<div>").addClass("content").hide();
 		 if(chartid){
 			 var chartContainer  =$("<div>").addClass("chart").attr("id",chartid).css({
@@ -93,21 +128,28 @@ ZMO.modules.statsMobile = (function($,ajax){
 		return kegContainer;
 	}
 	var initRankContainer = function(globalStatsModel){
-		 var statsContainer = initBasicContainer();
-		 var content = ich["ZMO-stats-mobile-kegstatus"](globalStatsModel);
-		 statsContainer.find(".content").append(content);
+		 var CHARTID ="zmo-rank";
+		 var statsContainer = initBasicContainer(CHARTID);
+		
 		 statsContainer.find(".headline").text("Rank");
-		 
+		 //Appendix of rank table
+		 var userlistModel = globalStatsModel.bestUserList;
+		var template = ich["ZMO-stats-bestlist-item"];
+		var table = $("<table>").addClass("bestlist-table");
+		$.each(userlistModel,function(ind,val){
+			val.rank = ind+1;
+			val.unit = "l";
+			table.append(template(val));
+		});
+		 statsContainer.find(".content").append(table);
 		 return statsContainer;
 	}
 	var initProgressContainer = function(globalStatsModel){
-		var CHARTID ="zmo-progress";
+		 var CHARTID ="zmo-progress";
 		 var statsContainer = initBasicContainer(CHARTID);
-		 statsContainer.find(".headline").text("Progress").data("chart",CHARTID);
-		 var content = $(ich["ZMO-stats-mobile-kegstatus"](globalStatsModel));
-		 
-		
-		 statsContainer.find(".content").append(content);
+		 statsContainer.find(".headline").text("Progress");
+//		 var content = $(ich["ZMO-stats-mobile-kegstatus"](globalStatsModel));
+//		 statsContainer.find(".content").append(content);
 
 		 return statsContainer;
 	}
@@ -164,7 +206,8 @@ ZMO.modules.statsMobile = (function($,ajax){
 	var init = function(hashParams,moduleParams){
 		refreshStats();
 		chartFcts = {
-				"zmo-progress": initProgressChart
+				"zmo-progress": initProgressChart,
+				"zmo-rank":initPieChart
 		}
 	};
 	/**
