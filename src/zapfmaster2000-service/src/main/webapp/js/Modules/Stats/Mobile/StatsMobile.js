@@ -17,7 +17,7 @@ ZMO.modules.statsMobile = (function($,ajax){
 	        	        shadowWidth: 3,             // width of the stroke for the shadow.
 	        	        shadowDepth: 3
 	        	}, 
-	        	seriesColors: [ "#dddf0d", "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
+	        	seriesColors: ["#dddf0d","#90b1d8",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
 	        	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
 	};
 	var mC = ZMO.modules.Constants;
@@ -46,6 +46,57 @@ ZMO.modules.statsMobile = (function($,ajax){
 		return arr;
 		
 	}
+	var calcKeg = function(list){
+		var s1 = [];
+		var s2 = [];
+		$.each(list,function(ind,keg){
+			//arr.push([[keg.size-keg.current_amount,ind]]);
+			//amount bar
+			
+			var size =keg.size;
+			var amount =parseFloat(keg.current_amount);
+			s1.push(size-amount);
+			s2.push(amount);
+		});
+		return [s1,s2];
+	}
+var initBarChart = function(id,globalStatsModel){
+//	var data =  [
+//	             [[2,1], [4,2], [6,3], [3,4]], 
+//	             [[5,1], [1,2], [3,3], [4,4]], 
+//	             [[4,1], [7,2], [1,3], [2,4]]];
+	var data = calcKeg(globalStatsModel.keg);
+	$("#"+id).css("height","150px");
+	 var plot2 = $.jqplot(id,data,$.extend({},plotOptions,{
+		 	stackSeries: true,
+             seriesDefaults: {
+                 renderer:$.jqplot.BarRenderer,
+                 // Show point labels to the right ('e'ast) of each bar.
+                 // edgeTolerance of -15 allows labels flow outside the grid
+                 // up to 15 pixels.  If they flow out more than that, they 
+                 // will be hidden.
+                 pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
+                 // Rotate the bar shadow as if bar is lit from top right.
+                 shadowAngle: 135,
+                 // Here's where we tell the chart it is oriented horizontally.
+                 rendererOptions: {
+                     barDirection: 'horizontal',
+                         // Put a 30 pixel margin between bars.
+                         barMargin: 30,
+                 }
+             },
+             axes: {
+                 yaxis: {
+                     renderer: $.jqplot.CategoryAxisRenderer,
+                 },
+                 xaxis:{
+                	 min:50
+                 }
+             },
+             seriesColors: ["#90b1d8","#dddf0d",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
+       	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
+         }));
+}
 	var initPieChart = function(id,globalStatsModel){
 		var rankList = globalStatsModel.bestUserList;
 		var data = calcBestlist(rankList);
@@ -120,7 +171,8 @@ ZMO.modules.statsMobile = (function($,ajax){
 		 return container;
 	}
 	var initKegContainer = function(globalStatsModel){
-		var kegContainer = initBasicContainer();
+		var CHARTID = "zmo-keg";
+		var kegContainer = initBasicContainer(CHARTID);
 		var content = ich["ZMO-stats-mobile-kegstatus"](globalStatsModel);
 		kegContainer.find(".content").append(content);
 		kegContainer.find(".headline").text("Keg");
@@ -207,7 +259,8 @@ ZMO.modules.statsMobile = (function($,ajax){
 		refreshStats();
 		chartFcts = {
 				"zmo-progress": initProgressChart,
-				"zmo-rank":initPieChart
+				"zmo-rank":initPieChart,
+				"zmo-keg":initBarChart
 		}
 	};
 	/**
