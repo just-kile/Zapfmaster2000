@@ -49,6 +49,7 @@ ZMO.modules.statsMobile = (function($,ajax){
 	var calcKeg = function(list){
 		var s1 = [];
 		var s2 = [];
+		var ticks = [];
 		$.each(list,function(ind,keg){
 			//arr.push([[keg.size-keg.current_amount,ind]]);
 			//amount bar
@@ -57,15 +58,15 @@ ZMO.modules.statsMobile = (function($,ajax){
 			var amount =parseFloat(keg.current_amount);
 			s1.push(size-amount);
 			s2.push(amount);
+			ticks.push(keg.brand+"("+keg.keg_id+")");
 		});
-		return [s1,s2];
+		return [[s1,s2],ticks];
 	}
 var initBarChart = function(id,globalStatsModel){
-//	var data =  [
-//	             [[2,1], [4,2], [6,3], [3,4]], 
-//	             [[5,1], [1,2], [3,3], [4,4]], 
-//	             [[4,1], [7,2], [1,3], [2,4]]];
-	var data = calcKeg(globalStatsModel.keg);
+
+	var barDatas = calcKeg(globalStatsModel.keg);
+	var data = barDatas[0];
+	var ticks =barDatas[1];
 	$("#"+id).css("height","150px");
 	 var plot2 = $.jqplot(id,data,$.extend({},plotOptions,{
 		 	stackSeries: true,
@@ -88,9 +89,10 @@ var initBarChart = function(id,globalStatsModel){
              axes: {
                  yaxis: {
                      renderer: $.jqplot.CategoryAxisRenderer,
+                     ticks: ticks
                  },
                  xaxis:{
-                	 min:50
+                	 min:50,
                  }
              },
              seriesColors: ["#90b1d8","#dddf0d",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
@@ -153,37 +155,42 @@ var initBarChart = function(id,globalStatsModel){
 		           }
 		       },plotOptions));
 	}
-	var initBasicContainer = function(chartid){
-		 var container = $("<li>").addClass("statsMobile keg statsDiv");
-		 var headline = $("<div>").addClass("headline").data("chart",chartid);
-		 var body = $("<div>").addClass("content").hide();
+	var initBasicContainer = function(chartid,headlineText,image){
+		 var container = $("<li>").addClass("statsMobile keg");
+		 var headline = $("<div>").addClass("headline ZMO-sideNavigation-entry").data("chart",chartid);
+		 var icon = $("<img>").attr("src",image).appendTo(headline).addClass("small");
+		 $("<div>").css({
+			 "margin-left":"2em"
+		 }).text(headlineText).appendTo(headline);
+		 
+		 var body = $("<div>").addClass("content statsDiv").hide();
 		 if(chartid){
+			 
 			 var chartContainer  =$("<div>").addClass("chart").attr("id",chartid).css({
 				 width:"100%",
 				 height:"200px"
-			 }).hide();
-			 container.append(headline).append(chartContainer).append(body);
+			 }).appendTo(body);
+			 //container.append(headline).append(chartContainer).append(body);
 		 }else{
-			 container.append(headline).append(body);
+			
 		 }
+		 container.append(headline).append(body);
 		
 		 
 		 return container;
 	}
 	var initKegContainer = function(globalStatsModel){
 		var CHARTID = "zmo-keg";
-		var kegContainer = initBasicContainer(CHARTID);
+		var kegContainer = initBasicContainer(CHARTID,"Keg","images/icons/47-fuel.png");
 		var content = ich["ZMO-stats-mobile-kegstatus"](globalStatsModel);
 		kegContainer.find(".content").append(content);
-		kegContainer.find(".headline").text("Keg");
 		
 		return kegContainer;
 	}
 	var initRankContainer = function(globalStatsModel){
 		 var CHARTID ="zmo-rank";
-		 var statsContainer = initBasicContainer(CHARTID);
+		 var statsContainer = initBasicContainer(CHARTID,"Rank","images/icons/85-trophy.png");
 		
-		 statsContainer.find(".headline").text("Rank");
 		 //Appendix of rank table
 		 var userlistModel = globalStatsModel.bestUserList;
 		var template = ich["ZMO-stats-bestlist-item"];
@@ -198,18 +205,14 @@ var initBarChart = function(id,globalStatsModel){
 	}
 	var initProgressContainer = function(globalStatsModel){
 		 var CHARTID ="zmo-progress";
-		 var statsContainer = initBasicContainer(CHARTID);
-		 statsContainer.find(".headline").text("Progress");
-//		 var content = $(ich["ZMO-stats-mobile-kegstatus"](globalStatsModel));
-//		 statsContainer.find(".content").append(content);
+		 var statsContainer = initBasicContainer(CHARTID,"Progress","images/icons/122-stats.png");
 
 		 return statsContainer;
 	}
 	var initGeneralStatsContainer = function(globalStatsModel){
-		 var statsContainer = initBasicContainer();
+		 var statsContainer = initBasicContainer(null,"General","images/icons/112-group.png");
 		 var content = ich["ZMO-stats-mobile-kegstatus"](globalStatsModel);
 		 statsContainer.find(".content").append(content);
-		 statsContainer.find(".headline").text("General");
 		 return statsContainer;
 	}
 	

@@ -96,7 +96,7 @@ a:hover {
 .major{
 	 width: 100%;
 	/* position: absolute;*/
-	margin-top: 3em;
+	margin-top: 3.5em;
 	/* bottom: 3em;*/
 }
 #drawfeed-news{
@@ -774,7 +774,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', end
 
 	
 }
-.ZMO-sideNavigation li.ZMO-sideNavigation-entry{
+.ZMO-sideNavigation-entry{
 	color:white;
 	list-style:none;
 	height:3em;
@@ -788,11 +788,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', end
 .ZMO-sideNavigation div.name-navigation{
 margin-left:2em;
 }
+
 .ZMO-sideNavigation div.name{
 position:absolute;
 left:4em;
 }
-.ZMO-sideNavigation img.small{
+img.small{
 float:left;
 margin-top:1em;
 height:1em;
@@ -1041,7 +1042,7 @@ margin-bottom:4em;
 	color:white;
 }
 .statsMobile .headline{
-	font-size:2em;
+	/*font-size:2em;*/
 }
 
 
