@@ -4,9 +4,12 @@
  */
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.statsMobileUser = (function($,ajax){
+	var l = ZMO.Util.localization;
 	var wording = {
-			NOBODY:"nobody"
-			
+			NOBODY:"nobody",
+			PROGRESS:"progress",
+			ACHIEVEMENTS:"achievements",
+			GENERAL:"generalStats"
 		};
 	var plotOptions = {
 			 grid: {
@@ -156,25 +159,10 @@ ZMO.modules.statsMobileUser = (function($,ajax){
 		 return container;
 	}
 
-	var initRankContainer = function(globalStatsModel){
-		 var CHARTID ="zmo-rank";
-		 var statsContainer = initBasicContainer(CHARTID,"Rank","images/icons/85-trophy.png");
-		
-		 //Appendix of rank table
-		 var userlistModel = globalStatsModel.bestUserList;
-		var template = ich["ZMO-stats-bestlist-item"];
-		var table = $("<table>").addClass("bestlist-table");
-		$.each(userlistModel,function(ind,val){
-			val.rank = ind+1;
-			val.unit = "l";
-			table.append(template(val));
-		});
-		 statsContainer.find(".content").append(table);
-		 return statsContainer;
-	}
+
 	var initProgressContainer = function(globalStatsModel){
 		 var CHARTID ="zmo-progress";
-		 var statsContainer = initBasicContainer(CHARTID,"Progress","images/icons/122-stats.png");
+		 var statsContainer = initBasicContainer(CHARTID,l.translateString(wording.PROGRESS),"images/icons/122-stats.png");
 
 		 return statsContainer;
 	}
@@ -218,14 +206,14 @@ ZMO.modules.statsMobileUser = (function($,ajax){
 				};
 		}
 	var initGeneralStatsContainer = function(userStatsModel){
-		 var statsContainer = initBasicContainer(null,"General","images/icons/112-group.png");
+		 var statsContainer = initBasicContainer(null,l.translateString(wording.GENERAL),"images/icons/112-group.png");
 		 var content = ich["ZMO-stats-mobile-user-general"](generateObjGlobalStats(userStatsModel));
 		 statsContainer.find(".content").append(content);
 		 return statsContainer;
 	}
 	var initAchievementStatsContainer = function(userStatsModel){
 		var achievements = userStatsModel.achievements;
-		 var statsContainer = initBasicContainer(null,"Achievements","images/icons/112-group.png");
+		 var statsContainer = initBasicContainer(null,l.translateString(wording.ACHIEVEMENTS),"images/icons/89-dumbell.png");
 		 var content =$("<div>");
 		 var globalStatsContainer = ich["ZMO-stats-mobile-user-achievement"](generateObjAchievements(userStatsModel));
 		 var achievementsContainer = $("<div>");

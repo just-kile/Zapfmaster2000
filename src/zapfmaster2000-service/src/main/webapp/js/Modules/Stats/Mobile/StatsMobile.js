@@ -4,9 +4,13 @@
  */
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.statsMobile = (function($,ajax){
+	var l = ZMO.Util.localization;
 	var wording = {
-			NOBODY:"nobody"
-			
+			NOBODY:"nobody",
+			PROGRESS:"progress",
+			KEG:"kegOverview",
+			RANK:"userRank",
+			GENERAL:"generalStats"
 		};
 	var plotOptions = {
 			 grid: {
@@ -185,7 +189,7 @@ var initBarChart = function(id,globalStatsModel){
 	}
 	var initKegContainer = function(globalStatsModel){
 		var CHARTID = "zmo-keg";
-		var kegContainer = initBasicContainer(CHARTID,"Keg","images/icons/47-fuel.png");
+		var kegContainer = initBasicContainer(CHARTID,l.translateString(wording.KEG),"images/icons/47-fuel.png");
 //		var content = ich["ZMO-stats-mobile-kegstatus"](globalStatsModel);
 //		kegContainer.find(".content").append(content);
 		
@@ -193,7 +197,7 @@ var initBarChart = function(id,globalStatsModel){
 	}
 	var initRankContainer = function(globalStatsModel){
 		 var CHARTID ="zmo-rank";
-		 var statsContainer = initBasicContainer(CHARTID,"Rank","images/icons/85-trophy.png");
+		 var statsContainer = initBasicContainer(CHARTID,l.translateString(wording.RANK),"images/icons/85-trophy.png");
 		
 		 //Appendix of rank table
 		 var userlistModel = globalStatsModel.bestUserList;
@@ -209,7 +213,7 @@ var initBarChart = function(id,globalStatsModel){
 	}
 	var initProgressContainer = function(globalStatsModel){
 		 var CHARTID ="zmo-progress";
-		 var statsContainer = initBasicContainer(CHARTID,"Progress","images/icons/122-stats.png");
+		 var statsContainer = initBasicContainer(CHARTID,l.translateString(wording.PROGRESS),"images/icons/122-stats.png");
 
 		 return statsContainer;
 	}
@@ -245,7 +249,7 @@ var initBarChart = function(id,globalStatsModel){
 			};
 		};
 	var initGeneralStatsContainer = function(globalStatsModel){
-		 var statsContainer = initBasicContainer(null,"General","images/icons/112-group.png");
+		 var statsContainer = initBasicContainer(null,l.translateString(wording.GENERAL),"images/icons/112-group.png");
 		 var content = ich["ZMO-frontpagestats-general-template"](generateObj(globalStatsModel));
 		 statsContainer.find(".content").append(content);
 		 return statsContainer;

@@ -48,6 +48,9 @@
 "generalStats":"General Stats",
 "kegNumber":"Keg No.",
 "nobody":"Nobody in sight",
+"progress":"Progress",
+"achievements":"Achievements",
+
 "challengeRemaining":"{{time}} min remaining",
 "challengeDone":"Challenge completed!",
 "challengeRequest":"Challenge requested!",
