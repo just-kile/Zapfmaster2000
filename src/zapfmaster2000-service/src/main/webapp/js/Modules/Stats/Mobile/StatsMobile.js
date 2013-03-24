@@ -4,6 +4,14 @@
  */
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.statsMobile = (function($,ajax){
+	var wording = {
+			REMAINING:"remaining",
+			COMPLETE:"complete",
+			TITLE:"kegOverview",
+			XBAR:"Liter",
+			NOBODY:"nobody"
+			
+		};
 	var plotOptions = {
 			 grid: {
 	        	    drawGridLines: true,        // wether to draw lines across the grid or not.
@@ -182,8 +190,8 @@ var initBarChart = function(id,globalStatsModel){
 	var initKegContainer = function(globalStatsModel){
 		var CHARTID = "zmo-keg";
 		var kegContainer = initBasicContainer(CHARTID,"Keg","images/icons/47-fuel.png");
-		var content = ich["ZMO-stats-mobile-kegstatus"](globalStatsModel);
-		kegContainer.find(".content").append(content);
+//		var content = ich["ZMO-stats-mobile-kegstatus"](globalStatsModel);
+//		kegContainer.find(".content").append(content);
 		
 		return kegContainer;
 	}
@@ -209,9 +217,40 @@ var initBarChart = function(id,globalStatsModel){
 
 		 return statsContainer;
 	}
+
+	var parseTableObject = function(statsList){
+		var obj = {};
+		
+		if(statsList && ZMO.exists(statsList[0])){
+			obj.userName = statsList[0].userName;
+			obj.userId = statsList[0].userId;
+			obj.amount  = (statsList[0].amount || statsList[0].drawCount ||statsList[0].achievementCount);
+		}else{
+			obj.userName = ZMO.Util.localization.translateString(wording.NOBODY);
+			obj.userId = "";
+		}
+		
+		return obj;
+	};
+		var generateObj = function(statsModel){
+			return {
+				bestUser:parseTableObject(statsModel.bestUserList),
+				bestUserHour:parseTableObject(statsModel.bestUserListHour),
+				bestDrawCount:parseTableObject(statsModel.drawCountUserList),
+				bestAchievement:parseTableObject(statsModel.achievementUserList),
+				promille:statsModel.promille,
+				amountComplete:statsModel.amount.complete,
+				amountAtMost:statsModel.amount.once,
+				amountAverage:statsModel.drawCount.average,
+				drawCount:statsModel.drawCount.operations,
+				mostActivityHour:statsModel.amount.mostActivityHour,
+				achievementCount:statsModel.achievements.count,
+				mostAchievementHour:statsModel.achievements.mostAchievementHour
+			};
+		};
 	var initGeneralStatsContainer = function(globalStatsModel){
 		 var statsContainer = initBasicContainer(null,"General","images/icons/112-group.png");
-		 var content = ich["ZMO-stats-mobile-kegstatus"](globalStatsModel);
+		 var content = ich["ZMO-frontpagestats-general-template"](generateObj(globalStatsModel));
 		 statsContainer.find(".content").append(content);
 		 return statsContainer;
 	}
