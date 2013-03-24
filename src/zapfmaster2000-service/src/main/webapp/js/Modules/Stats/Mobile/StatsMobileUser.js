@@ -231,7 +231,10 @@ ZMO.modules.statsMobileUser = (function($,ajax){
 		 var achievementsContainer = $("<div>");
 		 content.append(globalStatsContainer).append(achievementsContainer);
 		 $.each(achievements.achievements,function(ind,achievement){
-			 $("<img>").attr("src",achievement.achievementImage).appendTo(achievementsContainer);
+			 $("<img>").attr("src",achievement.achievementImage).on(mC.clickEvent,function(){
+				 var aContainer =$(ich["ZMO-stats-mobile-user-popup"](achievement));
+				 ZMO.Util.Popup.open(aContainer);
+			 }).appendTo(achievementsContainer);
 		 })
 		 statsContainer.find(".content").append(content);
 		 return statsContainer;

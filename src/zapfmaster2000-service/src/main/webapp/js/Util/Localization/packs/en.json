@@ -18,6 +18,7 @@
 "clock":" ",
 "liter":"l",
 "reachedAt":"Reached at {{date}}",
+"reached":"Reached at",
 "image":"Image",
 "achievementName":"Name",
 "description":"Description",

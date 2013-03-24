@@ -29,6 +29,7 @@ function appReady(){
 			"js/Util/Mobile/FastButton.js",
 			"js/Util/Localization/Localization.js",
 			"js/Util/Browser/Scroller.js",
+			"js/Util/Browser/Popup.js",
 			//"js/Util/Mobile/Scroller.js",
 			
 			
