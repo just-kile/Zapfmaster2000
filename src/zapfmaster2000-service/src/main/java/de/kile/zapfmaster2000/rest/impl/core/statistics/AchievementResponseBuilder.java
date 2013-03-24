@@ -1,10 +1,13 @@
 package de.kile.zapfmaster2000.rest.impl.core.statistics;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import de.kile.zapfmaster2000.rest.api.statistics.AchievementListResponse;
 import de.kile.zapfmaster2000.rest.api.statistics.AchievementResponse;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
@@ -29,7 +32,7 @@ public class AchievementResponseBuilder {
 
 		List<Object> resultAchievementCount;
 		List<Object> resultMostActivity;
-
+		List<Object> resultGainedAchievementList = new ArrayList<Object>();
 		if (user == -1) {
 			resultAchievementCount = session
 					.createQuery(
@@ -64,17 +67,46 @@ public class AchievementResponseBuilder {
 									+ " ORDER BY COUNT(g.id) DESC")
 					.setMaxResults(1).setEntity("account", account)
 					.setLong("user", user).list();
+
+		 	
+
+			resultGainedAchievementList = session
+					.createQuery("SELECT ga.achievement.name, ga.achievement.imagePath, ga.achievement.description,"
+							+ " ga.achievement.id, ga.date FROM GainedAchievement ga "
+							+ "WHERE ga.user.id = :userId "
+							+ "ORDER BY ga.date DESC")
+									.setLong("userId", user)
+									.list();
 		}
 		tx.commit();
 
 		AchievementResponse response = new AchievementResponse();
-
+		
+		//set count
 		response.setCount((Long) resultAchievementCount.get(0));
+		//set mostActivityHour
 		if (resultMostActivity.size() > 0) {
 			response.setMostAchievementHour((Integer) resultMostActivity.get(0));
 		} else {
 			response.setMostAchievementHour(-1);
 		}
+		//set gainedAchievement list
+		List<AchievementListResponse> achievementList = new ArrayList<AchievementListResponse>();
+		for(int i = 0;i<resultGainedAchievementList.size();i++){
+			Object[] resultRow = (Object[]) resultGainedAchievementList.get(i);
+			AchievementListResponse achievement = new AchievementListResponse();
+
+			achievement.setAchievementName((String)resultRow[0]);
+			achievement.setAchievementImage((String)resultRow[1]);
+			achievement.setAchievementDescription((String)resultRow[2]);
+			achievement.setAchievementId((long) resultRow[3]);
+			achievement.setDate((Date) resultRow[4]);
+			
+			
+			achievementList.add(achievement);
+		}
+		response.setAchievements(achievementList);
+		
 
 		return response;
 	}

@@ -5,10 +5,6 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.statsMobile = (function($,ajax){
 	var wording = {
-			REMAINING:"remaining",
-			COMPLETE:"complete",
-			TITLE:"kegOverview",
-			XBAR:"Liter",
 			NOBODY:"nobody"
 			
 		};
