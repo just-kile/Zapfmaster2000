@@ -101,7 +101,7 @@ ZMO.modules_properties ={
 			}
 		},
 		
-		userstats:{
+		user:{
 			sections:{
 				navigation:[{
 					moduleId:"receiveChallenge",

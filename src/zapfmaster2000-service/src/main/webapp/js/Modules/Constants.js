@@ -1,4 +1,8 @@
 ZMO.modules = ZMO.modules ||{}
+ZMO.modules.Environment = {
+		userId:"",
+		userName:""
+}
 //var baseUrl = "";
 //var baseUrl ="http://192.168.178.24:8080/zapfmaster2000-service/";
 ZMO.modules.Constants = {
@@ -109,7 +113,7 @@ ZMO.modules.Constants = {
 			title:"Stats",
 			image:"images/icons/16-line-chart.png"
 		},{
-			link:"#userstats",
+			link:"#user",
 			text:"User",
 			title:"User",
 			image:"images/icons/111-user.png"

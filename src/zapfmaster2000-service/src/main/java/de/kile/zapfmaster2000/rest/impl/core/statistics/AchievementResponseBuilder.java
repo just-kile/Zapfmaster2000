@@ -49,6 +49,12 @@ public class AchievementResponseBuilder {
 									+ " GROUP BY HOUR(g.date)"
 									+ " ORDER BY COUNT(g.id) DESC")
 					.setEntity("account", account).setMaxResults(1).list();
+//			resultGainedAchievementList = session
+//					.createQuery("SELECT ga.achievement.name, ga.achievement.imagePath, ga.achievement.description,"
+//							+ " ga.achievement.id, ga.date FROM GainedAchievement ga, User u "
+//							+ "WHERE ga.user = u "
+//							+ "ORDER BY ga.date DESC")
+//									.list();
 		} else {
 			resultAchievementCount = session
 					.createQuery(

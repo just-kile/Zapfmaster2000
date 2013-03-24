@@ -27,13 +27,21 @@ ZMO.modules.statsMobileUser = (function($,ajax){
 	var mC = ZMO.modules.Constants;
 	var container =null;
 	var chartsFcts = {};
-	var refreshStats = function(){
-			var url = mC.urls.USERSTATS;
-			ajax.getDatas(url,function(json){
-				var globalStatsModel =new ZMO.modules.StatsModel(json);
-				initAccordion(globalStatsModel);
-				
-			});
+	var refreshStats = function(userId){
+		var datas;
+		if(userId){
+		 datas={
+				user:userId	
+			};
+		}	
+
+			
+		var url = mC.urls.USERSTATS;
+		ajax.getDatas(url,function(json){
+			var globalStatsModel =new ZMO.modules.UserStatsModel(json);
+			initAccordion(globalStatsModel);
+			
+		},datas);
 	};
 	var calcProgress = function(timeParser,arr,interval){
 		var retArr = [];
@@ -66,43 +74,7 @@ ZMO.modules.statsMobileUser = (function($,ajax){
 		});
 		return [[s1,s2],ticks];
 	}
-var initBarChart = function(id,globalStatsModel){
 
-	var barDatas = calcKeg(globalStatsModel.keg);
-	var data = barDatas[0];
-	var ticks =barDatas[1];
-	$("#"+id).css("height","150px");
-	 var plot2 = $.jqplot(id,data,$.extend({},plotOptions,{
-		 	stackSeries: true,
-             seriesDefaults: {
-                 renderer:$.jqplot.BarRenderer,
-                 // Show point labels to the right ('e'ast) of each bar.
-                 // edgeTolerance of -15 allows labels flow outside the grid
-                 // up to 15 pixels.  If they flow out more than that, they 
-                 // will be hidden.
-                 pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
-                 // Rotate the bar shadow as if bar is lit from top right.
-                 shadowAngle: 135,
-                 // Here's where we tell the chart it is oriented horizontally.
-                 rendererOptions: {
-                     barDirection: 'horizontal',
-                         // Put a 30 pixel margin between bars.
-                         barMargin: 30,
-                 }
-             },
-             axes: {
-                 yaxis: {
-                     renderer: $.jqplot.CategoryAxisRenderer,
-                     ticks: ticks
-                 },
-                 xaxis:{
-                	 min:50,
-                 }
-             },
-             seriesColors: ["#90b1d8","#dddf0d",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
-       	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
-         }));
-}
 	var initPieChart = function(id,globalStatsModel){
 		var rankList = globalStatsModel.bestUserList;
 		var data = calcBestlist(rankList);
@@ -183,14 +155,7 @@ var initBarChart = function(id,globalStatsModel){
 		 
 		 return container;
 	}
-	var initKegContainer = function(globalStatsModel){
-		var CHARTID = "zmo-keg";
-		var kegContainer = initBasicContainer(CHARTID,"Keg","images/icons/47-fuel.png");
-//		var content = ich["ZMO-stats-mobile-kegstatus"](globalStatsModel);
-//		kegContainer.find(".content").append(content);
-		
-		return kegContainer;
-	}
+
 	var initRankContainer = function(globalStatsModel){
 		 var CHARTID ="zmo-rank";
 		 var statsContainer = initBasicContainer(CHARTID,"Rank","images/icons/85-trophy.png");
@@ -228,29 +193,57 @@ var initBarChart = function(id,globalStatsModel){
 		
 		return obj;
 	};
-		var generateObj = function(statsModel){
+		var generateObjGlobalStats = function(statsModel){
 			return {
-				bestUser:parseTableObject(statsModel.bestUserList),
-				bestUserHour:parseTableObject(statsModel.bestUserListHour),
-				bestDrawCount:parseTableObject(statsModel.drawCountUserList),
-				bestAchievement:parseTableObject(statsModel.achievementUserList),
+				achievementRank:statsModel.rank.achievements,
+				amountRank:statsModel.rank.amount,
+				drawCountRank:statsModel.rank.drawCount,
 				promille:statsModel.promille,
-				amountComplete:statsModel.amount.complete,
-				amountAtMost:statsModel.amount.once,
-				amountAverage:statsModel.drawCount.average,
 				drawCount:statsModel.drawCount.operations,
-				mostActivityHour:statsModel.amount.mostActivityHour,
-				achievementCount:statsModel.achievements.count,
-				mostAchievementHour:statsModel.achievements.mostAchievementHour
-			};
+				drawCountAverage:statsModel.drawCount.average,
+				amount:statsModel.amount.complete,
+				amountGreatestDrawing:statsModel.amount.once,
+				mostActiveHour:statsModel.amount.mostActivityHour,
+				
+				};
 		};
-	var initGeneralStatsContainer = function(globalStatsModel){
+		var generateObjAchievements = function(statsModel){
+			return {
+				achievementCount:statsModel.achievements.count,
+				mostAchievementHour:statsModel.achievements.mostAchievementHour,
+				
+				
+				
+				
+				};
+		}
+	var initGeneralStatsContainer = function(userStatsModel){
 		 var statsContainer = initBasicContainer(null,"General","images/icons/112-group.png");
-		 var content = ich["ZMO-frontpagestats-general-template"](generateObj(globalStatsModel));
+		 var content = ich["ZMO-stats-mobile-user-general"](generateObjGlobalStats(userStatsModel));
 		 statsContainer.find(".content").append(content);
 		 return statsContainer;
 	}
-	
+	var initAchievementStatsContainer = function(userStatsModel){
+		var achievements = userStatsModel.achievements;
+		 var statsContainer = initBasicContainer(null,"Achievements","images/icons/112-group.png");
+		 var content =$("<div>");
+		 var globalStatsContainer = ich["ZMO-stats-mobile-user-achievement"](generateObjAchievements(userStatsModel));
+		 var achievementsContainer = $("<div>");
+		 content.append(globalStatsContainer).append(achievementsContainer);
+		 $.each(achievements.achievements,function(ind,achievement){
+			 $("<img>").attr("src",achievement.achievementImage).appendTo(achievementsContainer);
+		 })
+		 statsContainer.find(".content").append(content);
+		 return statsContainer;
+	}
+	var initUserInfoContainer = function(userStatsModel){
+		 var statsContainer = $("<div>").addClass("statsDiv zmo-user");//initBasicContainer(null,"Achievements","images/icons/112-group.png");
+		 var user = userStatsModel.user;
+		 var img = $("<img>").attr("src",user.userImage);
+		 var userName = $("<div>").text("#"+userStatsModel.rank.amount+". "+user.userName);
+		 statsContainer.append(img).append(userName);
+		 return statsContainer;
+	}
 	var	toggleContainer = function(e,globalStatsModel){
 		if(!ZMO.scrolling.isActuallyScrolling()){
 			var el = $(e.currentTarget);
@@ -267,24 +260,26 @@ var initBarChart = function(id,globalStatsModel){
 
 		}
 	}
-	var initAccordion = function(globalStatsModel){
+
+	var initAccordion = function(userStatsModel){
 		var accordionContainer =$("<div>");
-		var ul =$("<ul>").addClass("statsMobileList")
-		var kegContainer = initKegContainer(globalStatsModel);
-		var rankContainer = initRankContainer(globalStatsModel);
-		var generalStatsContainer = initGeneralStatsContainer(globalStatsModel);
-		var progress = initProgressContainer(globalStatsModel);
+		var ul =$("<ul>").addClass("statsMobileList");
+		var userInfoContainer  =initUserInfoContainer(userStatsModel);
+		var achievementContainer = initAchievementStatsContainer(userStatsModel);
+		var generalStatsContainer = initGeneralStatsContainer(userStatsModel);
+		var progress = initProgressContainer(userStatsModel);
 		
 		
 		
 		ul	.on(mC.clickEvent,".headline",function(e){
 			
-			toggleContainer(e,globalStatsModel);
-		})
-			.append(kegContainer)
-			.append(progress)
+			toggleContainer(e,userStatsModel);
+		})	.append(userInfoContainer)
 			.append(generalStatsContainer)
-			.append(rankContainer)
+			.append(achievementContainer)
+			.append(progress)
+//			
+			//.append(rankContainer)
 			;
 
 		accordionContainer.append(ul).appendTo(container);
@@ -294,11 +289,11 @@ var initBarChart = function(id,globalStatsModel){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(hashParams,moduleParams){
-		refreshStats();
+		var userId = hashParams.id;
+		refreshStats(userId);
 		chartFcts = {
 				"zmo-progress": initProgressChart,
 				"zmo-rank":initPieChart,
-				"zmo-keg":initBarChart
 		}
 	};
 	/**

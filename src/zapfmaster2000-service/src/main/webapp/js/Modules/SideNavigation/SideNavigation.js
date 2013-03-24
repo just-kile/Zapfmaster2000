@@ -38,16 +38,19 @@ ZMO.modules.sideNavigation = (function($,ajax){
 	}
 	var createUserInformation = function(){
 		ajax.getDatas(mC.urls.USERSTATS,function(userStats){
-			var user = userStats.user;
+			var user = new ZMO.modules.UserModel(userStats.user);
+			
 			if(userInfo){
 				userInfo.remove();
 			}
 			userInfo = $("<li>").addClass("ZMO-sideNavigation-entry");
 			var img = $("<img>").attr("src",baseUrl+user.userImage).addClass("big");
-			var span = $("<div>").css("margin-left","4em").text(user.userName+" ("+userStats.amount.amountTotal.toFixed(2)+"l; No.: "+userStats.rank.amount+".)");
+			var span = $("<div>").css("margin-left","4em").text( "#"+userStats.rank.amount+". "+ user.userName+" ("+userStats.amount.amountTotal.toFixed(2)+"l)");
 			
 			userInfo.append(img).append(span);
-			ul.prepend(userInfo)
+			ul.prepend(userInfo);
+			ZMO.modules.Environment.userId=user.userId;
+			ZMO.modules.Environment.userName=user.userName;
 		});
 	}
 	/**

@@ -1046,6 +1046,14 @@ margin-bottom:4em;
 }
 
 
+
+.zmo-user img{
+	float:left;
+	}
+.zmo-user div{
+	line-height:4em;
+	margin-left:5em;
+}
 /*Plot styles*/
 
 .jqplot-axis,.jqplot-title{
