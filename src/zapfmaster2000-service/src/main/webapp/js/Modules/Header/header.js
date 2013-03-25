@@ -90,7 +90,7 @@ ZMO.modules.header = (function($,ajax){
 		var div =$("<div>");
 		var span = $("<span>").text(challengeRequest.challengerUserName).addClass("bold");
 		var spanLabel =$("<div>").addClass("zmo-notification-label").append(span).append($("<br/><span>challenged u!</span>"));
-		var img =$("<img>").attr("src",challengeRequest.challengerImagePath);
+		var img =$("<img>").attr("src",baseUrl+challengeRequest.challengerImagePath);
 		var buttonContainer = $("<div>").addClass("zmo-button-container")
 			.append(img)
 			.append(spanLabel)

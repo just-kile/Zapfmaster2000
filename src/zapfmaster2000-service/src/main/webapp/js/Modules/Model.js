@@ -39,7 +39,7 @@ ZMO.NewsModel =function(config){
 	this.place = config.place;
 	this.kegId =config.kegId;
 	this.brand = config.brand;
-	this.userImage =config.image;
+	this.userImage =baseUrl +config.image;
 	this.userId = config.userid||config.userId;
 	this.type = config.type;
 	this.place = "Alter Markt";
@@ -51,11 +51,11 @@ ZMO.NewKegNewsModel =function(config){
 	this.location = config.location;
 	this.kegId = config.kegId;
 	this.boxId = config.boxId;
-	this.image = config.image;
+	this.image = baseUrl +config.image;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";
 };
 ZMO.NewUserNewsModel =function(config){
-	this.image = config.image;
+	this.image = baseUrl +config.image;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";
 	this.userId = config.userId;
 	this.userName = config.userName
@@ -69,11 +69,11 @@ ZMO.AchievementModel = function(config){
 	this.achievementId = config.achievementId;
 	this.achievementName = config.achievementName;
 	this.description = config.description;
-	this.image =config.image;
+	this.image =baseUrl +config.image;
 };
 ZMO.OtherModel = function(config){
 	this.text = config.text;
-	this.image = config.image||config.IMAGE_PATH||config.imagepath;
+	this.image = baseUrl +config.image||config.IMAGE_PATH||config.imagepath;
 	this.type = config.type;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 	
@@ -103,9 +103,22 @@ ZMO.GlobalChallengeModel = function(config){
 		}
 		return count;
 	};
-	
-	this.team1 = config.team1;
-	this.team2 = config.team2;
+	var parseTeamModel = function(team){
+		var arr = [];
+		$.each(team,function(ind,member){
+			arr.push({
+				userName:member.userName,
+				userId:member.userId,
+				userImage:baseUrl+member.userImage,
+				won:member.won,
+				amount:member.amount
+			});
+		});
+		return arr;
+		
+	}
+	this.team1 = parseTeamModel(config.team1);
+	this.team2 = parseTeamModel(config.team2);
 //	this.team1 = parseTeam(config.team1,"userName");
 //	this.team2 = parseTeam(config.team2,"userName");
 //	this.team1Images = parseTeam(config.team1,"userImage");
@@ -123,7 +136,7 @@ ZMO.GlobalChallengeModel = function(config){
 		}
 	})();
 	
-	this.image = config.image||config.challengeImage;
+	this.image =baseUrl + config.image||config.challengeImage;
 	this.dateParser = config.startDate?new ZMO.TimeParser(config.startDate):null;
 	this.date = config.startDate?new ZMO.TimeParser(config.startDate).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 			
@@ -149,7 +162,7 @@ ZMO.MemberModel = function(config) {
 	this.userName = config.userName;
 	this.userId = config.userId;
 	this.achievements = config.achievements;
-	this.userImage = config.imagePath||config.userImage;
+	this.userImage = baseUrl +(config.imagePath||config.userImage);
 	this.totalAmount = config.totalAmount != undefined?config.totalAmount.toFixed(2):0;
 	
 	// ignore all achievements if there are way to many
@@ -165,7 +178,7 @@ ZMO.AchievementsModel = function(config) {
 	this.achievementName = config.achievementName;
 	this.achievementId = config.achievementId;
 	this.users = config.users;
-	this.achievementImage = config.imagePath||config.achievementImage;
+	this.achievementImage =baseUrl + config.imagePath||config.achievementImage;
 	this.count = config.users ?config.users.length :0;
 	
 	// ignore all achievements if there are way to many

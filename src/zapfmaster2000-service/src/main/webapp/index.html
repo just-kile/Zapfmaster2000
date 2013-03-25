@@ -145,6 +145,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		var userName = $(".applogin #userName").val();
 		var pass = $(".applogin #password").val();
+		console.log("Performing login to "+baseUrl +"rest/login/user"+"?userName="+userName+"&"+"password="+pass);
 		$.ajax({
 			type:"POST",
 			url:baseUrl +"rest/login/user",
@@ -154,7 +155,9 @@ $(document).ready(function(){
 			},
 			complete:function(data){
 				var token = data.responseText;
+				console.log("Token: "+token);
 				if(data.status==200 && localStorage){
+			
 					localStorage.setItem('token',token );
 					redirect();
 					//window.location.replace(window.location.pathname+"app.html");

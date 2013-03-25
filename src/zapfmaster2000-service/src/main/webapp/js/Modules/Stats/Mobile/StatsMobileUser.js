@@ -230,7 +230,7 @@ ZMO.modules.statsMobileUser = (function($,ajax){
 	var initUserInfoContainer = function(userStatsModel){
 		 var statsContainer = $("<div>").addClass("statsDiv zmo-user");//initBasicContainer(null,"Achievements","images/icons/112-group.png");
 		 var user = userStatsModel.user;
-		 var img = $("<img>").attr("src",user.userImage);
+		 var img = $("<img>").attr("src",baseUrl+user.userImage);
 		 var userName = $("<div>").text("#"+userStatsModel.rank.amount+". "+user.userName);
 		 statsContainer.append(img).append(userName);
 		 return statsContainer;
