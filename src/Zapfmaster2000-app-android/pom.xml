@@ -75,7 +75,7 @@
 				<version>3.5.0</version>
 				<configuration>
 					<!--  <assetsDirectory>assets</assetsDirectory>-->
-					<assetsDirectory>../Zapfmaster2000-service/src/main/webapp</assetsDirectory>
+					<assetsDirectory>../zapfmaster2000-service/src/main/webapp</assetsDirectory>
 					<resourceDirectory>res</resourceDirectory>
 					<sourceDirectory>src</sourceDirectory>
 					<run>
