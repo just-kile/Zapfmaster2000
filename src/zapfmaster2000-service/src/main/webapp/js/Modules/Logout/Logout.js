@@ -10,7 +10,7 @@ ZMO.modules.logout = (function($,ajax){
 	var logout = function(){
 		var baseUrl = localStorage.getItem("zm-serverurl");
 		localStorage.clear();
-		localStorage.setItem("zm-serverurl",baseUrl);
+		if(baseUrl!=null)localStorage.setItem("zm-serverurl",baseUrl);
 		//var baseUrl = window.location.href.replace(new RegExp("(/[a-zA-Z]*.html)"),"");
 		window.location.replace("index.html");
 	};
