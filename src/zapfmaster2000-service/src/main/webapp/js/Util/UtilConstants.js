@@ -1,7 +1,13 @@
 ZMO.UtilConstants ={
 		debugMode :true,
 		langToken:"zmo-lang",
-		defaultLang:"en",
+		defaultLang:(function(){
+			if(navigator.language == "de"){
+				return "de";
+			}else{
+				return "en";
+			}
+		})(),
 		templateUrl : "js/Templates/templates.html",
 		ajax:{
 			pullTimeout:60000,//ms
@@ -11,6 +17,7 @@ ZMO.UtilConstants ={
 		tokenName:"token",
 		serverDateFormat:"yyyyMMdd-HHmmss",
 		clientDateFormat:"dd.MM.yyyy HH:mm:ss",
+		chartDateFormat:"MM-dd-yyyy HH:mm",
 		shortFormat:"E, HH:mm",
 		linkUrls:{
 			user:"#user",

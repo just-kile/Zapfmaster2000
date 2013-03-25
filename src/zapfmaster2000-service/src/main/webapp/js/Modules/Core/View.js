@@ -4,6 +4,7 @@
  */
 ZMO.view=(function(){
 	var site = {};
+	var mainContainer = null;
 	/**
 	 * Declares the 3 areas of page
 	 */
@@ -93,15 +94,21 @@ ZMO.view=(function(){
 		});
 	};
 	var init =function(){
-		site.navigation = $(".main .nav");
-		site.main=$(".main .major");
-		site.footer=$(".main .footer");
-		
+		mainContainer = $(".main");
+		site.navigation = mainContainer.find(".nav");
+		site.main=mainContainer.find(".major");
+		site.footer=mainContainer.find(".footer");
+		site.side = $(".side");
+		if(ZMO.Scroller)new ZMO.Scroller(site.main[0]);
+	};
+
+	var getMainContainer = function(){
+		return mainContainer;
 	};
 	var pub = {
 			init:init,
-			createPage:createPage
-			
+			createPage:createPage,
+			getMainContainer:getMainContainer
 	};
 	return pub;
 }(jQuery,document));

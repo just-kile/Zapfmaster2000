@@ -50,6 +50,8 @@ public class AchievementResource {
 				LOG.error("Could not parse user.", e);
 				return Response.status(Status.BAD_REQUEST).build();
 			}
+		}else{
+			
 		}
 		if (account != null) {
 			AchievementResponse response = AchievementResponseBuilder

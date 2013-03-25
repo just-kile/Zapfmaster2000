@@ -1,5 +1,7 @@
 package de.kile.zapfmaster2000.rest.api.statistics;
 
+import java.util.List;
+
 public class AchievementResponse {
 
 	/**
@@ -13,6 +15,7 @@ public class AchievementResponse {
 	 */
 	private int mostAchievementHour;
 
+	private List<AchievementListResponse> achievements;
 	// private double achievementspeed;
 
 	public long getCount() {
@@ -29,6 +32,14 @@ public class AchievementResponse {
 
 	public void setMostAchievementHour(int mostAchievementHour) {
 		this.mostAchievementHour = mostAchievementHour;
+	}
+
+	public List<AchievementListResponse> getAchievements() {
+		return achievements;
+	}
+
+	public void setAchievements(List<AchievementListResponse> achievements) {
+		this.achievements = achievements;
 	}
 
 }

@@ -161,7 +161,7 @@
 </li>
  </template>
 <template id="ZMO-news-template" type="text/html">
-		<div class="news-drink-box">
+		<li class="news-drink-box">
 			<div class="news-drink-box-mugshot">
 				<div>
 					<a href="#user?id={{userId}}"><img width="48" height="48" border="0" src="{{userImage}}"></a>
@@ -177,10 +177,10 @@
 			<div class="news-box-dateline">
 				<abbr title="{{date}}" class="timeago">[[atTime]]</abbr>
 			</div>
-		</div>
+		</li>
 </template>
 <template id="ZMO-news-template-achievement" type="text/html">
-<div class="news-drink-box">
+<li class="news-drink-box">
 	<div class="news-drink-box-mugshot">
 		<div>
 			<a href="#achievement?id={{achievementId}}">
@@ -201,10 +201,10 @@
 	<div class="news-box-dateline">
 		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
 	</div>
-</div>
+</li>
 </template>
 <template id="ZMO-news-template-challenge-started" type="text/html">
-<div class="news-drink-box">
+<li class="news-drink-box">
 	<div class="news-drink-box-mugshot">
 		<div>
 			<a>
@@ -223,11 +223,11 @@
 	<div class="news-box-dateline">
 		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
 	</div>
-</div>
+</li>
 </template>
 
 <template id="ZMO-news-template-challenge-done">
-<div class="news-drink-box">
+<li class="news-drink-box">
 	<div class="news-drink-box-mugshot">
 		<div>
 			<a>
@@ -246,10 +246,10 @@
 	<div class="news-box-dateline">
 		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
 	</div>
-</div>
+</li>
 </template>
 <template id="ZMO-news-template-challenge-declined">
-<div class="news-drink-box">
+<li class="news-drink-box">
 	<div class="news-drink-box-mugshot">
 		<div>
 			<a>
@@ -268,7 +268,7 @@
 	<div class="news-box-dateline">
 		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
 	</div>
-</div>
+</li>
 </template>
 <template id="ZMO-achievements-template-box">
 <div class="news-drink-box">
@@ -311,7 +311,7 @@
 </template>
 
 <template id="ZMO-news-new-keg" type="text/html">
-<div class="news-drink-box">
+<li class="news-drink-box">
 	<div class="news-drink-box-mugshot">
 		<div>
 			<img src="{{image}}" border="0" height="48" width="48">
@@ -326,11 +326,11 @@
 	<div class="news-box-dateline">
 		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
 	</div>
-</div>
+</li>
 </template>
 
 <template id="ZMO-news-new-user" type="text/html">
-<div class="news-drink-box">
+<li class="news-drink-box">
 	<div class="news-drink-box-mugshot">
 		<div>
 			<img src="{{image}}" border="0" height="48" width="48">
@@ -344,7 +344,7 @@
 	<div class="news-box-dateline">
 		<abbr class="timeago" title="{{date}}">[[atTime]]</abbr>
 	</div>
-</div>
+</li>
 </template>
 
 <template id="ZMO-members-template-box">
@@ -401,4 +401,101 @@
  {{unit}}
 	</td>
 </tr>
+</template>
+  <template id="ZMO-createChallengeRow">
+ <li class="row">
+	<div class="rowContainer">
+		<img src="{{image}}{{userImage}}" />
+	<span>{{name}}{{userName}} {{#description}}:{{description}}{{/description}}</span>
+</li>
+ </template>
+<template id="ZMO-stats-mobile-kegstatus">
+<table>
+{{#keg}}
+	<tr>
+		<td>[[brand]]</td>
+		<td>{{brand}}</td>
+	</tr>
+	<tr>
+		<td>[[completeAmount]]</td>
+		<td>{{current_amount}}</td>
+	</tr>
+	<tr>
+		<td>lasts until</td>
+		<td>{{lastsUntil}}</td>
+	</tr>
+	
+{{/keg}}
+	
+</table>
+</template>
+<template id="ZMO-stats-mobile-user-general">
+<table class="stats-drinker">
+
+<tr class="stats-drinker-row">
+
+	<td>[[userRank]]</td><td>#{{amountRank}}</td>
+</tr>
+<tr class="stats-drinker-row">
+
+	<td>[[achievementRank]]</td><td>#{{achievementRank}}</td>
+</tr>
+<tr class="stats-drinker-row">
+
+	<td>[[drawCountsRank]]</td><td>#{{drawCountRank}}</td>
+</tr>
+<tr class="stats-drinker-row">
+
+	<td>[[alcohollevelBest]]</td><td>{{promille}}&permil;</td>
+</tr>
+<tr class="stats-drinker-row">
+
+	<td>[[completeDrawCount]]</td><td>{{drawCount}} x</td>
+</tr>
+<tr class="stats-drinker-row">
+
+	<td>[[averageDrawCount]]</td><td>{{drawCountAverage}} x/h</td>
+</tr>
+<tr class="stats-drinker-row">
+
+	<td>[[amount]]</td><td>{{amount}} l</td>
+</tr>
+<tr class="stats-drinker-row">
+
+	<td>[[greatestDrawing]]</td><td>{{amountGreatestDrawing}} l</td>
+</tr>
+<tr class="stats-drinker-row">
+
+	<td>[[mostActivityHour]]</td><td>{{mostActiveHour}} [[clock]]</td>
+</tr>
+
+</table>
+</template>
+<template id="ZMO-stats-mobile-user-achievement">
+<table class="stats-drinker">
+
+
+<tr class="stats-drinker-row">
+
+	<td>[[completeAchievements]]</td><td>{{achievementCount}}</td>
+</tr>
+<tr class="stats-drinker-row">
+
+	<td>[[mostAchievementHour]]</td><td>{{mostAchievementHour}} [[clock]]</td>
+</tr>
+</table>
+</template>
+<template id="ZMO-stats-mobile-user-popup">
+<table class="stats-drinker">
+
+<tr class="stats-drinker-row">
+	<td><img width="48" height="48" src="{{achievementImage}}" /></td><td>{{achievementName}}</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>[[description]]</td><td>{{achievementDescription}}</td>
+</tr>
+<tr class="stats-drinker-row">
+	<td>[[reached]]</td><td>{{date}}</td>
+</tr>
+</table>
 </template>

@@ -7,6 +7,7 @@ ZMO.changePage = ZMO.Util.Browser.changePage;
 ZMO.parseHash = function(str){
 	return str.substr(1);
 }
+
 ZMO.getTemplates = function(callback){
 	var url = ZMO.UtilConstants.templateUrl;
 	$.ajax({

@@ -7,6 +7,6 @@ ZMO.Positions={
 }
 ZMO.Constants = {
 	debugMode :true,
-	templateUrl : "js/Templates/templates.json",
+	templateUrl : "js/Templates/templates.html",
 
 };

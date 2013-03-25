@@ -1,7 +1,7 @@
 
 <html>
 <head>
-<title>Zapfmaster2000 Mobile</title>  
+<title>ZM2k</title>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <!-- Meta Tags for mobile -->
@@ -19,285 +19,48 @@
  <script src="libs/headjs/head.load.min.js"></script>
  <script src="libs/jquery/jquery-1.8.1.js"></script> 
 <script src="libs/jquery.ba-bbq.min.js"></script>
+<script src="libs/jquery.touchSwipe.min.js"></script>
+<script src="libs/iscroll.js"></script>
+<script src="libs/cordova-2.4.0.js"></script>
+<script src="libs/localNotification.js"></script>
 <script src="libs/ICanHaz.min.js"></script>
 <script src="libs/datefunctions/date.js"></script>
-<script src="libs/highcharts/highcharts.js" type="text/javascript"></script>
-<script type="text/javascript" src="libs/highcharts/themes/grayzm.js"></script>
 
+<script src="libs/jqplot/jquery.jqplot.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="libs/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript" src="libs/jqplot/plugins/jqplot.cursor.min.js"></script>
+<script type="text/javascript" src="libs/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script type="text/javascript" src="libs/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+
+<script type="text/javascript" src="libs/jqplot/plugins/jqplot.barRenderer.min.js"></script>
+<script type="text/javascript" src="libs/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="libs/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+
+<link rel="apple-touch-icon" href="images/icons/icon.png" />
 <!-- Style -->
+<link rel="stylesheet" type="text/css" href="libs/jqplot/jquery.jqplot.min.css" />
 <link rel="stylesheet" type="text/css" href="css/style_mobile.css" />
 
 <!-- Init Javascript -->
  <script src="js/App/Main.js"></script>
 <!-- Templates ==> Put them to templates.json (same effect) -->
- <script id="ZMO-duelsRow" type="text/html">
- <li class="row">
-	<div class="rowContainer">
-<div class="team1_amount"></div>
-	<div class="team2_amount"></div>
-	<!--<span class="backgrnd"><img src="css/images/challenge.png" style="opacity:0.5"/></span>
-	-->
-	<span class="team"><img src="{{team1}}"/></span>
-	<span class="type">({{type}})</span>
-	<span class="team2"><img src="{{team2}}"/></span>
-	<span class="time">{{time}}</span>
 
-	
-</div>
-</li>
- </script>
-
-  <script id="ZMO-createChallengeRow" type="text/html">
- <li class="row">
-	<div class="rowContainer">
-		<img src="{{image}}{{userImage}}" />
-	<span>{{name}}{{userName}} {{#description}}:{{description}}{{/description}}</span>
-</li>
- </script>
-<script id="ZMO-news-template" type="text/html">
-		<div class="news-drink-box">
-			<div class="news-drink-box-mugshot">
-				<div>
-					<a><img width="48" height="48" border="0" src="{{image}}"></a>
-				</div>
-			</div>
-			<div class="news-drink-box-details">
-				<div class="news-drink-box-details-headline">
-					{{name}} zapfte <b>{{amount}}</b>l
-				</div>
-				<div class="news-box-info">Ort:{{place}} Fass: {{kegId}} der Marke {{brand}}
-				</div>
-			</div>
-			<div class="news-box-dateline">
-				<abbr title="{{date}}" class="timeago">am {{date}}Uhr</abbr>
-			</div>
-		</div>
-</script>
-<script id="ZMO-news-template-achievement" type="text/html">
-<div class="news-drink-box">
-	<div class="news-drink-box-mugshot">
-		<div>
-			<a>
-				<img src="{{image}}" border="0" height="48" width="48">
-			</a>
-		</div>
-	</div>
-	<div class="news-drink-box-details">
-		<div class="news-drink-box-details-headline">
-			<a>{{username}}</a> erreichte den Erfolg <br>
-			<b>
-				<a>{{name}}</a>
-			</b>
-		</div>
-		<div class="news-box-info">
-			Ort: <a href="place.php">{{place}}</a>
-		</div>
-	</div>
-	<div class="news-box-dateline">
-		<abbr class="timeago" title="{{date}}">erhalten am {{date}} Uhr</abbr>
-	</div>
-</div>
-</script>
-<script id="ZMO-news-template-other" type="text/html">
-<div class="news-drink-box">
-	<div class="news-drink-box-mugshot">
-		<div>
-			<img src="{{image}}" border="0" height="48" width="48">
-		</div>
-	</div>
-	<div class="news-drink-box-details">
-		<div class="news-drink-box-details-headline">
-				{{text}}
-		</div>
-		<div class="news-box-info">Ort: <a href="place.php">Da wo die anderen auch, und so</a></div>
-	</div>
-</div>
-</script>
-<script id="ZMO-news-template-challenge-started" type="text/html">
-<div class="news-drink-box">
-	<div class="news-drink-box-mugshot">
-		<div>
-			<a>
-				<img src="{{image}}" border="0" height="48" width="48">
-			</a>
-		</div>
-	</div>
-	<div class="news-drink-box-details">
-		<div class="news-drink-box-details-headline">
-			{{team1}}</a> beginnt eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}!
-		</div>
-		<div class="news-box-info">
-			Ort: <a href="#">{{place}}</a>
-		</div>
-	</div>
-	<div class="news-box-dateline">
-		<abbr class="timeago" title="{{date}}">am {{date}} Uhr</abbr>
-	</div>
-</div>
-</script>
-
-<script type="text/html" id="ZMO-news-template-challenge-done">
-<div class="news-drink-box">
-	<div class="news-drink-box-mugshot">
-		<div>
-			<a>
-				<img src="{{image}}" border="0" height="48" width="48">
-			</a>
-		</div>
-	</div>
-	<div class="news-drink-box-details">
-		<div class="news-drink-box-details-headline">
-			{{team1}} hatte eine {{duration}} minütigen Challenge {{type}} gegen {{team2}}. Gewonnen hat: {{winner}}
-		</div>
-		<div class="news-box-info">
-			Ort: <a href="#">{{place}}</a>
-		</div>
-	</div>
-	<div class="news-box-dateline">
-		<abbr class="timeago" title="{{date}}">am {{date}} Uhr</abbr>
-	</div>
-</div>
-</script>
-<script type="text/html" id="ZMO-news-template-challenge-declined">
-<div class="news-drink-box">
-	<div class="news-drink-box-mugshot">
-		<div>
-			<a>
-				<img src="{{image}}" border="0" height="48" width="48">
-			</a>
-		</div>
-	</div>
-	<div class="news-drink-box-details">
-		<div class="news-drink-box-details-headline">
-			{{team1}} hat eine {{duration}} minütige Challenge {{type}} gegen {{team2}} abgelehnt mit der Begründung <br /> &quot;{{reason}}&quot;
-		</div>
-		<div class="news-box-info">
-			Ort: <a href="#">{{place}}</a>
-		</div>
-	</div>
-	<div class="news-box-dateline">
-		<abbr class="timeago" title="{{date}}">am {{date}} Uhr</abbr>
-	</div>
-</div>
-</script>
-
-<script id="ZMO-news-new-keg" type="text/html">
-<div class="news-drink-box">
-	<div class="news-drink-box-mugshot">
-		<div>
-			<img src="{{image}}" border="0" height="48" width="48">
-		</div>
-	</div>
-	<div class="news-drink-box-details">
-		<div class="news-drink-box-details-headline">
-				Ein neues {{size}} Liter Fass {{brand}} wurde angezapft.
-		</div>
-		<div class="news-box-info">Ort: {{location}}</div>
-	</div>
-	<div class="news-box-dateline">
-		<abbr class="timeago" title="{{date}}">am {{date}} Uhr</abbr>
-	</div>
-</div>
-</script>
-
-<script id="ZMO-news-new-user" type="text/html">
-<div class="news-drink-box">
-	<div class="news-drink-box-mugshot">
-		<div>
-			<img src="{{image}}" border="0" height="48" width="48">
-		</div>
-	</div>
-	<div class="news-drink-box-details">
-		<div class="news-drink-box-details-headline">
-				<a href="#">{{userName}}</a> hat sich soeben erfolgreich registriert. Viel Spaß beim zapfen!
-		</div>
-	</div>
-	<div class="news-box-dateline">
-		<abbr class="timeago" title="{{date}}">am {{date}} Uhr</abbr>
-	</div>
-</div>
-</script>
-
-
-<script type="text/html" id="ZMO-members-template-box">
-<div class="news-drink-box">
-	<div class="member-box-left">
-		<div class="news-drink-box-mugshot">
-			<div>
-				<a href="#user?id={{userId}}">
-					<img width="48" height="48" border="0" src="{{userImage}}">
-				</a>
-			</div>
-		</div>
-		<div class="members-box-headline">
-			<a href="#user?id={{userId}}">{{userName}}</a>
-		</div>
-		<div class="members-box-amount">
-			Gezapfte Menge: {{totalAmount}} Liter
-		</div>
-	</div>
-
-{{#additional}}
-	<div class="member-box-additional">
-		+ {{additionalCount}}
-	</div>
-{{/additional}}
-
-{{#achievements}}	
-	<div class="member-box-achievement-mugshot">
-		<div>
-			<a href="#achievementstats?id={{achievementId}}">
-				<img width="48" height="48" border="0" src="{{imagePath}}" title="{{achievementName}}">
-			</a>
-		</div>
-	</div>	
-{{/achievements}}
-
-<div style="clear:both;"></div>
-</div>
-
-
-</script>
-<script type="text/html" id="ZMO-stats-bestlist-item">
-<tr class="bestlist-item">
-<td class="rank">
-{{rank}}.
-</td>
-	<td class="name">
-		<a href="#stats?userid={{user_id}}">{{user_name}}</a>	
-	</td>
-	<td class="amount">
-		{{#amount}}{{amount}}{{/amount}}
-		{{#achievement_count}}{{achievement_count}}{{/achievement_count}}
-		{{#draw_count}}{{draw_count}}{{/draw_count}}
- {{unit}}
-	</td>
-</tr>
-</script>
-<script type="text/html" id="ZMO-stats-drinker">
-<tr class="stats-drinker-row">
-	<td>
-		{{description}}
-	</td>
-	<td>
-		{{#isLink}}
-			<a href="#stats?userid={{user_id}}">{{user_name}}</a><span>&nbsp;({{amount}})</span>	
-		{{/isLink}}
-		{{#isText}}
-			<span>{{text}}</span><span>&nbsp;{{unit}}</span>	
-		{{/isText}}
-	</td>
-</tr>
-</script>
 </head>
 <body>
 
-<div id="test"></div>
-<div class="main">
- 	<div class="nav"></div>
- 	<div class="major"></div>
- 	<div class="footer"></div>
+
+<div class="zm-viewport">
+<div class="side"></div>
+
+	<div class="main" id="scroller">
+	
+ 		<div class="nav"></div>
+ 		<div id="wrapper">
+ 			<div class="major"></div>
+ 		</div>
+ 		<div class="footer"></div>
+ 	
 </div>
-  
+  </div>
 </body>
 </html>
