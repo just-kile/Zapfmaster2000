@@ -45,6 +45,7 @@ ZMO.Util.scrollHandler = (function($) {
 	var bindScrollHandler = function(callback) {
 
 		var doc = $(document);
+		loadingOk();
 		$(window).bind("scroll", function(e) {
 
 			var top = doc.height();// scrollElement.offset().top;
