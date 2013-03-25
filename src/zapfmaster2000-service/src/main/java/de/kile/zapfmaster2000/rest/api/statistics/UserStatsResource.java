@@ -115,10 +115,11 @@ public class UserStatsResource {
 			}
 			User userR = Zapfmaster2000Core.INSTANCE.getAuthService().retrieveUser(
 					pToken);
-			if(userR == null){
+			if(userR == null && pUser==null){
 				LOG.error("pUser must be given in this context.");
 				return Response.status(Status.BAD_REQUEST).build();
-			}else if (pUser == null) {
+			}
+			if (pUser == null) {
 				
 				user = userR.getId();
 			}else{
