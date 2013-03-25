@@ -25,6 +25,25 @@ ZMO.modules.StatsModel = function(config){
 	}
 
 };
+ZMO.modules.UserStatsModel = function(config){
+	if("undefined"!=typeof config){
+		this.amount = new ZMO.modules.AmountStatsModel(config.amount);
+		this.drawCount  =new ZMO.modules.DrawCountModel (config.drawCount);
+		this.progress = new ZMO.modules.ProgressModel(config.progress||config.drinkProgress);
+		
+		//this.promille = config.promille?config.promille.average||config.promille.alcoholLevel:(config.alcoholLevel?config.alcoholLevel.alcoholLevel:null);
+		if(config.promille){
+			this.promille = typeof config.promille.average!="undefined"?config.promille.average:config.promille.alcoholLevel
+		}else{
+			this.promille = typeof config.alcoholLevel!="undefined"?config.alcoholLevel.alcoholLevel:null;
+		}
+		this.promille = this.promille!= null?this.promille.toFixed(2):null;
+		this.rank = new ZMO.modules.RankModel(config.rank);
+		this.user = new ZMO.modules.UserModel(config.user);
+		this.achievements = new ZMO.modules.AchievementStatsModel(config.achievement);
+		
+	}
+}
 ZMO.modules.RankModel =function(config){
 	if("undefined"!=typeof config){
 		this.amount = config.amount||config.rankAmount;
@@ -60,6 +79,11 @@ ZMO.modules.AchievementUserListModel = function(config){
 	}
 	return arr;
 };
+ZMO.modules.UserModel = function(config){
+	this.userName = config.userName;
+	this.userId =config.userId;
+	this.userImage = config.userImage;
+}
 ZMO.modules.DrawCountUserListModel = function(config){
 	
 	var arr = [];
@@ -93,8 +117,8 @@ ZMO.modules.kegModel = function(config){
 		      start_date:new ZMO.TimeParser(keg.start_date||keg.startDate).getDefaultTime(),
 		      keg_numbers:keg.keg_numbers||keg.kegNumber,
 		      current_amount : keg.currentAmount.toFixed(2),
-		      lastsUntil :date.getDefaultTime(),
-		      lastsUntilShort:date.getHoursMinutes(),
+		      lastsUntil :date.getDefaultTime()||ZMO.translateString("Never"),
+		      lastsUntilShort:date.getHoursMinutes()||ZMO.translateString("Never"),
 		      boxId:keg.boxId
 		});
 	});
@@ -122,9 +146,20 @@ ZMO.modules.AmountStatsModel = function(config){
  */
 ZMO.modules.AchievementStatsModel=function(config){
 	if("undefined"!=typeof config){
-        this.count=config.count||config.achievementCount,
+        this.count=typeof config.count!="undefined"?config.count:config.achievementCount;
         //this.achievementspeed = config.achievementspeed;
         this.mostAchievementHour=config.mostAchievementHour||config.achievementMostActivityHour; 
+        var achievements = [];
+        $.each(config.achievements,function(ind,achievement){
+        	achievements.push({
+        		achievementDescription: achievement.achievementDescription,
+        			achievementId: achievement.achievementId,
+        			achievementImage: achievement.achievementImage,
+        			achievementName:achievement.achievementName,
+        			date:new ZMO.TimeParser(achievement.date).getDefaultTime()
+        	})
+        });
+        this.achievements = achievements;
 	}
 };
 /**
@@ -134,9 +169,9 @@ ZMO.modules.AchievementStatsModel=function(config){
  */
 ZMO.modules.DrawCountModel =function(config){
 	if("undefined"!=typeof config){
-		this.operations = config.count||config.drawCount;
+		this.operations = typeof config.count!="undefined"?config.count:config.drawCount;
 	
-	this.average = config.averageOperationsPerHour||config.drawCountPerHour;
+	this.average = typeof config.averageOperationsPerHour!="undefined"? config.averageOperationsPerHour:config.drawCountPerHour;
 	this.average = this.average.toFixed(2)
 	}
 };

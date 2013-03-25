@@ -22,6 +22,7 @@ import de.kile.zapfmaster2000.rest.impl.core.statistics.AmountResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.DrawCountResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.DrinkProgressResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.RankBuilder;
+import de.kile.zapfmaster2000.rest.impl.core.statistics.UserBuilder;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 
@@ -112,19 +113,22 @@ public class UserStatsResource {
 					return Response.status(Status.BAD_REQUEST).build();
 				}
 			}
-
+			User userR = Zapfmaster2000Core.INSTANCE.getAuthService().retrieveUser(
+					pToken);
 			if (pUser == null) {
-				LOG.error("pUser must be given in this context.");
-				return Response.status(Status.BAD_REQUEST).build();
+//				LOG.error("pUser must be given in this context.");
+//				return Response.status(Status.BAD_REQUEST).build();
+				user = userR.getId();
+			}else{
+				try {
+					user = Long.parseLong(pUser);
+				} catch (NumberFormatException e) {
+					LOG.error("Could not parse user id pUser " + pUser, e);
+					return Response.status(Status.BAD_REQUEST).build();
+					
+				}
 			}
-
-			try {
-				user = Long.parseLong(pUser);
-			} catch (NumberFormatException e) {
-				LOG.error("Could not parse user id pUser " + pUser, e);
-				return Response.status(Status.BAD_REQUEST).build();
-			}
-
+			
 			AmountResponse amount = AmountResponseBuilder
 					.retrieveAmountResponse(user, account);
 			AchievementResponse achievement = AchievementResponseBuilder
@@ -137,6 +141,8 @@ public class UserStatsResource {
 					.retrieveDrinkResponse(account, user, dProgressFrom,
 							dProgressTo, interval);
 			RankResponse rank = RankBuilder.retrieveRank(user, account);
+			UserResponse userResponse = UserBuilder.retrieveUserResponse(account, pToken, pUser,userR);
+			
 
 			UserStatsResponse response = new UserStatsResponse();
 
@@ -146,7 +152,7 @@ public class UserStatsResource {
 			response.setProgress(progress);
 			response.setPromille(promille);
 			response.setRank(rank);
-
+			response.setUser(userResponse);
 			return Response.ok(response).build();
 		}
 

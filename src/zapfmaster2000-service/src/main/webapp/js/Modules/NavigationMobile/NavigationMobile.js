@@ -5,7 +5,7 @@ ZMO.modules.navigationMobile = (function($,ajax){
 	var c = ZMO.modules.Constants;
 	var container = null;
 	var createNavigation = function(){
-		var links = c.navbarMobile;
+		var links = c.navbarStats;
 		var ul = $("<ul>").addClass("navBtn");
 		container.append(ul);
 		$.each(links,function(ind,link){
@@ -16,7 +16,7 @@ ZMO.modules.navigationMobile = (function($,ajax){
 			li.append(iconCont).append(textSpan);
 			ul.append(li);
 			
-			li.on("mousedown",function(){
+			li.on(c.clickEvent,function(){
 				//alert(link.text);
 				ZMO.changePage(link.link);
 			})

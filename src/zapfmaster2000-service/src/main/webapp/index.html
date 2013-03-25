@@ -11,12 +11,19 @@
  <script src="libs/jquery/jquery-1.8.1.js"></script>
  <link rel="stylesheet" type="text/css" href="css/login.css" />
  <script>
+ baseUrl ="";//"http://192.168.178.24:8080/zapfmaster2000-service/";
+
+// baseUrl ="";
+ 
 $(document).ready(function(){
+	baseUrl =  localStorage.getItem("zm-serverurl")?localStorage.getItem("zm-serverurl"):"";
+	//localStorage.getItem("serverurl")?localStorage.getItem("serverurl"):"";
+	console.log("BaseUrl"+baseUrl);
 	function redirect(){
 	       if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
-	    	   window.location.replace(window.location.pathname+"app.html");
+	    	   window.location.replace("app.html");
 	       }else{
-	    	   window.location.replace(window.location.pathname+"page.html");
+	    	   window.location.replace("page.html");
 	       }
 	}
 	var RfidPush = (function(){
@@ -43,7 +50,7 @@ $(document).ready(function(){
 					connectToChannel(url,successCb,errorCb,data);
 				},
 				error:function(e){
-					if(e.status==0){
+					if(e.status==0 && e.statusText=="abort"){
 						console.log("Request abort success!");
 					}else if(e.status==503){
 						console.log("No Datas Received! Reconnect...");
@@ -86,7 +93,7 @@ $(document).ready(function(){
 		}
 		var initRfidPush = function (id){
 				abortPush();
-				connectToChannel("rest/draftkit/"+id+"/rfid",setRFID);
+				connectToChannel(baseUrl + "rest/draftkit/"+id+"/rfid",setRFID);
 			}
 		var abortPush = function(){
 			if(pushReq)pushReq.abort();
@@ -110,7 +117,7 @@ $(document).ready(function(){
 		var accountName = $("#account").val();
 		$.ajax({
 			type:"POST",
-			url:"rest/login/account",
+			url:baseUrl +"rest/login/account",
 			data:{
 				accountName:accountName
 			},
@@ -140,14 +147,14 @@ $(document).ready(function(){
 		var pass = $(".applogin #password").val();
 		$.ajax({
 			type:"POST",
-			url:"rest/login/user",
+			url:baseUrl +"rest/login/user",
 			data:{
 				userName:userName,
 				password:pass
 			},
 			complete:function(data){
 				var token = data.responseText;
-				if(localStorage){
+				if(data.status==200 && localStorage){
 					localStorage.setItem('token',token );
 					redirect();
 					//window.location.replace(window.location.pathname+"app.html");
@@ -174,7 +181,7 @@ $(document).ready(function(){
 		data["token"] = localStorage.getItem("token");
 		$.ajax({
 			type:"POST",
-			url:"rest/register/user",
+			url:baseUrl +"rest/register/user",
 			data:data,
 			success:function(token){
 				//alert("Token"+token);
@@ -195,7 +202,7 @@ $("#uploadImage").on("click",function(e){
 	var formData = new FormData ($("#imageForm")[0]);
 	formData.append("token",localStorage.getItem("token"));
 	$.ajax({
-	    url: 'rest/image/user',
+	    url: baseUrl + 'rest/image/user',
 	    data: formData,
 	    cache: false,
 	    contentType: false,
@@ -228,7 +235,7 @@ function startRFIDPush(e){
 	var data = {};
 	data["token"] = localStorage.getItem("token");
 	$.ajax({
-	    url: 'rest/draftkit',
+	    url:baseUrl+ 'rest/draftkit',
 	    type: 'GET',
 	    data:data,
 	    success: function(data){
@@ -270,7 +277,7 @@ $("#updateImageRfid").on("click",function(e){
 	var pass = $(".applogin #password").val();
 	$.ajax({
 		type:"POST",
-		url:"rest/login/user",
+		url:baseUrl+ "rest/login/user",
 		data:{
 			userName:userName,
 			password:pass

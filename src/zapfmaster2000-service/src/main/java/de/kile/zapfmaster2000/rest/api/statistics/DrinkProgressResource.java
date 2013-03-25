@@ -49,7 +49,7 @@ public class DrinkProgressResource {
 	 *         <li>FORBIDDEN: if authentication with <code>pToken</code> fails.</li>
 	 *         </ul>
 	 */
-	@Path("achievements")
+	@Path("progress")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveDrinkProgress(@QueryParam("token") String pToken,

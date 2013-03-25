@@ -1,6 +1,18 @@
 ZMO.modules = ZMO.modules ||{}
-
+ZMO.modules.Environment = {
+		userId:"",
+		userName:""
+}
+//var baseUrl = "";
+//var baseUrl ="http://192.168.178.24:8080/zapfmaster2000-service/";
 ZMO.modules.Constants = {
+		clickEvent:(function(){
+			if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
+				return "touchend";
+			}else{
+				return "mouseup touchend";
+			}
+		})(),
 		drawfeed:{
 			types:{
 				ACHIEVEMENT:"ACHIEVEMENT",
@@ -12,14 +24,14 @@ ZMO.modules.Constants = {
 				NEW_KEG:"NEW_KEG",
 				NEW_USER:"NEW_USER"
 			},
-			listLength:10
+			listLength:15
 		},
 		urls:{
 			ACHIEVEMENTS:"rest/achievements",
 			ACHIEVEMENTSSTATS:"rest/achievementStats",
 			FRONTPAGESTATS:"rest/statistics/frontpageStats",
 			USERFRONTPAGESTATS:"rest/statistics/frontpageUserStats",
-
+			USERSTATS:"rest/statistics/userStats",
 			NEWSLIST:"rest/news",
 			//STATS:"tmp/stats.json",
 			STATS:"rest/statistics/globalStats",
@@ -40,33 +52,34 @@ ZMO.modules.Constants = {
 		member:{
 			MAX_ACHIEVEMENTS:7
 		},
+		language:{
+			deImg:"images/view/flagDE.png",
+			enImg:"images/view/flagEN.png"
+		},
 		challenges:{
 			modes:{
 				name:"Laenge",
 				id:"length",
 				params:[{
-					name:"10 Minuten",
+					name:"10min",
 					id:"mode-tenMinutes",
 					image:"images/challenges/10min.jpg",
-					duration:10
+					duration:10,
+					type:"1v1"
 				},{
-					name:"30 Minuten",
+					name:"30min",
 					id:"mode-thirtyMinutes",
 					image:"images/challenges/30min.jpg",
-					duration:30
+					duration:30,
+					type:"1v1"
 				},{
-					name:"1 Stunde",
+					name:"60min",
 					id:"mode-60Minutes",
 					image:"images/challenges/60min.jpg",
-					duration:60
+					duration:60,
+					type:"1v1"
 				}]
-			},
-			types:[{
-				id:"1v1",
-				name:"1 vs 1",
-				image:"images/challenges/1v1.png",//"images/avatars/felix.jpg",
-				description:"Fordere einen Mitzapfer zum Wettzapfen auf!"
-			}]
+			}
 		}
 		,navbar :	[{
 			id:"topnav-1",
@@ -94,6 +107,17 @@ ZMO.modules.Constants = {
 			text:"Challenges",
 			title:"Challenges"
 		}],
+		navbarStats:[{
+			link:"#stats",
+			text:"Stats",
+			title:"Stats",
+			image:"images/icons/16-line-chart.png"
+		},{
+			link:"#user",
+			text:"User",
+			title:"User",
+			image:"images/icons/111-user.png"
+		}],
 		navbarMobile :	[{
 			link:"#",
 			text:"News",
@@ -103,15 +127,30 @@ ZMO.modules.Constants = {
 			link:"#duels",
 			text:"Duels",
 			title:"Duels",
-			image:"images/icons/89-dumbell.png"
+			image:"images/icons/115-bow-and-arrow.png"
 		},{
-			link:"#dare",
-			text:"Dare",
-			title:"Dare",
-			image:"images/icons/22-skull-n-bones.png"
+			link:"#stats",
+			text:"Stats",
+			title:"Stats",
+			image:"images/icons/16-line-chart.png"
 		
-}],
-badExcuses:["1","2","und 3"]
+		},{
+			link:"#settings",
+			text:"Settings",
+			title:"Settings",
+			image:"images/icons/19-gear.png"
+		
+		},{
+			link:"#logout",
+			text:"Logout",
+			title:"Logout",
+			image:"images/icons/63-runner.png"
+		
+		}],
+		navBarUserInformation:{
+			link:"#user"
+		},
+		badExcuses:["Muss mir morgen Muttis Haare kämmen","Mutti","und 3"]
 	
 
 };

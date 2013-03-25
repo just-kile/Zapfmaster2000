@@ -1,7 +1,8 @@
 ZMO.modules.drawfeed = (function($,Ajax){
-	var rfid ,newsfeed,container,scrollElement,counter=0,rfid;
+	var rfid ,newsfeed,container,counter=0,rfid;
 	var mC = ZMO.modules.Constants;
 	var c = mC.drawfeed;
+	var sH = ZMO.Util.scrollHandler;
 	/**
 	 * #######################################################
 	 * Blank Container Creation
@@ -19,11 +20,12 @@ ZMO.modules.drawfeed = (function($,Ajax){
 	var createContainer =function(){
 		var container = $(document.createElement("div")).addClass("news-backgrnd");
 		var newsFeedContainer = $(document.createElement("div")).addClass("newsfeed");
-		var rfidHeadline= initRfid();
-		newsfeed  =  $(document.createElement("div")).attr("id","drawfeed-news");
-		newsFeedContainer.append(rfidHeadline).append(newsfeed);
+		//var rfidHeadline= initRfid();
+		newsfeed  =  $(document.createElement("ul")).attr("id","drawfeed-news");
+		newsFeedContainer
+//			.append(rfidHeadline)
+			.append(newsfeed);
 		container.append(newsFeedContainer);
-		scrollElement = $("<div>").addClass("scrollElement").appendTo(container);
 		return container;
 	};
 	/**
@@ -110,6 +112,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 					fillContainer(container,val);
 				});
 				if(callback)callback(datas);
+				refreshScroller();
 			},{
 				start:startVal,
 				length:length,
@@ -124,8 +127,11 @@ ZMO.modules.drawfeed = (function($,Ajax){
 		}else{
 			ZMO.logger.warning(" Drawfeed data empty!");
 		}
+		refreshScroller();
 	}
-	
+	var refreshScroller = function(){
+		sH.refresh();
+	}
 	 var fillInitialData = function(){
 		 updateNewslist(0,mC.drawfeed.listLength);
 		 Ajax.connectToNewsPush(onMessageReceive);
@@ -141,32 +147,34 @@ ZMO.modules.drawfeed = (function($,Ajax){
 			 rfid.text("Hallo "+rfidModel.userName+". Du kannst jetzt zapfen!");
 		 }
 	 };
-	 var bindScrollHandler = function(scrollElement){
-		 var actLoadingFlag = false;
-		 $(window).bind("scroll",function(e){
-			 var top = scrollElement.offset().top;
-			 var windowHeight = $(window).height();
-			 var windowTop = $(window).scrollTop()+windowHeight+200;
-			 if(windowTop>top && top>=windowHeight&& !actLoadingFlag){
-				 actLoadingFlag = true;
-				 var len = container.children().length;
-				 updateNewslist(len,mC.drawfeed.listLength,function(datas){if(datas.length!=0)actLoadingFlag = false;});
-				 ZMO.logger.log("Loading newsfeed..."+len+"/"+mC.drawfeed.listLength);
-			 }
-			 
-		 });
-	 };
+	 var reloadingNewsfeed = function(ok){
+		 var len = container.children().length;
+		 updateNewslist(len,mC.drawfeed.listLength,function(datas){if(datas.length!=0)ok();});
+		 ZMO.logger.log("Loading newsfeed..."+len+"/"+mC.drawfeed.listLength);
+	 }
+
+	 var scroller = null;
 	 /**
 	  * Gets called, when container is appended
 	  */
-	 var init = function(){
+	 var init = function(queryparams,data){
 		 rfid = $("#rfid");
 		 container =$("#drawfeed-news")
 		 fillInitialData();
-		 bindScrollHandler(scrollElement);
+		 //if mobile define iscoll
+		 var newsfeed = container.parent();
+		 sH.initScrolling({
+			element: newsfeed,
+			loadMoreCallback:reloadingNewsfeed,
+			isMobile:false//data.isMobile
+		 });
+
+		
 		
 	}
-
+var getScroller = function(){
+	return scroller;
+}
 	/**
 	 * Gets called when instance is needed
 	 */
@@ -177,7 +185,8 @@ ZMO.modules.drawfeed = (function($,Ajax){
 	var pub = {
 			getInstance:getInstance,
 			init:init,
-			updateNewslist:updateNewslist
+			updateNewslist:updateNewslist,
+			getScroller:getScroller
 	}
 	return pub;
 }(jQuery,ZMO.ajax))

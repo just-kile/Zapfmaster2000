@@ -8,21 +8,24 @@ ZMO.modules.logout = (function($,ajax){
 	var container =null;
 	
 	var logout = function(){
+		var baseUrl = localStorage.getItem("zm-serverurl");
 		localStorage.clear();
-		var baseUrl = window.location.href.replace(new RegExp("(/[a-zA-Z]*.html)"),"");
-		window.location.replace(baseUrl);
+		localStorage.setItem("zm-serverurl",baseUrl);
+		//var baseUrl = window.location.href.replace(new RegExp("(/[a-zA-Z]*.html)"),"");
+		window.location.replace("index.html");
 	};
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(hashParams,moduleParams){
 		container.text("Logout").on("mouseup",logout);
+		if(ZMO.throbber)ZMO.throbber.hide();
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM
 	 */
 	var getInstance = function(){
-		return (container = $("<div>").addClass("ZMO-logout"));
+		return (container = $("<div>").addClass("zmo-clickbutton").css("margin-top","3em"));
 	};
 	var pub = {
 			getInstance:getInstance,
