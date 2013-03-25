@@ -8,9 +8,11 @@ ZMO.modules.logout = (function($,ajax){
 	var container =null;
 	
 	var logout = function(){
+		var baseUrl = localStorage.getItem("zm-serverurl");
 		localStorage.clear();
+		localStorage.setItem("zm-serverurl",baseUrl);
 		//var baseUrl = window.location.href.replace(new RegExp("(/[a-zA-Z]*.html)"),"");
-		window.location.href="index.html";
+		window.location.replace("index.html");
 	};
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
