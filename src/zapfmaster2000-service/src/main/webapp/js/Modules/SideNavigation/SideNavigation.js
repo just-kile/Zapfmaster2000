@@ -51,6 +51,11 @@ ZMO.modules.sideNavigation = (function($,ajax){
 			ul.prepend(userInfo);
 			ZMO.modules.Environment.userId=user.userId;
 			ZMO.modules.Environment.userName=user.userName;
+			userInfo.on(mC.clickEvent,function(e){
+				e.preventDefault();
+				hide();
+				ZMO.changePage(mC.navBarUserInformation.link+"?id="+user.userId);
+			})
 		});
 	}
 	/**

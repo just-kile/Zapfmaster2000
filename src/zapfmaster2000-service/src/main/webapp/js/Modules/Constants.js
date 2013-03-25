@@ -147,7 +147,10 @@ ZMO.modules.Constants = {
 			image:"images/icons/63-runner.png"
 		
 		}],
-badExcuses:["Muss mir morgen Muttis Haare kämmen","Mutti","und 3"]
+		navBarUserInformation:{
+			link:"#user"
+		},
+		badExcuses:["Muss mir morgen Muttis Haare kämmen","Mutti","und 3"]
 	
 
 };
