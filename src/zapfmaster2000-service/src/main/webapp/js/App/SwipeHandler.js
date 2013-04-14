@@ -5,12 +5,13 @@
 ZMO.swipeHandler = (function(){
 	var initSwipe = function(){
 		var threshold = 30,noSwipeToken=false;
-		$(document).swipe("destroy").swipe({
+		$("body")//.swipe("destroy")
+			.swipe({
 			 swipeStatus:function(event, phase, direction, distance, duration, fingers){
 				 if(phase=="move" && (direction =="up"||direction=="down")&&distance>threshold){
 					 noSwipeToken= true;
 				 }else
-				 if(phase=="end"){
+				 if(phase=="end" &&distance>threshold ){
 					if(direction=="left" && !noSwipeToken){
 						 if(!ZMO.modules.sideNavigation.isVisible()){
 							 ZMO.modules.challengeUserList.show();
@@ -29,14 +30,15 @@ ZMO.swipeHandler = (function(){
 				}
 		         
 		        },
-			swipeRight:function(event, direction, distance, duration, fingerCount) {
-
-				
-			  },
-			swipeLeft:function(event, direction, distance, duration, fingerCount) {
-
-				
-			},allowPageScroll:"auto",
+//			swipeRight:function(event, direction, distance, duration, fingerCount) {
+//
+//				
+//			  },
+//			swipeLeft:function(event, direction, distance, duration, fingerCount) {
+//
+//				
+//			},
+			 allowPageScroll:"auto",
 			 threshold:threshold
 		});
 	};
@@ -47,6 +49,9 @@ ZMO.swipeHandler = (function(){
 			 }else if(ZMO.modules.challengeUserList.isVisible()){
 				 ZMO.modules.challengeUserList.hide();
 			 }
+//			 if(ZMO.modules.header && ZMO.modules.header.isNotificationWindowVisible()){
+//				 ZMO.modules.header.hideNotificationWindow();
+//			 }
 		});
 	};
 	var myscroll = null;

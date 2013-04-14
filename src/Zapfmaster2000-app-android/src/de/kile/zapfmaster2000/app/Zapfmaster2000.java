@@ -43,6 +43,8 @@ public class Zapfmaster2000 extends DroidGap
 			e.printStackTrace();
 		}
         
+//        super.loadUrl("file:///android_asset/tmp/index.html",1000);
+        
         
        // this.appView.getSettings().setJavaScriptEnabled(true);
        // this.appView.addJavascriptInterface(new MyPhoneGap(), "MyPhoneGap");

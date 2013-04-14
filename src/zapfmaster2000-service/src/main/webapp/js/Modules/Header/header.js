@@ -58,6 +58,9 @@ ZMO.modules.header = (function($,ajax){
 		notificationVisible = false;
 		notificationWindow.css("top","-9999px").hide();
 	}
+	var isNotificationWindowVisible = function(){
+		return notificationVisible;
+	}
 	var toggleNotificationBtnClick = function(e){
 		//alert("Not");hide
 		if(notificationVisible){
@@ -175,7 +178,7 @@ ZMO.modules.header = (function($,ajax){
 		//add Clickhandler
 		//naviBtn.on("",onNaviBtnClick);
 		new google.ui.FastButton(naviBtn[0],onNaviBtnClick);
-		
+//		naviBtn.on(mC.clickEvent,onNaviBtnClick);
 		//usersBtn.on("mouseup",onUsersBtnClick);
 		new google.ui.FastButton(usersBtn[0],onUsersBtnClick);
 		notificationsBtn.on(mC.clickEvent,toggleNotificationBtnClick);
@@ -211,7 +214,10 @@ ZMO.modules.header = (function($,ajax){
 			clearNotification:clearNotification,
 			clearAll:clearAll,
 			updateBadge:updateBadge,
-			getScroller:getScroller
+			getScroller:getScroller,
+			hideNotificationWindow:hideNotificationWindow,
+			showNotificationWindow:showNotificationWindow,
+			isNotificationWindowVisible:isNotificationWindowVisible
 			
 	};
 	return pub;

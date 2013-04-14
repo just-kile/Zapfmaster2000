@@ -13,6 +13,13 @@ ZMO.modules.Constants = {
 				return "mouseup touchend";
 			}
 		})(),
+		clickEventDown:(function(){
+			if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
+				return "touchstart";
+			}else{
+				return "mouseup touchend";
+			}
+		})(),
 		drawfeed:{
 			types:{
 				ACHIEVEMENT:"ACHIEVEMENT",

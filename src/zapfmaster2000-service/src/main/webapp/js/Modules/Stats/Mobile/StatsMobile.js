@@ -49,7 +49,13 @@ ZMO.modules.statsMobile = (function($,ajax){
 	var calcBestlist = function(list){
 		var arr = [];
 		$.each(list,function(ind,user){
-			arr.push([user.userName,user.amount]);
+			try{
+				arr.push([user.userName,parseFloat(user.amount)]);
+			}catch(e){
+				ZMO.log("StatsMobile: User got no amount!");
+				console.log(user);
+			}
+			
 		});
 		return arr;
 		

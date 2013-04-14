@@ -50,6 +50,9 @@ ZMO.Util.scrollHandler = (function($) {
 
 			var top = doc.height();// scrollElement.offset().top;
 			var windowHeight = $(window).height();
+			if(windowHeight==top){
+				windowHeight = screen.availHeight;
+			}
 			var windowTop = $(window).scrollTop() + windowHeight + 200;
 			if (windowTop > top && top >= windowHeight && !actLoadingFlag) {
 				actLoadingFlag = true;
