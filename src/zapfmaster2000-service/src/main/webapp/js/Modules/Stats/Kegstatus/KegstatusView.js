@@ -14,7 +14,22 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		NOBODY:"nobody"
 		
 	};
-
+	var plotOptions = {
+			 grid: {
+	        	    drawGridLines: true,        // wether to draw lines across the grid or not.
+	        	        gridLineColor: 'rgba(0,0,0,0.2)',   // CSS color spec of the grid lines.
+	        	        background: 'rgba(255,255,255,0.2)',      // CSS color spec for background color of grid.
+	        	        borderColor: 'rgba(0,0,0,0.2)',     // CSS color spec for border around grid.
+	        	        borderWidth: 2.0,           // pixel width of border around grid.
+	        	        shadow: true,               // draw a shadow for grid.
+	        	        shadowAngle: 45,            // angle of the shadow.  Clockwise from x axis.
+	        	        shadowOffset: 1.5,          // offset from the line of the shadow.
+	        	        shadowWidth: 3,             // width of the stroke for the shadow.
+	        	        shadowDepth: 3
+	        	}, 
+	        	seriesColors: ["#dddf0d","#90b1d8",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
+	        	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
+	};
 	
 	var init = function(cont){
 		$.each(wording,function(ind,word){

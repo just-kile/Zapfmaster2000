@@ -474,8 +474,10 @@ ul#topnav li#topnav-5 a:hover {
 
 .linechart {
 	float: left;
-	width: 100%;
-	padding:0;
+	width: 90%;
+	height:100%;
+	padding:0 5% 0 5%;
+	
 	-moz-box-shadow: 0px 0px 20px #99ffff;
 	-webkit-box-shadow: 0px 0px 20px #99ffff;
 	box-shadow: 0px 0px 20px #99ffff;
@@ -485,7 +487,10 @@ ul#topnav li#topnav-5 a:hover {
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	background-image: url(../images/view/news_background2.png);
-	color: #FFF;
+	color: #ccc;
+	font-weight:bold;
+	font-size:10pt;
+	
 
 }
 .members-box-headline {
