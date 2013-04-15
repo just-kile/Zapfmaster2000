@@ -471,12 +471,12 @@ ul#topnav li#topnav-5 a:hover {
 .throbber img{
 
 }
-
+/*Chart css*/
 .linechart {
 	float: left;
 	width: 90%;
 	height:100%;
-	padding:0 5% 0 5%;
+	padding:1% 5% 1% 5%;
 	
 	-moz-box-shadow: 0px 0px 20px #99ffff;
 	-webkit-box-shadow: 0px 0px 20px #99ffff;
@@ -493,6 +493,17 @@ ul#topnav li#topnav-5 a:hover {
 	
 
 }
+.linechart .jqplot-yaxis {
+  margin-left:-5px !important;
+  width:20px !important;
+}
+.linechart .jqplot-yaxis-label{
+	margin-left:-20px !important;
+}
+.linechart .jqplot-xaxis {
+  margin-top:5px !important;
+}
+/* /chart css*/
 .members-box-headline {
 	font-size: 1.4em;
 }

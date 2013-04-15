@@ -27,9 +27,9 @@ ZMO.TimeParser = function(serverDateString){
 	var getChartTime = function(){
 		return formatDate(date,ZMO.UtilConstants.chartDateFormat);
 	}
-	var getChartTimeAddMins = function(mins){
+	var getChartTimeAddMins = function(mins,isTimestamp){
 		var newTime = new Date(date.getTime()+ mins*60*1000);
-		return formatDate(newTime,ZMO.UtilConstants.chartDateFormat);
+		return isTimestamp?newTime.getTime():formatDate(newTime,ZMO.UtilConstants.chartDateFormat);
 	}
 	//public
 	this.getDefaultTime = getDefaultTime;

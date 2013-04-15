@@ -12,11 +12,11 @@ ZMO.modules.bestlistView = (function($,ajax){
 	var plotOptions = {
 			 grid: {
 	        	    drawGridLines: true,        // wether to draw lines across the grid or not.
-	        	        gridLineColor: 'rgba(0,0,0,0.2)',   // CSS color spec of the grid lines.
-	        	        background: 'rgba(255,255,255,0.2)',      // CSS color spec for background color of grid.
-	        	        borderColor: 'rgba(0,0,0,0.2)',     // CSS color spec for border around grid.
+	        	        gridLineColor: 'rgba(255,255,255,0.3)',   // CSS color spec of the grid lines.
+	        	        background: 'rgba(255,255,255,0)',      // CSS color spec for background color of grid.
+	        	        borderColor: 'rgba(0,0,0,0)',     // CSS color spec for border around grid.
 	        	        borderWidth: 2.0,           // pixel width of border around grid.
-	        	        shadow: true,               // draw a shadow for grid.
+	        	        shadow: false,               // draw a shadow for grid.
 	        	        shadowAngle: 45,            // angle of the shadow.  Clockwise from x axis.
 	        	        shadowOffset: 1.5,          // offset from the line of the shadow.
 	        	        shadowWidth: 3,             // width of the stroke for the shadow.
@@ -29,20 +29,6 @@ ZMO.modules.bestlistView = (function($,ajax){
 		$.each(wording,function(ind,word){
 			wording[ind] = ZMO.Util.localization.translateString(word);
 		});
-	};
-	var convertToSeries = function(userlistModel){
-		var seriesArr =[];
-		try{
-			$.each(userlistModel,function(ind,user){
-				var username = user.userName;
-				var amount = parseFloat(user.amount);
-				seriesArr.push([username,amount]);
-			});
-		}catch(e){
-			ZMO.logger.error("Parse Error Beslist!")
-		}
-		return seriesArr;
-		
 	};
 	var calcBestlist = function(list){
 		var arr = [];
@@ -78,45 +64,6 @@ ZMO.modules.bestlistView = (function($,ajax){
 			  ,plotOptions));
 
 		
-		//		chartContainer =container;
-//		var datas = convertToSeries(userlistModel);
-//		chart = new Highcharts.Chart({
-//            chart: {
-//                renderTo: chartContainer.attr("id"),
-//                plotBackgroundColor: null,
-//                plotBorderWidth: null,
-//                plotShadow: false,
-//                height:200,
-//                marginTop:10
-//            },
-//            title: {
-//                text: ''
-//            },
-//            tooltip: {
-//        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-//            	percentageDecimals: 1
-//            },
-//            plotOptions: {
-//                pie: {
-//                    allowPointSelect: true,
-//                    cursor: 'pointer',
-//                    dataLabels: {
-//                        enabled: true,
-//                        color: '#fff',
-//                        connectorColor: '#fff',
-//                        distance:0,
-//                        formatter: function() {
-//                            return '<b>'+ this.point.name +'</b>';//+this.percentage.toFixed(1) +' %';
-//                        }
-//                    }
-//                }
-//            },
-//            series: [{
-//                type: 'pie',
-//                name: wording.amount,
-//                data: datas
-//            }]
-//        });
    
 	};
 	var createBestlist = function(userlistModel,container,unit,headlineText){

@@ -25,28 +25,32 @@ ZMO.modules.lineChartView = (function($,ajax){
 	        	seriesColors: ["#dddf0d","#90b1d8",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
 	        	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
 	};
-	var calcProgress = function(timeParser,arr,interval){
+	var calcProgress = function(timeParser,arr,interval,isTimestamp){
 		var retArr = [];
 		$.each(arr,function(ind,val){
-			retArr.push([timeParser.getChartTimeAddMins(ind*interval),val]);
+			isTimestamp
+					?retArr.push([timeParser.getChartTimeAddMins(ind*interval,true),val])
+					:retArr.push([timeParser.getChartTimeAddMins(ind*interval),val]);
 		});
 		return retArr;
-	}
+	};
 	var createLineChart = function(progressModel){
 		var id =  container.attr("id");
 		container.css({
 			height:"150px",
 			
 		});
+		if(!container.children().length==0){
+			updateChart(progressModel)
+		}else{
 		var progressStats= progressModel;
 		var progress = progressStats.data;
 		var interval = progressStats.interval;
 		var startDate = new ZMO.TimeParser(progressStats.start_date);
 		var datas = calcProgress(startDate,progress,interval);
-//		var line1=[['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
-//		           ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
-//		           ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
+
 		chart = $.jqplot(id, [datas],$.extend( {
+				animateReplot: true,
 		           title:'Draw Analytics',
 		           axes:{
 		             xaxis:{
@@ -60,80 +64,45 @@ ZMO.modules.lineChartView = (function($,ajax){
 //		            	   formatString:'%.2f'
 		            	   formatString:'%.0f'
 		                 },
-		                 min:0
+		                 min:0,
+		                 label:'Liter',
+		                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+		                 labelOptions: {
+		                     textColor: '#ccc',
+		                     fontSize: '12pt'
+		                   }
 		             }
 		           },
 		          
 		           cursor: {
 		             show: false
+		           },
+		           highlighter: {
+		               show: true, 
+		               showLabel: true, 
+		               tooltipAxes: 'y',
+		               sizeAdjust: 7.5 ,
+		               tooltipLocation : 'ne'
 		           }
 		       },plotOptions));
-//		chart = new Highcharts.Chart({
-//            chart: {
-//                renderTo: container.attr("id"),
-//                type: 'line',
-//                marginRight: 130,
-//                marginBottom: 25,
-//                height:200
-//            },
-//            title: {
-//                text: 'Draw Analytics',
-//                x: -20 //center
-//            },
-//
-//            xAxis: {
-//                type: 'datetime',
-//                tickInterval:  3600 * 1000*5, //  five hours
-//                tickWidth: 0,
-//                gridLineWidth: 1,
-//                labels: {
-//                    align: 'left',
-//                    x: 3,
-//                    y: -3
-//                }
-//            },
-//            yAxis: {
-//                title: {
-//                    text: 'Liter'
-//                },
-//                plotLines: [{
-//                    value: 0,
-//                    width: 1,
-//                    color: '#808080'
-//                }]
-//            },
-//            tooltip: {
-//                formatter: function() {
-//                	   var date = new Date(this.x); //in ms not s
-//                        return '<b>'+ this.series.name +'</b><br/>'+
-//                         +date.getHours()+":"+date.getMinutes()+"Uhr: "+this.y.toFixed(2) +'L';
-//                }
-//            },
-//            legend: {
-//                layout: 'vertical',
-//                align: 'right',
-//                verticalAlign: 'top',
-//                x: -10,
-//                y: 100,
-//                borderWidth: 0
-//            },
-//            series: [{
-//                name: 'Draw Amount',
-//                pointInterval:  progressModel.interval*60*1000,//60*60 * 1000*0.5, //half an hour
-//                pointStart: progressModel.start_date,//Date.UTC(2013, 0, 01),
-//                data: progressModel.data
-//            }]
-//        });
-   
+		}
 	};
-	var updateChart = function(val){
-		var series = chart.series[0];
-		series.addPoint(val, true, true);
-	};
+	var updateChart = function(progressModel){
+		var progressStats= progressModel;
+		var progress = progressStats.data;
+		var interval = progressStats.interval;
+		var startDate = new ZMO.TimeParser(progressStats.start_date);
+		var datas = calcProgress(startDate,progress,interval,true);
+		
+		chart.series[0].data = datas;
+		chart.resetAxesScale(); 
+		chart.replot();
+	}
 	var pub = {
 			updateChart:updateChart,
 			init:init,
-			createLineChart:createLineChart
+			createLineChart:createLineChart,
+			test:test
 	};
 	return pub;
 }(jQuery,ZMO.ajax));
