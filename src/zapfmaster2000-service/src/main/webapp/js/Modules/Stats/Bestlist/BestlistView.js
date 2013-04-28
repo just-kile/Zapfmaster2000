@@ -45,7 +45,9 @@ ZMO.modules.bestlistView = (function($,ajax){
 		$("#"+id).css("height","250px");
 //		['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
 //	    ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
-		jQuery.jqplot (id, [data], 
+		if(chart)$("#"+id).empty();
+			
+		chart = jQuery.jqplot (id, [data], 
 			    $.extend({ 
 			      seriesDefaults: {
 			        // Make this a pie chart.
@@ -62,7 +64,6 @@ ZMO.modules.bestlistView = (function($,ajax){
 			      legend: { show:false, location: 'e' }
 			    }
 			  ,plotOptions));
-
 		
    
 	};
