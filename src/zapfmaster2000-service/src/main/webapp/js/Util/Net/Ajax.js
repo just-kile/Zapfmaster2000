@@ -196,6 +196,9 @@ ZMO.Util.Net.Ajax = (function($){
 			url:baseUrl+url,
 			timeout:600000, 
 			data:data,
+//			headers:{
+//				"Connection": "Keep-Alive"
+//			},
 			complete:function(resp){
 				if(resp.status == 200){
 					var data = $.parseJSON(resp.responseText);
@@ -226,10 +229,14 @@ ZMO.Util.Net.Ajax = (function($){
 		
 	};
 	var connectToNewsPush = function(callback){
-		connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
+		setTimeout(function(){
+			connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
+		},100);
 	};
 	var connectToNewsUpdate = function(boxId,callback){
+		setTimeout(function(){
 		connectToChannel(ZMO.modules.Constants.push.NEWSUPDATE+"/"+boxId,callback);
+		},100);
 	};
 	var isAborted = function(url){
 		return !pushRequest[url];
@@ -266,7 +273,9 @@ ZMO.Util.Net.Ajax = (function($){
 	 * Challenge Requests
 	 *****/
 	var abortChallengePush = function(){
-		abortReq(ZMO.modules.Constants.push.CHALLENGE);
+		setTimeout(function(){
+			abortReq(ZMO.modules.Constants.push.CHALLENGE);
+		},100);
 	};
 	var connectChallengeReceive = function(callback){
 		connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback);

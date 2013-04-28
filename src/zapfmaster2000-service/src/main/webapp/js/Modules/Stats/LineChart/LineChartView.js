@@ -64,7 +64,7 @@ ZMO.modules.lineChartView = (function($,ajax){
 //		            	   formatString:'%.2f'
 		            	   formatString:'%.0f'
 		                 },
-		                 min:0,
+//		                 min:0,
 		                 label:'Liter',
 		                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
 		                 labelOptions: {
