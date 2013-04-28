@@ -14,9 +14,11 @@ import de.kile.zapfmaster2000.rest.api.box.LoginRequest;
 
 public class MockClient {
 
-//	 private static final String URL = "http://localhost:8080/Zapfmaster2000RESTful/rest/";
-	 private static final String URL = "http://localhost:8080/zapfmaster2000-service/rest/";
-//	private static final String URL = "http://zapfmaster2000.dyndns.org:9130/zapfmaster2000-restful-1.0.0-SNAPSHOT/rest/";
+	// private static final String URL =
+	// "http://localhost:8080/Zapfmaster2000RESTful/rest/";
+	// private static final String URL =
+	// "http://localhost:8080/zapfmaster2000-service/rest/";
+	private static final String URL = "http://zapfmaster2000.dyndns.org:9130/zapfmaster2000-service-1.0.0-SNAPSHOT/rest/";
 
 	private static final int UPDATE_RATE = 250;
 
@@ -67,32 +69,25 @@ public class MockClient {
 	}
 
 	private void performLogin(long pRfid) throws Exception {
-		LoginRequest loginRequest = new LoginRequest();
-		loginRequest.setBoxPassphrase(boxPassphrase);
-		loginRequest.setRfidTag(pRfid);
-
-		ClientRequest request = new ClientRequest(URL + "box/login");
-		ClientResponse<?> response = request.body(MediaType.APPLICATION_JSON,
-				loginRequest).post();
+		ClientRequest request = new ClientRequest(URL + "box/login?rfid="
+				+ pRfid + "&passphrase=" + boxPassphrase);
+		ClientResponse<?> response = request.get();
 		System.out.println("Response: " + response.getStatus());
 	}
 
 	private void performDraw(double pAmount, double pDuration) throws Exception {
-//		Thread.sleep(10000);
-//		performLogin(100);
+		// Thread.sleep(10000);
+		// performLogin(100);
 		int rawTicks = (int) (pAmount * 5200);
 
 		int numRequests = (int) (pDuration * 1000) / UPDATE_RATE;
 		int ticksPerUpdate = rawTicks / numRequests;
 
 		for (int i = 0; i < numRequests; ++i) {
-			DrawRequest drawRequest = new DrawRequest();
-			drawRequest.setBoxPassphrase(boxPassphrase);
-			drawRequest.setTicks(ticksPerUpdate);
-
-			ClientRequest request = new ClientRequest(URL + "box/draw");
-			ClientResponse<?> response = request.body(
-					MediaType.APPLICATION_JSON, drawRequest).post();
+			ClientRequest request = new ClientRequest(URL
+					+ "box/draw?passphrase=" + boxPassphrase + "&ticks="
+					+ ticksPerUpdate);
+			ClientResponse<?> response = request.get();
 			System.out.println("Response: " + response.getStatus());
 
 			Thread.sleep(UPDATE_RATE);
