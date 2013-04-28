@@ -170,7 +170,7 @@ ZMO.Util.Net.Ajax = (function($){
 	 * @param {Function} errorCb
 	 * 			The function that will be executed, when error occurs, or timeout
 	 */
-	var connectToChannel = function(url,successCb,errorCb,data){
+	var connectToChannel = function(url,successCb,errorCb,data,isNotCancable){
 		if(!data)data ={};
 		data["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		data["_"] = new Date().getTime();
@@ -211,6 +211,13 @@ ZMO.Util.Net.Ajax = (function($){
 						connectToChannel(url,successCb,errorCb,data);
 					}else if(resp.status==0){
 						ZMO.logger.log("Request abort success!");
+						if(isNotCancable){
+							ZMO.logger.log("Request is not abortable, reconnect in 5s ...");
+							setTimeout(function(){
+								connectToChannel(url,successCb,errorCb,data);
+							},5000);
+						}
+						delete pushRequests[url];
 					}else{
 						ZMO.logger.error("Error! Status "+e.status);
 						ZMO.logger.log("Reconnect in 5s...");
@@ -223,7 +230,7 @@ ZMO.Util.Net.Ajax = (function($){
 				}
 			},
 			error:function(e){
-
+				if(errorCb)errorCb(e);
 			}
 		});
 		
@@ -239,7 +246,7 @@ ZMO.Util.Net.Ajax = (function($){
 		},100);
 	};
 	var isAborted = function(url){
-		return !pushRequest[url];
+		return !pushRequests[url];
 	}
 	var abortReq = function(url){
 		
@@ -278,7 +285,11 @@ ZMO.Util.Net.Ajax = (function($){
 		},100);
 	};
 	var connectChallengeReceive = function(callback){
-		connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback);
+		setTimeout(function(){
+			connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback,null,null,true);
+		},100);
+		
+		
 	};
 	var sendChallengeConfirmation = function(data){
 		var datas = {

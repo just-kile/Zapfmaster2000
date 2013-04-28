@@ -82,7 +82,12 @@ ZMO.modules.kegstatusView = (function($,ajax){
 		var ticks =barDatas[1];
 		var id= container.attr("id");
 		$("#"+id).css("height","120px");
-		chart = $.jqplot(id,data,$.extend({},plotOptions,{
+		if(chart){
+			chart.series[0].data = [[data[0][0],1]];
+			chart.series[1].data = [[data[1][0],1]];
+			chart.replot();
+		}else{
+			chart = $.jqplot(id,data,$.extend({},plotOptions,{
 			 	stackSeries: true,
 	             seriesDefaults: {
 	                 renderer:$.jqplot.BarRenderer,
@@ -112,6 +117,7 @@ ZMO.modules.kegstatusView = (function($,ajax){
 	             seriesColors: ["#90b1d8","#dddf0d",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
 	       	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
 	         })); 
+		}
 	};
 	var updateChart = function(val){
 		var series = chart.series[0];
