@@ -136,7 +136,10 @@ ZMO.modules.AmountStatsModel = function(config){
 	if("undefined"!=typeof config){
         this.complete = config.amountTotal.toFixed(2);
         this.once=config.greatestDrawing.toFixed(2);
-        this.mostActivityHour=config.mostActivityHour||config.amountMostActivityHour;
+        
+        var mostActivityHour=config.mostActivityHour||config.amountMostActivityHour;
+        mostActivityHour = mostActivityHour>-1?mostActivityHour:"-";
+        this.mostActivityHour =mostActivityHour;
 	}
 };
 /**
@@ -148,7 +151,10 @@ ZMO.modules.AchievementStatsModel=function(config){
 	if("undefined"!=typeof config){
         this.count=typeof config.count!="undefined"?config.count:config.achievementCount;
         //this.achievementspeed = config.achievementspeed;
-        this.mostAchievementHour=config.mostAchievementHour||config.achievementMostActivityHour; 
+        var mostAchievementHour=config.mostAchievementHour||config.achievementMostActivityHour; 
+        mostAchievementHour = mostAchievementHour>-1?mostAchievementHour:"-";
+        this.mostAchievementHour = mostAchievementHour
+        
         var achievements = [];
         $.each(config.achievements,function(ind,achievement){
         	achievements.push({

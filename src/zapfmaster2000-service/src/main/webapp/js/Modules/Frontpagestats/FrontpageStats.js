@@ -178,10 +178,9 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 				drawCount:statsModel.drawCount,
 				userRank:statsModel.rank
 			});
-			
 			userContainer.empty().append(content);
 		},{
-			user:newsModel.userid
+			user:newsModel.userId
 		});
 	};
 	function roundAHalf(val) { 
@@ -202,7 +201,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 		view.updateChartUser({
 			current_amount:amount,
 			size:maxSize
-		},chart,newsModel.name+": "+amount +"l");
+		},chart,newsModel.userName+": "+amount +"l");
 		
 	};
 	/*****
@@ -214,7 +213,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 		view.updateChart({
 			current_amount:0.5,
 			size:0
-		},chart,newsModel.name+", Zapf los!");
+		},chart,newsModel.userName+", Zapf los!");
 		initUserStats(newsModel);
 		containerHandler.switchContainerToUser(newsModel);
 	};
@@ -274,12 +273,12 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 	        "type": "DRAWING",
 	        "image": "images/achievements/davidhasselhoff.png",
 	        "date": 1355687887000,
-	        "userId": 3,
+	        "userId": 239,
 	        "userName": "user-3",
 	        "amount": count,
 	        "kegId": 1,
 	        "brand": "keg-brand-1",
-	        "boxId":2
+	        "boxId":1
 	    }));
 	};
 	
@@ -289,12 +288,12 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 	        "type": "DRAWING",
 	        "image": "images/achievements/davidhasselhoff.png",
 	        "date": 1355687887000,
-	        "userId": 3,
+	        "userId": 239,
 	        "userName": "user-3",
 	        "amount": count,
 	        "kegId": 1,
 	        "brand": "keg-brand-1",
-	        "boxId":2
+	        "boxId":1
 	    }));
 	}
 	

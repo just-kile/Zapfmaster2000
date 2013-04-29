@@ -35,7 +35,7 @@
 <!-- Frontpage User stats -->
 {{#news}}
 <tr class="stats-drinker-row">
-	<td><img src="{{image}}" /> </td><td>{{name}}</td>
+	<td><img src="{{userImage}}" /> </td><td>{{userName}}</td>
 </tr>
 {{/news}}
 {{#amount}}
@@ -43,7 +43,7 @@
 	<td>[[completeAmount]]</td><td>{{complete}} [[liter]]</td>
 </tr>
 <tr class="stats-drinker-row">
-	<td>[[mostActivitiyHour]]</td><td>{{mostActivityHour}} [[clock]]</td>
+	<td>[[mostActivityHour]]</td><td>{{mostActivityHour}} [[clock]]</td>
 </tr>
 {{/amount}}
 {{#userRank}}
@@ -73,7 +73,7 @@
 {{/mostActivityHour}}
 {{#drawCount}}
 <tr class="stats-drinker-row">
-	<td>[[completeDrawCount]]</td><td>{{drawCount}}.</td>
+	<td>[[completeDrawCount]]</td><td>{{operations}}.</td>
 </tr>
 {{/drawCount}}
 {{#achievementCount}}
