@@ -10,8 +10,8 @@ ZMO.UtilConstants ={
 		})(),
 		templateUrl : "js/Templates/templates.html",
 		ajax:{
-//			pullTimeout:60000,//ms
-			pullTimeout:5000,
+			pullTimeout:60000,//ms
+//			pullTimeout:5000,
 			NO_DATA_RECEIVED_CODE:503
 		},
 		throbberUrl:"images/view/throbber.gif",

@@ -34,16 +34,16 @@ ZMO.modules_properties ={
 					ratio:"100%",
 					position:[0,0]
 				},{
-					moduleId:"kegstatus",
+					moduleId:"userstats",
 					ratio:"30%",
 					position:[1,0]
 				},{
-					moduleId:"bestlist",
+					moduleId:"userinfo",
 					ratio:"30%",
 					position:[1,1]
 				},
 				{
-					moduleId:"achievementBestlist",
+					moduleId:"userachievements",
 					ratio:"30%",
 					position:[1,2]
 				}],
@@ -64,18 +64,18 @@ ZMO.modules_properties ={
 					position:[0,0],
 					nocache:true
 				},{
-					moduleId:"kegstatus",
+					moduleId:"userstats",
 					ratio:"30%",
 					position:[1,0],
 					nocache:true
 				},{
-					moduleId:"bestlist",
+					moduleId:"userinfo",
 					ratio:"30%",
 					position:[1,1],
 					nocache:true
 				},
 				{
-					moduleId:"achievementBestlist",
+					moduleId:"userachievements",
 					ratio:"30%",
 					position:[1,2],
 					nocache:true
