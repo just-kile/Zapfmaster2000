@@ -211,8 +211,8 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 		var boxId =  newsModel.boxId;
 		var chart= containerHandler.getChart(boxId);
 		view.updateChart({
-			current_amount:0.5,
-			size:0
+			current_amount:0,
+			size:0.5
 		},chart,newsModel.userName+", Zapf los!");
 		initUserStats(newsModel);
 		containerHandler.switchContainerToUser(newsModel);
