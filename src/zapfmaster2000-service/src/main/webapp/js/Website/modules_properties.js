@@ -64,23 +64,20 @@ ZMO.modules_properties ={
 					position:[0,0],
 					nocache:true
 				},{
-					moduleId:"userstats",
+					moduleId:"kegstatus",
 					ratio:"30%",
-					position:[1,0],
-					nocache:true
+					position:[1,0]
 				},{
-					moduleId:"userinfo",
+					moduleId:"bestlist",
 					ratio:"30%",
-					position:[1,1],
-					nocache:true
+					position:[1,1]
 				},
 				{
-					moduleId:"userachievements",
+					moduleId:"achievementBestlist",
 					ratio:"30%",
-					position:[1,2],
-					nocache:true
+					position:[1,2]
 				}],
-				  
+
 				footer:[]
 			}
 		},		
