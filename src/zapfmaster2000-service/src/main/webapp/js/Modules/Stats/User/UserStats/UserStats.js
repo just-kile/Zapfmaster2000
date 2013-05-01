@@ -24,7 +24,7 @@ ZMO.modules.userstats = (function($,ajax){
 	var onDatasLoaded = function(data){
 		var userStatsModel = new ZMO.modules.UserStatsModel(data);
 		var content = ich["ZMO-stats-mobile-user-general"](generateObjGlobalStats(userStatsModel));
-		content.appendTo(statsContainer);
+		 statsContainer.html(content);
 	}
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM

@@ -11,6 +11,7 @@ baseUrl = "";
 			"js/Util/Util.js",
 			"js/Util/UtilConstants.js",
 			"js/Util/Browser/Throbber.js",
+			"js/Util/Browser/ChangePage.js",
 			"js/Util/Date/TimeParser.js",
 			"js/Util/Net/Ajax.js",
 			"js/Util/Object/Exists.js",

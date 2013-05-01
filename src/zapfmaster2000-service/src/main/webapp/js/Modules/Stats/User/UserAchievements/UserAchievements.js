@@ -17,18 +17,23 @@ ZMO.modules.userachievements = (function($,ajax){
 		var userStatsModel = new ZMO.modules.UserStatsModel(data);
 		var achievements = userStatsModel.achievements;
 		 var globalStatsContainer = ich["ZMO-stats-mobile-user-achievement"](generateObjAchievements(userStatsModel));
-		 var achievementsContainer = $("<div>");
-		 var content =$("<div>");
+		 $(globalStatsContainer).addClass("statsDiv");
+		 var achievementsContainer = $("<div>").addClass("statsDiv");
+		 
+		 var content =container;
 		 content.append(globalStatsContainer).append(achievementsContainer);
 		 $.each(achievements.achievements,function(ind,achievement){
-			 $("<img>").attr("src",achievement.achievementImage).on(mC.clickEvent,function(){
-				 var aContainer =$(ich["ZMO-stats-mobile-user-popup"](achievement));
-				 ZMO.Util.Popup.open(aContainer);
+			 $("<img>").css("cursor","pointer").attr({
+				 "src":achievement.achievementImage,
+				 "title":achievement.achievementName
+			 }).on(mC.clickEvent,function(){
+				ZMO.changePage("#achievement?id="+achievement.achievementId);
 			 }).appendTo(achievementsContainer);
-		 })
-		content.appendTo(statsContainer);
+		 });
+		 //container.append(content);
+		 
 		
-	}
+	};
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
@@ -50,7 +55,6 @@ ZMO.modules.userachievements = (function($,ajax){
 	 */
 	var getInstance = function(){
 		container = $("<div class='stats stats-achievements'>");
-		statsContainer = $("<div>").addClass("statsDiv").appendTo(container);
 		return container;
 	};
 	var pub = {
