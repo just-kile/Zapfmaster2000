@@ -21,8 +21,8 @@ ZMO.modules_properties ={
 				  
 				footer:[]
 			}
-		},
-		stats:{
+		},		
+		user:{
 			sections:{
 				navigation:[{
 					moduleId:"navigation",
@@ -46,6 +46,39 @@ ZMO.modules_properties ={
 					moduleId:"achievementBestlist",
 					ratio:"30%",
 					position:[1,2]
+				}],
+				  
+				footer:[]
+			}
+		},
+		stats:{
+			sections:{
+				navigation:[{
+					moduleId:"navigation",
+					ratio:"100%",
+					position:[0,0]
+				}],
+				main:[{
+					moduleId:"lineChart",
+					ratio:"100%",
+					position:[0,0],
+					nocache:true
+				},{
+					moduleId:"kegstatus",
+					ratio:"30%",
+					position:[1,0],
+					nocache:true
+				},{
+					moduleId:"bestlist",
+					ratio:"30%",
+					position:[1,1],
+					nocache:true
+				},
+				{
+					moduleId:"achievementBestlist",
+					ratio:"30%",
+					position:[1,2],
+					nocache:true
 				}],
 				  
 				footer:[]
