@@ -82,11 +82,15 @@ ZMO.modules.bestlistView = (function($,ajax){
 		var series = chart.series[0];
 		series.addPoint(val, true, true);
 	};
+	var clearCharts = function(){
+		chart = null;
+	}
 	var pub = {
 			updateChart:updateChart,
 			init:init,
 			createPieChart:createPieChart,
-			createBestlist:createBestlist
+			createBestlist:createBestlist,
+			clearCharts:clearCharts
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

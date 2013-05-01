@@ -14,6 +14,7 @@ ZMO.modules.userachievements = (function($,ajax){
 			};
 	}
 	var onDatasLoaded = function(data){
+		container.empty();
 		var userStatsModel = new ZMO.modules.UserStatsModel(data);
 		var achievements = userStatsModel.achievements;
 		 var globalStatsContainer = ich["ZMO-stats-mobile-user-achievement"](generateObjAchievements(userStatsModel));

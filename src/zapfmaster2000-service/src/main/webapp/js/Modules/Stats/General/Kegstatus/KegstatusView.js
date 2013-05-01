@@ -165,7 +165,7 @@ ZMO.modules.kegstatusView = (function($,ajax){
 			amountComplete:statsModel.amount.complete,
 			amountAtMost:statsModel.amount.once,
 			amountAverage:statsModel.drawCount.average,
-			drawCount:statsModel.drawCount.operations,
+			drawCount:statsModel.drawCount,
 			mostActivityHour:statsModel.amount.mostActivityHour,
 			achievementCount:statsModel.achievements.count,
 			mostAchievementHour:statsModel.achievements.mostAchievementHour
@@ -178,12 +178,16 @@ ZMO.modules.kegstatusView = (function($,ajax){
 
 		table.appendTo(container);
 	};
+	var clearCharts = function(){
+		chart = null;
+	}
 	var pub = {
 			updateChart:updateChart,
 			init:init,
 			createBarChart:createBarChart,
 			createDrinkstats:createDrinkstats,
-			createGeneralStats:createGeneralStats
+			createGeneralStats:createGeneralStats,
+			clearCharts:clearCharts
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

@@ -18,9 +18,17 @@ ZMO.modules.dummy = (function($,ajax){
 	var getInstance = function(){
 		return (container = $("<div class='statsDiv'>"));
 	};
+	/**
+	 * @optional
+	 * Gets called when module is removed from DOM
+	 */
+	var remove = function(){
+		alert("Module removed!")
+	}
 	var pub = {
 			getInstance:getInstance,
-			init:init
+			init:init,
+			remove:remove
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

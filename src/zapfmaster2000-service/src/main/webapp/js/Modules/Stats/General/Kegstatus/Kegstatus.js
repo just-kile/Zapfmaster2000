@@ -30,9 +30,13 @@ ZMO.modules.kegstatus = (function($,view,ajax){
 		generalStatsContainer = $("<div>").addClass("statsDiv").appendTo(container);
 		return container;
 	};
+	var remove = function(){
+		view.clearCharts();
+	}
 	var pub = {
 			getInstance:getInstance,
-			init:init
+			init:init,
+			remove:remove
 	};
 	return pub;
 }(jQuery,ZMO.modules.kegstatusView,ZMO.ajax));

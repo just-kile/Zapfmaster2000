@@ -205,11 +205,15 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
         return chart;
    
 	};
+	var clearCharts = function(){
+		
+	}
 	var pub = {
 			init:init,
 			createBarChart:createBarChart,
 			updateChart:updateChart,
-			updateChartUser:updateChartUser
+			updateChartUser:updateChartUser,
+			clearCharts:clearCharts
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

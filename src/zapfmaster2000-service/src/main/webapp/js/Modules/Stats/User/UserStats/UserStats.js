@@ -22,6 +22,7 @@ ZMO.modules.userstats = (function($,ajax){
 			};
 	};
 	var onDatasLoaded = function(data){
+		statsContainer.empty();
 		var userStatsModel = new ZMO.modules.UserStatsModel(data);
 		var content = ich["ZMO-stats-mobile-user-general"](generateObjGlobalStats(userStatsModel));
 		 statsContainer.html(content);
