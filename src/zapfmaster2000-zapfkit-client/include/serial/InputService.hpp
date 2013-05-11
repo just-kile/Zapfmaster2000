@@ -39,6 +39,7 @@ public:
 
 	InputService();
 	void run();
+	void notifyZapfcount(int count);
 
 };
 
@@ -47,6 +48,9 @@ class MockInputService : public InputService {
 public:
 	MockInputService();
 	void run();
+
+
+
 
 };
 
