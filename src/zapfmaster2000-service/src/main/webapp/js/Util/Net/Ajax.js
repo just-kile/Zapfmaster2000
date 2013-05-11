@@ -198,8 +198,8 @@ ZMO.Util.Net.Ajax = (function($){
 			data:data,
 			complete:function(resp){
 				if(resp.status == 200){
-					var data = $.parseJSON(resp.responseText);
-					if(successCb && data!="")successCb(data);
+					var json = $.parseJSON(resp.responseText);
+					if(successCb && json!="")successCb(json);
 					connectToChannel(url,successCb,errorCb,data);
 				}else{
 					if(resp.status==c.NO_DATAS_RECEIVED_CODE || (resp.status == 0&&resp.statusText!="abort")){
