@@ -22,18 +22,10 @@
 using namespace zm2k;
 using namespace std;
 
-class MyListener2: public SerialConnectorListener {
-
-public:
-	void onCharRead(const char c) {
-		cout << "read char: " << c << endl;
-	}
-};
-
 class MyListener: public InputServiceListener {
 
 public:
-	virtual void onRfidRead(std::string rfid) {
+	virtual void onRfidRead(long rfid) {
 		cout << "read rfid: " << rfid << endl;
 	}
 	virtual void onTicksRead(int ticks) {
@@ -41,7 +33,6 @@ public:
 	}
 };
 
-SerialConnector* connector = 0;
 InputService* service = 0;
 MockInputService* mock = 0;
 ZapfDisplay display;
@@ -49,9 +40,9 @@ ZapfController* controller;
 
 void inputThread() {
 	try {
-		if (connector != 0) {
+		if (service != 0) {
 			cout << "running connector" << endl;
-			connector->run();
+			service->run();
 		} else {
 			cout << "running mock" << endl;
 			mock->run();
@@ -102,8 +93,7 @@ int main(int argc, const char* argv[]) {
 
 		if (service == 0) {
 			cout << "created input service" << endl;
-			connector = new SerialConnector("/dev/ttyUSB0", B9600);
-			service = new SerialInputService(*connector);
+			service = new InputService();
 		}
 		service->addListener(new MyListener());
 
