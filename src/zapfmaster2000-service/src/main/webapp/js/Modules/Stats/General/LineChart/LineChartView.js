@@ -98,11 +98,32 @@ ZMO.modules.lineChartView = (function($,ajax){
 		chart.resetAxesScale(); 
 		chart.replot();
 	}
+	var setTimeRangeUpdatecallback = function(cb){
+		
+	}
+	var initSlider = function(sliderContainer){
+		sliderContainer
+			.css("margin-top","15px")
+			.dateRangeSlider({
+				 valueLabels:"change",
+				  delayOut: 1000,
+				  arrows:false,
+				  min: new Date(2012, 0, 1),
+				  max: new Date(),
+				  formatter:function(val){
+				        var value = Math.round(val * 5) / 5,
+				          decimal = value - Math.round(val);
+				        console.log(val);
+				        //return decimal == 0 ? value.toString() + ".0" : value.toString();
+				        return val;
+				      }
+			});
+	}
 	var pub = {
 			updateChart:updateChart,
 			init:init,
 			createLineChart:createLineChart,
-			test:test
+			initSlider:initSlider
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

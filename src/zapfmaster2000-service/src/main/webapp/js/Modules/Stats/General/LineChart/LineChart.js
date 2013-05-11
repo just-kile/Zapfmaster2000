@@ -6,7 +6,7 @@ ZMO.modules = ZMO.modules || {};
 ZMO.modules.lineChart = (function($,view,ajax){
 	var mC = ZMO.modules.Constants;
 	var chartID = "ZMO-stats-linechart";
-	var container = null,chartContainer = null;
+	var container = null,chartContainer = null,sliderContainer = null;
 	var userId = null;
 	var onDatasLoaded = function(statsModel){
 		if(userId){
@@ -14,6 +14,7 @@ ZMO.modules.lineChart = (function($,view,ajax){
 		}
 		var progressModel = statsModel.progress;
 		view.init(chartContainer);
+		view.initSlider(sliderContainer);
 		view.createLineChart(progressModel);
 		
 	};
@@ -50,8 +51,10 @@ ZMO.modules.lineChart = (function($,view,ajax){
 	var getInstance = function(){
 		container =  $("<div>").addClass("linechart");
 		chartContainer =  $("<div>").attr("id",chartID).appendTo(container);
+		sliderContainer =$("<div>").appendTo(container);
 		return container;
 	};
+	
 	var pub = {
 			getInstance:getInstance,
 			init:init
