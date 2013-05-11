@@ -202,17 +202,17 @@ ZMO.Util.Net.Ajax = (function($){
 					if(successCb && data!="")successCb(data);
 					connectToChannel(url,successCb,errorCb,data);
 				}else{
-					if(resp.status==c.NO_DATAS_RECEIVED_CODE || (resp.status == 0&&resp.statusText=="timeout")){
+					if(resp.status==c.NO_DATAS_RECEIVED_CODE || (resp.status == 0&&resp.statusText!="abort")){
 						ZMO.logger.warning("No Datas Received! Reconnect...");
 //						if(errorCb)errorCb(e);
 						connectToChannel(url,successCb,errorCb,data);
 					}else if(resp.status==0){
 						ZMO.logger.log("Request abort success!");
 					}else{
-						ZMO.logger.error("Error! Status "+e.status);
+						ZMO.logger.error("Error! Status "+resp.status);
 						ZMO.logger.log("Reconnect in 5s...");
 					
-						if(errorCb)errorCb(e);
+						if(errorCb)errorCb(resp);
 						setTimeout(function(){
 							connectToChannel(url,successCb,errorCb,data);
 						},5000);
