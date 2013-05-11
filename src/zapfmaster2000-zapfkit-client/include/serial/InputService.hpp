@@ -9,9 +9,6 @@
 #define INPUTSERVICE_HPP_
 
 #include "../Observable.hpp"
-#include "SerialConnector.hpp"
-#include <vector>
-#include <string>
 #include <boost/thread.hpp>
 
 namespace zm2k {
@@ -25,25 +22,24 @@ public:
 	virtual ~InputServiceListener() {
 	}
 
-	virtual void onRfidRead(std::string rfid) = 0;
+	virtual void onRfidRead(long rfid) = 0;
 	virtual void onTicksRead(int ticks) = 0;
 
 };
 
 class InputService: public Observable<InputServiceListener> {
 
-};
-
-class SerialInputService: public InputService, public SerialConnectorListener {
-
 private:
-	std::string buffer;
-	std::vector<MessageProcessor*> processors;
+
+	int serialInterface;
+	int serialByteCounter;
+	long curRfid;
 
 public:
-	SerialInputService(SerialConnector& SerialConnector);
-	virtual ~SerialInputService();
-	virtual void onCharRead(const char c);
+
+	InputService();
+	void run();
+
 };
 
 class MockInputService : public InputService {

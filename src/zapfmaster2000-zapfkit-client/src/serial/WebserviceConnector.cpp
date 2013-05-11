@@ -38,7 +38,7 @@ WebserviceConnector::WebserviceConnector(string pRootPath, string pPassphrase) {
 	}
 }
 
-boost::property_tree::ptree WebserviceConnector::postLogin(string rfidTag) {
+boost::property_tree::ptree WebserviceConnector::postLogin(long rfidTag) {
 	stringstream url;
 	string response;
 	long httpCode = 0;

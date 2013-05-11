@@ -8,114 +8,55 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <wiringSerial.h>
 
 #include "../../include/serial/InputService.hpp"
-#include "../../include/serial/MessageProcessor.hpp"
 
 using namespace zm2k;
-using namespace std;
 
-SerialInputService::SerialInputService(SerialConnector& serialConnector) {
-	processors.push_back(new RfidMessageProcessor());
-	processors.push_back(new TickMessageProcessor());
-	serialConnector.addListener(this);
+InputService::InputService() {
+
+	serialInterface = serialOpen("/dev/ttyAMA0", 9600);
+
+	if (serialInterface != -1) {
+		throw "Could not open serial port.";
+	}
+	curRfid = 0;
+	serialByteCounter = 0;
 }
 
-SerialInputService::~SerialInputService() {
-}
+void InputService::run() {
+	while (true) {
+		int newChar = serialGetchar(serialInterface);
 
-void SerialInputService::onCharRead(const char c) {
+		if (newChar != -1) {
+			curRfid <<= 8;
+			curRfid += newChar;
 
-	buffer += c;
+			serialByteCounter++;
 
-	bool didProcessMsg;
-	bool needsToDropChar = true;
+			if (serialByteCounter == 5) {
 
-	while (needsToDropChar && buffer.size() > 0) {
+				notifyListeners(
+						boost::bind(&InputServiceListener::onRfidRead, _1,
+								curRfid));
 
-		do {
-			didProcessMsg = false;
-			for (vector<MessageProcessor*>::iterator it = processors.begin();
-					it != processors.end(); ++it) {
-				ProcessStatus status = (*it)->canProcess(buffer);
-				if (status == COMPLETELY) {
-					std::pair<InputService::notification, int> result =
-							(*it)->process(buffer);
-					notifyListeners(result.first);
-					buffer = buffer.substr(result.second,
-							buffer.size() - result.second);
-					didProcessMsg = true;
-				} else if (status == PARTLY) {
-					needsToDropChar = false;
-				}
+				serialByteCounter = 0;
+				curRfid = 0;
 			}
-		} while (didProcessMsg);
-
-		if (needsToDropChar && buffer.size() > 0) {
-			buffer = buffer.substr(1, buffer.size() - 1);
+		} else {
+			serialByteCounter = 0;
+			curRfid = 0;
 		}
 
 	}
 }
 
+
 MockInputService::MockInputService() {
-	cout << "did create mock" << endl;
+	throw "not implemented yet";
 }
 
 void MockInputService::run() {
 
-	cout << "running mock thread" << endl;
-
-	string cmdTicks = "ticks";
-	string cmdLogin = "login";
-	string cmdDraw = "draw";
-
-	while (true) {
-		cout << "LOOP" << endl;
-		string rawInput;
-		getline(cin, rawInput);
-
-		cout << "read input " << rawInput << endl;
-
-		// ticks
-		if (rawInput.compare(0, cmdTicks.length(), cmdTicks) == 0
-				&& rawInput.length() > cmdTicks.length()) {
-			int offset = cmdTicks.length() + 1;
-			int ticks =
-					atoi(
-							rawInput.substr(offset, rawInput.length() - offset).c_str());
-			notifyListeners(
-					boost::bind(&InputServiceListener::onTicksRead, _1, ticks));
-		}
-
-		// login
-		if (rawInput.compare(0, cmdLogin.length(), cmdLogin) == 0
-				&& rawInput.length() > cmdLogin.length()) {
-			int offset = cmdLogin.length() + 1;
-			string rfid = rawInput.substr(offset, rawInput.length() - offset);
-			notifyListeners(
-					boost::bind(&InputServiceListener::onRfidRead, _1, rfid));
-
-		}
-
-		// draw
-		if (rawInput.compare(0, cmdDraw.length(), cmdDraw) == 0
-				&& rawInput.length() > cmdDraw.length()) {
-			int offset = cmdLogin.length() + 1;
-			string parameters = rawInput.substr(offset,
-					rawInput.length() - offset);
-			float amount;
-			float time;
-			sscanf(parameters.c_str(), "%f %f", &amount, &time);
-			int numInvokes = time * 2;
-			int ticksPerInvoke = amount * 5000 / numInvokes;
-			while (numInvokes-- > 0) {
-				notifyListeners(
-						boost::bind(&InputServiceListener::onTicksRead, _1,
-								ticksPerInvoke));
-				boost::this_thread::sleep( boost::posix_time::milliseconds(500) );
-			}
-
-		}
-	}
 }

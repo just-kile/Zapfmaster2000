@@ -28,7 +28,7 @@ public:
 
 	WebserviceConnector(std::string pRootPath, std::string pPassphrase);
 
-	boost::property_tree::ptree postLogin(std::string rfidTag);
+	boost::property_tree::ptree postLogin(long rfidTag);
 	boost::property_tree::ptree postTicks(int numTicks);
 
 	SDL_Surface* retrieveImage(std::string pPath);

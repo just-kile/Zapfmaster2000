@@ -71,7 +71,7 @@ void ZapfController::run() {
 
 }
 
-void ZapfController::onRfidRead(string rfid) {
+void ZapfController::onRfidRead(long rfid) {
 	lastRfid = boost::posix_time::second_clock::local_time();
 	unkownUser = false;
 	try {

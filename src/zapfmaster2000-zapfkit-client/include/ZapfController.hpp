@@ -44,7 +44,7 @@ public:
 			WebserviceConnector &connector);
 	~ZapfController();
 
-	virtual void onRfidRead(std::string rfid);
+	virtual void onRfidRead(long rfid);
 	virtual void onTicksRead(int ticks);
 
 	void setThread(boost::thread* thread) {
