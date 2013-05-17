@@ -120,7 +120,7 @@ ZMO.modules.lineChartView = (function($,ajax){
 
 	var sliderSet = false;
 
-	var initSlider = function(sliderContainer,progressModel,sliderValueChanged){
+	var initSlider = function(sliderContainer,progressModel,sliderValueChanged,timeBounds,defaultTimeBounds){
 		
 		if(!sliderSet){
 			var timeParser = new ZMO.TimeParser(progressModel.start_date);
@@ -131,14 +131,8 @@ ZMO.modules.lineChartView = (function($,ajax){
 					 valueLabels:"change",
 					  delayOut: 1000,
 					  arrows:false,
-					 bounds:{
-						 min: timeParser.getDate(),
-						 max: new Date(),
-					 },
-					 defaultValues:{
-						 min: timeParser.getDate(),
-						 max: new Date(), 
-					 },
+					 bounds:timeBounds,
+					 defaultValues:defaultTimeBounds,
 					 
 					  formatter:function(val){
 					        var value = Math.round(val * 5) / 5,

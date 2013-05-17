@@ -39,6 +39,10 @@ ZMO.TimeParser = function(serverDateString){
 		var newTime = new Date(date.getTime()+ mins*60*1000);
 		return isTimestamp?newTime.getTime():formatDate(newTime,ZMO.UtilConstants.chartDateFormat);
 	}
+	var getTimeParserAddMins = function(mins){
+		return new ZMO.TimeParser(new Date(date.getTime()+ mins*60*1000));
+	}
+
 	var getDate = function(){
 		return date;
 	}
@@ -55,6 +59,8 @@ ZMO.TimeParser = function(serverDateString){
 	this.getDate = getDate;
 	this.setDate = setDate;
 	this.getServerTimeFormat = getServerTimeFormat;
+	
+	this.getTimeParserAddMins = getTimeParserAddMins;
 };
 
 

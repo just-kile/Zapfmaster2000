@@ -5,7 +5,7 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.lineChart = (function($,view,ajax){
 	var mC = ZMO.modules.Constants;
-	var progressPointsNumber = mC.lineChartPoints;
+	var progressPointsNumber = mC.stats.lineChartPoints;
 	var chartID = "ZMO-stats-linechart";
 	var container = null,chartContainer = null,sliderContainer = null;
 	var userId = null;
@@ -20,14 +20,32 @@ ZMO.modules.lineChart = (function($,view,ajax){
 		}
 		var progressModel = statsModel.progress;
 		view.init(chartContainer);
-		view.initSlider(sliderContainer,progressModel,sliderValueChanged);
+		
+		var minusMinutes = -mC.stats.lineChartStartDateDays*24*60;
+		var max = new ZMO.TimeParser(new Date());
+		var min = max.getTimeParserAddMins(minusMinutes);
+		
+		var defaultMinusMinutes =  -mC.stats.lineChartMinBoundDays*24*60;
+		var maxBound = new ZMO.TimeParser(new Date());
+		var minBound = max.getTimeParserAddMins(defaultMinusMinutes);
+		
+		view.initSlider(sliderContainer,progressModel,sliderValueChanged,{
+			min:minBound.getDate(),
+			max:maxBound.getDate()
+		},{
+			min:min.getDate(),
+			max:max.getDate()
+		});
 		view.createLineChart(progressModel);
 		
 	};
+	var calcInterval = function(minTimestamp,maxTimestamp){
+		return Math.round((maxTimestamp-minTimestamp)/(1000*60*progressPointsNumber));
+	}
 	var sliderValueChanged = function(e,data){
 		var max = new ZMO.TimeParser(new Date(data.values.max));
 		var min = new ZMO.TimeParser(new Date(data.values.min));
-		var interval = Math.round((max.getTimestamp()-min.getTimestamp())/(1000*60*progressPointsNumber));
+		var interval = calcInterval(min.getTimestamp(),max.getTimestamp());
 		var data = {
 				progressFrom:min.getServerTimeFormat(),
 				progressTo:max.getServerTimeFormat(),
@@ -67,13 +85,24 @@ ZMO.modules.lineChart = (function($,view,ajax){
 	 */
 	var init = function(hashParams){
 		userId = hashParams.id;
+		var minusMinutes = -mC.stats.lineChartStartDateDays*24*60;
+		var max = new ZMO.TimeParser(new Date());
+		var min = max.getTimeParserAddMins(minusMinutes);
+		
+		var	interval =  calcInterval(min.getTimestamp(),max.getTimestamp()) ;
+		var data = {
+				progressFrom:min.getServerTimeFormat(),
+				progressTo:max.getServerTimeFormat(),
+				progressInterval:interval
+			}
 		//container.text("Hello drinkers worldwide!");
 		//register for dataupdate
 		//@see Util/Net/Ajax.js --> enqueueData
 		if(!userId){
 			ajax.enqueueDatas({
 				url:mC.urls.STATS,
-				callback:onDatasLoaded
+				callback:onDatasLoaded,
+				data:data
 			});
 			ajax.startPull();
 		}else{
@@ -81,9 +110,9 @@ ZMO.modules.lineChart = (function($,view,ajax){
 			ajax.enqueueDatas({
 				url:mC.urls.USERSTATS,
 				callback:onDatasLoaded,
-				data:{
+				data:$.extend({
 					user:userId,
-				},
+				},data),
 				rawData:true,
 			});
 			ajax.startPull();

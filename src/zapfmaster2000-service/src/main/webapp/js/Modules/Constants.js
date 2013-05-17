@@ -63,7 +63,11 @@ ZMO.modules.Constants = {
 			deImg:"images/view/flagDE.png",
 			enImg:"images/view/flagEN.png"
 		},
-		lineChartPoints:40,
+		stats:{
+			lineChartPoints:40,
+			lineChartStartDateDays:1,
+			lineChartMinBoundDays: 120
+		},
 		challenges:{
 			modes:{
 				name:"Laenge",
