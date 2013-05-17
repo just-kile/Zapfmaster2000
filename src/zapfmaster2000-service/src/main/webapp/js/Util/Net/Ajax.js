@@ -115,6 +115,7 @@ ZMO.Util.Net.Ajax = (function($){
 	/**
 	 * Gets the datas in the Queue, wait pullTimeout time, calls self again
 	 */
+	var enqueueTimeout = null;
 	var getEnqueueDatas = function(){
 		$.each(aspirantModules,function(url,modulesArr){
 			getDatas(url,function(response){
@@ -131,11 +132,22 @@ ZMO.Util.Net.Ajax = (function($){
 
 			},modulesArr[conf.MODULE_PARAMS]);
 		});
-		setTimeout(function(){
+		if(enqueueTimeout){
+			clearTimeout(enqueueTimeout);
+			
+		}
+		enqueueTimeout = setTimeout(function(){
+			enqueueTimeout = null;
 			//if we dont wanna stop, again
 			if(!stop)getEnqueueDatas();
 		},c.pullTimeout);
 	};
+	var updateEnqueueParams = function(url,data){
+		if(aspirantModules[url]){
+			$.extend(aspirantModules[url][conf.MODULE_PARAMS],data);
+		}
+	};
+	
 	var timeout = null;
 	var stopPull = function(){
 		stop = true;
@@ -323,10 +335,13 @@ ZMO.Util.Net.Ajax = (function($){
 	var pub = {
 			getDatas:getDatas,
 			postDatas:postDatas,
+			
 			enqueueDatas:enqueueDatas,
 			stopPull:stopPull,
 			startPull:startPull,
+			updateEnqueueParams:updateEnqueueParams,
 			resetQueue:resetQueue,
+			updateEnqueueDatas:getEnqueueDatas,
 			
 			connectToChannel:connectToChannel,
 			connectToNewsPush:connectToNewsPush,

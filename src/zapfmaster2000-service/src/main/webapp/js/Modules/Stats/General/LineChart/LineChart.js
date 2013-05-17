@@ -5,19 +5,63 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.lineChart = (function($,view,ajax){
 	var mC = ZMO.modules.Constants;
+	var progressPointsNumber = mC.lineChartPoints;
 	var chartID = "ZMO-stats-linechart";
 	var container = null,chartContainer = null,sliderContainer = null;
 	var userId = null;
-	var onDatasLoaded = function(statsModel){
+	var onDatasLoaded = function(statsModel,isProgress){
 		if(userId){
 			statsModel = new ZMO.modules.UserStatsModel(statsModel);
 		}
+		if(isProgress){
+			statsModel = {
+					progress:new ZMO.modules.ProgressModel(statsModel)
+			}
+		}
 		var progressModel = statsModel.progress;
 		view.init(chartContainer);
-		view.initSlider(sliderContainer);
+		view.initSlider(sliderContainer,progressModel,sliderValueChanged);
 		view.createLineChart(progressModel);
 		
 	};
+	var sliderValueChanged = function(e,data){
+		var max = new ZMO.TimeParser(new Date(data.values.max));
+		var min = new ZMO.TimeParser(new Date(data.values.min));
+		var interval = Math.round((max.getTimestamp()-min.getTimestamp())/(1000*60*progressPointsNumber));
+		var data = {
+				progressFrom:min.getServerTimeFormat(),
+				progressTo:max.getServerTimeFormat(),
+				progressInterval:interval
+			}
+//		if(!userId){
+//			ajax.getDatas("rest/statistics/progress",function(data){
+//				onDatasLoaded(data,true);
+//			},{
+//				from:min.getServerTimeFormat(),
+//				to:max.getServerTimeFormat()
+//			}
+//			);
+//		}else{
+//			//user Line chart
+//			ajax.enqueueDatas({
+//				url:"rest/statistics/drinkProgress",
+//				callback:onDatasLoaded,
+//				data:{
+//					user:userId,
+//					
+//				},
+//				rawData:true,
+//			});
+//			ajax.startPull();
+//		}
+		if(!userId){
+			ajax.updateEnqueueParams(mC.urls.STATS,data);
+		}else{
+			ajax.updateEnqueueParams(mC.urls.USERSTATS,data);
+		}
+		
+		ajax.updateEnqueueDatas();
+	}
 	/**
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
@@ -54,10 +98,14 @@ ZMO.modules.lineChart = (function($,view,ajax){
 		sliderContainer =$("<div>").appendTo(container);
 		return container;
 	};
-	
+	var remove = function(){
+		
+		view.resetSlider();
+	}
 	var pub = {
 			getInstance:getInstance,
-			init:init
+			init:init,
+			remove:remove
 	};
 	return pub;
 }(jQuery,ZMO.modules.lineChartView,ZMO.ajax));

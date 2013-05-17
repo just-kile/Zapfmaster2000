@@ -5,21 +5,36 @@
 ZMO.modules = ZMO.modules || {};
 ZMO.modules.lineChartView = (function($,ajax){
 	var mC = ZMO.modules.Constants;
-	var container = null,chart = null;
+	var container = null,chart = null,slideContainer = null;
 	var init = function(cont){
 		container =cont;
 	};
 	var plotOptions = {
 			 grid: {
-	        	    drawGridLines: true,        // wether to draw lines across the grid or not.
-	        	        gridLineColor: 'rgba(255,255,255,0.3)',   // CSS color spec of the grid lines.
-	        	        background: 'rgba(255,255,255,0)',      // CSS color spec for background color of grid.
-	        	        borderColor: 'rgba(255,255,255,0)',     // CSS color spec for border around grid.
-	        	        borderWidth: 2.0,           // pixel width of border around grid.
+	        	    drawGridLines: true,        // wether to draw lines across
+												// the grid or not.
+	        	        gridLineColor: 'rgba(255,255,255,0.3)',   // CSS color
+																	// spec of
+																	// the grid
+																	// lines.
+	        	        background: 'rgba(255,255,255,0)',      // CSS color
+																// spec for
+																// background
+																// color of
+																// grid.
+	        	        borderColor: 'rgba(255,255,255,0)',     // CSS color
+																// spec for
+																// border around
+																// grid.
+	        	        borderWidth: 2.0,           // pixel width of border
+													// around grid.
 	        	        shadow: true,               // draw a shadow for grid.
-	        	        shadowAngle: 45,            // angle of the shadow.  Clockwise from x axis.
-	        	        shadowOffset: 1.5,          // offset from the line of the shadow.
-	        	        shadowWidth: 3,             // width of the stroke for the shadow.
+	        	        shadowAngle: 45,            // angle of the shadow.
+													// Clockwise from x axis.
+	        	        shadowOffset: 1.5,          // offset from the line of
+													// the shadow.
+	        	        shadowWidth: 3,             // width of the stroke for
+													// the shadow.
 	        	        shadowDepth: 3
 	        	}, 
 	        	seriesColors: ["#dddf0d","#90b1d8",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
@@ -61,10 +76,10 @@ ZMO.modules.lineChartView = (function($,ajax){
 		             },
 		             yaxis:{
 		               tickOptions:{
-//		            	   formatString:'%.2f'
+// formatString:'%.2f'
 		            	   formatString:'%.0f'
 		                 },
-//		                 min:0,
+// min:0,
 		                 label:'Liter',
 		                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
 		                 labelOptions: {
@@ -95,35 +110,64 @@ ZMO.modules.lineChartView = (function($,ajax){
 		var datas = calcProgress(startDate,progress,interval,true);
 		
 		chart.series[0].data = datas;
-		chart.resetAxesScale(); 
-		chart.replot();
+		chart.replot( { 
+			resetAxes: true, 
+//			 axes:{
+//				 yaxis:{min:0}
+//			 }
+		} );
 	}
-	var setTimeRangeUpdatecallback = function(cb){
+
+	var sliderSet = false;
+
+	var initSlider = function(sliderContainer,progressModel,sliderValueChanged){
 		
+		if(!sliderSet){
+			var timeParser = new ZMO.TimeParser(progressModel.start_date);
+			sliderSet = true;
+			slideContainer = sliderContainer
+				.css("margin-top","15px")
+				.dateRangeSlider({
+					 valueLabels:"change",
+					  delayOut: 1000,
+					  arrows:false,
+					 bounds:{
+						 min: timeParser.getDate(),
+						 max: new Date(),
+					 },
+					 defaultValues:{
+						 min: timeParser.getDate(),
+						 max: new Date(), 
+					 },
+					 
+					  formatter:function(val){
+					        var value = Math.round(val * 5) / 5,
+					          decimal = value - Math.round(val);
+					        timeParser.setDate(new Date(val));
+					       // console.log(val);
+					        // return decimal == 0 ? value.toString() + ".0" :
+							// value.toString();
+					        return timeParser.getDefaultTime();
+					      }
+				}).on("valuesChanged",sliderValueChanged);
+		}
 	}
-	var initSlider = function(sliderContainer){
-		sliderContainer
-			.css("margin-top","15px")
-			.dateRangeSlider({
-				 valueLabels:"change",
-				  delayOut: 1000,
-				  arrows:false,
-				  min: new Date(2012, 0, 1),
-				  max: new Date(),
-				  formatter:function(val){
-				        var value = Math.round(val * 5) / 5,
-				          decimal = value - Math.round(val);
-				        console.log(val);
-				        //return decimal == 0 ? value.toString() + ".0" : value.toString();
-				        return val;
-				      }
-			});
+	var resetSlider = function(){
+//		if(slideContainer){
+//			slideContainer.rangeSlider("destroy");
+			sliderSet = false;
+//			container.children().remove();
+//		}else{
+//			ZMO.log("Remove Slider Container failed. Slider not set!");
+//		}
+
 	}
 	var pub = {
 			updateChart:updateChart,
 			init:init,
 			createLineChart:createLineChart,
-			initSlider:initSlider
+			initSlider:initSlider,
+			resetSlider:resetSlider
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

@@ -117,8 +117,8 @@ ZMO.modules.kegModel = function(config){
 		      start_date:new ZMO.TimeParser(keg.start_date||keg.startDate).getDefaultTime(),
 		      keg_numbers:keg.keg_numbers||keg.kegNumber,
 		      current_amount : keg.currentAmount.toFixed(2),
-		      lastsUntil :date.getDefaultTime()||ZMO.translateString("Never"),
-		      lastsUntilShort:date.getHoursMinutes()||ZMO.translateString("Never"),
+		      lastsUntil :!$.isEmptyObject(date)?date.getDefaultTime()||ZMO.translateString("Never"):"Never",
+		      lastsUntilShort:!$.isEmptyObject(date)?date.getHoursMinutes()||ZMO.translateString("Never"):"Never",
 		      boxId:keg.boxId
 		});
 	});
