@@ -17,7 +17,16 @@ ZMO.view=(function(){
 	var renderModuleModel =function(moduleModel,key,queryData){
 		var container =$(site[key]);
 		var ratio = moduleModel.ratio;
+		try{
 		var module = moduleModel.element.getInstance();
+		}catch(e){
+			if(console){
+				console.warn("Cant get module:");
+				console.log(moduleModel);
+			}
+			return false;
+			
+		}
 		var moduleRow = moduleModel.position.row;
 		var moduleCol = moduleModel.position.col;
 		var row;
@@ -57,6 +66,7 @@ ZMO.view=(function(){
 						||!newList[posKey][1].position.equals(elObj[1].position)
 						||newList[posKey][1].nocache){
 					ZMO.logger.log("remove "+posKey);
+					if(oldList[posKey][1].element && oldList[posKey][1].element.remove)oldList[posKey][1].element.remove();
 					$(oldList[posKey][0]).remove();
 				}
 		});

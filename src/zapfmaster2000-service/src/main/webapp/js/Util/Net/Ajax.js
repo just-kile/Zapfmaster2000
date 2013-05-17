@@ -115,6 +115,7 @@ ZMO.Util.Net.Ajax = (function($){
 	/**
 	 * Gets the datas in the Queue, wait pullTimeout time, calls self again
 	 */
+	var enqueueTimeout = null;
 	var getEnqueueDatas = function(){
 		$.each(aspirantModules,function(url,modulesArr){
 			getDatas(url,function(response){
@@ -131,11 +132,22 @@ ZMO.Util.Net.Ajax = (function($){
 
 			},modulesArr[conf.MODULE_PARAMS]);
 		});
-		setTimeout(function(){
+		if(enqueueTimeout){
+			clearTimeout(enqueueTimeout);
+			
+		}
+		enqueueTimeout = setTimeout(function(){
+			enqueueTimeout = null;
 			//if we dont wanna stop, again
 			if(!stop)getEnqueueDatas();
 		},c.pullTimeout);
 	};
+	var updateEnqueueParams = function(url,data){
+		if(aspirantModules[url]){
+			$.extend(aspirantModules[url][conf.MODULE_PARAMS],data);
+		}
+	};
+	
 	var timeout = null;
 	var stopPull = function(){
 		stop = true;
@@ -170,7 +182,7 @@ ZMO.Util.Net.Ajax = (function($){
 	 * @param {Function} errorCb
 	 * 			The function that will be executed, when error occurs, or timeout
 	 */
-	var connectToChannel = function(url,successCb,errorCb,data){
+	var connectToChannel = function(url,successCb,errorCb,data,isNotCancable){
 		if(!data)data ={};
 		data["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		data["_"] = new Date().getTime();
@@ -196,6 +208,9 @@ ZMO.Util.Net.Ajax = (function($){
 			url:baseUrl+url,
 			timeout:600000, 
 			data:data,
+//			headers:{
+//				"Connection": "Keep-Alive"
+//			},
 			complete:function(resp){
 				if(resp.status == 200){
 					var json = $.parseJSON(resp.responseText);
@@ -208,6 +223,13 @@ ZMO.Util.Net.Ajax = (function($){
 						connectToChannel(url,successCb,errorCb,data);
 					}else if(resp.status==0){
 						ZMO.logger.log("Request abort success!");
+						if(isNotCancable){
+							ZMO.logger.log("Request is not abortable, reconnect in 5s ...");
+							setTimeout(function(){
+								connectToChannel(url,successCb,errorCb,data);
+							},5000);
+						}
+						delete pushRequests[url];
 					}else{
 						ZMO.logger.error("Error! Status "+resp.status);
 						ZMO.logger.log("Reconnect in 5s...");
@@ -220,19 +242,23 @@ ZMO.Util.Net.Ajax = (function($){
 				}
 			},
 			error:function(e){
-
+				if(errorCb)errorCb(e);
 			}
 		});
 		
 	};
 	var connectToNewsPush = function(callback){
-		connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
+		setTimeout(function(){
+			connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
+		},100);
 	};
 	var connectToNewsUpdate = function(boxId,callback){
+		setTimeout(function(){
 		connectToChannel(ZMO.modules.Constants.push.NEWSUPDATE+"/"+boxId,callback);
+		},100);
 	};
 	var isAborted = function(url){
-		return !pushRequest[url];
+		return !pushRequests[url];
 	}
 	var abortReq = function(url){
 		
@@ -266,10 +292,16 @@ ZMO.Util.Net.Ajax = (function($){
 	 * Challenge Requests
 	 *****/
 	var abortChallengePush = function(){
-		abortReq(ZMO.modules.Constants.push.CHALLENGE);
+		setTimeout(function(){
+			abortReq(ZMO.modules.Constants.push.CHALLENGE);
+		},100);
 	};
 	var connectChallengeReceive = function(callback){
-		connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback);
+		setTimeout(function(){
+			connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback,null,null,true);
+		},100);
+		
+		
 	};
 	var sendChallengeConfirmation = function(data){
 		var datas = {
@@ -303,10 +335,13 @@ ZMO.Util.Net.Ajax = (function($){
 	var pub = {
 			getDatas:getDatas,
 			postDatas:postDatas,
+			
 			enqueueDatas:enqueueDatas,
 			stopPull:stopPull,
 			startPull:startPull,
+			updateEnqueueParams:updateEnqueueParams,
 			resetQueue:resetQueue,
+			updateEnqueueDatas:getEnqueueDatas,
 			
 			connectToChannel:connectToChannel,
 			connectToNewsPush:connectToNewsPush,
