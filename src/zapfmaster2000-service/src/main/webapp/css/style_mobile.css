@@ -231,7 +231,7 @@ ul#topnav li#topnav-5 a:hover {
 	border: 5px solid #99ffff;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
-	background-image: url(../images/view/news_background2.png);
+	/*background-image: url(../images/view/news_background2.png);*/
 	color: #FFF;
 }
 

@@ -161,12 +161,16 @@ $(document).ready(function(){
 					localStorage.setItem('token',token );
 					redirect();
 					//window.location.replace(window.location.pathname+"app.html");
-				}else{
-					alert("Use a normal browser! Localstorage is not available")
+				}else if(data.status == 403){
+					alert("Username oder Passwort falsch");
+				}else if(data.status == 404){
+					alert("Service ist offline oder Url falsch");
+				}else {
+					alert("Fehler! Status "+data.status);
 				}
 			},
 			error:function(){
-				alert("Username oder Passwort falsch")
+				
 			}
 		})
 	});
