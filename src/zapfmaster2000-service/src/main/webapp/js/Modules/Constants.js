@@ -67,7 +67,7 @@ ZMO.modules.Constants = {
 			lineChartPoints:40,
 			lineChartStartDateDays:1,
 			lineChartMinBoundDays: 150,
-			pieChartMaxUsers:10
+			pieChartMaxUsers:7
 		},
 		challenges:{
 			modes:{

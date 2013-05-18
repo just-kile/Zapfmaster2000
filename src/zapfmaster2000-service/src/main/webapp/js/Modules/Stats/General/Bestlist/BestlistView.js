@@ -49,7 +49,12 @@ ZMO.modules.bestlistView = (function($,ajax){
 		
 		$.each(list,function(ind,user){
 			if(ind<max){
-				arr.push([user.userName,user.amount]);
+				try{
+					arr.push([user.userName,parseFloat(user.amount)]);
+				}catch(e){
+					ZMO.log("StatsMobile: User got no amount!");
+					ZMO.log(user);
+				}
 			}else{
 				othersAmount += user.amount;
 			}
