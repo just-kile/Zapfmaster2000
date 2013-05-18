@@ -30,11 +30,33 @@ ZMO.modules.bestlistView = (function($,ajax){
 			wording[ind] = ZMO.Util.localization.translateString(word);
 		});
 	};
-	var calcBestlist = function(list){
-		var arr = [];
-		$.each(list,function(ind,user){
-			arr.push([user.userName,user.amount]);
+	var filterAmountArray = function(list){
+
+		return list.sort(function(a, b){
+				  var aName = a.amount;
+				  var bName = b.amount; 
+				  return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
 		});
+		
+		
+		
+	}
+	var calcBestlist = function(list){
+		var max = mC.stats.pieChartMaxUsers;
+		var arr = [];
+		var othersAmount  = 0;
+		list = filterAmountArray(list);
+		
+		$.each(list,function(ind,user){
+			if(ind<max){
+				arr.push([user.userName,user.amount]);
+			}else{
+				othersAmount += user.amount;
+			}
+		});
+		if(othersAmount>0){
+			arr.push([ZMO.translateString("Rest"),othersAmount]);
+		}
 		return arr;
 		
 	}
