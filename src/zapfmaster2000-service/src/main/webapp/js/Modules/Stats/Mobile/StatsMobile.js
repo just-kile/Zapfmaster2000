@@ -46,17 +46,38 @@ ZMO.modules.statsMobile = (function($,ajax){
 		});
 		return retArr;
 	}
-	var calcBestlist = function(list){
-		var arr = [];
-		$.each(list,function(ind,user){
-			try{
-				arr.push([user.userName,parseFloat(user.amount)]);
-			}catch(e){
-				ZMO.log("StatsMobile: User got no amount!");
-				console.log(user);
-			}
-			
+	var filterAmountArray = function(list){
+
+		return list.sort(function(a, b){
+				  var aName = a.amount;
+				  var bName = b.amount; 
+				  return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
 		});
+		
+		
+		
+	}
+	var calcBestlist = function(list){
+		var max = mC.stats.pieChartMaxUsers;
+		var arr = [];
+		var othersAmount  = 0;
+		list = filterAmountArray(list);
+		
+		$.each(list,function(ind,user){
+			if(ind<max){
+				try{
+					arr.push([user.userName,parseFloat(user.amount)]);
+				}catch(e){
+					ZMO.log("StatsMobile: User got no amount!");
+					ZMO.log(user);
+				}
+			}else{
+				othersAmount += user.amount;
+			}
+		});
+		if(othersAmount>0){
+			arr.push([ZMO.translateString("Rest"),othersAmount]);
+		}
 		return arr;
 		
 	}
