@@ -64,16 +64,20 @@ ZMO.modules.statsMobile = (function($,ajax){
 		list = filterAmountArray(list);
 		
 		$.each(list,function(ind,user){
+			try{
 			if(ind<max){
-				try{
+				
 					arr.push([user.userName,parseFloat(user.amount)]);
-				}catch(e){
-					ZMO.log("StatsMobile: User got no amount!");
-					ZMO.log(user);
-				}
+				
+				
 			}else{
-				othersAmount += user.amount;
+				othersAmount +=parseFloat(user.amount);
 			}
+		}catch(e){
+
+			ZMO.log("StatsMobile: User got no amount!");
+			ZMO.log(user);
+		}
 		});
 		if(othersAmount>0){
 			arr.push([ZMO.translateString("Rest"),othersAmount]);
