@@ -64,6 +64,7 @@ ZMO.modules.header = (function($,ajax){
 	}
 	var toggleNotificationBtnClick = function(e){
 		//alert("Not");hide
+		if(e)e.stopPropagation();
 		if(notificationVisible){
 			hideNotificationWindow();
 		}else{
