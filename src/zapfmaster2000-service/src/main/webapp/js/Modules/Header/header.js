@@ -28,6 +28,7 @@ ZMO.modules.header = (function($,ajax){
 	};
 	var onUsersBtnClick = function(e){
 		e.preventDefault();
+		e.stopPropagation();
 		if(ZMO.modules.sideNavigation.isVisible()){
 			ZMO.modules.sideNavigation.toggle();
 		}else{
