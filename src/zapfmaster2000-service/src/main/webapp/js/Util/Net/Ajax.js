@@ -203,7 +203,7 @@ ZMO.Util.Net.Ajax = (function($){
 //			}
 //			
 //		}
-		return pushRequests[url] = $.ajax({
+		var request = $.ajax({
 			type:"GET",
 			url:baseUrl+url,
 			timeout:600000, 
@@ -223,13 +223,14 @@ ZMO.Util.Net.Ajax = (function($){
 						connectToChannel(url,successCb,errorCb,data);
 					}else if(resp.status==0){
 						ZMO.logger.log("Request abort success!");
-						if(isNotCancable){
+						if(false && isNotCancable){
 							ZMO.logger.log("Request is not abortable, reconnect in 5s ...");
 							setTimeout(function(){
+//								connectToChannel(url,successCb,errorCb,data,isNotCancable);
 								connectToChannel(url,successCb,errorCb,data);
 							},5000);
 						}
-						delete pushRequests[url];
+						
 					}else{
 						ZMO.logger.error("Error! Status "+resp.status);
 						ZMO.logger.log("Reconnect in 5s...");
@@ -245,6 +246,14 @@ ZMO.Util.Net.Ajax = (function($){
 				if(errorCb)errorCb(e);
 			}
 		});
+		pushRequests[url]={
+				req:request,
+				success:successCb,
+				error:errorCb,
+				data:data,
+				isNotCancable:isNotCancable
+		};
+	return request;
 		
 	};
 	var connectToNewsPush = function(callback){
@@ -260,14 +269,32 @@ ZMO.Util.Net.Ajax = (function($){
 	var isAborted = function(url){
 		return !pushRequests[url];
 	}
+	var pausePushRequests =function(){
+		$.each(pushRequests,function(reqUrl,req){
+				//pushRequests[reqUrl] = null;
+				req.req.abort();
+				ZMO.logger.log(" Push Paused for url "+reqUrl);
+		});
+	}
+	var resumePushRequests = function(){
+		$.each(pushRequests,function(reqUrl,reqObj){
+//				pushRequests[reqUrl] = null;
+			
+				connectToChannel(reqUrl,reqObj.success,reqObj.error,reqObj.data,reqObj.isNotCancable);
+//				reqObj.req.abort();
+				ZMO.logger.log(" Push Resumed for Url "+reqUrl);
+				
+		});
+	}
 	var abortReq = function(url){
-		
 		$.each(pushRequests,function(reqUrl,req){
 			var regex = new RegExp("^"+url+"");
 			if(regex.test(reqUrl)&& ZMO.exists(req)){
-				pushRequests[reqUrl] = null;
-				req.abort();
+				//pushRequests[reqUrl] = null;
+				
+				req.req.abort();
 				ZMO.logger.log(" Push aborted: "+url);
+				delete pushRequests[url];
 				
 			}
 		});
@@ -350,6 +377,8 @@ ZMO.Util.Net.Ajax = (function($){
 			abortNewsUpdatePush:abortNewsUpdatePush,
 			abortPushRequests:abortPushRequests,
 			abortReq:abortReq,
+			pausePushRequests:pausePushRequests,
+			resumePushRequests:resumePushRequests,
 			
 			connectChallengeReceive:connectChallengeReceive,
 			abortChallengePush:abortChallengePush,
