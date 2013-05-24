@@ -22,6 +22,19 @@ ZMO.modules.settings = (function($,ajax){
 		    contentType: false,
 		    processData: false,
 		    type: 'POST',
+		    beforeSend: function() {
+		        ZMO.Util.Browser.throbber.show("0%");
+		       
+		        
+		    },
+		    progress: function(e) {
+		    	if(e.lengthComputable) {
+		            //calculate the percentage loaded
+		            var percentComplete = (e.loaded / e.total) * 100;
+			        var percentVal = percentComplete + '%';
+			        ZMO.Util.Browser.throbber.updateText(percentVal);
+		    	}
+		    },
 		    success: function(data){
 		        alert("Bild geändert!");
 	
@@ -29,6 +42,9 @@ ZMO.modules.settings = (function($,ajax){
 		    ,
 			error:function(){
 				alert("Fehler beim Bild hochladen");
+			},
+			complete:function(){
+				ZMO.Util.Browser.throbber.hide();
 			}
 		});
 	};
@@ -98,11 +114,11 @@ ZMO.modules.settings = (function($,ajax){
 			type:"file"
 		}).appendTo(formula); 
 		//ok button
-		$("<input>").attr({
-			name:"image",
-			type:"submit",
-			id:"uploadImage"
-		}).appendTo(formula); 
+//		$("<input>").attr({
+//			name:"image",
+//			type:"submit",
+//			id:"uploadImage"
+//		}).appendTo(formula); 
 		return formula;
 	};
 	var generateRegisterRfidButton = function(){
@@ -143,9 +159,13 @@ ZMO.modules.settings = (function($,ajax){
 	 */
 	var init = function(hashParams,moduleParams){
 		//container.text("Hello drinkers worldwide!");
-		form.find("#uploadImage").on("click",function(e){
-			e.preventDefault();
-			uploadImage(form);
+		//form.find("#uploadImage").on("click",function(e){
+		form.find("input[type=file]")
+			.on("change",function(e){
+				e.preventDefault();
+				var inputVal = $(e.currentTarget).val();
+				if(inputVal!="")
+					uploadImage(form);
 		});
 		if(ZMO.throbber)ZMO.throbber.hide();
 		

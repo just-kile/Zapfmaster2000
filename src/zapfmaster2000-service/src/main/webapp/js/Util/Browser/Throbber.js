@@ -4,29 +4,40 @@ ZMO.Util.Browser.throbber = (function($){
 	var isActive = false;
 	var icon;
 	var iconArr;
-	var getIcon = function(imgUrl){
+	var textDiv = null;
+	var getIcon = function(imgUrl,text){
 		var container =  $("<div>").addClass("throbber");
 		var throbberContainer =$("<div>");
 		var img = $("<img>").attr({
 			src:imgUrl
 		});
-		throbberContainer.append(img);
+		if(text){
+			throbberContainer.append(img).append(textDiv = $("<div>").text(text).css("color","white"));
+		}else{
+			throbberContainer.append(img);
+		}
+		
 		container.append(throbberContainer);
 		
 		return container;
 	}
-	var show =function(){
+	var updateText = function(text){
+		if(textDiv)textDiv.text(text);
+	}
+	var show =function(text){
 		if(!isActive){
 			isActive = true;
-			icon = getIcon(c.throbberUrl).appendTo("body");
+			icon = getIcon(c.throbberUrl,text).appendTo("body");
 		}
 		return icon;
 	}
+	
 	var hide = function(){
 		isActive = false;
 		if(icon)icon.fadeOut("slow",function(){
 			$(this).remove();
 		});
+		if(textDiv)textDiv = null;
 
 	}
 	var get = function(){
@@ -35,7 +46,8 @@ ZMO.Util.Browser.throbber = (function($){
 	var pub = {
 			show:show,
 			hide:hide,
-			get:get
+			get:get,
+			updateText:updateText
 	}
 	return pub;
 })(jQuery);
