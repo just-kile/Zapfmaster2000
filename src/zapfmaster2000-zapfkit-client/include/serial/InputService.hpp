@@ -11,6 +11,7 @@
 #include "../Observable.hpp"
 #include <boost/thread.hpp>
 
+
 namespace zm2k {
 
 class MessageProcessor;
@@ -27,7 +28,16 @@ public:
 
 };
 
-class InputService: public Observable<InputServiceListener> {
+class AbstractInputService : public Observable<InputServiceListener> {
+
+public:
+	virtual void run() = 0;
+
+	void notifyZapfcount(int count);
+	void notifyRfid(long rfid);
+
+};
+class InputService: public AbstractInputService {
 
 private:
 
@@ -38,20 +48,15 @@ private:
 public:
 
 	InputService();
-	void run();
-	void notifyZapfcount(int count);
+	virtual void run();
 
 };
 
-class MockInputService : public InputService {
+class MockInputService : public AbstractInputService {
 
 public:
 	MockInputService();
-	void run();
-
-
-
-
+	virtual void run();
 };
 
 }

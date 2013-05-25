@@ -15,6 +15,7 @@
 #include "views/UnkownUserView.hpp"
 #include "serial/InputService.hpp"
 #include "serial/WebserviceConnector.hpp"
+#include "serial/LEDController.hpp"
 #include <boost/thread.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
@@ -28,7 +29,8 @@ private:
 	IdleView idleView;
 	DrawView drawView;
 	UnkownUserView unkownUserView;
-	WebserviceConnector connector;
+	WebserviceConnector* connector;
+	LEDController ledController;
 
 	bool unkownUser;
 	std::string currentUser;
@@ -40,8 +42,8 @@ private:
 
 public:
 
-	ZapfController(ZapfDisplay& display, InputService& input,
-			WebserviceConnector &connector);
+	ZapfController(ZapfDisplay& display, AbstractInputService& input,
+			WebserviceConnector* connector);
 	~ZapfController();
 
 	virtual void onRfidRead(long rfid);

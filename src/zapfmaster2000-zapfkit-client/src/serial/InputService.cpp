@@ -5,6 +5,8 @@
  *      Author: thomas
  */
 
+// TODO: This implementation is crap. Needs to be fixed!
+
 #include <vector>
 #include <string>
 #include <fstream>
@@ -24,7 +26,7 @@
 using namespace zm2k;
 using namespace std;
 
-InputService* singleton;
+AbstractInputService* singleton;
 
 
 int interface = 0;
@@ -143,17 +145,78 @@ void InputService::run() {
 	}
 }
 
-void InputService::notifyZapfcount(int ticks) {
+void AbstractInputService::notifyZapfcount(int ticks) {
 	if (ticks > 0) {
 		notifyListeners(
 				boost::bind(&InputServiceListener::onTicksRead, _1, ticks));
 	}
 }
 
+void AbstractInputService::notifyRfid(long rfid) {
+	if (rfid != -1) {
+		cout << "notify rfid " << rfid << endl;
+		notifyListeners(
+				boost::bind(&InputServiceListener::onRfidRead, _1, rfid));
+	}
+}
+
+const int rfidPoll = 200;
+const int tickPoll = 500;
+
+int rfid = -1;
+long ticks = -1;
+
+void sendMockTicks() {
+	while (true) {
+		delay(tickPoll);
+		singleton->notifyZapfcount(ticks);
+	}
+}
+
+void sendMockRfid() {
+	while (true) {
+		delay(rfidPoll);
+		singleton->notifyRfid(rfid);
+	}
+}
+
+
 MockInputService::MockInputService() {
-	throw "not implemented yet";
+	singleton = this;
+
 }
 
 void MockInputService::run() {
+	boost::thread t1(sendMockTicks);
+	boost::thread t2(sendMockRfid);
 
+	const string cmdRfidEnd = "end rfid";
+	const string cmdTicksEnd = "end ticks";
+	const string cmdRfid = "rfid ";
+	const string cmdTicks = "ticks ";
+
+	while (true) {
+		string command;
+		getline(cin, command);
+
+		if (command.compare(0, cmdRfidEnd.size(), cmdRfidEnd) == 0) {
+			rfid = -1;
+		}
+
+		if (command.compare(0, cmdTicksEnd.size(), cmdTicksEnd) == 0) {
+			ticks = -1;
+		}
+
+		if (command.compare(0, cmdTicks.size(), cmdTicks) == 0) {
+			string rawTicks = command.substr(cmdTicks.size(),
+					command.size() - cmdTicks.size());
+			ticks = atoi(rawTicks.c_str());
+		}
+
+		if (command.compare(0, cmdRfid.size(), cmdRfid) == 0) {
+			string rawRfid = command.substr(cmdRfid.size(),
+					command.size() - cmdRfid.size());
+			rfid = atol(rawRfid.c_str());
+		}
+	}
 }
