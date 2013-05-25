@@ -33,20 +33,14 @@ public:
 	}
 };
 
-InputService* service = 0;
-MockInputService* mock = 0;
+AbstractInputService* service = 0;
 ZapfDisplay display;
 ZapfController* controller;
 
 void inputThread() {
 	try {
-		if (service != 0) {
-			cout << "running connector" << endl;
-			service->run();
-		} else {
-			cout << "running mock" << endl;
-			mock->run();
-		}
+		cout << "running input service" << endl;
+		service->run();
 	} catch (const char* exception) {
 		cerr << "Caught error: " << exception << endl;
 		cerr << "SDL says: " << SDL_GetError() << endl;
@@ -74,6 +68,8 @@ void sighandle(int sig) {
 
 int main(int argc, const char* argv[]) {
 
+	cout << "The Zapfmaster 2000 Zapfkit Client says: Hi." << endl;
+
 	// load properties
 	boost::property_tree::ptree ptree;
 	boost::property_tree::read_xml(toAbsPath("resources/config.xml"), ptree);
@@ -86,18 +82,19 @@ int main(int argc, const char* argv[]) {
 		if (argc > 1) {
 			string mockArg = "mock";
 			if (mockArg.compare(argv[1]) == 0) {
-				mock = new MockInputService();
-				service = mock;
+				cout << "creating mock service" << endl;
+				service = new MockInputService();
 			}
 		}
 
-		if (service == 0) {
+		if (!service) {
 			cout << "created input service" << endl;
 			service = new InputService();
 		}
+
 		service->addListener(new MyListener());
 
-		controller = new ZapfController(display, *service, webservieConnector);
+		controller = new ZapfController(display, *service, &webservieConnector);
 		cout << "running thread" << endl;
 		boost::thread t1(inputThread);
 		boost::thread t2(displayThread);

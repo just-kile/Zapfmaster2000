@@ -5,14 +5,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/serial/InputService.cpp \
+../src/serial/LEDConnector.cpp \
 ../src/serial/WebserviceConnector.cpp 
 
 OBJS += \
 ./src/serial/InputService.o \
+./src/serial/LEDConnector.o \
 ./src/serial/WebserviceConnector.o 
 
 CPP_DEPS += \
 ./src/serial/InputService.d \
+./src/serial/LEDConnector.d \
 ./src/serial/WebserviceConnector.d 
 
 
