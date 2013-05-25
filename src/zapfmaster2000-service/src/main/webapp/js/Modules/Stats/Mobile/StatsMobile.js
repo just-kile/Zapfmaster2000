@@ -46,17 +46,42 @@ ZMO.modules.statsMobile = (function($,ajax){
 		});
 		return retArr;
 	}
+	var filterAmountArray = function(list){
+
+		return list.sort(function(a, b){
+				  var aName = a.amount;
+				  var bName = b.amount; 
+				  return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
+		});
+		
+		
+		
+	}
 	var calcBestlist = function(list){
+		var max = mC.stats.pieChartMaxUsers;
 		var arr = [];
+		var othersAmount  = 0;
+		list = filterAmountArray(list);
+		
 		$.each(list,function(ind,user){
 			try{
-				arr.push([user.userName,parseFloat(user.amount)]);
-			}catch(e){
-				ZMO.log("StatsMobile: User got no amount!");
-				console.log(user);
+			if(ind<max){
+				
+					arr.push([user.userName,parseFloat(user.amount)]);
+				
+				
+			}else{
+				othersAmount +=parseFloat(user.amount);
 			}
-			
+		}catch(e){
+
+			ZMO.log("StatsMobile: User got no amount!");
+			ZMO.log(user);
+		}
 		});
+		if(othersAmount>0){
+			arr.push([ZMO.translateString("Rest"),othersAmount]);
+		}
 		return arr;
 		
 	}
@@ -143,9 +168,6 @@ var initBarChart = function(id,globalStatsModel){
 		var interval = progressStats.interval;
 		var startDate = new ZMO.TimeParser(progressStats.start_date);
 		var datas = calcProgress(startDate,progress,interval)
-//		var line1=[['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
-//		           ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
-//		           ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
 		var plot1 = $.jqplot(id, [datas],$.extend( {
 		           title:'Draw Analytics',
 		           axes:{

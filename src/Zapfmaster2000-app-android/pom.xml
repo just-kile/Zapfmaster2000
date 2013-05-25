@@ -28,25 +28,7 @@
 		<sourceDirectory>src</sourceDirectory>
 		<pluginManagement>
 			<plugins>
-				<!--<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-eclipse-plugin</artifactId>
-					<configuration>
-						<wtpversion>1.5</wtpversion>
-						<linkedResources>
-							<linkedResource>
-								<name>js</name>
-								<type>2</type>
-								<location>${project.basedir}\..\Zapfmaster2000-service\src\main\webapp\js</location>
-							</linkedResource>
-							<linkedResource>
-								<name>jslibs</name>
-								<type>2</type>
-								<location>${project.basedir}\..\Zapfmaster2000-service\src\main\webapp\libs</location>
-							</linkedResource>
-						</linkedResources>
-					</configuration>
-				</plugin>-->
+
 				<plugin>
 					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 					<artifactId>android-maven-plugin</artifactId>
@@ -57,7 +39,38 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
-
+			<!-- Android jar signer -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jarsigner-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>signing</id>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+						<phase>package</phase>
+						<inherited>true</inherited>
+						<configuration>
+							<archiveDirectory></archiveDirectory>
+							<includes>
+								<include>target/*.apk</include>
+							</includes>
+							<keystore>zapfmaster2000.keystore</keystore>
+							<storepass>njIpoigt4zuE432edaD</storepass>
+							<keypass>njIpoigt4zuE432edaD</keypass>
+							<alias>zapfmaster2000</alias>
+							<arguments>
+								<argument>-sigalg</argument>
+								<argument>MD5withRSA</argument>
+								<argument>-digestalg</argument>
+								<argument>SHA1</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -74,13 +87,19 @@
 				<extensions>true</extensions>
 				<version>3.5.0</version>
 				<configuration>
-					<!--  <assetsDirectory>assets</assetsDirectory>-->
+					<!-- <assetsDirectory>assets</assetsDirectory> -->
 					<assetsDirectory>../zapfmaster2000-service/src/main/webapp</assetsDirectory>
 					<resourceDirectory>res</resourceDirectory>
 					<sourceDirectory>src</sourceDirectory>
 					<run>
-						<debug>true</debug>
+						<debug>false</debug>
 					</run>
+					<zipalign>
+						<skip>false</skip>
+					</zipalign>
+					<sign>
+						<debug>false</debug>
+					</sign>
 					<sdk>
 						<platform>14</platform>
 					</sdk>
@@ -90,6 +109,15 @@
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
 
 				</configuration>
+				<executions>
+					<execution>
+						<id>alignApk</id>
+						<phase>package</phase>
+						<goals>
+							<goal>zipalign</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

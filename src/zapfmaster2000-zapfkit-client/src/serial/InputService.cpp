@@ -8,114 +8,152 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <iostream>
+#include <wiringSerial.h>
+#include <boost/thread.hpp>
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <iomanip>
+#include <wiringPi.h>
+#include <wiringPiI2C.h>
 
 #include "../../include/serial/InputService.hpp"
-#include "../../include/serial/MessageProcessor.hpp"
 
 using namespace zm2k;
 using namespace std;
 
-SerialInputService::SerialInputService(SerialConnector& serialConnector) {
-	processors.push_back(new RfidMessageProcessor());
-	processors.push_back(new TickMessageProcessor());
-	serialConnector.addListener(this);
+InputService* singleton;
+
+
+int interface = 0;
+
+char req_tick_low = 0x02;
+char req_tick_high = 0x03;
+
+char res_tick_low = 0x40;
+char res_tick_high = 0x80;
+
+int readTicks() {
+	int result = -1;
+
+	char res_1 = 0x00;
+	char res_2 = 0x00;
+
+	cout << "write request low" << endl;
+	delay(1);
+	wiringPiI2CWrite(interface, req_tick_low);
+	cout << "read response 1" << endl;
+	delay(1);
+	res_1 = wiringPiI2CRead(interface);
+	std::cout << "response 1 is " << std::hex << (int) res_1 << std::dec
+			<< std::endl;
+	cout << "write request high" << endl;
+	delay(1);
+	wiringPiI2CWrite(interface, req_tick_high);
+	cout << "read response 2" << endl;
+	delay(1);
+	res_2 = wiringPiI2CRead(interface);
+	std::cout << "response 2 is " << std::hex << (int) res_2 << std::dec
+			<< std::endl;
+	if ((res_1 & 0xC0) == res_tick_low) {
+		cout << "response 1 is low tick" << endl;
+		if ((res_2 & 0xC0) == res_tick_high) {
+			cout << "response 2 is high tick" << endl;
+			result = (res_2 & 0x3F) << 6 | (res_1 & 0x3F);
+		} else
+			result = -1;
+	} else
+		result = -1;
+
+	return result;
 }
 
-SerialInputService::~SerialInputService() {
-}
+int processZapfcounterInput() {
+	cout << "tach" << endl;
 
-void SerialInputService::onCharRead(const char c) {
+	interface = wiringPiI2CSetup(0x42);
 
-	buffer += c;
+	if (interface != -1)
+		cout << "port open" << endl;
+	else
+		cout << "error" << interface << endl;
 
-	bool didProcessMsg;
-	bool needsToDropChar = true;
+	int ticks = 0;
+	int attempt_no = 0;
 
-	while (needsToDropChar && buffer.size() > 0) {
-
+	while (1 == 1) {
+		cout << "----------------------------" << endl;
 		do {
-			didProcessMsg = false;
-			for (vector<MessageProcessor*>::iterator it = processors.begin();
-					it != processors.end(); ++it) {
-				ProcessStatus status = (*it)->canProcess(buffer);
-				if (status == COMPLETELY) {
-					std::pair<InputService::notification, int> result =
-							(*it)->process(buffer);
-					notifyListeners(result.first);
-					buffer = buffer.substr(result.second,
-							buffer.size() - result.second);
-					didProcessMsg = true;
-				} else if (status == PARTLY) {
-					needsToDropChar = false;
-				}
-			}
-		} while (didProcessMsg);
+			delay(2);
+			cout << "tick read attempt no " << attempt_no << endl;
+			ticks = readTicks();
+			attempt_no++;
+		} while (ticks == -1);
+		attempt_no = 0;
+		cout << "ticks: " << ticks << endl;
+		singleton->notifyZapfcount(ticks);
+		delay(490);
+	}
 
-		if (needsToDropChar && buffer.size() > 0) {
-			buffer = buffer.substr(1, buffer.size() - 1);
+	return 0;
+}
+
+InputService::InputService() {
+	singleton = this;
+	cout << "creating input service..." << endl;
+
+	serialInterface = serialOpen("/dev/ttyAMA0", 9600);
+
+	if (serialInterface == -1) {
+		throw "Could not open serial port.";
+	}
+	curRfid = 0;
+	serialByteCounter = 0;
+
+}
+
+void InputService::run() {
+	boost::thread t1(processZapfcounterInput);
+
+	while (true) {
+		int newChar = serialGetchar(serialInterface);
+
+		if (newChar != -1) {
+			curRfid <<= 8;
+			curRfid += newChar;
+
+			serialByteCounter++;
+
+			if (serialByteCounter == 5) {
+
+				notifyListeners(
+						boost::bind(&InputServiceListener::onRfidRead, _1,
+								curRfid));
+
+				serialByteCounter = 0;
+				curRfid = 0;
+			}
+		} else {
+			serialByteCounter = 0;
+			curRfid = 0;
 		}
 
+	}
+}
+
+void InputService::notifyZapfcount(int ticks) {
+	if (ticks > 0) {
+		notifyListeners(
+				boost::bind(&InputServiceListener::onTicksRead, _1, ticks));
 	}
 }
 
 MockInputService::MockInputService() {
-	cout << "did create mock" << endl;
+	throw "not implemented yet";
 }
 
 void MockInputService::run() {
 
-	cout << "running mock thread" << endl;
-
-	string cmdTicks = "ticks";
-	string cmdLogin = "login";
-	string cmdDraw = "draw";
-
-	while (true) {
-		cout << "LOOP" << endl;
-		string rawInput;
-		getline(cin, rawInput);
-
-		cout << "read input " << rawInput << endl;
-
-		// ticks
-		if (rawInput.compare(0, cmdTicks.length(), cmdTicks) == 0
-				&& rawInput.length() > cmdTicks.length()) {
-			int offset = cmdTicks.length() + 1;
-			int ticks =
-					atoi(
-							rawInput.substr(offset, rawInput.length() - offset).c_str());
-			notifyListeners(
-					boost::bind(&InputServiceListener::onTicksRead, _1, ticks));
-		}
-
-		// login
-		if (rawInput.compare(0, cmdLogin.length(), cmdLogin) == 0
-				&& rawInput.length() > cmdLogin.length()) {
-			int offset = cmdLogin.length() + 1;
-			string rfid = rawInput.substr(offset, rawInput.length() - offset);
-			notifyListeners(
-					boost::bind(&InputServiceListener::onRfidRead, _1, rfid));
-
-		}
-
-		// draw
-		if (rawInput.compare(0, cmdDraw.length(), cmdDraw) == 0
-				&& rawInput.length() > cmdDraw.length()) {
-			int offset = cmdLogin.length() + 1;
-			string parameters = rawInput.substr(offset,
-					rawInput.length() - offset);
-			float amount;
-			float time;
-			sscanf(parameters.c_str(), "%f %f", &amount, &time);
-			int numInvokes = time * 2;
-			int ticksPerInvoke = amount * 5000 / numInvokes;
-			while (numInvokes-- > 0) {
-				notifyListeners(
-						boost::bind(&InputServiceListener::onTicksRead, _1,
-								ticksPerInvoke));
-				boost::this_thread::sleep( boost::posix_time::milliseconds(500) );
-			}
-
-		}
-	}
 }

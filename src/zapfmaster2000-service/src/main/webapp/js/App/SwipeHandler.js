@@ -49,9 +49,9 @@ ZMO.swipeHandler = (function(){
 			 }else if(ZMO.modules.challengeUserList.isVisible()){
 				 ZMO.modules.challengeUserList.hide();
 			 }
-//			 if(ZMO.modules.header && ZMO.modules.header.isNotificationWindowVisible()){
-//				 ZMO.modules.header.hideNotificationWindow();
-//			 }
+			 if(ZMO.modules.header && ZMO.modules.header.isNotificationWindowVisible()){
+				 ZMO.modules.header.hideNotificationWindow();
+			 }
 		});
 	};
 	var myscroll = null;

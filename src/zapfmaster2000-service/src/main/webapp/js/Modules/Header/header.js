@@ -28,6 +28,7 @@ ZMO.modules.header = (function($,ajax){
 	};
 	var onUsersBtnClick = function(e){
 		e.preventDefault();
+		e.stopPropagation();
 		if(ZMO.modules.sideNavigation.isVisible()){
 			ZMO.modules.sideNavigation.toggle();
 		}else{
@@ -63,6 +64,7 @@ ZMO.modules.header = (function($,ajax){
 	}
 	var toggleNotificationBtnClick = function(e){
 		//alert("Not");hide
+		if(e)e.stopPropagation();
 		if(notificationVisible){
 			hideNotificationWindow();
 		}else{

@@ -2,7 +2,6 @@ src/ZapfkitClient.d: ../src/ZapfkitClient.cpp \
  ../src/../include/ZapfDisplay.hpp \
  ../src/../include/serial/InputService.hpp \
  ../src/../include/serial/../Observable.hpp \
- ../src/../include/serial/SerialConnector.hpp \
  ../src/../include/ZapfController.hpp ../src/../include/ZapfDisplay.hpp \
  ../src/../include/views/StartupView.hpp \
  ../src/../include/views/ZapfView.hpp \
@@ -18,8 +17,6 @@ src/ZapfkitClient.d: ../src/ZapfkitClient.cpp \
 ../src/../include/serial/InputService.hpp:
 
 ../src/../include/serial/../Observable.hpp:
-
-../src/../include/serial/SerialConnector.hpp:
 
 ../src/../include/ZapfController.hpp:
 
