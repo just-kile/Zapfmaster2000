@@ -32,6 +32,10 @@ WebserviceConnector::WebserviceConnector(string pRootPath, string pPassphrase) {
 	rootPath = pRootPath;
 	passphrase = pPassphrase;
 
+	cout << "Created webserice connector" << endl;
+	cout << "URL: " << pRootPath << endl;
+	cout << "Box Passphrase: " << pPassphrase << endl;
+
 	curl = curl_easy_init();
 	if (curl == 0) {
 		throw "Could not initialize curl";
