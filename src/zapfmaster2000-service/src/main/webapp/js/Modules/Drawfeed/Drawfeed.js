@@ -68,6 +68,8 @@ ZMO.modules.drawfeed = (function($,Ajax){
 				case c.types.NEW_USER:
 					news = ich["ZMO-news-new-user"](new ZMO.NewUserNewsModel(val));
 					break;
+				default:
+					ZMO.log("Content was pushed but no Model was assigned!");
 			}
 			if(typeof top!="undefined" && top ==true){
 				if(val.refreshType!= "REFRESH"){

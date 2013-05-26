@@ -78,12 +78,17 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 	var updateAmountChart = function(){
 		
 	};
-	var updateChart = function(kegModel,chart,titleText){
+	var updateChart = function(kegModel,chart,titleText,isGeneral){
 		var actAmount =  parseFloat(kegModel.current_amount);
 		var completeDiff =  parseFloat(kegModel.size)-actAmount;
+		if(isGeneral){
+			chart.series[1].data = [[actAmount,1]];
+			chart.series[0].data = [[completeDiff,1]];
+		}else{
+			chart.series[0].data = [[actAmount,1]];
+			chart.series[1].data = [[completeDiff,1]];
+		}
 		
-		chart.series[0].data = [[actAmount,0]];
-		chart.series[1].data = [[completeDiff,1]];
 		chart.replot( { resetAxes: true } );    
 //		chart.series[0].data[0].update(actAmount,false);
 //		chart.series[1].data[0].update(completeDiff);
