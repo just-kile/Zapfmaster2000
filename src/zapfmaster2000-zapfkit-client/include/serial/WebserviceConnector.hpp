@@ -12,6 +12,7 @@
 #include <curl/curl.h>
 #include <boost/property_tree/ptree.hpp>
 #include <SDL/SDL.h>
+#include <boost/thread.hpp>
 
 namespace zm2k {
 
@@ -19,14 +20,18 @@ class WebserviceConnector {
 
 private:
 
+	boost::mutex mutex;
 	std::string rootPath;
 	std::string passphrase;
 
 	CURL* curl;
 
+	WebserviceConnector(WebserviceConnector&);
+
 public:
 
 	WebserviceConnector(std::string pRootPath, std::string pPassphrase);
+
 
 	boost::property_tree::ptree postLogin(long rfidTag);
 	boost::property_tree::ptree postTicks(int numTicks);

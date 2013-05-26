@@ -39,6 +39,9 @@ WebserviceConnector::WebserviceConnector(string pRootPath, string pPassphrase) {
 }
 
 boost::property_tree::ptree WebserviceConnector::postLogin(long rfidTag) {
+
+	boost::lock_guard<boost::mutex> lock(mutex);
+
 	stringstream url;
 	string response;
 	long httpCode = 0;
@@ -71,6 +74,8 @@ boost::property_tree::ptree WebserviceConnector::postLogin(long rfidTag) {
 }
 boost::property_tree::ptree WebserviceConnector::postTicks(int numTicks) {
 
+	boost::lock_guard<boost::mutex> lock(mutex);
+
 	stringstream url;
 	string response;
 	long httpCode = 0;
@@ -85,7 +90,7 @@ boost::property_tree::ptree WebserviceConnector::postTicks(int numTicks) {
 
 	CURLcode res = curl_easy_perform(curl);
 	if (res != CURLE_OK) {
-		throw "Could not post login";
+		throw "Could not post ticks";
 	}
 
 	cout << "got " << response << endl;
@@ -103,6 +108,9 @@ boost::property_tree::ptree WebserviceConnector::postTicks(int numTicks) {
 }
 
 SDL_Surface* WebserviceConnector::retrieveImage(std::string path) {
+
+	boost::lock_guard<boost::mutex> lock(mutex);
+
 	stringstream url;
 	SimpleBuffer buffer;
 	long httpCode = 0;
@@ -116,7 +124,7 @@ SDL_Surface* WebserviceConnector::retrieveImage(std::string path) {
 
 	CURLcode res = curl_easy_perform(curl);
 	if (res != CURLE_OK) {
-		throw "Could not post login";
+		throw "Could not retrive image";
 	}
 
 	SDL_RWops *rw = SDL_RWFromMem(buffer.buffer, buffer.size);

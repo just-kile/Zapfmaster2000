@@ -7,6 +7,7 @@
 
 #include <unistd.h>
 #include "../include/ZapfController.hpp"
+
 #include <boost/thread.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/property_tree/json_parser.hpp>
@@ -14,8 +15,8 @@
 using namespace zm2k;
 using namespace std;
 
-ZapfController::ZapfController(ZapfDisplay& display, InputService& input,
-		WebserviceConnector& connector) :
+ZapfController::ZapfController(ZapfDisplay& display,
+		AbstractInputService& input, WebserviceConnector* connector) :
 		display(display), connector(connector) {
 	currentUser = "";
 	amount = 0;
@@ -38,10 +39,12 @@ void ZapfController::run() {
 			if (unkownUser) {
 				unkownUser = false;
 				display.paint(unkownUserView);
+				ledController.changeColor(RED);
 				boost::this_thread::sleep(boost::posix_time::seconds(1));
 			} else if (currentUser == "") {
 				// idle
 				display.paint(idleView);
+				ledController.changeColor(YELLOW);
 				boost::this_thread::sleep(boost::posix_time::seconds(100));
 			} else {
 				boost::posix_time::ptime now =
@@ -54,6 +57,7 @@ void ZapfController::run() {
 					currentUser = "";
 					amount = 0;
 				} else {
+					ledController.changeColor(GREEN);
 					drawView.setUserName(currentUser);
 					drawView.setAmount(amount);
 					drawView.setUserImage(userImage);
@@ -75,14 +79,15 @@ void ZapfController::onRfidRead(long rfid) {
 	lastRfid = boost::posix_time::second_clock::local_time();
 	unkownUser = false;
 	try {
-		boost::property_tree::ptree pt = connector.postLogin(rfid);
+		boost::property_tree::ptree pt = connector->postLogin(rfid);
 		string newUser = pt.get("userName", "");
 		if (newUser != currentUser) {
 			amount = 0;
 
 			// load the image
 			try {
-				userImage = connector.retrieveImage(pt.get("imagePath", ""));
+				// TODO: reenable the image
+				//userImage = connector.retrieveImage(pt.get("imagePath", ""));
 			} catch (const char* e) {
 				cerr << e << endl;
 				userImage = 0;
@@ -100,7 +105,7 @@ void ZapfController::onRfidRead(long rfid) {
 void ZapfController::onTicksRead(int ticks) {
 	lastRfid = boost::posix_time::second_clock::local_time();
 	try {
-		boost::property_tree::ptree pt = connector.postTicks(ticks);
+		boost::property_tree::ptree pt = connector->postTicks(ticks);
 		amount = pt.get<double>("totalAmount", 0);
 	} catch (const char* e) {
 		cerr << e << endl;
