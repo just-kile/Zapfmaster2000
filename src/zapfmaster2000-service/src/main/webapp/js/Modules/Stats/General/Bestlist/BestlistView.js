@@ -64,7 +64,7 @@ ZMO.modules.bestlistView = (function($,ajax){
 		}
 		});
 		if(othersAmount>0){
-			arr.push([ZMO.translateString("Rest"),othersAmount]);
+			arr.push([ZMO.Util.localization.translateString("Rest"),othersAmount]);
 		}
 		return arr;
 		
