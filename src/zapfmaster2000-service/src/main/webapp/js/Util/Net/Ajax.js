@@ -203,6 +203,9 @@ ZMO.Util.Net.Ajax = (function($){
 //			}
 //			
 //		}
+		if(ZMO.onlineRecognizer.isConnected()){
+			
+		
 		var request = $.ajax({
 			type:"GET",
 			url:baseUrl+url,
@@ -212,6 +215,7 @@ ZMO.Util.Net.Ajax = (function($){
 //				"Connection": "Keep-Alive"
 //			},
 			complete:function(resp){
+				
 				if(resp.status == 200){
 					var json = $.parseJSON(resp.responseText);
 					if(successCb && json!="")successCb(json);
@@ -253,7 +257,11 @@ ZMO.Util.Net.Ajax = (function($){
 				data:data,
 				isNotCancable:isNotCancable
 		};
+		
 	return request;
+		}else{
+			console.log("No Network Connection!");
+		}
 		
 	};
 	var connectToNewsPush = function(callback){
