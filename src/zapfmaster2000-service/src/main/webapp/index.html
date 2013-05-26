@@ -141,7 +141,8 @@ $(document).ready(function(){
 	/**
 	* Login App
 	*/
-	$(".applogin #submitApp").on("click",function(e){
+	//$(".applogin #submitApp").on("click",function(e){
+		$("#loginForm").on("submit",function(e){
 		e.preventDefault();
 		var userName = $(".applogin #userName").val();
 		var pass = $(".applogin #password").val();
@@ -318,10 +319,11 @@ $("#updateImageRfid").on("click",function(e){
 <div class="login">
 <img class="zmlogo" src="images/view/zapfmaster2000_klein.png" />
 	<div id="loginContainer" class="applogin container">
+	<form id="loginForm">
 		<p><input placeholder="Username" id="userName" name="userName" type="text" size="30" maxlength="30" value=""></p>
 		<p><input placeholder="Passwort" id="password" name="password" type="password" size="30" maxlength="30" value=""></p>
 		<div><input id ="submitApp" type="submit" value="Anmelden"></div>
-		
+		</form>
 		<div><input id ="updateImageRfid" type="submit" value="Bild/RFID Updaten">
 		</div>
 		<hr />

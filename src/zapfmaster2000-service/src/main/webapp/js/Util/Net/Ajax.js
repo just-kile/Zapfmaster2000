@@ -203,7 +203,7 @@ ZMO.Util.Net.Ajax = (function($){
 //			}
 //			
 //		}
-		if(ZMO.onlineRecognizer.isConnected()){
+		if(!ZMO.onlineRecognizer || ZMO.onlineRecognizer.isConnected()){
 			
 		
 		var request = $.ajax({
