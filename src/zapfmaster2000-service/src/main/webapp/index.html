@@ -181,7 +181,9 @@ $(document).ready(function(){
 	/**
 	 * Register user
 	 */
- 	$("#registerUserBtn").on("click",function(e){
+ 	//$("#registerUserBtn").on("click",function(e){
+ 	$("#registerUser").on("submit",function(e){
+ 	
 		e.preventDefault();
 		var userName = $("#userName").val();
 		var pass = $("#password").val();
@@ -362,7 +364,7 @@ $("#updateImageRfid").on("click",function(e){
     </select>
 </p>
 <p><input placeholder="Gewicht" class="registerItem" id="weight" name="weight" type="text" size="30" maxlength="30" value=""></p>
-<input class ="cancelBtn" type="submit" value="Abbrechen">
+<input class ="cancelBtn" type="button" value="Abbrechen">
 <input id ="registerUserBtn" type="submit" value="Registrieren">
 </form>
 </div>
