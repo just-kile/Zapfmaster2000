@@ -50,6 +50,7 @@ ZMO.swipeHandler = (function(){
 				 ZMO.modules.challengeUserList.hide();
 			 }
 			 if(ZMO.modules.header && ZMO.modules.header.isNotificationWindowVisible()){
+				 console.log("Close header");
 				 ZMO.modules.header.hideNotificationWindow();
 			 }
 		});
