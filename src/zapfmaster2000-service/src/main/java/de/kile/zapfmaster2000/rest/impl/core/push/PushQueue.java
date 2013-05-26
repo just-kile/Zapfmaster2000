@@ -111,6 +111,7 @@ public class PushQueue extends Thread {
 					Response response = Response.fromResponse(pResponse)
 							.build();
 					request.setResponse(response);
+					System.out.println("DID PUSH " + request);
 				}
 				pendingRequests.clear();
 			}
