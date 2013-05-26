@@ -30,7 +30,7 @@ ZMO.modules.settings = (function($,ajax){
 		    progress: function(e) {
 		    	if(e.lengthComputable) {
 		            //calculate the percentage loaded
-		            var percentComplete = (e.loaded / e.total) * 100;
+		            var percentComplete =Math.round( (e.loaded / e.total) * 100);
 			        var percentVal = percentComplete + '%';
 			        ZMO.Util.Browser.throbber.updateText(percentVal);
 		    	}

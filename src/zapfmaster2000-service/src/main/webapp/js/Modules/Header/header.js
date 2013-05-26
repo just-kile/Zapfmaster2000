@@ -51,7 +51,9 @@ ZMO.modules.header = (function($,ajax){
 
 	}
 	var showNotificationWindow = function(){
-		notificationVisible = true;
+		setTimeout(function(){
+			notificationVisible = true;
+		},500);
 		notificationWindow.css("top","").show();
 		if(scroller&&scroller.refresh)scroller.refresh()
 	}
@@ -64,7 +66,12 @@ ZMO.modules.header = (function($,ajax){
 	}
 	var toggleNotificationBtnClick = function(e){
 		//alert("Not");hide
-		if(e)e.stopPropagation();
+		
+		if(e){
+			e.stopPropagation();
+			e.preventDefault();
+			console.log("Open Head infos");
+		}
 		if(notificationVisible){
 			hideNotificationWindow();
 		}else{
