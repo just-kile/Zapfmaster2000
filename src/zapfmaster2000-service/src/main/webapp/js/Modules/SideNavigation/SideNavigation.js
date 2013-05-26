@@ -44,7 +44,7 @@ ZMO.modules.sideNavigation = (function($,ajax){
 				userInfo.remove();
 			}
 			userInfo = $("<li>").addClass("ZMO-sideNavigation-entry");
-			var img = $("<img>").attr("src",baseUrl+user.userImage).addClass("big");
+			var img = $("<img>").attr("src",baseUrl+user.userImage+"?_="+new Date().getTime()).addClass("big");
 			var span = $("<div>").css("margin-left","4em").text( "#"+userStats.rank.amount+". "+ user.userName+" ("+userStats.amount.amountTotal.toFixed(2)+"l)");
 			
 			userInfo.append(img).append(span);

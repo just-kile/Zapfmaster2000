@@ -15,6 +15,9 @@ ZMO.modules.settings = (function($,ajax){
 	var uploadImage = function(formular){
 		var formData = new FormData ($(formular)[0]);
 		formData.append("token",localStorage.getItem("token"));
+		if(true || typeof FileUploadOptions =="undefined"){
+			
+		
 		$.ajax({
 		    url: baseUrl+'rest/image/user',
 		    data: formData,
@@ -47,6 +50,34 @@ ZMO.modules.settings = (function($,ajax){
 				ZMO.Util.Browser.throbber.hide();
 			}
 		});
+		}else{
+			var options = new FileUploadOptions();
+			var imageURI = formular.find("#imageUpload").val();
+			options.fileKey="image";
+			options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);;
+			 options.mimeType="image/jpeg";
+			 var params ={
+					 token:localStorage.getItem("token")
+			 };
+			 ZMO.Util.Browser.throbber.show("0%");
+			 options.params = params;
+			 var ft = new FileTransfer();
+			 ft.onprogress  = function(e) {
+			    	if(e.lengthComputable) {
+			            //calculate the percentage loaded
+			            var percentComplete =Math.round( (e.loaded / e.total) * 100);
+				        var percentVal = percentComplete + '%';
+				        ZMO.Util.Browser.throbber.updateText(percentVal);
+			    	}
+			    };
+	         ft.upload(formular.find("#imageUpload")[0], encodeURI(baseUrl+'rest/image/user'), function(){
+	        	 alert("Bild geändert!");
+	        	 ZMO.Util.Browser.throbber.hide();
+	         }, function(){
+					alert("Fehler beim Bild hochladen");
+					ZMO.Util.Browser.throbber.hide();
+	         }, options);
+		}
 	};
 	var setRFID = function(rfid){
 		var yep = confirm("Karte erkannt! Ist das deine Karte?");
@@ -111,6 +142,7 @@ ZMO.modules.settings = (function($,ajax){
 		//image upload field
 		$("<input>").attr({
 			name:"image",
+			id:"imageUpload",
 			type:"file"
 		}).appendTo(formula); 
 		//ok button

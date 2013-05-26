@@ -79,12 +79,15 @@ $(document).ready(function(){
 				data["token"] = localStorage.getItem("token");
 				data["rfid"] = rfid;
 				$.ajax({
-				    url: 'rest/register/rfid',
+				    url: baseUrl + 'rest/register/rfid',
 				    type: 'POST',
 				    data:data,
 				    success: function(data){
 						//alert("RFID registriert")
 						redirect();
+				    },
+				    complete:function(e){
+				    	//console.log(e.status)
 				    }
 				});
 			}else{
