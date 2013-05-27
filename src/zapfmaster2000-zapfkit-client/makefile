@@ -8,7 +8,7 @@ BUILD_DIR := $(addprefix build/,$(MODULES))
 SRC       := $(foreach sdir,$(SRC_DIR),$(wildcard $(sdir)/*.cpp)) $(wildcard src/*.cpp)
 OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 INCLUDES  := $(addprefix -I,$(SRC_DIR))
-ALL_LIBS  := curl SDL SDL_ttf SDL_image boost_thread
+ALL_LIBS  := curl SDL SDL_ttf SDL_image boost_thread wiringPi pthread
 LIBS	  := $(addprefix -l,$(ALL_LIBS))
 
 vpath %.cpp $(SRC_DIR)
