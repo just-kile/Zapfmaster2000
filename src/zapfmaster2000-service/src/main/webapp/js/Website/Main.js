@@ -40,6 +40,7 @@ baseUrl = "";
 			"js/Modules/Achievements/Achievements.js",
 			"js/Modules/Achievementstats/Achievementstats.js",
 			"js/Modules/Achievementlist/Achievementlist.js",
+			"js/Modules/Logout/Logout.js",
 			//page definition properties
 			"js/Website/modules_properties.js",
 			//Core2

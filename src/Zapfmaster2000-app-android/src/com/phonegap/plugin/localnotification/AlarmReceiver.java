@@ -72,7 +72,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		//"file:///android_asset/www/index.html"R.drawable.ic_launcher
 		// Construct the notification and notificationManager objects
 		final NotificationManager notificationMgr = (NotificationManager) systemService;
-		final Notification notification = new Notification(R.drawable.icon, tickerText,
+		final Notification notification = new Notification(R.drawable.status_bar_icon, tickerText,
 				System.currentTimeMillis());
 		//final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(), 0);
 		Intent notificationIntent = new Intent(context, Zapfmaster2000.class); final PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);

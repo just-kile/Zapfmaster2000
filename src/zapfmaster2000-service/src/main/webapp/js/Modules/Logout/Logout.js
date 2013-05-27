@@ -29,7 +29,8 @@ ZMO.modules.logout = (function($,ajax){
 	};
 	var pub = {
 			getInstance:getInstance,
-			init:init
+			init:init,
+			logout:logout
 	};
 	return pub;
 }(jQuery,ZMO.ajax));
