@@ -155,8 +155,10 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 
 	var show =function(){
 		ZMO.scrolling.disable();
+		refreshMemberlist();
 		ZMO.Utils.animator.animateRight(mainContainer,container,function(){
 			visible =true;
+			
 		});
 
 	};
