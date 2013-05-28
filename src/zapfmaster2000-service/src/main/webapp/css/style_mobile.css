@@ -688,6 +688,9 @@ margin:0;
 .ZMO-header > .logo img,.nav,.ZMO-header,.ZMO-header .notificationsBtn{
 	height:3em;
 }
+.ZMO-header > .logo img:active{
+	background:rgba(255,255,255,0.2);
+}
 .ZMO-header{
 	color:white;
 border: 1px solid #555;
@@ -848,11 +851,13 @@ img.icon-big{
 /* This is the element that we apply the animation to. */
 .animate{
 	-webkit-transition-duration:0.2s;
-	 -webkit-transform: translate3d(-125%, 0, 0);
+	-webkit-transform: translate3d(-125%, 0, 0);
+	/*left:-100%;*/
 }
 .animateRight{
 		-webkit-transition-duration:0.2s;
 	 -webkit-transform: translate3d(125%, 0, 0);
+	/* left:100%;*/
 }
 
 .animateSide {
@@ -867,8 +872,25 @@ img.icon-big{
 -webkit-transform:translate3d(25%,0px,0px);
 /*left:20%;*/
 }
+/* Classes for non-webkit browsers*/
+.animate-noWk{
+	left:-100%;
+}
+.animateRight-noWk{
+	 left:100%;
+}
+
+.animateSide-noWk {
+left:0;
+}
 
 
+/*Challenge user list*/
+
+.animateChall-noWk {
+left:20%;
+}
+/*======= end noWebkit ======*/
 .rAnimate{
 -webkit-transform:translate3d(0,0px,0px);
 }

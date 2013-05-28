@@ -141,6 +141,16 @@ $(document).ready(function(){
 			}
 		})
 	});
+	var getBaseUrl = function(callback){
+		$.ajax({
+//			url:"http://zapfmaster2000.de/config2.json?_="+new Date().getTime(),
+			url:"http://zapfmaster2000.de/config.json?_="+new Date().getTime(),
+			type:"GET",
+			complete:function(res){
+				baseUrl = $.parseJSON(res.responseText).serverurl;
+			}
+		});
+	}
 	/**
 	* Login App
 	*/
