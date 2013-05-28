@@ -21,10 +21,14 @@ ZMO.Util.localization = (function($){
 	var c = ZMO.UtilConstants;
 	var languagePack = null;
 	var translateTemplate = function(msg){
-		return replaceStringByMap(msg,languagePack||{});
+		return replaceStringByMap(msg,languagePack||{},"template");
 	};
+	var translateAndFillTemplate = function(key,data){
+		var template = translateString(key);
+		return replaceStringByMap(template,data||{});
+	}
 	var translateString = function(msg){
-		return replaceStringByMap(msg,languagePack||{},true);
+		return replaceStringByMap(msg,languagePack||{},"simple");
 	}
 	var init = function(callb){
 		ZMO.ajax.getDatas("js/Util/Localization/packs/"+getLang()+".json",function(json){
@@ -67,11 +71,18 @@ ZMO.Util.localization = (function($){
 	 * @param {Object}
 	 *         map object with the values to the keywords
 	 */
-	var replaceStringByMap = function(value, map,isSimpleString) {
+	var replaceStringByMap = function(value, map,type) {
 	 var tmp = value;
 	 $.each(map, function(key, val) {
 		 val = fillLinks(val); 
-		 var placeHolderRegex = isSimpleString?new RegExp(key, "g"):new RegExp("\\[\\["+key+"\\]\\]", "g");
+		 var placeHolderRegex = null;
+		 if(type=="simple"){
+			 placeHolderRegex =new RegExp(key, "g");
+		 }else if(type=="template"){
+			 placeHolderRegex = new RegExp("\\[\\["+key+"\\]\\]", "g");
+		 }else{
+			 placeHolderRegex = new RegExp("\\{\\{"+key+"\\}\\}", "g");
+		 }
 		 
 		 tmp = tmp.replace(placeHolderRegex, val);
 	 });
@@ -92,6 +103,7 @@ ZMO.Util.localization = (function($){
 			replaceStringByMap:replaceStringByMap,
 			translateTemplate:translateTemplate,
 			translateString:translateString,
+			translateAndFillTemplate:translateAndFillTemplate,
 			changeLang:changeLang,
 			getLang:getLang,
 			init:init

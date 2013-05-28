@@ -30,6 +30,11 @@
 "achievementCountReached":"Erreicht: {{count}}x",
 "startsChallengeAgainst":"{{#team1}}{{*userName*}} {{/team1}} beginnt eine {{duration}} minütigen Challenge gegen {{#team2}}{{*userName*}} {{/team2}}",
 "hadChallengeAgainst":"{{#team1}}{{*userName*}} {{/team1}} hatte eine {{duration}} minütigen Challenge gegen{{#team2}} {{*userName*}} {{/team2}}. <br /> gewonnen hat {{#winner}}{{*userName*}}{{/winner}}",
+
+"challengeStarted":"Die Herausforderung zwischen {{user1Name}} und {{user2Name}} wurde gestartet!",
+"challengeDeclined":"Die Herausforderung zwischen {{user1Name}} und {{user2Name}} wurde abgelehnt!",
+"challengeRequest":"{{userName}} hat dich herausgefordert!",
+
 "place":"Ort:",
 "declinedChallengeTemplate":"{{#team1}}{{*userName*}} {{/team1}} hat eine {{duration}} minütige Challenge gegen {{#team2}}{{*userName*}} {{/team2}} abgelehnt mit der Begründung <br /> &quot;{{reason}}&quot;",
 "newKeg":"Ein neues {{size}} Liter Fass {{brand}} wurde angezapft.",

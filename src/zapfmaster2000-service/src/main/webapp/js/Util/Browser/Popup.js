@@ -11,8 +11,9 @@ var open = function(content){
 			top:$(window).scrollTop()
 		}).on(mC.clickEvent,close);
 		var contentContainer = $("<div>").addClass("inner");
+		
 		var closeBtn = $("<div>").addClass("zmo-clickbutton closeBtn").on(mC.clickEvent,close).text("Close");
-		contentContainer.append(content).append(closeBtn);
+		contentContainer.append($("<div>").addClass("content").append(content)).append(closeBtn);
 		wrapper.append(contentContainer).appendTo("body").hide().fadeIn("fast");
 		container =wrapper;
 	}
