@@ -731,6 +731,11 @@ border-radius:5px;
 	z-index:11;
 	
 }
+.ZMO-header .naviBtn:hover{
+	background:rgba(255,255,255,0.2);
+	
+}
+
 .ZMO-header .notificationsBtn{
 	
 	width:100%;
