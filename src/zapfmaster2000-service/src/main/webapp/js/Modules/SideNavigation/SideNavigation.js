@@ -15,7 +15,7 @@ ZMO.modules.sideNavigation = (function($,ajax){
 			visible=true;
 		});
 		createUserInformation();
-		
+
 		
 	};
 	var hide = function(){
