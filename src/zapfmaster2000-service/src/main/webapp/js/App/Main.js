@@ -66,8 +66,8 @@ function appReady(){
 					//baseUrl = "http://192.168.178.24:8080/zapfmaster2000-service/";
 					//console.log("Base url:"+localStorage.getItem("zm-serverurl"));
 					$.ajax({
-						url:"http://zapfmaster2000.de/config2.json?_="+new Date().getTime(),
-//						url:"http://zapfmaster2000.de/config.json?_="+new Date().getTime(),
+//						url:"http://zapfmaster2000.de/config2.json?_="+new Date().getTime(),
+						url:"http://zapfmaster2000.de/config.json?_="+new Date().getTime(),
 						type:"GET",
 						complete:function(res){
 							console.log("StatusCode : "+res.status);
@@ -85,6 +85,9 @@ function appReady(){
 							if(ZMO.swipeHandler)ZMO.swipeHandler.init();
 							localStorage.setItem("zm-serverurl",baseUrl);
 							console.log("afterwards Base url:"+localStorage.getItem("zm-serverurl"));
+							if(typeof navigator!="undefined" && navigator.splashscreen && navigator.splashscreen.hide){
+								navigator.splashscreen.hide();
+							}
 						}
 					});
 				}else{

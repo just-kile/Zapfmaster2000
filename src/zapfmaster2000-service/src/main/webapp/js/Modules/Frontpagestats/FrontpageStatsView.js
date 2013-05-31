@@ -97,19 +97,36 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 //			text:titleText
 //		});
 	};
+	var timeout = null;
+	var times = 20;// = animation steps
+	var animationTimeout = 10;
+	var oldAmount = 0;
+	var count = 0;
 	var updateChartUser = function(kegModel,chart,titleText){
+		count = 0;
 		var actAmount =  parseFloat(kegModel.current_amount);
-		var completeDiff =  parseFloat(kegModel.size)-actAmount;
-		chart.series[0].data = [[actAmount,1]];
-		chart.series[1].data = [[completeDiff,1]];
+		//
+		clearTimeout(timeout);
 		
-		chart.replot( { resetAxes: true } );    
-//		chart.series[0].data[0].update(completeDiff,false);
-//		chart.series[1].data[0].update(actAmount);
-//		if(titleText)chart.setTitle({
-//			text:titleText
-//		});
+		animateChart(actAmount,parseFloat(kegModel.size),chart);
 	}
+	var animateChart = function(finalAmount,kegSize,chart){
+		timeout = setTimeout(function(){
+			count++;
+			var finalAmountDiff = finalAmount - oldAmount;
+			var newAmount = oldAmount + count/times*finalAmountDiff;
+			var completeDiff = kegSize-newAmount;
+			chart.series[0].data = [[newAmount,1]];
+			chart.series[1].data = [[completeDiff,1]];
+			console.log(" cD: "+completeDiff+" new Amount "+newAmount);
+			chart.replot( { resetAxes: true } );   
+			oldAmount = newAmount;
+			if(count<=times){
+				animateChart(finalAmount,kegSize,chart);
+			}
+			
+		},animationTimeout);
+	};
 	var calcKeg = function(list){
 		var s1 = [];
 		var s2 = [];
