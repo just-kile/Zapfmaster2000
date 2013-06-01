@@ -49,8 +49,13 @@ ZMO.modules.statsMobile = (function($,ajax){
 	var filterAmountArray = function(list){
 
 		return list.sort(function(a, b){
-				  var aName = a.amount;
-				  var bName = b.amount; 
+			try{
+				  var aName = parseFloat(a.amount);
+				  var bName = parseFloat(b.amount); 
+			}catch(e){
+				return 0;
+			}
+				
 				  return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
 		});
 		
@@ -80,7 +85,7 @@ ZMO.modules.statsMobile = (function($,ajax){
 		}
 		});
 		if(othersAmount>0){
-			arr.push([ZMO.translateString("Rest"),othersAmount]);
+			arr.push([ZMO.Util.localization.translateString("Rest"),othersAmount]);
 		}
 		return arr;
 		
