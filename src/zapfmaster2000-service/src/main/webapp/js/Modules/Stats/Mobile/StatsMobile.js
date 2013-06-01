@@ -276,6 +276,7 @@ var initBarChart = function(id,globalStatsModel){
 				amountAtMost:statsModel.amount.once,
 				amountAverage:statsModel.drawCount.average,
 				drawCount:statsModel.drawCount.operations,
+				//drawCountMobilestatsModel.drawCount.operations,
 				mostActivityHour:statsModel.amount.mostActivityHour,
 				achievementCount:statsModel.achievements.count,
 				mostAchievementHour:statsModel.achievements.mostAchievementHour
