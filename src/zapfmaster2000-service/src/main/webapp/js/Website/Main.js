@@ -50,5 +50,28 @@ baseUrl = "";
 				//execute core controller
 				if(ZMO.controller)ZMO.controller.init();
 				else alert("Problems with fileloading!");
+				
 		});
 })();
+
+
+var Changer = Changer || {};
+Changer.hashs = ["#","#stats","#challenges"];
+Changer.times = [60000,60000,30000];
+//Changer.times = [6000,6000,1500];
+Changer.count = 0;
+Changer.offset = 322;
+Changer.startChangeAnimation = function(){
+	
+	
+	setTimeout(function(){
+		Changer.count++;
+		window.location.href=Changer.hashs[Changer.count%Changer.hashs.length];
+		setTimeout(function(){
+			$('body').animate({scrollTop: Changer.offset}, 500,function(){
+				
+			});
+		},200);
+		Changer.startChangeAnimation();
+	},Changer.times[Changer.count%Changer.hashs.length]);
+}
