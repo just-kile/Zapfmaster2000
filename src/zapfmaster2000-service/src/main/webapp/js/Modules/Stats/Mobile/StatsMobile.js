@@ -30,10 +30,10 @@ ZMO.modules.statsMobile = (function($,ajax){
 	};
 	var mC = ZMO.modules.Constants;
 	var container =null;
-	var chartsFcts = {};
 	var refreshStats = function(){
 			var url = mC.urls.STATS;
 			ajax.getDatas(url,function(json){
+				ZMO.logger.log("Stats mobile get json datas"+JSON.stringify(json));
 				var globalStatsModel =new ZMO.modules.StatsModel(json);
 				initAccordion(globalStatsModel);
 				
@@ -45,12 +45,17 @@ ZMO.modules.statsMobile = (function($,ajax){
 			retArr.push([timeParser.getChartTimeAddMins(ind*interval),val]);
 		});
 		return retArr;
-	}
+	};
 	var filterAmountArray = function(list){
 
 		return list.sort(function(a, b){
-				  var aName = a.amount;
-				  var bName = b.amount; 
+			try{
+				  var aName = parseFloat(a.amount);
+				  var bName = parseFloat(b.amount); 
+			}catch(e){
+				return 0;
+			}
+				
 				  return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
 		});
 		
@@ -75,12 +80,12 @@ ZMO.modules.statsMobile = (function($,ajax){
 			}
 		}catch(e){
 
-			ZMO.log("StatsMobile: User got no amount!");
-			ZMO.log(user);
+			ZMO.logger.log("StatsMobile: User got no amount!");
+			ZMO.logger.log(user);
 		}
 		});
 		if(othersAmount>0){
-			arr.push([ZMO.translateString("Rest"),othersAmount]);
+			arr.push([ZMO.Util.localization.translateString("Rest"),othersAmount]);
 		}
 		return arr;
 		
@@ -271,6 +276,7 @@ var initBarChart = function(id,globalStatsModel){
 				amountAtMost:statsModel.amount.once,
 				amountAverage:statsModel.drawCount.average,
 				drawCount:statsModel.drawCount.operations,
+				//drawCountMobilestatsModel.drawCount.operations,
 				mostActivityHour:statsModel.amount.mostActivityHour,
 				achievementCount:statsModel.achievements.count,
 				mostAchievementHour:statsModel.achievements.mostAchievementHour
@@ -301,7 +307,7 @@ var initBarChart = function(id,globalStatsModel){
 	}
 	var initAccordion = function(globalStatsModel){
 		var accordionContainer =$("<div>");
-		var ul =$("<ul>").addClass("statsMobileList")
+		var ul =$("<ul>").addClass("statsMobileList");
 		var kegContainer = initKegContainer(globalStatsModel);
 		var rankContainer = initRankContainer(globalStatsModel);
 		var generalStatsContainer = initGeneralStatsContainer(globalStatsModel);
@@ -320,6 +326,7 @@ var initBarChart = function(id,globalStatsModel){
 			;
 
 		accordionContainer.append(ul).appendTo(container);
+		ZMO.logger.log("Stats mobile init accordion");
 		
 	}
 	/**
@@ -331,7 +338,8 @@ var initBarChart = function(id,globalStatsModel){
 				"zmo-progress": initProgressChart,
 				"zmo-rank":initPieChart,
 				"zmo-keg":initBarChart
-		}
+		};
+		ZMO.logger.log("Stats mobile init");
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM

@@ -221,9 +221,10 @@ ZMO.Util.Net.Ajax = (function($){
 					if(successCb && json!="")successCb(json);
 					connectToChannel(url,successCb,errorCb,data);
 				}else{
-					if(resp.status==c.NO_DATAS_RECEIVED_CODE || (resp.status == 0&&resp.statusText!="abort")){
+					if(resp.status==c.NO_DATAS_RECEIVED_CODE || (resp.status == 0&&resp.statusText!="abort" && resp.statusText!="error")){
 						ZMO.logger.warning("No Datas Received! Reconnect...");
-//						if(errorCb)errorCb(e);
+						ZMO.logger.log(resp.statusText);
+						//						if(errorCb)errorCb(e);
 						connectToChannel(url,successCb,errorCb,data);
 					}else if(resp.status==0){
 						ZMO.logger.log("Request abort success!");
@@ -284,8 +285,13 @@ ZMO.Util.Net.Ajax = (function($){
 				ZMO.logger.log(" Push Paused for url "+reqUrl);
 		});
 	}
-	var resumePushRequests = function(){
-		$.each(pushRequests,function(reqUrl,reqObj){
+	var resumePushRequests = function(url){
+		if(url && pushRequests[url]){
+			var reqObj = pushRequests[url];
+			connectToChannel(url,reqObj.success,reqObj.error,reqObj.data,reqObj.isNotCancable);
+			ZMO.logger.log(" Push Resumed for Url "+reqUrl);
+		}else{
+			$.each(pushRequests,function(reqUrl,reqObj){
 //				pushRequests[reqUrl] = null;
 			
 				connectToChannel(reqUrl,reqObj.success,reqObj.error,reqObj.data,reqObj.isNotCancable);
@@ -293,6 +299,18 @@ ZMO.Util.Net.Ajax = (function($){
 				ZMO.logger.log(" Push Resumed for Url "+reqUrl);
 				
 		});
+		
+		}
+		
+	}
+	var getPushRequests = function(){
+		return pushRequests;
+	}
+	var isRequestPaused = function(url){
+		if(pushRequests[url]){
+			return pushRequests[url].req.readyState ==0;
+		}
+		return true;
 	}
 	var abortReq = function(url){
 		$.each(pushRequests,function(reqUrl,req){
@@ -387,6 +405,8 @@ ZMO.Util.Net.Ajax = (function($){
 			abortReq:abortReq,
 			pausePushRequests:pausePushRequests,
 			resumePushRequests:resumePushRequests,
+			getPushRequests:getPushRequests,
+			isRequestPaused:isRequestPaused,
 			
 			connectChallengeReceive:connectChallengeReceive,
 			abortChallengePush:abortChallengePush,

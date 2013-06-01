@@ -102,6 +102,8 @@ public class DrawResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response draw(@QueryParam("ticks") int ticks,
 			@QueryParam("passphrase") String pPassphrase) {
+		
+		LOG.info(ticks + " ticks were drawn at box " + pPassphrase);
 
 		DrawResponse response = new DrawResponse();
 		try {

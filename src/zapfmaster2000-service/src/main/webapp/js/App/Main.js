@@ -85,6 +85,9 @@ function appReady(){
 							if(ZMO.swipeHandler)ZMO.swipeHandler.init();
 							localStorage.setItem("zm-serverurl",baseUrl);
 							console.log("afterwards Base url:"+localStorage.getItem("zm-serverurl"));
+							if(typeof navigator!="undefined" && navigator.splashscreen && navigator.splashscreen.hide){
+								navigator.splashscreen.hide();
+							}
 						}
 					});
 				}else{

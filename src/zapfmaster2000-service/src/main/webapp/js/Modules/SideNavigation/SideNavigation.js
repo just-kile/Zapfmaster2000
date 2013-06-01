@@ -15,7 +15,7 @@ ZMO.modules.sideNavigation = (function($,ajax){
 			visible=true;
 		});
 		createUserInformation();
-		
+
 		
 	};
 	var hide = function(){
@@ -43,6 +43,8 @@ ZMO.modules.sideNavigation = (function($,ajax){
 			if(userInfo){
 				userInfo.remove();
 			}
+			
+			
 			userInfo = $("<li>").addClass("ZMO-sideNavigation-entry");
 			var img = $("<img>").attr("src",baseUrl+user.userImage+"?_="+new Date().getTime()).addClass("big");
 			var span = $("<div>").css("margin-left","4em").text( "#"+userStats.rank.amount+". "+ user.userName+" ("+userStats.amount.amountTotal.toFixed(2)+"l)");

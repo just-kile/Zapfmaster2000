@@ -17,7 +17,8 @@ using namespace std;
 
 ZapfController::ZapfController(ZapfDisplay& display,
 		AbstractInputService& input, WebserviceConnector* connector) :
-		display(display), connector(connector) {
+		display(display), connector(connector), logger(
+				log4cpp::Category::getInstance(std::string("ZapfController"))) {
 	currentUser = "";
 	amount = 0;
 	unkownUser = false;
@@ -31,6 +32,8 @@ ZapfController::~ZapfController() {
 #include <iostream>
 
 void ZapfController::run() {
+	logger.debug("ZapfController is running.");
+
 	display.paint(startupView);
 	sleep(2);
 
@@ -76,6 +79,8 @@ void ZapfController::run() {
 }
 
 void ZapfController::onRfidRead(long rfid) {
+	logger.info("Processing rfid %d", rfid);
+
 	lastRfid = boost::posix_time::second_clock::local_time();
 	unkownUser = false;
 	try {
@@ -103,6 +108,8 @@ void ZapfController::onRfidRead(long rfid) {
 }
 
 void ZapfController::onTicksRead(int ticks) {
+	logger.info("Processing ticks %d", ticks);
+
 	lastRfid = boost::posix_time::second_clock::local_time();
 	try {
 		boost::property_tree::ptree pt = connector->postTicks(ticks);

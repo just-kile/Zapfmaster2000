@@ -181,7 +181,8 @@ ZMO.modules.header = (function($,ajax){
 		//add icons
 		naviBtn.append(createIcon("images/icons/88-beer-mug.png"));
 		usersBtn.append(createIcon("images/icons/22-skull-n-bones.png"));
-		notificationsBtn.append(createIcon("images/view/zapfmaster2000_klein.png"))	
+		var img = createIcon("images/view/zapfmaster2000_klein.png");
+		notificationsBtn.append(img)	
 						.append(badge = $("<div>").addClass("badge").hide());
 		
 		//add Clickhandler
@@ -190,7 +191,8 @@ ZMO.modules.header = (function($,ajax){
 //		naviBtn.on(mC.clickEvent,onNaviBtnClick);
 		//usersBtn.on("mouseup",onUsersBtnClick);
 		new google.ui.FastButton(usersBtn[0],onUsersBtnClick);
-		notificationsBtn.on(mC.clickEvent,toggleNotificationBtnClick);
+		//notificationsBtn.on(mC.clickEvent,toggleNotificationBtnClick);
+		img.on(mC.clickEvent,toggleNotificationBtnClick);
 		initNotificationWindow();
 		
 		fillRecentNotifications();

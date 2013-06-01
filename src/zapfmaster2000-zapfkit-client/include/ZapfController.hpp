@@ -18,6 +18,7 @@
 #include "serial/LEDController.hpp"
 #include <boost/thread.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <log4cpp/Category.hh>
 
 namespace zm2k {
 
@@ -39,6 +40,8 @@ private:
 
 	boost::thread* controllerThread;
 	boost::posix_time::ptime lastRfid;
+
+	log4cpp::Category& logger;
 
 public:
 

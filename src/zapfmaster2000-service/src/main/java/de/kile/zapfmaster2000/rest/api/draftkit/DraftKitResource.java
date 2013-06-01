@@ -112,6 +112,9 @@ public class DraftKitResource {
 			@FormParam("size") int pSize, @FormParam("brand") String pBrand,
 			@PathParam("draftKitId") long pDraftKitId) {
 
+		LOG.info("Switching keg for box " + pDraftKitId + " to " + pBrand + "("
+				+ pSize + "l)");
+
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 		if (account != null) {
@@ -127,9 +130,10 @@ public class DraftKitResource {
 			boolean canSwitch = box != null
 					&& box.getAccount().getId() == account.getId();
 			tx.commit();
-			
+
 			if (canSwitch) {
-				Zapfmaster2000Core.INSTANCE.getKegService().switchKeg(box, pBrand, pSize);
+				Zapfmaster2000Core.INSTANCE.getKegService().switchKeg(box,
+						pBrand, pSize);
 				return Response.ok().build();
 			}
 

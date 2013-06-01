@@ -160,6 +160,10 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 			visible =true;
 			
 		});
+		//if challenge push receives error / abort reconnect
+		if(ajax.isRequestPaused(ZMO.modules.Constants.push.CHALLENGE)){
+			ajax.resumePushRequests(ZMO.modules.Constants.push.CHALLENGE);
+		};
 
 	};
 	var hide = function(){
