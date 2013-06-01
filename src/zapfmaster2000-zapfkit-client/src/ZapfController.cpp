@@ -92,7 +92,7 @@ void ZapfController::onRfidRead(long rfid) {
 			// load the image
 			try {
 				// TODO: reenable the image
-				//userImage = connector.retrieveImage(pt.get("imagePath", ""));
+				//userImage = connector->retrieveImage(pt.get("imagePath", ""));
 			} catch (const char* e) {
 				cerr << e << endl;
 				userImage = 0;

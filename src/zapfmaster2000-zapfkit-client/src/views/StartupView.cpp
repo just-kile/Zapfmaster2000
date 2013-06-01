@@ -24,13 +24,13 @@ StartupView::~StartupView() {
 void StartupView::paintView(SDL_Surface* screen) const {
 	drawText("Brought to you by", 60, 110, screen);
 
-	drawText("Ben Lenser", 120, 140, screen);
-	drawText("Daniel Wittekind", 120, 165, screen);
-	drawText("Paul Boeck", 120, 190, screen);
-	drawText("Thomas Kipar", 120, 215, screen);
+	drawText("Ben Lenser", 120, 150, screen);
+	drawText("Daniel Wittekind", 120, 190, screen);
+	drawText("Felix Sieckmann", 120, 230, screen);
+	drawText("Thomas Kipar", 120, 270, screen);
 
-	drawText("A product from", 220, 280, screen);
-	SDL_Rect position = {360, 280, 479, 319};
+	drawText("A product from", 220, 320, screen);
+	SDL_Rect position = {425, 330, 544, 369};
 	SDL_BlitSurface(justKileImage, NULL, screen, &position);
 }
 
