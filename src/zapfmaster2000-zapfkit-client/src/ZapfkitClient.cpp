@@ -13,6 +13,8 @@
 #include <string>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
+#include <log4cpp/Category.hh>
+#include <log4cpp/PropertyConfigurator.hh>
 
 #include "../include/ZapfDisplay.hpp"
 #include "../include/serial/InputService.hpp"
@@ -73,6 +75,10 @@ int main(int argc, const char* argv[]) {
 	// load properties
 	boost::property_tree::ptree ptree;
 	boost::property_tree::read_xml(toAbsPath("resources/config.xml"), ptree);
+
+	log4cpp::PropertyConfigurator::configure(toAbsPath("resources/log4cpp.properties"));
+
+	log4cpp::Category::getRoot().info("Zapfmaster 2000 Zapfkit Client is starting up");
 
 	WebserviceConnector webservieConnector(
 			ptree.get<string>("config.webservice.path"),
