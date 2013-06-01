@@ -42,7 +42,7 @@ ZMO.NewsModel =function(config){
 	this.userImage =baseUrl +(config.image||config.imagePath);
 	this.userId = config.userid||config.userId;
 	this.type = config.type;
-	this.place = "Alter Markt";
+	this.place = "Bens Bude";
 	this.boxId = config.boxId;
 };
 ZMO.NewKegNewsModel =function(config){
