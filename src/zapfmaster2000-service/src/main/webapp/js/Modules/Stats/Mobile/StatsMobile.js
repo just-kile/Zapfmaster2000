@@ -139,7 +139,7 @@ var initBarChart = function(id,globalStatsModel){
                 	 min:50,
                  }
              },
-             seriesColors: ["#90b1d8","#dddf0d",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
+             seriesColors: ["#dddf0d","rgba(0,0,0,0.3)",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
        	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
          }));
 }
