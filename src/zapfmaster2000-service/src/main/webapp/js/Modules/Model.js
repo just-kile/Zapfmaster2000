@@ -42,7 +42,7 @@ ZMO.NewsModel =function(config){
 	this.userImage =baseUrl +(config.image||config.imagePath);
 	this.userId = config.userid||config.userId;
 	this.type = config.type;
-	this.place = "Alter Markt";
+	this.place = config.location || "";
 	this.boxId = config.boxId;
 };
 ZMO.NewKegNewsModel =function(config){
@@ -125,11 +125,12 @@ ZMO.GlobalChallengeModel = function(config){
 //	this.team2Images = parseTeam(config.team2,"userImage");
 	this.team1Amount = sumArr(parseTeam(config.team1,"amount"));
 	this.team2Amount = sumArr(parseTeam(config.team2,"amount"));
-	this.team1Won =  parseTeam(config.team1,"won");
-	this.team2Won =  parseTeam(config.team2,"won");
+	this.team1Won = parseTeam(config.team2,"won");
+	this.team2Won =   parseTeam(config.team1,"won");
+	var that = this;
 	
 	this.winner =(function(){
-		if(typeof config.team1Won!="undefined" &&typeof config.team1Won[0]!="undefined" && config.team1Won[0]){
+		if(typeof that.team1Won!="undefined" &&typeof that.team1Won[0]!="undefined" && that.team1Won[0]){
 			return config.team1;
 		}else{
 			return config.team2;

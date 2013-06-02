@@ -49,8 +49,13 @@ ZMO.modules.statsMobile = (function($,ajax){
 	var filterAmountArray = function(list){
 
 		return list.sort(function(a, b){
-				  var aName = a.amount;
-				  var bName = b.amount; 
+			try{
+				  var aName = parseFloat(a.amount);
+				  var bName = parseFloat(b.amount); 
+			}catch(e){
+				return 0;
+			}
+				
 				  return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
 		});
 		
@@ -80,7 +85,7 @@ ZMO.modules.statsMobile = (function($,ajax){
 		}
 		});
 		if(othersAmount>0){
-			arr.push([ZMO.translateString("Rest"),othersAmount]);
+			arr.push([ZMO.Util.localization.translateString("Rest"),othersAmount]);
 		}
 		return arr;
 		
@@ -134,7 +139,7 @@ var initBarChart = function(id,globalStatsModel){
                 	 min:50,
                  }
              },
-             seriesColors: ["#90b1d8","#dddf0d",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
+             seriesColors: ["#dddf0d","rgba(0,0,0,0.3)",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
        	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
          }));
 }
@@ -271,6 +276,7 @@ var initBarChart = function(id,globalStatsModel){
 				amountAtMost:statsModel.amount.once,
 				amountAverage:statsModel.drawCount.average,
 				drawCount:statsModel.drawCount.operations,
+				//drawCountMobilestatsModel.drawCount.operations,
 				mostActivityHour:statsModel.amount.mostActivityHour,
 				achievementCount:statsModel.achievements.count,
 				mostAchievementHour:statsModel.achievements.mostAchievementHour

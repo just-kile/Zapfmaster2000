@@ -28,16 +28,20 @@ size_t write_to_buf(void *ptr, size_t size, size_t count, void *stream) {
 	return size * count;
 }
 
-WebserviceConnector::WebserviceConnector(string pRootPath, string pPassphrase) {
+WebserviceConnector::WebserviceConnector(string pRootPath, string pPassphrase) :
+		logger(
+				log4cpp::Category::getInstance(
+						std::string("WebserviceConnector"))) {
 	rootPath = pRootPath;
 	passphrase = pPassphrase;
 
-	cout << "Created webserice connector" << endl;
-	cout << "URL: " << pRootPath << endl;
-	cout << "Box Passphrase: " << pPassphrase << endl;
+	logger.info("Created webserice connector");
+	logger.info("URL: %s", pRootPath.c_str());
+	logger.info("Box Passphrase: %s", pPassphrase.c_str());
 
 	curl = curl_easy_init();
 	if (curl == 0) {
+		logger.fatal("Could not initialize curl");
 		throw "Could not initialize curl";
 	}
 }
@@ -52,7 +56,8 @@ boost::property_tree::ptree WebserviceConnector::postLogin(long rfidTag) {
 
 	url << rootPath << "rest/box/login?rfid=" << rfidTag << "&passphrase="
 			<< passphrase << endl;
-	cout << url.str() << endl;
+	logger.debug("Performing request: %s", url.str().c_str());
+
 	curl_easy_setopt(curl, CURLOPT_URL, url.str().c_str());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_to_string);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
@@ -63,7 +68,7 @@ boost::property_tree::ptree WebserviceConnector::postLogin(long rfidTag) {
 		throw "Could not post login";
 	}
 
-	cout << "got " << response << endl;
+	logger.debug("got %s", response.c_str());
 	try {
 		stringstream ss;
 		ss << response;
@@ -86,7 +91,8 @@ boost::property_tree::ptree WebserviceConnector::postTicks(int numTicks) {
 
 	url << rootPath << "rest/box/draw?ticks=" << numTicks << "&passphrase="
 			<< passphrase << endl;
-	cout << url.str() << endl;
+	logger.debug("Performing request: %s", url.str().c_str());
+
 	curl_easy_setopt(curl, CURLOPT_URL, url.str().c_str());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_to_string);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
@@ -97,7 +103,7 @@ boost::property_tree::ptree WebserviceConnector::postTicks(int numTicks) {
 		throw "Could not post ticks";
 	}
 
-	cout << "got " << response << endl;
+	logger.debug("got %s", response.c_str());
 	try {
 		stringstream ss;
 		ss << response;
@@ -120,7 +126,8 @@ SDL_Surface* WebserviceConnector::retrieveImage(std::string path) {
 	long httpCode = 0;
 
 	url << rootPath << path << "/big";
-	cout << url.str() << endl;
+	logger.debug("Performing request: %s", url.str().c_str());
+
 	curl_easy_setopt(curl, CURLOPT_URL, url.str().c_str());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_to_buf);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);

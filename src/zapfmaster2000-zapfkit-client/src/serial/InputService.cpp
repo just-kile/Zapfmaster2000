@@ -6,13 +6,13 @@
  */
 
 // TODO: This implementation is crap. Needs to be fixed!
-
 #include <vector>
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <wiringSerial.h>
 #include <boost/thread.hpp>
+#include <log4cpp/Category.hh>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,11 +31,17 @@ AbstractInputService* singleton;
 
 int interface = 0;
 
-char req_tick_low = 0x02;
-char req_tick_high = 0x03;
+int lastTicks = 0;
 
-char res_tick_low = 0x40;
-char res_tick_high = 0x80;
+
+// avr overflows after that tick amount
+const int ticksMax = 0xFFF;
+
+const char req_tick_low = 0x02;
+const char req_tick_high = 0x03;
+
+const char res_tick_low = 0x40;
+const char res_tick_high = 0x80;
 
 int readTicks() {
 	int result = -1;
@@ -43,26 +49,16 @@ int readTicks() {
 	char res_1 = 0x00;
 	char res_2 = 0x00;
 
-	cout << "write request low" << endl;
 	delay(1);
 	wiringPiI2CWrite(interface, req_tick_low);
-	cout << "read response 1" << endl;
 	delay(1);
 	res_1 = wiringPiI2CRead(interface);
-	std::cout << "response 1 is " << std::hex << (int) res_1 << std::dec
-			<< std::endl;
-	cout << "write request high" << endl;
 	delay(1);
 	wiringPiI2CWrite(interface, req_tick_high);
-	cout << "read response 2" << endl;
 	delay(1);
 	res_2 = wiringPiI2CRead(interface);
-	std::cout << "response 2 is " << std::hex << (int) res_2 << std::dec
-			<< std::endl;
 	if ((res_1 & 0xC0) == res_tick_low) {
-		cout << "response 1 is low tick" << endl;
 		if ((res_2 & 0xC0) == res_tick_high) {
-			cout << "response 2 is high tick" << endl;
 			result = (res_2 & 0x3F) << 6 | (res_1 & 0x3F);
 		} else
 			result = -1;
@@ -73,42 +69,54 @@ int readTicks() {
 }
 
 int processZapfcounterInput() {
-	cout << "tach" << endl;
+	log4cpp::Category& logger = log4cpp::Category::getInstance(
+			std::string("I2C Input"));
 
 	interface = wiringPiI2CSetup(0x42);
 
-	if (interface != -1)
-		cout << "port open" << endl;
-	else
-		cout << "error" << interface << endl;
+	if (interface != -1) {
+		logger.info("I2C port open");
+	} else {
+		logger.fatal("Could not open I2C port");
+		throw "Could not open I2C port";
+	}
 
 	int ticks = 0;
 	int attempt_no = 0;
 
-	while (1 == 1) {
-		cout << "----------------------------" << endl;
+	while (true) {
 		do {
 			delay(2);
-			cout << "tick read attempt no " << attempt_no << endl;
+			logger.debug("tick read attempt no %d", attempt_no);
 			ticks = readTicks();
 			attempt_no++;
 		} while (ticks == -1);
 		attempt_no = 0;
-		cout << "ticks: " << ticks << endl;
-		singleton->notifyZapfcount(ticks);
+
+		int tickDelta = ticks - lastTicks;
+		if (tickDelta < 0) {
+			// ticks did overflow
+			tickDelta = ticks + (ticksMax - lastTicks);
+		}
+		lastTicks = ticks;
+
+		logger.debug("ticks: %d ", tickDelta);
+		singleton->notifyZapfcount(tickDelta);
 		delay(490);
 	}
 
 	return 0;
 }
 
-InputService::InputService() {
+InputService::InputService() :
+		logger(log4cpp::Category::getInstance(std::string("InputService"))) {
 	singleton = this;
-	cout << "creating input service..." << endl;
+	logger.info("creating input service...");
 
 	serialInterface = serialOpen("/dev/ttyAMA0", 9600);
 
 	if (serialInterface == -1) {
+		logger.fatal("Could not open serial port");
 		throw "Could not open serial port.";
 	}
 	curRfid = 0;
@@ -154,7 +162,6 @@ void AbstractInputService::notifyZapfcount(int ticks) {
 
 void AbstractInputService::notifyRfid(long rfid) {
 	if (rfid != -1) {
-		cout << "notify rfid " << rfid << endl;
 		notifyListeners(
 				boost::bind(&InputServiceListener::onRfidRead, _1, rfid));
 	}
@@ -179,7 +186,6 @@ void sendMockRfid() {
 		singleton->notifyRfid(rfid);
 	}
 }
-
 
 MockInputService::MockInputService() {
 	singleton = this;
