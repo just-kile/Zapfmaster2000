@@ -24,29 +24,19 @@
 using namespace zm2k;
 using namespace std;
 
-class MyListener: public InputServiceListener {
-
-public:
-	virtual void onRfidRead(long rfid) {
-		cout << "read rfid: " << rfid << endl;
-	}
-	virtual void onTicksRead(int ticks) {
-		cout << "read ticks: " << ticks << endl;
-	}
-};
-
+log4cpp::Category* logger;
 AbstractInputService* service = 0;
 ZapfDisplay display;
 ZapfController* controller;
 
 void inputThread() {
 	try {
-		cout << "running input service" << endl;
+		logger->info("running input service");
 		service->run();
 	} catch (const char* exception) {
-		cerr << "Caught error: " << exception << endl;
-		cerr << "SDL says: " << SDL_GetError() << endl;
-		cerr << "errno: " << errno << ", " << strerror(errno) << endl;
+		logger->fatal("Caught error: %s", exception);
+		logger->fatal("SDL says: %d", SDL_GetError());
+		logger->fatal("errno: %d", strerror(errno));
 		exit(-1);
 	}
 }
@@ -55,9 +45,9 @@ void displayThread() {
 	try {
 		controller->run();
 	} catch (const char* exception) {
-		cerr << "Caught error: " << exception << endl;
-		cerr << "SDL says: " << SDL_GetError() << endl;
-		cerr << "errno: " << errno << ", " << strerror(errno) << endl;
+		logger->fatal("Caught error: %s", exception);
+		logger->fatal("SDL says: %d", SDL_GetError());
+		logger->fatal("errno: %d", strerror(errno));
 		exit(-1);
 	}
 }
@@ -70,15 +60,15 @@ void sighandle(int sig) {
 
 int main(int argc, const char* argv[]) {
 
-	cout << "The Zapfmaster 2000 Zapfkit Client says: Hi." << endl;
-
 	// load properties
 	boost::property_tree::ptree ptree;
 	boost::property_tree::read_xml(toAbsPath("resources/config.xml"), ptree);
 
-	log4cpp::PropertyConfigurator::configure(toAbsPath("resources/log4cpp.properties"));
+	log4cpp::PropertyConfigurator::configure(
+			toAbsPath("resources/log4cpp.properties"));
 
-	log4cpp::Category::getRoot().info("Zapfmaster 2000 Zapfkit Client is starting up");
+	logger = &log4cpp::Category::getRoot();
+	logger->info("Zapfmaster 2000 Zapfkit Client is starting up");
 
 	WebserviceConnector webservieConnector(
 			ptree.get<string>("config.webservice.path"),
@@ -88,33 +78,31 @@ int main(int argc, const char* argv[]) {
 		if (argc > 1) {
 			string mockArg = "mock";
 			if (mockArg.compare(argv[1]) == 0) {
-				cout << "creating mock service" << endl;
+				logger->info("creating mock service");
 				service = new MockInputService();
 			}
 		}
 
 		if (!service) {
-			cout << "created input service" << endl;
+			logger->info("created input service");
 			service = new InputService();
 		}
 
-		service->addListener(new MyListener());
-
 		controller = new ZapfController(display, *service, &webservieConnector);
-		cout << "running thread" << endl;
+		logger->info("running thread");
 		boost::thread t1(inputThread);
 		boost::thread t2(displayThread);
 		controller->setThread(&t2);
 
 		signal(SIGINT, &sighandle);
 
-		cout << "joining" << endl;
+		logger->info("Zapfkit client is up an running.");
 		t1.join();
 		t2.join();
 	} catch (const char* exception) {
-		cerr << "Caught error: " << exception << endl;
-		cerr << "SDL says: " << SDL_GetError() << endl;
-		cerr << "errno: " << errno << ", " << strerror(errno) << endl;
+		logger->fatal("Caught error: %s", exception);
+		logger->fatal("SDL says: %d", SDL_GetError());
+		logger->fatal("errno: %d", strerror(errno));
 		exit(-1);
 	}
 
