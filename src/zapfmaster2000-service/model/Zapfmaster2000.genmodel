@@ -1,73 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/Zapfmaster2000RESTful/src/main/generated" modelPluginID="Zapfmaster2000RESTful"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/zapfmaster2000-service/src/main/generated" modelPluginID="Zapfmaster2000RESTful"
     modelName="Zapfmaster2000" modelPluginClass="" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false">
   <foreignModel>Zapfmaster2000.ecore</foreignModel>
   <genPackages prefix="Zapfmaster2000" basePackage="de.kile.zapfmaster2000.rest.model"
       disposableProviderFactory="true" ecorePackage="Zapfmaster2000.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Zapfmaster2000.ecore#//ChallengeType">
-      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//ChallengeType/OneVsOne"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Zapfmaster2000.ecore#//Sex">
       <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//Sex/male"/>
       <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//Sex/female"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Zapfmaster2000.ecore#//NewsType">
-      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//NewsType/drawing"/>
-      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//NewsType/achievement"/>
-      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//NewsType/other"/>
-      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//NewsType/challenge_startet"/>
-      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//NewsType/challenge_done"/>
-      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//NewsType/challenge_declined"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Zapfmaster2000.ecore#//ChallengeType">
+      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//ChallengeType/OneVsOne"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Zapfmaster2000.ecore#//UserType">
+      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//UserType/USER"/>
+      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//UserType/GUEST"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Zapfmaster2000.ecore#//ChallengeState">
+      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//ChallengeState/PENDING"/>
+      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//ChallengeState/DECLINED"/>
+      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//ChallengeState/RUNNING"/>
+      <genEnumLiterals ecoreEnumLiteral="Zapfmaster2000.ecore#//ChallengeState/FINISHED"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="Zapfmaster2000.ecore#//Blob"/>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//Achievement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Achievement/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Achievement/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Achievement/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Achievement/imagePath"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Achievement/gained"/>
     </genClasses>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//Box">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Box/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Box/version"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Box/system"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Box/account"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Box/passphrase"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Box/kegs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Box/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Box/tickDisturbanceTerm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Box/tickRegressor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Box/tickReduction"/>
     </genClasses>
-    <genClasses ecoreClass="Zapfmaster2000.ecore#//System">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//System/boxes"/>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//Account">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Account/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Account/boxes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Account/news"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Account/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Account/users"/>
     </genClasses>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//Challenge">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Challenge/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Challenge/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Challenge/finished"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Challenge/startTime"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Challenge/participants"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Challenge/state"/>
     </genClasses>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//Challenge1v1">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Challenge1v1/challenge"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Challenge1v1/challengeEnd"/>
-    </genClasses>
-    <genClasses ecoreClass="Zapfmaster2000.ecore#//ChallengeParticipant">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//ChallengeParticipant/challenge"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//ChallengeParticipant/team"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//ChallengeParticipant/won"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//ChallengeParticipant/user"/>
-    </genClasses>
-    <genClasses ecoreClass="Zapfmaster2000.ecore#//Config">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Config/key"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Config/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Challenge1v1/user1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Challenge1v1/user2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Challenge1v1/winner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Challenge1v1/duration"/>
     </genClasses>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//Drawing">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Drawing/id"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Drawing/user"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Drawing/keg"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Drawing/amount"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Drawing/date"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Drawing/duration"/>
     </genClasses>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//GainedAchievement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//GainedAchievement/id"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//GainedAchievement/achievement"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//GainedAchievement/date"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//GainedAchievement/user"/>
     </genClasses>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//Keg">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Keg/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Keg/brand"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Keg/size"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Keg/startDate"/>
@@ -76,15 +84,42 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Keg/box"/>
     </genClasses>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//News">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//News/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//News/contents"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//News/imagePath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//News/id"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//News/account"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//News/date"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//DrawingNews">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//DrawingNews/drawing"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//AchievementNews">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//AchievementNews/gainedAchievment"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//OtherNews">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//OtherNews/contents"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//OtherNews/imagePath"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//Challenge1v1StartedNews">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Challenge1v1StartedNews/challenge"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//Challenge1v1DeclinedNews">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Challenge1v1DeclinedNews/challenge"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//Challenge1v1DoneNews">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Challenge1v1DoneNews/challenge"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//NewKegNews">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//NewKegNews/keg"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//NewUserNews">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//NewUserNews/user"/>
     </genClasses>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//MappingQrRfid">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//MappingQrRfid/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//MappingQrRfid/qrCode"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//MappingQrRfid/rfidTag"/>
     </genClasses>
     <genClasses ecoreClass="Zapfmaster2000.ecore#//User">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//User/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//User/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//User/password"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//User/imagePath"/>
@@ -93,7 +128,21 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//User/weight"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//User/gained"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//User/drawings"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//User/challengeParticipations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//User/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//User/account"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//Token">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Token/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Token/token"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Token/account"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Zapfmaster2000.ecore#//Token/user"/>
+    </genClasses>
+    <genClasses ecoreClass="Zapfmaster2000.ecore#//Image">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Image/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Image/path"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Image/contentType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Image/content"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Zapfmaster2000.ecore#//Image/contentBig"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
