@@ -281,7 +281,8 @@ public class DrawServiceImpl implements DrawService {
 	}
 
 	private double calcRealAmount(int pRawTicks) {
-		return pRawTicks * box.getTickRegressor() + box.getTickRegressor();
+		return pRawTicks * box.getTickRegressor()
+				+ box.getTickDisturbanceTerm();
 	}
 
 	/**
