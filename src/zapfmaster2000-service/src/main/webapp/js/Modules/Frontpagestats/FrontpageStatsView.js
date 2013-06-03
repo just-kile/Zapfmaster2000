@@ -102,6 +102,9 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 	var animationTimeout = 10;
 	var oldAmount = 0;
 	var count = 0;
+	var resetOldAmount = function(){
+		oldAmount = 0;
+	}
 	var updateChartUser = function(kegModel,chart,titleText){
 		count = 0;
 		var actAmount =  parseFloat(kegModel.current_amount);
@@ -228,14 +231,14 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
    
 	};
 	var clearCharts = function(){
-		
 	}
 	var pub = {
 			init:init,
 			createBarChart:createBarChart,
 			updateChart:updateChart,
 			updateChartUser:updateChartUser,
-			clearCharts:clearCharts
+			clearCharts:clearCharts,
+			resetOldAmount:resetOldAmount
 	};
 	return pub;
 }(jQuery,ZMO.ajax));

@@ -164,7 +164,7 @@ ZMO.MemberModel = function(config) {
 	this.userId = config.userId;
 	this.achievements = config.achievements;
 	this.userImage = baseUrl +(config.imagePath||config.userImage);
-	this.totalAmount = config.totalAmount != undefined?config.totalAmount.toFixed(2):0;
+	this.totalAmount = config.totalAmount != undefined?config.totalAmount.toFixed(2):0.00;
 	
 	// ignore all achievements if there are way to many
 	var max = ZMO.modules.Constants.member.MAX_ACHIEVEMENTS;

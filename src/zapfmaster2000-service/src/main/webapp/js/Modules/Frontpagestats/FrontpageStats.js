@@ -76,6 +76,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 			return typeof boxId=="object"?boxId:keyContainerMap[boxId]["model"];
 		};
 		var switchContainerToUser =function(boxId){
+			view.resetOldAmount();
 			var kegModel = getModelToId(boxId);
 			getKegContainer(kegModel).hide();
 			getUserContainer(kegModel).show();

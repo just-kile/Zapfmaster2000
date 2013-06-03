@@ -57,7 +57,7 @@ baseUrl = "";
 
 var Changer = Changer || {};
 Changer.hashs = ["#","#stats","#challenges"];
-Changer.times = [60000,60000,30000];
+Changer.times = [30000,30000,15000];
 //Changer.times = [6000,6000,1500];
 Changer.count = 0;
 Changer.offset = 322;

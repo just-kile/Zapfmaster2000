@@ -18,7 +18,7 @@ ZMO.modules.StatsModel = function(config){
 		this.promille = this.promille?this.promille.toFixed(2):null;
 		
 		this.bestUserList = new ZMO.modules.BestUserListModel(config.bestUserList||config.amountUserList);
-		this.bestUserListHour = new ZMO.modules.BestUserListModel(config.amountUserListLastHour);
+		this.bestUserListHour = new ZMO.modules.BestUserListModel(config.amountUserListLastHour||config.bestUserListHour);
 		this.achievementUserList = new ZMO.modules.AchievementUserListModel(config.achievementUserList);
 		this.drawCountUserList = new ZMO.modules.DrawCountUserListModel(config.drawCountUserList);
 		this.rank = new ZMO.modules.RankModel(config.rank);
