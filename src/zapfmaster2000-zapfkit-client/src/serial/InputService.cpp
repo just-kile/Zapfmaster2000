@@ -28,11 +28,9 @@ using namespace std;
 
 AbstractInputService* singleton;
 
-
 int interface = 0;
 
-int lastTicks = 0;
-
+int lastTicks = -1;
 
 // avr overflows after that tick amount
 const int ticksMax = 0xFFF;
@@ -93,16 +91,21 @@ int processZapfcounterInput() {
 		} while (ticks == -1);
 		attempt_no = 0;
 
-		int tickDelta = ticks - lastTicks;
-		if (tickDelta < 0) {
-			// ticks did overflow
-			tickDelta = ticks + (ticksMax - lastTicks);
-		}
-		lastTicks = ticks;
+		if (lastTicks == -1) {
+			// first read of ticks ever. save that, since we do not start at 0!
+			lastTicks = ticks;
+		} else {
+			int tickDelta = ticks - lastTicks;
+			if (tickDelta < 0) {
+				// ticks did overflow
+				tickDelta = ticks + (ticksMax - lastTicks);
+			}
+			lastTicks = ticks;
 
-		logger.debug("ticks: %d ", tickDelta);
-		singleton->notifyZapfcount(tickDelta);
-		delay(490);
+			logger.debug("ticks: %d ", tickDelta);
+			singleton->notifyZapfcount(tickDelta);
+			delay(490);
+		}
 	}
 
 	return 0;
