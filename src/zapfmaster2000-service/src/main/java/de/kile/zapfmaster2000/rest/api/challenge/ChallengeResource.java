@@ -103,6 +103,15 @@ public class ChallengeResource {
 			List<User> loggedInUsers = Zapfmaster2000Core.INSTANCE
 					.getChallengeService().retrieveLoggedInUsers(
 							user.getAccount());
+
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			String rawQuery = "SELECT SUM(d.amount) FROM Drawing d "
+					+ "WHERE d.user.id = :userId GROUP BY d.user.id ";
+
 			List<LoggedInUserReponse> response = new ArrayList<>();
 			for (User loggedInUser : loggedInUsers) {
 				// ignore user that requested the user list
@@ -111,9 +120,21 @@ public class ChallengeResource {
 					r.setUserId(loggedInUser.getId());
 					r.setUserName(loggedInUser.getName());
 					r.setUserImage(loggedInUser.getImagePath());
+
+					@SuppressWarnings("unchecked")
+					List<Double> result = session.createQuery(rawQuery)
+							.setLong("userId", loggedInUser.getId()).list();
+					double totalAmount = 0;
+					if (result.size() == 1) {
+						totalAmount = result.get(0);
+					}
+					r.setTotalAmount(totalAmount);
+
 					response.add(r);
 				}
 			}
+			
+			tx.commit();
 
 			// order by user name
 			Collections.sort(response, new Comparator<LoggedInUserReponse>() {
