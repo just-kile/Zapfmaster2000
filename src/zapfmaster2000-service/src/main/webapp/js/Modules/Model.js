@@ -125,8 +125,8 @@ ZMO.GlobalChallengeModel = function(config){
 //	this.team2Images = parseTeam(config.team2,"userImage");
 	this.team1Amount = sumArr(parseTeam(config.team1,"amount"));
 	this.team2Amount = sumArr(parseTeam(config.team2,"amount"));
-	this.team1Won = parseTeam(config.team2,"won");
-	this.team2Won =   parseTeam(config.team1,"won");
+	this.team1Won =   parseTeam(config.team1,"won");
+	this.team2Won = parseTeam(config.team2,"won");
 	var that = this;
 	
 	this.winner =(function(){
