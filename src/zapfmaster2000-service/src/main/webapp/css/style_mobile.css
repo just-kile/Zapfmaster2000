@@ -418,7 +418,17 @@ background: url(../images/view/backgrnd2.jpg) repeat scroll 0 0 #FFFFFF;
 	margin-left: -1.7em;
 	font-size: 12px;
 }
-
+#ZMO-duels-container .usernames {
+	text-align:center;
+	font-size: 12px;
+	padding-top:2.6em;
+}
+#ZMO-duels-container .center {
+	position:static;
+}
+#ZMO-duels-container .name1,#ZMO-duels-container .name2 {
+	position:static;
+}
 #ZMO-duels-container .time {
 	left: 50%;
 	margin-left: -60px;
