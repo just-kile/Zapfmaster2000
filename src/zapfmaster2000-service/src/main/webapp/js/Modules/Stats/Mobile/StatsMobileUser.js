@@ -228,11 +228,19 @@ ZMO.modules.statsMobileUser = (function($,ajax){
 		 return statsContainer;
 	}
 	var initUserInfoContainer = function(userStatsModel){
-		 var statsContainer = $("<div>").addClass("statsDiv zmo-user");//initBasicContainer(null,"Achievements","images/icons/112-group.png");
+//		 var statsContainer = $("<div>").addClass("statsDiv zmo-user");//initBasicContainer(null,"Achievements","images/icons/112-group.png");
+		 var statsContainer = $("<li>").css({
+			 "overflow-x":"hidden",
+			 width:"100%"
+		 });
+		 var contentContainer =$("<div>").addClass("statsDiv zmo-user").css({
+			// width:"90%"
+		 });
 		 var user = userStatsModel.user;
 		 var img = $("<img>").attr("src",baseUrl+user.userImage);
 		 var userName = $("<div>").text("#"+userStatsModel.rank.amount+". "+user.userName);
-		 statsContainer.append(img).append(userName);
+		 contentContainer.append(img).append(userName);
+		 statsContainer.append(contentContainer);
 		 return statsContainer;
 	}
 	var	toggleContainer = function(e,globalStatsModel){
@@ -263,9 +271,9 @@ ZMO.modules.statsMobileUser = (function($,ajax){
 		
 		
 		ul	.on(mC.clickEvent,".headline",function(e){
-			
 			toggleContainer(e,userStatsModel);
-		})	.append(userInfoContainer)
+		})	
+			.append(userInfoContainer)
 			.append(generalStatsContainer)
 			.append(achievementContainer)
 			.append(progress)

@@ -115,6 +115,7 @@ ZMO.modules_properties ={
 				main:[{
 					moduleId:"statsMobileUser",
 					ratio:"100%",
+					nocache:true,
 					position:[0,0]
 				}],
 				  

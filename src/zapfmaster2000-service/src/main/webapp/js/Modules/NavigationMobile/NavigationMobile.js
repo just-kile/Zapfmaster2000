@@ -10,10 +10,12 @@ ZMO.modules.navigationMobile = (function($,ajax){
 		container.append(ul);
 		$.each(links,function(ind,link){
 			var li = $("<li>");
+			var containerDiv = $("<div>").addClass("listContainer");
 			var textSpan = $("<span>").text(link.text);
 			var icon = $("<img>").attr("src",link.image);
 			var iconCont = $("<div>").addClass("iconContainer").append(icon);
-			li.append(iconCont).append(textSpan);
+			containerDiv.append(iconCont).append(textSpan);
+			li.append(containerDiv);
 			ul.append(li);
 			
 			li.on(c.clickEvent,function(){
