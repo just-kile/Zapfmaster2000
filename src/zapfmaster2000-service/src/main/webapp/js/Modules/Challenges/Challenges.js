@@ -103,6 +103,7 @@ ZMO.modules.challenges = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(queryparams,data){
+		if(ZMO.throbber)ZMO.throbber.show();
 //		ajax.getDatas(c.urls.CHALLENGES,onChallengesReceive);
 		ajax.enqueueDatas({
 			url:c.urls.CHALLENGES,

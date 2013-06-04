@@ -17,6 +17,7 @@ ZMO.modules.achievementlist = (function($,ajax){
 	 * in jQuery Mobile it is called: onPageChange
 	 */
 	var init = function(data){
+		if(ZMO.throbber)ZMO.throbber.show();
 		//you can access with data.id to the wanted id
 		ajax.enqueueDatas({
 			url:mC.urls.ACHIEVEMENTSSTATS,

@@ -28,6 +28,7 @@ ZMO.modules.userinfo = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(hashParams,moduleParams){
+		if(ZMO.throbber)ZMO.throbber.show();
 		userId = hashParams.id;
 		ajax.enqueueDatas({
 			url:mC.urls.USERSTATS,

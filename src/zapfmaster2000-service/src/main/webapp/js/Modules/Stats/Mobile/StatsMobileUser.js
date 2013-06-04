@@ -280,6 +280,7 @@ ZMO.modules.statsMobileUser = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(hashParams,moduleParams){
+		if(ZMO.throbber)ZMO.throbber.show();
 		var userId = hashParams.id;
 		refreshStats(userId);
 		chartFcts = {

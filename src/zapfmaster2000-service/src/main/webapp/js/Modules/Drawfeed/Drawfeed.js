@@ -160,6 +160,7 @@ ZMO.modules.drawfeed = (function($,Ajax){
 	  * Gets called, when container is appended
 	  */
 	 var init = function(queryparams,data){
+		 if(ZMO.throbber)ZMO.throbber.show();
 		 rfid = $("#rfid");
 		 container =$("#drawfeed-news")
 		 fillInitialData();

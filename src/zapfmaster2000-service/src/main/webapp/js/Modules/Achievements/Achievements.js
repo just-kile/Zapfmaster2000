@@ -17,6 +17,7 @@ ZMO.modules.achievements = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(){
+		if(ZMO.throbber)ZMO.throbber.show();
 		ajax.getDatas(mC.urls.ACHIEVEMENTS,onAchievementsReceive)
 	}
 	/**

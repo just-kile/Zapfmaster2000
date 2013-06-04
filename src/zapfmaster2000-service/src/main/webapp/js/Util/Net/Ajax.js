@@ -224,7 +224,7 @@ ZMO.Util.Net.Ajax = (function($){
 					if(successCb && json!="")successCb(json);
 					connectToChannel(url,successCb,errorCb,data);
 				}else{
-					if(resp.status==c.NO_DATAS_RECEIVED_CODE || (resp.status == 0&&resp.statusText!="abort" && resp.statusText!="error")){
+					if(resp.status==c.NO_DATAS_RECEIVED_CODE || (resp.status == 0&&resp.statusText!="abort")){
 						ZMO.logger.warning("No Datas Received! Reconnect...");
 						ZMO.logger.log(resp.statusText);
 						//						if(errorCb)errorCb(e);
@@ -292,7 +292,7 @@ ZMO.Util.Net.Ajax = (function($){
 		if(url && pushRequests[url]){
 			var reqObj = pushRequests[url];
 			connectToChannel(url,reqObj.success,reqObj.error,reqObj.data,reqObj.isNotCancable);
-			ZMO.logger.log(" Push Resumed for Url "+reqUrl);
+			ZMO.logger.log(" Push Resumed for Url "+url);
 		}else{
 			$.each(pushRequests,function(reqUrl,reqObj){
 //				pushRequests[reqUrl] = null;

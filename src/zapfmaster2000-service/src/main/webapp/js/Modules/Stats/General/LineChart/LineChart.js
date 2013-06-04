@@ -84,6 +84,7 @@ ZMO.modules.lineChart = (function($,view,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(hashParams){
+		if(ZMO.throbber)ZMO.throbber.show();
 		userId = hashParams.id;
 		var minusMinutes = -mC.stats.lineChartStartDateDays*24*60;
 		var max = new ZMO.TimeParser(new Date());
