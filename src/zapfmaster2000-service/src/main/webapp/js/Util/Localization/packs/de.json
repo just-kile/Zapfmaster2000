@@ -63,7 +63,13 @@
 "choseImage":"Lade ein Bild von dir hoch!",
 "selectLang":"Wähle die Sprache: ",
 "registerRfid":"Registriere deine RFID Karte",
-"Settings":"Einstellungen",
 "Never":"Niemals",
-"Rest":"Rest"
+"Rest":"Rest",
+
+"News":"News",
+"Challenges":"Challenges",
+"Stats":"Stats",
+"Settings":"Einstellungen",
+"Logout":"Logout"
+
 }

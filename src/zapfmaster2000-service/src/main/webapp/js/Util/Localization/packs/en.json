@@ -62,7 +62,14 @@
 "choseImage":"Upload an image!",
 "selectLang":"Choose language:  ",
 "registerRfid":"Reregister your RFID Card",
-"Settings":"Settings",
+
 "Never":"Never",
-"Rest":"Rest"
+"Rest":"Rest",
+
+"News":"News",
+"Challenges":"Challenges",
+"Stats":"Stats",
+"Settings":"Settings",
+"Logout":"Logout"
+
 }

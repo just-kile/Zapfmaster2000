@@ -33,7 +33,7 @@ ZMO.modules_properties ={
 				}]
 			}
 		},
-		duels:{
+		challenges:{
 			sections:{
 				navigation:[{
 					moduleId:"receiveChallenge",

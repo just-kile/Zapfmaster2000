@@ -71,7 +71,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 			});
 			//fill view with model data
 			$.each(memberModelArr,function(ind,val){
-				var title = $("<div>").text(val.userName + ", "+val.totalAmount+"L").addClass("name");
+				var title = $("<div>").text(val.userName + ", "+val.totalAmount+"l").addClass("name");
 				var image = $("<img>").attr("src",val.userImage).addClass("icon-big");
 				var li = $("<li>").addClass("ZMO-sideNavigation-entry");//.data("link","#");
 				li.append(image).append(title).append(createTimeChooserContainer(val));

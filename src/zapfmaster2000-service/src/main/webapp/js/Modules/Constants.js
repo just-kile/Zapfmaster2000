@@ -137,9 +137,9 @@ ZMO.modules.Constants = {
 			title:"News",
 			image:"images/icons/166-newspaper.png"
 		},{
-			link:"#duels",
-			text:"Duels",
-			title:"Duels",
+			link:"#challenges",
+			text:"Challenges",
+			title:"Challenges",
 			image:"images/icons/115-bow-and-arrow.png"
 		},{
 			link:"#stats",
