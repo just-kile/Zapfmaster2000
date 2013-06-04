@@ -57,6 +57,7 @@
 "achievements":"Achievements",
 
 "challengeRemaining":"{{time}} min remaining",
+"challengeSRemaining":"{{time}} s remaining",
 "challengeDone":"Challenge completed!",
 "challengeRequest":"Challenge requested!",
 "choseImage":"Upload an image!",

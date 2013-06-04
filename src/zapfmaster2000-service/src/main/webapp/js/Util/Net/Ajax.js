@@ -169,6 +169,9 @@ ZMO.Util.Net.Ajax = (function($){
 	var resetQueue = function(){
 		aspirantModules = {};
 	};
+	var getAspirants = function(){
+		return aspirantModules;
+	}
 	/*******
 	 * Server Push
 	 *******/
@@ -395,6 +398,7 @@ ZMO.Util.Net.Ajax = (function($){
 			updateEnqueueParams:updateEnqueueParams,
 			resetQueue:resetQueue,
 			updateEnqueueDatas:getEnqueueDatas,
+			getAspirants:getAspirants,
 			
 			connectToChannel:connectToChannel,
 			connectToNewsPush:connectToNewsPush,

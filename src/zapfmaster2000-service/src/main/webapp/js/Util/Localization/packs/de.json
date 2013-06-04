@@ -58,6 +58,7 @@
 "achievements":"Achievements",
 
 "challengeRemaining":"{{time}} min verbleibend",
+"challengeSRemaining":"{{time}} s verbleibend",
 "challengeDone":"Challenge beendet",
 "challengeRequest":"Challenge verschickt!",
 "choseImage":"Lade ein Bild von dir hoch!",
