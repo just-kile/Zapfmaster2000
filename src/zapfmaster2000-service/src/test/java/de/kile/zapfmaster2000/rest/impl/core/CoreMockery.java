@@ -5,6 +5,7 @@ import org.junit.After;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.core.box.BoxService;
+import de.kile.zapfmaster2000.rest.core.challenge.ChallengeService;
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 
@@ -22,6 +23,8 @@ public class CoreMockery {
 	private BoxService originalBoxService;
 	
 	private AuthService originalAuthService;
+	
+	private ChallengeService originalChallengeService;
 
 	public void mockTransactionService(TransactionService pManager) {
 		originalTransactionService = getCore().getTransactionService();
@@ -42,6 +45,11 @@ public class CoreMockery {
 		originalAuthService = getCore().getAuthService();
 		getCore().setAuthService(pAuthService);
 	}
+	
+	public void mockChallengeService(ChallengeService pChallengeService) {
+		originalChallengeService = getCore().getChallengeService();
+		getCore().setChallengeService(pChallengeService);
+	}
 
 	@After
 	public void resetMocks() {
@@ -54,9 +62,17 @@ public class CoreMockery {
 		if (originalBoxService != null) {
 			getCore().setBoxManager(originalBoxService);
 		}
+		if (originalAuthService != null) {
+			getCore().setAuthService(originalAuthService);
+		}
+		if (originalChallengeService != null) {
+			getCore().setChallengeService(originalChallengeService);
+		}
 	}
 
 	private Zapfmaster2000CoreImpl getCore() {
 		return (Zapfmaster2000CoreImpl) Zapfmaster2000Core.INSTANCE;
 	}
+
+
 }

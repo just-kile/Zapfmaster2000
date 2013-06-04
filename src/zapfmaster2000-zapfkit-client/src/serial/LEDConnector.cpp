@@ -26,8 +26,6 @@ void changeColor(double r, double g, double b) {
 	stringstream ss;
 	ss << "resources/changeColor.sh ";
 	ss << r << " " << g << " " << b;
-	cout << "### color: " << ss.str() << endl;
-	system(ss.str().c_str());
 }
 
 void fadeThread() {
@@ -48,9 +46,6 @@ void fadeThread() {
 
 					double ratio = diff.total_milliseconds()
 							/ (double) fadeTime;
-
-					cout << "### diff: " << diff.total_milliseconds() << endl;
-					cout << "### ratio: " << ratio << endl;
 
 					double newR = currentColor.r * (1 - ratio)
 							+ targetColor.r * ratio;

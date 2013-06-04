@@ -47,7 +47,7 @@ void ZapfView::loadImages() {
 }
 
 void ZapfView::loadFonts() {
-	font = TTF_OpenFont(toAbsPath("resources/FreeSans.ttf").c_str(), 20);
+	font = TTF_OpenFont(toAbsPath("resources/FreeSans.ttf").c_str(), 30);
 	if (font == NULL) {
 		throw "Could not load font";
 	}

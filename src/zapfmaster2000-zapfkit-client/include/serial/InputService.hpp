@@ -10,6 +10,7 @@
 
 #include "../Observable.hpp"
 #include <boost/thread.hpp>
+#include <log4cpp/Category.hh>
 
 
 namespace zm2k {
@@ -44,6 +45,8 @@ private:
 	int serialInterface;
 	int serialByteCounter;
 	long curRfid;
+
+	log4cpp::Category& logger;
 
 public:
 

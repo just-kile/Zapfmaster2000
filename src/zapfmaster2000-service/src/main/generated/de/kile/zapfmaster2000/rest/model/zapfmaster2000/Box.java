@@ -20,6 +20,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getKegs <em>Kegs</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getLocation <em>Location</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickRegressor <em>Tick Regressor</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction <em>Tick Reduction</em>}</li>
  * </ul>
  * </p>
  *
@@ -177,5 +180,83 @@ public interface Box extends EObject {
 	 * @generated
 	 */
 	void setLocation(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Tick Disturbance Term</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tick Disturbance Term</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tick Disturbance Term</em>' attribute.
+	 * @see #setTickDisturbanceTerm(int)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_TickDisturbanceTerm()
+	 * @model
+	 * @generated
+	 */
+	int getTickDisturbanceTerm();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tick Disturbance Term</em>' attribute.
+	 * @see #getTickDisturbanceTerm()
+	 * @generated
+	 */
+	void setTickDisturbanceTerm(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Tick Regressor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tick Regressor</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tick Regressor</em>' attribute.
+	 * @see #setTickRegressor(double)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_TickRegressor()
+	 * @model
+	 * @generated
+	 */
+	double getTickRegressor();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickRegressor <em>Tick Regressor</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tick Regressor</em>' attribute.
+	 * @see #getTickRegressor()
+	 * @generated
+	 */
+	void setTickRegressor(double value);
+
+	/**
+	 * Returns the value of the '<em><b>Tick Reduction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tick Reduction</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tick Reduction</em>' attribute.
+	 * @see #setTickReduction(double)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_TickReduction()
+	 * @model
+	 * @generated
+	 */
+	double getTickReduction();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction <em>Tick Reduction</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tick Reduction</em>' attribute.
+	 * @see #getTickReduction()
+	 * @generated
+	 */
+	void setTickReduction(double value);
 
 } // Box

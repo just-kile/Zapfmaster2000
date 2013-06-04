@@ -29,6 +29,22 @@
 // the three lower nibbles will be send to the I2C master which makes it a 12 bit 
 // integer.
 // 
+// Author: Daniel Wittekind
+// C 2013
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
 // TinyWireS
 // This software uses the TinyWireS implementation by rambo, which has added support
 // for onRequest and onReceive
@@ -55,8 +71,11 @@ int pinLed = 1;
 // Flow-Meter Tick pin / interrupt
 int pinInt = 4;
 
-// ticks counted within interval
+// ticks counted, rolls over
 int ticks = 0;
+
+// ticks counted within interval
+int internalTicks = 0;
 
 // interval for which ticks are accumulated, ms
 int interval = 500;
@@ -98,7 +117,7 @@ void receiveEvent(uint8_t amount) {
   if (inByte == reqTickLow) // master asks for low part of ticks
     outByte = resTickLow | (ticks & 0x003F); // put low part of ticks in transmission byte
   else if (inByte == reqTickHigh) { // master asks for high part of tick
-    outByte = resTickHigh | (ticks & 0x0FC0) >> 6; // put low part of ticks in transmission byte
+    outByte = resTickHigh | (ticks & 0x0FC0) >> 6; // put high part of ticks in transmission byte
   }
   sbi(GIMSK,PCIE); // Turn on external interrupt
 }
@@ -131,18 +150,18 @@ void loop(){
   if ( (currentMillis - previousMillis) > interval ) { // has interval passed?
     cbi(GIMSK,PCIE); // Turn off external interrupt
     // set led brightness according to ticks
-    if (ticks > 0) {
-      if (ticks < 100)
+    if (internalTicks > 0) {
+      if (internalTicks < 100)
         analogWrite(pinLed, 50);
-      else if (ticks < 200)
+      else if (internalTicks < 200)
         analogWrite(pinLed, 100);
-      else if (ticks < 400)
+      else if (internalTicks < 400)
         analogWrite(pinLed, 150);
-      else if (ticks < 600)
+      else if (internalTicks < 600)
         analogWrite(pinLed, 210);
-      else if (ticks >= 800)
+      else if (internalTicks >= 800)
         analogWrite(pinLed, 255);
-      ticks = 0; // reset ticks after interval
+      internalTicks = 0; // reset ticks after interval
     }
     else {
       analogWrite(pinLed, 0); // turn led off, if no ticks were registered
@@ -155,4 +174,5 @@ void loop(){
 // called if interrupt is triggered
 ISR(PCINT0_vect){
   ticks++; // increase ticks
+  internalTicks++; // increase internal ticks
 }

@@ -8,6 +8,8 @@ public class LoggedInUserReponse {
 
 	private String userImage;
 
+	private double totalAmount;
+
 	public long getUserId() {
 		return userId;
 	}
@@ -30,6 +32,14 @@ public class LoggedInUserReponse {
 
 	public void setUserImage(String userImage) {
 		this.userImage = userImage;
+	}
+
+	public double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
 }

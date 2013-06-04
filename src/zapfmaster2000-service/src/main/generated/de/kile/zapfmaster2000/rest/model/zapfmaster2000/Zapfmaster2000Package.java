@@ -186,13 +186,40 @@ public interface Zapfmaster2000Package extends EPackage {
 	int BOX__LOCATION = 5;
 
 	/**
+	 * The feature id for the '<em><b>Tick Disturbance Term</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__TICK_DISTURBANCE_TERM = 6;
+
+	/**
+	 * The feature id for the '<em><b>Tick Regressor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__TICK_REGRESSOR = 7;
+
+	/**
+	 * The feature id for the '<em><b>Tick Reduction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__TICK_REDUCTION = 8;
+
+	/**
 	 * The number of structural features of the '<em>Box</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX_FEATURE_COUNT = 6;
+	int BOX_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.
@@ -1577,6 +1604,39 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getBox_Location();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tick Disturbance Term</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_TickDisturbanceTerm();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickRegressor <em>Tick Regressor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tick Regressor</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickRegressor()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_TickRegressor();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction <em>Tick Reduction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tick Reduction</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_TickReduction();
+
+	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2650,6 +2710,30 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute BOX__LOCATION = eINSTANCE.getBox_Location();
+
+		/**
+		 * The meta object literal for the '<em><b>Tick Disturbance Term</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__TICK_DISTURBANCE_TERM = eINSTANCE.getBox_TickDisturbanceTerm();
+
+		/**
+		 * The meta object literal for the '<em><b>Tick Regressor</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__TICK_REGRESSOR = eINSTANCE.getBox_TickRegressor();
+
+		/**
+		 * The meta object literal for the '<em><b>Tick Reduction</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__TICK_REDUCTION = eINSTANCE.getBox_TickReduction();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.

@@ -204,4 +204,14 @@ public class Zapfmaster2000CoreImpl implements Zapfmaster2000Core {
 	void setPushService(PushService pPushService) {
 		pushService = pPushService;
 	}
+
+	/**
+	 * Sets the challenge service. Use only for mocking in unit tests!
+	 * 
+	 * @param pChallengeService
+	 *            the challenge service to set
+	 */
+	void setChallengeService(ChallengeService pChallengeService) {
+		challengeService = pChallengeService;
+	}
 }

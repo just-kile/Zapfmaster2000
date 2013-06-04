@@ -6,8 +6,6 @@
 	
 	<entry key="box.draw.minTicks">10</entry>
 	<entry key="box.draw.minAmount">0.05</entry>
-	<entry key="box.draw.tickReduction">0</entry>
-	<entry key="box.draw.ticksPerLiter">5200</entry>
 	
 	<entry key="beer.size">0.5</entry>
 		

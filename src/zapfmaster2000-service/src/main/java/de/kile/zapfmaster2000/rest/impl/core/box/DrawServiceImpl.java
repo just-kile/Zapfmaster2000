@@ -37,7 +37,7 @@ public class DrawServiceImpl implements DrawService {
 	private final Object SYNC_USER_LOCK = new Object();
 
 	/** the box the manager is used for */
-	private final Box box;
+	private Box box;
 
 	/** user that is currently logged in at this box */
 	private User currentUser;
@@ -79,6 +79,7 @@ public class DrawServiceImpl implements DrawService {
 						currentUser = newUser;
 						scheduleAutoLogout();
 						lastDrawing = System.currentTimeMillis();
+						retrieveOwnBox();
 						notifyLoginSuccessful(currentUser);
 						return currentUser;
 					} else {
@@ -111,8 +112,7 @@ public class DrawServiceImpl implements DrawService {
 			// logged out even if he is not doing anything
 			return calcRealAmount(totalTicks);
 		}
-		pRawAmount -= config
-				.getInt(ConfigurationConstants.BOX_DRAW_TICK_REDUCTION);
+		pRawAmount -= box.getTickReduction();
 
 		scheduleAutoLogout();
 		lastDrawing = System.currentTimeMillis();
@@ -127,16 +127,35 @@ public class DrawServiceImpl implements DrawService {
 				notifyDrawing(currentUser, realAmount);
 			} else {
 				// guest starts to draw
+				retrieveOwnBox();
 				guestUser = findGuest();
 				notifyLoginSuccessful(guestUser);
 				currentUser = guestUser;
 				notifyDrawing(guestUser, realAmount);
 				scheduleAutoLogout();
 			}
-			
+
 		}
-		
+
 		return realAmount;
+	}
+
+	/**
+	 * Reads the own box from db once more, since tick setup parameters might
+	 * have changed.
+	 */
+	private void retrieveOwnBox() {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			box = (Box) session.load(Zapfmaster2000Package.eINSTANCE.getBox()
+					.getName(), box.getId());
+		} finally {
+			session.getTransaction().commit();
+			session.close();
+		}
+
 	}
 
 	@Override
@@ -262,11 +281,8 @@ public class DrawServiceImpl implements DrawService {
 	}
 
 	private double calcRealAmount(int pRawTicks) {
-		ConfigurationService config = Zapfmaster2000Core.INSTANCE
-				.getConfigurationService();
-		int ticksPerLiter = config
-				.getInt(ConfigurationConstants.BOX_DRAW_TICKS_PER_LITER);
-		return (double) pRawTicks / (double) ticksPerLiter;
+		return pRawTicks * box.getTickRegressor()
+				+ box.getTickDisturbanceTerm();
 	}
 
 	/**

@@ -92,9 +92,9 @@ void ZapfController::onRfidRead(long rfid) {
 			// load the image
 			try {
 				// TODO: reenable the image
-				//userImage = connector.retrieveImage(pt.get("imagePath", ""));
+				//userImage = connector->retrieveImage(pt.get("imagePath", ""));
 			} catch (const char* e) {
-				cerr << e << endl;
+				logger.warn(e);
 				userImage = 0;
 			}
 		}
@@ -102,7 +102,7 @@ void ZapfController::onRfidRead(long rfid) {
 	} catch (const char* e) {
 		unkownUser = true;
 		currentUser = ""; // no user
-		cerr << e << endl;
+		logger.warn(e);
 	}
 	controllerThread->interrupt();
 }
@@ -115,7 +115,7 @@ void ZapfController::onTicksRead(int ticks) {
 		boost::property_tree::ptree pt = connector->postTicks(ticks);
 		amount = pt.get<double>("totalAmount", 0);
 	} catch (const char* e) {
-		cerr << e << endl;
+		logger.warn(e);
 	}
 	controllerThread->interrupt();
 }

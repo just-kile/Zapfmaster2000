@@ -37,6 +37,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getPassphrase <em>Passphrase</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getKegs <em>Kegs</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getLocation <em>Location</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getTickRegressor <em>Tick Regressor</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getTickReduction <em>Tick Reduction</em>}</li>
  * </ul>
  * </p>
  *
@@ -132,6 +135,66 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @ordered
 	 */
 	protected String location = LOCATION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTickDisturbanceTerm() <em>Tick Disturbance Term</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTickDisturbanceTerm()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int TICK_DISTURBANCE_TERM_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getTickDisturbanceTerm() <em>Tick Disturbance Term</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTickDisturbanceTerm()
+	 * @generated
+	 * @ordered
+	 */
+	protected int tickDisturbanceTerm = TICK_DISTURBANCE_TERM_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTickRegressor() <em>Tick Regressor</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTickRegressor()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double TICK_REGRESSOR_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getTickRegressor() <em>Tick Regressor</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTickRegressor()
+	 * @generated
+	 * @ordered
+	 */
+	protected double tickRegressor = TICK_REGRESSOR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTickReduction() <em>Tick Reduction</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTickReduction()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double TICK_REDUCTION_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getTickReduction() <em>Tick Reduction</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTickReduction()
+	 * @generated
+	 * @ordered
+	 */
+	protected double tickReduction = TICK_REDUCTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -294,6 +357,69 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getTickDisturbanceTerm() {
+		return tickDisturbanceTerm;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTickDisturbanceTerm(int newTickDisturbanceTerm) {
+		int oldTickDisturbanceTerm = tickDisturbanceTerm;
+		tickDisturbanceTerm = newTickDisturbanceTerm;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM, oldTickDisturbanceTerm, tickDisturbanceTerm));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public double getTickRegressor() {
+		return tickRegressor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTickRegressor(double newTickRegressor) {
+		double oldTickRegressor = tickRegressor;
+		tickRegressor = newTickRegressor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__TICK_REGRESSOR, oldTickRegressor, tickRegressor));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public double getTickReduction() {
+		return tickReduction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTickReduction(double newTickReduction) {
+		double oldTickReduction = tickReduction;
+		tickReduction = newTickReduction;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__TICK_REDUCTION, oldTickReduction, tickReduction));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -358,6 +484,12 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return getKegs();
 			case Zapfmaster2000Package.BOX__LOCATION:
 				return getLocation();
+			case Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM:
+				return getTickDisturbanceTerm();
+			case Zapfmaster2000Package.BOX__TICK_REGRESSOR:
+				return getTickRegressor();
+			case Zapfmaster2000Package.BOX__TICK_REDUCTION:
+				return getTickReduction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -390,6 +522,15 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case Zapfmaster2000Package.BOX__LOCATION:
 				setLocation((String)newValue);
 				return;
+			case Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM:
+				setTickDisturbanceTerm((Integer)newValue);
+				return;
+			case Zapfmaster2000Package.BOX__TICK_REGRESSOR:
+				setTickRegressor((Double)newValue);
+				return;
+			case Zapfmaster2000Package.BOX__TICK_REDUCTION:
+				setTickReduction((Double)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -420,6 +561,15 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case Zapfmaster2000Package.BOX__LOCATION:
 				setLocation(LOCATION_EDEFAULT);
 				return;
+			case Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM:
+				setTickDisturbanceTerm(TICK_DISTURBANCE_TERM_EDEFAULT);
+				return;
+			case Zapfmaster2000Package.BOX__TICK_REGRESSOR:
+				setTickRegressor(TICK_REGRESSOR_EDEFAULT);
+				return;
+			case Zapfmaster2000Package.BOX__TICK_REDUCTION:
+				setTickReduction(TICK_REDUCTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -444,6 +594,12 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return kegs != null && !kegs.isEmpty();
 			case Zapfmaster2000Package.BOX__LOCATION:
 				return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
+			case Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM:
+				return tickDisturbanceTerm != TICK_DISTURBANCE_TERM_EDEFAULT;
+			case Zapfmaster2000Package.BOX__TICK_REGRESSOR:
+				return tickRegressor != TICK_REGRESSOR_EDEFAULT;
+			case Zapfmaster2000Package.BOX__TICK_REDUCTION:
+				return tickReduction != TICK_REDUCTION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -466,6 +622,12 @@ public class BoxImpl extends EObjectImpl implements Box {
 		result.append(passphrase);
 		result.append(", location: ");
 		result.append(location);
+		result.append(", tickDisturbanceTerm: ");
+		result.append(tickDisturbanceTerm);
+		result.append(", tickRegressor: ");
+		result.append(tickRegressor);
+		result.append(", tickReduction: ");
+		result.append(tickReduction);
 		result.append(')');
 		return result.toString();
 	}

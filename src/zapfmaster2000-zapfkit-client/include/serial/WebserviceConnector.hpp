@@ -13,6 +13,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <SDL/SDL.h>
 #include <boost/thread.hpp>
+#include <log4cpp/Category.hh>
 
 namespace zm2k {
 
@@ -25,6 +26,8 @@ private:
 	std::string passphrase;
 
 	CURL* curl;
+
+	log4cpp::Category& logger;
 
 	WebserviceConnector(WebserviceConnector&);
 

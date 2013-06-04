@@ -21,10 +21,6 @@ public class ConfigurationConstants {
 
 	public final static String BOX_DRAW_MIN_AMOUNT = "box.draw.minAmount";
 
-	public final static String BOX_DRAW_TICK_REDUCTION = "box.draw.tickReduction";
-
-	public final static String BOX_DRAW_TICKS_PER_LITER = "box.draw.ticksPerLiter";
-
 	public final static String BEER_SIZE = "beer.size";
 
 }
