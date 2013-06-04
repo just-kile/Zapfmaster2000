@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Meta Tags for mobile -->
+   <meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />  
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+ <script src="../libs/jquery/jquery-1.8.1.js"></script> 
+  <script src="../libs/bootstrap/js/bootstrap.min.js"></script> 
+  <script src="../libs/ICanHaz.min.js"></script> 
+  
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css" />
+ 
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap-responsive.min.css" />
+
+ <link rel="stylesheet" type="text/css" href="css/style.css" />
+ <script>
+ var baseUrl = "../";
+ </script>
+<script id="dashboard-calibration" type="text/html">
+<div class="navbar box">
+  <div class="navbar-inner">
+<form class="form-horizontal" action="../rest/calibrate/boxes/{{boxId}}" data-boxid="{{boxId}}">
+<fieldset>	
+
+	<legend class="brand">Zapfkit Id: {{boxId}}</legend>
+   <div class="control-group">
+	    <label class="control-label" for="regression_{{boxId}}">Regression</label>
+		 <div class="controls">
+			<input class="registerItem" id="regression_{{boxId}}" name="regression" type="text" placeholder="Regression" value="{{regression}}">
+			<a href="#" class="tt" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{regressionTT}}"><i class="icon-question-sign"></i></a>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="disturbance_{{boxId}}">Störung</label>
+		<div class="controls">
+			<input class="registerItem" id="disturbance_{{boxId}}" name="disturbance" type="text" placeholder="Disturbance" value="{{disturbance}}">
+			<a href="#" class="tt" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{disturbanceTT}}"><i class="icon-question-sign"></i></a>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="tickReduction_{{boxId}}">Tick Reduktion</label>
+		<div class="controls">
+			<input class="registerItem" id="tickReduction_{{boxId}}" name="tickReduction" type="number" placeholder="tickReduction" value="{{tickReduction}}">
+			<a href="#" class="tt" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{tickReductionTT}}"><i class="icon-question-sign"></i></a>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<input id ="newKegBtn" type="submit" value="Ändern" class="btn btn-primary" style="display:block">
+		</div>
+	</div>
+	
+</fieldset>
+</form>
+</div>
+</div></script>
+
+</head>
+<body>
+<!-- Include Navigation -->
+<div id="navigation"></div>
+<script>
+var navigation = $("#navigation").load("header.html",function(){
+	navigation.find(".calibration").addClass("active");	
+});
+</script>
+<script type="text/javascript">
+var toolTips= {
+		regressionTT:"regresion",
+		disturbanceTT:"dstubiwe",
+		tickReductionTT:"tick reducktion"
+}
+function refreshData(){
+	var data = {};
+	data["token"] = localStorage.getItem("token");
+	$.ajax({
+		type:"GET",
+		url:"../rest/calibration/boxes",
+		data:data,
+		error:function(){
+			alert("Error retrieving boxes!");
+		},
+		success: function(boxArr){
+		/*// DEBUG DATAS
+			boxArr = [{
+				boxId:1,
+				regression:Math.random(),
+				disturbance:Math.random(),
+				tickReduction:5
+			},{
+				boxId:2,
+				regression:Math.random(),
+				disturbance:Math.random(),
+				tickReduction:90
+			}];*/
+			var container = $(".mainContainer");container.find(".box").remove();
+			$.each(boxArr,function(ind,boxData){
+				$.extend(boxData,toolTips);
+				var template =ich["dashboard-calibration"](boxData);
+				container.append(template);
+				
+			});
+			container.find(".tt").tooltip();
+		}
+	})
+	
+
+	
+
+}
+$(function(){
+
+	refreshData();
+	
+	$("#refreshBoxBtn").on("click",function(){
+		refreshData();
+	});
+	$(".mainContainer").on("submit","form",function(e){
+		e.preventDefault();
+		var form = $(e.currentTarget);
+		var boxId=form.data("boxid");
+		
+		var data = {
+				regression:form.find("#regression_"+boxId).val(),
+				disturbance:form.find("#disturbance_"+boxId).val(),
+				tickReduction:form.find("#tickReduction_"+boxId).val(),
+				
+		};
+		data["token"] = localStorage.getItem("token");
+		$.ajax({
+			type:"POST",
+			url:form.attr("action"),
+			data:data,
+			success:function(){
+				alert("Daten geändert!");
+			},
+			error:function(){
+				alert("Daten ändern fehlgeschlagen!");
+			}
+		})
+	});
+});
+
+</script>
+<!-- Main Container -->
+
+<div class="container mainContainer" style="margin-top:50px">
+	<div class="btn btn-success" id="refreshBoxBtn" style="margin-bottom:20px">Aktualisiere Zapfkits<i class="icon-refresh icon-white"></i></div>
+
+</div>
+
+</body>
+</html>
