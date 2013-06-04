@@ -70,9 +70,9 @@ var navigation = $("#navigation").load("header.html",function(){
 </script>
 <script type="text/javascript">
 var toolTips= {
-		regressionTT:"regresion",
-		disturbanceTT:"dstubiwe",
-		tickReductionTT:"tick reducktion"
+		regressionTT:"Die Regression und die Störung sind die beiden Koeffizienten zur linearen Regression um die tatsächliche Menge aus den Ticks zu ermitteln. Ticks wurden dabei schon reduziert. <br/>Formel:  Menge = Regression * total_ticks + Störung.",
+		disturbanceTT:"Die Regression und die Störung sind die beiden Koeffizienten zur linearen Regression um die tatsächliche Menge aus den Ticks zu ermitteln. Ticks wurden dabei schon reduziert. <br/>Formel:  Menge = Regression * total_ticks + Störung.",
+		tickReductionTT:'Der Wert "Tick Reduktion" wird von JEDEM Tick Request vom Zapfkit zum Backend subtrahiert. Je höher dieser Wert ist, desto niedriger ist der Zapf-Mengenwert, der in die Datenbank geschrieben wird.',
 }
 function refreshData(){
 	var data = {};
@@ -85,8 +85,8 @@ function refreshData(){
 			alert("Error retrieving boxes!");
 		},
 		success: function(boxArr){
-		/*// DEBUG DATAS
-			boxArr = [{
+		// DEBUG DATAS
+		/*	boxArr = [{
 				boxId:1,
 				regression:Math.random(),
 				disturbance:Math.random(),
@@ -104,7 +104,9 @@ function refreshData(){
 				container.append(template);
 				
 			});
-			container.find(".tt").tooltip();
+			container.find(".tt").tooltip({
+				html:true
+			});
 		}
 	})
 	
