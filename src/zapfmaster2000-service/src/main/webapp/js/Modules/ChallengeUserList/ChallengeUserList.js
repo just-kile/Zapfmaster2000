@@ -21,7 +21,7 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 					var type = obj.type;//challengeDatas.type.id;
 					var challengeeId = memberModel.userId;
 					ajax.sendChallengeRequest(type,challengeeId,duration,function(){
-						 ZMO.Util.Popup.open(ZMO.Util.localization.translateString(wording.challengeRequest));
+						 new ZMO.Util.Popup().open(ZMO.Util.localization.translateString(wording.challengeRequest));
 						//alert(ZMO.Util.localization.translateString(wording.challengeRequest));
 					});
 				};

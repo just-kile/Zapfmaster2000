@@ -18,7 +18,7 @@ ZMO.modules.createChallenge = (function($,view,ajax){
 		var challengeeId = challengeDatas.victim.userId;
 		ajax.sendChallengeRequest(type,challengeeId,duration,function(){
 			//alert("Challenge verschickt!");
-			 ZMO.Util.Popup.open("Challenge verschickt!");
+			new ZMO.Util.Popup().open("Challenge verschickt!");
 			resetChallengeDatas();
 			init();
 		});

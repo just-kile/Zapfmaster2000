@@ -34,14 +34,14 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 			}else if(type=="challengeaccepted"){
 				//alert("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde gestartet!");
 				 var template = ZMO.Util.localization.translateAndFillTemplate("challengeStarted",datas);
-				 ZMO.Util.Popup.open(template);
+				 new ZMO.Util.Popup().open(template);
 				 
 			}else if(type=="challengedeclined"){
 				//alert("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde abgelehnt!");
 				// ZMO.Util.Popup.open("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde abgelehnt!");
 				 //ZMO.Util.Popup.open(ZMO.Util.Localization.
 				 var template = ZMO.Util.localization.translateAndFillTemplate("challengeDeclined",datas);
-				 ZMO.Util.Popup.open(template);
+				 new ZMO.Util.Popup().open(template);
 			}
 
 		}
