@@ -156,8 +156,9 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 	var show =function(){
 		ZMO.scrolling.disable();
 		refreshMemberlist();
+		visible =true;
 		ZMO.Utils.animator.animateRight(mainContainer,container,function(){
-			visible =true;
+			
 			
 		});
 		//if challenge push receives error / abort reconnect
@@ -168,8 +169,9 @@ ZMO.modules.challengeUserList = (function($,ajax,view){
 	};
 	var hide = function(){
 		ZMO.scrolling.enable();
+		visible =false;
 		ZMO.Utils.animator.animateRightRev(mainContainer,container,function(){
-			visible =false;
+		
 		});
 
 	};
