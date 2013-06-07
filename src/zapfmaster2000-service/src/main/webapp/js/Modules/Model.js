@@ -58,7 +58,8 @@ ZMO.NewUserNewsModel =function(config){
 	this.image = baseUrl +config.image;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";
 	this.userId = config.userId;
-	this.userName = config.userName
+	this.userName = config.userName;
+	this.place = config.location || "";
 };
 ZMO.AchievementModel = function(config){
 	this.userId = config.userId;
@@ -70,6 +71,7 @@ ZMO.AchievementModel = function(config){
 	this.achievementName = config.achievementName;
 	this.description = config.description;
 	this.image =baseUrl +config.image;
+	this.place = config.location || "";
 };
 ZMO.OtherModel = function(config){
 	this.text = config.text;
@@ -140,7 +142,7 @@ ZMO.GlobalChallengeModel = function(config){
 	this.image =baseUrl + config.image||config.challengeImage;
 	this.dateParser = config.startDate?new ZMO.TimeParser(config.startDate):null;
 	this.date = config.startDate?new ZMO.TimeParser(config.startDate).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
-			
+	this.place = config.location || "";
 	//this.date = config.start_time||config.startDate;
 
 };
