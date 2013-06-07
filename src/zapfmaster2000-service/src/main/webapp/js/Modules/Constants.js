@@ -163,7 +163,7 @@ ZMO.modules.Constants = {
 		navBarUserInformation:{
 			link:"#user"
 		},
-		badExcuses:["Muss mir morgen Muttis Haare kämmen","Mutti","und 3"]
+		badExcuses:["Muss morgen Muttis Haare kämmen","Keine Lust","Trinke lieber nen Tee"]
 	
 
 };

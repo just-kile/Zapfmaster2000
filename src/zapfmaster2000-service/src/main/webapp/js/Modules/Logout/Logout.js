@@ -18,8 +18,10 @@ ZMO.modules.logout = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(hashParams,moduleParams){
-		container.text("Logout").on("mouseup",logout);
+		//container.text("Logout").on("mouseup",logout);
+		logout();
 		if(ZMO.throbber)ZMO.throbber.hide();
+		
 	};
 	/**
 	 * Gets called when page contains the module. This container will be added to DOM

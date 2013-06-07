@@ -11,8 +11,9 @@ ZMO.modules.sideNavigation = (function($,ajax){
 	
 	var show =function(){
 		ZMO.scrolling.disable();
+		visible=true;
 		ZMO.Utils.animator.animateLeft(mainContainer,container,function(){
-			visible=true;
+			
 		});
 		createUserInformation();
 
@@ -20,9 +21,10 @@ ZMO.modules.sideNavigation = (function($,ajax){
 	};
 	var hide = function(){
 		ZMO.scrolling.enable();
+		visible = false;
 		ZMO.Utils.animator.animateLeftRev(mainContainer,container,function(){
 			//"container" will be hided at webkiTransitionEnd event
-			visible = false;
+			
 		});
 
 	};

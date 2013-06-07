@@ -12,12 +12,12 @@ ZMO.modules.settings = (function($,ajax){
 		registerRfid:"registerRfid"
 	};
 	var container =null,form = null,language = null,rfid=null,rfidRegister=null;
-	var uploadImage = function(formular){
-		var formData = new FormData ($(formular)[0]);
+	var uploadImage = function(formular,isPhoto){
+
+		if(!isPhoto && (true || typeof FileUploadOptions =="undefined")){
+		var formData = null;
+			formData = new FormData ($(formular)[0]);
 		formData.append("token",localStorage.getItem("token"));
-		if(true || typeof FileUploadOptions =="undefined"){
-			
-		
 		$.ajax({
 		    url: baseUrl+'rest/image/user',
 		    data: formData,
@@ -52,9 +52,12 @@ ZMO.modules.settings = (function($,ajax){
 		});
 		}else{
 			var options = new FileUploadOptions();
-			var imageURI = formular.find("#imageUpload").val();
+			var imageURI = formular;
+			console.log(imageURI);
 			options.fileKey="image";
-			options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);;
+			options.chunkedMode = false;
+			options.trustEveryone = true;
+			options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
 			 options.mimeType="image/jpeg";
 			 var params ={
 					 token:localStorage.getItem("token")
@@ -70,8 +73,8 @@ ZMO.modules.settings = (function($,ajax){
 				        ZMO.Util.Browser.throbber.updateText(percentVal);
 			    	}
 			    };
-	         ft.upload(formular.find("#imageUpload")[0], encodeURI(baseUrl+'rest/image/user'), function(){
-	        	 alert("Bild geändert!");
+	         ft.upload(imageURI, encodeURI(baseUrl+'rest/image/user/'), function(){
+	        	 new ZMO.Util.Popup().open("Bild ge&auml;ndert!");
 	        	 ZMO.Util.Browser.throbber.hide();
 	         }, function(){
 					alert("Fehler beim Bild hochladen");
@@ -136,7 +139,8 @@ ZMO.modules.settings = (function($,ajax){
 		rfidRegister.hide();
 	};
 	var generateForm = function(){
-		var formula = $("<form>").addClass("statsDiv");
+		var formDiv = $("<div>").addClass("statsDiv");
+		var formula = $("<form>");
 		//label
 		$("<p>").text(t.translateString(wording.choseImage)).appendTo(formula);
 		//image upload field
@@ -150,8 +154,20 @@ ZMO.modules.settings = (function($,ajax){
 //			name:"image",
 //			type:"submit",
 //			id:"uploadImage"
-//		}).appendTo(formula); 
-		return formula;
+//		}).appendTo(formula);
+		 formDiv.append(formula);
+		if( typeof device!="undefined" && device.cordova){
+			$("<input>").attr({
+				id:"take_photo",
+				type:"button"
+			}).val("Take a photo!").appendTo(formDiv);
+			
+		}
+
+			
+
+		
+		return formDiv;
 	};
 	var generateRegisterRfidButton = function(){
 		return $("<div>").addClass("statsDiv")
@@ -199,6 +215,23 @@ ZMO.modules.settings = (function($,ajax){
 				if(inputVal!="")
 					uploadImage(form);
 		});
+		
+		if(typeof device!="undefined" && device.cordova){
+			$("#take_photo").on("click",function(){
+				navigator.camera.getPicture( function(image){
+					uploadImage(image,true);
+				}, function(){
+					ZMO.logger.log("Camera error!");
+				}, {
+					mediaType:Camera.MediaType.PICTURE,
+					width:160,
+					heigt:160,
+					quality: 50, 
+                    destinationType: navigator.camera.DestinationType.FILE_URI,
+                   // sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+				});
+			});
+		}
 		if(ZMO.throbber)ZMO.throbber.hide();
 		
 	};
@@ -209,7 +242,8 @@ ZMO.modules.settings = (function($,ajax){
 	var getInstance = function(){
 		
 		container = $("<div>");
-		form = generateForm().appendTo(container);
+		var formDiv= generateForm().appendTo(container);
+		form = formDiv.children();
 		language =generateLanguageChooser().appendTo(container);
 		rfid = generateRegisterRfidButton().appendTo(container);
 		
