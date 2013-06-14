@@ -121,7 +121,7 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 			var completeDiff = kegSize-newAmount;
 			chart.series[0].data = [[newAmount,1]];
 			chart.series[1].data = [[completeDiff,1]];
-			console.log(" cD: "+completeDiff+" new Amount "+newAmount);
+			ZMO.logger.log(" cD: "+completeDiff+" new Amount "+newAmount);
 			chart.replot( { resetAxes: true } );   
 			oldAmount = newAmount;
 			if(count<=times){
