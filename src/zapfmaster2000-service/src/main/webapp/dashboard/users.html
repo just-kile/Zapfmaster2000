@@ -16,10 +16,13 @@
   var ZMO = ZMO || {};
   ZMO.Util = ZMO.Util ||{};
   ZMO.modules = ZMO.modules ||{};
+  
+
   </script>
     <script src="../js/Modules/Constants.js"></script> 
       <script src="../js/Modules/Model.js"></script>    
   <script src="../js/Util/UtilConstants.js"></script>   
+    <script src="../js/Util/Object/Exists.js"></script>  
   <script src="../js/Util/Net/Ajax.js"></script>   
  <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css" />
  
@@ -28,8 +31,45 @@
  <link rel="stylesheet" type="text/css" href="css/style.css" />
  <script>
  var baseUrl = "../";
+ var ajax = ZMO.Util.Net.Ajax;
+ ZMO.exists = ZMO.Util.Object.exists;
+ ZMO.Constants =ZMO.UtilConstants;
+ var defaultImg = "../images/view/pix.png";
+ ZMO.logger = (function(){
+	  	var log = function(str){
+	  		if(console && ZMO.Constants.debugMode){
+	  	
+	  		console.log(str);
+	  		}
+	  	};
+	  	var warning = function(str){
+	  		if(console && ZMO.Constants.debugMode){
+	  	
+	  		console.log(str);
+	  		}
+	  	};
+	  	var error = function(str){
+	  		if(console && ZMO.Constants.debugMode){
+	  			
+	  			console.log(str);
+	  			}
+	  	}
+	  	var pub = {
+	  			log:log,
+	  			warning:warning,
+	  			error:error
+	  	};
+	  	return pub;
+	  })();
  </script>
-<script id="dashboard-calibration" type="text/html">
+<script id="dashboard-users-row" type="text/html">
+
+<tr data-userid={{userId}}>
+  <td><img class="img-rounded" src="{{userImage}}{{image}}" width="32" height="32"/></td>
+  <td>{{userName}}</td>
+   <td class="amountCol">{{totalAmount}} l</td>
+    <td><button class="btn btn-primary del-rfid" >RFID Löschen</button></td>
+</tr>
 </script>
 
 </head>
@@ -44,32 +84,43 @@ var navigation = $("#navigation").load("header.html",function(){
 <script type="text/javascript">
 
 $(function(){
-	var ajax = ZMO.Util.Net.Ajax;
 	var c = ZMO.modules.Constants;
-	ajax.connectToNewsPush(function(json){
-	
-		if(json.type == c.drawfeed.types.DRAWING){
-			var drawModel = new ZMO.NewsModel(val);	
-			console.log(drawModel);
+	ajax.getDatas("rest/members",function(members){
+		$.each(members,function(ind,member){
+			var memberModel = new ZMO.MemberModel(member);
+			var template = $(ich["dashboard-users-row"](memberModel));
+			$("#usersTable").append(template);
+		})
+	});
+	$("#usersliste").on("click",".del-rfid",function(e){
+		var yep = confirm("RFID Karte wirklich zurücksetzen?");
+		if(yep){
+			var tr = $(e.currentTarget).parent().parent();
+			ajax.postDatas("rest/rfid/",function(){
+				alert("Rfid auf 0 gesetzt!")
+			},{
+				rfid:"0",
+				userId:tr.data("userid")
+			});
 		}
 	});
 });
+
 
 </script>
 <!-- Main Container -->
 
 <div class="container mainContainer" style="margin-top:50px">
-	<table id="" class="table table-striped">
+	<table id="usersTable" class="table table-striped">
   <thead>
     <tr>
       <th>Bild</th>
       <th>Name</th>
       <th>Menge</th>
-      <th>RFID</th>
       <th>RFID deaktivieren</th>
     </tr>
   </thead>
-  <tbody id="zapfliste">
+  <tbody id="usersliste">
    
   </tbody>
 </table>
