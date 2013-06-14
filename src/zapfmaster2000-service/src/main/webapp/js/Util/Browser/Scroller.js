@@ -167,7 +167,8 @@ var refresh = function(){
 }
 	var pub = {
 		initScrolling : initScrolling,
-		refresh:refresh
+		refresh:refresh,
+		bindScrollHandler:bindScrollHandler
 	}
 	return pub;
 })(jQuery);
