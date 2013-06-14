@@ -38,7 +38,7 @@
 <div id="navigation"></div>
 <script>
 var navigation = $("#navigation").load("header.html",function(){
-	navigation.find(".zapflist").addClass("active");	
+	navigation.find(".users").addClass("active");	
 });
 </script>
 <script type="text/javascript">
@@ -59,7 +59,20 @@ $(function(){
 <!-- Main Container -->
 
 <div class="container mainContainer" style="margin-top:50px">
-	Zapfliste
+	<table id="" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Bild</th>
+      <th>Name</th>
+      <th>Menge</th>
+      <th>RFID</th>
+      <th>RFID deaktivieren</th>
+    </tr>
+  </thead>
+  <tbody id="zapfliste">
+   
+  </tbody>
+</table>
 </div>
 
 </body>

@@ -188,12 +188,12 @@ $(function(){
 	//-------zapfliste-----------
 	var LENGTH=100;
 	function loadListItems(start,length,callback,prepend){
-		//ajax.getDatas("/rest/news/drawings",function(){
-		ajax.getDatas("rest/news",function(data){
+		ajax.getDatas("/rest/news/drawings",function(){
+		//ajax.getDatas("rest/news",function(data){
 			
 			var container = $("#zapfliste");
 					$.each(data,function(ind,news){
-						if(news.type.toLowerCase()=="drawing"){
+						//if(news.type.toLowerCase()=="drawing"){
 							news=	new ZMO.NewsModel(news);	
 							var template =$(ich["dashboard-zapfliste-row"](news));
 							if(prepend){
@@ -201,7 +201,7 @@ $(function(){
 							}else{
 								container.append(template);
 							}
-						}
+						//}
 					});
 					if(callback)callback();
 			},{
