@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Meta Tags for mobile -->
+   <meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />  
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+ <script src="../libs/jquery/jquery-1.8.1.js"></script> 
+  <script src="../libs/bootstrap/js/bootstrap.min.js"></script> 
+  <script src="../libs/ICanHaz.min.js"></script> 
+  <script>
+  //Init Namespace
+  var ZMO = ZMO || {};
+  ZMO.Util = ZMO.Util ||{};
+  ZMO.modules = ZMO.modules ||{};
+  </script>
+    <script src="../js/Modules/Constants.js"></script> 
+      <script src="../js/Modules/Model.js"></script>    
+  <script src="../js/Util/UtilConstants.js"></script>   
+    <script src="../js/Util/Object/Exists.js"></script>   
+  <script src="../js/Util/Net/Ajax.js"></script>   
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css" />
+ 
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap-responsive.min.css" />
+
+ <link rel="stylesheet" type="text/css" href="css/style.css" />
+ <script>
+ var baseUrl = "../";
+ var rows = 2;
+ var ajax = ZMO.Util.Net.Ajax;
+ ZMO.exists = ZMO.Util.Object.exists;
+ var defaultImg = "../images/view/pix.png";
+ </script>
+<script id="dashboard-mock-box" type="text/html">
+<div class="span5 navbar">
+	<div class="navbar-inner box">
+		<form class="form-vertical" id="kegChangeForm">
+	<fieldset>	
+<legend>{{boxId}}: {{name}}</legend>
+<div class="row">
+<div class="span2">
+	<img id="profilePic_{{boxId}}" src="../images/view/pix.png" class="img-polaroid" width="160" height="160">
+	<p id ="username_{{boxId}}" style="text-align:center">{{userId}}: {{userName}}</p>
+</div>
+<div class="span2">
+	<div class="control-group">
+	    <label class="control-label" for="brand">Liter</label>
+	  <div class="controls">
+			<input class="registerItem" id="size" name="size" type="number" size="30" maxlength="30" placeholder="in Liter" value="0.3" min="0" step="0.1">
+		</div>
+	</div>
+<div class="control-group">
+		<div class="controls">
+			<input id="submit_{{boxId}}" type="submit" value="Neuer Zapfvorgang" class="btn btn-primary" style="display:block" disabled>
+		</div>
+	</div>
+</div>
+</div>
+
+	
+</fieldset>
+</form>
+	</div>
+</div>
+</script>
+
+</head>
+<body>
+<!-- Include Navigation -->
+<div id="navigation"></div>
+<script>
+var navigation = $("#navigation").load("header.html",function(){
+	navigation.find(".mock").addClass("active");	
+});
+</script>
+<script type="text/javascript">
+
+$(function(){
+	var boxMapping = {}
+	function addFormHandlers(form){
+		
+	}
+	function initBox(boxModel){
+		var boxTemplate = $(ich["dashboard-mock-box"](boxModel));
+		$("#boxRow").append(boxTemplate);
+		boxMapping[boxModel.boxId] = boxTemplate;
+		
+		//RFID Connect
+		
+	}
+	
+	function getBoxes(){
+		ajax.getDatas("rest/draftkit",function(boxes){
+			$.each(boxes,function(ind,box){
+				initBox(box);
+			});
+		});
+	}
+	
+	
+	function connectRfid(){
+		var ajax = ZMO.Util.Net.Ajax;
+		var c = ZMO.modules.Constants;
+		ajax.connectToNewsUpdate(function(json){
+			if(json.type == c.drawfeed.types.DRAWING){
+				var drawModel = new ZMO.NewsModel(val);	
+				console.log(drawModel);
+			}
+		});
+	}
+	
+	getBoxes();
+	
+});
+
+</script>
+<!-- Main Container -->
+
+<div id="mainContainer" class="container mainContainer" style="margin-top:50px">
+	<div id="boxRow" class="row">
+	
+	</div>
+</div>
+
+</body>
+</html>

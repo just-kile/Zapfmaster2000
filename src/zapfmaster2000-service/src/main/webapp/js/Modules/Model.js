@@ -39,11 +39,13 @@ ZMO.NewsModel =function(config){
 	this.place = config.place;
 	this.kegId =config.kegId;
 	this.brand = config.brand;
-	this.userImage =baseUrl +(config.image||config.imagePath);
+	this.userImage =baseUrl +(config.image||config.imagePath||config.userImage);
 	this.userId = config.userid||config.userId;
 	this.type = config.type;
 	this.place = config.location || "";
 	this.boxId = config.boxId;
+	this.drawId =config.drawId;
+	this.boxName = config.boxName || "Theke";
 };
 ZMO.NewKegNewsModel =function(config){
 	this.brand = config.brand;
