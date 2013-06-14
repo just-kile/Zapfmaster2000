@@ -45,6 +45,7 @@ ZMO.NewsModel =function(config){
 	this.place = config.location || "";
 	this.boxId = config.boxId;
 	this.drawId =config.drawId;
+	this.boxName = config.boxName || "Theke";
 };
 ZMO.NewKegNewsModel =function(config){
 	this.brand = config.brand;

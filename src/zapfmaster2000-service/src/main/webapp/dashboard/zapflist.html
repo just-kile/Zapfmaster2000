@@ -96,6 +96,7 @@
   <td>{{userName}}</td>
    <td class="amountCol">{{amount}} l</td>
 <td>{{date}}</td>
+<td>{{boxName}}</td>
     <td><button class="btn btn-primary" >Editieren</button></td>
 </tr>
 </script>
@@ -161,10 +162,13 @@ $(function(){
 		//------- DEBUG ----------
 		/*boxes = [{
 			boxId:1,
-			name:null
+			name:"Bar"
 	},{
 		boxId:2,
 		name:"Theke"
+	},{
+		boxId:3,
+		name:"Tresen"
 	}]*/
  	// ----/DEBUG--------
 		$.each(boxes,function(ind,box){
@@ -280,6 +284,7 @@ $(function(){
       <th>Name</th>
       <th>Menge</th>
       <th>Date</th>
+      <th>Ort</th>
       <th>Editieren</th>
     </tr>
   </thead>
