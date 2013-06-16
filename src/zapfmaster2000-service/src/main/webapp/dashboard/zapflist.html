@@ -115,10 +115,11 @@ $(function(){
 	//---------- RFID PUSH ---------------
 	var c = ZMO.modules.Constants;
 	var boxesOverview = {};
-	function resetBox(box){
+	function resetBox(box,boxId){
 		box.find("#profileImage").attr("src",defaultImg);
 		box.find("#name").text("Niemand");
 		box.find("#amount").text("0 liter");
+		if(boxesOverview[boxId])	boxesOverview[boxId].timeout = null;
 	}
 	function fillBoxWithDatas(box,newsModel,noImage){
 		if(!noImage)box.find("#profileImage").attr("src",newsModel.userImage+"/big");
@@ -127,7 +128,7 @@ $(function(){
 					box.find("#amount").text("0 liter"):
 					box.find("#amount").text(newsModel.amount+" liter");
 	}
-	var timeout = null;
+	
 	function connectToAmountPush(box,container){
 		var boxId = box.boxId;
 		var boxContainer = container;
@@ -135,16 +136,16 @@ $(function(){
 		ajax.connectToNewsUpdate(boxId,function(pushResponse){
 			var newsModel =  new ZMO.NewsModel(pushResponse);
 			var type = newsModel.type;
-			if(timeout){
-				clearTimeout(timeout);timeout=null;
+			if(		boxesOverview[boxId] && boxesOverview[boxId].timeout){
+				clearTimeout(boxesOverview[boxId].timeout);	boxesOverview[boxId].timeout=null;
 			}
 			if(type.toLowerCase() == "login"){
 				fillBoxWithDatas(boxContainer,newsModel)
 			}else if(type.toLowerCase() == "draw"){
 				fillBoxWithDatas(boxContainer,newsModel,true)
 			}else if(type.toLowerCase() == "logout"){
-				timeout = setTimeout(function(){
-					resetBox(boxContainer);
+				boxesOverview[boxId].timeout = setTimeout(function(){
+					resetBox(boxContainer,boxId);
 				},20000);
 				
 			}else{
@@ -175,7 +176,10 @@ $(function(){
 			
 			var template = $(ich["dashboard-zapf-box"](box));
 			$("#drawings").append(template);
-			boxesOverview[box.id]= template;
+			boxesOverview[box.boxId]= {
+					dom:template,
+					timeout:null
+			}
 			resetBox(template);
 			connectToAmountPush(box,template);
 		});
@@ -188,7 +192,7 @@ $(function(){
 	//-------zapfliste-----------
 	var LENGTH=100;
 	function loadListItems(start,length,callback,prepend){
-		ajax.getDatas("/rest/news/drawings",function(){
+		ajax.getDatas("rest/news/drawings",function(){
 		//ajax.getDatas("rest/news",function(data){
 			
 			var container = $("#zapfliste");
