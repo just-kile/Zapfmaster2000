@@ -35,7 +35,7 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 				//alert("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde gestartet!");
 				 var template = ZMO.Util.localization.translateAndFillTemplate("challengeStarted",datas);
 				 new ZMO.Util.Popup().open(template);
-				 ZMO.Notifications.send("Die Challenge zwischen "+datas.user1Name+ "und "+datas.user1Name+"wurde angenommen!","Herausforderung angenommen!");
+				 ZMO.Notifications.send("Die Challenge zwischen "+datas.user1Name+ "und "+datas.user2Name+" wurde angenommen!","Herausforderung angenommen!");
 					
 				 
 			}else if(type=="challengedeclined"){
@@ -44,7 +44,7 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 				 //ZMO.Util.Popup.open(ZMO.Util.Localization.
 				 var template = ZMO.Util.localization.translateAndFillTemplate("challengeDeclined",datas);
 				 new ZMO.Util.Popup().open(template);
-				 ZMO.Notifications.send("Die Challenge zwischen "+datas.user1Name+ "und "+datas.user1Name+"wurde abeglehnt!","Herausforderung abgelehnt!");
+				 ZMO.Notifications.send("Die Challenge zwischen "+datas.user1Name+ "und "+datas.user2Name+" wurde abgelehnt!","Herausforderung abgelehnt!");
 					
 			}
 
