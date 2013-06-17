@@ -239,10 +239,10 @@ $(function(){
 	$("#editRow").on("click",".amount",function(e){
 		var target = $(e.currentTarget);
 		var current = currentTableRow;
-		ajax.postDatas("rest/news/drawings",function(){
+		ajax.postDatas("rest/news/drawings/"+modalDrawId,function(){
 			current.find(".amountCol").text(target.data("amount")+" l");
 		},{
-			drawId:modalDrawId,
+			//drawId:modalDrawId,
 			amount:target.data("amount")
 		});
 		 $("#editRow").modal("hide");
@@ -250,10 +250,10 @@ $(function(){
 	$("#editRow").on("click",".custom-amount",function(e){
 		var amount = $("#custom-amount-input").val();		
 		var current = currentTableRow;
-		ajax.postDatas("rest/news/drawings",function(){
+		ajax.postDatas("rest/news/drawings/"+modalDrawId,function(){
 			current.find(".amountCol").text(target.data("amount")+" l");
 		},{
-			drawId:modalDrawId,
+			//drawId:modalDrawId,
 			amount:amount
 		});
 		 $("#editRow").modal("hide");
