@@ -4,7 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -13,6 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClass;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -22,6 +26,7 @@ import de.kile.zapfmaster2000.rest.core.util.NewsAdapter;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 @Path("news")
 public class NewsResource {
@@ -93,8 +98,8 @@ public class NewsResource {
 			List<Drawing> result = session
 					.createQuery(
 							"FROM Drawing d"
-//									+ " JOIN FETCH d.user JOIN FETCH d.keg "
-//									+ " JOIN FETCH d.keg.box"
+									// + " JOIN FETCH d.user JOIN FETCH d.keg "
+									// + " JOIN FETCH d.keg.box"
 									+ " WHERE d.user.account.id = :accountId"
 									+ " ORDER BY d.date DESC")
 					.setLong("accountId", account.getId())
@@ -124,5 +129,45 @@ public class NewsResource {
 			return Response.status(Status.FORBIDDEN).build();
 		}
 
+	}
+
+	@POST
+	@Path("/start/1v1")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response changeDrawAmount(@FormParam("drawId") long drawId,
+			@FormParam("amount") double amount,
+			@FormParam("token") String pToken) {
+
+		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAccount(pToken);
+
+		if (account != null) {
+
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			EClass drawingClass = Zapfmaster2000Package.eINSTANCE.getDrawing();
+			Drawing drawing = (Drawing) session.get(drawingClass.getName(),
+					drawId);
+
+			if (drawing == null
+					|| drawing.getUser().getAccount().getId() != account
+							.getId()) {
+				tx.commit();
+				return Response.status(Status.FORBIDDEN).build();
+			}
+			
+			drawing.setAmount(amount);
+			session.update(drawing);
+
+			tx.commit();
+			
+			return Response.ok(true).build();
+		} else {
+			return Response.status(Status.FORBIDDEN).build();
+		}
 	}
 }

@@ -1,5 +1,10 @@
 package de.kile.zapfmaster2000.rest.api.news;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,15 +14,10 @@ import javax.ws.rs.core.Response.Status;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
-import static org.mockito.Matchers.*;
-import static org.junit.Assert.*;
-
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
@@ -95,8 +95,44 @@ public class TestNewsResource extends AbstractMockingTest {
 		assertDrawingsResponse(2, "l2", 4, 1, "u1", "i1", 0.4,
 				"20130504-040404", drawings.get(0));
 	}
+
+	@Test
+	public void testChangeDrawAmount() {
+		NewsResource newsResource = new NewsResource();
+		Response response = newsResource.changeDrawAmount(2, 1.35, null);
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		// retrieve all drawings and check that the right change was saved to db
+		response = newsResource.retrieveDrawings(null);
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		@SuppressWarnings("unchecked")
+		List<DrawingResponse> drawings = (List<DrawingResponse>) response
+				.getEntity();
+
+		assertEquals(5, drawings.size());
+
+		// order: desc by date (note: month stats to count at 0!)
+		assertDrawingsResponse(1, "l1", 1, 1, "u1", "i1", 0.1,
+				"20130201-010101", drawings.get(4));
+		assertDrawingsResponse(2, "l2", 2, 2, "u2", "i2", 1.3,
+				"20130302-020202", drawings.get(3));
+		assertDrawingsResponse(1, "l1", 3, 3, "u3", "i3", 0.3,
+				"20130403-030303", drawings.get(2));
+		assertDrawingsResponse(2, "l2", 4, 1, "u1", "i1", 0.4,
+				"20130504-040404", drawings.get(1));
+		assertDrawingsResponse(1, "l1", 5, 2, "u2", "i2", 0.5,
+				"20130605-050505", drawings.get(0));
+	}
 	
-	
+	@Test
+	public void testChangeDrawAmountFobidden() {
+		// drawing id = 6 does not exist -> forbidden
+		NewsResource newsResource = new NewsResource();
+		Response response = newsResource.changeDrawAmount(6, 1.35, null);
+		assertEquals(Status.FORBIDDEN.getStatusCode(), response.getStatus());
+	}
+
 	private void assertDrawingsResponse(long boxId, String boxName,
 			long drawId, long userId, String userName, String userImage,
 			double amount, String date, DrawingResponse drawingResponse) {
@@ -111,4 +147,5 @@ public class TestNewsResource extends AbstractMockingTest {
 		assertEquals(date, drawingResponse.getDate());
 
 	}
+
 }
