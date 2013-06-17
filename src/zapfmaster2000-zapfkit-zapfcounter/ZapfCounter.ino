@@ -1,11 +1,15 @@
 //
 // ZapfCounter
 // AVR Component of Zapfmaster2000 ZapfKit
+// using ATtiny85
 //
 // Interconnection between the Swissflow 800 Flow-Meter and the Raspberry Pi
 // Counts the ticks from the Flow-Meter and sends them to the Raspberry Pi
 // via I2C. This component is the I2C slave and sends the requested data to the 
 // master .
+//
+// !!! Attention !!!
+// The low fuse byte of the ATtiny85 needs to be set to 0xE2 (default is 0x62)
 // 
 // I2C Protocol:
 // x : Payload
