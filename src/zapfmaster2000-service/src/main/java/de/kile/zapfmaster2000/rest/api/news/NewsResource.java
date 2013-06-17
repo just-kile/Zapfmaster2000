@@ -9,6 +9,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -132,10 +133,10 @@ public class NewsResource {
 	}
 
 	@POST
-	@Path("/start/1v1")
+	@Path("/drawings/{drawId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response changeDrawAmount(@FormParam("drawId") long drawId,
+	public Response changeDrawAmount(@PathParam("drawId") long drawId,
 			@FormParam("amount") double amount,
 			@FormParam("token") String pToken) {
 
