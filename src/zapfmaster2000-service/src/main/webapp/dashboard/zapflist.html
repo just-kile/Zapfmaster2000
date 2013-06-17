@@ -124,7 +124,7 @@ $(function(){
 	function fillBoxWithDatas(box,newsModel,noImage){
 		if(!noImage)box.find("#profileImage").attr("src",newsModel.userImage+"/big");
 		box.find("#name").text(newsModel.userName);
-		newsModel.amount!="NaN"?
+		isNaN(newsModel.amount)?
 					box.find("#amount").text("0 liter"):
 					box.find("#amount").text(newsModel.amount+" liter");
 	}
