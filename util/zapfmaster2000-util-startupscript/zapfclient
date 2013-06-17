@@ -1,0 +1,29 @@
+#! /bin/sh
+# /etc/init.d/zapfclient
+
+### BEGIN INIT INFO
+# Provides:     zapfclient
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: starts the ZapfClient
+### END INIT INFO
+
+case "$1" in
+	start)
+		echo "Starting ZapfClient"
+		cd /home/pi/client/zapfmaster2000-zapfkit-client
+		sudo ./zapfmaster2000-zapfkit-client
+		;;
+	stop)
+		echo "Stopping ZapfClient"
+		sudo killall zapfmaster2000-zapfkit-client
+		;;
+	*)
+		echo "Usage: /etc/init.d/zapfclient {start|stop}"
+		exit 1
+		;;
+esac
+
+exit 0

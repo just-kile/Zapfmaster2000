@@ -1,0 +1,28 @@
+#! /bin/sh
+# /etc/init.d/zapfenv
+
+### BEGIN INIT INFO
+# Provides: 	zapfenv
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: starts all additional services needed by the ZapfClient
+### END INIT INFO
+
+case "$1" in
+	start)
+		echo "Starting pi-blaster"
+		sudo /home/pi/client/startPiBlaster.sh
+		echo "Starting I2C interface"
+		gpio load i2c
+		;;
+	stop)
+		;;
+	*)
+		echo "Usage: /etc/init.d/zapfenv {start|stop}"
+		exit 1
+		;;
+esac
+
+exit 0
