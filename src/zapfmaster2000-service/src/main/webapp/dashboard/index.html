@@ -47,32 +47,36 @@ $(document).ready(function(){
  */
 	$("#newKegBtn").on("click",function(e){
 	e.preventDefault();
-	var brand = $("#brand").val();
-	var size = $("#size").val();
-	var boxid = $("#boxId").val();
-	var data = {};
-	var theUrl =baseUrl +  'rest/draftkit/'+boxid+'/switchkeg';
-	$.each($(".registerItem"),function(ind,item){
-		data[$(item).attr("name")] =$(item).val(); 
-	});
-	data["token"] = localStorage.getItem("token");
-	data["size"] = size;
-	$.ajax({
-		type:"POST",
-		url:theUrl,
-		data:data,
-		success:function(token){
-			alert("Neues Fass erstellt!");
-
-		},
-		error:function(e){
-			if(e.status == 403){
-				alert("Check login status");
-			}else{
-				alert("Keg could not be switched");
+	if(!$("#newKegBtn").hasClass("disabled")){
+		var brand = $("#brand").val();
+		var size = $("#size").val();
+		var boxid = $("#boxId").val();
+		var data = {};
+		var theUrl =baseUrl +  'rest/draftkit/'+boxid+'/switchkeg';
+		$.each($(".registerItem"),function(ind,item){
+			data[$(item).attr("name")] =$(item).val(); 
+		});
+		data["token"] = localStorage.getItem("token");
+		data["size"] = size;
+		$("#newKegBtn").addClass("disabled");
+		$.ajax({
+			type:"POST",
+			url:theUrl,
+			data:data,
+			success:function(token){
+				alert("Neues Fass erstellt!");
+				$("#newKegBtn").removeClass("disabled");
+			},
+			error:function(e){
+				if(e.status == 403){
+					alert("Check login status");
+				}else{
+					alert("Keg could not be switched");
+				}
+				$("#newKegBtn").removeClass("disabled");
 			}
-		}
-	})
+		})
+	}
 });
 function updateBoxes(){
 	
