@@ -23,21 +23,21 @@
 <script id="dashboard-calibration" type="text/html">
 <div class="navbar box">
   <div class="navbar-inner">
-<form class="form-horizontal" action="../rest/calibrate/boxes/{{boxId}}" data-boxid="{{boxId}}">
+<form class="form-horizontal" action="../rest/calibration/boxes/{{boxId}}" data-boxid="{{boxId}}">
 <fieldset>	
 
 	<legend class="brand">Zapfkit Id: {{boxId}}</legend>
    <div class="control-group">
 	    <label class="control-label" for="regression_{{boxId}}">Regression</label>
 		 <div class="controls">
-			<input class="registerItem" id="regression_{{boxId}}" name="regression" type="text" placeholder="Regression" value="{{regression}}">
+			<input class="registerItem" id="regression_{{boxId}}" name="regression" type="number" placeholder="Regression" value="{{regression}}">
 			<a href="#" class="tt" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{regressionTT}}"><i class="icon-question-sign"></i></a>
 		</div>
 	</div>
 	<div class="control-group">
 		<label class="control-label" for="disturbance_{{boxId}}">Störung</label>
 		<div class="controls">
-			<input class="registerItem" id="disturbance_{{boxId}}" name="disturbance" type="text" placeholder="Disturbance" value="{{disturbance}}">
+			<input class="registerItem" id="disturbance_{{boxId}}" name="disturbance" type="number" placeholder="Disturbance" value="{{disturbance}}">
 			<a href="#" class="tt" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{disturbanceTT}}"><i class="icon-question-sign"></i></a>
 		</div>
 	</div>
