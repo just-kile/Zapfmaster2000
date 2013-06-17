@@ -190,9 +190,9 @@ $(function(){
 	
 	// ------------ /RFID Push -----------
 	//-------zapfliste-----------
-	var LENGTH=100;
+	var LENGTH=30;
 	function loadListItems(start,length,callback,prepend){
-		ajax.getDatas("rest/news/drawings",function(){
+		ajax.getDatas("rest/news/drawings",function(data){
 		//ajax.getDatas("rest/news",function(data){
 			
 			var container = $("#zapfliste");
