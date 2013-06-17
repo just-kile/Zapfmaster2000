@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest.api.news;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,11 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.util.NewsAdapter;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 
 @Path("news")
@@ -32,7 +35,7 @@ public class NewsResource {
 			@QueryParam("token") String pToken) {
 
 		LOG.debug("Retrieving news");
-		
+
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 		if (account != null) {
@@ -62,5 +65,63 @@ public class NewsResource {
 		} else {
 			return Response.status(Status.FORBIDDEN).build();
 		}
+	}
+
+	@GET
+	@Path("/drawings")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrieveDrawings(@QueryParam("token") String pToken) {
+		return retrieveDrawings(pToken, 0, 50);
+	}
+
+	@GET
+	@Path("/drawings")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrieveDrawings(@QueryParam("token") String pToken,
+			@QueryParam("start") int start, @QueryParam("length") int length) {
+
+		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAccount(pToken);
+
+		if (account != null) {
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			@SuppressWarnings("unchecked")
+			List<Drawing> result = session
+					.createQuery(
+							"SELECT d FROM Drawing d WHERE n.account.id = :accountId"
+									+ " JOIN FETCH d.user JOIN FETCH d.keg "
+									+ " JOIN FETCH d.keg.box"
+									+ " ORDER BY d.date DESC")
+					.setLong("accountId", account.getId())
+					.setMaxResults(length).setFirstResult(start).list();
+
+			List<DrawingResponse> response = new ArrayList<>();
+
+			SimpleDateFormat format = new SimpleDateFormat(
+					PlatformConstants.DATE_TIME_FORMAT);
+
+			for (Drawing drawing : result) {
+				DrawingResponse r = new DrawingResponse();
+				r.setAmount(drawing.getAmount());
+				r.setBoxId(drawing.getKeg().getBox().getId());
+				r.setBoxName(drawing.getKeg().getBox().getLocation());
+				r.setDate(format.format(drawing.getDate()));
+				r.setDrawId(drawing.getId());
+				r.setUserId(drawing.getUser().getId());
+				r.setUserImage(drawing.getUser().getImagePath());
+				r.setUserName(drawing.getUser().getName());
+				response.add(r);
+			}
+
+			tx.commit();
+			return Response.ok(response).build();
+		} else {
+			return Response.status(Status.FORBIDDEN).build();
+		}
+
 	}
 }
