@@ -57,6 +57,21 @@ public abstract class AbstractDatabaseTest {
 		return box;
 	}
 
+	protected Box createBox(String pPassphrase, String pLocation,
+			String pVersion, double pRegression, double pDisturbance,
+			int pTickReduction, Account pAccount) {
+		Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
+		box.setAccount(pAccount);
+		box.setLocation(pLocation);
+		box.setPassphrase(pPassphrase);
+		box.setVersion(pVersion);
+		box.setTickRegressor(pRegression);
+		box.setTickDisturbanceTerm(pDisturbance);
+		box.setTickReduction(pTickReduction);
+		saveEntity(box, pAccount);
+		return box;
+	}
+
 	protected User createUser(String pName, String pImagePath,
 			String pPassword, long pRfidTag, Sex pSex, int pWeight,
 			UserType pUserType, Account pAccount) {
