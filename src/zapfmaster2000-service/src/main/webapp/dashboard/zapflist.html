@@ -251,7 +251,7 @@ $(function(){
 		var amount = $("#custom-amount-input").val();		
 		var current = currentTableRow;
 		ajax.postDatas("rest/news/drawings/"+modalDrawId,function(){
-			current.find(".amountCol").text(target.data("amount")+" l");
+			current.find(".amountCol").text(amount+" l");
 		},{
 			//drawId:modalDrawId,
 			amount:amount
