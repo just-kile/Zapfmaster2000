@@ -144,7 +144,7 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int TICK_DISTURBANCE_TERM_EDEFAULT = 0;
+	protected static final double TICK_DISTURBANCE_TERM_EDEFAULT = 0.0;
 
 	/**
 	 * The cached value of the '{@link #getTickDisturbanceTerm() <em>Tick Disturbance Term</em>}' attribute.
@@ -154,7 +154,7 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @generated
 	 * @ordered
 	 */
-	protected int tickDisturbanceTerm = TICK_DISTURBANCE_TERM_EDEFAULT;
+	protected double tickDisturbanceTerm = TICK_DISTURBANCE_TERM_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTickRegressor() <em>Tick Regressor</em>}' attribute.
@@ -184,7 +184,7 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double TICK_REDUCTION_EDEFAULT = 0.0;
+	protected static final int TICK_REDUCTION_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getTickReduction() <em>Tick Reduction</em>}' attribute.
@@ -194,7 +194,7 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @generated
 	 * @ordered
 	 */
-	protected double tickReduction = TICK_REDUCTION_EDEFAULT;
+	protected int tickReduction = TICK_REDUCTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -357,7 +357,7 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getTickDisturbanceTerm() {
+	public double getTickDisturbanceTerm() {
 		return tickDisturbanceTerm;
 	}
 
@@ -366,8 +366,8 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTickDisturbanceTerm(int newTickDisturbanceTerm) {
-		int oldTickDisturbanceTerm = tickDisturbanceTerm;
+	public void setTickDisturbanceTerm(double newTickDisturbanceTerm) {
+		double oldTickDisturbanceTerm = tickDisturbanceTerm;
 		tickDisturbanceTerm = newTickDisturbanceTerm;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM, oldTickDisturbanceTerm, tickDisturbanceTerm));
@@ -399,7 +399,7 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getTickReduction() {
+	public int getTickReduction() {
 		return tickReduction;
 	}
 
@@ -408,8 +408,8 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTickReduction(double newTickReduction) {
-		double oldTickReduction = tickReduction;
+	public void setTickReduction(int newTickReduction) {
+		int oldTickReduction = tickReduction;
 		tickReduction = newTickReduction;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__TICK_REDUCTION, oldTickReduction, tickReduction));
@@ -523,13 +523,13 @@ public class BoxImpl extends EObjectImpl implements Box {
 				setLocation((String)newValue);
 				return;
 			case Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM:
-				setTickDisturbanceTerm((Integer)newValue);
+				setTickDisturbanceTerm((Double)newValue);
 				return;
 			case Zapfmaster2000Package.BOX__TICK_REGRESSOR:
 				setTickRegressor((Double)newValue);
 				return;
 			case Zapfmaster2000Package.BOX__TICK_REDUCTION:
-				setTickReduction((Double)newValue);
+				setTickReduction((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

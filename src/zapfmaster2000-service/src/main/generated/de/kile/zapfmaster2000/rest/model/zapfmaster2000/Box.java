@@ -190,12 +190,12 @@ public interface Box extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tick Disturbance Term</em>' attribute.
-	 * @see #setTickDisturbanceTerm(int)
+	 * @see #setTickDisturbanceTerm(double)
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_TickDisturbanceTerm()
 	 * @model
 	 * @generated
 	 */
-	int getTickDisturbanceTerm();
+	double getTickDisturbanceTerm();
 
 	/**
 	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}' attribute.
@@ -205,7 +205,7 @@ public interface Box extends EObject {
 	 * @see #getTickDisturbanceTerm()
 	 * @generated
 	 */
-	void setTickDisturbanceTerm(int value);
+	void setTickDisturbanceTerm(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Tick Regressor</b></em>' attribute.
@@ -242,12 +242,12 @@ public interface Box extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tick Reduction</em>' attribute.
-	 * @see #setTickReduction(double)
+	 * @see #setTickReduction(int)
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_TickReduction()
 	 * @model
 	 * @generated
 	 */
-	double getTickReduction();
+	int getTickReduction();
 
 	/**
 	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction <em>Tick Reduction</em>}' attribute.
@@ -257,6 +257,6 @@ public interface Box extends EObject {
 	 * @see #getTickReduction()
 	 * @generated
 	 */
-	void setTickReduction(double value);
+	void setTickReduction(int value);
 
 } // Box
