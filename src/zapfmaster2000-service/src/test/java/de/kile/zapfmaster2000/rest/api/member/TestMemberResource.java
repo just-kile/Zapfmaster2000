@@ -92,6 +92,7 @@ public class TestMemberResource extends AbstractMockingTest {
 		assertEquals("img/user2", m1.getImagePath());
 		assertEquals(0.5, m1.getTotalAmount(), 0.05);
 		assertEquals(user2.getId(), m1.getUserId());
+		assertEquals(202, m1.getRfidTag());
 		assertEquals(1, m1.getAchievements().size());
 
 		GainedUserAchievement a1_1 = m1.getAchievements().get(0);
@@ -104,6 +105,7 @@ public class TestMemberResource extends AbstractMockingTest {
 		assertEquals("img/user3", m2.getImagePath());
 		assertEquals(0, m2.getTotalAmount(), 0.05);
 		assertEquals(user3.getId(), m2.getUserId());
+		assertEquals(303, m2.getRfidTag());
 		assertEquals(0, m2.getAchievements().size());
 		
 		MemberResponse m3 = memberResponse.get(2);
@@ -111,6 +113,7 @@ public class TestMemberResource extends AbstractMockingTest {
 		assertEquals("img/user1", m3.getImagePath());
 		assertEquals(0.9, m3.getTotalAmount(), 0.05);
 		assertEquals(user1.getId(), m3.getUserId());
+		assertEquals(101, m3.getRfidTag());
 		assertEquals(2, m3.getAchievements().size());
 
 		// ordered by date
