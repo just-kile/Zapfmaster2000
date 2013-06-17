@@ -8,7 +8,7 @@ public class CalibrationResponse {
 	
 	private double disturbance;
 	
-	private double tickReduction;
+	private int tickReduction;
 
 	public long getBoxId() {
 		return boxId;
@@ -34,11 +34,11 @@ public class CalibrationResponse {
 		this.disturbance = disturbance;
 	}
 
-	public double getTickReduction() {
+	public int getTickReduction() {
 		return tickReduction;
 	}
 
-	public void setTickReduction(double tickReduction) {
+	public void setTickReduction(int tickReduction) {
 		this.tickReduction = tickReduction;
 	}
 	
