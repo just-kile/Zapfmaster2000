@@ -191,7 +191,8 @@ $(function(){
 	// ------------ /RFID Push -----------
 	//-------zapfliste-----------
 	var LENGTH=30;
-	function loadListItems(start,length,callback,prepend){
+	function loadListItems(start,len,callback,prepend){
+	
 		ajax.getDatas("rest/news/drawings",function(data){
 		//ajax.getDatas("rest/news",function(data){
 			
@@ -210,7 +211,7 @@ $(function(){
 					if(callback)callback();
 			},{
 				start:start,
-				length:length
+				length:len
 		});
 	}
 	function connectToTablePush(){
