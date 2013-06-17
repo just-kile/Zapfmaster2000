@@ -92,9 +92,10 @@ public class NewsResource {
 			@SuppressWarnings("unchecked")
 			List<Drawing> result = session
 					.createQuery(
-							"SELECT d FROM Drawing d WHERE n.account.id = :accountId"
-									+ " JOIN FETCH d.user JOIN FETCH d.keg "
-									+ " JOIN FETCH d.keg.box"
+							"FROM Drawing d"
+//									+ " JOIN FETCH d.user JOIN FETCH d.keg "
+//									+ " JOIN FETCH d.keg.box"
+									+ " WHERE d.user.account.id = :accountId"
 									+ " ORDER BY d.date DESC")
 					.setLong("accountId", account.getId())
 					.setMaxResults(length).setFirstResult(start).list();
