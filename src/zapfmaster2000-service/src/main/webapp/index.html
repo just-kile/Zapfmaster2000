@@ -299,8 +299,11 @@ $(document).ready(function(){
 /**
  * Upload Image
  */
-$("#uploadImage").on("click",function(e){
+$("#rImage").on("change",function(e){
 	e.preventDefault();
+	if($("#rImage").val()!=""){
+		
+
 	var formData = new FormData ($("#imageForm")[0]);
 	formData.append("token",localStorage.getItem("token"));
 	$.ajax({
@@ -340,6 +343,7 @@ $("#uploadImage").on("click",function(e){
 	    ,
 
 	});
+	}
 });
 var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
 if(app){
@@ -539,7 +543,7 @@ $("#updateImageRfid").on("click",function(e){
  <div class="container" id="imageFormContainer" class="container" style="display:none">
 <form id="imageForm"  >
 <p>Lade ein Bild von dir hoch</p><p><input id="rImage" name="image" type="file"></p>
-<input id ="uploadImage" type="submit" value="ImageUpload">
+<!-- <input id ="uploadImage" type="submit" value="ImageUpload"> -->
 <input id ="uploadImageSkip" type="submit" value="Skip">
 
 </form>
