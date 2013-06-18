@@ -3,6 +3,7 @@ package de.kile.zapfmaster2000.rest.api.news;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -24,7 +25,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 public class NewsResource {
 
 	private static final Logger LOG = Logger.getLogger(NewsResource.class);
-
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveNews(@QueryParam("start") int pStart,
