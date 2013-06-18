@@ -124,7 +124,7 @@ $(function(){
 	function fillBoxWithDatas(box,newsModel,noImage){
 		if(!noImage)box.find("#profileImage").attr("src",newsModel.userImage+"/big");
 		box.find("#name").text(newsModel.userName);
-		newsModel.amount!="NaN"?
+		isNaN(newsModel.amount)?
 					box.find("#amount").text("0 liter"):
 					box.find("#amount").text(newsModel.amount+" liter");
 	}
@@ -190,9 +190,10 @@ $(function(){
 	
 	// ------------ /RFID Push -----------
 	//-------zapfliste-----------
-	var LENGTH=100;
-	function loadListItems(start,length,callback,prepend){
-		ajax.getDatas("rest/news/drawings",function(){
+	var LENGTH=30;
+	function loadListItems(start,len,callback,prepend){
+	
+		ajax.getDatas("rest/news/drawings",function(data){
 		//ajax.getDatas("rest/news",function(data){
 			
 			var container = $("#zapfliste");
@@ -210,7 +211,7 @@ $(function(){
 					if(callback)callback();
 			},{
 				start:start,
-				length:length
+				length:len
 		});
 	}
 	function connectToTablePush(){
@@ -239,10 +240,10 @@ $(function(){
 	$("#editRow").on("click",".amount",function(e){
 		var target = $(e.currentTarget);
 		var current = currentTableRow;
-		ajax.postDatas("rest/news/drawings",function(){
+		ajax.postDatas("rest/news/drawings/"+modalDrawId,function(){
 			current.find(".amountCol").text(target.data("amount")+" l");
 		},{
-			drawId:modalDrawId,
+			//drawId:modalDrawId,
 			amount:target.data("amount")
 		});
 		 $("#editRow").modal("hide");
@@ -250,10 +251,10 @@ $(function(){
 	$("#editRow").on("click",".custom-amount",function(e){
 		var amount = $("#custom-amount-input").val();		
 		var current = currentTableRow;
-		ajax.postDatas("rest/news/drawings",function(){
-			current.find(".amountCol").text(target.data("amount")+" l");
+		ajax.postDatas("rest/news/drawings/"+modalDrawId,function(){
+			current.find(".amountCol").text(amount+" l");
 		},{
-			drawId:modalDrawId,
+			//drawId:modalDrawId,
 			amount:amount
 		});
 		 $("#editRow").modal("hide");
