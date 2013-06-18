@@ -36,7 +36,7 @@ public class MembersResource {
 			// TODO: 1+n queries (n is num of users). Is that the best way?
 			List<?> result = session
 					.createQuery(
-							"SELECT u.name, u.imagePath, u.id, SUM(d.amount)"
+							"SELECT u.name, u.imagePath, u.id, SUM(d.amount), u.rfidTag "
 									+ "FROM User u LEFT OUTER JOIN u.drawings d "
 									+ "WHERE u.account.id = :accountId "
 									+ "GROUP BY u.id ORDER BY u.name")
@@ -50,6 +50,8 @@ public class MembersResource {
 				memberResponse.setUserId((Long) resultArray[2]);
 				memberResponse.setUserName((String) resultArray[0]);
 				memberResponse.setImagePath((String) resultArray[1]);
+				memberResponse.setRfidTag((Long) resultArray[4]);
+				
 				if (resultArray[3] instanceof Double) {
 					memberResponse.setTotalAmount((Double) resultArray[3]);
 				} // else the user did not drink at all yet, leave "0.0"

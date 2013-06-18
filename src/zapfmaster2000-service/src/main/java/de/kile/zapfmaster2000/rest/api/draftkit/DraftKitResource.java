@@ -56,6 +56,7 @@ public class DraftKitResource {
 				DraftKitResponse response = new DraftKitResponse();
 				response.setBoxId(box.getId());
 				response.setName(box.getLocation());
+				response.setPassphrase(box.getPassphrase());
 				kits.add(response);
 			}
 
