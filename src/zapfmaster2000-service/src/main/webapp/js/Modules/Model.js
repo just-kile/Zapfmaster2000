@@ -77,7 +77,7 @@ ZMO.AchievementModel = function(config){
 };
 ZMO.OtherModel = function(config){
 	this.text = config.text;
-	this.image = baseUrl +config.image||config.IMAGE_PATH||config.imagepath;
+	this.image = baseUrl +(config.image||config.IMAGE_PATH||config.imagepath);
 	this.type = config.type;
 	this.date = config.date?new ZMO.TimeParser(config.date).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 	
@@ -141,7 +141,7 @@ ZMO.GlobalChallengeModel = function(config){
 		}
 	})();
 	
-	this.image =baseUrl + config.image||config.challengeImage;
+	this.image =baseUrl + (config.image||config.challengeImage);
 	this.dateParser = config.startDate?new ZMO.TimeParser(config.startDate):null;
 	this.date = config.startDate?new ZMO.TimeParser(config.startDate).getDefaultTime():"";//config.date?new Date(config.date).toGMTString():(new Date()). toGMTString();
 	this.place = config.location || "";
@@ -183,7 +183,7 @@ ZMO.AchievementsModel = function(config) {
 	this.achievementName = config.achievementName;
 	this.achievementId = config.achievementId;
 	this.users = config.users;
-	this.achievementImage =baseUrl + config.imagePath||config.achievementImage;
+	this.achievementImage =baseUrl + (config.imagePath||config.achievementImage);
 	this.count = config.users ?config.users.length :0;
 	
 	// ignore all achievements if there are way to many
