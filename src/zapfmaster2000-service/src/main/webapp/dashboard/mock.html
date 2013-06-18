@@ -119,6 +119,9 @@ $(function(){
 				},
 				success:function(resp){
 					log(div,"Login Successful for "+resp.userName);
+				},
+				error:function(resp){
+					log(div,"Error "+resp.status+": "+resp.statusText);
 				}
 			});			
 			
@@ -148,6 +151,8 @@ $(function(){
 					},
 					success:function(amountJson){
 						log(div,"Amount: "+amountJson.totalAmount )
+					},error:function(resp){
+						log(div,"Error "+resp.status+": "+resp.statusText)
 					}
 				});
 				counter++;
