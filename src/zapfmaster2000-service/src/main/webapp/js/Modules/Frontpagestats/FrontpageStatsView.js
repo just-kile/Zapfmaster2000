@@ -98,34 +98,45 @@ ZMO.modules.frontPageStatsView = (function($,ajax){
 //		});
 	};
 	var timeout = null;
+	var timeoutObj = {
+			
+	};
 	var times = 20;// = animation steps
 	var animationTimeout = 10;
 	var oldAmount = 0;
 	var count = 0;
-	var resetOldAmount = function(){
-		oldAmount = 0;
+	var resetOldAmount = function(boxId){
+		if(!timeoutObj[boxId.boxId])timeoutObj[boxId.boxId] = {};
+		timeoutObj[boxId.boxId].oldAmount = 0;
 	}
 	var updateChartUser = function(kegModel,chart,titleText){
-		count = 0;
+		if(!timeoutObj[kegModel.boxId])timeoutObj[kegModel.boxId] = {};
+		
+		timeoutObj[kegModel.boxId].count = 0;
 		var actAmount =  parseFloat(kegModel.current_amount);
 		//
-		clearTimeout(timeout);
 		
-		animateChart(actAmount,parseFloat(kegModel.size),chart);
+		if(timeoutObj[kegModel.boxId] && timeoutObj[kegModel.boxId].timeout){
+			clearTimeout(timeoutObj[kegModel.boxId].timeout);
+			timeoutObj[kegModel.boxId].timeout =null;
+		}
+		
+		animateChart(actAmount,parseFloat(kegModel.size),chart,kegModel);
 	}
-	var animateChart = function(finalAmount,kegSize,chart){
-		timeout = setTimeout(function(){
-			count++;
+	var animateChart = function(finalAmount,kegSize,chart,kegModel){
+		timeoutObj[kegModel.boxId].timeout = setTimeout(function(){
+			var count = timeoutObj[kegModel.boxId].count = timeoutObj[kegModel.boxId].count+1;
+			var oldAmount = timeoutObj[kegModel.boxId].oldAmount;
 			var finalAmountDiff = finalAmount - oldAmount;
 			var newAmount = oldAmount + count/times*finalAmountDiff;
 			var completeDiff = kegSize-newAmount;
 			chart.series[0].data = [[newAmount,1]];
 			chart.series[1].data = [[completeDiff,1]];
-			ZMO.logger.log(" cD: "+completeDiff+" new Amount "+newAmount);
-			chart.replot( { resetAxes: true } );   
-			oldAmount = newAmount;
+			//ZMO.logger.log(" cD: "+completeDiff+" new Amount "+newAmount);
+			chart.replot( { resetAxes: true } );
+			timeoutObj[kegModel.boxId].oldAmount = newAmount;
 			if(count<=times){
-				animateChart(finalAmount,kegSize,chart);
+				animateChart(finalAmount,kegSize,chart,kegModel);
 			}
 			
 		},animationTimeout);

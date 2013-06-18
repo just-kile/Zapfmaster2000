@@ -76,7 +76,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 			return typeof boxId=="object"?boxId:keyContainerMap[boxId]["model"];
 		};
 		var switchContainerToUser =function(boxId){
-			view.resetOldAmount();
+			view.resetOldAmount(boxId);
 			var kegModel = getModelToId(boxId);
 			getKegContainer(kegModel).hide();
 			getUserContainer(kegModel).show();
@@ -202,8 +202,12 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 		var maxSize = roundAHalf(amount);
 		view.updateChartUser({
 			current_amount:amount,
-			size:maxSize
+			size:maxSize,
+			boxId:boxId
 		},chart,newsModel.userName+": "+amount +"l");
+		ZMO.logger.log(newsModel.boxId+": "+amount);
+//		ZMO.logger.log(containerHandler.getChart(boxId));
+		
 		
 	};
 	/*****
@@ -246,6 +250,7 @@ ZMO.modules.frontpagestats = (function($,view,ajax){
 			}else{
 				ZMO.logger.warning("No fitting push action detected!")
 			}
+			//ZMO.logger.log(pushResponse.type+" : "+pushResponse.boxId);
 		});
 	};
 	/*****
