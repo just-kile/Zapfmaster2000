@@ -16,12 +16,12 @@ public class MockClient {
 
 	// private static final String URL =
 	// "http://localhost:8080/Zapfmaster2000RESTful/rest/";
-	// private static final String URL =
-	// "http://localhost:8080/zapfmaster2000-service/rest/";
+	 private static final String URL =
+	 "http://localhost:8080/zapfmaster2000-service/rest/";
 //	 private static final String URL =
 	// "http://zapfmaster2000.dyndns.org:9130/zapfmaster2000-service-1.0.0-SNAPSHOT/rest/";
 
-	private static final String URL = "http://localhost:8080/de.kile.zapfmaster2000.rest/rest/";
+//	private static final String URL = "http://localhost:8080/de.kile.zapfmaster2000.rest/rest/";
 
 	private static final int UPDATE_RATE = 250;
 

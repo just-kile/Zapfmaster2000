@@ -1,18 +1,14 @@
 package de.kile.zapfmaster2000.test;
 
 import java.util.Date;
-import java.util.List;
 
 import org.hibernate.Session;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class EntityCreator {
 
@@ -22,18 +18,18 @@ public class EntityCreator {
 				.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 
-		Account account = (Account) session.get(Zapfmaster2000Package.eINSTANCE
-				.getAccount().getName(), 0L);
-		assert (account != null);
+//		Account account = (Account) session.get(Zapfmaster2000Package.eINSTANCE
+//				.getAccount().getName(), 0L);
+//		assert (account != null);
 
-		// Account account = Zapfmaster2000Factory.eINSTANCE.createAccount();
-		// account.setName("Test Account");
+		 Account account = Zapfmaster2000Factory.eINSTANCE.createAccount();
+		 account.setName("Test Account");
 
 		Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
 		box.setVersion("1.0");
-		box.setPassphrase("box-2");
+		box.setPassphrase("box-1");
 		box.setAccount(account);
-		box.setLocation("Box Nr 2");
+		box.setLocation("Box Nr 1");
 		box.setTickReduction(0);
 		box.setTickRegressor(1.0 / (5200.0/ 2.2));
 		box.setTickDisturbanceTerm(0);
@@ -43,6 +39,23 @@ public class EntityCreator {
 		keg.setBrand("Berliner Pilsner");
 		keg.setStartDate(new Date());
 		keg.setSize(50);
+		
+		Box box2 = Zapfmaster2000Factory.eINSTANCE.createBox();
+		box2.setVersion("1.0");
+		box2.setPassphrase("box-2");
+		box2.setAccount(account);
+		box2.setLocation("Box Nr 2");
+		box2.setTickReduction(0);
+		box2.setTickRegressor(1.0 / (5200.0/ 2.2));
+		box2.setTickDisturbanceTerm(0);
+
+		Keg keg2 = Zapfmaster2000Factory.eINSTANCE.createKeg();
+		keg2.setBox(box2);
+		keg2.setBrand("Berliner Pilsner");
+		keg2.setStartDate(new Date());
+		keg2.setSize(50);
+		
+		
 		//
 		// User user1 = Zapfmaster2000Factory.eINSTANCE.createUser();
 		// user1.setName("user-1");
@@ -95,10 +108,14 @@ public class EntityCreator {
 		// session.delete(d);
 		// }
 
-//		session.save(account);
+		session.save(account);
 		
 		session.save(box);
 		session.save(keg);
+		session.save(box2);
+		session.save(keg2);
+		
+		
 		// session.save(user1);
 		// session.save(user2);
 		// session.save(user3);
