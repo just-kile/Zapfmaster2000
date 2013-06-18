@@ -37,9 +37,11 @@
 <script id="dashboard-mock-box" type="text/html">
 <div class="span6 navbar">
 	<div class="navbar-inner box">
-		<form class="form-horizontal" id="newDraw_{{boxId}}">
+		<form class="form-vertical" id="newDraw_{{boxId}}">
 	<fieldset>	
 <legend>{{boxId}}: {{name}}</legend>
+<div class="row">
+<div class="span3">
 <div class="control-group">
 	<label class="control-label" for="brand">User</label>
 	<div class="controls">
@@ -69,8 +71,14 @@
             <input type="button" class="btn btn-primary" placeholder="Value" value="Zapfen" id="zapf">
         </div>
 	</div>
+</div>
+<div class="span2">
+<pre id="console" style="height:237px;overflow-y:scroll;width:200px;">
+  Init
+</pre>
 
-
+</div>
+</div>
 	
 </fieldset>
 </form>
@@ -93,8 +101,11 @@ var navigation = $("#navigation").load("header.html",function(){
 
 $(function(){
 	var boxMapping = {}
-	var ticks = 5200;
-	var UPDATE_RATE = 250;
+	var ticks = $("#ticks").val();
+	var UPDATE_RATE = $("#updateRate").val();
+	function log(boxContainer,msg){
+		boxContainer.find("#console").prepend("- "+msg+"\n");
+	}
 	function addFormHandlers(div,boxModel){
 		div.find("#refreshBoxBtn").on("click",getUsers);
 		div.find("#login").on("click",function(e){
@@ -105,6 +116,9 @@ $(function(){
 				data:{
 					rfid:rfid,
 					passphrase:boxModel.passphrase
+				},
+				success:function(resp){
+					log(div,"Login Successful for "+resp.userName);
 				}
 			});			
 			
@@ -112,6 +126,8 @@ $(function(){
 		var interval = null;
 		div.find("#zapf").on("click",function(e){
 			e.preventDefault();
+			UPDATE_RATE =  parseInt($("#updateRate").val());
+			ticks =  parseInt($("#ticks").val());
 			var amount =   div.find("#amount").val();
 			var duration = div.find("#duration").val();
 			var rawTicks = amount*ticks;
@@ -129,6 +145,9 @@ $(function(){
 					data:{
 						passphrase:boxModel.passphrase,
 						ticks:ticksPerUpdate
+					},
+					success:function(amountJson){
+						log(div,"Amount: "+amountJson.totalAmount )
 					}
 				});
 				counter++;
@@ -137,16 +156,7 @@ $(function(){
 				}
 			},UPDATE_RATE);
 			
-		/*	for (int i = 0; i < numRequests; ++i) {
-				ClientRequest request = new ClientRequest(URL
-						+ "box/draw?passphrase=" + boxPassphrase + "&ticks="
-						+ ticksPerUpdate);
-				ClientResponse<?> response = request.get();
-				System.out.println("Response: " + response.getStatus());
-
-				Thread.sleep(UPDATE_RATE);
-			}*/
-			
+	
 		});
 	}
 	function initBox(boxModel){
@@ -183,6 +193,17 @@ $(function(){
 <!-- Main Container -->
 
 <div id="mainContainer" class="container mainContainer" style="margin-top:50px">
+	<div id="credentials" class="row" style="margin-bottom:10px;">
+	 	<div class="span12" style="text-align:center;">
+	 	
+	 		<form class="form-inline well">
+	 		<label style="margin-right:5px" for="updateRate">Update Rate</label><input type="number" id="updateRate" value="250" step="50" placeholder="Update Rate for Zapf Requests"/>
+	 		<label style="margin-right:5px;" for="ticks">Ticks</label><input type="number" id="ticks" value="5200" placeholder="Ticks"/>
+	 		</form>
+	 		
+	 	</div>
+	</div>
+
 	<div id="boxRow" class="row">
 	
 	</div>
