@@ -5,6 +5,8 @@ public class DraftKitResponse {
 	private long boxId;
 
 	private String name;
+	
+	private String passphrase;
 
 	public long getBoxId() {
 		return boxId;
@@ -20,6 +22,14 @@ public class DraftKitResponse {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPassphrase() {
+		return passphrase;
+	}
+
+	public void setPassphrase(String passphrase) {
+		this.passphrase = passphrase;
 	}
 
 }

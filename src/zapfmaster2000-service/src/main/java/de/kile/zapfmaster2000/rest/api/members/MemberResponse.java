@@ -12,6 +12,8 @@ public class MemberResponse {
 	private double totalAmount;
 
 	private String imagePath;
+	
+	private long rfidTag;
 
 	private final List<GainedUserAchievement> achievements = new ArrayList<>();
 
@@ -49,6 +51,14 @@ public class MemberResponse {
 
 	public List<GainedUserAchievement> getAchievements() {
 		return achievements;
+	}
+	
+	public long getRfidTag() {
+		return rfidTag;
+	}
+
+	public void setRfidTag(long rfidTag) {
+		this.rfidTag = rfidTag;
 	}
 
 	public static class GainedUserAchievement {

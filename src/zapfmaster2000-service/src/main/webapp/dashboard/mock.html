@@ -35,38 +35,59 @@
  var defaultImg = "../images/view/pix.png";
  </script>
 <script id="dashboard-mock-box" type="text/html">
-<div class="span5 navbar">
+<div class="span6 navbar">
 	<div class="navbar-inner box">
-		<form class="form-vertical" id="kegChangeForm">
+		<form class="form-vertical" id="newDraw_{{boxId}}">
 	<fieldset>	
 <legend>{{boxId}}: {{name}}</legend>
 <div class="row">
-<div class="span2">
-	<img id="profilePic_{{boxId}}" src="../images/view/pix.png" class="img-polaroid" width="160" height="160">
-	<p id ="username_{{boxId}}" style="text-align:center">{{userId}}: {{userName}}</p>
-</div>
-<div class="span2">
+<div class="span3">
+<div class="control-group">
+	<label class="control-label" for="brand">User</label>
+	<div class="controls">
+	    <select id="usersSelect" class="userSelect" name="users" size="1">
+			
+		</select>
+		<div class="btn btn-success" id="refreshBoxBtn"><i class="icon-refresh icon-white"></i></div>
+	</div>
+	</div>
 	<div class="control-group">
-	    <label class="control-label" for="brand">Liter</label>
+	    <label class="control-label" for="brand">Menge</label>
 	  <div class="controls">
-			<input class="registerItem" id="size" name="size" type="number" size="30" maxlength="30" placeholder="in Liter" value="0.3" min="0" step="0.1">
+			<input class="registerItem" id="amount" name="size" type="number" size="30" maxlength="30" placeholder="in Liter" value="0.3" min="0" step="0.1">
+		</div>
+	</div>
+	<div class="control-group">
+	    <label class="control-label" for="brand">Zeit</label>
+	  <div class="controls">
+			<input class="registerItem" id="duration" name="time" type="number" size="30" maxlength="30" placeholder="Zeit (in s)" value="5" min="0" step="1">
 		</div>
 	</div>
 <div class="control-group">
-		<div class="controls">
-			<input id="submit_{{boxId}}" type="submit" value="Neuer Zapfvorgang" class="btn btn-primary" style="display:block" disabled>
-		</div>
+		 <div class="controls form-inline">
+       
+            <input type="button" class="btn" placeholder="Key" value="Login" id="login">
+          
+            <input type="button" class="btn btn-primary" placeholder="Value" value="Zapfen" id="zapf">
+        </div>
 	</div>
 </div>
-</div>
+<div class="span2">
+<pre id="console" style="height:237px;overflow-y:scroll;width:200px;">
+  Init
+</pre>
 
+</div>
+</div>
 	
 </fieldset>
 </form>
 	</div>
 </div>
 </script>
-
+<script type="text/html" id="dashboard-user-options">
+{{#members}}<option value="{{rfidTag}}">{{userName}}</option>{{/members}}
+</script>
 </head>
 <body>
 <!-- Include Navigation -->
@@ -80,35 +101,87 @@ var navigation = $("#navigation").load("header.html",function(){
 
 $(function(){
 	var boxMapping = {}
-	function addFormHandlers(form){
-		
+	var ticks = $("#ticks").val();
+	var UPDATE_RATE = $("#updateRate").val();
+	function log(boxContainer,msg){
+		boxContainer.find("#console").prepend("- "+msg+"\n");
+	}
+	function addFormHandlers(div,boxModel){
+		div.find("#refreshBoxBtn").on("click",getUsers);
+		div.find("#login").on("click",function(e){
+			e.preventDefault();
+			var rfid = div.find("#usersSelect").val();
+			$.ajax({
+				url:baseUrl+"rest/box/login",
+				data:{
+					rfid:rfid,
+					passphrase:boxModel.passphrase
+				},
+				success:function(resp){
+					log(div,"Login Successful for "+resp.userName);
+				}
+			});			
+			
+		});
+		var interval = null;
+		div.find("#zapf").on("click",function(e){
+			e.preventDefault();
+			UPDATE_RATE =  parseInt($("#updateRate").val());
+			ticks =  parseInt($("#ticks").val());
+			var amount =   div.find("#amount").val();
+			var duration = div.find("#duration").val();
+			var rawTicks = amount*ticks;
+			var numRequests = Math.round(duration*1000 / UPDATE_RATE);
+
+			var ticksPerUpdate = Math.round(rawTicks / numRequests);
+			var counter = 0;
+			if(interval){
+				clearInterval(interval);
+				interval = null;
+			}
+			var interval = setInterval(function(){
+				$.ajax({
+					url:baseUrl+"rest/box/draw",
+					data:{
+						passphrase:boxModel.passphrase,
+						ticks:ticksPerUpdate
+					},
+					success:function(amountJson){
+						log(div,"Amount: "+amountJson.totalAmount )
+					}
+				});
+				counter++;
+				if(counter>=numRequests){
+					clearInterval(interval);
+				}
+			},UPDATE_RATE);
+			
+	
+		});
 	}
 	function initBox(boxModel){
 		var boxTemplate = $(ich["dashboard-mock-box"](boxModel));
 		$("#boxRow").append(boxTemplate);
 		boxMapping[boxModel.boxId] = boxTemplate;
-		
-		//RFID Connect
+		return boxTemplate;
 		
 	}
-	
+	function getUsers(){
+		ajax.getDatas("rest/members",function(members){
+			//var memberModel = new ZMO.MemberModel(members);
+			var obj = {
+					members:members
+			}
+			var template = $(ich["dashboard-user-options"](obj));
+			$(".userSelect").empty().append(template);
+		})
+	}
 	function getBoxes(){
 		ajax.getDatas("rest/draftkit",function(boxes){
 			$.each(boxes,function(ind,box){
-				initBox(box);
+				addFormHandlers(initBox(box),box);
 			});
-		});
-	}
-	
-	
-	function connectRfid(){
-		var ajax = ZMO.Util.Net.Ajax;
-		var c = ZMO.modules.Constants;
-		ajax.connectToNewsUpdate(function(json){
-			if(json.type == c.drawfeed.types.DRAWING){
-				var drawModel = new ZMO.NewsModel(val);	
-				console.log(drawModel);
-			}
+			getUsers();
 		});
 	}
 	
@@ -120,6 +193,17 @@ $(function(){
 <!-- Main Container -->
 
 <div id="mainContainer" class="container mainContainer" style="margin-top:50px">
+	<div id="credentials" class="row" style="margin-bottom:10px;">
+	 	<div class="span12" style="text-align:center;">
+	 	
+	 		<form class="form-inline well">
+	 		<label style="margin-right:5px" for="updateRate">Update Rate</label><input type="number" id="updateRate" value="250" step="50" placeholder="Update Rate for Zapf Requests"/>
+	 		<label style="margin-right:5px;" for="ticks">Ticks</label><input type="number" id="ticks" value="5200" placeholder="Ticks"/>
+	 		</form>
+	 		
+	 	</div>
+	</div>
+
 	<div id="boxRow" class="row">
 	
 	</div>
