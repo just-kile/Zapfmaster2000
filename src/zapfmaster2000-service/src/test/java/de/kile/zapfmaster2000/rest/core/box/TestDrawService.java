@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest.core.box;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -163,9 +164,12 @@ public class TestDrawService extends AbstractDatabaseTest {
 
 		assertEquals(1, drawings.size());
 		Drawing drawing = drawings.get(0);
-		int ticksPerLiter = Zapfmaster2000Core.INSTANCE
-				.getConfigurationService().getInt(
-						ConfigurationConstants.BOX_DRAW_TICKS_PER_LITER);
+		fail("FIX TODO BELOW");
+		// TODO: Below statement does not work any more
+//		int ticksPerLiter = Zapfmaster2000Core.INSTANCE
+//				.getConfigurationService().getInt(
+//						ConfigurationConstants.BOX_DRAW_TICKS_PER_LITER);
+		int ticksPerLiter = 0; // TODO remove this
 		assertEquals((double) 2000 / ticksPerLiter, drawing.getAmount(), 1);
 
 		// check if right user was chosen
