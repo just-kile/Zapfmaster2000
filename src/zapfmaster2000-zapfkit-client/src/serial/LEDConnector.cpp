@@ -11,6 +11,7 @@
 #include <sstream>
 #include <wiringPi.h>
 #include <iostream>
+#include <log4cpp/Category.hh>
 #include "../../include/serial/LEDController.hpp"
 
 using namespace zm2k;
