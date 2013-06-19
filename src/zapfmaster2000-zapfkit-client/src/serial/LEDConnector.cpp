@@ -17,7 +17,7 @@
 using namespace zm2k;
 using namespace std;
 
-Color currentColor(1, 0.35, 0);
+Color currentColor(1, 1, 1);
 Color targetColor(0, 0, 0);
 
 const int fadeTime = 500; // in ms
