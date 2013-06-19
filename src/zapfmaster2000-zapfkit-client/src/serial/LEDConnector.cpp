@@ -23,29 +23,22 @@ Color targetColor(0, 0, 0);
 const int fadeTime = 500; // in ms
 const int fadeInterval = 0;
 
-log4cpp::Category& ledLogger = log4cpp::Category::getInstance(
-		std::string("LED Connector"));
-
 void changeColor(double r, double g, double b) {
 	stringstream ss;
 	ss << "resources/changeColor.sh ";
 	ss << r << " " << g << " " << b;
+	std::system(ss.str().c_str());
 }
 
 void fadeThread() {
 
-	ledLogger.info("Fade Thread is running.");
-
 	while (true) {
 
-		ledLogger.info("Loop in fade thread.");
 		try {
 			if (currentColor == targetColor) {
 				changeColor(currentColor.r, currentColor.g, currentColor.b);
 				boost::this_thread::sleep(boost::posix_time::seconds(100));
 			} else {
-				ledLogger.info("Fading...");
-
 				// fading is needed
 				boost::posix_time::ptime startTime =
 						boost::posix_time::microsec_clock::local_time();
@@ -70,7 +63,6 @@ void fadeThread() {
 				changeColor(currentColor.r, currentColor.g, currentColor.b);
 			}
 		} catch (boost::thread_interrupted const&) {
-			ledLogger.info("Fade Thread was interrupted");
 			// we have been interrupted. Fine. Just continue.
 		}
 
@@ -85,8 +77,6 @@ LEDController::LEDController() {
 
 void LEDController::changeColor(LEDColor newColor) {
 
-	ledLogger.info("Change color is invoked");
-
 	switch (newColor) {
 	case GREEN:
 		targetColor = Color(0, 1, 0);
@@ -99,7 +89,6 @@ void LEDController::changeColor(LEDColor newColor) {
 		break;
 	}
 
-	ledLogger.info("Interrupting fade thread");
 	thread->interrupt();
 }
 
