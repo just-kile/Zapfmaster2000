@@ -153,7 +153,7 @@ public class NewsServiceImpl implements NewsService {
 		};
 	}
 
-	private void postNewsDrawFinished(Box pBox, Drawing pDrawing) {
+	private synchronized void postNewsDrawFinished(Box pBox, Drawing pDrawing) {
 		LOG.debug("Posting news (draw finished): " + pDrawing.getId());
 
 		// find system for the given box
@@ -187,7 +187,7 @@ public class NewsServiceImpl implements NewsService {
 		}
 	}
 
-	private void postNewsAchievementGained(GainedAchievement pGainedAchievement) {
+	private synchronized void postNewsAchievementGained(GainedAchievement pGainedAchievement) {
 		LOG.debug("Posting news (achievement gained): "
 				+ pGainedAchievement.getId());
 
@@ -210,7 +210,7 @@ public class NewsServiceImpl implements NewsService {
 		notifiyListenersNewsPosted(news);
 	}
 
-	private void postNewsChallengeStarted(Challenge pChallenge) {
+	private synchronized void postNewsChallengeStarted(Challenge pChallenge) {
 		if (pChallenge instanceof Challenge1v1) {
 			Challenge1v1 challenge1v1 = (Challenge1v1) pChallenge;
 
@@ -236,7 +236,7 @@ public class NewsServiceImpl implements NewsService {
 		}
 	}
 
-	private void postNewsChallengeFinished(Challenge pChallenge) {
+	private synchronized void postNewsChallengeFinished(Challenge pChallenge) {
 		if (pChallenge instanceof Challenge1v1) {
 			Challenge1v1 challenge1v1 = (Challenge1v1) pChallenge;
 
@@ -262,7 +262,7 @@ public class NewsServiceImpl implements NewsService {
 		}
 	}
 
-	private void postNewsChallengeDeclined(Challenge pChallenge) {
+	private synchronized void postNewsChallengeDeclined(Challenge pChallenge) {
 		if (pChallenge instanceof Challenge1v1) {
 			Challenge1v1 challenge1v1 = (Challenge1v1) pChallenge;
 
@@ -288,7 +288,7 @@ public class NewsServiceImpl implements NewsService {
 		}
 	}
 
-	private void postNewsNewKeg(Keg pKeg) {
+	private synchronized void postNewsNewKeg(Keg pKeg) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
@@ -306,7 +306,7 @@ public class NewsServiceImpl implements NewsService {
 		notifiyListenersNewsPosted(news);
 	}
 
-	private void postNewUserNews(User pUser) {
+	private synchronized void postNewUserNews(User pUser) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
