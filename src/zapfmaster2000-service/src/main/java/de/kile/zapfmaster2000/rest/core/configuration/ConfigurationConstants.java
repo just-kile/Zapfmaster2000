@@ -20,6 +20,8 @@ public class ConfigurationConstants {
 	public final static String BOX_DRAW_MIN_TICKS = "box.draw.minTicks";
 
 	public final static String BOX_DRAW_MIN_AMOUNT = "box.draw.minAmount";
+	
+	public final static String BOX_DRAW_MAX_TICKS = "box.draw.maxTicks";
 
 	public final static String BEER_SIZE = "beer.size";
 

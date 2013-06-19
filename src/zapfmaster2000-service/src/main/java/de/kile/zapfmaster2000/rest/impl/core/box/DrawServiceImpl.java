@@ -112,6 +112,14 @@ public class DrawServiceImpl implements DrawService {
 			// logged out even if he is not doing anything
 			return calcRealAmount(totalTicks);
 		}
+		
+		if (pRawAmount > config
+				.getInt(ConfigurationConstants.BOX_DRAW_MAX_TICKS)) {
+			// this tick amount is to big! must be a bug!
+			LOG.warn("Too many ticks here! Got " + pRawAmount + " ticks. Ignoring them.");
+			return calcRealAmount(totalTicks);
+		}
+		
 		pRawAmount -= box.getTickReduction();
 
 		scheduleAutoLogout();
