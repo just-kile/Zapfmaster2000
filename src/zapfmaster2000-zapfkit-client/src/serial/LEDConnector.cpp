@@ -23,7 +23,7 @@ Color targetColor(0, 0, 0);
 const int fadeTime = 500; // in ms
 const int fadeInterval = 0;
 
-log4cpp::Category& logger = log4cpp::Category::getInstance(
+log4cpp::Category& ledLogger = log4cpp::Category::getInstance(
 		std::string("LED Connector"));
 
 void changeColor(double r, double g, double b) {
@@ -41,7 +41,7 @@ void fadeThread() {
 				changeColor(currentColor.r, currentColor.g, currentColor.b);
 				boost::this_thread::sleep(boost::posix_time::seconds(100));
 			} else {
-				logger.info("Fading...");
+				ledLogger.info("Fading...");
 
 				// fading is needed
 				boost::posix_time::ptime startTime =
@@ -81,7 +81,7 @@ LEDController::LEDController() {
 
 void LEDController::changeColor(LEDColor newColor) {
 
-	logger.info("Change color is invoked");
+	ledLogger.info("Change color is invoked");
 
 	switch (newColor) {
 	case GREEN:
