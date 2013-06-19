@@ -34,8 +34,11 @@ void changeColor(double r, double g, double b) {
 
 void fadeThread() {
 
+	ledLogger.info("Fade Thread is running.");
+
 	while (true) {
 
+		ledLogger.info("Loop in fade thread.");
 		try {
 			if (currentColor == targetColor) {
 				changeColor(currentColor.r, currentColor.g, currentColor.b);
@@ -67,6 +70,7 @@ void fadeThread() {
 				changeColor(currentColor.r, currentColor.g, currentColor.b);
 			}
 		} catch (boost::thread_interrupted const&) {
+			ledLogger.info("Fade Thread was interrupted");
 			// we have been interrupted. Fine. Just continue.
 		}
 
@@ -95,6 +99,7 @@ void LEDController::changeColor(LEDColor newColor) {
 		break;
 	}
 
+	ledLogger.info("Interrupting fade thread");
 	thread->interrupt();
 }
 
