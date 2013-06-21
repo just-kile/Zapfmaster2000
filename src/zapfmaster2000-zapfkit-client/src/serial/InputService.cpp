@@ -30,8 +30,6 @@ AbstractInputService* singleton;
 
 int interface = 0;
 
-int lastTicks = -1;
-
 // avr overflows after that tick amount
 const int ticksMax = 0xFF;
 
@@ -60,32 +58,32 @@ int processZapfcounterInput() {
 	}
 
 	int ticks = 0;
-	int attempt_no = 0;
+	int lastTicks = -1;
+
+	const int interval = 250;
+	const int numTicksUntilUpdate = 4;
+
+	lastTicks = readTicks();
 
 	while (true) {
-		do {
-			delay(2);
-			logger.debug("tick read attempt no %d", attempt_no);
-			ticks = readTicks();
-			attempt_no++;
-		} while (ticks == -1);
-		attempt_no = 0;
 
-		if (lastTicks == -1) {
-			// first read of ticks ever. save that, since we do not start at 0!
-			lastTicks = ticks;
-		} else {
+		int totalDelta = 0;
+
+		for (int i = 0; i < numTicksUntilUpdate; ++i) {
+			delay(interval);
+			ticks = readTicks();
+
 			int tickDelta = ticks - lastTicks;
 			if (tickDelta < 0) {
 				// ticks did overflow
 				tickDelta = ticks + (ticksMax - lastTicks);
 			}
 			lastTicks = ticks;
-
-			logger.debug("ticks: %d ", tickDelta);
-			singleton->notifyZapfcount(tickDelta);
-			delay(250);
+			totalDelta += tickDelta;
 		}
+
+		logger.debug("ticks: %d ", totalDelta);
+		singleton->notifyZapfcount(totalDelta);
 	}
 
 	return 0;
