@@ -116,6 +116,28 @@ $(function(){
 	function log(boxContainer,msg){
 		boxContainer.find("#console").prepend("- "+msg+"\n");
 	}
+	function sendRequests(ticksPerUpdate,passphrase,counter,numRequests,div){
+		
+		$.ajax({
+			url:baseUrl+"rest/box/draw",
+			data:{
+				passphrase:passphrase,
+				ticks:ticksPerUpdate
+			},
+			success:function(amountJson){
+				log(div,"Amount: "+amountJson.totalAmount +":"+numRequests+":"+counter);
+				if(numRequests>counter){
+					setTimeout(function(){
+						sendRequests(ticksPerUpdate,passphrase,++counter,numRequests,div);
+					},UPDATE_RATE);
+				}
+			},error:function(resp){
+				log(div,"Error "+resp.status+": "+resp.statusText);
+
+				
+			}
+		});
+	}
 	function addFormHandlers(div,boxModel){
 		div.find("#refreshBoxBtn").on("click",getUsers);
 		div.find("#login").on("click",function(e){
@@ -148,28 +170,7 @@ $(function(){
 
 			var ticksPerUpdate = Math.round(rawTicks / numRequests);
 			var counter = 0;
-			if(interval){
-				clearInterval(interval);
-				interval = null;
-			}
-			var interval = setInterval(function(){
-				$.ajax({
-					url:baseUrl+"rest/box/draw",
-					data:{
-						passphrase:boxModel.passphrase,
-						ticks:ticksPerUpdate
-					},
-					success:function(amountJson){
-						log(div,"Amount: "+amountJson.totalAmount )
-					},error:function(resp){
-						log(div,"Error "+resp.status+": "+resp.statusText)
-					}
-				});
-				counter++;
-				if(counter>=numRequests){
-					clearInterval(interval);
-				}
-			},UPDATE_RATE);
+			sendRequests(ticksPerUpdate,boxModel.passphrase,1,numRequests,div);
 			
 	
 		});
