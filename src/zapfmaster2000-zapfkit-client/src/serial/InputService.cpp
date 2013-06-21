@@ -73,7 +73,7 @@ int processZapfcounterInput() {
 			delay(interval);
 			ticks = readTicks();
 
-			logger.debug("read ticks: %d ", totalDelta);
+			logger.debug("read ticks: %d ", ticks);
 
 			int tickDelta = ticks - lastTicks;
 			if (tickDelta < 0) {
