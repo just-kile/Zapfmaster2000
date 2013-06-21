@@ -44,7 +44,6 @@ const char res_tick_high = 0x80;
 int readTicks() {
 	int result = -1;
 
-	int
 	int res_1 = 0x00;
 	int res_2 = 0x00;
 
