@@ -222,11 +222,18 @@ $(document).ready(function(){
 	});
 	var getBaseUrl = function(callback){
 		$.ajax({
-//			url:"http://zapfmaster2000.de/config2.json?_="+new Date().getTime(),
+			//url:"http://zapfmaster2000.de/config2.json?_="+new Date().getTime(),
 			url:"http://zapfmaster2000.de/config.json?_="+new Date().getTime(),
 			type:"GET",
 			complete:function(res){
-				baseUrl = $.parseJSON(res.responseText).serverurl;
+				if(res.status==200){
+					baseUrl = $.parseJSON(res.responseText).serverurl;
+					console.log("Parsed Base Url: "+baseUrl);
+					localStorage.setItem("zm-serverurl",baseUrl);
+					console.log("Saved Base url:"+localStorage.getItem("zm-serverurl"));
+				}
+			
+			
 			}
 		});
 	}
@@ -257,7 +264,10 @@ $(document).ready(function(){
 				}else if(data.status == 403){
 					alert("Username oder Passwort falsch");
 				}else if(data.status == 404){
-					alert("Service ist offline oder Url falsch");
+					alert("Service ist offline oder Url falsch, bitte versuche es noch einmal");
+					if(typeof device!="undefined" && device.cordova){
+						getBaseUrl();
+					}
 				}else {
 					alert("Fehler! Status "+data.status);
 				}
@@ -476,7 +486,8 @@ $("#updateImageRfid").on("click",function(e){
 			}
 		},
 		error:function(){
-			alert("Username oder Passwort falsch")
+			alert("Username oder Passwort falsch");
+			
 		}
 	})
 	
@@ -503,7 +514,6 @@ $("#updateImageRfid").on("click",function(e){
 		</div>
 		<hr />
 	<input id ="registerApp" type="submit" value="Registrieren">
-	
 	
 		
 	</div>
