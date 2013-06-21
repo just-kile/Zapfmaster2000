@@ -63,7 +63,7 @@
 			<input class="registerItem" id="duration" name="time" type="number" size="30" maxlength="30" placeholder="Zeit (in s)" value="5" min="0" step="1">
 		</div>
 	</div>
-<div class="control-group">
+	<div class="control-group">
 		 <div class="controls form-inline">
        
             <input type="button" class="btn" placeholder="Key" value="Login" id="login">
@@ -71,12 +71,21 @@
             <input type="button" class="btn btn-primary" placeholder="Value" value="Zapfen" id="zapf">
         </div>
 	</div>
+	<div class="control-group">
+	    <label class="control-label" for="brand">Custom Rfid</label>
+	  <div class="controls">
+			<input class="registerItem" id="customRfid" name="size" type="text" size="30" maxlength="30" placeholder="Bel RFID" value="123">
+			<input type="button" class="btn btn-primary" placeholder="Senden" value="Senden" id="sendRfid">
+		
+	</div>
+	</div>
 </div>
+
 <div class="span2">
-<pre id="console" style="height:237px;overflow-y:scroll;width:200px;">
+<pre id="console" style="height:303px;overflow-y:scroll;width:200px;">
   Init
 </pre>
-
+<input type="button" class="btn btn-primary" placeholder="Value" value="Clear" id="clearLog">
 </div>
 </div>
 	
@@ -162,6 +171,26 @@ $(function(){
 			},UPDATE_RATE);
 			
 	
+		});
+		div.find("#clearLog").on("click",function(){
+			div.find("#console").text("");
+		});
+		div.find("#sendRfid").on("click",function(e){
+			e.preventDefault();
+			var rfid = div.find("#customRfid").val();
+			$.ajax({
+				url:baseUrl+"rest/box/login",
+				data:{
+					rfid:rfid,
+					passphrase:boxModel.passphrase
+				},
+				success:function(resp){
+					log(div,"Login Successful for "+resp.userName);
+				},
+				error:function(resp){
+					log(div,"Error "+resp.status+": "+resp.statusText);
+				}
+			});			
 		});
 	}
 	function initBox(boxModel){
