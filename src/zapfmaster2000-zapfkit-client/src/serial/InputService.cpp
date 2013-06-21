@@ -30,18 +30,51 @@ AbstractInputService* singleton;
 
 int interface = 0;
 
-// avr overflows after that tick amount
-const int ticksMax = 0xFF;
+int lastTicks = -1;
 
-const char req_tick_low = 0x01;
-const char req_tick_high = 0x02;
-const char req_tick_check = 0x03;
+// avr overflows after that tick amount
+const int ticksMax = 0xFFF;
+
+const char req_tick_low = 0x02;
+const char req_tick_high = 0x03;
 
 const char res_tick_low = 0x40;
 const char res_tick_high = 0x80;
 
 int readTicks() {
-	return wiringPiI2CRead(interface);
+	int result = -1;
+
+	int
+	int res_1 = 0x00;
+	int res_2 = 0x00;
+
+	delay(1);
+	if (wiringPiI2CWrite(interface, req_tick_low) == -1) {
+		return -1;
+	}
+	delay(1);
+	res_1 = wiringPiI2CRead(interface);
+
+	delay(1);
+	if (wiringPiI2CWrite(interface, req_tick_high) == -1) {
+		return -1;
+	}
+	delay(1);
+	res_2 = wiringPiI2CRead(interface);
+
+	if (res_1 == -1 || res_2 == -1) {
+		return -1;
+	}
+
+	if ((res_1 & 0xC0) == res_tick_low) {
+		if ((res_2 & 0xC0) == res_tick_high) {
+			result = (res_2 & 0x3F) << 6 | (res_1 & 0x3F);
+		} else
+			result = -1;
+	} else
+		result = -1;
+
+	return result;
 }
 
 int processZapfcounterInput() {
@@ -58,34 +91,32 @@ int processZapfcounterInput() {
 	}
 
 	int ticks = 0;
-	int lastTicks = -1;
-
-	const int interval = 250;
-	const int numTicksUntilUpdate = 4;
-
-	lastTicks = readTicks();
+	int attempt_no = 0;
 
 	while (true) {
-
-		int totalDelta = 0;
-
-		for (int i = 0; i < numTicksUntilUpdate; ++i) {
-			delay(interval);
+		do {
+			delay(2);
+			logger.debug("tick read attempt no %d", attempt_no);
 			ticks = readTicks();
+			attempt_no++;
+		} while (ticks == -1);
+		attempt_no = 0;
 
-			logger.debug("read ticks: %d ", ticks);
-
+		if (lastTicks == -1) {
+			// first read of ticks ever. save that, since we do not start at 0!
+			lastTicks = ticks;
+		} else {
 			int tickDelta = ticks - lastTicks;
 			if (tickDelta < 0) {
 				// ticks did overflow
 				tickDelta = ticks + (ticksMax - lastTicks);
 			}
 			lastTicks = ticks;
-			totalDelta += tickDelta;
-		}
 
-		logger.debug("sending tick update: %d ", totalDelta);
-		singleton->notifyZapfcount(totalDelta);
+			logger.debug("ticks: %d ", tickDelta);
+			singleton->notifyZapfcount(tickDelta);
+			delay(490);
+		}
 	}
 
 	return 0;
