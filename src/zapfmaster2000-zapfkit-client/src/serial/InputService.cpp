@@ -73,6 +73,8 @@ int processZapfcounterInput() {
 			delay(interval);
 			ticks = readTicks();
 
+			logger.debug("read ticks: %d ", totalDelta);
+
 			int tickDelta = ticks - lastTicks;
 			if (tickDelta < 0) {
 				// ticks did overflow
@@ -82,7 +84,7 @@ int processZapfcounterInput() {
 			totalDelta += tickDelta;
 		}
 
-		logger.debug("ticks: %d ", totalDelta);
+		logger.debug("sending tick update: %d ", totalDelta);
 		singleton->notifyZapfcount(totalDelta);
 	}
 
