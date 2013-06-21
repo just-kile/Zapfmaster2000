@@ -33,37 +33,17 @@ int interface = 0;
 int lastTicks = -1;
 
 // avr overflows after that tick amount
-const int ticksMax = 0xFFF;
+const int ticksMax = 0xFF;
 
-const char req_tick_low = 0x02;
-const char req_tick_high = 0x03;
+const char req_tick_low = 0x01;
+const char req_tick_high = 0x02;
+const char req_tick_check = 0x03;
 
 const char res_tick_low = 0x40;
 const char res_tick_high = 0x80;
 
 int readTicks() {
-	int result = -1;
-
-	char res_1 = 0x00;
-	char res_2 = 0x00;
-
-	delay(1);
-	wiringPiI2CWrite(interface, req_tick_low);
-	delay(1);
-	res_1 = wiringPiI2CRead(interface);
-	delay(1);
-	wiringPiI2CWrite(interface, req_tick_high);
-	delay(1);
-	res_2 = wiringPiI2CRead(interface);
-	if ((res_1 & 0xC0) == res_tick_low) {
-		if ((res_2 & 0xC0) == res_tick_high) {
-			result = (res_2 & 0x3F) << 6 | (res_1 & 0x3F);
-		} else
-			result = -1;
-	} else
-		result = -1;
-
-	return result;
+	return wiringPiI2CRead(interface);
 }
 
 int processZapfcounterInput() {
@@ -104,7 +84,7 @@ int processZapfcounterInput() {
 
 			logger.debug("ticks: %d ", tickDelta);
 			singleton->notifyZapfcount(tickDelta);
-			delay(490);
+			delay(250);
 		}
 	}
 
