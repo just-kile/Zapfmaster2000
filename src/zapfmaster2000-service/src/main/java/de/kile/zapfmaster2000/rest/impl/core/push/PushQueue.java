@@ -65,6 +65,11 @@ public class PushQueue extends Thread {
 					}
 				} catch (InterruptedException e) {
 					LOG.error(e);
+				} catch (Throwable th) {
+					// something went totally wrong. Emptying push queue
+					// now. Hopefully, everything is fine afterwards.
+					responsesToPush.clear();
+					LOG.error("Unhandled exception in Push Queue: Emptying queue", th);
 				}
 			}
 
@@ -96,7 +101,7 @@ public class PushQueue extends Thread {
 			} // else the response is ignored
 		}
 	}
-	
+
 	public void addRequest(AsynchronousResponse pRequest) {
 		if (pRequest != null) {
 			pendingRequests.add(pRequest);
@@ -108,10 +113,13 @@ public class PushQueue extends Thread {
 			lastPush = System.currentTimeMillis();
 			synchronized (pendingRequests) {
 				for (AsynchronousResponse request : pendingRequests) {
-					Response response = Response.fromResponse(pResponse)
-							.build();
-					request.setResponse(response);
-					System.out.println("DID PUSH " + request);
+					try {
+						Response response = Response.fromResponse(pResponse)
+								.build();
+						request.setResponse(response);
+					} catch (Throwable th) {
+						LOG.error("Could not send push response", th);
+					}
 				}
 				pendingRequests.clear();
 			}
