@@ -44,17 +44,27 @@ const char res_tick_high = 0x80;
 int readTicks() {
 	int result = -1;
 
-	char res_1 = 0x00;
-	char res_2 = 0x00;
+	int res_1 = 0x00;
+	int res_2 = 0x00;
 
 	delay(1);
-	wiringPiI2CWrite(interface, req_tick_low);
+	if (wiringPiI2CWrite(interface, req_tick_low) == -1) {
+		return -1;
+	}
 	delay(1);
 	res_1 = wiringPiI2CRead(interface);
+
 	delay(1);
-	wiringPiI2CWrite(interface, req_tick_high);
+	if (wiringPiI2CWrite(interface, req_tick_high) == -1) {
+		return -1;
+	}
 	delay(1);
 	res_2 = wiringPiI2CRead(interface);
+
+	if (res_1 == -1 || res_2 == -1) {
+		return -1;
+	}
+
 	if ((res_1 & 0xC0) == res_tick_low) {
 		if ((res_2 & 0xC0) == res_tick_high) {
 			result = (res_2 & 0x3F) << 6 | (res_1 & 0x3F);
