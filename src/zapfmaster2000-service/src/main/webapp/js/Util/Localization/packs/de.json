@@ -10,6 +10,7 @@
 "achievementRank":"Achievements Bestenliste",
 "drawCountsRank":"Zapfvorgang Bestenliste",
 "kegId":"Fass Id",
+"boxId":"Zapfkit",
 "brand":"Marke",
 "currentAmount":"Bisher gezapft",
 "currentAmountTemplate":"{{current_amount}} l von {{size}} l",

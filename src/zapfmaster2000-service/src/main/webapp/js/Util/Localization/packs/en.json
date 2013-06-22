@@ -10,6 +10,7 @@
 "achievementRank":"Achievements list",
 "drawCountsRank":"Draw Counts Bestlist",
 "kegId":"Keg Id",
+"boxId":"Zapfkit",
 "brand":"Brand",
 "currentAmount":"Currently zapfed",
 "currentAmountTemplate":"{{current_amount}} l of {{size}} l",
