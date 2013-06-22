@@ -79,7 +79,19 @@ void ZapfController::run() {
 }
 
 void ZapfController::onRfidRead(long rfid) {
+	static long lastRfidTag = -1;
+
 	logger.info("Processing rfid %d", rfid);
+
+	// only re-process the same rfid tag if enough time passed
+	const boost::posix_time::time_duration minDiff =
+			boost::posix_time::milliseconds(750);
+	const boost::posix_time::time_duration diff =
+			boost::posix_time::second_clock::local_time() - lastRfid;
+	if (rfid == lastRfidTag && diff < minDiff) {
+		logger.info("Skipping the tag since it was processed only %dms ago",
+				diff.fractional_seconds());
+	}
 
 	lastRfid = boost::posix_time::second_clock::local_time();
 	unkownUser = false;
