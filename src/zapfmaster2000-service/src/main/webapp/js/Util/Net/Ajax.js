@@ -352,10 +352,57 @@ ZMO.Util.Net.Ajax = (function($){
 			abortReq(ZMO.modules.Constants.push.CHALLENGE);
 		},100);
 	};
+	var onGetPluginCalls = function(e){
+		ZMO.logger.log(e);
+		
+	}
+	
+	var errorHandler = function(e){
+		ZMO.logger.log(e);
+	}
+	var sendRegisterId = function(id){
+		console.log("Send RegId:"+id);
+		var gcmId = localStorage.getItem("zm-gcm");
+		if(gcmId==id){
+			//alert("Gleich")
+		}else{
+			//alert("verschieden")
+		}
+		localStorage.setItem("zm-gcm",id);
+		
+	}
+	var onNotification = function(e){
+    	ZMO.logger.log("Receive Message");
+    	ZMO.logger.log(e);
+    	switch(e.event){
+    	case "registered":
+    		sendRegisterId(e.regID);
+    		break;
+    	case "message":
+    		if(true || e.foreground){
+    			if(callback)callback($.parseJSON(e.payload.message));
+    		}else{
+    			
+    		}
+    		break;
+    	case "error":
+    		errorHandler(e.msg);
+    		break;
+    	default:
+    		ZMO.logger.log("Message received,but dont know that it is");
+    	}
+    }
 	var connectChallengeReceive = function(callback){
-		setTimeout(function(){
-			connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback,null,null,true);
-		},100);
+		if (window.device &&( window.device.platform == 'android' || window.device.platform == 'Android')) {
+			window.plugins.pushNotification.register(onGetPluginCalls, errorHandler,{"senderID":"946899274677","ecb":"ZMO.ajax.onNotification"});
+		} else if(window.device && window.device.platform =="ios"){
+		    pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});
+		}else{
+			setTimeout(function(){
+				connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback,null,null,true);
+			},100);
+		}
+		
 		
 		
 	};
@@ -416,7 +463,8 @@ ZMO.Util.Net.Ajax = (function($){
 			abortChallengePush:abortChallengePush,
 			sendChallengeConfirmation:sendChallengeConfirmation,
 			sendChallengeRejection:sendChallengeRejection,
-			sendChallengeRequest:sendChallengeRequest
+			sendChallengeRequest:sendChallengeRequest,
+			onNotification:onNotification
 	};
 	return pub;
 	
