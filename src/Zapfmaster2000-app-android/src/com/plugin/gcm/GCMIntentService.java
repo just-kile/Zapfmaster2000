@@ -73,10 +73,10 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 			extras.putBoolean("foreground", foreground);
 
-			if (foreground)
+//			if (foreground)
 				PushPlugin.sendExtras(extras);
-			else
-				createNotification(context, extras);
+//			else
+//				createNotification(context, extras);
 		}
 	}
 
