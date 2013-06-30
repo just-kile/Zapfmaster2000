@@ -20,6 +20,7 @@ ZMO.modules.Constants = {
 				return "mouseup touchend";
 			}
 		})(),
+		unregisterPushService:false,
 		drawfeed:{
 			types:{
 				ACHIEVEMENT:"ACHIEVEMENT",
@@ -70,6 +71,11 @@ ZMO.modules.Constants = {
 			pieChartMaxUsers:12
 		},
 		challenges:{
+			types:{
+				CHALLENGE_REQUEST:"ChallengeRequest",
+				CHALLENGE_ACCEPTED:"ChallengeAccepted",
+				CHALLENGE_DECLINED:"ChallengeDeclined"
+			},
 			modes:{
 				name:"Laenge",
 				id:"length",

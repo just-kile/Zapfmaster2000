@@ -1,6 +1,7 @@
 ZMO.Util.Net = ZMO.Util.Net || {};
 ZMO.Util.Net.Ajax = (function($){
 	var c = ZMO.UtilConstants.ajax;
+	
 	var r = ZMO.onlineRecognizer;
 	/*****
 	 * Receive Datas
@@ -11,6 +12,8 @@ ZMO.Util.Net.Ajax = (function($){
 			MODULE_PARAMS:"params"
 	};
 	var stop=true;
+	var isAndroid = window.device &&( window.device.platform == 'android' || window.device.platform == 'Android');
+	var gcmHandlers = {};
 	/**
 	 * Get datas instant
 	 */
@@ -268,10 +271,24 @@ ZMO.Util.Net.Ajax = (function($){
 		}
 		
 	};
+	var getGcmHandlers = function(){
+		return gcmHandlers;
+	}
+	var setGcmHandler = function(key,val){
+			return gcmHandlers[key]=val;
+	}
 	var connectToNewsPush = function(callback){
-		setTimeout(function(){
-			connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
-		},100);
+		if(isAndroid){//registerCallbackHandler
+			ZMO.logger.log("Connect to news push");
+			$.each(ZMO.modules.Constants.drawfeed.types,function(key,type){
+				setGcmHandler(type,callback);
+			});
+		
+		}else{//start long polling
+			setTimeout(function(){
+				connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
+			},100);
+		}
 	};
 	var connectToNewsUpdate = function(boxId,callback){
 		setTimeout(function(){
@@ -369,18 +386,38 @@ ZMO.Util.Net.Ajax = (function($){
 			//alert("verschieden")
 		}
 		localStorage.setItem("zm-gcm",id);
+		 new ZMO.Util.Popup().open($("<input>").val(id));
+//		$.ajax({
+//			url:"http://dns.zapfmaster2000.de/test",
+//			data:{
+//				key:id
+//			}
+//			
+//		});
 		
 	}
 	var onNotification = function(e){
-    	ZMO.logger.log("Receive Message");
+    	
     	ZMO.logger.log(e);
     	switch(e.event){
     	case "registered":
-    		sendRegisterId(e.regID);
+    		sendRegisterId(e.regid);
+    		ZMO.logger.log("Receive Registered");
     		break;
     	case "message":
     		if(true || e.foreground){
-    			if(callback)callback($.parseJSON(e.payload.message));
+    			ZMO.logger.log("Receive Message"+JSON.stringify(e));
+    			//if(callback)callback($.parseJSON(e.payload.message));
+    			// new ZMO.Util.Popup().open($("<input>").val("Wuff!"));
+    			 var json = e.payload;
+    			 if(getGcmHandlers()[json.type]){
+    				 ZMO.logger.log("Received Handler for "+json.type);
+    				 getGcmHandlers()[json.type](json);
+    				 
+    			 }else{
+    				 ZMO.logger.log("No handler for "+JSON.stringify(e));
+    				 ZMO.logger.log("GCM Handler: "+getGcmHandlers()[json.type]);
+    			 }
     		}else{
     			
     		}
@@ -393,8 +430,11 @@ ZMO.Util.Net.Ajax = (function($){
     	}
     }
 	var connectChallengeReceive = function(callback){
-		if (window.device &&( window.device.platform == 'android' || window.device.platform == 'Android')) {
-			window.plugins.pushNotification.register(onGetPluginCalls, errorHandler,{"senderID":"946899274677","ecb":"ZMO.ajax.onNotification"});
+		if (isAndroid) {
+			$.each(ZMO.modules.Constants.challenges.types,function(key,type){
+				setGcmHandler(type,callback);
+			});
+			
 		} else if(window.device && window.device.platform =="ios"){
 		    pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});
 		}else{
@@ -435,7 +475,15 @@ ZMO.Util.Net.Ajax = (function($){
 					};
 		postDatas(url,callback,datas);
 	};
+	var init = function(){
+		ZMO.logger.log("Init ajax js");
+		if(isAndroid){
+			window.plugins.pushNotification.register(onGetPluginCalls, errorHandler,{"senderID":c.GCM_API_KEY,"ecb":"ZMO.ajax.onNotification"});
+		}
+		
+	}
 	var pub = {
+			init:init,
 			getDatas:getDatas,
 			postDatas:postDatas,
 			

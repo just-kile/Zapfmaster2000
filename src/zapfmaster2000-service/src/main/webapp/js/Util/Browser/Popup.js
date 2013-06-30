@@ -21,8 +21,10 @@ this.open = function(content){
 this.close = function(){
 	ZMO.scrolling.enable();
 	if(container)container.fadeOut("fast",function(){
-		container.remove();
-		container = null;
+		setTimeout(function(){
+			container.remove();
+			container = null;
+		},50);
 	});
 }
 
