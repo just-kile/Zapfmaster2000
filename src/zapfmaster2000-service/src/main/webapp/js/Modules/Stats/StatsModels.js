@@ -188,7 +188,16 @@ ZMO.modules.DrawCountModel =function(config){
  */
 ZMO.modules.ProgressModel = function(config){
 	if("undefined"!=typeof config){
-	this.data = config.data||config.amount;
+	var data = config.data||config.amount;
+	if(data.length<2){
+		if(ZMO.modules.Constants && ZMO.modules.Constants.stats.lineChartPoints){
+			var len = ZMO.modules.Constants.stats.lineChartPoints;
+			for(var i=0;i<len;i++){
+				data.push(0);
+			}
+		}
+	}
+	this.data = data;
 	//this.start_date = Date.UTC(2012, 12, 31);// config.start_date;
 	var date = config.from||config.startDate;
 	this.start_date =new ZMO.TimeParser(date).getTimestamp();

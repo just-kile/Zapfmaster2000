@@ -59,7 +59,7 @@ ZMO.modules.bestlistView = (function($,ajax){
 					arr.push([user.userName,parseFloat(user.amount)]);
 				
 				
-			}else{
+			}else if(ZMO.modules.Constants.stats.showOthersPieChart){
 				othersAmount += parseFloat(user.amount);
 			}
 		}catch(e){
