@@ -193,6 +193,15 @@ public interface Zapfmaster2000Factory extends EFactory {
 	Image createImage();
 
 	/**
+	 * Returns a new object of class '<em>Ticks</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ticks</em>'.
+	 * @generated
+	 */
+	Ticks createTicks();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
