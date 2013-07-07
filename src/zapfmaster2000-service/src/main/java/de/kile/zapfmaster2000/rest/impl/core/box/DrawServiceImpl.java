@@ -23,6 +23,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
@@ -56,6 +57,9 @@ public class DrawServiceImpl implements DrawService {
 
 	/** listeners */
 	private final List<DrawServiceListener> listeners = new ArrayList<>();
+	
+	/** ticks of the current drawing */
+	private final List<Ticks> currentDrawingTicks = new ArrayList<>();
 
 	public DrawServiceImpl(Box pBox) {
 		assert (pBox != null);
@@ -121,6 +125,10 @@ public class DrawServiceImpl implements DrawService {
 		}
 		
 		pRawAmount -= box.getTickReduction();
+		
+		Ticks ticks = Zapfmaster2000Factory.eINSTANCE.createTicks();
+		ticks.setTicks(pRawAmount);
+		ticks.setDate(new Date());
 
 		scheduleAutoLogout();
 		lastDrawing = System.currentTimeMillis();
@@ -360,6 +368,7 @@ public class DrawServiceImpl implements DrawService {
 				drawing.setDate(new Date());
 				drawing.setKeg(activeKeg);
 				drawing.setUser(currentUser);
+				drawing.getTicks().addAll(currentDrawingTicks);
 
 				session.save(drawing);
 				tx.commit();
@@ -379,6 +388,7 @@ public class DrawServiceImpl implements DrawService {
 		// reset values
 		totalTicks = 0;
 		currentUser = null;
+		currentDrawingTicks.clear();
 	}
 
 }
