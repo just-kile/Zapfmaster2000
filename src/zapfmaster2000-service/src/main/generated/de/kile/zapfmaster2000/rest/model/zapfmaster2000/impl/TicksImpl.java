@@ -37,7 +37,7 @@ public class TicksImpl extends EObjectImpl implements Ticks {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Date DATE_EDEFAULT = null;
+	protected static final String DATE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getDate() <em>Date</em>}' attribute.
@@ -47,7 +47,7 @@ public class TicksImpl extends EObjectImpl implements Ticks {
 	 * @generated
 	 * @ordered
 	 */
-	protected Date date = DATE_EDEFAULT;
+	protected String date = DATE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTicks() <em>Ticks</em>}' attribute.
@@ -93,7 +93,7 @@ public class TicksImpl extends EObjectImpl implements Ticks {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
@@ -102,8 +102,8 @@ public class TicksImpl extends EObjectImpl implements Ticks {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDate(Date newDate) {
-		Date oldDate = date;
+	public void setDate(String newDate) {
+		String oldDate = date;
 		date = newDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.TICKS__DATE, oldDate, date));
@@ -155,7 +155,7 @@ public class TicksImpl extends EObjectImpl implements Ticks {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case Zapfmaster2000Package.TICKS__DATE:
-				setDate((Date)newValue);
+				setDate((String)newValue);
 				return;
 			case Zapfmaster2000Package.TICKS__TICKS:
 				setTicks((Integer)newValue);

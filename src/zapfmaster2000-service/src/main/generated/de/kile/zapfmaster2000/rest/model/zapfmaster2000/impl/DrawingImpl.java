@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -122,7 +124,7 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	protected Date date = DATE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTicks() <em>Ticks</em>}' reference list.
+	 * The cached value of the '{@link #getTicks() <em>Ticks</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTicks()
@@ -340,7 +342,7 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 */
 	public EList<Ticks> getTicks() {
 		if (ticks == null) {
-			ticks = new EObjectResolvingEList<Ticks>(Ticks.class, this, Zapfmaster2000Package.DRAWING__TICKS);
+			ticks = new EObjectContainmentEList<Ticks>(Ticks.class, this, Zapfmaster2000Package.DRAWING__TICKS);
 		}
 		return ticks;
 	}
@@ -377,6 +379,8 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 				return basicSetUser(null, msgs);
 			case Zapfmaster2000Package.DRAWING__KEG:
 				return basicSetKeg(null, msgs);
+			case Zapfmaster2000Package.DRAWING__TICKS:
+				return ((InternalEList<?>)getTicks()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest.impl.core.box;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.box.DrawService;
 import de.kile.zapfmaster2000.rest.core.box.DrawServiceListener;
@@ -57,7 +59,7 @@ public class DrawServiceImpl implements DrawService {
 
 	/** listeners */
 	private final List<DrawServiceListener> listeners = new ArrayList<>();
-	
+
 	/** ticks of the current drawing */
 	private final List<Ticks> currentDrawingTicks = new ArrayList<>();
 
@@ -116,19 +118,22 @@ public class DrawServiceImpl implements DrawService {
 			// logged out even if he is not doing anything
 			return calcRealAmount(totalTicks);
 		}
-		
+
 		if (pRawAmount > config
 				.getInt(ConfigurationConstants.BOX_DRAW_MAX_TICKS)) {
 			// this tick amount is to big! must be a bug!
-			LOG.warn("Too many ticks here! Got " + pRawAmount + " ticks. Ignoring them.");
+			LOG.warn("Too many ticks here! Got " + pRawAmount
+					+ " ticks. Ignoring them.");
 			return calcRealAmount(totalTicks);
 		}
-		
+
 		pRawAmount -= box.getTickReduction();
-		
+
 		Ticks ticks = Zapfmaster2000Factory.eINSTANCE.createTicks();
 		ticks.setTicks(pRawAmount);
-		ticks.setDate(new Date());
+		ticks.setDate(new SimpleDateFormat(
+				PlatformConstants.DATE_TIME_MS_FORMAT).format(new Date()));
+		currentDrawingTicks.add(ticks);
 
 		scheduleAutoLogout();
 		lastDrawing = System.currentTimeMillis();

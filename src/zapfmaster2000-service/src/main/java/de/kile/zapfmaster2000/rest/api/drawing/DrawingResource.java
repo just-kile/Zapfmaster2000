@@ -154,13 +154,10 @@ public class DrawingResource {
 				return Response.status(Status.FORBIDDEN).build();
 			}
 			
-			SimpleDateFormat format = new SimpleDateFormat(
-					PlatformConstants.DATE_TIME_FORMAT);
-					
 			List<TicksResponse> response = new ArrayList<>();
 			for (Ticks ticks : drawing.getTicks()) {
 				TicksResponse ticksResponse = new TicksResponse();
-				ticksResponse.setDate(format.format(ticks.getDate()));
+				ticksResponse.setDate(ticks.getDate());
 				ticksResponse.setTicks(ticks.getTicks());
 				response.add(ticksResponse);
 			}

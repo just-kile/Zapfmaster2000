@@ -487,7 +487,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	int DRAWING__DATE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Ticks</b></em>' reference list.
+	 * The feature id for the '<em><b>Ticks</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1921,10 +1921,10 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getDrawing_Date();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getTicks <em>Ticks</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getTicks <em>Ticks</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Ticks</em>'.
+	 * @return the meta object for the containment reference list '<em>Ticks</em>'.
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getTicks()
 	 * @see #getDrawing()
 	 * @generated
@@ -3009,7 +3009,7 @@ public interface Zapfmaster2000Package extends EPackage {
 		EAttribute DRAWING__DATE = eINSTANCE.getDrawing_Date();
 
 		/**
-		 * The meta object literal for the '<em><b>Ticks</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Ticks</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

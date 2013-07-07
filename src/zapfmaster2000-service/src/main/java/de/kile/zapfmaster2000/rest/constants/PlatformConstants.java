@@ -12,6 +12,8 @@ public class PlatformConstants {
 	}
 	
 	public static final String DATE_TIME_FORMAT = "yyyyMMdd-HHmmss";
+	
+	public static final String DATE_TIME_MS_FORMAT = "yyyyMMdd-HHmmssSSS";
 
 	public static final int ASYNC_TIMEOUT = 60000;
 	

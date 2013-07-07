@@ -33,12 +33,12 @@ public interface Ticks extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Date</em>' attribute.
-	 * @see #setDate(Date)
+	 * @see #setDate(String)
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getTicks_Date()
 	 * @model
 	 * @generated
 	 */
-	Date getDate();
+	String getDate();
 
 	/**
 	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks#getDate <em>Date</em>}' attribute.
@@ -48,7 +48,7 @@ public interface Ticks extends EObject {
 	 * @see #getDate()
 	 * @generated
 	 */
-	void setDate(Date value);
+	void setDate(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Ticks</b></em>' attribute.
