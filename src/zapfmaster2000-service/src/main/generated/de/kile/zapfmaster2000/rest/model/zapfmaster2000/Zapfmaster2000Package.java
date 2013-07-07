@@ -487,13 +487,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int DRAWING__DATE = 4;
 
 	/**
+	 * The feature id for the '<em><b>Ticks</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DRAWING__TICKS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Drawing</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DRAWING_FEATURE_COUNT = 5;
+	int DRAWING_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GainedAchievementImpl <em>Gained Achievement</em>}' class.
@@ -1411,6 +1420,43 @@ public interface Zapfmaster2000Package extends EPackage {
 	int IMAGE_FEATURE_COUNT = 5;
 
 	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TicksImpl <em>Ticks</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TicksImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getTicks()
+	 * @generated
+	 */
+	int TICKS = 21;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TICKS__DATE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Ticks</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TICKS__TICKS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Ticks</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TICKS_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1418,7 +1464,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 21;
+	int SEX = 22;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType <em>Challenge Type</em>}' enum.
@@ -1428,7 +1474,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeType()
 	 * @generated
 	 */
-	int CHALLENGE_TYPE = 22;
+	int CHALLENGE_TYPE = 23;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType <em>User Type</em>}' enum.
@@ -1438,7 +1484,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUserType()
 	 * @generated
 	 */
-	int USER_TYPE = 23;
+	int USER_TYPE = 24;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState <em>Challenge State</em>}' enum.
@@ -1448,7 +1494,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeState()
 	 * @generated
 	 */
-	int CHALLENGE_STATE = 24;
+	int CHALLENGE_STATE = 25;
 
 
 	/**
@@ -1459,7 +1505,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getBlob()
 	 * @generated
 	 */
-	int BLOB = 25;
+	int BLOB = 26;
 
 
 	/**
@@ -1873,6 +1919,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDrawing_Date();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getTicks <em>Ticks</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Ticks</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getTicks()
+	 * @see #getDrawing()
+	 * @generated
+	 */
+	EReference getDrawing_Ticks();
 
 	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement <em>Gained Achievement</em>}'.
@@ -2531,6 +2588,38 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getImage_ContentBig();
 
 	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks <em>Ticks</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ticks</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks
+	 * @generated
+	 */
+	EClass getTicks();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks#getDate <em>Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Date</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks#getDate()
+	 * @see #getTicks()
+	 * @generated
+	 */
+	EAttribute getTicks_Date();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks#getTicks <em>Ticks</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ticks</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks#getTicks()
+	 * @see #getTicks()
+	 * @generated
+	 */
+	EAttribute getTicks_Ticks();
+
+	/**
 	 * Returns the meta object for enum '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2918,6 +3007,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute DRAWING__DATE = eINSTANCE.getDrawing_Date();
+
+		/**
+		 * The meta object literal for the '<em><b>Ticks</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DRAWING__TICKS = eINSTANCE.getDrawing_Ticks();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GainedAchievementImpl <em>Gained Achievement</em>}' class.
@@ -3436,6 +3533,32 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMAGE__CONTENT_BIG = eINSTANCE.getImage_ContentBig();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TicksImpl <em>Ticks</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TicksImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getTicks()
+		 * @generated
+		 */
+		EClass TICKS = eINSTANCE.getTicks();
+
+		/**
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TICKS__DATE = eINSTANCE.getTicks_Date();
+
+		/**
+		 * The meta object literal for the '<em><b>Ticks</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TICKS__TICKS = eINSTANCE.getTicks_Ticks();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.
