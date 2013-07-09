@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -29,21 +30,14 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 @Path("/drawings")
 public class DrawingResource {
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response retrieveDrawings(@QueryParam("token") String pToken) {
-		return retrieveDrawings(pToken, 0, 50);
-	}
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveDrawings(@QueryParam("token") String pToken,
-			@QueryParam("start") int start, @QueryParam("length") int length) {
+			@DefaultValue("0") @QueryParam("start") int start,
+			@DefaultValue("50") @QueryParam("length") int length) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
-
 		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
