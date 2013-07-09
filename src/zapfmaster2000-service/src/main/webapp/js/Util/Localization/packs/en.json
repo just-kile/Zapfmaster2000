@@ -36,7 +36,7 @@
 
 
 "place":"Place:",
-"declinedChallengeTemplate":"{{#team1}}{{*userName*}} {{/team1}} declined a {{duration}} minutes Challenge against {{#team2}}{{*userName*}} {{/team2}}  because <br /> &quot;{{reason}}&quot;",
+"declinedChallengeTemplate":"{{#team2}}{{*userName*}} {{/team2}} declined a {{duration}} minutes Challenge against {{#team1}}{{*userName*}} {{/team1}}  because <br /> &quot;{{reason}}&quot;",
 "newKeg":"A new {{size}} Liter keg of brand {{brand}} has been zapfed for the first time!",
 "newUser":"{{*userName*}} registered successfully. Have a lot of fun!",
 "tappedQuantity":"Tapped Amount {{totalAmount}} Liter",
