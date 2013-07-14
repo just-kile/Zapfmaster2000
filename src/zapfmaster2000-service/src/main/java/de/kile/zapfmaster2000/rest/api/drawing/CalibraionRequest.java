@@ -23,16 +23,16 @@ public class CalibraionRequest {
 
 	public class CalibrationValues {
 
-		private long drawinId;
+		private long drawingId;
 
 		private double measuredAmount;
 
-		public long getDrawinId() {
-			return drawinId;
+		public long getDrawingId() {
+			return drawingId;
 		}
 
-		public void setDrawinId(long drawinId) {
-			this.drawinId = drawinId;
+		public void setDrawingId(long drawingId) {
+			this.drawingId = drawingId;
 		}
 
 		public double getMeasuredAmount() {
