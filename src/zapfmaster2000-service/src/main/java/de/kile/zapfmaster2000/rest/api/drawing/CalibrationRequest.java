@@ -3,11 +3,11 @@ package de.kile.zapfmaster2000.rest.api.drawing;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalibraionRequest {
+public class CalibrationRequest {
 
 	private String token;
 
-	private final List<CalibrationValues> data = new ArrayList<>();
+	private List<CalibrationValues> data = new ArrayList<>();
 
 	public String getToken() {
 		return token;
