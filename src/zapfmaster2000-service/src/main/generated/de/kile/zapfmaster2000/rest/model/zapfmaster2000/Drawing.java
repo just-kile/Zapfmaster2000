@@ -4,6 +4,7 @@ package de.kile.zapfmaster2000.rest.model.zapfmaster2000;
 
 import java.util.Date;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getKeg <em>Keg</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getAmount <em>Amount</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getDate <em>Date</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing#getTicks <em>Ticks</em>}</li>
  * </ul>
  * </p>
  *
@@ -160,5 +162,21 @@ public interface Drawing extends EObject {
 	 * @generated
 	 */
 	void setDate(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Ticks</b></em>' containment reference list.
+	 * The list contents are of type {@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ticks</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ticks</em>' containment reference list.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getDrawing_Ticks()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Ticks> getTicks();
 
 } // Drawing

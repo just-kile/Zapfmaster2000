@@ -201,6 +201,12 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Zapfmaster2000Package.TICKS: {
+				Ticks ticks = (Ticks)theEObject;
+				T result = caseTicks(ticks);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -517,6 +523,21 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImage(Image object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ticks</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ticks</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTicks(Ticks object) {
 		return null;
 	}
 

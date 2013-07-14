@@ -77,6 +77,7 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.USER: return createUser();
 			case Zapfmaster2000Package.TOKEN: return createToken();
 			case Zapfmaster2000Package.IMAGE: return createImage();
+			case Zapfmaster2000Package.TICKS: return createTicks();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -316,6 +317,16 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	public Image createImage() {
 		ImageImpl image = new ImageImpl();
 		return image;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Ticks createTicks() {
+		TicksImpl ticks = new TicksImpl();
+		return ticks;
 	}
 
 	/**

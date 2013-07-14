@@ -4,19 +4,25 @@ package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +36,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getKeg <em>Keg</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getAmount <em>Amount</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getDate <em>Date</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.DrawingImpl#getTicks <em>Ticks</em>}</li>
  * </ul>
  * </p>
  *
@@ -115,6 +122,16 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * @ordered
 	 */
 	protected Date date = DATE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTicks() <em>Ticks</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTicks()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Ticks> ticks;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -323,6 +340,18 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Ticks> getTicks() {
+		if (ticks == null) {
+			ticks = new EObjectContainmentEList<Ticks>(Ticks.class, this, Zapfmaster2000Package.DRAWING__TICKS);
+		}
+		return ticks;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -350,6 +379,8 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 				return basicSetUser(null, msgs);
 			case Zapfmaster2000Package.DRAWING__KEG:
 				return basicSetKeg(null, msgs);
+			case Zapfmaster2000Package.DRAWING__TICKS:
+				return ((InternalEList<?>)getTicks()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -374,6 +405,8 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 				return getAmount();
 			case Zapfmaster2000Package.DRAWING__DATE:
 				return getDate();
+			case Zapfmaster2000Package.DRAWING__TICKS:
+				return getTicks();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -383,6 +416,7 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -400,6 +434,10 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 				return;
 			case Zapfmaster2000Package.DRAWING__DATE:
 				setDate((Date)newValue);
+				return;
+			case Zapfmaster2000Package.DRAWING__TICKS:
+				getTicks().clear();
+				getTicks().addAll((Collection<? extends Ticks>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -428,6 +466,9 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 			case Zapfmaster2000Package.DRAWING__DATE:
 				setDate(DATE_EDEFAULT);
 				return;
+			case Zapfmaster2000Package.DRAWING__TICKS:
+				getTicks().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -450,6 +491,8 @@ public class DrawingImpl extends EObjectImpl implements Drawing {
 				return amount != AMOUNT_EDEFAULT;
 			case Zapfmaster2000Package.DRAWING__DATE:
 				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
+			case Zapfmaster2000Package.DRAWING__TICKS:
+				return ticks != null && !ticks.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
