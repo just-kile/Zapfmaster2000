@@ -17,12 +17,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import de.kile.zapfmaster2000.rest.api.drawing.CalibraionRequest.CalibrationValues;
+import de.kile.zapfmaster2000.rest.api.drawing.CalibrationResponse.CalibratedData;
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.impl.core.PolynomialRegression;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks;
@@ -126,7 +130,7 @@ public class DrawingResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response changeDrawAmount(@PathParam("drawId") long drawId,
 			@QueryParam("token") String pToken) {
-		
+
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 
@@ -140,14 +144,14 @@ public class DrawingResource {
 			EClass drawingClass = Zapfmaster2000Package.eINSTANCE.getDrawing();
 			Drawing drawing = (Drawing) session.get(drawingClass.getName(),
 					drawId);
-			
+
 			if (drawing == null
 					|| drawing.getUser().getAccount().getId() != account
 							.getId()) {
 				tx.commit();
 				return Response.status(Status.FORBIDDEN).build();
 			}
-			
+
 			List<TicksResponse> response = new ArrayList<>();
 			for (Ticks ticks : drawing.getTicks()) {
 				TicksResponse ticksResponse = new TicksResponse();
@@ -155,11 +159,88 @@ public class DrawingResource {
 				ticksResponse.setTicks(ticks.getTicks());
 				response.add(ticksResponse);
 			}
-			
+
 			tx.commit();
 			return Response.ok(response).build();
 		}
-		
+
 		return Response.status(Status.FORBIDDEN).build();
 	}
+
+	@POST
+	@Path("/calibration")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response calibrate(CalibraionRequest calibrationRequest) {
+
+		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAccount(calibrationRequest.getToken());
+
+		if (account != null) {
+
+			List<Double> xValues = new ArrayList<>();
+			List<Double> yValues = new ArrayList<>();
+
+			CalibrationResponse calibrationResponse = new CalibrationResponse();
+			
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			EClass drawingClass = Zapfmaster2000Package.eINSTANCE.getDrawing();
+
+			for (CalibrationValues value : calibrationRequest.getData()) {
+				Drawing drawing = (Drawing) session.get(drawingClass.getName(),
+						value.getDrawinId());
+
+				if (drawing == null
+						|| drawing.getUser().getAccount().getId() != account
+								.getId()) {
+					tx.commit();
+					return Response.status(Status.FORBIDDEN).build();
+				}
+
+				double sum = 0;
+				EList<Ticks> allTicks = drawing.getTicks();
+				for (Ticks ticks : allTicks) {
+					sum += ticks.getTicks();
+				}
+				double avg = sum / allTicks.size();
+
+				double amountPerInterval = value.getMeasuredAmount() / allTicks.size();
+				xValues.add(avg);
+				yValues.add(amountPerInterval);
+
+				CalibratedData data = new CalibratedData();
+				data.setTicks(avg);
+				data.setAmount(amountPerInterval);
+				calibrationResponse.getData().add(data);
+				
+			}
+
+			tx.commit();
+
+			PolynomialRegression polynomialRegression = new PolynomialRegression(
+					unbox(xValues), unbox(yValues), 2);
+			
+
+			calibrationResponse.setA0(polynomialRegression.beta(0));
+			calibrationResponse.setA1(polynomialRegression.beta(1));
+			calibrationResponse.setA2(polynomialRegression.beta(2));
+
+			return Response.ok(calibrationResponse).build();
+		}
+
+		return Response.status(Status.FORBIDDEN).build();
+	}
+
+	private double[] unbox(List<Double> list) {
+		double[] result = new double[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			result[i] = list.get(i);
+		}
+		return result;
+	}
+
 }
