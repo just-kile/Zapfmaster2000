@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import de.kile.zapfmaster2000.rest.api.drawing.CalibraionRequest.CalibrationValues;
+import de.kile.zapfmaster2000.rest.api.drawing.CalibrationRequest.CalibrationValues;
 import de.kile.zapfmaster2000.rest.api.drawing.CalibrationResponse.CalibratedData;
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
@@ -171,7 +171,7 @@ public class DrawingResource {
 	@Path("/calibration")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response calibrate(CalibraionRequest calibrationRequest) {
+	public Response calibrate(CalibrationRequest calibrationRequest) {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(calibrationRequest.getToken());
@@ -192,7 +192,7 @@ public class DrawingResource {
 
 			for (CalibrationValues value : calibrationRequest.getData()) {
 				Drawing drawing = (Drawing) session.get(drawingClass.getName(),
-						value.getDrawinId());
+						value.getDrawingId());
 
 				if (drawing == null
 						|| drawing.getUser().getAccount().getId() != account
