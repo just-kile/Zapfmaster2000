@@ -253,7 +253,7 @@ $(document).ready(function(){
 				var arr = [];
 				$.each(data,function(ind,val){
 					//date = new Date(getDateFromFormat(val.date,"yyyyMMdd-HHmmssSSS")).getTime();
-					var date = moment(val.date,"YYYYMMDD-HHmmssSSS").format("DD-MM-YYYY HH:mm:ss:SSS");
+					var date = moment(val.date,"YYYYMMDD-HHmmssSSS").toDate();//.format("DD-MM-YYYY HH:mm:ss:SSS");
 					arr.push([date,val.ticks]);
 				});
 				
