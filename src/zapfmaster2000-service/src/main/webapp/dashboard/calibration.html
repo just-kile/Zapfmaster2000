@@ -61,6 +61,7 @@ left:537px;
  var ajax = ZMO.Util.Net.Ajax;
  ZMO.exists = ZMO.Util.Object.exists;
  ZMO.Constants =ZMO.UtilConstants;
+ var c = ZMO.modules.Constants;
  var defaultImg = "../images/view/pix.png";
  ZMO.logger = (function(){
 	  	var log = function(str){
@@ -336,16 +337,21 @@ $(document).ready(function(){
 				arr.push({drawingId:drawingId,measuredAmount:amount});
 			}
 
-		})
+		});
+		var data = {
+				token:localStorage.getItem("token"),
+				data:arr
+		}
 		$.ajax({
 			type:"POST",
 			url:baseUrl+"rest/drawings/calibration",
-			data: JSON.stringify(arr),
+			data: JSON.stringify(data),
 			contentType: 'application/json; charset=utf-8',
 			dataType: 'json',
 			async: false,
 			success: function(res) {
 			      console.log(res);
+			      
 			}
 		})
 	});
@@ -399,11 +405,23 @@ var navigation = $("#navigation").load("header.html",function(){
   <div class="navbar-inner">
   	<div id="linechart"></div>
   	</div>
-  	<div>
-  	
+
+<div class="navbar-inner" style="margin-top:20px">
+  		<form class="form-inline">
+	  <fieldset>
+	    <legend>Parameters</legend>
+	    <label>a0</label>
+	    <input id="a0" type="number" placeholder="Type something…" class="input-mini">
+	     <label>a1</label>
+	    <input id="a1" type="number" placeholder="Type something…" class="input-mini">
+	     <label>a2</label>
+	    <input id="a2" type="number" placeholder="Type something…" class="input-mini">
+	    
+	    <button type="submit" class="btn">Submit</button>
+	  </fieldset>
+	</form>
   	</div>
-</div>
-</div>
+</div></div>
 </div>
 </body>
 </html>
