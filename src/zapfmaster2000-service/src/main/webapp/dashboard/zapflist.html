@@ -160,18 +160,7 @@ $(function(){
 	//retrieving Zapfboxes
 
 	ajax.getDatas("rest/draftkit",function(boxes){
-		//------- DEBUG ----------
-		/*boxes = [{
-			boxId:1,
-			name:"Bar"
-	},{
-		boxId:2,
-		name:"Theke"
-	},{
-		boxId:3,
-		name:"Tresen"
-	}]*/
- 	// ----/DEBUG--------
+
 		$.each(boxes,function(ind,box){
 			
 			var template = $(ich["dashboard-zapf-box"](box));
