@@ -7,7 +7,7 @@ public class CalibrationRequest {
 
 	private String token;
 
-	private List<CalibrationValues> data = new ArrayList<>();
+	private CalibrationValues[] data;
 
 	public String getToken() {
 		return token;
@@ -17,11 +17,11 @@ public class CalibrationRequest {
 		this.token = token;
 	}
 
-	public List<CalibrationValues> getData() {
+	public CalibrationValues[] getData() {
 		return data;
 	}
 
-	public class CalibrationValues {
+	public static class CalibrationValues {
 
 		private long drawingId;
 
