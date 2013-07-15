@@ -167,7 +167,8 @@ $(document).ready(function(){
 			$.each(boxes,function(ind,box){
 				$("#boxes-sel").append($("<option>").val(box.boxId).text(box.boxId+": "+box.name));	
 			});
-			initDrawList();
+			//initDrawList();
+			$("#boxes-sel").trigger("change");
 		});
 	}
 	 ZMO.Util.scrollHandler.bindScrollHandler(function(loadingFinished){
@@ -176,7 +177,7 @@ $(document).ready(function(){
 			loadListItems(counter*LENGTH+addedNews,LENGTH,loadingFinished);
 	 });
 	 var chartContainer = $("#chartContainer");
-	 $(window).bind("scroll", function(e) {
+	/* $(window).bind("scroll", function(e) {
 			var top = $(window).scrollTop();
 			var windowTop = 100;
 			if(windowTop<top){
@@ -184,7 +185,7 @@ $(document).ready(function(){
 			}else{
 				chartContainer.removeClass("chart-fixed");
 			}
-	})
+	})*/
 	
 	 $('#zapfliste').on("click","tr",function(e) {
 		 var el = $(e.currentTarget);
@@ -199,6 +200,12 @@ $(document).ready(function(){
 	 $("#boxes-sel").on("change",function(e){
 			var el = $(e.currentTarget);
 			initDrawList();
+			ajax.getDatas("rest/calibration/boxes/"+el.val(),function(e){
+				var obj = e[0];
+				$("#a0").val(obj["a0"]);
+				$("#a1").val(obj["a1"])
+				$("#a2").val(obj["a2"])
+			});
 			
 	 })
 	 
@@ -234,53 +241,11 @@ $(document).ready(function(){
 													// the shadow.
 	        	        shadowDepth: 3
 	        	}, 
-	        	 series:[ 
-	        	          {
-	        	            // Change our line width and use a diamond shaped marker.
-	        	           //showLine:false, 
-	        	            //markerOptions: { style:'diamond' }
-	        	          }, 
-	        	          {
-	        	            // Don't show a line, just show markers.
-	        	            // Make the markers 7 pixels with an 'x' style
-	        	            showMarker:false,
-	        	            lineWidth:2, 
-	        	           // markerOptions: { size: 7, style:"x" }
-	        	          }],
-	        	seriesColors: ["#dddf0d","#90b1d8",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
+	        	     	seriesColors: ["#dddf0d","#90b1d8",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
 	        	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
 	        	                 
 	        	     				animateReplot: true,
-	        	     		           title:'Ticks vs Time',
-	        	     		           axes:{
-	        	     		             xaxis:{
-	        	     		               renderer:$.jqplot.DateAxisRenderer,
-	        	     		               tickOptions:{
-	        	     		                 formatString:'%H:%M:%S'
-	        	     		               },
-	        	     		               label:"Time",
-	        	     		               labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-        	     		                   labelOptions: {
-        	     		                     textColor: '#ccc',
-        	     		                     fontSize: '12pt'
-        	     		                   }
-	        	     		             },
-	        	     		             yaxis:{
-	        	     		               tickOptions:{
-	        	     // formatString:'%.2f'
-	        	     		            	   formatString:'%.0f'
-	        	     		                 },
-	        	     		                 min:0,
-	        	     						 max:500,
-	        	     						//padMax:100,
-	        	     		                 label:'Ticks',
-	        	     		                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-	        	     		                 labelOptions: {
-	        	     		                     textColor: '#ccc',
-	        	     		                     fontSize: '12pt'
-	        	     		                   }
-	        	     		             }
-	        	     		           },
+	        	     		          
 	        	     		          
 	        	     		           cursor: {
 	        	     		             show: false
@@ -300,9 +265,73 @@ $(document).ready(function(){
 			chart[id].destroy();
 			chart[id] = null;
 		}
-		chart[id] = $.jqplot(id, datas,plotOptions);
+		chart[id] = $.jqplot(id, datas,$.extend({},plotOptions,{
+			 title:'Ticks vs Time',
+	           axes:{
+	             xaxis:{
+	               renderer:$.jqplot.DateAxisRenderer,
+	               tickOptions:{
+	                 formatString:'%H:%M:%S'
+	               },
+	               label:"Time",
+	               labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                  labelOptions: {
+                    textColor: '#ccc',
+                    fontSize: '12pt'
+                  }
+	             },
+	             yaxis:{
+	               tickOptions:{
+// formatString:'%.2f'
+	            	   formatString:'%.0f'
+	                 },
+	                 min:0,
+					 max:500,
+					//padMax:100,
+	                 label:'Ticks',
+	                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+	                 labelOptions: {
+	                     textColor: '#ccc',
+	                     fontSize: '12pt'
+	                   }
+	             }
+	           },
+	           series:[ 
+	        	          {
+	        	            // Change our line width and use a diamond shaped marker.
+	        	           //showLine:false, 
+	        	            //markerOptions: { style:'diamond' }
+	        	          }, 
+	        	          {
+	        	            // Don't show a line, just show markers.
+	        	            // Make the markers 7 pixels with an 'x' style
+	        	            showMarker:false,
+	        	            lineWidth:2, 
+	        	           // markerOptions: { size: 7, style:"x" }
+	        	          }],
+
+		}));
 	}
-	
+	function calcModel(a0,a1,a2){
+		
+		a0 = parseFloat(a0);
+		a1 = parseFloat(a1);
+		a2 = parseFloat(a2);
+		
+		var STEP_SIZE = 20;
+		var MESH_SIZE = 400;
+		var iterations  = Math.round(MESH_SIZE/STEP_SIZE);
+		var mesh = [];
+		for(var i=0;i<iterations;i++){
+			var ticks = i*STEP_SIZE;
+			var amount = a0+a1*ticks+a2*ticks*ticks;
+		
+			mesh.push([ticks,amount]);
+		}
+		return mesh;
+		
+		
+	}
 	function getPlotDatas(drawId){
 		ajax.getDatas("rest/drawings/"+drawId+"/ticks",function(data){
 				var arr = [];
@@ -323,6 +352,7 @@ $(document).ready(function(){
 				plotData("linechart",[arr,regr]);
 			})
 	};
+	var measuredDatasArr = [];
 	$("#calibrate-btn").on("click",function(e){
 		e.preventDefault();
 		var arr = [];
@@ -351,9 +381,59 @@ $(document).ready(function(){
 			async: false,
 			success: function(res) {
 			      console.log(res);
-			      
+			      $("#a0").val(res["a0"]);
+			      $("#a1").val(res["a1"]);
+			      $("#a2").val(res["a2"]);
+			      var chartArr = [];
+			      $.each(res.data,function(ind,val){
+			    	  chartArr.push([val.ticks,val.amount]);
+			      });
+			      var model = calcModel(res["a0"],res["a1"],res["a2"])
+			     // plotData("resChart",[chartArr]);
+			      if(chart["resChart"])chart["resChart"].destroy();
+			      measuredDatasArr = chartArr;
+			     chart["resChart"] = $.jqplot("resChart", [chartArr,model],{
+			    	 series:[ 
+		        	          {
+		        	            // Change our line width and use a diamond shaped marker.
+		        	           showLine:false, 
+		        	            //markerOptions: { style:'diamond' }
+		        	          }, 
+		        	          {
+		        	            // Don't show a line, just show markers.
+		        	            // Make the markers 7 pixels with an 'x' style
+		        	            showMarker:false,
+		        	            lineWidth:2, 
+		        	           // markerOptions: { size: 7, style:"x" }
+		        	          }],
+			     });
 			}
 		})
+	});
+	
+	$("#parameters").on("change","input",function(){
+		var a0 = $("#a0").val();
+		var a1 = $("#a1").val();
+		var a2 = $("#a2").val();
+		var model = calcModel(a0,a1,a2);
+	     if(chart["resChart"])chart["resChart"].destroy();
+	     var datas = measuredDatasArr.length==0? [model]:[measuredDatasArr,model];
+	     chart["resChart"] = $.jqplot("resChart", datas,{
+	    	 series:[ 
+        	          {
+        	            // Change our line width and use a diamond shaped marker.
+        	           showLine:false, 
+        	            //markerOptions: { style:'diamond' }
+        	          }, 
+        	          {
+        	            // Don't show a line, just show markers.
+        	            // Make the markers 7 pixels with an 'x' style
+        	            showMarker:false,
+        	            lineWidth:2, 
+        	           // markerOptions: { size: 7, style:"x" }
+        	          }],
+	     });
+		measuredDatasArr
 	});
 	//TODO
 	$("#zapfliste").on("change","input[type=checkbox]",function(e){
@@ -362,7 +442,16 @@ $(document).ready(function(){
 		}
 		
 	});
-
+	$("#parameters").on("submit",function(e){
+		e.preventDefault();
+		ajax.postDatas("rest/calibration/boxes/"+$("#boxes-sel").val(),function(){
+			alert("Daten geändert!");
+		},{
+			"a0":$("#a0").val(),
+			"a1":$("#a1").val(),
+			"a2":$("#a2").val()
+		});
+	});
 
 
 });
@@ -407,20 +496,24 @@ var navigation = $("#navigation").load("header.html",function(){
   	</div>
 
 <div class="navbar-inner" style="margin-top:20px">
-  		<form class="form-inline">
+  		<form class="form-inline" id="parameters">
 	  <fieldset>
 	    <legend>Parameters</legend>
 	    <label>a0</label>
-	    <input id="a0" type="number" placeholder="Type something…" class="input-mini">
+	    <input id="a0" type="number" step="any" placeholder="Type something…" class="input-small">
 	     <label>a1</label>
-	    <input id="a1" type="number" placeholder="Type something…" class="input-mini">
+	    <input id="a1" type="number" step="any" placeholder="Type something…" class="input-small">
 	     <label>a2</label>
-	    <input id="a2" type="number" placeholder="Type something…" class="input-mini">
+	    <input id="a2" type="number" step="any" placeholder="Type something…" class="input-small">
 	    
-	    <button type="submit" class="btn">Submit</button>
+	    <button id="setParam-btn" type="submit" class="btn">Submit</button>
 	  </fieldset>
 	</form>
+</div>
+ <div class="navbar-inner" style="margin-top:20px">
+  	<div id="resChart"></div>
   	</div>
+
 </div></div>
 </div>
 </body>
