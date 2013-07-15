@@ -213,13 +213,49 @@ public interface Zapfmaster2000Package extends EPackage {
 	int BOX__TICK_REDUCTION = 8;
 
 	/**
+	 * The feature id for the '<em><b>A0</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__A0 = 9;
+
+	/**
+	 * The feature id for the '<em><b>A1</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__A1 = 10;
+
+	/**
+	 * The feature id for the '<em><b>A2</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__A2 = 11;
+
+	/**
+	 * The feature id for the '<em><b>New Calc</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__NEW_CALC = 12;
+
+	/**
 	 * The number of structural features of the '<em>Box</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX_FEATURE_COUNT = 9;
+	int BOX_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.
@@ -1683,6 +1719,50 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getBox_TickReduction();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA0 <em>A0</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>A0</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA0()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_A0();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA1 <em>A1</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>A1</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA1()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_A1();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA2 <em>A2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>A2</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA2()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_A2();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#isNewCalc <em>New Calc</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>New Calc</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#isNewCalc()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EAttribute getBox_NewCalc();
+
+	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2823,6 +2903,38 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute BOX__TICK_REDUCTION = eINSTANCE.getBox_TickReduction();
+
+		/**
+		 * The meta object literal for the '<em><b>A0</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__A0 = eINSTANCE.getBox_A0();
+
+		/**
+		 * The meta object literal for the '<em><b>A1</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__A1 = eINSTANCE.getBox_A1();
+
+		/**
+		 * The meta object literal for the '<em><b>A2</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__A2 = eINSTANCE.getBox_A2();
+
+		/**
+		 * The meta object literal for the '<em><b>New Calc</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOX__NEW_CALC = eINSTANCE.getBox_NewCalc();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.

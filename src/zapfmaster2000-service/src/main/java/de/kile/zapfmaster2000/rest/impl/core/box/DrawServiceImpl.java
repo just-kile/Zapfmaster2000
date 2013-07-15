@@ -302,8 +302,27 @@ public class DrawServiceImpl implements DrawService {
 	}
 
 	private double calcRealAmount(int pRawTicks) {
+		if (box.isNewCalc()){
+			return calcRealAmountNew();
+		} else {
+			return calcRealAmountOld(pRawTicks);
+		}
+	}
+	
+	private double calcRealAmountOld(int pRawTicks) {
 		return pRawTicks * box.getTickRegressor()
 				+ box.getTickDisturbanceTerm();
+	}
+
+	private double calcRealAmountNew() {
+		double realAmount = 0;
+		for (Ticks ticks : currentDrawingTicks) {
+			int rawTicks = ticks.getTicks();
+			double localAmount = box.getA0() + box.getA1() * rawTicks
+					+ box.getA2() * (rawTicks * rawTicks);
+			realAmount += localAmount;
+		}
+		return realAmount;
 	}
 
 	/**

@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.annotations.common.reflection.XClass;
 
 import de.kile.zapfmaster2000.rest.api.drawing.CalibrationRequest.CalibrationValue;
 import de.kile.zapfmaster2000.rest.api.drawing.CalibrationResponse.CalibratedData;
@@ -230,7 +229,6 @@ public class DrawingResource {
 			
 			xValues.add(0.0);
 			yValues.add(0.0);
-			
 
 			PolynomialRegression polynomialRegression = new PolynomialRegression(
 					unbox(xValues), unbox(yValues), 2);

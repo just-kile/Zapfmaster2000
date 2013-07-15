@@ -23,6 +23,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickRegressor <em>Tick Regressor</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction <em>Tick Reduction</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA0 <em>A0</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA1 <em>A1</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA2 <em>A2</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#isNewCalc <em>New Calc</em>}</li>
  * </ul>
  * </p>
  *
@@ -258,5 +262,109 @@ public interface Box extends EObject {
 	 * @generated
 	 */
 	void setTickReduction(int value);
+
+	/**
+	 * Returns the value of the '<em><b>A0</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>A0</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>A0</em>' attribute.
+	 * @see #setA0(double)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_A0()
+	 * @model
+	 * @generated
+	 */
+	double getA0();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA0 <em>A0</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>A0</em>' attribute.
+	 * @see #getA0()
+	 * @generated
+	 */
+	void setA0(double value);
+
+	/**
+	 * Returns the value of the '<em><b>A1</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>A1</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>A1</em>' attribute.
+	 * @see #setA1(double)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_A1()
+	 * @model
+	 * @generated
+	 */
+	double getA1();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA1 <em>A1</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>A1</em>' attribute.
+	 * @see #getA1()
+	 * @generated
+	 */
+	void setA1(double value);
+
+	/**
+	 * Returns the value of the '<em><b>A2</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>A2</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>A2</em>' attribute.
+	 * @see #setA2(double)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_A2()
+	 * @model
+	 * @generated
+	 */
+	double getA2();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA2 <em>A2</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>A2</em>' attribute.
+	 * @see #getA2()
+	 * @generated
+	 */
+	void setA2(double value);
+
+	/**
+	 * Returns the value of the '<em><b>New Calc</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>New Calc</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>New Calc</em>' attribute.
+	 * @see #setNewCalc(boolean)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_NewCalc()
+	 * @model
+	 * @generated
+	 */
+	boolean isNewCalc();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#isNewCalc <em>New Calc</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>New Calc</em>' attribute.
+	 * @see #isNewCalc()
+	 * @generated
+	 */
+	void setNewCalc(boolean value);
 
 } // Box
