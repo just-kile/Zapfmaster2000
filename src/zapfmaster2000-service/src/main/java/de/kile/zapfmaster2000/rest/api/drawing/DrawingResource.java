@@ -21,8 +21,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.common.reflection.XClass;
 
-import de.kile.zapfmaster2000.rest.api.drawing.CalibrationRequest.CalibrationValues;
+import de.kile.zapfmaster2000.rest.api.drawing.CalibrationRequest.CalibrationValue;
 import de.kile.zapfmaster2000.rest.api.drawing.CalibrationResponse.CalibratedData;
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
@@ -175,9 +176,9 @@ public class DrawingResource {
 
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(calibrationRequest.getToken());
-
+		
 		if (account != null) {
-
+			
 			List<Double> xValues = new ArrayList<>();
 			List<Double> yValues = new ArrayList<>();
 
@@ -190,7 +191,7 @@ public class DrawingResource {
 
 			EClass drawingClass = Zapfmaster2000Package.eINSTANCE.getDrawing();
 
-			for (CalibrationValues value : calibrationRequest.getData()) {
+			for (CalibrationValue value : calibrationRequest.getData()) {
 				Drawing drawing = (Drawing) session.get(drawingClass.getName(),
 						value.getDrawingId());
 
@@ -220,6 +221,16 @@ public class DrawingResource {
 			}
 
 			tx.commit();
+			
+			// add 0,0 as data as well
+			CalibratedData values0 = new CalibratedData();
+			values0.setAmount(0);
+			values0.setTicks(0);
+			calibrationResponse.getData().add(values0);
+			
+			xValues.add(0.0);
+			yValues.add(0.0);
+			
 
 			PolynomialRegression polynomialRegression = new PolynomialRegression(
 					unbox(xValues), unbox(yValues), 2);
