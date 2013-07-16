@@ -411,30 +411,46 @@ $(document).ready(function(){
 		})
 	});
 	
-	/*$("#parameters").on("change","input",function(){
+	$("#plot-btn").on("click",function(e){
+		e.preventDefault();
+	
 		var a0 = $("#a0").val();
 		var a1 = $("#a1").val();
 		var a2 = $("#a2").val();
 		var model = calcModel(a0,a1,a2);
 	     if(chart["resChart"])chart["resChart"].destroy();
-	     var datas = measuredDatasArr.length==0? [model]:[measuredDatasArr,model];
+	     var datas;
+	     var series;
+	     if( measuredDatasArr.length==0){
+	    	 var datas = [model];
+	    	 series = [{
+	          	            // Don't show a line, just show markers.
+	          	            // Make the markers 7 pixels with an 'x' style
+	          	            showMarker:false,
+	          	            lineWidth:2, 
+	          	           // markerOptions: { size: 7, style:"x" }
+	          	          }];
+	     }else{
+	    	 datas = [measuredDatasArr,model];
+	    	 series = [ 
+	        	          {
+	          	            // Change our line width and use a diamond shaped marker.
+	          	           showLine:false, 
+	          	            //markerOptions: { style:'diamond' }
+	          	          }, 
+	          	          {
+	          	            // Don't show a line, just show markers.
+	          	            // Make the markers 7 pixels with an 'x' style
+	          	            showMarker:false,
+	          	            lineWidth:2, 
+	          	           // markerOptions: { size: 7, style:"x" }
+	          	          }];
+	     }
 	     chart["resChart"] = $.jqplot("resChart", datas,{
-	    	 series:[ 
-        	          {
-        	            // Change our line width and use a diamond shaped marker.
-        	           showLine:false, 
-        	            //markerOptions: { style:'diamond' }
-        	          }, 
-        	          {
-        	            // Don't show a line, just show markers.
-        	            // Make the markers 7 pixels with an 'x' style
-        	            showMarker:false,
-        	            lineWidth:2, 
-        	           // markerOptions: { size: 7, style:"x" }
-        	          }],
+	    	 series:series,
 	     });
 		
-	});*/
+	});
 	//TODO
 	$("#zapfliste").on("change","input[type=checkbox]",function(e){
 		if(e.target.checked){
@@ -451,6 +467,23 @@ $(document).ready(function(){
 			"a1":$("#a1").val(),
 			"a2":$("#a2").val()
 		});
+	});
+	$("#plus-btn").on("click",function(e){
+		e.preventDefault();
+		var percent = $("#percent-input").val()*0.01+1;
+		$("#a0").val($("#a0").val()*percent);
+		$("#a1").val($("#a1").val()*percent);
+		$("#a2").val($("#a2").val()*percent);
+		$("#plot-btn").trigger("click");
+		
+	});
+	$("#minus-btn").on("click",function(e){
+		e.preventDefault();
+		var percent = $("#percent-input").val()*0.01+1;
+		$("#a0").val($("#a0").val()/percent);
+		$("#a1").val($("#a1").val()/percent);
+		$("#a2").val($("#a2").val()/percent);
+		$("#plot-btn").trigger("click");
 	});
 
 
@@ -506,8 +539,15 @@ var navigation = $("#navigation").load("header.html",function(){
 	     <label>a2</label>
 	    <input id="a2" type="number" step="any" placeholder="Type something…" class="input-small">
 	    
-	    <button id="setParam-btn" type="submit" class="btn">Submit</button>
+	    <button id="setParam-btn" type="submit" class="btn btn-warning">Set Params</button>
 	  </fieldset>
+	</form>
+	<form class="form-inline">
+	<button id="plot-btn" class="btn btn-primary">Plot</button>
+	
+	<button id="minus-btn" class="btn btn-info">-%</button>
+	<input id="percent-input" type="number" step="any" value="10" class="input-small">
+	<button id="plus-btn" class="btn btn-info">+%</button>
 	</form>
 </div>
  <div class="navbar-inner" style="margin-top:20px">
