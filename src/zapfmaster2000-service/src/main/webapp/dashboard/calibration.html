@@ -533,9 +533,9 @@ var navigation = $("#navigation").load("header.html",function(){
 	  <fieldset>
 	    <legend>Parameters</legend>
 	    <label>a0</label>
-	    <input id="a0" type="number" step="any" placeholder="Type something…" class="input-small">
+	    <input id="a0" type="number" step="any" placeholder="Type something…" class="input-medium">
 	     <label>a1</label>
-	    <input id="a1" type="number" step="any" placeholder="Type something…" class="input-small">
+	    <input id="a1" type="number" step="any" placeholder="Type something…" class="input-medium">
 	     <label>a2</label>
 	    <input id="a2" type="number" step="any" placeholder="Type something…" class="input-small">
 	    
@@ -545,9 +545,13 @@ var navigation = $("#navigation").load("header.html",function(){
 	<form class="form-inline">
 	<button id="plot-btn" class="btn btn-primary">Plot</button>
 	
-	<button id="minus-btn" class="btn btn-info">-%</button>
-	<input id="percent-input" type="number" step="any" value="10" class="input-small">
-	<button id="plus-btn" class="btn btn-info">+%</button>
+	
+	<div class="input-append">
+	  <input id="percent-input" type="number" step="any" value="10" class="input-small">
+  	  <span class="add-on">%</span>
+	</div>
+	<button id="minus-btn" class="btn btn-info">-</button>
+	<button id="plus-btn" class="btn btn-info">+</button>
 	</form>
 </div>
  <div class="navbar-inner" style="margin-top:20px">
