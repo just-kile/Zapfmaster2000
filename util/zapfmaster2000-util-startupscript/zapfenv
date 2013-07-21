@@ -15,7 +15,7 @@ case "$1" in
 		echo "Starting pi-blaster"
 		sudo /home/pi/client/startPiBlaster.sh
 		echo "Starting I2C interface"
-		gpio load i2c
+		/usr/local/bin/gpio load i2c
 		;;
 	stop)
 		;;
