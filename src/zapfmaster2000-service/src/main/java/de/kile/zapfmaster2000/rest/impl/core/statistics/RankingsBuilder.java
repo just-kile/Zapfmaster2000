@@ -12,6 +12,7 @@ import de.kile.zapfmaster2000.rest.api.statistics.DrawCountUserListResponse;
 import de.kile.zapfmaster2000.rest.api.statistics.UserAmountResponse;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class RankingsBuilder {
@@ -37,7 +38,8 @@ public class RankingsBuilder {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		account = (Account) session.load(Zapfmaster2000Package.eINSTANCE.getAccount().getName(), account.getId());
+		account = (Account) session.load(Zapfmaster2000Package.eINSTANCE
+				.getAccount().getName(), account.getId());
 
 		if (maxResults == -1) {
 			maxResults = Integer.MAX_VALUE;
@@ -50,7 +52,9 @@ public class RankingsBuilder {
 							"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
 									+ " FROM User u, Drawing d "
 									+ " WHERE d.user = u AND u.account = :account "
+									+ " AND u.type != :guest"
 									+ " GROUP BY u.id ORDER BY amt DESC")
+					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setMaxResults(maxResults)
 					.list();
 
@@ -59,9 +63,11 @@ public class RankingsBuilder {
 					.createQuery(
 							"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
 									+ " FROM User u, Drawing d "
-									+ " WHERE d.user = u AND u.account = :account AND "
-									+ " d.date > :from"
+									+ " WHERE d.user = u AND u.account = :account "
+									+ " AND u.type != :guest"
+									+ " AND d.date > :from"
 									+ " GROUP BY u.id ORDER BY amt DESC")
+					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setTimestamp("from", dFrom)
 					.setMaxResults(maxResults).list();
 		} else { // general list
@@ -69,9 +75,11 @@ public class RankingsBuilder {
 					.createQuery(
 							"SELECT u.id, u.name, SUM(d.amount) AS amt, u.imagePath"
 									+ " FROM User u, Drawing d "
-									+ " WHERE d.user = u AND u.account = :account AND "
-									+ " d.date BETWEEN :from AND :to"
+									+ " WHERE d.user = u AND u.account = :account "
+									+ " AND u.type != :guest"
+									+ " AND d.date BETWEEN :from AND :to"
 									+ " GROUP BY u.id ORDER BY amt DESC")
+					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setTimestamp("from", dFrom)
 					.setTimestamp("to", dTo).setMaxResults(maxResults).list();
 		}
@@ -126,7 +134,9 @@ public class RankingsBuilder {
 							"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
 									+ " FROM User u, Drawing d "
 									+ " WHERE d.user = u AND u.account = :account "
+									+ " AND u.type != :guest"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setMaxResults(maxResults)
 					.list();
 
@@ -135,9 +145,11 @@ public class RankingsBuilder {
 					.createQuery(
 							"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
 									+ " FROM User u, Drawing d "
-									+ " WHERE d.user = u AND u.account = :account AND "
-									+ " d.date > :from"
+									+ " WHERE d.user = u AND u.account = :account "
+									+ " AND u.type != :guest"
+									+ " AND d.date > :from"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setTimestamp("from", dFrom)
 					.setMaxResults(maxResults).list();
 		} else { // general list
@@ -145,9 +157,11 @@ public class RankingsBuilder {
 					.createQuery(
 							"SELECT u.id, u.name, COUNT(d.id) AS cnt, u.imagePath"
 									+ " FROM User u, Drawing d "
-									+ " WHERE d.user = u AND u.account = :account AND "
-									+ " d.date BETWEEN :from AND :to"
+									+ " WHERE d.user = u AND u.account = :account "
+									+ " AND u.type != :guest"
+									+ " AND d.date BETWEEN :from AND :to"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setTimestamp("from", dFrom)
 					.setMaxResults(maxResults).setTimestamp("to", dTo).list();
 		}
@@ -187,7 +201,8 @@ public class RankingsBuilder {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		account = (Account) session.load(Zapfmaster2000Package.eINSTANCE.getAccount().getName(), account.getId());
+		account = (Account) session.load(Zapfmaster2000Package.eINSTANCE
+				.getAccount().getName(), account.getId());
 
 		if (maxResults == -1) {
 			maxResults = Integer.MAX_VALUE;
@@ -200,7 +215,9 @@ public class RankingsBuilder {
 							"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
 									+ " FROM User u, GainedAchievement g "
 									+ " WHERE g.user = u AND u.account = :account "
+									+ " AND u.type != :guest"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setMaxResults(maxResults)
 					.list();
 
@@ -209,9 +226,11 @@ public class RankingsBuilder {
 					.createQuery(
 							"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
 									+ " FROM User u, GainedAchievement g "
-									+ " WHERE g.user = u AND u.account = :account AND "
-									+ " g.date > :from"
+									+ " WHERE g.user = u AND u.account = :account "
+									+ " AND g.date > :from"
+									+ " AND u.type != :guest"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setTimestamp("from", dFrom)
 					.setMaxResults(maxResults).list();
 		} else { // general list
@@ -219,9 +238,11 @@ public class RankingsBuilder {
 					.createQuery(
 							"SELECT u.id, u.name, COUNT(g.id) AS cnt, u.imagePath"
 									+ " FROM User u, GainedAchievement g "
-									+ " WHERE g.user = u AND u.account = :account AND "
-									+ " g.date BETWEEN :from AND :to"
+									+ " WHERE g.user = u AND u.account = :account "
+									+ " AND g.date BETWEEN :from AND :to"
+									+ " AND u.type != :guest"
 									+ " GROUP BY u.id ORDER BY cnt DESC")
+					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setTimestamp("from", dFrom)
 					.setTimestamp("to", dTo).setMaxResults(maxResults).list();
 		}
