@@ -21,11 +21,11 @@ ZMO.modules.lineChart = (function($,view,ajax){
 		var progressModel = statsModel.progress;
 		view.init(chartContainer);
 		
-		var minusMinutes = -mC.stats.lineChartStartDateDays*24*60;
+		var minusMinutes = Math.round(-mC.stats.lineChartStartDateDays*24*60);
 		var max = new ZMO.TimeParser(new Date());
 		var min = max.getTimeParserAddMins(minusMinutes);
 		
-		var defaultMinusMinutes =  -mC.stats.lineChartMinBoundDays*24*60;
+		var defaultMinusMinutes = Math.round( -mC.stats.lineChartMinBoundDays*24*60);
 		var maxBound = new ZMO.TimeParser(new Date());
 		var minBound = max.getTimeParserAddMins(defaultMinusMinutes);
 		

@@ -1,4 +1,4 @@
-package de.kile.zapfmaster2000.rest.api.news;
+package de.kile.zapfmaster2000.rest.api.drawing;
 
 public class DrawingResponse {
 

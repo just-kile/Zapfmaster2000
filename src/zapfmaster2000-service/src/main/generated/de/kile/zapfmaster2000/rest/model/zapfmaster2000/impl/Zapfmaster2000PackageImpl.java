@@ -24,6 +24,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewUserNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
@@ -193,6 +194,13 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * @generated
 	 */
 	private EClass imageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ticksEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -439,6 +447,42 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBox_A0() {
+		return (EAttribute)boxEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBox_A1() {
+		return (EAttribute)boxEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBox_A2() {
+		return (EAttribute)boxEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBox_NewCalc() {
+		return (EAttribute)boxEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAccount() {
 		return accountEClass;
 	}
@@ -630,6 +674,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 */
 	public EAttribute getDrawing_Date() {
 		return (EAttribute)drawingEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDrawing_Ticks() {
+		return (EReference)drawingEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1186,6 +1239,33 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTicks() {
+		return ticksEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTicks_Date() {
+		return (EAttribute)ticksEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTicks_Ticks() {
+		return (EAttribute)ticksEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSex() {
 		return sexEEnum;
 	}
@@ -1271,6 +1351,10 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(boxEClass, BOX__TICK_DISTURBANCE_TERM);
 		createEAttribute(boxEClass, BOX__TICK_REGRESSOR);
 		createEAttribute(boxEClass, BOX__TICK_REDUCTION);
+		createEAttribute(boxEClass, BOX__A0);
+		createEAttribute(boxEClass, BOX__A1);
+		createEAttribute(boxEClass, BOX__A2);
+		createEAttribute(boxEClass, BOX__NEW_CALC);
 
 		accountEClass = createEClass(ACCOUNT);
 		createEAttribute(accountEClass, ACCOUNT__ID);
@@ -1297,6 +1381,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEReference(drawingEClass, DRAWING__KEG);
 		createEAttribute(drawingEClass, DRAWING__AMOUNT);
 		createEAttribute(drawingEClass, DRAWING__DATE);
+		createEReference(drawingEClass, DRAWING__TICKS);
 
 		gainedAchievementEClass = createEClass(GAINED_ACHIEVEMENT);
 		createEAttribute(gainedAchievementEClass, GAINED_ACHIEVEMENT__ID);
@@ -1374,6 +1459,10 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(imageEClass, IMAGE__CONTENT);
 		createEAttribute(imageEClass, IMAGE__CONTENT_BIG);
 
+		ticksEClass = createEClass(TICKS);
+		createEAttribute(ticksEClass, TICKS__DATE);
+		createEAttribute(ticksEClass, TICKS__TICKS);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		challengeTypeEEnum = createEEnum(CHALLENGE_TYPE);
@@ -1440,6 +1529,10 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getBox_TickDisturbanceTerm(), ecorePackage.getEDouble(), "tickDisturbanceTerm", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBox_TickRegressor(), ecorePackage.getEDouble(), "tickRegressor", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBox_TickReduction(), ecorePackage.getEInt(), "tickReduction", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBox_A0(), ecorePackage.getEDouble(), "a0", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBox_A1(), ecorePackage.getEDouble(), "a1", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBox_A2(), ecorePackage.getEDouble(), "a2", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBox_NewCalc(), ecorePackage.getEBoolean(), "newCalc", null, 0, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accountEClass, Account.class, "Account", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAccount_Id(), ecorePackage.getELong(), "id", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1466,6 +1559,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEReference(getDrawing_Keg(), this.getKeg(), this.getKeg_Drawings(), "keg", null, 1, 1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDrawing_Amount(), ecorePackage.getEDouble(), "amount", null, 0, 1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDrawing_Date(), ecorePackage.getEDate(), "date", null, 0, 1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDrawing_Ticks(), this.getTicks(), null, "ticks", null, 0, -1, Drawing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(gainedAchievementEClass, GainedAchievement.class, "GainedAchievement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGainedAchievement_Id(), ecorePackage.getELong(), "id", null, 0, 1, GainedAchievement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1542,6 +1636,10 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getImage_ContentType(), ecorePackage.getEString(), "contentType", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImage_Content(), this.getBlob(), "content", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImage_ContentBig(), this.getBlob(), "contentBig", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ticksEClass, Ticks.class, "Ticks", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTicks_Date(), ecorePackage.getEString(), "date", null, 0, 1, Ticks.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTicks_Ticks(), ecorePackage.getEInt(), "ticks", null, 0, 1, Ticks.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

@@ -1,14 +1,38 @@
 package de.kile.zapfmaster2000.rest.api.calibration;
 
 public class CalibrationResponse {
-	
+
 	private long boxId;
-	
-	private double regression;
-	
-	private double disturbance;
-	
-	private int tickReduction;
+
+	private double a0;
+
+	private double a1;
+
+	private double a2;
+
+	public double getA0() {
+		return a0;
+	}
+
+	public void setA0(double a0) {
+		this.a0 = a0;
+	}
+
+	public double getA1() {
+		return a1;
+	}
+
+	public void setA1(double a1) {
+		this.a1 = a1;
+	}
+
+	public double getA2() {
+		return a2;
+	}
+
+	public void setA2(double a2) {
+		this.a2 = a2;
+	}
 
 	public long getBoxId() {
 		return boxId;
@@ -18,28 +42,4 @@ public class CalibrationResponse {
 		this.boxId = boxId;
 	}
 
-	public double getRegression() {
-		return regression;
-	}
-
-	public void setRegression(double regression) {
-		this.regression = regression;
-	}
-
-	public double getDisturbance() {
-		return disturbance;
-	}
-
-	public void setDisturbance(double disturbance) {
-		this.disturbance = disturbance;
-	}
-
-	public int getTickReduction() {
-		return tickReduction;
-	}
-
-	public void setTickReduction(int tickReduction) {
-		this.tickReduction = tickReduction;
-	}
-	
 }

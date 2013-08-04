@@ -39,7 +39,7 @@ public class TestCalibrationResource extends AbstractMockingTest {
 		Response response = res.retrieveAllBoxes(null);
 		assertEquals(200, response.getStatus());
 
-		List<CalibrationResponse> entity = (List<CalibrationResponse>) response
+		List<CalibrationResponseOld> entity = (List<CalibrationResponseOld>) response
 				.getEntity();
 		assertEquals(3, entity.size());
 
@@ -52,10 +52,10 @@ public class TestCalibrationResource extends AbstractMockingTest {
 	@Test
 	public void testRetrieveSingleBox() {
 		CalibrationResource res = new CalibrationResource();
-		Response response = res.retrieveSingleBox(null, 2);
+		Response response = res.retrieveSingleBoxOld(null, 2);
 		assertEquals(200, response.getStatus());
 
-		List<CalibrationResponse> entity = (List<CalibrationResponse>) response
+		List<CalibrationResponseOld> entity = (List<CalibrationResponseOld>) response
 				.getEntity();
 		assertEquals(1, entity.size());
 
@@ -65,7 +65,7 @@ public class TestCalibrationResource extends AbstractMockingTest {
 	@Test
 	public void testRetrieveSingleBoxNotFound() {
 		CalibrationResource res = new CalibrationResource();
-		Response response = res.retrieveSingleBox(null, 4);
+		Response response = res.retrieveSingleBoxOld(null, 4);
 		assertEquals(Status.NOT_FOUND.getStatusCode(), response.getStatus());
 	}
 
@@ -74,10 +74,10 @@ public class TestCalibrationResource extends AbstractMockingTest {
 	public void testUpdate() {
 		CalibrationResource res = new CalibrationResource();
 		Response response = res
-				.updateCalibrationParameters(30, 40, 50, null, 2);
+				.updateCalibrationParametersOld(30, 40, 50, null, 2);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 
-		List<CalibrationResponse> entity = (List<CalibrationResponse>) response
+		List<CalibrationResponseOld> entity = (List<CalibrationResponseOld>) response
 				.getEntity();
 		assertEquals(1, entity.size());
 
@@ -87,7 +87,7 @@ public class TestCalibrationResource extends AbstractMockingTest {
 		response = res.retrieveAllBoxes(null);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 
-		entity = (List<CalibrationResponse>) response.getEntity();
+		entity = (List<CalibrationResponseOld>) response.getEntity();
 		assertEquals(3, entity.size());
 
 		assertCalibrationReponse(1, 1, 2, 3, entity.get(0));
@@ -97,7 +97,7 @@ public class TestCalibrationResource extends AbstractMockingTest {
 	}
 
 	private void assertCalibrationReponse(int boxId, double regression,
-			double disturbance, int tickReduction, CalibrationResponse response) {
+			double disturbance, int tickReduction, CalibrationResponseOld response) {
 		assertEquals(boxId, response.getBoxId());
 		assertEquals(regression, response.getRegression(), 0.1);
 		assertEquals(disturbance, response.getDisturbance(), 0.1);
