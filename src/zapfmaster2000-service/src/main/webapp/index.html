@@ -203,8 +203,10 @@ $(document).ready(function(){
 			data:{
 				accountName:accountName
 			},
-			success:function(token){
-				if(localStorage){
+			complete:function(data){
+				var token= data.responseText;	
+			
+				if(localStorage && data.status==200){
 					//alert(token);
 					localStorage.setItem('token',token );
 					//if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
@@ -212,7 +214,7 @@ $(document).ready(function(){
 					$(".container").hide();
 					$("#registerUserContainer").show();
 				}else{
-					alert("Use a normal browser! Localstorage is not available")
+					alert("Fehler "+data.status)
 				}
 			},
 			error:function(){
@@ -295,11 +297,14 @@ $(document).ready(function(){
 			type:"POST",
 			url:baseUrl +"rest/register/user",
 			data:data,
-			success:function(token){
+			complete:function(data){
 				//alert("Token"+token);
-				localStorage.setItem("token",token);
-				$(".container").hide();
-				$("#imageFormContainer").show();
+				if(data.status==200){
+					localStorage.setItem("token",data.responseText);
+					$(".container").hide();
+					$("#imageFormContainer").show();	
+				}
+				
 			},
 			error:function(){
 				alert("Fehler! Der Nutzername ist wahrscheinlich schon vergeben.")
@@ -475,7 +480,9 @@ $("#updateImageRfid").on("click",function(e){
 			userName:userName,
 			password:pass
 		},
-		success:function(token){
+		complete:function(data){
+			var token = 	data.responseText;
+		if(data.status==200){
 			if(localStorage){
 				localStorage.setItem('token',token );
 				$(".container").hide();
@@ -484,6 +491,7 @@ $("#updateImageRfid").on("click",function(e){
 			}else{
 				alert("Use a normal browser! Localstorage is not available")
 			}
+		}
 		},
 		error:function(){
 			alert("Username oder Passwort falsch");
