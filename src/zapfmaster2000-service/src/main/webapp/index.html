@@ -459,9 +459,15 @@ $("#registerSelectBox").on("change",function(e){
 //loginContainer,registerUserContainer,accountloginContainer,imageFormContainer,setRfidContainer
 $("#registerApp").on("click",function(e){
 	e.preventDefault();
-	$(".container").hide();
-	$("#accountloginContainer").show();
-	
+    $.get(baseUrl+"rest/account").success(function(resp){
+        var account = $("#account").empty();
+        $.each(resp,function(ind,val){
+           $("<option>").text(val.name).appendTo(account);
+        });
+        $(".container").hide();
+        $("#accountloginContainer").show();
+    })
+
 })
 $(".cancelBtn").on("click",function(e){
 	e.preventDefault();
@@ -532,8 +538,10 @@ $("#updateImageRfid").on("click",function(e){
  <!-- accountlogin -->
 <div id="accountloginContainer" class="websitelogin container" style="display:none" >
  <p>Gib den Namen der Gruppe ein, der du beitreten möchtest.</p>
- <p><input placeholder="Gruppenname" id="account" name="account" type="text" size="30" maxlength="30" value="ChezNasimausi"></p>
-
+ <!--<p><input placeholder="Gruppenname" id="account" name="account" type="text" size="30" maxlength="30" value="ChezNasimausi"></p>
+ -->
+    <p><select id="account" name="account"></select>
+    </p>
 <input class ="cancelBtn" type="submit" value="Abbrechen">
 <input id ="submitWebsite" type="submit" value="Anmelden">
 
