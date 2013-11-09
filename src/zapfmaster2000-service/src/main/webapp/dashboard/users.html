@@ -64,11 +64,12 @@
  </script>
 <script id="dashboard-users-row" type="text/html">
 
-<tr data-userid={{userId}}>
+<tr data-userid="{{userId}}" data-userimage="{{userImage}}{{image}}" data-username="{{userName}}">
+
   <td><img class="img-rounded" src="{{userImage}}{{image}}" width="32" height="32"/></td>
   <td>{{userName}}</td>
    <td class="amountCol">{{totalAmount}} l</td>
- <!--   <td><button class="btn btn-primary del-rfid" >RFID Löschen</button></td>-->
+    <td><button class="btn btn-primary del-rfid" >Edit</button></td>
 </tr>
 </script>
 
@@ -93,7 +94,8 @@ $(function(){
 		})
 	});
 	$("#usersliste").on("click",".del-rfid",function(e){
-		var yep = confirm("RFID Karte wirklich zurücksetzen?");
+		
+		/*var yep = confirm("RFID Karte wirklich zurücksetzen?");
 		if(yep){
 			var tr = $(e.currentTarget).parent().parent();
 			ajax.postDatas("rest/rfid/",function(){
@@ -102,7 +104,14 @@ $(function(){
 				rfid:"0",
 				userId:tr.data("userid")
 			});
-		}
+		}*/
+		var target = $(e.currentTarget);
+		var li = currentTableRow = target.parent().parent();
+		var modal = $("#editUser");
+		modal.find("#profileImage").attr("src",li.data("userimage")+"/big");
+		modal.find("#modal-user").text(li.data("username"));
+		modalDrawId = li.data("drawid");
+		modal.modal();
 	});
 });
 
@@ -117,7 +126,7 @@ $(function(){
       <th>Bild</th>
       <th>Name</th>
       <th>Menge</th>
-     <!--  <th>RFID deaktivieren</th>-->
+      <th>RFID deaktivieren</th>
     </tr>
   </thead>
   <tbody id="usersliste">
@@ -126,5 +135,37 @@ $(function(){
 </table>
 </div>
 
+<div id="editUser" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden=true>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Ändere Zapfmenge <span id="modal-user"></span></h3>
+  </div>
+  <div class="modal-body">
+  <div class="row">
+     <div class="span2" style="margin-bottom:10px"><img id="profileImage" src="../images/view/pix.png" class="img-polaroid" width="160" height="160"></div>
+    
+ <div class="span3">
+
+  <p class="well"><button class="btn btn-info amount" data-amount="0.1">0.1l</button>
+   <button class="btn btn-info amount" data-amount="0.2">0.2l</button>
+    <button class="btn btn-info amount" data-amount="0.3">0.3l</button>
+     <button class="btn btn-info amount" data-amount="0.4">0.4l</button>
+  </p>
+     <p class="well input-prepend">
+		<input class="input-small" id="custom-amount-input" type="number" step=0.01 value="0.1">
+     	<button class="btn btn-success custom-amount">Speichern</button>
+     	
+</p>
+     
+     
+     
+   </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Abbrechen</button>
+   
+  </div>
+</div></div>
 </body>
 </html>
