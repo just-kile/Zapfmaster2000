@@ -39,7 +39,7 @@ public class AccountResource {
 
 			@SuppressWarnings("unchecked")
 			List<Account> result = session
-					.createQuery("From Account")
+					.createQuery("From Account a")
 					.list();
 			tx.commit();
 
@@ -48,8 +48,7 @@ public class AccountResource {
                 AccountResponse response = new AccountResponse();
 				response.setAccountId(account.getId());
 				response.setName(account.getName());
-
-				accounts.add(response);
+                accounts.add(response);
 			}
 
 			return Response.ok(accounts).build();
@@ -75,6 +74,7 @@ public class AccountResource {
             account.setName(pName);
             session.save(account);
             session.getTransaction().commit();
+
 
             return Response.ok().build();
         }else{

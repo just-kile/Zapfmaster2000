@@ -139,8 +139,7 @@ public class DraftKitResource {
 	}
     @PUT
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response createBox(@FormParam("token") String pToken,
-                              @FormParam("accountId") long pAccountId,
+    public Response createBox(@FormParam("accountId") long pAccountId,
                               @FormParam("version") @DefaultValue("1.0") String pVersion,
                               @FormParam("passphrase") String pPassphrase,
                               @FormParam("location") String pLocation,
@@ -164,12 +163,16 @@ public class DraftKitResource {
         Account account =(Account) session
                 .createQuery("From Account a WHERE a.id = :accountId")
                 .setLong("accountId", pAccountId).uniqueResult();
-        tx.commit();
+
+
+
+
         if(account!=null &&pPassphrase!=null && !pPassphrase.equals("") && pLocation!=null && !pLocation.equals("")){
             Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
             box.setVersion(pVersion);
             box.setPassphrase(pPassphrase);
             box.setAccount(account);
+
             box.setLocation(pLocation);
             box.setTickReduction(pTickReduction);
             box.setTickRegressor(pTickRegressor);
@@ -181,8 +184,7 @@ public class DraftKitResource {
 
             session.save(box);
             session.getTransaction().commit();
-
-           return Response.ok().build();
+            return Response.ok().build();
 
         }else{
             return Response.status(Status.BAD_REQUEST).build();
