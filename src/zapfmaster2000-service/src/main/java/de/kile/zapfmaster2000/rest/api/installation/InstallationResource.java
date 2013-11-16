@@ -38,12 +38,12 @@ public class InstallationResource {
 	@POST
 	@Path("/firstadmin")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createFirstAdmin(String name, String password) {
+	public Response createFirstAdmin(String adminName, String password) {
 		if (checkIsNewInstallation()) {
-			createAdmin(name, password);
+			createAdmin(adminName, password);
 
 			String token = Zapfmaster2000Core.INSTANCE.getAuthService()
-					.loginAdmin(name, password);
+					.loginAdmin(adminName, password);
 			if (token == null) {
 				return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			} else {
