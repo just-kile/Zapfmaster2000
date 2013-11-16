@@ -50,18 +50,18 @@
                           adminName:$form.find(".adminName").val(),
                           password:$form.find(".pass").val()
                       },
-                      success:function(e){
-
-                          $(".leaf").hide();
-                          $(".leaf .registerAccount").show();
-                          window.location.href="dashboard/accounts.html";
-                      },
                       complete:function(e){
-                          if(e && e.status !="200"){
-                              alert("Fehler Status:"+ e.status);
-                          }
                           window.location.href="dashboard/accounts.html";
-
+                          var token= data.responseText;
+                          if(localStorage && data.status==200){
+                               //alert(token);
+                               localStorage.setItem('token',token );
+                               //if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
+                               //window.location.replace(window.location.pathname+"page.html");
+                              redirect();
+                          }else{
+                              alert("Fehler "+data.status)
+                          }
                       }
                   })
               });
