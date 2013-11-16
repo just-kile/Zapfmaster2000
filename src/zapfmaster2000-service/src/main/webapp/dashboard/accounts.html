@@ -67,6 +67,7 @@
         <tr data-accountid="{{accountId}}" data-accountName="{{name}}">
 
             <td>{{name}}</td>
+            <td data-accountid="{{accountId}}" class="boxes-row"></td>
             <td>
                 <button class="btn btn-primary add-box">+</button>
             </td>
@@ -91,8 +92,17 @@
                 $("#usersTable > tbody").empty();
                 $.each(accounts, function (ind, account) {
 
-                    var template = $(ich["dashboard-account-row"](account));
-                    $("#usersTable").append(template);
+                    var $template = $(ich["dashboard-account-row"](account));
+                    ajax.getDatas("rest/account",function(boxes){
+                        var boxRow =  $($template.find(".boxes-row"));
+                        var boxArr = [];
+                        $.each(boxes,function(ind,item){
+                            boxArr.push(item.name);
+                        });
+                        boxRow.text(boxArr.join(", "));
+
+                    },{accountId:account.accountId});
+                    $("#usersTable").append($template);
                 })
             });
         }
@@ -148,6 +158,7 @@
         <tr>
 
             <th>Name</th>
+            <th>Boxes</th>
             <th>Add Box</th>
         </tr>
         </thead>
