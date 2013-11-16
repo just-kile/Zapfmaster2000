@@ -78,6 +78,7 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.TOKEN: return createToken();
 			case Zapfmaster2000Package.IMAGE: return createImage();
 			case Zapfmaster2000Package.TICKS: return createTicks();
+			case Zapfmaster2000Package.ADMIN: return createAdmin();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -99,6 +100,8 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return createUserTypeFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.CHALLENGE_STATE:
 				return createChallengeStateFromString(eDataType, initialValue);
+			case Zapfmaster2000Package.ADMIN_TYPE:
+				return createAdminTypeFromString(eDataType, initialValue);
 			case Zapfmaster2000Package.BLOB:
 				return createBlobFromString(eDataType, initialValue);
 			default:
@@ -122,6 +125,8 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 				return convertUserTypeToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.CHALLENGE_STATE:
 				return convertChallengeStateToString(eDataType, instanceValue);
+			case Zapfmaster2000Package.ADMIN_TYPE:
+				return convertAdminTypeToString(eDataType, instanceValue);
 			case Zapfmaster2000Package.BLOB:
 				return convertBlobToString(eDataType, instanceValue);
 			default:
@@ -334,6 +339,16 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Admin createAdmin() {
+		AdminImpl admin = new AdminImpl();
+		return admin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Sex createSexFromString(EDataType eDataType, String initialValue) {
 		Sex result = Sex.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -406,6 +421,26 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	 * @generated
 	 */
 	public String convertChallengeStateToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AdminType createAdminTypeFromString(EDataType eDataType, String initialValue) {
+		AdminType result = AdminType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAdminTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

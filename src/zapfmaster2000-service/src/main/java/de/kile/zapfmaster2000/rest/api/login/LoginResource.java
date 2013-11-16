@@ -37,13 +37,31 @@ public class LoginResource {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Path("/user")
-	public Response loginUser(@FormParam("userName") String pUserName,
+	@Path("/admin")
+	public Response loginAdmin(@FormParam("adminName") String adminName,
+			@FormParam("password") String password) {
+		LOG.debug("Login request for admin " + adminName);
+
+		String token = Zapfmaster2000Core.INSTANCE.getAuthService().loginAdmin(
+				adminName, password);
+		if (token == null) {
+			// log in failed
+			return Response.status(Status.FORBIDDEN).build();
+		}
+
+		// log in succeeded
+		return Response.ok(token).build();
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/admin")
+	public Response loginUser(@FormParam("adminName") String pUserName,
 			@FormParam("password") String pPassword) {
 		LOG.debug("Login request for account " + pUserName);
 
-		String token = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.loginUser(pUserName, pPassword);
+		String token = Zapfmaster2000Core.INSTANCE.getAuthService().loginUser(
+				pUserName, pPassword);
 		if (token == null) {
 			// log in failed
 			return Response.status(Status.FORBIDDEN).build();

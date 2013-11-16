@@ -6,13 +6,13 @@ import java.util.Date;
 import org.eclipse.emf.ecore.EObject;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.After;
 import org.junit.Before;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.transaction.SessionReconfigurator;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
@@ -144,6 +144,15 @@ public abstract class AbstractDatabaseTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(pYear, pMonth, pDay, pHour, pMinute, pSecond);
 		return cal.getTime();
+	}
+
+	protected Admin createAdmin(String name, String password, Account account) {
+		Admin admin = Zapfmaster2000Factory.eINSTANCE.createAdmin();
+		admin.setName(name);
+		admin.setPassword(password);
+		admin.setAccount(account);
+		saveEntity(admin);
+		return admin;
 	}
 
 	protected void saveEntity(EObject pEntity, EObject... pEntitiesToUpdate) {
