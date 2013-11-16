@@ -1,6 +1,8 @@
 package de.kile.zapfmaster2000.rest.api.installation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -65,4 +67,26 @@ public class TestInstallationResource extends AbstractMockingTest {
 		assertEquals("installed", statusResponse.getStatus());
 	}
 
+	@Test
+	public void testCreateFirstAdminNewInstallation() {
+		InstallationResource resource = new InstallationResource();
+		
+		Response response = resource.createFirstAdmin("foo", "bar");
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+		
+		String token = (String) response.getEntity();
+		assertNotNull(token);
+	}
+	
+	@Test
+	public void testCreateFirstAdminExistingInstallation() {
+		createAdmin("baz", "qux", null);
+		
+		InstallationResource resource = new InstallationResource();
+		
+		Response response = resource.createFirstAdmin("foo", "bar");
+		assertEquals(Status.FORBIDDEN.getStatusCode(), response.getStatus());
+		
+		assertNull(response.getEntity());
+	}
 }
