@@ -3,6 +3,7 @@ package de.kile.zapfmaster2000.rest.api.installation;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -34,7 +35,7 @@ public class InstallationResource {
 		return Response.ok(response).build();
 	}
 
-	@GET
+	@POST
 	@Path("/firstadmin")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createFirstAdmin(String name, String password) {
