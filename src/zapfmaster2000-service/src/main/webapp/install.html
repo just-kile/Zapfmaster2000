@@ -47,20 +47,17 @@
                       type:"POST",
                       url:"rest/install/firstadmin",
                       data:{
-                          adminName:$form.find(".adminName").val(),
+                          name:$form.find(".adminName").val(),
                           password:$form.find(".pass").val()
                       },
                       complete:function(e){
-                          window.location.href="dashboard/accounts.html";
-                          var token= data.responseText;
-                          if(localStorage && data.status==200){
-                               //alert(token);
+
+                          var token= e.responseText;
+                          if(localStorage && e.status==200){
                                localStorage.setItem('token',token );
-                               //if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
-                               //window.location.replace(window.location.pathname+"page.html");
-                              redirect();
+                               window.location.href="dashboard/accounts.html";
                           }else{
-                              alert("Fehler "+data.status)
+                              alert("Fehler "+e.status);
                           }
                       }
                   })
