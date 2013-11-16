@@ -5,6 +5,8 @@ package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AdminType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
@@ -207,6 +209,13 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass adminEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum sexEEnum = null;
 
 	/**
@@ -229,6 +238,13 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * @generated
 	 */
 	private EEnum challengeStateEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum adminTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1185,6 +1201,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getToken_Admin() {
+		return (EReference)tokenEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getImage() {
 		return imageEClass;
 	}
@@ -1266,6 +1291,51 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAdmin() {
+		return adminEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAdmin_Name() {
+		return (EAttribute)adminEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAdmin_Password() {
+		return (EAttribute)adminEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAdmin_Type() {
+		return (EAttribute)adminEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAdmin_Account() {
+		return (EReference)adminEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSex() {
 		return sexEEnum;
 	}
@@ -1295,6 +1365,15 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 */
 	public EEnum getChallengeState() {
 		return challengeStateEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getAdminType() {
+		return adminTypeEEnum;
 	}
 
 	/**
@@ -1451,6 +1530,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(tokenEClass, TOKEN__TOKEN);
 		createEReference(tokenEClass, TOKEN__ACCOUNT);
 		createEReference(tokenEClass, TOKEN__USER);
+		createEReference(tokenEClass, TOKEN__ADMIN);
 
 		imageEClass = createEClass(IMAGE);
 		createEAttribute(imageEClass, IMAGE__ID);
@@ -1463,11 +1543,18 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(ticksEClass, TICKS__DATE);
 		createEAttribute(ticksEClass, TICKS__TICKS);
 
+		adminEClass = createEClass(ADMIN);
+		createEAttribute(adminEClass, ADMIN__NAME);
+		createEAttribute(adminEClass, ADMIN__PASSWORD);
+		createEAttribute(adminEClass, ADMIN__TYPE);
+		createEReference(adminEClass, ADMIN__ACCOUNT);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		challengeTypeEEnum = createEEnum(CHALLENGE_TYPE);
 		userTypeEEnum = createEEnum(USER_TYPE);
 		challengeStateEEnum = createEEnum(CHALLENGE_STATE);
+		adminTypeEEnum = createEEnum(ADMIN_TYPE);
 
 		// Create data types
 		blobEDataType = createEDataType(BLOB);
@@ -1629,6 +1716,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getToken_Token(), ecorePackage.getEString(), "token", null, 0, 1, Token.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getToken_Account(), this.getAccount(), null, "account", null, 0, 1, Token.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getToken_User(), this.getUser(), null, "user", null, 0, 1, Token.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getToken_Admin(), this.getAdmin(), null, "admin", null, 0, 1, Token.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imageEClass, Image.class, "Image", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImage_Id(), ecorePackage.getELong(), "id", null, 0, 1, Image.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1640,6 +1728,12 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEClass(ticksEClass, Ticks.class, "Ticks", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTicks_Date(), ecorePackage.getEString(), "date", null, 0, 1, Ticks.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTicks_Ticks(), ecorePackage.getEInt(), "ticks", null, 0, 1, Ticks.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(adminEClass, Admin.class, "Admin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAdmin_Name(), ecorePackage.getEString(), "name", null, 0, 1, Admin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAdmin_Password(), ecorePackage.getEString(), "password", null, 0, 1, Admin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAdmin_Type(), this.getAdminType(), "type", "", 0, 1, Admin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAdmin_Account(), this.getAccount(), null, "account", null, 0, 1, Admin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
@@ -1658,6 +1752,10 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		addEEnumLiteral(challengeStateEEnum, ChallengeState.DECLINED);
 		addEEnumLiteral(challengeStateEEnum, ChallengeState.RUNNING);
 		addEEnumLiteral(challengeStateEEnum, ChallengeState.FINISHED);
+
+		initEEnum(adminTypeEEnum, AdminType.class, "AdminType");
+		addEEnumLiteral(adminTypeEEnum, AdminType.GLOBAL);
+		addEEnumLiteral(adminTypeEEnum, AdminType.ACCOUNT);
 
 		// Initialize data types
 		initEDataType(blobEDataType, Blob.class, "Blob", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

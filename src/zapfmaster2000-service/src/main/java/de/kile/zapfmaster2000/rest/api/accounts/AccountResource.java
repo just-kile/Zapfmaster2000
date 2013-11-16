@@ -1,23 +1,26 @@
 package de.kile.zapfmaster2000.rest.api.accounts;
 
-import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
-import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
-import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.jboss.resteasy.annotations.Suspend;
-import org.jboss.resteasy.spi.AsynchronousResponse;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
 @Path("/account")
 public class AccountResource {
@@ -28,33 +31,23 @@ public class AccountResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retriveAvailableAccounts() {
 
-		//Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-		//		.retrieveAccount(pToken);
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
 
-		//if (account != null) {
-			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionService().getSessionFactory()
-					.getCurrentSession();
-			Transaction tx = session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Account> result = session.createQuery("From Account a").list();
+		tx.commit();
 
-			@SuppressWarnings("unchecked")
-			List<Account> result = session
-					.createQuery("From Account a")
-					.list();
-			tx.commit();
+		List<AccountResponse> accounts = new ArrayList<>();
+		for (Account account : result) {
+			AccountResponse response = new AccountResponse();
+			response.setAccountId(account.getId());
+			response.setName(account.getName());
+			accounts.add(response);
+		}
 
-			List<AccountResponse> accounts = new ArrayList<>();
-			for (Account account : result) {
-                AccountResponse response = new AccountResponse();
-				response.setAccountId(account.getId());
-				response.setName(account.getName());
-                accounts.add(response);
-			}
-
-			return Response.ok(accounts).build();
-		//} else {
-		//	return Response.status(Status.FORBIDDEN).build();
-		//}
+		return Response.ok(accounts).build();
 	}
 
 	@PUT
@@ -62,52 +55,50 @@ public class AccountResource {
 	public Response createAccount(@FormParam("name") String pName) {
 
 		LOG.info("Creating Account with name " + pName);
-    	// check that the given account name is a valid string
-        if(pName !=null && !pName.equals("")){
-
+		// check that the given account name is a valid string
+		if (pName != null && !pName.equals("")) {
 
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
 			Transaction tx = session.beginTransaction();
-            Account account = Zapfmaster2000Factory.eINSTANCE.createAccount();
-            account.setName(pName);
-            session.save(account);
-            session.getTransaction().commit();
+			Account account = Zapfmaster2000Factory.eINSTANCE.createAccount();
+			account.setName(pName);
+			session.save(account);
+			tx.commit();
 
-
-            return Response.ok().build();
-        }else{
-            return Response.status(Status.BAD_REQUEST).build();
-        }
+			return Response.ok().build();
+		} else {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
 	}
-    @DELETE
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response deleteAccount(
-            @FormParam("token") String pToken,
-            @FormParam("accountId") long accountId) {
 
-        LOG.info("Deleting Account with id " + accountId);
+	@DELETE
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response deleteAccount(@FormParam("token") String pToken,
+			@FormParam("accountId") long accountId) {
 
-        // check that the given account name is a valid string
-        Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-                .retrieveAccount(pToken);
+		LOG.info("Deleting Account with id " + accountId);
 
-        if(account!=null){
+		// check that the given account name is a valid string
+		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAccount(pToken);
 
-            Session session = Zapfmaster2000Core.INSTANCE
-                    .getTransactionService().getSessionFactory()
-                    .getCurrentSession();
-            Transaction tx = session.beginTransaction();
-            Account deletionAccount =(Account) session
-                    .createQuery("From Account a WHERE a.id = :accountId")
-                    .setLong("accountId", accountId).uniqueResult();
-            tx.commit();
-            session.delete(deletionAccount);
-            session.getTransaction().commit();
-            return Response.ok().build();
-        }else{
-            return Response.status(Status.FORBIDDEN).build();
-        }
-    }
+		if (account != null) {
+
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			Account deletionAccount = (Account) session
+					.createQuery("From Account a WHERE a.id = :accountId")
+					.setLong("accountId", accountId).uniqueResult();
+			session.delete(deletionAccount);
+			tx.commit();
+
+			return Response.ok().build();
+		} else {
+			return Response.status(Status.FORBIDDEN).build();
+		}
+	}
 }
