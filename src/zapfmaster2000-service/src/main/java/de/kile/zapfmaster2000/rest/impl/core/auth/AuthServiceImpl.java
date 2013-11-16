@@ -101,7 +101,7 @@ public class AuthServiceImpl implements AuthService {
 			@SuppressWarnings("unchecked")
 			List<User> results = session
 					.createQuery(
-							"SELECT u FROM Admin a "
+							"SELECT a FROM Admin a "
 									+ "WHERE a.name = :name AND a.password = :password")
 					.setString("name", adminName)
 					.setString("password", password).list();
