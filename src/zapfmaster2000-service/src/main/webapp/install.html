@@ -45,15 +45,22 @@
                   e.preventDefault();
                   $.ajax({
                       type:"POST",
-                      url:"rest/login/admin",
+                      url:"rest/install/firstadmin",
                       data:{
                           adminName:$form.find(".adminName").val(),
                           password:$form.find(".pass").val()
                       },
                       success:function(e){
-                          window.console.log(e);
+
                           $(".leaf").hide();
                           $(".leaf .registerAccount").show();
+                          window.location.href="dashboard/accounts.html";
+                      },
+                      complete:function(e){
+                          if(e && e.status !="200"){
+                              alert("Fehler Status:"+ e.status);
+                          }
+                          window.location.href="dashboard/accounts.html";
 
                       }
                   })
@@ -67,7 +74,7 @@
       <img class="zmlogo" src="images/view/zapfmaster2000_klein.png" />
 
     <div class="leaf registerAdmin container">
-        <p>Erstinstallation</p>
+        <p>Erstinstallation - Admin Account erstellen</p>
     <form id="registerAdminForm">
         <p><input class="adminName" type="text" name="adminName" placeholder="Nutzername"></p>
         <p><input class="pass" type="password" name="password" placeholder="Passwort">  </p>

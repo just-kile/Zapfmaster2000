@@ -81,9 +81,9 @@
     	console.log("Performing login to "+baseUrl +"rest/login/user"+"?userName="+userName+"&"+"password="+pass);
     	$.ajax({
     		type:"POST",
-    		url:baseUrl +"rest/login/user",
+    		url:baseUrl +"rest/login/admin",
     		data:{
-    			userName:userName,
+                adminName:userName,
     			password:pass
     		},
     		complete:function(data){
