@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Install the ZapfPerience!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Meta Tags for mobile -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="width">
+    <script src="libs/jquery/jquery-1.8.1.js"></script>
+    <script type="text/javascript" src="libs/jquery.ajax-progress.js"></script>
+    <script src="libs/cordova-2.4.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <style>
+        .throbber{
+            text-align:center;
+            position:absolute;
+            width:100%;
+            height:100%;
+            top:0;
+            left:0;
+            z-index:26000;
+        }
+        .throbber > div{
+            top:55%;
+            left:48%;
+            position:absolute;
+            background:#222;
+            padding:5px;
+            box-shadow:0 0 10px;
+            border-radius:10px;
+        }
+        .throbber img{
+
+        }
+    </style>
+       <!--/rest/login/admin -> POST -->
+    <script>
+        $(document).on("ready",function(){
+              var $form = $("#registerAdminForm").on("submit",function(e){
+                  var formData = new FormData($form[0]);
+                  e.preventDefault();
+                  $.ajax({
+                      type:"POST",
+                      url:"rest/login/admin",
+                      data:{
+                          adminName:$form.find(".adminName").val(),
+                          password:$form.find(".pass").val()
+                      },
+                      success:function(e){
+                          window.console.log(e);
+                          $(".leaf").hide();
+                          $(".leaf .registerAccount").show();
+
+                      }
+                  })
+              });
+        });
+    </script>
+</head>
+
+<body>
+  <div class="login">
+      <img class="zmlogo" src="images/view/zapfmaster2000_klein.png" />
+
+    <div class="leaf registerAdmin container">
+        <p>Erstinstallation</p>
+    <form id="registerAdminForm">
+        <p><input class="adminName" type="text" name="adminName" placeholder="Nutzername"></p>
+        <p><input class="pass" type="password" name="password" placeholder="Passwort">  </p>
+        <button type="submit">Registrieren</button>
+    </form>
+    </div>
+
+    <div class="leaf registerAccount container" style="display:none">
+        <form id="registerAdminForm">
+           <p></p> <input class="adminName" type="text" name="adminName" placeholder="Nutzername">
+            <input class="pass" type="password" name="password" placeholder="Passwort">
+            <button type="submit">Account Registrieren</button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>   <!--Is first installation -->

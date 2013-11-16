@@ -46,9 +46,11 @@ $(document).ready(function(){
 	console.log("BaseUrl"+baseUrl);
 	function redirect(){
 	       if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
-	    	   window.location.replace("app.html");
+	    	  // window.location.replace("app.html");
+               window.location.href="app.html";
 	       }else{
-	    	   window.location.replace("page.html");
+	    	   //window.location.replace("page.html");
+               window.location.href="page.html";
 	       }
 	}
 	var RfidPush = (function(){
@@ -355,7 +357,7 @@ $("#rImage").on("change",function(e){
 		complete:function(){
 			Throbber.hide();
 		}
-	    ,
+
 
 	});
 	}
@@ -404,7 +406,7 @@ document.addEventListener("deviceready", function(){
 			width:160,
 			heigt:160,
 			quality: 50, 
-            destinationType: navigator.camera.DestinationType.FILE_URI,
+            destinationType: navigator.camera.DestinationType.FILE_URI
            // sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
 		}
 		);
@@ -466,7 +468,7 @@ $("#registerApp").on("click",function(e){
         });
         $(".container").hide();
         $("#accountloginContainer").show();
-    })
+    });
 
 })
 $(".cancelBtn").on("click",function(e){
@@ -505,11 +507,57 @@ $("#updateImageRfid").on("click",function(e){
 		}
 	})
 	
-})
+});
+    $("#guestLogin").on("click",function(e){
+        e.preventDefault();
+        var accountName = $("#accountSelectFront").val();
+        $.ajax({
+            type:"POST",
+            url:baseUrl +"rest/login/account",
+            data:{
+                accountName:accountName
+            },
+            complete:function(data){
+                var token= data.responseText;
 
+                if(localStorage && data.status==200){
+                    //alert(token);
+                    localStorage.setItem('token',token );
+                    //if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
+                    //window.location.replace(window.location.pathname+"page.html");
+                    redirect();
+                }else{
+                    alert("Fehler "+data.status)
+                }
+            },
+            error:function(e){
+                alert("Fehler! "+ e.status);
+            }
+        })
+    });
 
-})
+    $.get(baseUrl+"rest/account").success(function(resp){
+        var account = $("#accountSelectFront").empty();
+        $.each(resp,function(ind,val){
+            $("<option>").text(val.name).appendTo(account);
+        });
 
+    })
+
+});
+
+    //check is installed
+ $.ajax({
+     url:"rest/install/status",
+     type:"GET",
+     complete:function(resp){
+         if(resp && resp.status===200){
+             var json = JSON.parse(resp.responseText);
+             if(json.status =="new")window.location.href="install.html";
+         }
+         window.location.href="install.html";
+     }
+ });
 
 </script>
 
@@ -522,7 +570,8 @@ $("#updateImageRfid").on("click",function(e){
 	<form id="loginForm">
 		<p><input placeholder="Username" id="userName" name="userName" type="text" size="30" maxlength="30" value=""></p>
 		<p><input placeholder="Passwort" id="password" name="password" type="password" size="30" maxlength="30" value=""></p>
-		<div><input id ="submitApp" type="submit" value="Anmelden"></div>
+        <p><select id="accountSelectFront" name="account"></select></p>
+		<div><input id ="submitApp" type="submit" value="Anmelden"><button id ="guestLogin">Gast</button></div>
 		</form>
 		<div><input id ="updateImageRfid" type="submit" value="Bild/RFID Updaten">
 		</div>
