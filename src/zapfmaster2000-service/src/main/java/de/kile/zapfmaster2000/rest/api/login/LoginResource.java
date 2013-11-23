@@ -55,8 +55,8 @@ public class LoginResource {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Path("/admin")
-	public Response loginUser(@FormParam("adminName") String pUserName,
+	@Path("/user")
+	public Response loginUser(@FormParam("userName") String pUserName,
 			@FormParam("password") String pPassword) {
 		LOG.debug("Login request for account " + pUserName);
 
