@@ -8,6 +8,7 @@ requirejs.config({
         Angular: 'libs/angular/angular.min',
         AngularRoute: 'libs/angular/angular-route',
         AngularResource: "libs/angular/angular-resource",
+        AngularAnimate:"libs/angular/angular-animate",
         templates: './../views'
     },
     shim: {
@@ -15,9 +16,13 @@ requirejs.config({
             exports: "angular"
         },
         AngularResource: {
-            deps: ['Angular']
+            deps: ['Angular'],
+            exports:""
         },
         AngularRoute: {
+            deps: ['Angular']
+        },
+        AngularAnimate: {
             deps: ['Angular']
         },
         jQuery: {
@@ -45,13 +50,19 @@ requirejs([
     , 'Underscore'
     , 'Angular',
     'AngularRoute',
-    'AngularResource'
-], function (require, Console, $, _, angular) {
+    'AngularResource',
+    'AngularAnimate'
+], function (require, Console, $, _, angular,angularRoute,angularResource,angularAnimate) {
     Console.group("Bootstrap dependencies loaded.");
     Console.info("Console", Console);
     Console.info("jQuery", $);
     Console.info("Underscore: ", _);
     Console.info("Angular: ", angular);
+    Console.group("Angular Directives");
+    Console.info("ngRoute: ", angularRoute);
+    Console.info("ngResource: ", angularResource);
+    Console.info("ngAnimate: ", angularAnimate);
+    Console.groupEnd();
 
     require(['app'], function (App) {
         Console.group("Starting bootstrap.");
