@@ -14,8 +14,12 @@ define([
     //Modules Controller
      'modules/bestlist/BestlistController',
      'modules/challenges/ChallengeController',
-     'modules/newsstack/NewsstackController'
-], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack) {
+     'modules/newsstack/NewsstackController',
+     'modules/draftkits/DraftKitController',
+
+    //Constants
+    'constants'
+], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,constants) {
     "use strict";
     Console.group("Entering controllers module.");
     Console.info("AppController", app);
@@ -25,11 +29,17 @@ define([
         BestlistController:bestlist,
         ChallengeController:challenge,
         NewsstackController:newsstack,
+        DraftKitController:draftkit,
         stats: stats
 
     };
 
-
+    var setUpConstants = function(angModule){
+        Console.group('Initializing constants.');
+        angModule.constant('ZMConstants', constants);
+        Console.debug('Registered Constants: ',constants);
+        Console.groupEnd();
+    };
     var setUpRoutes = function (angModule) {
         // hook up routing
         Console.group('Initializing navigation and routing.');
@@ -45,12 +55,15 @@ define([
             });
             $routeProvider.otherwise({ redirectTo: routes.home.route });
         });
-        angModule.run(function ($rootScope) {
+        angModule.run(["$rootScope","CometService",function ($rootScope,CometService) {
             $rootScope.$on('$routeChangeSuccess', function (next, last) {
                 Console.debug("Navigating from ", last);
                 Console.debug("Navigating to   ", next);
+                CometService.reset();
+
+
             });
-        });
+        }]);
     }
 
     var initialize = function (angModule) {
@@ -59,6 +72,7 @@ define([
             angModule.controller(name, controller);
         })
         setUpRoutes(angModule);
+        setUpConstants(angModule);
         Console.info("Registered Controllers: ", controllers);
     };
 

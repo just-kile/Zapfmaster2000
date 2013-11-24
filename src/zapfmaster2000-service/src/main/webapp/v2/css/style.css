@@ -1,35 +1,73 @@
-.container {
-    z-index: 51;
+@font-face {
+    font-family: RalewayLight;
+    src: url(fonts/Raleway-Bold.otf);
 }
 
-#bg1, #bg2, #bg3 {
-    z-index: 50;
-    top: 0;
-    left: 0;
+@font-face {
+    font-family: RalewayRegular;
+    src: url(fonts/Raleway-Regular.otf);
+}
+
+@font-face {
+    font-family: RalewaySemiBold;
+    src: url(fonts/Raleway-SemiBold.otf);
+}
+
+@font-face {
+    font-family: RalewayBold;
+    src: url(fonts/Raleway-Bold.otf);
+}
+
+body {
+    font-family: RalewayRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: url("images/drops.png");
+    color: #ffffff;
+}
+
+.loadingScreen {
+    background: rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 100%;
-    background: url(images/bubbles.png) repeat 0 0;
-    position: fixed;
-}
-
-#bg2 {
-    z-index: 49;
-    background-image: url(images/bubbles2.png);
-}
-
-#bg3 {
-    z-index: 48;
-    background-image: url(images/bubbles3.png);
-}
-
-.transitionTop {
     position: absolute;
-    transform: translateZ(0);
-    transition: top 2s;
-    -webkit-transition: top 2s; /* Safari */
+    top: 0;
+    left: 0;
+    text-align: center;
+
 }
 
-ng-view {
+header > nav {
+    text-align: center;
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -100px;
+}
+
+header > nav  > ul {
+    background: #000000;
+    color: #ffffff;
+    opacity: 0.5;
+    display: inline-block;
+    margin: 0;
+    padding: 0px 15px;
+    padding-bottom: 5px;
+}
+
+header > nav > ul > li {
+    display: inline;
+    list-style: none;
+    margin-right: 10px;
+}
+header > nav > ul > li > a,header > nav > ul > li > a:hover{
+    color: #ffffff;
+    text-decoration: none;
+}
+header > nav > ul > li::before {
+    content: "  ";
+}
+
+/*ng-view {
 
     position: absolute;
     top: 0%;
@@ -78,3 +116,4 @@ ng-view {
     }
 }
 
+  */

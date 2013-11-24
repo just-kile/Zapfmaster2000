@@ -67,10 +67,10 @@ requirejs([
     require(['app'], function (App) {
         Console.group("Starting bootstrap.");
         Console.info("App: ", App);
-
+        Console.groupEnd();
         App.initialize();
 
-        Console.groupEnd();
+
     });
 
     Console.groupEnd();

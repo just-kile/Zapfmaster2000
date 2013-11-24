@@ -5,17 +5,16 @@ define(['Console'], function (Console) {
   var controller = ['$scope',function ($scope) {
     Console.group("HomeController entered.");
     var rows = [{
-        name:"js/modules/newsstack",
-        controller:"newsstack"
+        name:"js/modules/newsstack"
     },{
-        name:"js/modules/bestlist",
-        controller:"bestlist"
+        name:"js/modules/draftkits"
     },{
-        name:"js/modules/challenges",
-        controller:"challenges"
+        name:"js/modules/bestlist"
+    },{
+        name:"js/modules/challenges"
     }];
     $scope.rows = rows;
-    Console.log("Initializing:",rows);
+    Console.debug("Initializing:",rows);
     Console.groupEnd();
   }];
   //controller.$inject = [];

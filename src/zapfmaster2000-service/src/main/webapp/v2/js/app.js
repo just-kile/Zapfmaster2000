@@ -1,15 +1,15 @@
 define([
     // Standard Libs
-    'Console'      // lib/console/console
-    , 'jQuery'     // lib/jquery/jquery
-    , 'Underscore' // lib/underscore/underscore
-    , 'Angular'    // lib/angular/angular
+    'Console',      // lib/console/console
+    'jQuery',     // lib/jquery/jquery
+    'Underscore', // lib/underscore/underscore
+    'Angular',    // lib/angular/angular
 
     // Application Files
-    , 'services/services'
-    , 'directives/directives'
-    , 'filters/filters'
-    , 'controllers/controllers'
+    'services/services',
+    'directives/directives',
+    'filters/filters',
+    'controllers/controllers'
 ], function (Console, $, _, angular, services, directives, filters, controllers) {
     "use strict";
 
@@ -22,13 +22,13 @@ define([
 
         Console.group("Setup Angular");
 
-        var mainModule = angular.module('myApp',['ngRoute','ngResource','ngAnimate']);
+        var mainModule = angular.module('myApp', ['ngRoute', 'ngResource', 'ngAnimate']);
         services.initialize(mainModule);
         directives.initialize(mainModule);
         filters.initialize(mainModule);
         controllers.initialize(mainModule);
 
-        angular.bootstrap(window.document,['myApp']);
+        angular.bootstrap(window.document, ['myApp']);
         Console.info("Angular compiled and executed.");
 
         Console.groupEnd(); // [angular]

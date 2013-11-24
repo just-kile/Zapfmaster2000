@@ -7,7 +7,7 @@ define([
             title: 'Home', route: '/home', controller: 'home', template: homeTemplate
         },
         stats: {
-            title: 'Data List', route: '/stats', controller: 'stats', template: statsTemplate
+            title: 'Stats', route: '/stats', controller: 'stats', template: statsTemplate
         }
     };
 })
