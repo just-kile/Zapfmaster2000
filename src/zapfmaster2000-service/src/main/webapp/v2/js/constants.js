@@ -7,7 +7,12 @@ define([
     var constants = {
       baseUrl:"../",
       ajaxTimeout:120000,
-      challengeUrl:"rest/challenge"
+      challengeUrl:"rest/challenge",
+      challengeMaxDuels:5,
+      CHALLENGE_STARTED:"CHALLENGE_STARTED",
+      CHALLENGE_DONE:"CHALLENGE_DONE",
+      DRAWING:"DRAWING",
+      SERVER_TIME_FORMAT:"YYYYMMDD-HHmmss"
     }
 
     Console.info("Register constants: ", constants);

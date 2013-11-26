@@ -118,7 +118,10 @@ header > nav > ul > li::before {
 }
 
   */
-
+.zmo-challenges{
+    padding-right:15px;
+    padding-left: 15px;
+}
 .zmo-challenges header{
     font-family: RalewayBold;
     font-size: 32px;
@@ -127,32 +130,37 @@ header > nav > ul > li::before {
 .zmo-container{
     height:500px;
     background: rgba(0,0,0,0.4);
-    margin-right:20px;
+
     border-radius: 10px;
     padding-top: 20px;
     padding-left: 20px;
     padding-right:20px;
+
 }
 .zmo-challenges img.userimage1,.zmo-challenges img.userimage2,.zmo-challenges div.username1,.zmo-challenges div.username2,.zmo-challenges .bar1,.zmo-challenges .bar2{
     position: absolute;
 }
-
+.zmo-challenges .clock{
+    font-size: 18pt;
+    padding-top:40px;
+}
 .zmo-challenges .challenge-container{
     position: relative;
     height:100px;
+    text-align: center;
 }
 .zmo-challenges img.userimage1{
     left: 0px;
-    width: 12.8%;
-    height: 50%;
+   /* width: 12.8%;
+    height: 50%;  */
 }
 .zmo-challenges div.username1{
     left: 5px;
 }
 .zmo-challenges img.userimage2{
     right: 0px;
-    width: 12.8%;
-    height: 50%;
+   /* width: 12.8%;
+    height: 50%; */
 }
 .zmo-challenges div.username2{
     right: 5px;
@@ -176,7 +184,9 @@ header > nav > ul > li::before {
 
 .zmo-challenges .bar1,.zmo-challenges .bar2{
       top: 10px;
+    transition:translateZ(0);
     transition:1s;
+
 }
 .zmo-challenges .bar1{
 
@@ -215,4 +225,34 @@ header > nav > ul > li::before {
     -webkit-border-radius: 10px;
     width: 48px;
     height: 48px;
+}
+
+
+.challenge-container.ng-enter {
+    transition:translateZ(0);
+    -webkit-transition: 1s;
+    transition: 1s;
+
+    top: -100px;
+    opacity: 0;
+}
+
+.challenge-container.ng-enter-active {
+    top: 0;
+    opacity: 1;
+}
+
+.challenge-container.ng-leave {
+    transition:translateZ(0);
+    -webkit-transition: 1s;
+    transition: 1s;
+
+    top: 0;
+    opacity: 1;
+}
+
+.challenge-container.ng-leave-active {
+    top: 100px;
+    opacity: 0;
+
 }

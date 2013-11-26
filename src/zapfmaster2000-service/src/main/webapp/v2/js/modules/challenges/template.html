@@ -4,15 +4,15 @@
     <div class="zmo-container">
         <div class ="challenge-container" ng-repeat="challenge in challenges">
           <!--  <div class="zm-img" style='background: url("{{baseurl+challenge.team1[0].userImage}}")'/>  --->
-            <div class="bar1" style="width:{{challenge.team1[0].amount/(challenge.team1[0].amount+challenge.team2[0].amount)*100||50}}%"></div>
-            <div class="bar2" style="width:{{challenge.team2[0].amount/(challenge.team1[0].amount+challenge.team2[0].amount)*100||50}}%"></div>
+            <div class="bar1" style="width:{{challenge.team1Percent}}%"></div>
+            <div class="bar2" style="width:{{challenge.team2Percent}}%"></div>
             <img class="img-responsive img-rounded userimage1" src="{{baseurl+challenge.team1[0].userImage}}">
             <div class="username1">{{challenge.team1[0].userName}}</div>
 
 
             <img class="img-responsive img-rounded userimage2" src="{{baseurl+challenge.team2[0].userImage}}">
             <div class="username2">{{challenge.team2[0].userName}}</div>
-
+            <div class="clock">{{challenge.countdown}}</div>
         </div>
     </div>
 

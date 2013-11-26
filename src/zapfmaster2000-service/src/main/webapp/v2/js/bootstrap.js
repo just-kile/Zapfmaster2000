@@ -1,6 +1,7 @@
 "use strict";
 
 requirejs.config({
+
     paths: {
         Console: 'libs/console/console-min',
         jQuery: 'libs/jquery/jquery-2.0.3.min',//'http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min'
@@ -9,6 +10,7 @@ requirejs.config({
         AngularRoute: 'libs/angular/angular-route',
         AngularResource: "libs/angular/angular-resource",
         AngularAnimate:"libs/angular/angular-animate",
+        moment:"libs/moment/moment.min",
         templates: './../views'
     },
     shim: {
@@ -31,6 +33,7 @@ requirejs.config({
         Underscore: {
             exports: "_"
         },
+
         Console: {
             exports: "console"
         }
@@ -48,15 +51,17 @@ requirejs([
     , 'Console'
     , 'jQuery'
     , 'Underscore'
+    , 'moment'
     , 'Angular',
     'AngularRoute',
     'AngularResource',
     'AngularAnimate'
-], function (require, Console, $, _, angular,angularRoute,angularResource,angularAnimate) {
+], function (require, Console, $, _,moment, angular,angularRoute,angularResource,angularAnimate) {
     Console.group("Bootstrap dependencies loaded.");
     Console.info("Console", Console);
     Console.info("jQuery", $);
     Console.info("Underscore: ", _);
+    Console.info("Moment: ",moment);
     Console.info("Angular: ", angular);
     Console.group("Angular Directives");
     Console.info("ngRoute: ", angularRoute);
