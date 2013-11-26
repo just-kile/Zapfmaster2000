@@ -6,7 +6,8 @@ define([
     Console.group("Entering Constants module.");
     var constants = {
       baseUrl:"../",
-      ajaxTimeout:120000
+      ajaxTimeout:120000,
+      challengeUrl:"rest/challenge"
     }
 
     Console.info("Register constants: ", constants);

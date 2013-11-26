@@ -4,15 +4,19 @@ define(['Console'], function (Console) {
 
   var controller = ['$scope',function ($scope) {
     Console.group("HomeController entered.");
-    var rows = [{
-        name:"js/modules/newsstack"
+    var rows = [[{
+        name:"js/modules/newsstack",
+        className:"col-md-6"
     },{
-        name:"js/modules/draftkits"
+        name:"js/modules/draftkits",
+        className:"col-md-6"
+    }],[{
+        name:"js/modules/bestlist",
+        className:"col-md-8"
     },{
-        name:"js/modules/bestlist"
-    },{
-        name:"js/modules/challenges"
-    }];
+        name:"js/modules/challenges",
+        className:"col-md-4"
+    }]];
     $scope.rows = rows;
     Console.debug("Initializing:",rows);
     Console.groupEnd();

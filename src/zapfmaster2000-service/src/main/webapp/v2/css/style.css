@@ -42,6 +42,7 @@ header > nav {
     top: 0;
     left: 50%;
     margin-left: -100px;
+    z-index: 26000;
 }
 
 header > nav  > ul {
@@ -117,3 +118,101 @@ header > nav > ul > li::before {
 }
 
   */
+
+.zmo-challenges header{
+    font-family: RalewayBold;
+    font-size: 32px;
+}
+
+.zmo-container{
+    height:500px;
+    background: rgba(0,0,0,0.4);
+    margin-right:20px;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right:20px;
+}
+.zmo-challenges img.userimage1,.zmo-challenges img.userimage2,.zmo-challenges div.username1,.zmo-challenges div.username2,.zmo-challenges .bar1,.zmo-challenges .bar2{
+    position: absolute;
+}
+
+.zmo-challenges .challenge-container{
+    position: relative;
+    height:100px;
+}
+.zmo-challenges img.userimage1{
+    left: 0px;
+    width: 12.8%;
+    height: 50%;
+}
+.zmo-challenges div.username1{
+    left: 5px;
+}
+.zmo-challenges img.userimage2{
+    right: 0px;
+    width: 12.8%;
+    height: 50%;
+}
+.zmo-challenges div.username2{
+    right: 5px;
+}
+.zmo-challenges div.username1,.zmo-challenges div.username2{
+    margin-top: 50px;
+    font-size: 15pt;
+}
+.challenge-container:nth-child(odd) img.userimage1{
+    border:  1px solid #FFF143;
+}
+.challenge-container:nth-child(even) img.userimage1{
+    border: 1px solid #FF71AC;
+}
+.challenge-container:nth-child(odd) img.userimage2{
+    border:  1px solid #FF71AC;
+}
+.challenge-container:nth-child(even) img.userimage2{
+    border: 1px solid #FFF143;
+}
+
+.zmo-challenges .bar1,.zmo-challenges .bar2{
+      top: 10px;
+    transition:1s;
+}
+.zmo-challenges .bar1{
+
+}
+
+.zmo-challenges .bar2{
+  right: 0;
+}
+
+.challenge-container:nth-child(even) .bar1{
+    border: 2px solid #FF71AC;
+    background:rgba(255,113,172,0.5);
+    height:30px;
+}
+.challenge-container:nth-child(odd) .bar1{
+    border: 2px solid #FFF143;
+    background:rgba(255,241,67,0.5);
+    height:30px;
+}
+.challenge-container:nth-child(even) .bar2{
+    border: 2px solid #FFF143;
+    background:rgba(255,241,67,0.5);
+    height:30px;
+}
+.challenge-container:nth-child(odd) .bar2{
+    border: 2px solid #FF71AC;
+    background:rgba(255,113,172,0.5);
+    height:30px;
+}
+
+.zmo-challenges .zm-img{
+    border: 1px solid yellow;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    width: 48px;
+    height: 48px;
+}

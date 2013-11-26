@@ -24,13 +24,13 @@ define(['Console','Underscore'], function (Console,_) {
 
                 }).
                 error(function (data, status, headers, config) {
-                    Console.log(status);
+                    Console.log("Error Status: ",status);
                     if(status==503 || status == 0){
                         Console.debug("Timeout. Reconnect Newspush");
                         startCometService();
 
                     }else{
-                        Console.debug("Error occured, reconnect in 5s...");
+                        Console.debug("Reconnect in 5s...");
                         window.setTimeout(startCometService,5000);
                     }
                 });
