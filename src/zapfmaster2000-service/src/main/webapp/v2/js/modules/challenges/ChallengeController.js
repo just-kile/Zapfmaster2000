@@ -12,7 +12,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     var team2Percent = challenge.team2[0].amount / (challenge.team1[0].amount + challenge.team2[0].amount) * 100
                     challenge.team1Percent = !isNaN(team1Percent) ? team1Percent : 50;
                     challenge.team2Percent = !isNaN(team2Percent) ? team2Percent : 50;
-                    challenge.countdown = "00:00";
+                    challenge.countdown = 0;
                 });
                 return data;
 
@@ -24,7 +24,7 @@ define(['Console', 'Underscore'], function (Console, _) {
 
                 _.each($scope.challenges, function (challenge, keys) {
                     var end = DateService.calcDiffToNow(challenge.startDate,challenge.challengeDuration, "mm:ss");
-                    $scope.challenges[keys].countdown = end !="00:00"?end:"End";
+                    $scope.challenges[keys].countdown = end;
                 });
 
                 clockInterval = $timeout($scope.letTheClockTick, 1000);

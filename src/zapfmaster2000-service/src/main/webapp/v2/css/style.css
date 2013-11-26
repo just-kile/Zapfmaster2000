@@ -141,8 +141,8 @@ header > nav > ul > li::before {
     position: absolute;
 }
 .zmo-challenges .clock{
-    font-size: 18pt;
-    padding-top:40px;
+    font-size: 22pt;
+    padding-top:35px;
 }
 .zmo-challenges .challenge-container{
     position: relative;
@@ -255,4 +255,12 @@ header > nav > ul > li::before {
     top: 100px;
     opacity: 0;
 
+}
+.winner{
+    box-shadow: 0 0 40px;
+}
+
+.row{
+    margin-left: 0;
+    margin-right: 0;
 }

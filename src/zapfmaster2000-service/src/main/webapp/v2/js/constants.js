@@ -12,7 +12,8 @@ define([
       CHALLENGE_STARTED:"CHALLENGE_STARTED",
       CHALLENGE_DONE:"CHALLENGE_DONE",
       DRAWING:"DRAWING",
-      SERVER_TIME_FORMAT:"YYYYMMDD-HHmmss"
+      SERVER_TIME_FORMAT:"YYYYMMDD-HHmmss",
+      COUNTDOWN_TIME_FORMAT:"mm:ss"
     }
 
     Console.info("Register constants: ", constants);

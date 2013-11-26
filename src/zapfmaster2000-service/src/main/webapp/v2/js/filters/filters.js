@@ -1,14 +1,16 @@
 define([
   // Standard Libs
-  'Console'       // lib/console/console
-  , 'Underscore'  // lib/underscore/underscore
+  'Console',       // lib/console/console
+   'Underscore',  // lib/underscore/underscore
   // Application Filters
-
-], function (Console,_){
+   "filters/CountdownFilter"
+], function (Console,_,CountdownFilter){
   "use strict";
   Console.group("Entering Filters module.");
 
-  var filters = {};
+  var filters = {
+      countdown:CountdownFilter
+  };
   Console.info("Registered filters: ", filters);
 
   var initialize = function (angModule) {
