@@ -12,12 +12,12 @@
                 ng-style="{top:user.order*100+'px'}">
                 <div class="zm-relative">
                     <div class="zm-absolute amount">{{user.amount|amount}}</div>
-                    <div class="bestlistbar zm-absolute bar1" ng-style="{'width':(user.amountPercent)+'%'}">
+                    <div class="bestlistbar zm-absolute bar1 zm-animate" ng-style="{'width':(user.amountPercent)+'%'}">
 
                     </div>
                 </div>
                 <div class="zm-absolute1-wrapper">
-                    <div class="zm-absolute1" ng-style="{right:user.amountPercent+'%'}">
+                    <div class="zm-absolute1 zm-animate" ng-style="{right:user.amountPercent+'%'}">
                         <img class="userimage1 img-responsive img-rounded"
                              src="{{baseUrl + user.image+'/big'}}"/>
 

@@ -205,7 +205,10 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 .color-container:nth-child(even) img.userimage2 {
     border: 1px solid #FFF143;
 }
-
+.zm-animate{
+    transition: translateZ(0);
+    transition: 1s;
+}
 .zmo-challenges .bar1, .zmo-challenges .bar2 {
     top: 10px;
     transition: translateZ(0);
@@ -306,14 +309,28 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 
 }
 
-.bestlist li {
+.bestlist li.bestlist-item {
     list-style: none;
     position: absolute;
     width: 100%;
     padding-right: 40px;
     margin-top: 20px;
+    -webkit-transition: top 0.5s ease-in-out;
+    -moz-transition: top 0.5s ease-in-out;
+    transition: top 0.5s ease-in-out;
 }
+ li.bestlist-item.ng-enter{
+     transition: translateZ(0);
+     -webkit-transition: 1s;
+     transition: 1s;
 
+     top: -100px;
+     opacity: 0;
+ }
+li.bestlist-item.ng-enter-active {
+    top: 0;
+    opacity: 1;
+}
 .bestlist .bar1{
     background-color: black !important;
     border-radius: 10px;
@@ -328,6 +345,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
     height: 40px !important;
     width: 100%;
     padding-left: 200px;
+
 }
 
 .zm-relative {
