@@ -314,14 +314,20 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
     margin-top: 20px;
 }
 
-.bestlist .bar1 {
-    right: 0;
-    top: 20px;
+.bestlist .bar1{
     background-color: black !important;
     border-radius: 10px;
     border-width: 2px;
-
+}
+.bestlist .bestlistbar {
+    right: 0;
+    top: 20px;
+    box-sizing: content-box;
+    /* min-width: 255px;
+     max-width: 100%;    */
     height: 40px !important;
+    width: 100%;
+    padding-left: 200px;
 }
 
 .zm-relative {
@@ -330,6 +336,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 
 .bestlist .zm-relative {
     margin-left: 250px;
+
 }
 
 .bestlist .bar-wrapper {
@@ -345,8 +352,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 }
 
 .content-wrapper {
-    /*position: relative;*/
-    height: 100px;
+    position: relative;
 
 }
 
