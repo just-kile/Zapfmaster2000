@@ -315,21 +315,34 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
     width: 100%;
     padding-right: 40px;
     margin-top: 20px;
-    -webkit-transition: top 0.5s ease-in-out;
-    -moz-transition: top 0.5s ease-in-out;
-    transition: top 0.5s ease-in-out;
+    transition: translateZ(0);
+
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    transition:  0.5s ease-in-out;
 }
  li.bestlist-item.ng-enter{
-     transition: translateZ(0);
      -webkit-transition: 1s;
      transition: 1s;
+     margin-top:-50px;
 
-     top: -100px;
      opacity: 0;
  }
-li.bestlist-item.ng-enter-active {
-    top: 0;
+/*li.bestlist-item.ng-enter-active {
+
+    margin-top:0;
     opacity: 1;
+}
+li.bestlist-item.ng-leave{
+    -webkit-transition: 1s;
+    transition: 1s;
+
+
+    opacity: 1;
+}    */
+li.bestlist-item.ng-leave-active {
+
+    opacity: 0;
 }
 .bestlist .bar1{
     background-color: black !important;
@@ -395,15 +408,15 @@ li.bestlist-item.ng-enter-active {
     margin-left: 250px;
 }
 
-.bestlist .username1 {
+.bestlist .username1,.bestlist .amount {
     font-family: RalewaySemiBold;
     font-size: 18pt;
     line-height: 80px;
 }
 
 .bestlist .amount {
-    right: 0;
-    top: 25px;
+    right: 10px;
+
     z-index: 1;
 
 }

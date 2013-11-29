@@ -59,19 +59,39 @@ define(['Console', 'Underscore'], function (Console, _) {
 
                 _.each(data,function(user,index){
                     var userId = user.id;
+                    var isUserInList = false;
                     _.each(bestlist,function(oldUser,oldIndex){
                          if(oldUser.id == userId){
                              $scope.bestlist[oldIndex].order = index;
                              $scope.bestlist[oldIndex].amount = user.amount;
                              $scope.bestlist[oldIndex].amountPercent = user.amountPercent;
+                             isUserInList = true;
                          }
                     });
+                    if(!isUserInList){
+                        var lowestOrderUser={order:0};
+                        var lowestIndex = 0;
+                        _.each(bestlist,function(oldUser,oldIndex){
+                            if(oldUser.order==index){
+                                user.order=index;
+                                $scope.bestlist.push(user);
+                                //$scope.bestlist.splice(oldIndex,1);
+                            }
+                            if(oldUser.order >lowestOrderUser.order){
+                                lowestOrderUser = oldUser ;
+                                lowestIndex = oldIndex;
+                            }
+                        });
+                        $scope.bestlist.splice(lowestIndex,1);
+
+                    }
                 });
 
             });
         }
         CometService.addPushListener(function (data) {
-           updateScope();
+            if(c.DRAWING == data.type)
+                updateScope();
         });
         initScope();
         Console.groupEnd();

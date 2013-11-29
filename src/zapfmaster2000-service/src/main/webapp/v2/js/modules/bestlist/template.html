@@ -11,7 +11,7 @@
             <li ng-repeat="user in bestlist" class="color-container bestlist-item"
                 ng-style="{top:user.order*100+'px'}">
                 <div class="zm-relative">
-                    <div class="zm-absolute amount">{{user.amount|amount}}</div>
+                    <div class="zm-absolute amount">{{user.amount|amount}} l</div>
                     <div class="bestlistbar zm-absolute bar1 zm-animate" ng-style="{'width':(user.amountPercent)+'%'}">
 
                     </div>
