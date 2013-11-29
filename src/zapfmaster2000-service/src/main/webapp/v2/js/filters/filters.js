@@ -3,13 +3,15 @@ define([
   'Console',       // lib/console/console
    'Underscore',  // lib/underscore/underscore
   // Application Filters
-   "filters/CountdownFilter"
-], function (Console,_,CountdownFilter){
+   "filters/CountdownFilter",
+    "filters/AmountFilter"
+], function (Console,_,CountdownFilter,AmountFilter){
   "use strict";
   Console.group("Entering Filters module.");
 
   var filters = {
-      countdown:CountdownFilter
+      countdown:CountdownFilter,
+      amount:AmountFilter
   };
   Console.info("Registered filters: ", filters);
 

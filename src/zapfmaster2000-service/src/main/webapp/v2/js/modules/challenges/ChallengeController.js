@@ -5,7 +5,7 @@ define(['Console', 'Underscore'], function (Console, _) {
     var controller = ['$scope','$timeout', "CometService", "DataService", "ZMConstants", "DateService",
         function ($scope,$timeout, CometService, ajax, c, DateService) {
             Console.group("Challenge controller entered.");
-            $scope.baseurl = c.baseUrl;
+            $scope.baseUrl = c.baseUrl;
             var calcTeamPercent = function (data) {
                 _.each(data, function (challenge, key) {
                     var team1Percent = challenge.team1[0].amount / (challenge.team1[0].amount + challenge.team2[0].amount) * 100;
@@ -72,7 +72,9 @@ define(['Console', 'Underscore'], function (Console, _) {
 
             };
             CometService.addPushListener(pushListener);
-
+            $scope.$on("$destroy",function(){
+                $timeout.cancel(clockInterval);
+            });
             Console.groupEnd();
         }];
     //controller.$inject = [];
