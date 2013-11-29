@@ -301,31 +301,58 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
         Bestlist
 ------------------------- */
 
-.bestlist{
+.bestlist {
     position: relative;
-    margin-left: 250px;
+
 }
+
 .bestlist li {
     list-style: none;
     position: absolute;
+    width: 100%;
+    padding-right: 40px;
+    margin-top: 20px;
+}
+
+.bestlist .bar1 {
+    right: 0;
+    top: 20px;
+    background-color: black !important;
+    border-radius: 10px;
+    border-width: 2px;
+
+    height: 40px !important;
+}
+
+.zm-relative {
+    position: relative;
+}
+
+.bestlist .zm-relative {
+    margin-left: 250px;
+}
+
+.bestlist .bar-wrapper {
+    position: relative;
+
 }
 
 .bestlist .userimage1 {
     width: 80px;
     height: 80px;
     float: left;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .content-wrapper {
-    position: relative;
+    /*position: relative;*/
     height: 100px;
 
 }
 
 .bestlist .content-wrapper {
     margin-left: auto;
- /*  margin-right: 200px;*/
+    /*  margin-right: 200px;*/
 }
 
 .bestlist .userimage1, li.bestlist .username1 {
@@ -333,11 +360,26 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 }
 
 .bestlist .zm-absolute1 {
-    min-width: 250px;
+    width: 250px;
+    margin-left: auto;
+
+    position: absolute;
+}
+
+.zm-absolute1-wrapper {
+    position: relative;
+    margin-left: 250px;
 }
 
 .bestlist .username1 {
     font-family: RalewaySemiBold;
-    font-size: 20pt;
+    font-size: 18pt;
     line-height: 80px;
+}
+
+.bestlist .amount {
+    right: 0;
+    top: 25px;
+    z-index: 1;
+
 }

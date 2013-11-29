@@ -6,24 +6,31 @@
     </div>
     <div class="col-md-7">
         <header class="zmo-header">Top Zapfer</header>
-        <div class="zmo-container">
-            <ul class="bestlist">
+        <ul class="zmo-container bestlist">
 
-                <li ng-repeat="user in bestlist" class="color-container bestlist-item"
-                    ng-style="{top:user.order*100+'px',right:user.amountPercent+'%'}">
-                    <div class="content-wrapper">
-                        <div class="zm-absolute1">
-                            <img class="userimage1 img-responsive img-rounded" src="{{baseUrl + user.image+'/big'}}"/>
-
-                            <div class="username1">{{user.name}}</div>
-
-                        </div>
-
-                        <span>{{user.amount|amount}}</span>
-                        <span>{{user.amountPercent}}</span>
+            <li ng-repeat="user in bestlist" class="color-container bestlist-item"
+                ng-style="{top:user.order*100+'px'}">
+                <div class="zm-relative">
+                    <div class="zm-absolute amount">{{user.amount|amount}}</div>
+                    <div class="bar-wrapper">
+                        <div class="zm-absolute bar1" ng-style="{width:user.amountPercent+'%'}"></div>
                     </div>
-                </li>
-            </ul>
-        </div>
+
+
+                </div>
+                <div class="zm-absolute1-wrapper">
+                    <div class="zm-absolute1" ng-style="{right:user.amountPercent+'%'}">
+                        <img class="userimage1 img-responsive img-rounded"
+                             src="{{baseUrl + user.image+'/big'}}"/>
+
+                        <div class="username1">{{user.name}}</div>
+
+                    </div>
+                </div>
+
+
+
+            </li>
+        </ul>
     </div>
 </div>
