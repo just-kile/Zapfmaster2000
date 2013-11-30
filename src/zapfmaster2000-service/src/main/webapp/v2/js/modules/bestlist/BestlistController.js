@@ -21,8 +21,8 @@ define(['Console', 'Underscore'], function (Console, _) {
             });
             return data;
         }
-        var initOrder = function(data){
-            _.each(data,function(user,index){
+        var initOrder = function (data) {
+            _.each(data, function (user, index) {
                 user.order = index;
             });
             return data;
@@ -37,19 +37,19 @@ define(['Console', 'Underscore'], function (Console, _) {
                 $scope.bestlist = data;
             });
         };
-        var sortDatas = function(){
-            var len = $scope.bestlist.length,tmp=0;
-            for(var i=0;i<len;i++){
-                for(var j=0;j<len;j++){
-                    if($scope.bestlist[i].amount >$scope.bestlist[j].amount){
-                         tmp = $scope.bestlist[i].order;
-                        $scope.bestlist[j].order=j;
-                        $scope.bestlist[i].order=tmp;
+        var sortDatas = function () {
+            var len = $scope.bestlist.length, tmp = 0;
+            for (var i = 0; i < len; i++) {
+                for (var j = 0; j < len; j++) {
+                    if ($scope.bestlist[i].amount > $scope.bestlist[j].amount) {
+                        tmp = $scope.bestlist[i].order;
+                        $scope.bestlist[j].order = j;
+                        $scope.bestlist[i].order = tmp;
                     }
                 }
             }
         }
-        var updateScope = function(data){
+        var updateScope = function (data) {
             ajax.getDatas(c.bestlistUrl, function (data) {
                 if (data.length > c.bestlistMax) {
                     data.length = c.bestlistMax;
@@ -57,32 +57,32 @@ define(['Console', 'Underscore'], function (Console, _) {
                 calcPercentAmount(data);
                 var bestlist = $scope.bestlist;
 
-                _.each(data,function(user,index){
+                _.each(data, function (user, index) {
                     var userId = user.id;
                     var isUserInList = false;
-                    _.each(bestlist,function(oldUser,oldIndex){
-                         if(oldUser.id == userId){
-                             $scope.bestlist[oldIndex].order = index;
-                             $scope.bestlist[oldIndex].amount = user.amount;
-                             $scope.bestlist[oldIndex].amountPercent = user.amountPercent;
-                             isUserInList = true;
-                         }
+                    _.each(bestlist, function (oldUser, oldIndex) {
+                        if (oldUser.id == userId) {
+                            $scope.bestlist[oldIndex].order = index;
+                            $scope.bestlist[oldIndex].amount = user.amount;
+                            $scope.bestlist[oldIndex].amountPercent = user.amountPercent;
+                            isUserInList = true;
+                        }
                     });
-                    if(!isUserInList){
-                        var lowestOrderUser={order:0};
+                    if (!isUserInList) {
+                        var lowestOrderUser = {order: 0};
                         var lowestIndex = 0;
-                        _.each(bestlist,function(oldUser,oldIndex){
-                            if(oldUser.order==index){
-                                user.order=index;
+                        _.each(bestlist, function (oldUser, oldIndex) {
+                            if (oldUser.order == index) {
+                                user.order = index;
                                 $scope.bestlist.push(user);
                                 //$scope.bestlist.splice(oldIndex,1);
                             }
-                            if(oldUser.order >lowestOrderUser.order){
-                                lowestOrderUser = oldUser ;
+                            if (oldUser.order > lowestOrderUser.order) {
+                                lowestOrderUser = oldUser;
                                 lowestIndex = oldIndex;
                             }
                         });
-                        $scope.bestlist.splice(lowestIndex,1);
+                        if ($scope.bestlist.length > c.bestlistMax) $scope.bestlist.splice(lowestIndex, 1);
 
                     }
                 });
@@ -90,7 +90,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             });
         }
         CometService.addPushListener(function (data) {
-            if(c.DRAWING == data.type)
+            if (c.DRAWING == data.type)
                 updateScope();
         });
         initScope();

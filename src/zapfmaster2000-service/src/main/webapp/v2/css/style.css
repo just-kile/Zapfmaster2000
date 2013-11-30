@@ -179,10 +179,10 @@ header > nav > ul > li::before {
     -o-mask-image:  url(images/throbber-mask_1.png);
     -moz-mask-image:  url(images/throbber-mask_1.png);
 
-    animation: animatedBackground 40s linear infinite;
-    -ms-animation: animatedBackground 40s linear infinite;
-    -moz-animation: animatedBackground 40s linear infinite;
-    -webkit-animation: animatedBackground 40s linear infinite;
+    animation: animatedBackground 60s linear infinite;
+    -ms-animation: animatedBackground 60s linear infinite;
+    -moz-animation: animatedBackground 60s linear infinite;
+    -webkit-animation: animatedBackground 60s linear infinite;
 
     overflow: hidden;
    /* width: 560px;
@@ -507,5 +507,12 @@ li.bestlist-item.ng-leave-active {
 
 
 .yellow-border{
-    border: 1px solid #FFF143;
+    border: 1px solid rgba(255, 241, 67, 0.5);
+}
+.userstats{
+    height: 542px;
+}
+
+.arrow{
+    left: -10px;
 }
