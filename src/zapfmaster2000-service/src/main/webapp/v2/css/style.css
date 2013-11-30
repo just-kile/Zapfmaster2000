@@ -23,6 +23,26 @@ body {
     background: url("images/drops.png");
     color: #ffffff;
 }
+.loadingScreen.ng-leave{
+    transition: translateZ(0);
+    -moz-transition: 1s;
+
+    -webkit-transition: 1s;
+    transition: 1s;
+
+
+    opacity: 1;
+}
+.loadingScreen.ng-leave-active{
+    transition: translateZ(0);
+    -moz-transition: 1s;
+
+    -webkit-transition: 1s;
+    transition: 1s;
+
+
+    opacity: 0;
+}
 
 .loadingScreen {
     background: rgba(0, 0, 0, 0.2);
@@ -121,6 +141,53 @@ header > nav > ul > li::before {
 
   */
 
+.username1,.username2{
+  /*  text-overflow: ellipsis;
+
+    overflow: hidden;*/
+}
+
+@keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 0 400%; }
+}
+@-webkit-keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 0 400%; }
+}
+@-ms-keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 0 400%; }
+}
+@-moz-keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 0 400%; }
+}
+
+.throbber{
+    width: 50px;
+    height: 137px;
+    background-image: url(images/beer.png);
+    background-position: 0px 100%;
+    background-repeat: repeat-y;
+    -webkit-mask: url(images/throbber-mask.png);
+    -o-mask-image:  url(images/throbber-mask.png);
+    -moz-mask-image:  url(images/throbber-mask.png);
+
+    animation: animatedBackground 40s linear infinite;
+    -ms-animation: animatedBackground 40s linear infinite;
+    -moz-animation: animatedBackground 40s linear infinite;
+    -webkit-animation: animatedBackground 40s linear infinite;
+   /* width: 560px;
+    height: 400px;
+    background-image: url(images/zm_logo.png);
+    background-position: 0px 0px;
+    background-repeat: repeat-x;
+    animation: animatedBackground 40s linear infinite;
+    -ms-animation: animatedBackground 40s linear infinite;
+    -moz-animation: animatedBackground 40s linear infinite;
+    -webkit-animation: animatedBackground 40s linear infinite; */
+}
 /* ----------------------
         Challenges
 ------------------------- */
@@ -172,6 +239,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 
 .zmo-challenges div.username1 {
     left: 5px;
+
 
 }
 
@@ -260,6 +328,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 
 .challenge-container.ng-enter {
     transition: translateZ(0);
+    -moz-transition: 1s;
     -webkit-transition: 1s;
     transition: 1s;
 
@@ -274,6 +343,8 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 
 .challenge-container.ng-leave {
     transition: translateZ(0);
+    -moz-transition: 1s;
+
     -webkit-transition: 1s;
     transition: 1s;
 
@@ -323,6 +394,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 }
  li.bestlist-item.ng-enter{
      -webkit-transition: 1s;
+     -moz-transition: 1s;
      transition: 1s;
      margin-top:-50px;
 
@@ -353,6 +425,7 @@ li.bestlist-item.ng-leave-active {
     right: 0;
     top: 20px;
     box-sizing: content-box;
+    -moz-box-sizing:content-box;
     /* min-width: 255px;
      max-width: 100%;    */
     height: 40px !important;
@@ -408,6 +481,9 @@ li.bestlist-item.ng-leave-active {
     margin-left: 250px;
 }
 
+.bestlist .username1{
+    min-width: 130px;
+}
 .bestlist .username1,.bestlist .amount {
     font-family: RalewaySemiBold;
     font-size: 18pt;
@@ -420,3 +496,4 @@ li.bestlist-item.ng-leave-active {
     z-index: 1;
 
 }
+
