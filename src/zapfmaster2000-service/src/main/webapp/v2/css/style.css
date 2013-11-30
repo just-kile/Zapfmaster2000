@@ -142,9 +142,9 @@ header > nav > ul > li::before {
   */
 
 .username1,.username2{
-  /*  text-overflow: ellipsis;
+    text-overflow: ellipsis;
 
-    overflow: hidden;*/
+    overflow: hidden;
 }
 
 @keyframes animatedBackground {
@@ -163,21 +163,28 @@ header > nav > ul > li::before {
     from { background-position: 0 0; }
     to { background-position: 0 400%; }
 }
-
+.throbber img:first-child{
+    width: 110%;
+    height: 105%;
+    margin-left: -4px;
+    margin-top: -8px;
+}
 .throbber{
-    width: 50px;
-    height: 137px;
+    width: 33px;
+    height: 90px;
     background-image: url(images/beer.png);
     background-position: 0px 100%;
     background-repeat: repeat-y;
-    -webkit-mask: url(images/throbber-mask.png);
-    -o-mask-image:  url(images/throbber-mask.png);
-    -moz-mask-image:  url(images/throbber-mask.png);
+    -webkit-mask: url(images/throbber-mask_1.png);
+    -o-mask-image:  url(images/throbber-mask_1.png);
+    -moz-mask-image:  url(images/throbber-mask_1.png);
 
     animation: animatedBackground 40s linear infinite;
     -ms-animation: animatedBackground 40s linear infinite;
     -moz-animation: animatedBackground 40s linear infinite;
     -webkit-animation: animatedBackground 40s linear infinite;
+
+    overflow: hidden;
    /* width: 560px;
     height: 400px;
     background-image: url(images/zm_logo.png);
@@ -258,19 +265,19 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
     font-size: 15pt;
 }
 
-.color-container:nth-child(odd) img.userimage1 {
+.color-container:nth-child(odd) .userimage1 {
     border: 1px solid #FFF143;
 }
 
-.color-container:nth-child(even) img.userimage1 {
+.color-container:nth-child(even) .userimage1 {
     border: 1px solid #FF71AC;
 }
 
-.color-container:nth-child(odd) img.userimage2 {
+.color-container:nth-child(odd) .userimage2 {
     border: 1px solid #FF71AC;
 }
 
-.color-container:nth-child(even) img.userimage2 {
+.color-container:nth-child(even) .userimage2 {
     border: 1px solid #FFF143;
 }
 .zm-animate{
@@ -497,3 +504,8 @@ li.bestlist-item.ng-leave-active {
 
 }
 
+
+
+.yellow-border{
+    border: 1px solid #FFF143;
+}
