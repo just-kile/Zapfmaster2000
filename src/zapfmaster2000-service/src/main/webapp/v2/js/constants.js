@@ -9,6 +9,7 @@ define([
       ajaxTimeout:120000,
       challengeUrl:"rest/challenge",
       bestlistUrl:"rest/statistics/rankings/bestUserList",
+      frontPageUserStatsUrl:"rest/statistics/frontpageUserStats",
       challengeMaxDuels:5,
       bestlistMax:5,
       CHALLENGE_STARTED:"CHALLENGE_STARTED",

@@ -1,4 +1,4 @@
-define(['Console'], function (Console) {
+define(['Console','Underscore'], function (Console,_) {
   "use strict";
   Console.group("Entering DataService module.");
 
@@ -7,10 +7,10 @@ define(['Console'], function (Console) {
           $http({
               url: c.baseUrl+url,
               method:"GET",
-              params: {
+              params: _.extend({
                   token: localStorage.getItem("token"),
                   _: new Date().getTime()
-              }
+              },data)
           }).success(success);
     };
     return {

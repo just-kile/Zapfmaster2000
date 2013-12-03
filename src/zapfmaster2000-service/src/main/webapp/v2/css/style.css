@@ -283,6 +283,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 .zm-animate{
     transition: translateZ(0);
     transition: 1s;
+    opacity:1;
 }
 .zmo-challenges .bar1, .zmo-challenges .bar2 {
     top: 10px;
@@ -385,6 +386,9 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 .bestlist {
     position: relative;
 
+}
+.bestlist > ul{
+    padding: 0;
 }
 
 .bestlist li.bestlist-item {
@@ -509,10 +513,33 @@ li.bestlist-item.ng-leave-active {
 .yellow-border{
     border: 1px solid rgba(255, 241, 67, 0.5);
 }
+/*Userstats*/
 .userstats{
     height: 542px;
 }
 
 .arrow{
-    left: -10px;
+    left: -30px;
+    padding-top: 24px;
+    top: 0;
+    padding-right: 18px;
+
+}
+.arrow img{
+   height: 77px;
+    width: 100%;
+}
+.animate-show {
+    -webkit-transition: 1s;
+    transition: 1s;
+    opacity:1;
+}
+.animate-show.ng-hide-add,
+.animate-show.ng-hide-remove,
+.zm-animate.ng-hide-add,
+.zm-animate.ng-hide-remove{
+    display:block!important;
+}
+.animate-show.ng-hide,.zm-animate.ng-hide {
+    opacity:0;
 }

@@ -6,6 +6,7 @@ public class FrontpageUserStatsResponse {
 	private AchievementResponse achievement;
 	private DrawCountResponse drawCount;
 	private RankResponse rank;
+    private UserResponse user;
 
 	public AmountResponse getAmount() {
 		return amount;
@@ -38,5 +39,12 @@ public class FrontpageUserStatsResponse {
 	public void setRank(RankResponse rank) {
 		this.rank = rank;
 	}
+    public void setUser(UserResponse user) {
+        this.user = user;
+    }
+    public UserResponse getUser() {
+        return user;
+    }
+
 
 }

@@ -112,8 +112,8 @@ public class EntityCreator {
 		
 		session.save(box);
 		session.save(keg);
-		session.save(box2);
-		session.save(keg2);
+		//session.save(box2);
+		//session.save(keg2);
 		
 		
 		// session.save(user1);
