@@ -516,6 +516,16 @@ li.bestlist-item.ng-leave-active {
 /*Userstats*/
 .userstats{
     height: 542px;
+   text-align: center;
+}
+.userstats > *{
+    margin-left: auto;
+    margin-right: auto;
+}
+.userstats >h2{
+    font-family: RalewayBold;
+    font-size: 25pt;
+    margin-top: 10px;
 }
 
 .arrow{
