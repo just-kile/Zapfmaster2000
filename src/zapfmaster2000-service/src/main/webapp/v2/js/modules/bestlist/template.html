@@ -6,9 +6,11 @@
 
             <h2>{{stats.user.userName}}</h2>
             <ul>
-                <li>{{stats.amount.amountTotal}}</li>
-                <li>{{stats.achievements.count}} Achievements</li>
+                <li>{{stats.amount.amountTotal|amount}} L</li>
+                <li>{{stats.achievement.count|achievement}} Achievements</li>
+                <li>{{stats.drawCount.count}} Zapfvorgänge</li>
             </ul>
+
         </div>
 
     </div>

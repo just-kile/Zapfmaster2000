@@ -4,14 +4,16 @@ define([
    'Underscore',  // lib/underscore/underscore
   // Application Filters
    "filters/CountdownFilter",
-    "filters/AmountFilter"
-], function (Console,_,CountdownFilter,AmountFilter){
+    "filters/AmountFilter",
+    "filters/AchievementFilter"
+], function (Console,_,CountdownFilter,AmountFilter,AchievementFilter){
   "use strict";
   Console.group("Entering Filters module.");
 
   var filters = {
       countdown:CountdownFilter,
-      amount:AmountFilter
+      amount:AmountFilter,
+      achievement:AchievementFilter
   };
   Console.info("Registered filters: ", filters);
 
