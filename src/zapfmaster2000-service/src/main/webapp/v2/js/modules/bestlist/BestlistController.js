@@ -37,6 +37,13 @@ define(['Console', 'Underscore'], function (Console, _) {
                     initOrder(data);
                     calcPercentAmount(data);
                     $scope.bestlist = data;
+
+                    if($scope.bestlist && $scope.bestlist.length>0){
+                        $timeout(function () {
+                            $scope.arrow.visible = true;
+                            updateStatsArrow();
+                        }, 3000);
+                    }
                 });
             };
             var sortDatas = function () {
@@ -92,6 +99,10 @@ define(['Console', 'Underscore'], function (Console, _) {
                         });
                     } else {
                         initScope();
+                        $timeout(function () {
+                            $scope.arrow.visible = true;
+                            updateStatsArrow();
+                        }, 3000);
                     }
 
                 });
@@ -106,14 +117,13 @@ define(['Console', 'Underscore'], function (Console, _) {
 
             /*Stats*/
             var initArrow = function () {
+
                 $scope.arrow = {
                     pointer: -9999,
                     visible: false
                 };
-                $timeout(function () {
-                    $scope.arrow.visible = true;
-                    updateStatsArrow();
-                }, 3000);
+
+
             }
             var getUserIdFromPointer = function (order) {
                 if ($scope.bestlist) {
@@ -126,6 +136,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
                 return -1;
             }
+            var activeStats= 0;
             var updateStatsArrow = function () {
                 var len;
                 if (!$scope.bestlist) {
@@ -139,12 +150,21 @@ define(['Console', 'Underscore'], function (Console, _) {
                 if (changeInterval)$timeout.cancel(changeInterval);
 
                 ajax.getDatas(c.frontPageUserStatsUrl, function (data) {
-                    $scope.stats = data;
+                    counter = ++counter % len;
+                    activeStats = ++activeStats%2;
+                    $scope.activeStats = activeStats;
+                    if(activeStats%2==1){
+                        $scope.statsodd = data;
+                    }else{
+                        $scope.statseven = data;
+                    }
+
+
+                    changeInterval = $timeout(function () {
+                        updateStatsArrow();
+                    }, 5000);
                 }, {user: getUserIdFromPointer(counter)});
-                counter = ++counter % len;
-                changeInterval = $timeout(function () {
-                    updateStatsArrow();
-                }, 5000);
+
 
             };
             initArrow();

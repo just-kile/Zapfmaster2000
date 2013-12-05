@@ -1,55 +1,67 @@
 <div ng-controller="BestlistController">
     <div class="col-md-5 color-container">
-        <div class="zmo-container yellow-border userstats">
+        <div class="flip-container" ng-class="{flip: activeStats==0}">
+            <div class=" flipper zmo-container yellow-border userstats-wrapper">
+                <div class="front userstats animate-show" ng-show="arrow.visible" ng-class="animate-show:arrow-visible">
+                    <img class="img-responsive img-rounded" src="{{baseUrl + statsodd.user.userImage}}/big"/>
 
-            <img class="img-responsive img-rounded" src="{{baseUrl + stats.user.userImage}}/big"/>
+                    <h2>{{statsodd.user.userName}}</h2>
+                    <ul>
+                        <li>{{statsodd.amount.amountTotal|amount}} L</li>
+                        <li>{{statsodd.achievement.count|achievement}} Achievements</li>
+                        <li>{{statsodd.drawCount.count}} Zapfvorgänge</li>
+                    </ul>
+                </div>
+                <div class="back userstats animate-show" ng-show="arrow.visible">
+                    <img class="img-responsive img-rounded" src="{{baseUrl + statseven.user.userImage}}/big"/>
 
-            <h2>{{stats.user.userName}}</h2>
-            <ul>
-                <li>{{stats.amount.amountTotal|amount}} L</li>
-                <li>{{stats.achievement.count|achievement}} Achievements</li>
-                <li>{{stats.drawCount.count}} Zapfvorgänge</li>
-            </ul>
+                    <h2>{{statseven.user.userName}}</h2>
+                    <ul>
+                        <li>{{statseven.amount.amountTotal|amount}} L</li>
+                        <li>{{statseven.achievement.count|achievement}} Achievements</li>
+                        <li>{{statseven.drawCount.count}} Zapfvorgänge</li>
+                    </ul>
 
-        </div>
-
-    </div>
-    <div class="col-md-7">
-        <header class="zmo-header">Top Zapfer</header>
-        <div class="zmo-container bestlist">
-            <div class="zm-absolute arrow animate-show" ng-show="arrow.visible"
-                 ng-style="{top:arrow.pointer*100+'px'} ">
-                <img src="css/images/arrow_left.png"/>
+                </div>
             </div>
-            <ul>
-                <li ng-repeat="user in bestlist" class="color-container bestlist-item"
-                    ng-style="{top:user.order*100+'px'}">
-                    <div class="zm-relative">
-                        <div class="zm-absolute amount">{{user.amount|amount}} l</div>
-                        <div class="bestlistbar zm-absolute bar1 zm-animate"
-                             ng-style="{'width':(user.amountPercent)+'%'}"
+            </div>
+        </div>
+        <div class="col-md-7">
+            <header class="zmo-header">Top Zapfer</header>
+            <div class="zmo-container bestlist">
+                <div class="zm-absolute arrow animate-show" ng-show="arrow.visible"
+                     ng-style="{top:arrow.pointer*100+'px'} ">
+                    <img src="css/images/arrow_left.png"/>
+                </div>
+                <ul>
+                    <li ng-repeat="user in bestlist" class="color-container bestlist-item"
+                        ng-style="{top:user.order*100+'px'}">
+                        <div class="zm-relative">
+                            <div class="zm-absolute amount">{{user.amount|amount}} l</div>
+                            <div class="bestlistbar zm-absolute bar1 zm-animate"
+                                 ng-style="{'width':(user.amountPercent)+'%'}"
+                                 ng-show="arrow.pointer!=user.order || !arrow.visible">
+
+                            </div>
+                        </div>
+                        <div class="zm-absolute1-wrapper animate-show"
                              ng-show="arrow.pointer!=user.order || !arrow.visible">
+                            <div class="zm-absolute1 zm-animate" ng-style="{right:user.amountPercent+'%'}">
+                                <img class="userimage1 img-responsive img-rounded"
+                                     src="{{baseUrl + user.image+'/big'}}"/>
 
+                                <div class="username1">{{user.name}}</div>
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="zm-absolute1-wrapper animate-show"
-                         ng-show="arrow.pointer!=user.order || !arrow.visible">
-                        <div class="zm-absolute1 zm-animate" ng-style="{right:user.amountPercent+'%'}">
-                            <img class="userimage1 img-responsive img-rounded"
-                                 src="{{baseUrl + user.image+'/big'}}"/>
-
-                            <div class="username1">{{user.name}}</div>
-
-                        </div>
-                    </div>
 
 
-                </li>
+                    </li>
 
-            </ul>
+                </ul>
+
+            </div>
+
 
         </div>
-
-
     </div>
-</div>

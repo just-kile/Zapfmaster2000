@@ -514,9 +514,13 @@ li.bestlist-item.ng-leave-active {
     border: 1px solid rgba(255, 241, 67, 0.5);
 }
 /*Userstats*/
+.userstats-wrapper{
+    height:542px;
+}
 .userstats{
-    height: 542px;
+   /* height: 542px;*/
    text-align: center;
+    top:20px;
 }
 .userstats > *{
     margin-left: auto;
@@ -548,6 +552,7 @@ li.bestlist-item.ng-leave-active {
     width: 100%;
 }
 .animate-show {
+    transition: translateZ(0);
     -webkit-transition: 1s;
     transition: 1s;
     opacity:1;
@@ -560,4 +565,48 @@ li.bestlist-item.ng-leave-active {
 }
 .animate-show.ng-hide,.zm-animate.ng-hide {
     opacity:0;
+}
+
+/*Card Flip*/
+/* entire container, keeps perspective */
+.flip-container {
+    -webkit-perspective: 1000;
+}
+/* flip the pane when hovered */
+/*.flip-container:hover .flipper, .flip-container.hover .flipper {
+    -webkit-transform: rotateY(180deg);
+}       */
+.flip-container.flip .flipper {
+    -webkit-transform: rotateY(180deg);
+}
+.flip-container, .front, .back {
+    width: 320px;
+    /*height: 480px;*/
+}
+
+/* flip speed goes here */
+.flipper {
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+
+    position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+    -webkit-backface-visibility: hidden;
+
+    position: absolute;
+    top: 20px;
+    left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+}
+
+/* back, initially hidden pane */
+.back {
+    -webkit-transform: rotateY(180deg);
 }
