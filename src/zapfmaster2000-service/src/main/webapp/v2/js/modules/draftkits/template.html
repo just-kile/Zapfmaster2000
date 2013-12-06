@@ -37,7 +37,7 @@ startDate: 1386087479000-->
                         <div class="location">@ {{keg.boxLocation}}</div>
 
                         <div class="amount">
-                            <div class="amountBar" ng-style="{width:(keg.user.amount) * 100+'%'}">
+                            <div class="amountBar" ng-style="{width:((keg.user.amount/0.5)%1) * 100+'%'}">
                                 {{keg.user.amount|amount}} L
                             </div>
 
