@@ -12,10 +12,10 @@ lastsUntil: 1386305147644
 size: 50
 startDate: 1386087479000-->
     <ul>
-        <li ng-repeat="keg in kegs" class="zm-draftkit zm-backgrnd">
+        <li ng-repeat="keg in kegs" class="zm-draftkit">
             <div class="flip-container">
                 <div class="flipper">
-                    <div class="front">
+                    <div class="front  zm-backgrnd">
                         <img src="{{keg.image || 'css/images/defaultKeg.jpg'}}" class="img-rounded"/>
 
                         <div class="brand">{{keg.brand}}</div>
@@ -30,7 +30,7 @@ startDate: 1386087479000-->
                         <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
                     </div>
-                    <div class="back">
+                    <div class="back zm-backgrnd">
 
                     </div>
 

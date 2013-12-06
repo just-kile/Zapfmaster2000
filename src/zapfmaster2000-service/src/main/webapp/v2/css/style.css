@@ -198,7 +198,7 @@ header > nav > ul > li::before {
 /* ----------------------
         Challenges
 ------------------------- */
-.zmo-challenges {
+.zmo-challenges,.zm-draftkits,.zm-newsstack {
     padding-right: 15px;
     padding-left: 15px;
 }
@@ -541,10 +541,11 @@ li.bestlist-item.ng-leave-active {
   list-style: none;
 }
 .arrow{
-    left: -60px;
+   /* left: -60px;*/
     padding-top: 24px;
     top: 0;
-    padding-right: 18px;
+    padding-right: 38px;
+    width: 100%;
 
 }
 .arrow img{
@@ -628,14 +629,15 @@ li.bestlist-item.ng-leave-active {
 
 .zm-backgrnd{
     background: rgba(0,0,0,0.5);
-    padding:7px;
+    margin:7px;
+    padding:7px 0px 7px 7px;
     box-sizing: content-box;
+    border-radius: 10px;
+
 }
 /** Drafkit**/
 .zm-draftkits{
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 50px;
+    padding-top: 35px;
 }
 li.zm-draftkit{
     font-family: RalewayLight;
@@ -643,7 +645,7 @@ li.zm-draftkit{
     float:right;
     height: 50px;
     display: inline;
-    border-radius: 10px;
+
     min-width: 250px;
     margin-left: 10px;
 }
@@ -665,9 +667,9 @@ li.zm-draftkit{
 .zm-draftkit .amount,.zm-draftkit .amountNumbers{
     height: 15px;
     position: absolute;
-    width: 195px;
-    right:0;
-    bottom: 0;
+    width: 71%;
+    right:7px;
+    bottom: 7px;
 
 }
 .zm-draftkit .amount{
