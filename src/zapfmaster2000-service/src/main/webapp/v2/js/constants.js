@@ -11,6 +11,8 @@ define([
       bestlistUrl:"rest/statistics/rankings/bestUserList",
       frontPageUserStatsUrl:"rest/statistics/frontpageUserStats",
       kegStatsUrl:"rest/statistics/keg",
+      newsPushUrl:"rest/push/news",
+      updateAmountPushUrl:"rest/push/draftkit/{0}",
       boxesUrl:"rest/draftkit",
       challengeMaxDuels:5,
       bestlistMax:5,
@@ -18,6 +20,9 @@ define([
       CHALLENGE_DONE:"CHALLENGE_DONE",
       DRAWING:"DRAWING",
         NEWKEG:"NEW_KEG",
+        LOGIN:"LOGIN",
+        LOGOUT:"LOGOUT",
+        DRAW:"DRAW",
       SERVER_TIME_FORMAT:"YYYYMMDD-HHmmss",
       COUNTDOWN_TIME_FORMAT:"mm:ss"
     }

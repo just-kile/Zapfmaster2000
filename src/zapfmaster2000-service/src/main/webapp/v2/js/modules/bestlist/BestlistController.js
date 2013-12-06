@@ -113,6 +113,8 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
 
             });
+
+
             initScope();
             var counter = 0, changeInterval;
 
