@@ -108,8 +108,9 @@ define(['Console', 'Underscore'], function (Console, _) {
                 });
             }
             CometService.addPushListener(function (data) {
-                if (c.DRAWING == data.type)
+                if (c.DRAWING == data.type){
                     updateScope();
+                }
 
             });
             initScope();
