@@ -82,7 +82,10 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		assertEquals(3, achievementUserListResponses.length);
 
 		assertConforms(user3, achievementUserListResponses[0]);
+		
+		// user 1 and 2 both have one achievement: Expect order by name!
 		assertConforms(user1, achievementUserListResponses[1]);
+		assertConforms(user2, achievementUserListResponses[2]);
 	}
 
 	@Test

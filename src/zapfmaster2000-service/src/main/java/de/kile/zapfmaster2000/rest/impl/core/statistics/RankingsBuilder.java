@@ -135,7 +135,7 @@ public class RankingsBuilder {
 									+ " FROM User u, Drawing d "
 									+ " WHERE d.user = u AND u.account = :account "
 									+ " AND u.type != :guest"
-									+ " GROUP BY u.id ORDER BY cnt DESC")
+									+ " GROUP BY u.id ORDER BY cnt DESC, u.name")
 					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setMaxResults(maxResults)
 					.list();
@@ -216,7 +216,7 @@ public class RankingsBuilder {
 									+ " FROM User u, GainedAchievement g "
 									+ " WHERE g.user = u AND u.account = :account "
 									+ " AND u.type != :guest"
-									+ " GROUP BY u.id ORDER BY cnt DESC")
+									+ " GROUP BY u.id ORDER BY cnt DESC, u.name")
 					.setParameter("guest", UserType.GUEST)
 					.setEntity("account", account).setMaxResults(maxResults)
 					.list();
