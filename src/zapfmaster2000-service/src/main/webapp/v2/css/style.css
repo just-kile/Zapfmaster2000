@@ -585,8 +585,9 @@ li.bestlist-item.ng-leave-active {
 
 }
 .flip-container, .front, .back {
-    width: 320px;
+    /*width: 320px;*/
     /*height: 480px;*/
+    width:100%;
 }
 
 /* flip speed goes here */
@@ -623,4 +624,20 @@ li.bestlist-item.ng-leave-active {
     -moz-transform: rotateY(180deg);
     transform: rotateY(180deg);
 
+}
+
+
+/** Drafkit**/
+.zm-draftkits{
+    padding-left: 15px;
+}
+.zm-draftkit{
+    list-style: none;
+    float:right;
+    height: 50px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px
+}
+.zm-draftkit > img{
+    float:left;
 }

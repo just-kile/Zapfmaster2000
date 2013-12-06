@@ -5,7 +5,7 @@ define(['Console'], function (Console) {
     var controller = ['$scope',"CometService","DataService","ZMConstants",
         function ($scope,CometService,ajax,c) {
         Console.group("Draftkit controller entered.");
-
+            $scope.baseUrl = c.baseUrl;
         ajax.getDatas(c.kegStatsUrl,function(kegs){
             $scope.kegs =  kegs;
         });
