@@ -6,8 +6,9 @@ define([
   // Custom Services
   , 'services/DataService',
     'services/CometService',
-    'services/DateService'
-], function(Console, _, ds,cs,dateS) {
+    'services/DateService',
+    'services/SplashScreenService'
+], function(Console, _, ds,cs,dateS,splash) {
   "use strict";
   Console.group("Entering Service module.");
   Console.info("DataService", ds);
@@ -16,7 +17,8 @@ define([
   var services = {
     DataService: ds,
     CometService:cs,
-    DateService:dateS
+    DateService:dateS,
+    SplashScreenService:splash
   };
   Console.info("Registered services: ", services);
 

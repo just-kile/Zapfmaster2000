@@ -20,9 +20,9 @@ define([
   var initialize = function (angModule) {
     _.each(filters,function(filter,name){
       angModule.filter(name,filter);
-    })
+    });
     Console.debug("Custom filters initialized.");
-  }
+  };
 
   Console.groupEnd();
   return {

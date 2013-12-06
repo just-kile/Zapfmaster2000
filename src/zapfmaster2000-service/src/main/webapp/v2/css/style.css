@@ -692,3 +692,26 @@ li.zm-draftkit{
 .zm-draftkit .amountNumbers{
     font-size: 1em;
 }
+
+
+
+/**
+* SplashScreen
+*/
+.zm-splash{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+.zm-splash .team1{
+   position: absolute;
+}
+.zm-splash .vs{
+    position: absolute;
+}
+zm-splash .team2{
+    position: absolute;
+}
