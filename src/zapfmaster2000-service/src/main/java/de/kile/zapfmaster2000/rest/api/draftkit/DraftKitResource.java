@@ -43,6 +43,12 @@ public class DraftKitResource {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(pToken);
+		if (isAccountAdmin(admin)) {
+			account = admin.getAccount();
+		}
+
 		if (account != null) {
 			List<DraftKitResponse> kits = retrieveDraftKits(account.getId());
 			return Response.ok(kits).build();
@@ -178,7 +184,8 @@ public class DraftKitResource {
 	@GET
 	@Path("/account/{accountId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response retrieveAccountBoxes(@PathParam("accountId") long accountId,
+	public Response retrieveAccountBoxes(
+			@PathParam("accountId") long accountId,
 			@QueryParam("token") String pToken) {
 
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
@@ -191,6 +198,10 @@ public class DraftKitResource {
 			return Response.status(Status.FORBIDDEN).build();
 		}
 
+	}
+
+	private boolean isAccountAdmin(Admin admin) {
+		return admin != null && admin.getAccount() != null;
 	}
 
 	private List<DraftKitResponse> retrieveDraftKits(long accountId) {
