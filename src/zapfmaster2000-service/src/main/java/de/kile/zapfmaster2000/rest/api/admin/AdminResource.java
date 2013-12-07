@@ -1,5 +1,8 @@
 package de.kile.zapfmaster2000.rest.api.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -11,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import de.kile.zapfmaster2000.rest.api.admin.AdminResponse.Type;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
@@ -44,7 +48,7 @@ public class AdminResource {
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAdmin(token);
 		if (admin != null
-				&& (admin.getAccount() == null || admin.getAccount().getId() == accountId)) {
+				&& (isGlobalAdmin(admin) || admin.getAccount().getId() == accountId)) {
 
 			Account account = retiveAccount(accountId);
 
@@ -66,12 +70,60 @@ public class AdminResource {
 	public Response checkLoginStatus(@QueryParam("token") String token) {
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAdmin(token);
-		
+
 		if (admin != null) {
 			return Response.ok().build();
 		} else {
 			return Response.status(Status.FORBIDDEN).build();
 		}
+	}
+
+	@GET
+	@Path("/account")
+	public Response retrieveAccountAdmins(@QueryParam("token") String token) {
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
+
+		if (isGlobalAdmin(admin)) {
+
+			Session session = Zapfmaster2000Core.INSTANCE
+					.getTransactionService().getSessionFactory()
+					.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+
+			@SuppressWarnings("unchecked")
+			List<Admin> result = session.createQuery("FROM Admin").list();
+			List<AdminResponse> responseList = new ArrayList<>();
+
+			for (Admin retrievedAdmin : result) {
+
+				AdminResponse response = new AdminResponse();
+				response.setAdminId(retrievedAdmin.getId());
+				response.setAdminName(retrievedAdmin.getName());
+
+				Account account = retrievedAdmin.getAccount();
+				if (account != null) {
+					response.setAccountName(account.getName());
+					response.setAccountId(account.getId());
+					response.setType(Type.account);
+				} else {
+					response.setType(Type.global);
+				}
+
+				responseList.add(response);
+
+			}
+
+			tx.commit();
+
+			return Response.ok(responseList).build();
+		} else {
+			return Response.status(Status.FORBIDDEN).build();
+		}
+	}
+
+	private boolean isGlobalAdmin(Admin admin) {
+		return admin != null && admin.getAccount() == null;
 	}
 
 	private Account retiveAccount(long accountId) {
