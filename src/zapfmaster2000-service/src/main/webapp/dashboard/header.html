@@ -14,6 +14,7 @@
 
                     <li class="users"><a href="users.html">Users</a></li>
                     <li class="accounts"><a href="accounts.html">Accounts</a></li>
+                    <li class="admins"><a href="adminaccounts.html">Admin Accounts</a></li>
                     <li class="kegchange"><a href="index.html">Fass Wechsel</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle kegchange calibration mock" data-toggle="dropdown">
@@ -34,7 +35,7 @@
 
             </div>
             <!--/.nav-collapse -->
-
+            <button id="header-logout" class="btn btn-danger">Logout</button>
           <!--  <form class="navbar-form pull-right" id="loginForm">
 
                 <i id="iconOk" class="icon-ok icon-white" style="display:none"></i>
@@ -179,5 +180,10 @@
     $("#login-cancel").on("click",function(){
        window.location.href="../"
     });
+    $("#header-logout").on("click",function(){
+        localStorage.setItem("token",null);
+        var modal = $("#loginBoxModal");
+        modal.modal();
+    })
 
 </script>

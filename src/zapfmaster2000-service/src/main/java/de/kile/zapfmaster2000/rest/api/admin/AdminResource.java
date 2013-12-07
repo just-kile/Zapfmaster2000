@@ -3,11 +3,7 @@ package de.kile.zapfmaster2000.rest.api.admin;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -44,8 +40,8 @@ public class AdminResource {
 
 	@POST
 	@Path("/account/{accountId}/create")
-	public Response createAccountAdmin(@QueryParam("accountId") long accountId,
-			String adminName, String password, String token) {
+	public Response createAccountAdmin(@PathParam("accountId") long accountId,
+			@FormParam("adminName") String adminName, @FormParam("password") String password, @FormParam("token") String token) {
 
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAdmin(token);
