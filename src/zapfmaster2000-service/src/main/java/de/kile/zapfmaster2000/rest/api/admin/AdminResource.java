@@ -1,5 +1,6 @@
 package de.kile.zapfmaster2000.rest.api.admin;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -58,6 +59,19 @@ public class AdminResource {
 			return Response.status(Status.FORBIDDEN).build();
 		}
 
+	}
+
+	@GET
+	@Path("/loginstatus")
+	public Response checkLoginStatus(@QueryParam("token") String token) {
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
+		
+		if (admin != null) {
+			return Response.ok().build();
+		} else {
+			return Response.status(Status.FORBIDDEN).build();
+		}
 	}
 
 	private Account retiveAccount(long accountId) {

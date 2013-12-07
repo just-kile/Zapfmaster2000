@@ -150,6 +150,30 @@ public class TestAdminResource extends AbstractMockingTest {
 		assertFalse(exists);
 	}
 
+	@Test
+	public void testCheckLoginStatusSuccessful() {
+		Admin admin = createAdmin("admin", "password", null);
+
+		AuthService authService = mock(AuthService.class);
+		when(authService.retrieveAdmin("tokenAdmin1")).thenReturn(admin);
+		mockAuthService(authService);
+
+		Response response = new AdminResource().checkLoginStatus("tokenAdmin1");
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+	}
+
+	@Test
+	public void testCheckLoginStatusFailed() {
+		Admin admin = createAdmin("admin", "password", null);
+
+		AuthService authService = mock(AuthService.class);
+		when(authService.retrieveAdmin("tokenAdmin1")).thenReturn(admin);
+		mockAuthService(authService);
+
+		Response response = new AdminResource().checkLoginStatus("tokenAdmin2");
+		assertEquals(Status.FORBIDDEN.getStatusCode(), response.getStatus());
+	}
+
 	private boolean checkAdminExists(String name, String password) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
