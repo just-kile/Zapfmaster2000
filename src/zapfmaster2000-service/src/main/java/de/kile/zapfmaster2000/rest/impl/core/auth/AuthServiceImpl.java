@@ -99,7 +99,7 @@ public class AuthServiceImpl implements AuthService {
 			Transaction tx = session.beginTransaction();
 
 			@SuppressWarnings("unchecked")
-			List<User> results = session
+			List<Admin> results = session
 					.createQuery(
 							"SELECT a FROM Admin a "
 									+ "WHERE a.name = :name AND a.password = :password")
@@ -184,7 +184,6 @@ public class AuthServiceImpl implements AuthService {
 		List<Token> result = session
 				.createQuery(
 						"SELECT t FROM Token t JOIN FETCH t.admin AS a "
-								+ "JOIN FETCH a.account "
 								+ "WHERE t.token = :token")
 				.setString("token", token).list();
 

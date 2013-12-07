@@ -28,21 +28,25 @@ import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.PolynomialRegression;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 @Path("/drawings")
 public class DrawingResource {
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveDrawings(@QueryParam("token") String pToken,
 			@DefaultValue("0") @QueryParam("start") int start,
 			@DefaultValue("50") @QueryParam("length") int length) {
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pToken);
-		if (account != null) {
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(pToken);
+		if (isAccountAdmin(admin)) {
+			Account account = admin.getAccount();
+
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
@@ -52,8 +56,6 @@ public class DrawingResource {
 			List<Drawing> result = session
 					.createQuery(
 							"FROM Drawing d"
-									// + " JOIN FETCH d.user JOIN FETCH d.keg "
-									// + " JOIN FETCH d.keg.box"
 									+ " WHERE d.user.account.id = :accountId"
 									+ " ORDER BY d.date DESC")
 					.setLong("accountId", account.getId())
@@ -93,10 +95,10 @@ public class DrawingResource {
 			@FormParam("amount") double amount,
 			@FormParam("token") String pToken) {
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pToken);
-
-		if (account != null) {
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(pToken);
+		if (isAccountAdmin(admin)) {
+			Account account = admin.getAccount();
 
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
@@ -131,10 +133,10 @@ public class DrawingResource {
 	public Response changeDrawAmount(@PathParam("drawId") long drawId,
 			@QueryParam("token") String pToken) {
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pToken);
-
-		if (account != null) {
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(pToken);
+		if (isAccountAdmin(admin)) {
+			Account account = admin.getAccount();
 
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
@@ -173,16 +175,16 @@ public class DrawingResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response calibrate(CalibrationRequest calibrationRequest) {
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(calibrationRequest.getToken());
-		
-		if (account != null) {
-			
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(calibrationRequest.getToken());
+		if (isAccountAdmin(admin)) {
+			Account account = admin.getAccount();
+
 			List<Double> xValues = new ArrayList<>();
 			List<Double> yValues = new ArrayList<>();
 
 			CalibrationResponse calibrationResponse = new CalibrationResponse();
-			
+
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
@@ -208,7 +210,8 @@ public class DrawingResource {
 				}
 				double avg = sum / allTicks.size();
 
-				double amountPerInterval = value.getMeasuredAmount() / allTicks.size();
+				double amountPerInterval = value.getMeasuredAmount()
+						/ allTicks.size();
 				xValues.add(avg);
 				yValues.add(amountPerInterval);
 
@@ -216,23 +219,22 @@ public class DrawingResource {
 				data.setTicks(avg);
 				data.setAmount(amountPerInterval);
 				calibrationResponse.getData().add(data);
-				
+
 			}
 
 			tx.commit();
-			
+
 			// add 0,0 as data as well
 			CalibratedData values0 = new CalibratedData();
 			values0.setAmount(0);
 			values0.setTicks(0);
 			calibrationResponse.getData().add(values0);
-			
+
 			xValues.add(0.0);
 			yValues.add(0.0);
 
 			PolynomialRegression polynomialRegression = new PolynomialRegression(
 					unbox(xValues), unbox(yValues), 2);
-			
 
 			calibrationResponse.setA0(polynomialRegression.beta(0));
 			calibrationResponse.setA1(polynomialRegression.beta(1));
@@ -242,6 +244,10 @@ public class DrawingResource {
 		}
 
 		return Response.status(Status.FORBIDDEN).build();
+	}
+
+	private boolean isAccountAdmin(Admin admin) {
+		return admin != null && admin.getAccount() != null;
 	}
 
 	private double[] unbox(List<Double> list) {

@@ -16,26 +16,26 @@ import org.junit.Test;
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
 public class TestCalibrationResource extends AbstractMockingTest {
 
-	
 	private Box box1;
 	private Box box2;
 	private Box box3;
-	
+
 	@Before
 	public void setup() {
 		Account account = createAccount("acc");
+		Admin admin = createAdmin("name", "password", account);
 		box1 = createBox("b1", "l1", "v1", 1, 2, 3, account);
 		box2 = createBox("b2", "l2", "v2", -1, -2, -3, account);
 		box3 = createBox("b3", "l3", "v3", 11.1, -22.2, 33, account);
 
 		AuthService authService = mock(AuthService.class);
-		when(authService.retrieveAccount(any(String.class)))
-				.thenReturn(account);
+		when(authService.retrieveAdmin(any(String.class))).thenReturn(admin);
 		mockAuthService(authService);
 	}
 
@@ -81,20 +81,20 @@ public class TestCalibrationResource extends AbstractMockingTest {
 	@Test
 	public void testUpdate() {
 		CalibrationResource res = new CalibrationResource();
-		Response response = res
-				.updateCalibrationParameters(30, 40, 50, null, box2.getId());
+		Response response = res.updateCalibrationParameters(30, 40, 50, null,
+				box2.getId());
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 
 		List<CalibrationResponse> entity = (List<CalibrationResponse>) response
 				.getEntity();
 		assertEquals(1, entity.size());
-		
+
 		Box updatedBox = Zapfmaster2000Factory.eINSTANCE.createBox();
 		updatedBox.setA2(50);
 		updatedBox.setA1(40);
 		updatedBox.setA0(30);
 		updatedBox.setId(box2.getId());
-		
+
 		assertCalibrationReponse(updatedBox, entity.get(0));
 
 		// check that only box 2 changed
