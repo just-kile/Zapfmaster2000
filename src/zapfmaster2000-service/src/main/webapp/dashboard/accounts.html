@@ -93,7 +93,7 @@
                 $.each(accounts, function (ind, account) {
 
                     var $template = $(ich["dashboard-account-row"](account));
-                    ajax.getDatas("rest/draftkit",function(boxes){
+                    ajax.getDatas("rest/draftkit/account/{0}".replace("{0}",account.accountId),function(boxes){
                         var boxRow =  $($template.find(".boxes-row"));
                         var boxArr = [];
                         $.each(boxes,function(ind,item){
@@ -101,7 +101,7 @@
                         });
                         boxRow.text(boxArr.join(" | "));
 
-                    },{accountId:account.accountId});
+                    });
                     $("#usersTable").append($template);
                 })
             });
