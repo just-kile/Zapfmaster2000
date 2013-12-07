@@ -69,6 +69,7 @@ public class AdminResource {
 
 	@GET
 	@Path("/loginstatus")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response checkLoginStatus(@QueryParam("token") String token) {
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAdmin(token);
