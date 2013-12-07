@@ -153,7 +153,7 @@ public class TestAdminResource extends AbstractMockingTest {
 	}
 
 	@Test
-	public void testCheckLoginStatusSuccessful() {
+	public void testCheckLoginStatusSuccessfulGlobalAdmin() {
 		Admin admin = createAdmin("admin", "password", null);
 
 		AuthService authService = mock(AuthService.class);
@@ -162,6 +162,27 @@ public class TestAdminResource extends AbstractMockingTest {
 
 		Response response = new AdminResource().checkLoginStatus("tokenAdmin1");
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		AdminInfo entity = (AdminInfo) response.getEntity();
+		assertEquals(admin.getName(), entity.getAdminName());
+		assertEquals(Type.global, entity.getType());
+	}
+
+	@Test
+	public void testCheckLoginStatusSuccessfulAccountAdmin() {
+		Account account = createAccount("acc");
+		Admin admin = createAdmin("admin", "password", account);
+
+		AuthService authService = mock(AuthService.class);
+		when(authService.retrieveAdmin("tokenAdmin1")).thenReturn(admin);
+		mockAuthService(authService);
+
+		Response response = new AdminResource().checkLoginStatus("tokenAdmin1");
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		AdminInfo entity = (AdminInfo) response.getEntity();
+		assertEquals(admin.getName(), entity.getAdminName());
+		assertEquals(Type.account, entity.getType());
 	}
 
 	@Test

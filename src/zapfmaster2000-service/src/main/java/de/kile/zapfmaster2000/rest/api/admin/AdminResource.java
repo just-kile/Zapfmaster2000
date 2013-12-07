@@ -72,7 +72,15 @@ public class AdminResource {
 				.retrieveAdmin(token);
 
 		if (admin != null) {
-			return Response.ok().build();
+			AdminInfo status = new AdminInfo();
+			status.setAdminName(admin.getName());
+			if (isGlobalAdmin(admin)) {
+				status.setType(Type.global);
+			} else {
+				status.setType(Type.account);
+			}
+
+			return Response.ok(status).build();
 		} else {
 			return Response.status(Status.FORBIDDEN).build();
 		}
@@ -101,13 +109,13 @@ public class AdminResource {
 				response.setAdminId(retrievedAdmin.getId());
 				response.setAdminName(retrievedAdmin.getName());
 
-				Account account = retrievedAdmin.getAccount();
-				if (account != null) {
+				if (isGlobalAdmin(retrievedAdmin)) {
+					response.setType(Type.global);
+				} else {
+					Account account = retrievedAdmin.getAccount();
 					response.setAccountName(account.getName());
 					response.setAccountId(account.getId());
 					response.setType(Type.account);
-				} else {
-					response.setType(Type.global);
 				}
 
 				responseList.add(response);
