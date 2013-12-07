@@ -177,6 +177,7 @@ public class DraftKitResource {
 
 	@GET
 	@Path("/account/{accountId}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveAccountBoxes(@PathParam("accountId") long accountId,
 			@QueryParam("token") String pToken) {
 
