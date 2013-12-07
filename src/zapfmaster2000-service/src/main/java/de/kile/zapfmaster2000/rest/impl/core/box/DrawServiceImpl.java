@@ -127,8 +127,6 @@ public class DrawServiceImpl implements DrawService {
 			return calcRealAmount(totalTicks);
 		}
 
-		pRawAmount -= box.getTickReduction();
-
 		Ticks ticks = Zapfmaster2000Factory.eINSTANCE.createTicks();
 		ticks.setTicks(pRawAmount);
 		ticks.setDate(new SimpleDateFormat(
@@ -302,19 +300,6 @@ public class DrawServiceImpl implements DrawService {
 	}
 
 	private double calcRealAmount(int pRawTicks) {
-		if (box.isNewCalc()){
-			return calcRealAmountNew();
-		} else {
-			return calcRealAmountOld(pRawTicks);
-		}
-	}
-	
-	private double calcRealAmountOld(int pRawTicks) {
-		return pRawTicks * box.getTickRegressor()
-				+ box.getTickDisturbanceTerm();
-	}
-
-	private double calcRealAmountNew() {
 		double realAmount = 0;
 		for (Ticks ticks : currentDrawingTicks) {
 			int rawTicks = ticks.getTicks();

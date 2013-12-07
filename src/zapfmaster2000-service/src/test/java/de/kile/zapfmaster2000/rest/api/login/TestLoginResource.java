@@ -1,75 +1,42 @@
 package de.kile.zapfmaster2000.rest.api.login;
 
+import static org.junit.Assert.*;
+
+import javax.ws.rs.core.Response;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import de.kile.zapfmaster2000.rest.AbstractDatabaseTest;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 
 public class TestLoginResource extends AbstractDatabaseTest {
 
-	// TODO: fix
-//	@Test
-//	public void correctCredentials() {
-//		createAccountAndBox("my-box", "my-secret-passphrase");
-//
-//		Credentials credentials = new Credentials();
-//		credentials.setName("my-box");
-//		credentials.setPassphrase("my-secret-passphrase");
-//
-//		LoginResource login = new LoginResource();
-//		HttpServletRequest request = createRequestMock();
-//		Response response = login.userLogin(credentials, request);
-//		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-//
-//		verify(request).getSession();
-//	}
+	@Before
+	public void createEntities() {
+		Account account = createAccount("account1");
+		createBox("pw", "loc", "1", account);
+		createUser("Uschi", "Me.jpg", "Ralf", 123, Sex.FEMALE, 0,
+				UserType.USER, account);
+	}
 
-//	@Test
-//	public void checkInvalidCredentials() {
-//		createAccountAndBox("my-other-box", "my-other-secret-passphrase");
-//
-//		Credentials credentials = new Credentials();
-//		credentials.setName("my-other-box");
-//		credentials.setPassphrase("wrong-passphrase");
-//
-//		LoginResource login = new LoginResource();
-//		HttpServletRequest request = createRequestMock();
-//		Response response = login.userLogin(credentials, request);
-//		assertEquals(Response.Status.FORBIDDEN.getStatusCode(),
-//				response.getStatus());
-//
-//		credentials.setName("foo");
-//		response = login.userLogin(credentials, request);
-//		assertEquals(Response.Status.FORBIDDEN.getStatusCode(),
-//				response.getStatus());
-//
-//		credentials.setPassphrase("my-other-secret-passphrase");
-//		response = login.userLogin(credentials, request);
-//		assertEquals(Response.Status.FORBIDDEN.getStatusCode(),
-//				response.getStatus());
-//
-//		verify(request, never()).getSession();
-//	}
-//
-//	private void createAccountAndBox(String pId, String pPassphrase) {
-//		Session session = Zapfmaster2000Core.INSTANCE.getTransactionManager()
-//				.getSessionFactory().openSession();
-//		session.beginTransaction();
-//
-//		Account account = Zapfmaster2000Factory.eINSTANCE.createAccount();
-//		Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
-//		box.setId(pId);
-//		box.setPassphrase(pPassphrase);
-//		account.getBoxes().add(box);
-//
-//		session.save(account);
-//		session.save(box);
-//		session.getTransaction().commit();
-//		session.close();
-//	}
+	@Test
+	public void userCorrectCredentials() {
+		LoginResource login = new LoginResource();
 
-//	private HttpServletRequest createRequestMock() {
-//		HttpSession session = mock(HttpSession.class);
-//		HttpServletRequest request = mock(HttpServletRequest.class);
-//		when(request.getSession()).thenReturn(session);
-//		return request;
-//	}
+		Response response = login.loginUser("Uschi", "Ralf");
+		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+	}
+
+	@Test
+	public void userInvalidCredentials() {
+		LoginResource login = new LoginResource();
+
+		Response response = login.loginUser("Uschi", "Dieter");
+		assertEquals(Response.Status.FORBIDDEN.getStatusCode(),
+				response.getStatus());
+	}
 
 }

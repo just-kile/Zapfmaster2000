@@ -20,13 +20,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getPassphrase <em>Passphrase</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getKegs <em>Kegs</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getLocation <em>Location</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickRegressor <em>Tick Regressor</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction <em>Tick Reduction</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA0 <em>A0</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA1 <em>A1</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA2 <em>A2</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#isNewCalc <em>New Calc</em>}</li>
  * </ul>
  * </p>
  *
@@ -186,84 +182,6 @@ public interface Box extends EObject {
 	void setLocation(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Tick Disturbance Term</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tick Disturbance Term</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tick Disturbance Term</em>' attribute.
-	 * @see #setTickDisturbanceTerm(double)
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_TickDisturbanceTerm()
-	 * @model
-	 * @generated
-	 */
-	double getTickDisturbanceTerm();
-
-	/**
-	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tick Disturbance Term</em>' attribute.
-	 * @see #getTickDisturbanceTerm()
-	 * @generated
-	 */
-	void setTickDisturbanceTerm(double value);
-
-	/**
-	 * Returns the value of the '<em><b>Tick Regressor</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tick Regressor</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tick Regressor</em>' attribute.
-	 * @see #setTickRegressor(double)
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_TickRegressor()
-	 * @model
-	 * @generated
-	 */
-	double getTickRegressor();
-
-	/**
-	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickRegressor <em>Tick Regressor</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tick Regressor</em>' attribute.
-	 * @see #getTickRegressor()
-	 * @generated
-	 */
-	void setTickRegressor(double value);
-
-	/**
-	 * Returns the value of the '<em><b>Tick Reduction</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tick Reduction</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tick Reduction</em>' attribute.
-	 * @see #setTickReduction(int)
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_TickReduction()
-	 * @model
-	 * @generated
-	 */
-	int getTickReduction();
-
-	/**
-	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction <em>Tick Reduction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tick Reduction</em>' attribute.
-	 * @see #getTickReduction()
-	 * @generated
-	 */
-	void setTickReduction(int value);
-
-	/**
 	 * Returns the value of the '<em><b>A0</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -340,31 +258,5 @@ public interface Box extends EObject {
 	 * @generated
 	 */
 	void setA2(double value);
-
-	/**
-	 * Returns the value of the '<em><b>New Calc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>New Calc</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>New Calc</em>' attribute.
-	 * @see #setNewCalc(boolean)
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getBox_NewCalc()
-	 * @model
-	 * @generated
-	 */
-	boolean isNewCalc();
-
-	/**
-	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#isNewCalc <em>New Calc</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>New Calc</em>' attribute.
-	 * @see #isNewCalc()
-	 * @generated
-	 */
-	void setNewCalc(boolean value);
 
 } // Box

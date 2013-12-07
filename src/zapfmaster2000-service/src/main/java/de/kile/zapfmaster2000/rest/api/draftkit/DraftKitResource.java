@@ -146,58 +146,50 @@ public class DraftKitResource {
 		return Response.status(Status.FORBIDDEN).build();
 
 	}
-    @PUT
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response createBox(@FormParam("accountId") long pAccountId,
-                              @FormParam("version") @DefaultValue("1.0") String pVersion,
-                              @FormParam("passphrase") String pPassphrase,
-                              @FormParam("location") String pLocation,
-                              @FormParam("tickReduction") @DefaultValue("0") int pTickReduction,
-                              @FormParam("tickRegressor") @DefaultValue("4.2307") double pTickRegressor,
-                              @FormParam("tickDisturbanceTerm") @DefaultValue("0") double pTickDisturbanceTerm,
-                              @FormParam("a0") @DefaultValue("0.00006186472614225462") double pA0,
-                              @FormParam("a1") @DefaultValue("0.0000825562566780224") double pA1,
-                              @FormParam("a2") @DefaultValue("-1.675383403699784e-8") double pA2,
-                              @FormParam("newcalc") @DefaultValue("true") Boolean pNewCalc) {
-        LOG.info("Create box for account" + pAccountId + " with Passphrase" + pPassphrase
-                +",location: "+pLocation+", tickReduction: "+pTickReduction+", tickRegressor: "+pTickRegressor+
-                "tickDisturbanceTerm: "+pTickDisturbanceTerm+" a0,a1,a2:"+pA0+","+pA1+","+pA2+"; NewCalc:"+pNewCalc);
 
-        // check that the chosen box exists for given account
-        Session session = Zapfmaster2000Core.INSTANCE
-                .getTransactionService().getSessionFactory()
-                .getCurrentSession();
-        Transaction tx = session.beginTransaction();
+	@PUT
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response createBox(
+			@FormParam("accountId") long pAccountId,
+			@FormParam("version") @DefaultValue("1.0") String pVersion,
+			@FormParam("passphrase") String pPassphrase,
+			@FormParam("location") String pLocation,
+			@FormParam("a0") @DefaultValue("0.00006186472614225462") double pA0,
+			@FormParam("a1") @DefaultValue("0.0000825562566780224") double pA1,
+			@FormParam("a2") @DefaultValue("-1.675383403699784e-8") double pA2) {
+		LOG.info("Create box for account" + pAccountId + " with Passphrase"
+				+ pPassphrase + ",location: " + pLocation + " a0,a1,a2:" + pA0
+				+ "," + pA1 + "," + pA2);
 
-        Account account =(Account) session
-                .createQuery("From Account a WHERE a.id = :accountId")
-                .setLong("accountId", pAccountId).uniqueResult();
+		// check that the chosen box exists for given account
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
 
+		Account account = (Account) session
+				.createQuery("From Account a WHERE a.id = :accountId")
+				.setLong("accountId", pAccountId).uniqueResult();
 
+		if (account != null && pPassphrase != null && !pPassphrase.equals("")
+				&& pLocation != null && !pLocation.equals("")) {
+			Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
+			box.setVersion(pVersion);
+			box.setPassphrase(pPassphrase);
+			box.setAccount(account);
 
+			box.setLocation(pLocation);
+			box.setA0(pA0);
+			box.setA1(pA1);
+			box.setA2(pA2);
 
-        if(account!=null &&pPassphrase!=null && !pPassphrase.equals("") && pLocation!=null && !pLocation.equals("")){
-            Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
-            box.setVersion(pVersion);
-            box.setPassphrase(pPassphrase);
-            box.setAccount(account);
+			session.save(box);
+			tx.commit();
+			return Response.ok().build();
 
-            box.setLocation(pLocation);
-            box.setTickReduction(pTickReduction);
-            box.setTickRegressor(pTickRegressor);
-            box.setTickDisturbanceTerm(pTickDisturbanceTerm);
-            box.setA0(pA0);
-            box.setA1(pA1);
-            box.setA2(pA2);
-            box.setNewCalc(pNewCalc);
+		} else {
+			tx.commit();
+			return Response.status(Status.BAD_REQUEST).build();
+		}
 
-            session.save(box);
-            session.getTransaction().commit();
-            return Response.ok().build();
-
-        }else{
-            return Response.status(Status.BAD_REQUEST).build();
-        }
-
-    }
+	}
 }

@@ -2,6 +2,7 @@ package de.kile.zapfmaster2000.rest.api.installation;
 
 import java.util.List;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -38,7 +39,9 @@ public class InstallationResource {
 	@POST
 	@Path("/firstadmin")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createFirstAdmin(String adminName, String password) {
+	public Response createFirstAdmin(@FormParam("adminName") String adminName,
+			@FormParam("password") String password) {
+		
 		if (checkIsNewInstallation()) {
 			createAdmin(adminName, password);
 

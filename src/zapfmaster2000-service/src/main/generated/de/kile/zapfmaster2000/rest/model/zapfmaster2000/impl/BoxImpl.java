@@ -37,13 +37,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getPassphrase <em>Passphrase</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getKegs <em>Kegs</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getLocation <em>Location</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getTickRegressor <em>Tick Regressor</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getTickReduction <em>Tick Reduction</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getA0 <em>A0</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getA1 <em>A1</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#getA2 <em>A2</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.BoxImpl#isNewCalc <em>New Calc</em>}</li>
  * </ul>
  * </p>
  *
@@ -141,66 +137,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 	protected String location = LOCATION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getTickDisturbanceTerm() <em>Tick Disturbance Term</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTickDisturbanceTerm()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final double TICK_DISTURBANCE_TERM_EDEFAULT = 0.0;
-
-	/**
-	 * The cached value of the '{@link #getTickDisturbanceTerm() <em>Tick Disturbance Term</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTickDisturbanceTerm()
-	 * @generated
-	 * @ordered
-	 */
-	protected double tickDisturbanceTerm = TICK_DISTURBANCE_TERM_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTickRegressor() <em>Tick Regressor</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTickRegressor()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final double TICK_REGRESSOR_EDEFAULT = 0.0;
-
-	/**
-	 * The cached value of the '{@link #getTickRegressor() <em>Tick Regressor</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTickRegressor()
-	 * @generated
-	 * @ordered
-	 */
-	protected double tickRegressor = TICK_REGRESSOR_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTickReduction() <em>Tick Reduction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTickReduction()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int TICK_REDUCTION_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getTickReduction() <em>Tick Reduction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTickReduction()
-	 * @generated
-	 * @ordered
-	 */
-	protected int tickReduction = TICK_REDUCTION_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getA0() <em>A0</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -259,26 +195,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @ordered
 	 */
 	protected double a2 = A2_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isNewCalc() <em>New Calc</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNewCalc()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean NEW_CALC_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isNewCalc() <em>New Calc</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNewCalc()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean newCalc = NEW_CALC_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -441,69 +357,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getTickDisturbanceTerm() {
-		return tickDisturbanceTerm;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTickDisturbanceTerm(double newTickDisturbanceTerm) {
-		double oldTickDisturbanceTerm = tickDisturbanceTerm;
-		tickDisturbanceTerm = newTickDisturbanceTerm;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM, oldTickDisturbanceTerm, tickDisturbanceTerm));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public double getTickRegressor() {
-		return tickRegressor;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTickRegressor(double newTickRegressor) {
-		double oldTickRegressor = tickRegressor;
-		tickRegressor = newTickRegressor;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__TICK_REGRESSOR, oldTickRegressor, tickRegressor));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int getTickReduction() {
-		return tickReduction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTickReduction(int newTickReduction) {
-		int oldTickReduction = tickReduction;
-		tickReduction = newTickReduction;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__TICK_REDUCTION, oldTickReduction, tickReduction));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public double getA0() {
 		return a0;
 	}
@@ -560,27 +413,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 		a2 = newA2;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__A2, oldA2, a2));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isNewCalc() {
-		return newCalc;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNewCalc(boolean newNewCalc) {
-		boolean oldNewCalc = newCalc;
-		newCalc = newNewCalc;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.BOX__NEW_CALC, oldNewCalc, newCalc));
 	}
 
 	/**
@@ -652,20 +484,12 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return getKegs();
 			case Zapfmaster2000Package.BOX__LOCATION:
 				return getLocation();
-			case Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM:
-				return getTickDisturbanceTerm();
-			case Zapfmaster2000Package.BOX__TICK_REGRESSOR:
-				return getTickRegressor();
-			case Zapfmaster2000Package.BOX__TICK_REDUCTION:
-				return getTickReduction();
 			case Zapfmaster2000Package.BOX__A0:
 				return getA0();
 			case Zapfmaster2000Package.BOX__A1:
 				return getA1();
 			case Zapfmaster2000Package.BOX__A2:
 				return getA2();
-			case Zapfmaster2000Package.BOX__NEW_CALC:
-				return isNewCalc();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -698,15 +522,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case Zapfmaster2000Package.BOX__LOCATION:
 				setLocation((String)newValue);
 				return;
-			case Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM:
-				setTickDisturbanceTerm((Double)newValue);
-				return;
-			case Zapfmaster2000Package.BOX__TICK_REGRESSOR:
-				setTickRegressor((Double)newValue);
-				return;
-			case Zapfmaster2000Package.BOX__TICK_REDUCTION:
-				setTickReduction((Integer)newValue);
-				return;
 			case Zapfmaster2000Package.BOX__A0:
 				setA0((Double)newValue);
 				return;
@@ -715,9 +530,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return;
 			case Zapfmaster2000Package.BOX__A2:
 				setA2((Double)newValue);
-				return;
-			case Zapfmaster2000Package.BOX__NEW_CALC:
-				setNewCalc((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -749,15 +561,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case Zapfmaster2000Package.BOX__LOCATION:
 				setLocation(LOCATION_EDEFAULT);
 				return;
-			case Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM:
-				setTickDisturbanceTerm(TICK_DISTURBANCE_TERM_EDEFAULT);
-				return;
-			case Zapfmaster2000Package.BOX__TICK_REGRESSOR:
-				setTickRegressor(TICK_REGRESSOR_EDEFAULT);
-				return;
-			case Zapfmaster2000Package.BOX__TICK_REDUCTION:
-				setTickReduction(TICK_REDUCTION_EDEFAULT);
-				return;
 			case Zapfmaster2000Package.BOX__A0:
 				setA0(A0_EDEFAULT);
 				return;
@@ -766,9 +569,6 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return;
 			case Zapfmaster2000Package.BOX__A2:
 				setA2(A2_EDEFAULT);
-				return;
-			case Zapfmaster2000Package.BOX__NEW_CALC:
-				setNewCalc(NEW_CALC_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -794,20 +594,12 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return kegs != null && !kegs.isEmpty();
 			case Zapfmaster2000Package.BOX__LOCATION:
 				return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
-			case Zapfmaster2000Package.BOX__TICK_DISTURBANCE_TERM:
-				return tickDisturbanceTerm != TICK_DISTURBANCE_TERM_EDEFAULT;
-			case Zapfmaster2000Package.BOX__TICK_REGRESSOR:
-				return tickRegressor != TICK_REGRESSOR_EDEFAULT;
-			case Zapfmaster2000Package.BOX__TICK_REDUCTION:
-				return tickReduction != TICK_REDUCTION_EDEFAULT;
 			case Zapfmaster2000Package.BOX__A0:
 				return a0 != A0_EDEFAULT;
 			case Zapfmaster2000Package.BOX__A1:
 				return a1 != A1_EDEFAULT;
 			case Zapfmaster2000Package.BOX__A2:
 				return a2 != A2_EDEFAULT;
-			case Zapfmaster2000Package.BOX__NEW_CALC:
-				return newCalc != NEW_CALC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -830,20 +622,12 @@ public class BoxImpl extends EObjectImpl implements Box {
 		result.append(passphrase);
 		result.append(", location: ");
 		result.append(location);
-		result.append(", tickDisturbanceTerm: ");
-		result.append(tickDisturbanceTerm);
-		result.append(", tickRegressor: ");
-		result.append(tickRegressor);
-		result.append(", tickReduction: ");
-		result.append(tickReduction);
 		result.append(", a0: ");
 		result.append(a0);
 		result.append(", a1: ");
 		result.append(a1);
 		result.append(", a2: ");
 		result.append(a2);
-		result.append(", newCalc: ");
-		result.append(newCalc);
 		result.append(')');
 		return result.toString();
 	}
