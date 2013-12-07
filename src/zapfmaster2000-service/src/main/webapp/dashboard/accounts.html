@@ -87,17 +87,17 @@
 
     $(function () {
         var c = ZMO.modules.Constants;
-        var updateList = function(){
+        var updateList = function () {
             ajax.getDatas("rest/account", function (accounts) {
                 $("#usersTable > tbody").empty();
                 $.each(accounts, function (ind, account) {
 
                     var $template = $(ich["dashboard-account-row"](account));
-                    ajax.getDatas("rest/draftkit/account/{0}".replace("{0}",account.accountId),function(boxes){
-                        var boxRow =  $($template.find(".boxes-row"));
+                    ajax.getDatas("rest/draftkit/account/{0}".replace("{0}", account.accountId), function (boxes) {
+                        var boxRow = $($template.find(".boxes-row"));
                         var boxArr = [];
-                        $.each(boxes,function(ind,item){
-                            boxArr.push(item.passphrase+": "+item.name);
+                        $.each(boxes, function (ind, item) {
+                            boxArr.push(item.passphrase + ": " + item.name);
                         });
                         boxRow.text(boxArr.join(" | "));
 
@@ -117,30 +117,30 @@
             accountId = li.data("accountid");
             modal.modal();
         });
-        $("#addBox .submit").on("click",function(){
+        $("#addBox .submit").on("click", function () {
             $.ajax({
-                type:"PUT",
-                url:baseUrl+"rest/draftkit",
-                data:{
-                    accountId:accountId,
-                    passphrase:$("#addBox #box-passphrase").val(),
-                    location:$("#addBox #box-location").val()
+                type: "PUT",
+                url: baseUrl + "rest/draftkit",
+                data: {
+                    accountId: accountId,
+                    passphrase: $("#addBox #box-passphrase").val(),
+                    location: $("#addBox #box-location").val()
                 },
-                success:updateList
+                success: updateList
             })
         });
         $(".add-account").on("click", function (e) {
             var modal = $("#addAccount");
             modal.modal();
         });
-        $("#addAccountBtn").on("click",function(e){
+        $("#addAccountBtn").on("click", function (e) {
             var name = $("#addAccount .name").val();
             $.ajax({
-                type:"PUT",
-                url:baseUrl+"rest/account",
-                data:{
-                    name:name
-                },success:function(account){
+                type: "PUT",
+                url: baseUrl + "rest/account",
+                data: {
+                    name: name
+                }, success: function (account) {
                     updateList();
                 }
             })
@@ -181,22 +181,25 @@
                     <label for="box-passphrase">Box Passphrase</label>
                     <input class="input-large" id="box-passphrase" type="text">
                 </p>
+
                 <p class="well">
                     <label for="box-location">Ort</label>
                     <input class="input-large" id="box-location" type="text">
                 </p>
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                                Erweitert
-                            </a>
-                        </div>
-                        <div id="collapseOne" class="accordion-body collapse out">
-                            <div class="accordion-inner">
-                               TODO
-                            </div>
+
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                           href="#collapseOne">
+                            Erweitert
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="accordion-body collapse out">
+                        <div class="accordion-inner">
+                            TODO
                         </div>
                     </div>
+                </div>
 
 
             </div>
@@ -226,12 +229,12 @@
                 </p>
 
 
-
             </div>
 
         </div>
         <div class="modal-footer">
-            <button id="addAccountBtn" data-dismiss="modal" class="btn btn-primary" aria-hidden="true">Hinzufügen</button>
+            <button id="addAccountBtn" data-dismiss="modal" class="btn btn-primary" aria-hidden="true">Hinzufügen
+            </button>
 
             <button class="btn" data-dismiss="modal" aria-hidden="true">Abbrechen</button>
 
