@@ -12,11 +12,11 @@ define([
      'controllers/StatsController',
 
     //Modules Controller
-     'modules/bestlist/BestlistController',
-     'modules/challenges/ChallengeController',
-     'modules/newsstack/NewsstackController',
-     'modules/draftkits/DraftKitController',
-     'modules/splashscreen/SplashScreenController',
+     'widgets/bestlist/BestlistController',
+     'widgets/challenges/ChallengeController',
+     'widgets/newsstack/NewsstackController',
+     'widgets/draftkits/DraftKitController',
+     'widgets/splashscreen/SplashScreenController',
 
     //Constants
     'constants'

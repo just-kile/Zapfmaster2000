@@ -5,16 +5,16 @@ define(['Console'], function (Console) {
   var controller = ['$scope',function ($scope) {
     Console.group("HomeController entered.");
     var rows = [[{
-        name:"js/modules/newsstack",
+        name:"js/widget/newsstack",
         className:"col-md-6"
     },{
-        name:"js/modules/draftkits",
+        name:"js/widgets/draftkits",
         className:"col-md-6"
     }],[{
-        name:"js/modules/bestlist",
+        name:"js/widgets/bestlist",
         className:"col-md-8"
     },{
-        name:"js/modules/challenges",
+        name:"js/widgets/challenges",
         className:"col-md-4"
     }]];
     $scope.rows = rows;
