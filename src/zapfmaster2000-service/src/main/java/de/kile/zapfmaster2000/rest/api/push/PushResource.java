@@ -50,8 +50,7 @@ public class PushResource {
 			final @Suspend(PlatformConstants.ASYNC_TIMEOUT) AsynchronousResponse pResponse,
 			@PathParam("boxid") int pBoxId, @QueryParam("token") String pToken) {
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pToken);
+		Account account = AuthUtil.retrieveAccount(pToken);
 		if (account != null) {
 			// check if account has box with given id
 			Box box = null;
