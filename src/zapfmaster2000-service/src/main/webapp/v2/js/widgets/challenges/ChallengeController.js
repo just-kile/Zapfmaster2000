@@ -42,7 +42,6 @@ define(['Console', 'Underscore'], function (Console, _) {
                     calcTeamPercent(data);
                     $scope.challenges = data;
                     $scope.letTheClockTick();
-                    splash.splashChallenge(dummyChallengeData);
                 });
             };
             var updateAmount = function () {
@@ -70,6 +69,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     } else if (data.type == c.CHALLENGE_STARTED) {
                         addNewChallenge(data);
                         splash.splashChallenge(data);
+
                     } else if (data.type == c.CHALLENGE_DONE) {
                         splash.splashChallengeFinished(data);
                     }

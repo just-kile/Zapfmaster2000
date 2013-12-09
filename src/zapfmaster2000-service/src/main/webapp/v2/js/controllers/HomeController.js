@@ -5,7 +5,7 @@ define(['Console'], function (Console) {
   var controller = ['$scope',function ($scope) {
     Console.group("HomeController entered.");
     var rows = [[{
-        name:"js/widget/newsstack",
+        name:"js/widgets/newsstack",
         className:"col-md-6"
     },{
         name:"js/widgets/draftkits",
