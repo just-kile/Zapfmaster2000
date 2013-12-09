@@ -18,6 +18,7 @@ import org.jboss.resteasy.spi.AsynchronousResponse;
 
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.auth.AuthUtil;
 import de.kile.zapfmaster2000.rest.core.challenge.StatusAwareAsynchronousResponse;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
@@ -32,8 +33,8 @@ public class PushResource {
 	public void retrieveNews(
 			final @Suspend(PlatformConstants.ASYNC_TIMEOUT) AsynchronousResponse pResponse,
 			@QueryParam(value = "token") String pToken) {
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pToken);
+		
+		Account account = AuthUtil.retrieveAccount(pToken);
 		if (account != null) {
 			Zapfmaster2000Core.INSTANCE.getPushService().addNewsRequest(
 					pResponse, account, pToken);
