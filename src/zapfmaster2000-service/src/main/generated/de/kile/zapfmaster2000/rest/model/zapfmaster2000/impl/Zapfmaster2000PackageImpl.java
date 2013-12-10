@@ -1264,7 +1264,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAdmin_Name() {
+	public EAttribute getAdmin_Id() {
 		return (EAttribute)adminEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1273,7 +1273,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAdmin_Password() {
+	public EAttribute getAdmin_Name() {
 		return (EAttribute)adminEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1282,7 +1282,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAdmin_Type() {
+	public EAttribute getAdmin_Password() {
 		return (EAttribute)adminEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1291,8 +1291,17 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAdmin_Type() {
+		return (EAttribute)adminEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getAdmin_Account() {
-		return (EReference)adminEClass.getEStructuralFeatures().get(3);
+		return (EReference)adminEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1504,6 +1513,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		createEAttribute(ticksEClass, TICKS__TICKS);
 
 		adminEClass = createEClass(ADMIN);
+		createEAttribute(adminEClass, ADMIN__ID);
 		createEAttribute(adminEClass, ADMIN__NAME);
 		createEAttribute(adminEClass, ADMIN__PASSWORD);
 		createEAttribute(adminEClass, ADMIN__TYPE);
@@ -1686,6 +1696,7 @@ public class Zapfmaster2000PackageImpl extends EPackageImpl implements Zapfmaste
 		initEAttribute(getTicks_Ticks(), ecorePackage.getEInt(), "ticks", null, 0, 1, Ticks.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(adminEClass, Admin.class, "Admin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAdmin_Id(), ecorePackage.getELong(), "id", null, 0, 1, Admin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAdmin_Name(), ecorePackage.getEString(), "name", null, 0, 1, Admin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAdmin_Password(), ecorePackage.getEString(), "password", null, 0, 1, Admin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAdmin_Type(), this.getAdminType(), "type", "", 0, 1, Admin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

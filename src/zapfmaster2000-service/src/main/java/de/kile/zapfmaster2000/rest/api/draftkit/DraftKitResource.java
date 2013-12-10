@@ -25,7 +25,9 @@ import org.jboss.resteasy.spi.AsynchronousResponse;
 
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.auth.AuthUtil;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
@@ -42,27 +44,14 @@ public class DraftKitResource {
 		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAccount(pToken);
 
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(pToken);
+		if (isAccountAdmin(admin)) {
+			account = admin.getAccount();
+		}
+
 		if (account != null) {
-			Session session = Zapfmaster2000Core.INSTANCE
-					.getTransactionService().getSessionFactory()
-					.getCurrentSession();
-			Transaction tx = session.beginTransaction();
-
-			@SuppressWarnings("unchecked")
-			List<Box> result = session
-					.createQuery("From Box b WHERE b.account.id = :accountId")
-					.setLong("accountId", account.getId()).list();
-			tx.commit();
-
-			List<DraftKitResponse> kits = new ArrayList<>();
-			for (Box box : result) {
-				DraftKitResponse response = new DraftKitResponse();
-				response.setBoxId(box.getId());
-				response.setName(box.getLocation());
-				response.setPassphrase(box.getPassphrase());
-				kits.add(response);
-			}
-
+			List<DraftKitResponse> kits = retrieveDraftKits(account.getId());
 			return Response.ok(kits).build();
 		} else {
 			return Response.status(Status.FORBIDDEN).build();
@@ -119,9 +108,11 @@ public class DraftKitResource {
 		LOG.info("Switching keg for box " + pDraftKitId + " to " + pBrand + "("
 				+ pSize + "l)");
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pToken);
-		if (account != null) {
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(pToken);
+		if (AuthUtil.isAccountAdmin(admin)) {
+			Account account = admin.getAccount();
+
 			// check that the chosen box exists for given account
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
@@ -191,5 +182,50 @@ public class DraftKitResource {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
 
+	}
+
+	@GET
+	@Path("/account/{accountId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response retrieveAccountBoxes(
+			@PathParam("accountId") long accountId,
+			@QueryParam("token") String pToken) {
+
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(pToken);
+
+		if (admin != null) {
+			final List<DraftKitResponse> kits = retrieveDraftKits(accountId);
+			return Response.ok(kits).build();
+		} else {
+			return Response.status(Status.FORBIDDEN).build();
+		}
+
+	}
+
+	private boolean isAccountAdmin(Admin admin) {
+		return admin != null && admin.getAccount() != null;
+	}
+
+	private List<DraftKitResponse> retrieveDraftKits(long accountId) {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		@SuppressWarnings("unchecked")
+		List<Box> result = session
+				.createQuery("From Box b WHERE b.account.id = :accountId")
+				.setLong("accountId", accountId).list();
+		tx.commit();
+
+		List<DraftKitResponse> kits = new ArrayList<>();
+		for (Box box : result) {
+			DraftKitResponse response = new DraftKitResponse();
+			response.setBoxId(box.getId());
+			response.setName(box.getLocation());
+			response.setPassphrase(box.getPassphrase());
+			kits.add(response);
+		}
+		return kits;
 	}
 }

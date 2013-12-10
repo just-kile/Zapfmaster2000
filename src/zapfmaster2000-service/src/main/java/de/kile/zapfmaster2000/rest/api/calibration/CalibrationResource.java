@@ -21,21 +21,22 @@ import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 
 @Path("calibration")
 public class CalibrationResource {
-
 
 	@GET
 	@Path("/boxes")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveAllBoxes(@QueryParam("token") String token) {
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(token);
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
+		if (isAccountAdmin(admin)) {
+			Account account = admin.getAccount();
 
-		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
@@ -59,17 +60,18 @@ public class CalibrationResource {
 		}
 
 	}
-	
+
 	@GET
 	@Path("/boxes/{boxId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveSingleBox(@QueryParam("token") String token,
 			@PathParam("boxId") long boxId) {
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(token);
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
+		if (isAccountAdmin(admin)) {
+			Account account = admin.getAccount();
 
-		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
@@ -108,10 +110,11 @@ public class CalibrationResource {
 			@FormParam("a1") double a1, @FormParam("a2") double a2,
 			@FormParam("token") String token, @PathParam("boxId") long boxId) {
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(token);
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
+		if (isAccountAdmin(admin)) {
+			Account account = admin.getAccount();
 
-		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
@@ -144,7 +147,11 @@ public class CalibrationResource {
 		}
 
 	}
-	
+
+	private boolean isAccountAdmin(Admin admin) {
+		return admin != null && admin.getAccount() != null;
+	}
+
 	private CalibrationResponse extractCalibrationValues(Box b) {
 		CalibrationResponse response = new CalibrationResponse();
 		response.setBoxId(b.getId());

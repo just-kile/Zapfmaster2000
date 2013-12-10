@@ -64,12 +64,12 @@
     </script>
     <script id="dashboard-account-row" type="text/html">
 
-        <tr data-accountid="{{accountId}}" data-accountName="{{name}}">
+        <tr data-accountid="{{accountId}}" data-adminid="{{adminId}}">
 
-            <td>{{name}}</td>
-            <td data-accountid="{{accountId}}" class="boxes-row"></td>
+            <td>{{adminName}}</td>
+            <td>{{accountName}}</td>
             <td>
-                <button class="btn btn-primary add-box">+</button>
+                {{type}}
             </td>
         </tr>
     </script>
@@ -80,7 +80,7 @@
 <div id="navigation"></div>
 <script>
     var navigation = $("#navigation").load("header.html", function () {
-        navigation.find(".accounts").addClass("active");
+        navigation.find(".admins").addClass("active");
     });
 </script>
 <script type="text/javascript">
@@ -88,20 +88,12 @@
     $(function () {
         var c = ZMO.modules.Constants;
         var updateList = function () {
-            ajax.getDatas("rest/account", function (accounts) {
+            ajax.getDatas(baseUrl+"rest/admin/account", function (accounts) {
                 $("#usersTable > tbody").empty();
                 $.each(accounts, function (ind, account) {
 
                     var $template = $(ich["dashboard-account-row"](account));
-                    ajax.getDatas("rest/draftkit/account/{0}".replace("{0}", account.accountId), function (boxes) {
-                        var boxRow = $($template.find(".boxes-row"));
-                        var boxArr = [];
-                        $.each(boxes, function (ind, item) {
-                            boxArr.push(item.passphrase + ": " + item.name);
-                        });
-                        boxRow.text(boxArr.join(" | "));
 
-                    });
                     $("#usersTable").append($template);
                 })
             });
@@ -134,17 +126,39 @@
             modal.modal();
         });
         $("#addAccountBtn").on("click", function (e) {
-            var name = $("#addAccount .name").val();
+            var name = $("#addAccount #adminName").val();
+            var pass =  $("#addAccount #password").val();
+            var accountId =$("#modal-accounts").val();
+            var token = localStorage.getItem("token");
             $.ajax({
-                type: "PUT",
-                url: baseUrl + "rest/account",
+                type: "POST",
+                url: baseUrl + "rest/admin/account/{accountId}/create".replace("{accountId}",accountId),
                 data: {
-                    name: name
+                    adminName: name,
+                    password:pass,
+                    token:token
                 }, success: function (account) {
                     updateList();
                 }
             })
-        })
+        })  ;
+        function fillAccountList(){
+            var accountSelBox = $("#modal-accounts");
+            var token = localStorage.getItem("token");
+            $.ajax({
+                type: "GET",
+                url: baseUrl + "rest/account",
+                data: {
+                    token:token
+                }, success: function (accounts) {
+                    $.each(accounts,function(index,account){
+                        $("<option>").text(account.name).val(account.accountId).appendTo(accountSelBox);
+                    })
+
+                }
+            })
+        }
+        fillAccountList();
     });
 
 
@@ -152,14 +166,14 @@
 <!-- Main Container -->
 
 <div class="container mainContainer" style="margin-top:50px">
-    <button class="btn btn-success add-account">Add Account</button>
+    <button class="btn btn-success add-account">Add Admin</button>
     <table id="usersTable" class="table table-striped">
         <thead>
         <tr>
 
-            <th>Name</th>
-            <th>Boxes</th>
-            <th>Add Box</th>
+            <th>Admin Name</th>
+            <th>AccountName</th>
+            <th>Type</th>
         </tr>
         </thead>
         <tbody id="usersliste">
@@ -168,64 +182,22 @@
     </table>
 </div>
 
-<div id="addBox" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden=true>
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Ändere Zapfmenge <span id="modal-user"></span></h3>
-    </div>
-    <div class="modal-body">
-        <div class="row">
-            <div class="span5">
-
-                <p class="well">
-                    <label for="box-passphrase">Box Passphrase</label>
-                    <input class="input-large" id="box-passphrase" type="text">
-                </p>
-
-                <p class="well">
-                    <label for="box-location">Ort</label>
-                    <input class="input-large" id="box-location" type="text">
-                </p>
-
-                <div class="accordion-group">
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
-                           href="#collapseOne">
-                            Erweitert
-                        </a>
-                    </div>
-                    <div id="collapseOne" class="accordion-body collapse out">
-                        <div class="accordion-inner">
-                            TODO
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-
-        </div>
-        <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-primary submit" aria-hidden="true">Hinzufügen</button>
-
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Abbrechen</button>
-
-        </div>
-    </div>
-</div>
 <div id="addAccount" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden=true>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Füge Account hinzu<span id="modal-user"></span></h3>
+        <h3 id="myModalLabel">Füge Account Admin hinzu<span id="modal-user"></span></h3>
     </div>
     <div class="modal-body">
         <div class="row">
 
             <div class="span5">
-
+                <p><select id="modal-accounts" size="1"></select></p>
                 <p class="well">
-                    <input class="input name" id="name" type="text">
+                    <label>Admin Name</label> <input class="input name" id="adminName" name="adminName"
+                                                     type="text">
+                    <label>Passwort</label> <input class="input name" id="password" name="password"
+                                                   type="password">
                 </p>
 
 

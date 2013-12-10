@@ -1476,13 +1476,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int ADMIN = 22;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMIN__ID = 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADMIN__NAME = 0;
+	int ADMIN__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -1491,7 +1500,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADMIN__PASSWORD = 1;
+	int ADMIN__PASSWORD = 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1500,7 +1509,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADMIN__TYPE = 2;
+	int ADMIN__TYPE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Account</b></em>' reference.
@@ -1509,7 +1518,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADMIN__ACCOUNT = 3;
+	int ADMIN__ACCOUNT = 4;
 
 	/**
 	 * The number of structural features of the '<em>Admin</em>' class.
@@ -1518,7 +1527,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADMIN_FEATURE_COUNT = 4;
+	int ADMIN_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.
@@ -2715,6 +2724,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EClass getAdmin();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getId()
+	 * @see #getAdmin()
+	 * @generated
+	 */
+	EAttribute getAdmin_Id();
+
+	/**
 	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3726,6 +3746,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EClass ADMIN = eINSTANCE.getAdmin();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADMIN__ID = eINSTANCE.getAdmin_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

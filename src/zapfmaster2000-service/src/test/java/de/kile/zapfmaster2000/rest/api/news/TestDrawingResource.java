@@ -19,6 +19,7 @@ import de.kile.zapfmaster2000.rest.api.drawing.DrawingResource;
 import de.kile.zapfmaster2000.rest.api.drawing.DrawingResponse;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
@@ -42,6 +43,8 @@ public class TestDrawingResource extends AbstractMockingTest {
 	@Before
 	public void setup() {
 		Account acc = createAccount("my acc");
+		Admin admin = createAdmin("admin", "foo", acc);
+		
 		box1 = createBox("b1", "l1", "v.1", acc);
 		box2 = createBox("b2", "l2", "v.1", acc);
 
@@ -64,7 +67,7 @@ public class TestDrawingResource extends AbstractMockingTest {
 				user2);
 
 		AuthService authService = mock(AuthService.class);
-		when(authService.retrieveAccount(any(String.class))).thenReturn(acc);
+		when(authService.retrieveAdmin(any(String.class))).thenReturn(admin);
 		mockAuthService(authService);
 	}
 
