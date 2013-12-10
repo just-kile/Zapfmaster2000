@@ -42,6 +42,8 @@ define(['Console', 'Underscore'], function (Console, _) {
                     calcTeamPercent(data);
                     $scope.challenges = data;
                     $scope.letTheClockTick();
+
+
                 });
             };
             var updateAmount = function () {
@@ -82,12 +84,14 @@ define(['Console', 'Underscore'], function (Console, _) {
                 $timeout.cancel(clockInterval);
             });
 
-            var dummyChallengeData = {"type": "CHALLENGE_STARTED", "image": "images/others/challengeStarted.jpg", "date": "20131206-172849", "challengeDuration": 10, "startDate": "20131206-172849", "challengeId": 4, "team1": [
+          /*  var dummyChallengeData = {"type": "CHALLENGE_STARTED", "image": "images/others/challengeStarted.jpg", "date": "20131206-172849", "challengeDuration": 10, "startDate": "20131206-172849", "challengeId": 4, "team1": [
                 {"userId": 1, "userName": "Ben", "userImage": "rest/image/user/1", "amount": 0.0, "won": false}
             ], "team2": [
                 {"userId": 3, "userName": "Thomas", "userImage": "rest/image/user/3", "amount": 0.0, "won": false}
             ], "challengeFinished": false};
-
+            $timeout(function(){
+                splash.splashChallenge(dummyChallengeData);
+            },2000)        */
             Console.groupEnd();
         }];
     //controller.$inject = [];

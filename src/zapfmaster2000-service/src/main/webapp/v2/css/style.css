@@ -110,36 +110,62 @@ header > nav > ul > li::before {
     -webkit-animation: enter 0.5s ease-out reverse;
     animation: enter 0.5s ease-out reverse;
 }
-
-@-webkit-keyframes enter {
-    0% {
-
-        opacity: 0;
-    }
+  */
+@-webkit-keyframes left {
     50% {
 
+        opacity: 0;
+        left:100%;
     }
+
     100% {
 
         opacity: 1;
+        left:0;
+    }
+}
+@-webkit-keyframes right {
+    50% {
+
+        opacity: 0;
+        right:100%;
+    }
+
+    100% {
+
+        opacity: 1;
+        right:0%;
+    }
+}
+@-webkit-keyframes enter {
+    30% {
+
+        opacity: 0;
+        top:-500px;
+    }
+
+    50% {
+
+        opacity: 1;
+        top:0;
     }
 }
 
 @keyframes enter {
-    0% {
+    30% {
 
         opacity: 0;
     }
     50% {
 
     }
-    100% {
+    50% {
 
         opacity: 1;
     }
 }
 
-  */
+
 
 .username1,.username2{
     text-overflow: ellipsis;
@@ -708,13 +734,44 @@ li.zm-draftkit{
 }
 .zm-splash .team1{
    position: absolute;
+    font-size: 80pt;
+    left: 0;
+    top:30%;
 }
 .zm-splash .vs{
     position: absolute;
+    font-size: 80pt;
+    left: 50%;
+    margin-left: -50px;
+    top:30%;
 }
-zm-splash .team2{
+.zm-splash .team2{
     position: absolute;
+    font-size: 80pt;
+    right: 0;
+    top:30%;
 }
+
+.splashVs {
+    transition: translateZ(0);
+    -webkit-animation:enter 3s;
+    animation:enter 3s;
+    opacity:1;
+}
+.splashTeam1{
+transition: translateZ(0);
+    -webkit-animation:left 3s;
+    animation:left 3s;
+    opacity:1;
+}
+.splashTeam2 {
+    transition: translateZ(0);
+    -webkit-animation:right 3s;
+    animation:right 3s;
+    opacity:1;
+}
+
+
 
 
 

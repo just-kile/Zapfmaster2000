@@ -1,8 +1,8 @@
 <div ng-controller="SplashScreenController" class="zm-newsstack">
-    <div class="zm-splash" ng-show="visible">
-        <div class="team1">{{data.team1[0].userName}}</div>
-        <div class="vs">vs</div>
-        <div class="team2">{{data.team2[0].userName}}</div>
+    <div class="zm-splash animate-show" ng-show="visible">
+        <div class="team1" ng-class="{splashTeam1:visible}">{{data.team1[0].userName}}</div>
+        <div class="vs" ng-class="{splashVs:visible}">vs</div>
+        <div class="team2" ng-class="{splashTeam2:visible}">{{data.team2[0].userName}}</div>
     </div>
 
 </div>

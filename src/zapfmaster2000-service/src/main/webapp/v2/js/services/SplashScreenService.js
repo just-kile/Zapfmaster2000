@@ -11,9 +11,9 @@ define(['Console', 'Underscore'], function (Console, _) {
             scope.visible = true;
 
             scope.data = data;
-           /* $timeout(function () {
+            $timeout(function () {
                 scope.visible = false;
-            }, 5000);*/
+            }, 5000);
         }
         return {
             register: register,

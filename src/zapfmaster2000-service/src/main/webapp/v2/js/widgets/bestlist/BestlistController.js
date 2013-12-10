@@ -81,19 +81,28 @@ define(['Console', 'Underscore'], function (Console, _) {
                             });
                             if (!isUserInList) {
                                 var lowestOrderUser = {order: 0};
+                                var addedFlag = false;
                                 var lowestIndex = 0;
                                 _.each(bestlist, function (oldUser, oldIndex) {
                                     if (oldUser.order == index) {
                                         user.order = index;
                                         $scope.bestlist.push(user);
+                                        addedFlag = true;
                                         //$scope.bestlist.splice(oldIndex,1);
+                                    }else{
+
                                     }
                                     if (oldUser.order > lowestOrderUser.order) {
                                         lowestOrderUser = oldUser;
                                         lowestIndex = oldIndex;
                                     }
                                 });
-                                if ($scope.bestlist.length > c.bestlistMax) $scope.bestlist.splice(lowestIndex, 1);
+                                if ($scope.bestlist.length > c.bestlistMax){
+                                    $scope.bestlist.splice(lowestIndex, 1);
+                                }else if(!addedFlag){
+                                    user.order=$scope.bestlist.length;
+                                       $scope.bestlist.push(user);
+                                }
 
                             }
                         });
