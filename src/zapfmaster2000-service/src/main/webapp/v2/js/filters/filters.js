@@ -5,15 +5,17 @@ define([
   // Application Filters
    "filters/CountdownFilter",
     "filters/AmountFilter",
-    "filters/AchievementFilter"
-], function (Console,_,CountdownFilter,AmountFilter,AchievementFilter){
+    "filters/AchievementFilter",
+    "filters/ImageFilterBig"
+], function (Console,_,CountdownFilter,AmountFilter,AchievementFilter,ImageFilterBig){
   "use strict";
   Console.group("Entering Filters module.");
 
   var filters = {
       countdown:CountdownFilter,
       amount:AmountFilter,
-      achievement:AchievementFilter
+      achievement:AchievementFilter,
+      big:  ImageFilterBig
   };
   Console.info("Registered filters: ", filters);
 
