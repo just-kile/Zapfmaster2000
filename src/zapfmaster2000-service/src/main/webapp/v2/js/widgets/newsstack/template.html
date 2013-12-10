@@ -1,4 +1,19 @@
 
-<div ng-controller="NewsstackController" class="zm-newsstack">
-    <img src="css/images/zm_logo.png" style="margin-left: 5%"/>
+<div ng-controller="NewsstackController" class="zm-newsstack"">
+        <div ng-class="{zmdim: news.length>0}" >
+            <img src="css/images/zm_logo.png" style="margin-left: 5%"/>
+        </div>
+        <ul class="news">
+            <li>
+                <div>test</div>
+            </li>
+            <li>
+                <div>test</div>
+            </li>
+            <li ng-repeat="n in news">
+                {{n.userName}}
+            </li>
+
+        </ul>
+
 </div>

@@ -715,3 +715,20 @@ li.zm-draftkit{
 zm-splash .team2{
     position: absolute;
 }
+
+
+
+/**Newsstack*/
+.zmdim{
+    opacity: 0.5;
+}
+.zm-newsstack ul.news{
+    position: absolute;
+    top:35px;
+
+}
+.zm-newsstack ul.news li{
+    list-style: none;
+    display: inline-block;
+    width:150px;
+}
