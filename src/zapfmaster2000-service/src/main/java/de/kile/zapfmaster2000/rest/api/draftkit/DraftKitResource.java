@@ -25,6 +25,7 @@ import org.jboss.resteasy.spi.AsynchronousResponse;
 
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.auth.AuthUtil;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
@@ -107,9 +108,11 @@ public class DraftKitResource {
 		LOG.info("Switching keg for box " + pDraftKitId + " to " + pBrand + "("
 				+ pSize + "l)");
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pToken);
-		if (account != null) {
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(pToken);
+		if (AuthUtil.isAccountAdmin(admin)) {
+			Account account = admin.getAccount();
+
 			// check that the chosen box exists for given account
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()

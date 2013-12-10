@@ -26,6 +26,7 @@ import de.kile.zapfmaster2000.rest.api.drawing.CalibrationRequest.CalibrationVal
 import de.kile.zapfmaster2000.rest.api.drawing.CalibrationResponse.CalibratedData;
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.auth.AuthUtil;
 import de.kile.zapfmaster2000.rest.impl.core.PolynomialRegression;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
@@ -42,11 +43,9 @@ public class DrawingResource {
 			@DefaultValue("0") @QueryParam("start") int start,
 			@DefaultValue("50") @QueryParam("length") int length) {
 
-		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAdmin(pToken);
-		if (isAccountAdmin(admin)) {
-			Account account = admin.getAccount();
-
+		Account account = AuthUtil.retrieveAccount(pToken);
+		
+		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
 					.getCurrentSession();
@@ -97,7 +96,7 @@ public class DrawingResource {
 
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAdmin(pToken);
-		if (isAccountAdmin(admin)) {
+		if (AuthUtil.isAccountAdmin(admin)) {
 			Account account = admin.getAccount();
 
 			Session session = Zapfmaster2000Core.INSTANCE
@@ -135,7 +134,7 @@ public class DrawingResource {
 
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAdmin(pToken);
-		if (isAccountAdmin(admin)) {
+		if (AuthUtil.isAccountAdmin(admin)) {
 			Account account = admin.getAccount();
 
 			Session session = Zapfmaster2000Core.INSTANCE
@@ -177,7 +176,7 @@ public class DrawingResource {
 
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAdmin(calibrationRequest.getToken());
-		if (isAccountAdmin(admin)) {
+		if (AuthUtil.isAccountAdmin(admin)) {
 			Account account = admin.getAccount();
 
 			List<Double> xValues = new ArrayList<>();
@@ -246,9 +245,7 @@ public class DrawingResource {
 		return Response.status(Status.FORBIDDEN).build();
 	}
 
-	private boolean isAccountAdmin(Admin admin) {
-		return admin != null && admin.getAccount() != null;
-	}
+
 
 	private double[] unbox(List<Double> list) {
 		double[] result = new double[list.size()];
