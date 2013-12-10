@@ -7,7 +7,7 @@ define(['Console'], function (Console) {
         Console.group("Newsstack controller entered.");
             CometService.addPushListener(function (data) {
                 if (c.DRAWING == data.type){
-                    addToNewsQueue(data);
+                 //   addToNewsQueue(data);
                 }
             });
             var addToNewsQueue = function(data){
@@ -20,7 +20,7 @@ define(['Console'], function (Console) {
                 $scope.news = [];
 
             }
-                initScope();
+              //  initScope();
 
 
             Console.groupEnd();
