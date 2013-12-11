@@ -88,7 +88,7 @@
     $(function () {
         var c = ZMO.modules.Constants;
         var updateList = function () {
-            ajax.getDatas(baseUrl+"rest/admin/account", function (accounts) {
+            ajax.getDatas("rest/admin/account", function (accounts) {
                 $("#usersTable > tbody").empty();
                 $.each(accounts, function (ind, account) {
 
