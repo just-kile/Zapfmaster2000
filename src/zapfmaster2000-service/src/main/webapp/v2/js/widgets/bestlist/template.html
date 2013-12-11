@@ -3,7 +3,7 @@
         <div class="flip-container zmo-container yellow-border  userstats-wrapper" ng-class="{flip: activeStats==0}">
             <div class="flipper">
                 <div class="front userstats animate-show" ng-show="arrow.visible">
-                    <img class="img-responsive img-rounded" src="{{baseUrl + statsodd.user.userImage|big}}"/>
+                    <img width="160" class="img-responsive img-rounded" src="{{baseUrl + statsodd.user.userImage|big}}"/>
 
                     <h2>{{statsodd.user.userName}}</h2>
                     <ul>
@@ -19,7 +19,7 @@
                     </ul>
                 </div>
                 <div class="back userstats animate-show" ng-show="arrow.visible">
-                    <img class="img-responsive img-rounded" src="{{baseUrl + statseven.user.userImage|big}}"/>
+                    <img width="160" class="img-responsive img-rounded" src="{{baseUrl + statseven.user.userImage|big}}"/>
 
                     <h2>{{statseven.user.userName}}</h2>
                     <ul>

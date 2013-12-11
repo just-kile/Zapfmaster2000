@@ -70,10 +70,10 @@ define(['Console', 'Underscore'], function (Console, _) {
                         updateAmount();
                     } else if (data.type == c.CHALLENGE_STARTED) {
                         addNewChallenge(data);
-                        splash.splashChallenge(data);
+                        splash.splashChallenge(data, c.CHALLENGE_STARTED);
 
                     } else if (data.type == c.CHALLENGE_DONE) {
-                        splash.splashChallengeFinished(data);
+                        splash.splashChallengeFinished(data,c.CHALLENGE_DONE);
                     }
 
                 }
@@ -84,14 +84,18 @@ define(['Console', 'Underscore'], function (Console, _) {
                 $timeout.cancel(clockInterval);
             });
 
-          /*  var dummyChallengeData = {"type": "CHALLENGE_STARTED", "image": "images/others/challengeStarted.jpg", "date": "20131206-172849", "challengeDuration": 10, "startDate": "20131206-172849", "challengeId": 4, "team1": [
-                {"userId": 1, "userName": "Ben", "userImage": "rest/image/user/1", "amount": 0.0, "won": false}
+      /*     var dummyChallengeData = {"type": "CHALLENGE_STARTED", "image": "images/others/challengeStarted.jpg", "date": "20131206-172849", "challengeDuration": 10, "startDate": "20131206-172849", "challengeId": 4, "team1": [
+                {"userId": 1, "userName": "Ben", "userImage": "rest/image/user/1", "amount": 0.0, "won": true}
             ], "team2": [
                 {"userId": 3, "userName": "Thomas", "userImage": "rest/image/user/3", "amount": 0.0, "won": false}
             ], "challengeFinished": false};
             $timeout(function(){
-                splash.splashChallenge(dummyChallengeData);
-            },2000)        */
+                splash.splashChallenge(dummyChallengeData, c.CHALLENGE_STARTED);
+            },2000)
+            $timeout(function(){
+                splash.splashChallenge(dummyChallengeData, c.CHALLENGE_DONE);
+            },5000)*/
+
             Console.groupEnd();
         }];
     //controller.$inject = [];

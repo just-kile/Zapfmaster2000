@@ -235,7 +235,7 @@ header.zmo-header {
 }
 
 .zmo-container {
-    height: 500px;
+    height: 620px;
     background: rgba(0, 0, 0, 0.4);
 
     border-radius: 10px;
@@ -541,7 +541,7 @@ li.bestlist-item.ng-leave-active {
 }
 /*Userstats*/
 .userstats-wrapper{
-    height:542px;
+    height:662px;
 }
 .userstats{
    /* height: 542px;*/
@@ -744,6 +744,7 @@ li.zm-draftkit{
     left: 50%;
     margin-left: -50px;
     top:30%;
+    color:red;
 }
 .zm-splash .team2{
     position: absolute;
@@ -751,8 +752,31 @@ li.zm-draftkit{
     right: 0;
     top:30%;
 }
+.zm-splash .headline{
+    position: absolute;
+    font-size: 80pt;
+    left: 50%;
+    white-space: nowrap;
+    top:0%;
+    color:gold;
+    margin-left: -480px;
 
-.splashVs {
+}
+.zm-splash .duration{
+    position: absolute;
+    font-size: 80pt;
+    left: 50%;
+    top:60%;
+    margin-left: -300px;
+    color:gold;
+
+}
+.splashWinner{
+    text-decoration: underline;
+    font-size: 90pt!important;
+    border:3px solid gold;
+}
+.splashVs,.splashDuration,.splashHeadine {
     transition: translateZ(0);
     -webkit-animation:enter 3s;
     animation:enter 3s;
@@ -770,7 +794,6 @@ transition: translateZ(0);
     animation:right 3s;
     opacity:1;
 }
-
 
 
 
