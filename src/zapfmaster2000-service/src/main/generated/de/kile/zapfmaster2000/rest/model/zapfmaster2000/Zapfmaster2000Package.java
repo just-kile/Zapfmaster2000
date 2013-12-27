@@ -186,40 +186,13 @@ public interface Zapfmaster2000Package extends EPackage {
 	int BOX__LOCATION = 5;
 
 	/**
-	 * The feature id for the '<em><b>Tick Disturbance Term</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__TICK_DISTURBANCE_TERM = 6;
-
-	/**
-	 * The feature id for the '<em><b>Tick Regressor</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__TICK_REGRESSOR = 7;
-
-	/**
-	 * The feature id for the '<em><b>Tick Reduction</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__TICK_REDUCTION = 8;
-
-	/**
 	 * The feature id for the '<em><b>A0</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__A0 = 9;
+	int BOX__A0 = 6;
 
 	/**
 	 * The feature id for the '<em><b>A1</b></em>' attribute.
@@ -228,7 +201,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__A1 = 10;
+	int BOX__A1 = 7;
 
 	/**
 	 * The feature id for the '<em><b>A2</b></em>' attribute.
@@ -237,16 +210,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOX__A2 = 11;
-
-	/**
-	 * The feature id for the '<em><b>New Calc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__NEW_CALC = 12;
+	int BOX__A2 = 8;
 
 	/**
 	 * The number of structural features of the '<em>Box</em>' class.
@@ -255,7 +219,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOX_FEATURE_COUNT = 13;
+	int BOX_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.
@@ -1383,13 +1347,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int TOKEN__USER = 3;
 
 	/**
+	 * The feature id for the '<em><b>Admin</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOKEN__ADMIN = 4;
+
+	/**
 	 * The number of structural features of the '<em>Token</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOKEN_FEATURE_COUNT = 4;
+	int TOKEN_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ImageImpl <em>Image</em>}' class.
@@ -1493,6 +1466,70 @@ public interface Zapfmaster2000Package extends EPackage {
 	int TICKS_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AdminImpl <em>Admin</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AdminImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAdmin()
+	 * @generated
+	 */
+	int ADMIN = 22;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMIN__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMIN__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Password</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMIN__PASSWORD = 2;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMIN__TYPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMIN__ACCOUNT = 4;
+
+	/**
+	 * The number of structural features of the '<em>Admin</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMIN_FEATURE_COUNT = 5;
+
+	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1500,7 +1537,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 22;
+	int SEX = 23;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType <em>Challenge Type</em>}' enum.
@@ -1510,7 +1547,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeType()
 	 * @generated
 	 */
-	int CHALLENGE_TYPE = 23;
+	int CHALLENGE_TYPE = 24;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType <em>User Type</em>}' enum.
@@ -1520,7 +1557,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUserType()
 	 * @generated
 	 */
-	int USER_TYPE = 24;
+	int USER_TYPE = 25;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState <em>Challenge State</em>}' enum.
@@ -1530,8 +1567,18 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeState()
 	 * @generated
 	 */
-	int CHALLENGE_STATE = 25;
+	int CHALLENGE_STATE = 26;
 
+
+	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.AdminType <em>Admin Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.AdminType
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAdminType()
+	 * @generated
+	 */
+	int ADMIN_TYPE = 27;
 
 	/**
 	 * The meta object id for the '<em>Blob</em>' data type.
@@ -1541,7 +1588,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getBlob()
 	 * @generated
 	 */
-	int BLOB = 26;
+	int BLOB = 28;
 
 
 	/**
@@ -1686,39 +1733,6 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getBox_Location();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm <em>Tick Disturbance Term</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tick Disturbance Term</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickDisturbanceTerm()
-	 * @see #getBox()
-	 * @generated
-	 */
-	EAttribute getBox_TickDisturbanceTerm();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickRegressor <em>Tick Regressor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tick Regressor</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickRegressor()
-	 * @see #getBox()
-	 * @generated
-	 */
-	EAttribute getBox_TickRegressor();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction <em>Tick Reduction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tick Reduction</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getTickReduction()
-	 * @see #getBox()
-	 * @generated
-	 */
-	EAttribute getBox_TickReduction();
-
-	/**
 	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#getA0 <em>A0</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1750,17 +1764,6 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBox_A2();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#isNewCalc <em>New Calc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>New Calc</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box#isNewCalc()
-	 * @see #getBox()
-	 * @generated
-	 */
-	EAttribute getBox_NewCalc();
 
 	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account <em>Account</em>}'.
@@ -2603,6 +2606,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EReference getToken_User();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token#getAdmin <em>Admin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Admin</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token#getAdmin()
+	 * @see #getToken()
+	 * @generated
+	 */
+	EReference getToken_Admin();
+
+	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image <em>Image</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2700,6 +2714,71 @@ public interface Zapfmaster2000Package extends EPackage {
 	EAttribute getTicks_Ticks();
 
 	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin <em>Admin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Admin</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin
+	 * @generated
+	 */
+	EClass getAdmin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getId()
+	 * @see #getAdmin()
+	 * @generated
+	 */
+	EAttribute getAdmin_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getName()
+	 * @see #getAdmin()
+	 * @generated
+	 */
+	EAttribute getAdmin_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getPassword <em>Password</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Password</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getPassword()
+	 * @see #getAdmin()
+	 * @generated
+	 */
+	EAttribute getAdmin_Password();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getType()
+	 * @see #getAdmin()
+	 * @generated
+	 */
+	EAttribute getAdmin_Type();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getAccount <em>Account</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Account</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin#getAccount()
+	 * @see #getAdmin()
+	 * @generated
+	 */
+	EReference getAdmin_Account();
+
+	/**
 	 * Returns the meta object for enum '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2738,6 +2817,16 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EEnum getChallengeState();
+
+	/**
+	 * Returns the meta object for enum '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.AdminType <em>Admin Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Admin Type</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.AdminType
+	 * @generated
+	 */
+	EEnum getAdminType();
 
 	/**
 	 * Returns the meta object for data type '{@link java.sql.Blob <em>Blob</em>}'.
@@ -2881,30 +2970,6 @@ public interface Zapfmaster2000Package extends EPackage {
 		EAttribute BOX__LOCATION = eINSTANCE.getBox_Location();
 
 		/**
-		 * The meta object literal for the '<em><b>Tick Disturbance Term</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BOX__TICK_DISTURBANCE_TERM = eINSTANCE.getBox_TickDisturbanceTerm();
-
-		/**
-		 * The meta object literal for the '<em><b>Tick Regressor</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BOX__TICK_REGRESSOR = eINSTANCE.getBox_TickRegressor();
-
-		/**
-		 * The meta object literal for the '<em><b>Tick Reduction</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BOX__TICK_REDUCTION = eINSTANCE.getBox_TickReduction();
-
-		/**
 		 * The meta object literal for the '<em><b>A0</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2927,14 +2992,6 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute BOX__A2 = eINSTANCE.getBox_A2();
-
-		/**
-		 * The meta object literal for the '<em><b>New Calc</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BOX__NEW_CALC = eINSTANCE.getBox_NewCalc();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AccountImpl <em>Account</em>}' class.
@@ -3597,6 +3654,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		EReference TOKEN__USER = eINSTANCE.getToken_User();
 
 		/**
+		 * The meta object literal for the '<em><b>Admin</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TOKEN__ADMIN = eINSTANCE.getToken_Admin();
+
+		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ImageImpl <em>Image</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3673,6 +3738,56 @@ public interface Zapfmaster2000Package extends EPackage {
 		EAttribute TICKS__TICKS = eINSTANCE.getTicks_Ticks();
 
 		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AdminImpl <em>Admin</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.AdminImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAdmin()
+		 * @generated
+		 */
+		EClass ADMIN = eINSTANCE.getAdmin();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADMIN__ID = eINSTANCE.getAdmin_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADMIN__NAME = eINSTANCE.getAdmin_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Password</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADMIN__PASSWORD = eINSTANCE.getAdmin_Password();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADMIN__TYPE = eINSTANCE.getAdmin_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Account</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADMIN__ACCOUNT = eINSTANCE.getAdmin_Account();
+
+		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3711,6 +3826,16 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EEnum CHALLENGE_STATE = eINSTANCE.getChallengeState();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.AdminType <em>Admin Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.AdminType
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAdminType()
+		 * @generated
+		 */
+		EEnum ADMIN_TYPE = eINSTANCE.getAdminType();
 
 		/**
 		 * The meta object literal for the '<em>Blob</em>' data type.

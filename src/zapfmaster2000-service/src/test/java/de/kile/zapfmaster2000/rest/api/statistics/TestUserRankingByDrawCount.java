@@ -58,8 +58,6 @@ public class TestUserRankingByDrawCount extends AbstractMockingTest {
 
 	@Before
 	public void setupData() {
-		truncate();
-
 		account = createAccount("foo-account");
 
 		account2 = createAccount("bar-account");
@@ -129,10 +127,13 @@ public class TestUserRankingByDrawCount extends AbstractMockingTest {
 
 		assertEquals(3, rawDrawCountResponse.length);
 
+		// note that both user1 and user2 have drawn once. Sort by name expected.
 		assertConforms(user3,
 				(DrawCountUserListResponse) rawDrawCountResponse[0]);
 		assertConforms(user1,
 				(DrawCountUserListResponse) rawDrawCountResponse[1]);
+		assertConforms(user2,
+				(DrawCountUserListResponse) rawDrawCountResponse[2]);
 	}
 
 	@Test

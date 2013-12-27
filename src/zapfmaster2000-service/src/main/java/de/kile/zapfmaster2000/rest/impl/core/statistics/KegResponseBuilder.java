@@ -29,7 +29,7 @@ public class KegResponseBuilder {
 		
 		List<Object[]> resultCurrentKegs = session
 				.createQuery(
-						"SELECT k.id, k.brand, k.size, k.startDate, SUM(d.amount), k.box.id"
+						"SELECT k.id, k.brand, k.size, k.startDate, SUM(d.amount), k.box.id, k.box.location"
 								+ " FROM Keg k LEFT JOIN k.drawings AS d"
 								+ " WHERE k.box.account = :account "
 								+ " AND k.endDate IS NULL "
@@ -80,7 +80,7 @@ public class KegResponseBuilder {
 			}
 			response[i].setKegNumber((Long) resultNumberKegs.get(0));
 			response[i].setBoxId((Long) resultRow[5]);
-
+            response[i].setBoxLocation((String) resultRow[6]);
 			if (idxKeg < resultLastThreeHours.size()
 					&& response[i].getKegId() == (Long) resultLastThreeHours
 							.get(idxKeg)[0]) {

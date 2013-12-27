@@ -202,6 +202,15 @@ public interface Zapfmaster2000Factory extends EFactory {
 	Ticks createTicks();
 
 	/**
+	 * Returns a new object of class '<em>Admin</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Admin</em>'.
+	 * @generated
+	 */
+	Admin createAdmin();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

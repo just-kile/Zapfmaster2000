@@ -16,13 +16,13 @@
 {{#bestAchievement}}
 <tr class="stats-drinker-row">
 
-	<td>[[achievementBest]]</td><td><a href="#user?id={{userId}}">{{userName}}</a> ({{achievementCount}}{{amount}})</td>
+	<td>[[achievementBest]]</td><td><a href="#user?id={{userId}}">{{userName}}</a> ({{^amount}}{{achievementCount}}{{/amount}}{{amount}})</td>
 
 </tr>
 {{/bestAchievement}}
 {{#bestDrawCount}}
 <tr class="stats-drinker-row">
-	<td>[[drawCountBest]]</td><td><a href="#user?id={{userId}}">{{userName}}</a> ({{drawCount}}{{amount}}x)</td>
+	<td>[[drawCountBest]]</td><td><a href="#user?id={{userId}}">{{userName}}</a> ({{^amount}}{{drawCount}}{{/amount}}{{amount}}x)</td>
 </tr>
 {{/bestDrawCount}}
 {{#promille}}

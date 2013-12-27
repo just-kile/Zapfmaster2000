@@ -46,9 +46,11 @@ $(document).ready(function(){
 	console.log("BaseUrl"+baseUrl);
 	function redirect(){
 	       if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase())){
-	    	   window.location.replace("app.html");
+	    	  // window.location.replace("app.html");
+               window.location.href="app.html";
 	       }else{
-	    	   window.location.replace("page.html");
+	    	   //window.location.replace("page.html");
+               window.location.href="page.html";
 	       }
 	}
 	var RfidPush = (function(){
@@ -203,8 +205,10 @@ $(document).ready(function(){
 			data:{
 				accountName:accountName
 			},
-			success:function(token){
-				if(localStorage){
+			complete:function(data){
+				var token= data.responseText;	
+			
+				if(localStorage && data.status==200){
 					//alert(token);
 					localStorage.setItem('token',token );
 					//if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
@@ -212,7 +216,7 @@ $(document).ready(function(){
 					$(".container").hide();
 					$("#registerUserContainer").show();
 				}else{
-					alert("Use a normal browser! Localstorage is not available")
+					alert("Fehler "+data.status)
 				}
 			},
 			error:function(){
@@ -295,11 +299,14 @@ $(document).ready(function(){
 			type:"POST",
 			url:baseUrl +"rest/register/user",
 			data:data,
-			success:function(token){
+			complete:function(data){
 				//alert("Token"+token);
-				localStorage.setItem("token",token);
-				$(".container").hide();
-				$("#imageFormContainer").show();
+				if(data.status==200){
+					localStorage.setItem("token",data.responseText);
+					$(".container").hide();
+					$("#imageFormContainer").show();	
+				}
+				
 			},
 			error:function(){
 				alert("Fehler! Der Nutzername ist wahrscheinlich schon vergeben.")
@@ -350,7 +357,7 @@ $("#rImage").on("change",function(e){
 		complete:function(){
 			Throbber.hide();
 		}
-	    ,
+
 
 	});
 	}
@@ -399,7 +406,7 @@ document.addEventListener("deviceready", function(){
 			width:160,
 			heigt:160,
 			quality: 50, 
-            destinationType: navigator.camera.DestinationType.FILE_URI,
+            destinationType: navigator.camera.DestinationType.FILE_URI
            // sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
 		}
 		);
@@ -454,9 +461,15 @@ $("#registerSelectBox").on("change",function(e){
 //loginContainer,registerUserContainer,accountloginContainer,imageFormContainer,setRfidContainer
 $("#registerApp").on("click",function(e){
 	e.preventDefault();
-	$(".container").hide();
-	$("#accountloginContainer").show();
-	
+    $.get(baseUrl+"rest/account").success(function(resp){
+        var account = $("#account").empty();
+        $.each(resp,function(ind,val){
+           $("<option>").text(val.name).appendTo(account);
+        });
+        $(".container").hide();
+        $("#accountloginContainer").show();
+    });
+
 })
 $(".cancelBtn").on("click",function(e){
 	e.preventDefault();
@@ -475,7 +488,9 @@ $("#updateImageRfid").on("click",function(e){
 			userName:userName,
 			password:pass
 		},
-		success:function(token){
+		complete:function(data){
+			var token = 	data.responseText;
+		if(data.status==200){
 			if(localStorage){
 				localStorage.setItem('token',token );
 				$(".container").hide();
@@ -484,6 +499,7 @@ $("#updateImageRfid").on("click",function(e){
 			}else{
 				alert("Use a normal browser! Localstorage is not available")
 			}
+		}
 		},
 		error:function(){
 			alert("Username oder Passwort falsch");
@@ -491,11 +507,57 @@ $("#updateImageRfid").on("click",function(e){
 		}
 	})
 	
-})
+});
+    $("#guestLogin").on("click",function(e){
+        e.preventDefault();
+        var accountName = $("#accountSelectFront").val();
+        $.ajax({
+            type:"POST",
+            url:baseUrl +"rest/login/account",
+            data:{
+                accountName:accountName
+            },
+            complete:function(data){
+                var token= data.responseText;
 
+                if(localStorage && data.status==200){
+                    //alert(token);
+                    localStorage.setItem('token',token );
+                    //if(/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()))
+                    //window.location.replace(window.location.pathname+"page.html");
+                    redirect();
+                }else{
+                    alert("Fehler "+data.status)
+                }
+            },
+            error:function(e){
+                alert("Fehler! "+ e.status);
+            }
+        })
+    });
 
-})
+    $.get(baseUrl+"rest/account").success(function(resp){
+        var account = $("#accountSelectFront").empty();
+        $.each(resp,function(ind,val){
+            $("<option>").text(val.name).appendTo(account);
+        });
 
+    })
+
+});
+
+    //check is installed
+ $.ajax({
+     url:"rest/install/status",
+     type:"GET",
+     complete:function(resp){
+         if(resp && resp.status===200){
+             var json = JSON.parse(resp.responseText);
+             if(json.status =="new")window.location.href="install.html";
+         }
+         //window.location.href="install.html";
+     }
+ });
 
 </script>
 
@@ -508,7 +570,8 @@ $("#updateImageRfid").on("click",function(e){
 	<form id="loginForm">
 		<p><input placeholder="Username" id="userName" name="userName" type="text" size="30" maxlength="30" value=""></p>
 		<p><input placeholder="Passwort" id="password" name="password" type="password" size="30" maxlength="30" value=""></p>
-		<div><input id ="submitApp" type="submit" value="Anmelden"></div>
+        <p><select id="accountSelectFront" name="account"></select></p>
+		<div><input id ="submitApp" type="submit" value="Anmelden"><button id ="guestLogin">Gast</button></div>
 		</form>
 		<div><input id ="updateImageRfid" type="submit" value="Bild/RFID Updaten">
 		</div>
@@ -524,8 +587,10 @@ $("#updateImageRfid").on("click",function(e){
  <!-- accountlogin -->
 <div id="accountloginContainer" class="websitelogin container" style="display:none" >
  <p>Gib den Namen der Gruppe ein, der du beitreten möchtest.</p>
- <p><input placeholder="Gruppenname" id="account" name="account" type="text" size="30" maxlength="30" value="Erdreich"></p>
-
+ <!--<p><input placeholder="Gruppenname" id="account" name="account" type="text" size="30" maxlength="30" value="ChezNasimausi"></p>
+ -->
+    <p><select id="account" name="account"></select>
+    </p>
 <input class ="cancelBtn" type="submit" value="Abbrechen">
 <input id ="submitWebsite" type="submit" value="Anmelden">
 

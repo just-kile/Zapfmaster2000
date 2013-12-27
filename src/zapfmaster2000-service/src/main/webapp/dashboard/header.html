@@ -1,132 +1,189 @@
- <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
         <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="#">Zapfmaster2000 - Dashboard</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="zapflist"><a href="zapflist.html">Zapfliste</a></li>
-              
-              <li class="users"><a href="users.html">Users</a></li>
-              <li class="kegchange"><a href="index.html">Fass Wechsel</a></li>
-               <li class="dropdown">
-			    <a href="#" class="dropdown-toggle kegchange calibration mock" data-toggle="dropdown">
-			      Tools
-			      <b class="caret"></b>
-			    </a>
-			    <ul class="dropdown-menu">
-			    	<li><a href="calibration.html">Kalibrierung</a></li>
-			    	<li><a href="calibration_old.html">Kalibrierung(Alt)</a></li>
-			     	<li><a href="mock.html">Mock Client</a></li>
-			     	<li><a href="zapftracking.html">Zapf Tracking</a></li>
-			    </ul>
-			  </li>
-            </ul>
-         <div class="notices pull-left">
-                <p class="navbar-text">Eingeloggt als: <span id="loggedUserName"></span></p>
-         </div>
-         
-          </div><!--/.nav-collapse -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Zapfmaster2000 - Dashboard</a>
 
-         <form class="navbar-form pull-right" id="loginForm">
-         	
-             <i id="iconOk" class="icon-ok icon-white" style="display:none"></i>
- 			 <i id="iconFalse" class="icon-remove icon-white" style="display:none"></i>
- 			 <input type="text" class="input-small" placeholder="User" id="username">
- 			 <input type="password" class="input-small" placeholder="Password" id="password">
- 			 <button type="submit" class="btn btn-primary">Anmelden</button>
- 			
-		</form>
-		
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="zapflist"><a href="zapflist.html">Zapfliste</a></li>
+
+                   <!-- <li class="users"><a href="users.html">Users</a></li>              -->
+                    <li class="accounts"><a href="accounts.html">Accounts</a></li>
+                    <li class="admins"><a href="adminaccounts.html">Admin Accounts</a></li>
+                    <li class="kegchange"><a href="index.html">Fass Wechsel</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle kegchange calibration mock" data-toggle="dropdown">
+                            Tools
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="calibration.html">Kalibrierung</a></li>
+                            <!--<li><a href="calibration_old.html">Kalibrierung(Alt)</a></li>    -->
+                            <li><a href="mock.html">Mock Client</a></li>
+                           <!-- <li><a href="zapftracking.html">Zapf Tracking</a></li>  -->
+                        </ul>
+                    </li>
+                </ul>
+                <div class="notices pull-left">
+                    <p class="navbar-text">Eingeloggt als: <span id="loggedUserName"></span></p>
+                </div>
+
+            </div>
+            <!--/.nav-collapse -->
+            <button id="header-logout" class="btn btn-danger">Logout</button>
+          <!--  <form class="navbar-form pull-right" id="loginForm">
+
+                <i id="iconOk" class="icon-ok icon-white" style="display:none"></i>
+                <i id="iconFalse" class="icon-remove icon-white" style="display:none"></i>
+                <input type="text" class="input-small" placeholder="User" id="username">
+                <input type="password" class="input-small" placeholder="Password" id="password">
+                <button type="submit" class="btn btn-primary">Anmelden</button>
+
+            </form>   -->
+
         </div>
-      </div>
     </div>
-    <script>
+</div>
+<div id="loginBoxModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden=true>
+    <form id="loginForm">
+    <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>  -->
+        <h3>Login</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+
+            <div class="span5">
+
+                <p class="well">
+                    <label>Admin Name</label> <input class="input name" id="loginBoxModal-adminName" name="adminName"
+                                                     type="text">
+                    <label>Passwort</label> <input class="input name" id="loginBoxModal-password" name="password"
+                                                   type="password">
+                </p>
+
+            </div>
+
+        </div> </div>
+        <div class="modal-footer">
+            <button id="submit" type="submit" class="btn btn-primary" aria-hidden="true">Anmelden
+            </button>
+
+            <button id="login-cancel" class="btn" aria-hidden="true" type="button">Abbrechen</button>
+
+        </div>
+    </form>
+    </div>
+</div>
+<script>
     /**
-    * Handles the Icons (success/error)
-    */
-    var IconHandler = (function(){
-    	var showIcon = function(show,hide){
-    	$(hide).hide();
-    	$(show).show();
-    	setTimeout(function(){
-    		$(show).fadeOut("fast");
-    	},3000);
-    	};
-    	function showOk(){
-    		showIcon("#iconOk","#iconFalse");
-    	}
-    	function showFalse(){
-    		showIcon("#iconFalse","#iconOk");
-    	}
-    	var pub = {
-    			showOk:showOk,
-    			showFalse:showFalse
-    	}
-    	return pub;
-    	
+     * Handles the Icons (success/error)
+     */
+    var IconHandler = (function () {
+        var showIcon = function (show, hide) {
+            $(hide).hide();
+            $(show).show();
+            setTimeout(function () {
+                $(show).fadeOut("fast");
+            }, 3000);
+        };
+
+        function showOk() {
+            showIcon("#iconOk", "#iconFalse");
+        }
+
+        function showFalse() {
+            showIcon("#iconFalse", "#iconOk");
+        }
+
+        var pub = {
+            showOk: showOk,
+            showFalse: showFalse
+        }
+        return pub;
+
     })();
     /**
      * Handles the user login
      */
-    $("#loginForm").on("submit",function(e){
-    	e.preventDefault();
-    	var userName = $("#loginForm #username").val();
-    	var pass = $("#loginForm #password").val();
-    	console.log("Performing login to "+baseUrl +"rest/login/user"+"?userName="+userName+"&"+"password="+pass);
-    	$.ajax({
-    		type:"POST",
-    		url:baseUrl +"rest/login/user",
-    		data:{
-    			userName:userName,
-    			password:pass
-    		},
-    		complete:function(data){
-    			var token = data.responseText;
-    			console.log("Token: "+token);
-    			if(data.status==200 && localStorage){
-    				IconHandler.showOk();
-    				localStorage.setItem('token',token );
-    				//redirect();
-    				retrieveLoggedInUserInformation();
-    				//window.location.replace(window.location.pathname+"app.html");
-    			}else if(data.status == 403){
-    				IconHandler.showFalse();
-    				alert("Username oder Passwort falsch");
-    			}else if(data.status == 404){
-    				IconHandler.showFalse();
-    				alert("Service ist offline oder Url falsch");
-    			}else {
-    				IconHandler.showFalse();
-    				alert("Fehler! Status "+data.status);
-    			}
-    			
-    		}
-    	})
+    $("#loginForm").on("submit", function (e) {
+        e.preventDefault();
+        var userName = $("#loginForm #loginBoxModal-adminName").val();
+        var pass = $("#loginForm #loginBoxModal-password").val();
+        console.log("Performing login to " + baseUrl + "rest/login/user" + "?userName=" + userName + "&" + "password=" + pass);
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "rest/login/admin",
+            data: {
+                adminName: userName,
+                password: pass
+            },
+            complete: function (data) {
+                var token = data.responseText;
+                console.log("Token: " + token);
+                if (data.status == 200 && localStorage) {
+                   // IconHandler.showOk();
+                    localStorage.setItem('token', token);
+                    //redirect();
+                   // retrieveLoggedInUserInformation();
+                    var modal = $("#loginBoxModal");
+                    modal.modal("hide");
+                    //window.location.replace(window.location.pathname+"app.html");
+                } else if (data.status == 403) {
+                    //IconHandler.showFalse();
+                    alert("Username oder Passwort falsch");
+                } else if (data.status == 404) {
+                   // IconHandler.showFalse();
+                    alert("Service ist offline oder Url falsch");
+                } else {
+                   // IconHandler.showFalse();
+                    alert("Fehler! Status " + data.status);
+                }
+
+
+            }
+        })
     });
     /**
      * Get logged in user information
      */
-    function retrieveLoggedInUserInformation(){
-    	var userSpan = $("#loggedUserName");
-    	var token = localStorage.getItem('token');
-    	if(token){
-    		$.ajax({
-    			url:baseUrl + "rest/statistics/userStats",
-    			data:{
-    				token:token
-    			},
-    			success:function(json){
-    					var userInfo = json.user;
-    					userSpan.text(userInfo.userName);
-    			}
-    		});
-    	}
+    function retrieveLoggedInUserInformation() {
+        var userSpan = $("#loggedUserName");
+        var token = localStorage.getItem('token');
+        if (token) {
+            $.ajax({
+                url: baseUrl + "rest/admin/loginstatus",
+                data: {
+                    token: token
+                },
+                success: function (json) {
+                    var userInfo = json.adminName;
+                    userSpan.text(userInfo);
+                }, error: function () {
+                    var modal = $("#loginBoxModal");
+                    modal.modal();
+                }
+            });
+        }  else{
+            var modal = $("#loginBoxModal");
+            modal.modal();
+        }
     }
+
     retrieveLoggedInUserInformation();
-    
-    </script>
+    $("#login-cancel").on("click",function(){
+       window.location.href="../"
+    });
+    $("#header-logout").on("click",function(){
+        localStorage.setItem("token",null);
+        var modal = $("#loginBoxModal");
+        modal.modal();
+    })
+
+</script>

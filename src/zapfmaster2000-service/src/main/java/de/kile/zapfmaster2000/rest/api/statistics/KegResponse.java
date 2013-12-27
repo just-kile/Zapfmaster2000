@@ -13,7 +13,7 @@ public class KegResponse {
 	private Date startDate;
 	private double currentAmount;
 	private long boxId;
-
+    private String boxLocation;
 	/**
 	 * Number of kegs drunk so far (including the current one)
 	 */
@@ -83,5 +83,11 @@ public class KegResponse {
 	public void setBoxId(long boxId) {
 		this.boxId = boxId;
 	}
+    public String getBoxLocation() {
+        return boxLocation;
+    }
 
+    public void setBoxLocation(String boxLocation) {
+        this.boxLocation = boxLocation;
+    }
 }

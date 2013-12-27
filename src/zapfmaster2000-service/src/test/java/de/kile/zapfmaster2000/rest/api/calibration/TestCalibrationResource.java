@@ -16,19 +16,26 @@ import org.junit.Test;
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
 public class TestCalibrationResource extends AbstractMockingTest {
+
+	private Box box1;
+	private Box box2;
+	private Box box3;
 
 	@Before
 	public void setup() {
 		Account account = createAccount("acc");
-		createBox("b1", "l1", "v1", 1, 2, 3, account);
-		createBox("b2", "l2", "v2", -1, -2, -3, account);
-		createBox("b3", "l3", "v3", 11.1, -22.2, 33, account);
+		Admin admin = createAdmin("name", "password", account);
+		box1 = createBox("b1", "l1", "v1", 1, 2, 3, account);
+		box2 = createBox("b2", "l2", "v2", -1, -2, -3, account);
+		box3 = createBox("b3", "l3", "v3", 11.1, -22.2, 33, account);
 
 		AuthService authService = mock(AuthService.class);
-		when(authService.retrieveAccount(any(String.class)))
-				.thenReturn(account);
+		when(authService.retrieveAdmin(any(String.class))).thenReturn(admin);
 		mockAuthService(authService);
 	}
 
@@ -39,33 +46,34 @@ public class TestCalibrationResource extends AbstractMockingTest {
 		Response response = res.retrieveAllBoxes(null);
 		assertEquals(200, response.getStatus());
 
-		List<CalibrationResponseOld> entity = (List<CalibrationResponseOld>) response
+		List<CalibrationResponse> entity = (List<CalibrationResponse>) response
 				.getEntity();
 		assertEquals(3, entity.size());
 
-		assertCalibrationReponse(1, 1, 2, 3, entity.get(0));
-		assertCalibrationReponse(2, -1, -2, -3, entity.get(1));
-		assertCalibrationReponse(3, 11.1, -22.2, 33, entity.get(2));
+		assertCalibrationReponse(box1, entity.get(0));
+		assertCalibrationReponse(box2, entity.get(1));
+		assertCalibrationReponse(box3, entity.get(2));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testRetrieveSingleBox() {
 		CalibrationResource res = new CalibrationResource();
-		Response response = res.retrieveSingleBoxOld(null, 2);
+		Response response = res.retrieveSingleBox(null, box2.getId());
 		assertEquals(200, response.getStatus());
 
-		List<CalibrationResponseOld> entity = (List<CalibrationResponseOld>) response
+		List<CalibrationResponse> entity = (List<CalibrationResponse>) response
 				.getEntity();
 		assertEquals(1, entity.size());
 
-		assertCalibrationReponse(2, -1, -2, -3, entity.get(0));
+		assertCalibrationReponse(box2, entity.get(0));
 	}
 
 	@Test
 	public void testRetrieveSingleBoxNotFound() {
 		CalibrationResource res = new CalibrationResource();
-		Response response = res.retrieveSingleBoxOld(null, 4);
+		final long invalidId = box3.getId() + 123;
+		Response response = res.retrieveSingleBox(null, invalidId);
 		assertEquals(Status.NOT_FOUND.getStatusCode(), response.getStatus());
 	}
 
@@ -73,34 +81,39 @@ public class TestCalibrationResource extends AbstractMockingTest {
 	@Test
 	public void testUpdate() {
 		CalibrationResource res = new CalibrationResource();
-		Response response = res
-				.updateCalibrationParametersOld(30, 40, 50, null, 2);
+		Response response = res.updateCalibrationParameters(30, 40, 50, null,
+				box2.getId());
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 
-		List<CalibrationResponseOld> entity = (List<CalibrationResponseOld>) response
+		List<CalibrationResponse> entity = (List<CalibrationResponse>) response
 				.getEntity();
 		assertEquals(1, entity.size());
 
-		assertCalibrationReponse(2, 30, 40, 50, entity.get(0));
+		Box updatedBox = Zapfmaster2000Factory.eINSTANCE.createBox();
+		updatedBox.setA2(50);
+		updatedBox.setA1(40);
+		updatedBox.setA0(30);
+		updatedBox.setId(box2.getId());
+
+		assertCalibrationReponse(updatedBox, entity.get(0));
 
 		// check that only box 2 changed
 		response = res.retrieveAllBoxes(null);
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
 
-		entity = (List<CalibrationResponseOld>) response.getEntity();
+		entity = (List<CalibrationResponse>) response.getEntity();
 		assertEquals(3, entity.size());
 
-		assertCalibrationReponse(1, 1, 2, 3, entity.get(0));
-		assertCalibrationReponse(2, 30, 40, 50, entity.get(1));
-		assertCalibrationReponse(3, 11.1, -22.2, 33, entity.get(2));
+		assertCalibrationReponse(box1, entity.get(0));
+		assertCalibrationReponse(updatedBox, entity.get(1));
+		assertCalibrationReponse(box3, entity.get(2));
 
 	}
 
-	private void assertCalibrationReponse(int boxId, double regression,
-			double disturbance, int tickReduction, CalibrationResponseOld response) {
-		assertEquals(boxId, response.getBoxId());
-		assertEquals(regression, response.getRegression(), 0.1);
-		assertEquals(disturbance, response.getDisturbance(), 0.1);
-		assertEquals(tickReduction, response.getTickReduction());
+	private void assertCalibrationReponse(Box box, CalibrationResponse response) {
+		assertEquals(box.getId(), response.getBoxId());
+		assertEquals(box.getA2(), response.getA2(), 0.01);
+		assertEquals(box.getA1(), response.getA1(), 0.01);
+		assertEquals(box.getA0(), response.getA0(), 0.01);
 	}
 }

@@ -1,10 +1,11 @@
 package de.kile.zapfmaster2000.rest.core.box;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -21,10 +22,9 @@ import de.kile.zapfmaster2000.rest.impl.core.box.DrawServiceImpl;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
 public class TestDrawService extends AbstractDatabaseTest {
 
@@ -34,43 +34,23 @@ public class TestDrawService extends AbstractDatabaseTest {
 
 	private Box box;
 
-	@Before
-	public void createUsers() {
-		User user1 = Zapfmaster2000Factory.eINSTANCE.createUser();
-		user1.setName("Harry");
-		user1.setRfidTag(RFID_TAG_1);
-
-		User user2 = Zapfmaster2000Factory.eINSTANCE.createUser();
-		user2.setName("Ron");
-		user2.setRfidTag(RFID_TAG_2);
-
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
-				.getSessionFactory().getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		session.save(user1);
-		session.save(user2);
-		tx.commit();
-	}
+	private Date creationDateKeg2;
 
 	@Before
-	public void createAccount() {
-		Keg keg1 = Zapfmaster2000Factory.eINSTANCE.createKeg();
-		keg1.setStartDate(new GregorianCalendar(2012, 10, 17).getTime());
-		Keg keg2 = Zapfmaster2000Factory.eINSTANCE.createKeg();
-		keg2.setStartDate(new GregorianCalendar(2012, 11, 03).getTime());
-
-		box = Zapfmaster2000Factory.eINSTANCE.createBox();
-		box.getKegs().add(keg1);
-		box.getKegs().add(keg2);
+	public void createEntities() {
+		Account account = createAccount("Hogwards");
+		box = createBox("box-1", "Gryffindor Tower", "1.0", 0, 0.001, 0,
+				account);
 		
-		Account account = Zapfmaster2000Factory.eINSTANCE.createAccount();
-		account.getBoxes().add(box);
+		creationDateKeg2 = createDate(2012, 10, 18);
+		createKeg("Muggel Brew", createDate(2012, 10, 17),
+				creationDateKeg2, 50, box);
+		createKeg("Muggel Brew", creationDateKeg2, null, 50, box);
 
-		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
-				.getSessionFactory().getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		session.save(account);
-		tx.commit();
+		createUser("Harry", "Scar.png", "Seeker", RFID_TAG_1, Sex.MALE, 50,
+				UserType.USER, account);
+		createUser("Ron", "HarryAndMe.png", "IWantToBeHarry", RFID_TAG_2,
+				Sex.MALE, 50, UserType.USER, account);
 	}
 
 	@After
@@ -83,8 +63,7 @@ public class TestDrawService extends AbstractDatabaseTest {
 
 	@Test
 	public void testLoginSimple() {
-		DrawServiceImpl mgr = new DrawServiceImpl(
-				Zapfmaster2000Factory.eINSTANCE.createBox());
+		DrawServiceImpl mgr = retrieveDrawManager();
 		User user = mgr.login(RFID_TAG_1);
 		assertNotNull(user);
 		assertEquals("Harry", user.getName());
@@ -92,8 +71,7 @@ public class TestDrawService extends AbstractDatabaseTest {
 
 	@Test
 	public void testLoginTwice() {
-		DrawServiceImpl mgr = new DrawServiceImpl(
-				Zapfmaster2000Factory.eINSTANCE.createBox());
+		DrawServiceImpl mgr = retrieveDrawManager();
 
 		User user = mgr.login(RFID_TAG_1);
 		assertNotNull(user);
@@ -106,8 +84,7 @@ public class TestDrawService extends AbstractDatabaseTest {
 
 	@Test
 	public void testLoginOtherUserAlreadyLoggedIn() {
-		DrawServiceImpl mgr = new DrawServiceImpl(
-				Zapfmaster2000Factory.eINSTANCE.createBox());
+		DrawServiceImpl mgr = retrieveDrawManager();
 
 		User user = mgr.login(RFID_TAG_1);
 		assertNotNull(user);
@@ -139,8 +116,7 @@ public class TestDrawService extends AbstractDatabaseTest {
 
 	@Test
 	public void testUserDoesNotExist() {
-		DrawServiceImpl mgr = new DrawServiceImpl(
-				Zapfmaster2000Factory.eINSTANCE.createBox());
+		DrawServiceImpl mgr = retrieveDrawManager();
 
 		User user = mgr.login(-1);
 		assertNull(user);
@@ -148,11 +124,10 @@ public class TestDrawService extends AbstractDatabaseTest {
 
 	@Test
 	public void testSimpleDraw() throws InterruptedException {
-		DrawServiceImpl mgr = new DrawServiceImpl(box);
+		DrawServiceImpl mgr = retrieveDrawManager();
 		mgr.login(RFID_TAG_1);
-		mgr.draw(2000);
+		mgr.draw(200);
 
-		// wait for auto log-off
 		waitForAutoLogout();
 
 		// check if drawing was added to database
@@ -164,13 +139,10 @@ public class TestDrawService extends AbstractDatabaseTest {
 
 		assertEquals(1, drawings.size());
 		Drawing drawing = drawings.get(0);
-		fail("FIX TODO BELOW");
-		// TODO: Below statement does not work any more
-//		int ticksPerLiter = Zapfmaster2000Core.INSTANCE
-//				.getConfigurationService().getInt(
-//						ConfigurationConstants.BOX_DRAW_TICKS_PER_LITER);
-		int ticksPerLiter = 0; // TODO remove this
-		assertEquals((double) 2000 / ticksPerLiter, drawing.getAmount(), 1);
+
+		// amount = a2*ticks^2 + a1*ticks + a0
+		// with a2 = a0 = 0 and a1 = 0.001
+		assertEquals(0.2, drawing.getAmount(), 1);
 
 		// check if right user was chosen
 		assertNotNull(drawing.getUser());
@@ -178,8 +150,7 @@ public class TestDrawService extends AbstractDatabaseTest {
 
 		// check if right keg was chosen
 		assertNotNull(drawing.getKeg());
-		assertEquals(new GregorianCalendar(2012, 11, 03).getTime(), drawing
-				.getKeg().getStartDate()); // this is keg2
+		assertEquals(creationDateKeg2, drawing.getKeg().getStartDate()); // this
 
 		tx.commit();
 	}
@@ -188,8 +159,8 @@ public class TestDrawService extends AbstractDatabaseTest {
 	@Test
 	public void testDrawGuestUser() throws InterruptedException {
 		// note: there is no guest user in the database yet
-		DrawServiceImpl mgr = new DrawServiceImpl(box);
-		mgr.draw(2000); // drawing without login
+		DrawServiceImpl mgr = retrieveDrawManager();
+		mgr.draw(200); // drawing without login -> guest eats it!!
 		waitForAutoLogout();
 
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
@@ -212,7 +183,7 @@ public class TestDrawService extends AbstractDatabaseTest {
 		tx.commit();
 
 		// draw once more as guest. no new user should be created now!
-		mgr.draw(2000); // drawing without login
+		mgr.draw(200); // drawing without login
 		waitForAutoLogout();
 
 		session = Zapfmaster2000Core.INSTANCE.getTransactionService()
@@ -231,5 +202,9 @@ public class TestDrawService extends AbstractDatabaseTest {
 		assertEquals(2, drawings.size());
 		tx.commit();
 
+	}
+
+	private DrawServiceImpl retrieveDrawManager() {
+		return new DrawServiceImpl(box);
 	}
 }

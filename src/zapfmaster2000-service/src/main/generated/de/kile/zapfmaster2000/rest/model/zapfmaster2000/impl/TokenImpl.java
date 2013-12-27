@@ -3,6 +3,7 @@
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getToken <em>Token</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getAccount <em>Account</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getUser <em>User</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getAdmin <em>Admin</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,6 +93,16 @@ public class TokenImpl extends EObjectImpl implements Token {
 	 * @ordered
 	 */
 	protected User user;
+
+	/**
+	 * The cached value of the '{@link #getAdmin() <em>Admin</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdmin()
+	 * @generated
+	 * @ordered
+	 */
+	protected Admin admin;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -234,6 +246,44 @@ public class TokenImpl extends EObjectImpl implements Token {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Admin getAdmin() {
+		if (admin != null && admin.eIsProxy()) {
+			InternalEObject oldAdmin = (InternalEObject)admin;
+			admin = (Admin)eResolveProxy(oldAdmin);
+			if (admin != oldAdmin) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.TOKEN__ADMIN, oldAdmin, admin));
+			}
+		}
+		return admin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Admin basicGetAdmin() {
+		return admin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAdmin(Admin newAdmin) {
+		Admin oldAdmin = admin;
+		admin = newAdmin;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.TOKEN__ADMIN, oldAdmin, admin));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -247,6 +297,9 @@ public class TokenImpl extends EObjectImpl implements Token {
 			case Zapfmaster2000Package.TOKEN__USER:
 				if (resolve) return getUser();
 				return basicGetUser();
+			case Zapfmaster2000Package.TOKEN__ADMIN:
+				if (resolve) return getAdmin();
+				return basicGetAdmin();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -270,6 +323,9 @@ public class TokenImpl extends EObjectImpl implements Token {
 				return;
 			case Zapfmaster2000Package.TOKEN__USER:
 				setUser((User)newValue);
+				return;
+			case Zapfmaster2000Package.TOKEN__ADMIN:
+				setAdmin((Admin)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -295,6 +351,9 @@ public class TokenImpl extends EObjectImpl implements Token {
 			case Zapfmaster2000Package.TOKEN__USER:
 				setUser((User)null);
 				return;
+			case Zapfmaster2000Package.TOKEN__ADMIN:
+				setAdmin((Admin)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -315,6 +374,8 @@ public class TokenImpl extends EObjectImpl implements Token {
 				return account != null;
 			case Zapfmaster2000Package.TOKEN__USER:
 				return user != null;
+			case Zapfmaster2000Package.TOKEN__ADMIN:
+				return admin != null;
 		}
 		return super.eIsSet(featureID);
 	}

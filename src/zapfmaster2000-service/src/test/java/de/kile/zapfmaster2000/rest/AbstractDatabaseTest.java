@@ -2,17 +2,18 @@ package de.kile.zapfmaster2000.rest;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.After;
-import org.junit.Before;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
-import de.kile.zapfmaster2000.rest.impl.core.transaction.SessionReconfigurator;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
@@ -29,14 +30,44 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
  * Will truncate the whole db after each test.
  * </p>
  * 
- * 
  * @author Thomas Kipar
  */
 public abstract class AbstractDatabaseTest {
 
-	@Before
+	@After
+	public void closeTransactions() {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.getTransaction();
+
+		if (transaction != null && transaction.isActive()) {
+			transaction.rollback();
+		}
+	}
+
+	@After
 	public void truncate() {
-		SessionReconfigurator.reconfigure();
+		SessionFactory sessionFactory = Zapfmaster2000Core.INSTANCE
+				.getTransactionService().getSessionFactory();
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		session.createSQLQuery("SET REFERENTIAL_INTEGRITY FALSE")
+				.executeUpdate();
+
+		List<Object[]> result = session.createSQLQuery(
+				"SHOW TABLES FROM PUBLIC").list();
+		for (Object[] tableDesc : result) {
+			final int indexTableName = 0;
+			String tableName = (String) tableDesc[indexTableName];
+			session.createSQLQuery("TRUNCATE TABLE " + tableName)
+					.executeUpdate();
+		}
+
+		session.createSQLQuery("SET REFERENTIAL_INTEGRITY TRUE")
+				.executeUpdate();
+
+		tx.commit();
 	}
 
 	protected Account createAccount(String pName) {
@@ -58,16 +89,16 @@ public abstract class AbstractDatabaseTest {
 	}
 
 	protected Box createBox(String pPassphrase, String pLocation,
-			String pVersion, double pRegression, double pDisturbance,
-			int pTickReduction, Account pAccount) {
+			String pVersion, double pA2, double pA1,
+			int pA0, Account pAccount) {
 		Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
 		box.setAccount(pAccount);
 		box.setLocation(pLocation);
 		box.setPassphrase(pPassphrase);
 		box.setVersion(pVersion);
-		box.setTickRegressor(pRegression);
-		box.setTickDisturbanceTerm(pDisturbance);
-		box.setTickReduction(pTickReduction);
+		box.setA2(pA2);
+		box.setA1(pA1);
+		box.setA0(pA0);
 		saveEntity(box, pAccount);
 		return box;
 	}
@@ -144,6 +175,15 @@ public abstract class AbstractDatabaseTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(pYear, pMonth, pDay, pHour, pMinute, pSecond);
 		return cal.getTime();
+	}
+
+	protected Admin createAdmin(String name, String password, Account account) {
+		Admin admin = Zapfmaster2000Factory.eINSTANCE.createAdmin();
+		admin.setName(name);
+		admin.setPassword(password);
+		admin.setAccount(account);
+		saveEntity(admin);
+		return admin;
 	}
 
 	protected void saveEntity(EObject pEntity, EObject... pEntitiesToUpdate) {

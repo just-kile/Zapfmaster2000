@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import de.kile.zapfmaster2000.rest.core.auth.AuthUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -25,8 +26,7 @@ public class MembersResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveMembers(@QueryParam("token") String pToken) {
 
-		Account account = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAccount(pToken);
+		Account account = AuthUtil.retrieveAccount(pToken);
 		if (account != null) {
 			Session session = Zapfmaster2000Core.INSTANCE
 					.getTransactionService().getSessionFactory()
