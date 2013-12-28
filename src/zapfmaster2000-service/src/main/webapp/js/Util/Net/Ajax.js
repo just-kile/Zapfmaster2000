@@ -435,7 +435,7 @@ ZMO.Util.Net.Ajax = (function($){
     		errorHandler(e.msg);
     		break;
     	default:
-    		ZMO.logger.log("Message received,but dont know that it is");
+    		ZMO.logger.log("Message received,but dont know what it is");
     	}
     }
 	var connectChallengeReceive = function(callback){
@@ -445,7 +445,7 @@ ZMO.Util.Net.Ajax = (function($){
 			});
 			
 		} else if(window.device && window.device.platform =="ios"){
-		    pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});
+		    window.plugins.pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});
 		}else{
 			setTimeout(function(){
 				connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback,null,null,true);

@@ -314,11 +314,12 @@ public class PushServiceImpl implements PushService {
 				jsonGenerator.writeEndArray();
 
 				jsonGenerator.writeFieldName("data");
-				jsonGenerator.writeString(new Gson().toJson(entity));
+				jsonGenerator.writeRaw(new Gson().toJson(entity));
 				jsonGenerator.writeEndObject();
+                jsonGenerator.flush();
 
 				String json = os.toString();
-				LOGGER.trace("Created json" + json);
+				LOGGER.debug("Created json" + json);
 
 				post.setRequestHeader("Content-Length",
 						Integer.toString(json.length()));
@@ -331,7 +332,7 @@ public class PushServiceImpl implements PushService {
 
 				try {
 					httpclient.executeMethod(post);
-					LOGGER.trace("gcm returned: " + post.getStatusLine());
+					LOGGER.debug("gcm returned: " + post.getStatusLine());
 				} finally {
 					post.releaseConnection();
 				}
