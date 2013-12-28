@@ -81,5 +81,18 @@ public class TestChallengeService extends AbstractDatabaseTest {
 		assertEquals(1, users.size());
 		assertEquals(user1.getId(), users.get(0).getId());
 	}
+	
+	@Test
+	public void testRetriveUsersMutlipleGcmTokens() {
+		createToken("t1", user1, account1, null, "gcm1");
+		createToken("t1", user1, account1, null, "gcm2");
+
+		ChallengeServiceImpl service = new ChallengeServiceImpl();
+		List<User> users = service.retrieveLoggedInUsers(account1);
+
+		// user1 should only be contained once
+		assertEquals(1, users.size());
+		assertEquals(user1.getId(), users.get(0).getId());
+	}
 
 }

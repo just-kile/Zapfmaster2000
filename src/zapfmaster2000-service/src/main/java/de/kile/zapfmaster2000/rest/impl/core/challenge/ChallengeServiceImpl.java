@@ -3,8 +3,10 @@ package de.kile.zapfmaster2000.rest.impl.core.challenge;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -92,8 +94,16 @@ public class ChallengeServiceImpl implements ChallengeService {
 		List<User> results = query.list();
 		usersForAccount.addAll(results);
 		tx.commit();
+		
+		Set<Long> userIds = new HashSet<>();
+		List<User> result = new ArrayList<>();
+		for (User user : usersForAccount) {
+			if (userIds.add(user.getId())) {
+				result.add(user);
+			}
+		}
 
-		return usersForAccount;
+		return result;
 	}
 
 	@Override
