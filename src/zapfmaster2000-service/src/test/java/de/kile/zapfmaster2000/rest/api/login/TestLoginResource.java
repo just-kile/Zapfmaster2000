@@ -56,4 +56,15 @@ public class TestLoginResource extends AbstractMockingTest {
 		verifyNoMoreInteractions(authServiceMock);
 	}
 
+	@Test
+	public void testResetGcm() {
+		AuthService authServiceMock = mock(AuthService.class);
+		mockAuthService(authServiceMock);
+
+		String zm2kToken = "token";
+		new LoginResource().resetGcm(zm2kToken);
+		verify(authServiceMock).setupGoogleCloudMessagingToken(zm2kToken, null);
+		verifyNoMoreInteractions(authServiceMock);
+	}
+
 }

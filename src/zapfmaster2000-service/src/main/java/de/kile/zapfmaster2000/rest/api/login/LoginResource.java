@@ -84,5 +84,18 @@ public class LoginResource {
 		// log in succeeded
 		return Response.ok(token).build();
 	}
-	
+
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/gcm/reset")
+	public Response resetGcm(@FormParam("token") String token) {
+		LOG.debug("Reset gcm request for token" + token);
+
+		Zapfmaster2000Core.INSTANCE.getAuthService()
+				.setupGoogleCloudMessagingToken(token, null);
+
+		// log in succeeded
+		return Response.ok(token).build();
+	}
+
 }
