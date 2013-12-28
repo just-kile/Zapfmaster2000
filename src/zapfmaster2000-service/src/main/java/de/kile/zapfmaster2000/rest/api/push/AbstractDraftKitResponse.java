@@ -1,6 +1,5 @@
 package de.kile.zapfmaster2000.rest.api.push;
 
-import de.kile.zapfmaster2000.rest.api.news.DrawingNewsResponse;
 
 public abstract class AbstractDraftKitResponse {
 

@@ -1,6 +1,5 @@
 package de.kile.zapfmaster2000.rest.api.statistics;
 
-import java.util.Date;
 
 public class UserResponse {
 

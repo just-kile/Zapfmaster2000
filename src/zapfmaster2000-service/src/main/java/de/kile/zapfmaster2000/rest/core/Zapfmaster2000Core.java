@@ -11,7 +11,6 @@ import de.kile.zapfmaster2000.rest.core.push.PushService;
 import de.kile.zapfmaster2000.rest.core.registration.RegistrationService;
 import de.kile.zapfmaster2000.rest.core.transaction.TransactionService;
 import de.kile.zapfmaster2000.rest.impl.core.Zapfmaster2000CoreImpl;
-import de.kile.zapfmaster2000.rest.impl.core.registration.RegistrationServiceImpl;
 
 /**
  * The core is the central unit to provide zapfmaster functionality for the rest

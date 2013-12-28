@@ -2,8 +2,6 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000;
 
-import java.util.Date;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

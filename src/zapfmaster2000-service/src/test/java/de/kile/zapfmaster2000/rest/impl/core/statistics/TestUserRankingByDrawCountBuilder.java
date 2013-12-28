@@ -1,5 +1,7 @@
 package de.kile.zapfmaster2000.rest.impl.core.statistics;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,7 +16,6 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
-import static org.junit.Assert.assertEquals;
 
 public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 
