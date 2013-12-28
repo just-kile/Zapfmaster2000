@@ -234,6 +234,7 @@ public class AuthServiceImpl implements AuthService {
 		if (foundToken) {
 			Token dbToken = result.get(0);
 			dbToken.setGoogleCloudMessagingToken(googleCloudMessagingToken);
+			session.update(dbToken);
 		} 
 		tx.commit();
 		
