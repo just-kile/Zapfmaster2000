@@ -3,8 +3,7 @@
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
@@ -18,23 +17,21 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Token</b></em>'.
+ * An implementation of the model object '<em><b>GCM Token</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getId <em>Id</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getToken <em>Token</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getAccount <em>Account</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getUser <em>User</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getAdmin <em>Admin</em>}</li>
- *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.TokenImpl#getGoogleCloudMessagingToken <em>Google Cloud Messaging Token</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GCMTokenImpl#getId <em>Id</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GCMTokenImpl#getToken <em>Token</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GCMTokenImpl#getAccount <em>Account</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GCMTokenImpl#getUser <em>User</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TokenImpl extends EObjectImpl implements Token {
+public class GCMTokenImpl extends EObjectImpl implements GCMToken {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -96,41 +93,11 @@ public class TokenImpl extends EObjectImpl implements Token {
 	protected User user;
 
 	/**
-	 * The cached value of the '{@link #getAdmin() <em>Admin</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAdmin()
-	 * @generated
-	 * @ordered
-	 */
-	protected Admin admin;
-
-	/**
-	 * The default value of the '{@link #getGoogleCloudMessagingToken() <em>Google Cloud Messaging Token</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getGoogleCloudMessagingToken()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String GOOGLE_CLOUD_MESSAGING_TOKEN_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getGoogleCloudMessagingToken() <em>Google Cloud Messaging Token</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getGoogleCloudMessagingToken()
-	 * @generated
-	 * @ordered
-	 */
-	protected String googleCloudMessagingToken = GOOGLE_CLOUD_MESSAGING_TOKEN_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TokenImpl() {
+	protected GCMTokenImpl() {
 		super();
 	}
 
@@ -141,7 +108,7 @@ public class TokenImpl extends EObjectImpl implements Token {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return Zapfmaster2000Package.Literals.TOKEN;
+		return Zapfmaster2000Package.Literals.GCM_TOKEN;
 	}
 
 	/**
@@ -162,7 +129,7 @@ public class TokenImpl extends EObjectImpl implements Token {
 		long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.TOKEN__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.GCM_TOKEN__ID, oldId, id));
 	}
 
 	/**
@@ -183,7 +150,7 @@ public class TokenImpl extends EObjectImpl implements Token {
 		String oldToken = token;
 		token = newToken;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.TOKEN__TOKEN, oldToken, token));
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.GCM_TOKEN__TOKEN, oldToken, token));
 	}
 
 	/**
@@ -197,7 +164,7 @@ public class TokenImpl extends EObjectImpl implements Token {
 			account = (Account)eResolveProxy(oldAccount);
 			if (account != oldAccount) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.TOKEN__ACCOUNT, oldAccount, account));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.GCM_TOKEN__ACCOUNT, oldAccount, account));
 			}
 		}
 		return account;
@@ -221,7 +188,7 @@ public class TokenImpl extends EObjectImpl implements Token {
 		Account oldAccount = account;
 		account = newAccount;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.TOKEN__ACCOUNT, oldAccount, account));
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.GCM_TOKEN__ACCOUNT, oldAccount, account));
 	}
 
 	/**
@@ -235,7 +202,7 @@ public class TokenImpl extends EObjectImpl implements Token {
 			user = (User)eResolveProxy(oldUser);
 			if (user != oldUser) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.TOKEN__USER, oldUser, user));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.GCM_TOKEN__USER, oldUser, user));
 			}
 		}
 		return user;
@@ -259,66 +226,7 @@ public class TokenImpl extends EObjectImpl implements Token {
 		User oldUser = user;
 		user = newUser;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.TOKEN__USER, oldUser, user));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Admin getAdmin() {
-		if (admin != null && admin.eIsProxy()) {
-			InternalEObject oldAdmin = (InternalEObject)admin;
-			admin = (Admin)eResolveProxy(oldAdmin);
-			if (admin != oldAdmin) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Zapfmaster2000Package.TOKEN__ADMIN, oldAdmin, admin));
-			}
-		}
-		return admin;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Admin basicGetAdmin() {
-		return admin;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAdmin(Admin newAdmin) {
-		Admin oldAdmin = admin;
-		admin = newAdmin;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.TOKEN__ADMIN, oldAdmin, admin));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getGoogleCloudMessagingToken() {
-		return googleCloudMessagingToken;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setGoogleCloudMessagingToken(String newGoogleCloudMessagingToken) {
-		String oldGoogleCloudMessagingToken = googleCloudMessagingToken;
-		googleCloudMessagingToken = newGoogleCloudMessagingToken;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.TOKEN__GOOGLE_CLOUD_MESSAGING_TOKEN, oldGoogleCloudMessagingToken, googleCloudMessagingToken));
+			eNotify(new ENotificationImpl(this, Notification.SET, Zapfmaster2000Package.GCM_TOKEN__USER, oldUser, user));
 	}
 
 	/**
@@ -329,21 +237,16 @@ public class TokenImpl extends EObjectImpl implements Token {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Zapfmaster2000Package.TOKEN__ID:
+			case Zapfmaster2000Package.GCM_TOKEN__ID:
 				return getId();
-			case Zapfmaster2000Package.TOKEN__TOKEN:
+			case Zapfmaster2000Package.GCM_TOKEN__TOKEN:
 				return getToken();
-			case Zapfmaster2000Package.TOKEN__ACCOUNT:
+			case Zapfmaster2000Package.GCM_TOKEN__ACCOUNT:
 				if (resolve) return getAccount();
 				return basicGetAccount();
-			case Zapfmaster2000Package.TOKEN__USER:
+			case Zapfmaster2000Package.GCM_TOKEN__USER:
 				if (resolve) return getUser();
 				return basicGetUser();
-			case Zapfmaster2000Package.TOKEN__ADMIN:
-				if (resolve) return getAdmin();
-				return basicGetAdmin();
-			case Zapfmaster2000Package.TOKEN__GOOGLE_CLOUD_MESSAGING_TOKEN:
-				return getGoogleCloudMessagingToken();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -356,23 +259,17 @@ public class TokenImpl extends EObjectImpl implements Token {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Zapfmaster2000Package.TOKEN__ID:
+			case Zapfmaster2000Package.GCM_TOKEN__ID:
 				setId((Long)newValue);
 				return;
-			case Zapfmaster2000Package.TOKEN__TOKEN:
+			case Zapfmaster2000Package.GCM_TOKEN__TOKEN:
 				setToken((String)newValue);
 				return;
-			case Zapfmaster2000Package.TOKEN__ACCOUNT:
+			case Zapfmaster2000Package.GCM_TOKEN__ACCOUNT:
 				setAccount((Account)newValue);
 				return;
-			case Zapfmaster2000Package.TOKEN__USER:
+			case Zapfmaster2000Package.GCM_TOKEN__USER:
 				setUser((User)newValue);
-				return;
-			case Zapfmaster2000Package.TOKEN__ADMIN:
-				setAdmin((Admin)newValue);
-				return;
-			case Zapfmaster2000Package.TOKEN__GOOGLE_CLOUD_MESSAGING_TOKEN:
-				setGoogleCloudMessagingToken((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -386,23 +283,17 @@ public class TokenImpl extends EObjectImpl implements Token {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Zapfmaster2000Package.TOKEN__ID:
+			case Zapfmaster2000Package.GCM_TOKEN__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case Zapfmaster2000Package.TOKEN__TOKEN:
+			case Zapfmaster2000Package.GCM_TOKEN__TOKEN:
 				setToken(TOKEN_EDEFAULT);
 				return;
-			case Zapfmaster2000Package.TOKEN__ACCOUNT:
+			case Zapfmaster2000Package.GCM_TOKEN__ACCOUNT:
 				setAccount((Account)null);
 				return;
-			case Zapfmaster2000Package.TOKEN__USER:
+			case Zapfmaster2000Package.GCM_TOKEN__USER:
 				setUser((User)null);
-				return;
-			case Zapfmaster2000Package.TOKEN__ADMIN:
-				setAdmin((Admin)null);
-				return;
-			case Zapfmaster2000Package.TOKEN__GOOGLE_CLOUD_MESSAGING_TOKEN:
-				setGoogleCloudMessagingToken(GOOGLE_CLOUD_MESSAGING_TOKEN_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -416,18 +307,14 @@ public class TokenImpl extends EObjectImpl implements Token {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Zapfmaster2000Package.TOKEN__ID:
+			case Zapfmaster2000Package.GCM_TOKEN__ID:
 				return id != ID_EDEFAULT;
-			case Zapfmaster2000Package.TOKEN__TOKEN:
+			case Zapfmaster2000Package.GCM_TOKEN__TOKEN:
 				return TOKEN_EDEFAULT == null ? token != null : !TOKEN_EDEFAULT.equals(token);
-			case Zapfmaster2000Package.TOKEN__ACCOUNT:
+			case Zapfmaster2000Package.GCM_TOKEN__ACCOUNT:
 				return account != null;
-			case Zapfmaster2000Package.TOKEN__USER:
+			case Zapfmaster2000Package.GCM_TOKEN__USER:
 				return user != null;
-			case Zapfmaster2000Package.TOKEN__ADMIN:
-				return admin != null;
-			case Zapfmaster2000Package.TOKEN__GOOGLE_CLOUD_MESSAGING_TOKEN:
-				return GOOGLE_CLOUD_MESSAGING_TOKEN_EDEFAULT == null ? googleCloudMessagingToken != null : !GOOGLE_CLOUD_MESSAGING_TOKEN_EDEFAULT.equals(googleCloudMessagingToken);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -446,10 +333,8 @@ public class TokenImpl extends EObjectImpl implements Token {
 		result.append(id);
 		result.append(", token: ");
 		result.append(token);
-		result.append(", googleCloudMessagingToken: ");
-		result.append(googleCloudMessagingToken);
 		result.append(')');
 		return result.toString();
 	}
 
-} //TokenImpl
+} //GCMTokenImpl

@@ -144,6 +144,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" eType="#//Account"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="user" eType="#//User"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="admin" eType="#//Admin"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="googleCloudMessagingToken"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Image">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
