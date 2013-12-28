@@ -23,6 +23,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jboss.resteasy.spi.AsynchronousResponse;
 
+import com.google.gson.Gson;
+
 import de.kile.zapfmaster2000.rest.api.news.AbstractNewsResponse;
 import de.kile.zapfmaster2000.rest.api.push.DrawDraftKitResponse;
 import de.kile.zapfmaster2000.rest.api.push.LoginDraftKitResponse;
@@ -312,7 +314,7 @@ public class PushServiceImpl implements PushService {
 				jsonGenerator.writeEndArray();
 
 				jsonGenerator.writeFieldName("data");
-				jsonGenerator.writeObject(entity);
+				jsonGenerator.writeString(new Gson().toJson(entity));
 				jsonGenerator.writeEndObject();
 
 				String json = os.toString();
