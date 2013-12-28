@@ -82,7 +82,7 @@ public interface AuthService {
 
 	/**
 	 * Retrieves the admin that is related to the given token. If no
-	 * {@link Admin} is attached to the tocken, this method will return
+	 * {@link Admin} is attached to the token, this method will return
 	 * <code>null</code>.
 	 * 
 	 * @param token
@@ -91,5 +91,26 @@ public interface AuthService {
 	 *         the given token.
 	 */
 	public Admin retrieveAdmin(String token);
+
+	/**
+	 * Retrieves the google cloud messaging token associated to the given token.
+	 * 
+	 * @param token
+	 *            the token to retrieve the gcm token for.
+	 * @return the gcm token or <code>null</code> if there is no gcm token for
+	 *         the given token.
+	 */
+	public String retrieveGoogleCloudMessagingToken(String token);
+
+	/**
+	 * Sets up the google cloud messaging token for a given logged in user.
+	 * 
+	 * @param token
+	 *            the token corresponding to the gcm to set
+	 * @throws IllegalArgumentException
+	 *             if the given token is not valid.
+	 */
+	public void setupGoogleCloudMessagingToken(String token,
+			String googleCloudMessagingToken) throws IllegalArgumentException;
 
 }

@@ -213,6 +213,12 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Zapfmaster2000Package.GCM_TOKEN: {
+				GCMToken gcmToken = (GCMToken)theEObject;
+				T result = caseGCMToken(gcmToken);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -559,6 +565,21 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAdmin(Admin object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>GCM Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>GCM Token</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGCMToken(GCMToken object) {
 		return null;
 	}
 

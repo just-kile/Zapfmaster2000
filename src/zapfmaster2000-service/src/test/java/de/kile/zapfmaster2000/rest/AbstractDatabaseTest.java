@@ -19,6 +19,7 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
@@ -55,6 +56,7 @@ public abstract class AbstractDatabaseTest {
 		session.createSQLQuery("SET REFERENTIAL_INTEGRITY FALSE")
 				.executeUpdate();
 
+		@SuppressWarnings("unchecked")
 		List<Object[]> result = session.createSQLQuery(
 				"SHOW TABLES FROM PUBLIC").list();
 		for (Object[] tableDesc : result) {
@@ -89,8 +91,7 @@ public abstract class AbstractDatabaseTest {
 	}
 
 	protected Box createBox(String pPassphrase, String pLocation,
-			String pVersion, double pA2, double pA1,
-			int pA0, Account pAccount) {
+			String pVersion, double pA2, double pA1, int pA0, Account pAccount) {
 		Box box = Zapfmaster2000Factory.eINSTANCE.createBox();
 		box.setAccount(pAccount);
 		box.setLocation(pLocation);
@@ -184,6 +185,18 @@ public abstract class AbstractDatabaseTest {
 		admin.setAccount(account);
 		saveEntity(admin);
 		return admin;
+	}
+
+	protected Token createToken(String token, User user, Account account,
+			Admin admin, String gcmToken) {
+		Token dbToken = Zapfmaster2000Factory.eINSTANCE.createToken();
+		dbToken.setToken(token);
+		dbToken.setAdmin(admin);
+		dbToken.setAccount(account);
+		dbToken.setUser(user);
+		dbToken.setGoogleCloudMessagingToken(gcmToken);
+		saveEntity(dbToken);
+		return dbToken;
 	}
 
 	protected void saveEntity(EObject pEntity, EObject... pEntitiesToUpdate) {

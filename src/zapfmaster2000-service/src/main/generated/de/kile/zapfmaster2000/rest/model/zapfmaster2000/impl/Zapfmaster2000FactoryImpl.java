@@ -79,6 +79,7 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.IMAGE: return createImage();
 			case Zapfmaster2000Package.TICKS: return createTicks();
 			case Zapfmaster2000Package.ADMIN: return createAdmin();
+			case Zapfmaster2000Package.GCM_TOKEN: return createGCMToken();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -342,6 +343,16 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	public Admin createAdmin() {
 		AdminImpl admin = new AdminImpl();
 		return admin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GCMToken createGCMToken() {
+		GCMTokenImpl gcmToken = new GCMTokenImpl();
+		return gcmToken;
 	}
 
 	/**

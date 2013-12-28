@@ -211,6 +211,15 @@ public interface Zapfmaster2000Factory extends EFactory {
 	Admin createAdmin();
 
 	/**
+	 * Returns a new object of class '<em>GCM Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>GCM Token</em>'.
+	 * @generated
+	 */
+	GCMToken createGCMToken();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
