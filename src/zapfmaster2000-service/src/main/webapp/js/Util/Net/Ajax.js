@@ -1,7 +1,7 @@
 ZMO.Util.Net = ZMO.Util.Net || {};
 ZMO.Util.Net.Ajax = (function($){
 	var c = ZMO.UtilConstants.ajax;
-	
+
 	var r = ZMO.onlineRecognizer;
 	/*****
 	 * Receive Datas
@@ -374,6 +374,9 @@ ZMO.Util.Net.Ajax = (function($){
 		
 	}
 	
+	
+	
+	
 	var errorHandler = function(e){
 		ZMO.logger.log(e);
 	}
@@ -386,14 +389,19 @@ ZMO.Util.Net.Ajax = (function($){
 			//alert("verschieden")
 		}
 		localStorage.setItem("zm-gcm",id);
-		 new ZMO.Util.Popup().open($("<input>").val(id));
-//		$.ajax({
-//			url:"http://dns.zapfmaster2000.de/test",
-//			data:{
-//				key:id
-//			}
-//			
-//		});
+		//new ZMO.Util.Popup().open($("<input>").val(id));
+		$.ajax({
+			url:baseUrl+"rest/login/gcm",
+			type:"POST",
+			data:{
+				token:localStorage.getItem(ZMO.UtilConstants.tokenName),
+				gcm:id
+			},
+			complete:function(e){
+				new ZMO.Util.Popup().open($("<input>").val(JSON.stringify(e)));
+			}
+			
+		});
 		
 	}
 	var onNotification = function(e){
