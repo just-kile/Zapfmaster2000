@@ -15,10 +15,16 @@ ZMO.modules.logout = (function($,ajax){
 		if(mC.unregisterPushService && window.device &&( window.device.platform == 'android' || window.device.platform == 'Android')){
 			window.plugins.pushNotification.unregister(function(){
 				ZMO.logger.log("App unregister success");
-				window.location.replace("index.html");
+				ajax.postDatas(mC.urls.GCMRESET,function(){
+					window.location.replace("index.html");
+				},{},true);
+				//window.location.replace("index.html");
 			}, function(){
 				ZMO.logger.log("App unregister failed");
-				window.location.replace("index.html");
+				ajax.postDatas(mC.urls.GCMRESET,function(){
+					window.location.replace("index.html");
+				},{},true);
+				//window.location.replace("index.html");
 			});
 		}else{
 			window.location.replace("index.html");

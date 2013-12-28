@@ -49,7 +49,9 @@ ZMO.modules.Constants = {
 			CHALLENGEEMEMBERS:"rest/challenge/users",
 			STARTCHALLENGE:"rest/challenge/start/{0}",
 			ACCEPTCHALLENGE:"rest/challenge/accept",
-			DENYCHALLENGE:"rest/challenge/decline"
+			DENYCHALLENGE:"rest/challenge/decline",
+			GCMRESET:"rest/login/gcm/reset",
+			GCMREGISTER:"rest/login/gcm/register"
 			// NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
 		push:{

@@ -17,7 +17,7 @@ ZMO.Util.Net.Ajax = (function($){
 	/**
 	 * Get datas instant
 	 */
-	var getDatas = function(url,callback,datas,type){
+	var getDatas = function(url,callback,datas,type,callOnError){
 		if(!ZMO.exists(datas))datas = {};
 		//if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
 		datas["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
@@ -51,13 +51,14 @@ ZMO.Util.Net.Ajax = (function($){
 				callback(data);
 			}else{
 				ZMO.logger.error("AJAX ERROR "+resp.status);
+				if(callOnError)callback();
 			}
 			if(ZMO.throbber)ZMO.throbber.hide();
 			}
 		});
 	};
-	var postDatas = function(url,callback,datas){
-		getDatas(url,callback,datas,"POST");
+	var postDatas = function(url,callback,datas,callOnError){
+		getDatas(url,callback,datas,"POST",callOnError);
 	};
 	/*****
 	 * Interval pull
@@ -398,7 +399,7 @@ ZMO.Util.Net.Ajax = (function($){
 				gcm:id
 			},
 			complete:function(e){
-				new ZMO.Util.Popup().open($("<input>").val(JSON.stringify(e)));
+				new ZMO.Util.Popup().open($("<input>").val(e&&e.status));
 			}
 			
 		});
@@ -520,7 +521,8 @@ ZMO.Util.Net.Ajax = (function($){
 			sendChallengeConfirmation:sendChallengeConfirmation,
 			sendChallengeRejection:sendChallengeRejection,
 			sendChallengeRequest:sendChallengeRequest,
-			onNotification:onNotification
+			onNotification:onNotification,
+			sendRegisterId:sendRegisterId
 	};
 	return pub;
 	
