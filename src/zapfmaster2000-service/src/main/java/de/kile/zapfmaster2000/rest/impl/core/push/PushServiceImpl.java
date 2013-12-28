@@ -1,11 +1,24 @@
 package de.kile.zapfmaster2000.rest.impl.core.push;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.log4j.Logger;
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.JsonProcessingException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jboss.resteasy.spi.AsynchronousResponse;
@@ -35,6 +48,9 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class PushServiceImpl implements PushService {
 
+	private static final Logger LOGGER = Logger
+			.getLogger(PushServiceImpl.class);
+
 	/** pending responses for news pushs: AccountId -> PushQueue */
 	private final Map<Long, PushQueue> pendingNewsResponses = new HashMap<>();
 
@@ -43,7 +59,7 @@ public class PushServiceImpl implements PushService {
 
 	/** pending reponses for challenge pushs: UserId -> PushQueue */
 	private final Map<Long, PushQueue> pendingChallengeResponses = new HashMap<>();
-	
+
 	/** pending responses for unknown rfid tag pushes: BoxId -> PushQueue */
 	private final Map<Long, PushQueue> pendingUnkownRfidResponses = new HashMap<>();
 
@@ -91,7 +107,7 @@ public class PushServiceImpl implements PushService {
 
 	@Override
 	public void addUnkownRfidRequest(AsynchronousResponse pResponse, Box pBox) {
-		if (!pendingUnkownRfidResponses.containsKey(pBox.getId())){
+		if (!pendingUnkownRfidResponses.containsKey(pBox.getId())) {
 			PushQueue queue = new PushQueue();
 			pendingUnkownRfidResponses.put(pBox.getId(), queue);
 		}
@@ -135,7 +151,8 @@ public class PushServiceImpl implements PushService {
 			}
 
 			@Override
-			public void onLoginFailed(Box pBox, LoginFailureReason pReason, long pTag) {
+			public void onLoginFailed(Box pBox, LoginFailureReason pReason,
+					long pTag) {
 				if (pReason == LoginFailureReason.INVALID_RFID_TAG) {
 					pushInvalidRfidTag(pBox, pTag);
 				}
@@ -229,24 +246,107 @@ public class PushServiceImpl implements PushService {
 		if (pChallenge instanceof Challenge1v1) {
 			Challenge1v1 challenge1v1 = (Challenge1v1) pChallenge;
 			User challengee = challenge1v1.getUser2();
+
+			ChallengeRequestResponse entity = new ChallengeRequestResponse();
+			User challenger = challenge1v1.getUser1();
+			entity.setChallengerUserName(challenger.getName());
+			entity.setChallengerImagePath(challenger.getImagePath());
+			entity.setChallengerUserId(challenger.getId());
+			entity.setChallengeId(challenge1v1.getId());
+
+			// send via reverse ajax
 			if (pendingChallengeResponses.containsKey(challengee.getId())) {
 				PushQueue queue = pendingChallengeResponses.get(challengee
 						.getId());
-
-				ChallengeRequestResponse entity = new ChallengeRequestResponse();
-				User challenger = challenge1v1.getUser1();
-				entity.setChallengerUserName(challenger.getName());
-				entity.setChallengerImagePath(challenger.getImagePath());
-				entity.setChallengerUserId(challenger.getId());
-				entity.setChallengeId(challenge1v1.getId());
-
 				Response response = Response.ok(entity).build();
 				queue.push(response, true);
-			} // else nobody is interested in this
+			}
+
+			// send via gcm
+			sendViaGcm(entity, challengee.getId());
 		}
 	}
 
-	private void pushChallengeStarted(Challenge pChallenge) {
+	private void sendViaGcm(Object entity, Long... userIds) {
+
+		// collect the gcm tokens we want to send the entity to
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		Set<String> gcmTokens = new HashSet<>();
+
+		for (Long userId : userIds) {
+			@SuppressWarnings("unchecked")
+			List<String> result = session
+					.createQuery(
+							"SELECT t.googleCloudMessagingToken From Token t "
+									+ "WHERE t.user IS NOT NULL AND t.user.id = :userId "
+									+ "AND t.googleCloudMessagingToken IS NOT NULL")
+					.setLong("userId", userId).list();
+			gcmTokens.addAll(result);
+		}
+
+		tx.commit();
+
+		if (!gcmTokens.isEmpty()) {
+
+			HttpClient httpclient = new HttpClient();
+			PostMethod post = new PostMethod(
+					"https://android.googleapis.com/gcm/send");
+
+			// convert entity to json
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			JsonFactory factory = new JsonFactory();
+
+			try {
+				JsonGenerator jsonGenerator = factory.createJsonGenerator(os);
+
+				jsonGenerator.writeStartObject();
+
+				jsonGenerator.writeFieldName("registration_ids");
+				jsonGenerator.writeStartArray();
+				for (String gcmToken : gcmTokens) {
+					jsonGenerator.writeString(gcmToken);
+				}
+				jsonGenerator.writeEndArray();
+
+				jsonGenerator.writeFieldName("data");
+				jsonGenerator.writeObject(entity);
+				jsonGenerator.writeEndObject();
+
+				String json = os.toString();
+				LOGGER.trace("Created json" + json);
+
+				post.setRequestHeader("Content-Length",
+						Integer.toString(json.length()));
+				post.setRequestHeader("Content-Type", "application/json");
+				post.setRequestHeader("Authorization",
+						"key=AIzaSyAzFGj3pOuMyhQq9udWWplVbWMQFKMuS1g");
+
+				post.setRequestEntity(new StringRequestEntity(json,
+						"application/json", null));
+
+				try {
+					httpclient.executeMethod(post);
+					LOGGER.trace("gcm returned: " + post.getStatusLine());
+				} finally {
+					post.releaseConnection();
+				}
+
+			} catch (JsonGenerationException e) {
+				LOGGER.error("Could not generate json", e);
+			} catch (JsonProcessingException e) {
+				LOGGER.error("Could not generate json", e);
+			} catch (IOException e) {
+				LOGGER.error("Could not generate json", e);
+			}
+
+		}
+
+	}
+
+	void pushChallengeStarted(Challenge pChallenge) {
 		if (pChallenge instanceof Challenge1v1) {
 			Challenge1v1 challenge1v1 = (Challenge1v1) pChallenge;
 
@@ -268,6 +368,7 @@ public class PushServiceImpl implements PushService {
 
 			Response response = Response.ok(entity).build();
 
+			// send via revese ajax
 			if (pendingChallengeResponses.containsKey(challenge1v1.getUser1()
 					.getId())) {
 				PushQueue queue = pendingChallengeResponses.get(challenge1v1
@@ -280,6 +381,10 @@ public class PushServiceImpl implements PushService {
 						.getUser2().getId());
 				queue.push(response, true);
 			}
+
+			// send via gcm
+			sendViaGcm(entity, challenge1v1.getUser1().getId(), challenge1v1
+					.getUser2().getId());
 		}
 	}
 
@@ -305,6 +410,7 @@ public class PushServiceImpl implements PushService {
 
 			Response response = Response.ok(entity).build();
 
+			// send via reverse ajax
 			if (pendingChallengeResponses.containsKey(challenge1v1.getUser1()
 					.getId())) {
 				PushQueue queue = pendingChallengeResponses.get(challenge1v1
@@ -317,13 +423,17 @@ public class PushServiceImpl implements PushService {
 						.getUser2().getId());
 				queue.push(response, true);
 			}
+
+			// send via gcm
+			sendViaGcm(entity, challenge1v1.getUser1().getId(), challenge1v1
+					.getUser2().getId());
 		}
 	}
-	
+
 	private void pushInvalidRfidTag(Box pBox, long pTag) {
 		if (pendingUnkownRfidResponses.containsKey(pBox.getId())) {
 			PushQueue queue = pendingUnkownRfidResponses.get(pBox.getId());
-			
+
 			Response response = Response.ok(pTag).build();
 			queue.push(response, false);
 		} // else nobody cares

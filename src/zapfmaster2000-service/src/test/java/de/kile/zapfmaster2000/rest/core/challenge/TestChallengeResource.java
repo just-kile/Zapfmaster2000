@@ -1,5 +1,10 @@
 package de.kile.zapfmaster2000.rest.core.challenge;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -10,25 +15,16 @@ import javax.ws.rs.core.Response.Status;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
-import static org.mockito.Matchers.*;
-import static org.junit.Assert.*;
-
-import de.kile.zapfmaster2000.rest.AbstractDatabaseTest;
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
 import de.kile.zapfmaster2000.rest.api.challenge.ChallengeResource;
 import de.kile.zapfmaster2000.rest.api.challenge.LoggedInUserReponse;
-import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
-import de.kile.zapfmaster2000.rest.impl.core.push.ChallengeRequestResponse;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
 
 public class TestChallengeResource extends AbstractMockingTest {
 

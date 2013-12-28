@@ -2,18 +2,16 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState;
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 /**
  * <!-- begin-user-doc -->
