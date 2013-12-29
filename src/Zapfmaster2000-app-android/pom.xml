@@ -21,6 +21,16 @@
 			<artifactId>phonegap</artifactId>
 			<version>2.4.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>gcm</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>android</groupId>
+			<artifactId>support</artifactId>
+			<version>13</version>
+		</dependency>
 
 	</dependencies>
 	<build>
