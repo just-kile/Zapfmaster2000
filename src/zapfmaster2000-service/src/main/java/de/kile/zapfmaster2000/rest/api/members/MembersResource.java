@@ -11,12 +11,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import de.kile.zapfmaster2000.rest.core.auth.AuthUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import de.kile.zapfmaster2000.rest.api.members.MemberResponse.GainedUserAchievement;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.core.auth.AuthUtil;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
 @Path("/members")

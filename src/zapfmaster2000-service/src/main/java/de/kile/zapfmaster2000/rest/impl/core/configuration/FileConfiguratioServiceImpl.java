@@ -1,10 +1,8 @@
 package de.kile.zapfmaster2000.rest.impl.core.configuration;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 

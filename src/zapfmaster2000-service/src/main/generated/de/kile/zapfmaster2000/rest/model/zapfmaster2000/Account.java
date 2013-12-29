@@ -3,7 +3,6 @@
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

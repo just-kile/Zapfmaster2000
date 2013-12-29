@@ -12,7 +12,8 @@ ZMO.UtilConstants ={
 		ajax:{
 			pullTimeout:60000,//ms
 //			pullTimeout:5000,
-			NO_DATA_RECEIVED_CODE:503
+			NO_DATA_RECEIVED_CODE:503,
+			GCM_API_KEY:"946899274677"
 		},
 		throbberUrl:"images/view/throbber.gif",
 		tokenName:"token",

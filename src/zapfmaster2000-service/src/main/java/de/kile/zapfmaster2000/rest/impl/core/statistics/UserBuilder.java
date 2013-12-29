@@ -1,16 +1,11 @@
 package de.kile.zapfmaster2000.rest.impl.core.statistics;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import de.kile.zapfmaster2000.rest.api.members.MemberResponse;
-import de.kile.zapfmaster2000.rest.api.members.MemberResponse.GainedUserAchievement;
-import de.kile.zapfmaster2000.rest.api.statistics.KegResponse;
 import de.kile.zapfmaster2000.rest.api.statistics.UserResponse;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;

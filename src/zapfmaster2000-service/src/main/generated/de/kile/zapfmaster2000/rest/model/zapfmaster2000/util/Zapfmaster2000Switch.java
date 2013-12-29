@@ -2,12 +2,35 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.util;
 
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
+
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewUserNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -210,6 +233,12 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 			case Zapfmaster2000Package.ADMIN: {
 				Admin admin = (Admin)theEObject;
 				T result = caseAdmin(admin);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Zapfmaster2000Package.GCM_TOKEN: {
+				GCMToken gcmToken = (GCMToken)theEObject;
+				T result = caseGCMToken(gcmToken);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -559,6 +588,21 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAdmin(Admin object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>GCM Token</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>GCM Token</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGCMToken(GCMToken object) {
 		return null;
 	}
 

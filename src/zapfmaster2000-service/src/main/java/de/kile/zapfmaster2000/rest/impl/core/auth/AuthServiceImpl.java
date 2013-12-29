@@ -196,6 +196,55 @@ public class AuthServiceImpl implements AuthService {
 		return admin;
 	}
 
+	@Override
+	public String retrieveGoogleCloudMessagingToken(String token) {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		@SuppressWarnings("unchecked")
+		List<Token> result = session
+				.createQuery("SELECT t FROM Token t WHERE t.token = :token")
+				.setString("token", token).list();
+		tx.commit();
+
+		if (result.size() == 1) {
+			Token dbToken = result.get(0);
+			return dbToken.getGoogleCloudMessagingToken();
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void setupGoogleCloudMessagingToken(String token,
+			String googleCloudMessagingToken) throws IllegalArgumentException {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		@SuppressWarnings("unchecked")
+		List<Token> result = session
+				.createQuery("SELECT t FROM Token t WHERE t.token = :token")
+				.setString("token", token).list();
+
+
+		
+		boolean foundToken = result.size() == 1;
+		if (foundToken) {
+			Token dbToken = result.get(0);
+			dbToken.setGoogleCloudMessagingToken(googleCloudMessagingToken);
+			session.update(dbToken);
+		} 
+		tx.commit();
+		
+		if (!foundToken) {
+			throw new IllegalArgumentException("Could not find the given token");
+		}
+		
+
+	}
+
 	private String createNextToken() {
 		return new BigInteger(130, secureRandom).toString(32);
 	}

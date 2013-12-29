@@ -1,5 +1,10 @@
 package de.kile.zapfmaster2000.rest.api.statistics;
 
+import static junit.framework.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.text.SimpleDateFormat;
 
 import javax.ws.rs.core.Response;
@@ -7,13 +12,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertEquals;
-
-import static org.mockito.Matchers.anyString;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;

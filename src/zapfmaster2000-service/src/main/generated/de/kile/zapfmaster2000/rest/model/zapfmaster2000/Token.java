@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token#getAccount <em>Account</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token#getUser <em>User</em>}</li>
  *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token#getAdmin <em>Admin</em>}</li>
+ *   <li>{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token#getGoogleCloudMessagingToken <em>Google Cloud Messaging Token</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,5 +155,31 @@ public interface Token extends EObject {
 	 * @generated
 	 */
 	void setAdmin(Admin value);
+
+	/**
+	 * Returns the value of the '<em><b>Google Cloud Messaging Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Google Cloud Messaging Token</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Google Cloud Messaging Token</em>' attribute.
+	 * @see #setGoogleCloudMessagingToken(String)
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package#getToken_GoogleCloudMessagingToken()
+	 * @model
+	 * @generated
+	 */
+	String getGoogleCloudMessagingToken();
+
+	/**
+	 * Sets the value of the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token#getGoogleCloudMessagingToken <em>Google Cloud Messaging Token</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Google Cloud Messaging Token</em>' attribute.
+	 * @see #getGoogleCloudMessagingToken()
+	 * @generated
+	 */
+	void setGoogleCloudMessagingToken(String value);
 
 } // Token

@@ -1,5 +1,10 @@
 package de.kile.zapfmaster2000.rest.api.statistics;
 
+import static junit.framework.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -13,12 +18,6 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
-import static junit.framework.Assert.assertEquals;
-
-import static org.mockito.Matchers.anyString;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class TestAchievementStats extends AbstractMockingTest {
 

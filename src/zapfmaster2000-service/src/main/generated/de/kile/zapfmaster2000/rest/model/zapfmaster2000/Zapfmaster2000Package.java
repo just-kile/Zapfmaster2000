@@ -1356,13 +1356,22 @@ public interface Zapfmaster2000Package extends EPackage {
 	int TOKEN__ADMIN = 4;
 
 	/**
+	 * The feature id for the '<em><b>Google Cloud Messaging Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOKEN__GOOGLE_CLOUD_MESSAGING_TOKEN = 5;
+
+	/**
 	 * The number of structural features of the '<em>Token</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOKEN_FEATURE_COUNT = 5;
+	int TOKEN_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ImageImpl <em>Image</em>}' class.
@@ -1530,6 +1539,61 @@ public interface Zapfmaster2000Package extends EPackage {
 	int ADMIN_FEATURE_COUNT = 5;
 
 	/**
+	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GCMTokenImpl <em>GCM Token</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GCMTokenImpl
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getGCMToken()
+	 * @generated
+	 */
+	int GCM_TOKEN = 23;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCM_TOKEN__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Token</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCM_TOKEN__TOKEN = 1;
+
+	/**
+	 * The feature id for the '<em><b>Account</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCM_TOKEN__ACCOUNT = 2;
+
+	/**
+	 * The feature id for the '<em><b>User</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCM_TOKEN__USER = 3;
+
+	/**
+	 * The number of structural features of the '<em>GCM Token</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GCM_TOKEN_FEATURE_COUNT = 4;
+
+	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1537,7 +1601,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 23;
+	int SEX = 24;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType <em>Challenge Type</em>}' enum.
@@ -1547,7 +1611,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeType()
 	 * @generated
 	 */
-	int CHALLENGE_TYPE = 24;
+	int CHALLENGE_TYPE = 25;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType <em>User Type</em>}' enum.
@@ -1557,7 +1621,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUserType()
 	 * @generated
 	 */
-	int USER_TYPE = 25;
+	int USER_TYPE = 26;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState <em>Challenge State</em>}' enum.
@@ -1567,7 +1631,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeState()
 	 * @generated
 	 */
-	int CHALLENGE_STATE = 26;
+	int CHALLENGE_STATE = 27;
 
 
 	/**
@@ -1578,7 +1642,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAdminType()
 	 * @generated
 	 */
-	int ADMIN_TYPE = 27;
+	int ADMIN_TYPE = 28;
 
 	/**
 	 * The meta object id for the '<em>Blob</em>' data type.
@@ -1588,7 +1652,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getBlob()
 	 * @generated
 	 */
-	int BLOB = 28;
+	int BLOB = 29;
 
 
 	/**
@@ -2617,6 +2681,17 @@ public interface Zapfmaster2000Package extends EPackage {
 	EReference getToken_Admin();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token#getGoogleCloudMessagingToken <em>Google Cloud Messaging Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Google Cloud Messaging Token</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token#getGoogleCloudMessagingToken()
+	 * @see #getToken()
+	 * @generated
+	 */
+	EAttribute getToken_GoogleCloudMessagingToken();
+
+	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image <em>Image</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2777,6 +2852,60 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EReference getAdmin_Account();
+
+	/**
+	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken <em>GCM Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>GCM Token</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken
+	 * @generated
+	 */
+	EClass getGCMToken();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken#getId()
+	 * @see #getGCMToken()
+	 * @generated
+	 */
+	EAttribute getGCMToken_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken#getToken <em>Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Token</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken#getToken()
+	 * @see #getGCMToken()
+	 * @generated
+	 */
+	EAttribute getGCMToken_Token();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken#getAccount <em>Account</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Account</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken#getAccount()
+	 * @see #getGCMToken()
+	 * @generated
+	 */
+	EReference getGCMToken_Account();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken#getUser <em>User</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>User</em>'.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken#getUser()
+	 * @see #getGCMToken()
+	 * @generated
+	 */
+	EReference getGCMToken_User();
 
 	/**
 	 * Returns the meta object for enum '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}'.
@@ -3662,6 +3791,14 @@ public interface Zapfmaster2000Package extends EPackage {
 		EReference TOKEN__ADMIN = eINSTANCE.getToken_Admin();
 
 		/**
+		 * The meta object literal for the '<em><b>Google Cloud Messaging Token</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TOKEN__GOOGLE_CLOUD_MESSAGING_TOKEN = eINSTANCE.getToken_GoogleCloudMessagingToken();
+
+		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.ImageImpl <em>Image</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3786,6 +3923,48 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EReference ADMIN__ACCOUNT = eINSTANCE.getAdmin_Account();
+
+		/**
+		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GCMTokenImpl <em>GCM Token</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.GCMTokenImpl
+		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getGCMToken()
+		 * @generated
+		 */
+		EClass GCM_TOKEN = eINSTANCE.getGCMToken();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GCM_TOKEN__ID = eINSTANCE.getGCMToken_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Token</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GCM_TOKEN__TOKEN = eINSTANCE.getGCMToken_Token();
+
+		/**
+		 * The meta object literal for the '<em><b>Account</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GCM_TOKEN__ACCOUNT = eINSTANCE.getGCMToken_Account();
+
+		/**
+		 * The meta object literal for the '<em><b>User</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GCM_TOKEN__USER = eINSTANCE.getGCMToken_User();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex <em>Sex</em>}' enum.

@@ -1,6 +1,7 @@
 ZMO.Util.Net = ZMO.Util.Net || {};
 ZMO.Util.Net.Ajax = (function($){
 	var c = ZMO.UtilConstants.ajax;
+
 	var r = ZMO.onlineRecognizer;
 	/*****
 	 * Receive Datas
@@ -11,10 +12,12 @@ ZMO.Util.Net.Ajax = (function($){
 			MODULE_PARAMS:"params"
 	};
 	var stop=true;
+	var isAndroid = window.device &&( window.device.platform == 'android' || window.device.platform == 'Android');
+	var gcmHandlers = {};
 	/**
 	 * Get datas instant
 	 */
-	var getDatas = function(url,callback,datas,type){
+	var getDatas = function(url,callback,datas,type,callOnError){
 		if(!ZMO.exists(datas))datas = {};
 		//if(ZMO.Constants.debugMode)datas["_"] = new Date().getTime();
 		datas["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
@@ -48,13 +51,14 @@ ZMO.Util.Net.Ajax = (function($){
 				callback(data);
 			}else{
 				ZMO.logger.error("AJAX ERROR "+resp.status);
+				if(callOnError)callback();
 			}
 			if(ZMO.throbber)ZMO.throbber.hide();
 			}
 		});
 	};
-	var postDatas = function(url,callback,datas){
-		getDatas(url,callback,datas,"POST");
+	var postDatas = function(url,callback,datas,callOnError){
+		getDatas(url,callback,datas,"POST",callOnError);
 	};
 	/*****
 	 * Interval pull
@@ -268,10 +272,24 @@ ZMO.Util.Net.Ajax = (function($){
 		}
 		
 	};
+	var getGcmHandlers = function(){
+		return gcmHandlers;
+	}
+	var setGcmHandler = function(key,val){
+			return gcmHandlers[key]=val;
+	}
 	var connectToNewsPush = function(callback){
-		setTimeout(function(){
-			connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
-		},100);
+		if(isAndroid){//registerCallbackHandler
+			ZMO.logger.log("Connect to news push");
+			$.each(ZMO.modules.Constants.drawfeed.types,function(key,type){
+				setGcmHandler(type,callback);
+			});
+		
+		}else{//start long polling
+			setTimeout(function(){
+				connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
+			},100);
+		}
 	};
 	var connectToNewsUpdate = function(boxId,callback){
 		setTimeout(function(){
@@ -352,10 +370,88 @@ ZMO.Util.Net.Ajax = (function($){
 			abortReq(ZMO.modules.Constants.push.CHALLENGE);
 		},100);
 	};
+	var onGetPluginCalls = function(e){
+		ZMO.logger.log(e);
+		
+	}
+	
+	
+	
+	
+	var errorHandler = function(e){
+		ZMO.logger.log(e);
+	}
+	var sendRegisterId = function(id){
+		console.log("Send RegId:"+id);
+		var gcmId = localStorage.getItem("zm-gcm");
+		if(gcmId==id){
+			//alert("Gleich")
+		}else{
+			//alert("verschieden")
+		}
+		localStorage.setItem("zm-gcm",id);
+		//new ZMO.Util.Popup().open($("<input>").val(id));
+		$.ajax({
+			url:baseUrl+"rest/login/gcm",
+			type:"POST",
+			data:{
+				token:localStorage.getItem(ZMO.UtilConstants.tokenName),
+				gcm:id
+			},
+			complete:function(e){
+				new ZMO.Util.Popup().open($("<input>").val(e&&e.status));
+			}
+			
+		});
+		
+	}
+	var onNotification = function(e){
+    	
+    	ZMO.logger.log(e);
+    	switch(e.event){
+    	case "registered":
+    		sendRegisterId(e.regid);
+    		ZMO.logger.log("Receive Registered");
+    		break;
+    	case "message":
+    		if(true || e.foreground){
+    			ZMO.logger.log("Receive Message"+JSON.stringify(e));
+    			//if(callback)callback($.parseJSON(e.payload.message));
+    			// new ZMO.Util.Popup().open($("<input>").val("Wuff!"));
+    			 var json = e.payload;
+    			 if(getGcmHandlers()[json.type]){
+    				 ZMO.logger.log("Received Handler for "+json.type);
+    				 getGcmHandlers()[json.type](json);
+    				 
+    			 }else{
+    				 ZMO.logger.log("No handler for "+JSON.stringify(e));
+    				 ZMO.logger.log("GCM Handler: "+getGcmHandlers()[json.type]);
+    			 }
+    		}else{
+    			
+    		}
+    		break;
+    	case "error":
+    		errorHandler(e.msg);
+    		break;
+    	default:
+    		ZMO.logger.log("Message received,but dont know what it is");
+    	}
+    }
 	var connectChallengeReceive = function(callback){
-		setTimeout(function(){
-			connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback,null,null,true);
-		},100);
+		if (isAndroid) {
+			$.each(ZMO.modules.Constants.challenges.types,function(key,type){
+				setGcmHandler(type,callback);
+			});
+			
+		} else if(window.device && window.device.platform =="ios"){
+		    window.plugins.pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});
+		}else{
+			setTimeout(function(){
+				connectToChannel(ZMO.modules.Constants.push.CHALLENGE,callback,null,null,true);
+			},100);
+		}
+		
 		
 		
 	};
@@ -388,7 +484,15 @@ ZMO.Util.Net.Ajax = (function($){
 					};
 		postDatas(url,callback,datas);
 	};
+	var init = function(){
+		ZMO.logger.log("Init ajax js");
+		if(isAndroid){
+			window.plugins.pushNotification.register(onGetPluginCalls, errorHandler,{"senderID":c.GCM_API_KEY,"ecb":"ZMO.ajax.onNotification"});
+		}
+		
+	}
 	var pub = {
+			init:init,
 			getDatas:getDatas,
 			postDatas:postDatas,
 			
@@ -416,7 +520,9 @@ ZMO.Util.Net.Ajax = (function($){
 			abortChallengePush:abortChallengePush,
 			sendChallengeConfirmation:sendChallengeConfirmation,
 			sendChallengeRejection:sendChallengeRejection,
-			sendChallengeRequest:sendChallengeRequest
+			sendChallengeRequest:sendChallengeRequest,
+			onNotification:onNotification,
+			sendRegisterId:sendRegisterId
 	};
 	return pub;
 	

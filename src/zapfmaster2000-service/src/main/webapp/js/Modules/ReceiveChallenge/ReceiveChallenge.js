@@ -20,8 +20,9 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 	 */
 	var onChallengeReceive = function(datas){
 		if(ZMO.exists(datas.type)){
-			var type = datas.type.toLowerCase();
-			if(type=="challengerequest"){
+			var type = datas.type;
+			ZMO.logger.log("Received Challenge type "+ type);
+			if(type==mC.challenges.types.CHALLENGE_REQUEST){
 //				var yep = confirm(datas.challengerUserName+" hat dich zu einem Duell herausgefordert! Nimmst du an?");
 //				if(yep){
 //					ajax.sendChallengeConfirmation(datas);
@@ -31,14 +32,14 @@ ZMO.modules.receiveChallenge = (function($,ajax){
 				ZMO.Notifications.send(datas.challengerUserName+" hat dich zu einem Duell herausgefordert!","Du wurdest herausgefordert!");
 				
 				ZMO.modules.header.pushNotification(datas,sendChallengeResponse);
-			}else if(type=="challengeaccepted"){
+			}else if(type==mC.challenges.types.CHALLENGE_ACCEPTED){
 				//alert("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde gestartet!");
 				 var template = ZMO.Util.localization.translateAndFillTemplate("challengeStarted",datas);
 				 new ZMO.Util.Popup().open(template);
 				 ZMO.Notifications.send("Die Challenge zwischen "+datas.user1Name+ "und "+datas.user2Name+" wurde angenommen!","Herausforderung angenommen!");
 					
 				 
-			}else if(type=="challengedeclined"){
+			}else if(type==mC.challenges.types.CHALLENGE_DECLINED){
 				//alert("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde abgelehnt!");
 				// ZMO.Util.Popup.open("Die Herausforderung zwischen "+datas.user1Name+" und "+ datas.user2Name+ " wurde abgelehnt!");
 				 //ZMO.Util.Popup.open(ZMO.Util.Localization.

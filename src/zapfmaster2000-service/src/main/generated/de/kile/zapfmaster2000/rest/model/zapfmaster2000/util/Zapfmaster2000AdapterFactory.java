@@ -2,14 +2,36 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.util;
 
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewUserNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.News;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -158,6 +180,10 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAdmin(Admin object) {
 				return createAdminAdapter();
+			}
+			@Override
+			public Adapter caseGCMToken(GCMToken object) {
+				return createGCMTokenAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -498,6 +524,20 @@ public class Zapfmaster2000AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAdminAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken <em>GCM Token</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken
+	 * @generated
+	 */
+	public Adapter createGCMTokenAdapter() {
 		return null;
 	}
 

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="lib" path="C:/Users/Ben/git/Zapfmaster2000/src/Zapfmaster2000-app-android/libs/cordova-2.4.0.jar"/>
+	<classpathentry kind="lib" path="src/com/plugin/android-support-v13.jar"/>
+	<classpathentry kind="lib" path="libs/gcm/gcm.jar"/>
+	<classpathentry kind="lib" path="libs/phonegap/cordova-2.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/android-support/android-support-v13.jar"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
