@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.kile.zapfmaster2000</groupId>
 	<artifactId>zapfmaster2000-app-android</artifactId>
-	<version>1.2.0<version>
+	<version>1.2.0</version>
 	<packaging>apk</packaging>
 	<properties>
 		<skip.install>false</skip.install>
