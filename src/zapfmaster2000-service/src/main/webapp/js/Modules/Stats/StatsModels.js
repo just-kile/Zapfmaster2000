@@ -188,7 +188,7 @@ ZMO.modules.DrawCountModel =function(config){
  */
 ZMO.modules.ProgressModel = function(config){
 	if("undefined"!=typeof config){
-	var data = config.data||config.amount;
+	var data = config.data||config.amount||[];
 	if(data.length<2){
 		if(ZMO.modules.Constants && ZMO.modules.Constants.stats.lineChartPoints){
 			var len = ZMO.modules.Constants.stats.lineChartPoints;

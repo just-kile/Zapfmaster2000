@@ -178,6 +178,7 @@ ZMO.modules.header = (function($,ajax){
 	 * Gets called after the "getInstance" container is appended to DOM
 	 */
 	var init = function(hashParams,moduleParams){
+		ZMO.logger.log("init header");
 		//add icons
 		naviBtn.append(createIcon("images/icons/88-beer-mug.png"));
 		usersBtn.append(createIcon("images/icons/22-skull-n-bones.png"));

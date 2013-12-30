@@ -190,6 +190,7 @@ ZMO.Util.Net.Ajax = (function($){
 	 * 			The function that will be executed, when error occurs, or timeout
 	 */
 	var connectToChannel = function(url,successCb,errorCb,data,isNotCancable){
+		ZMO.logger.log("connect to channel "+url);
 		if(!data)data ={};
 		data["token"] = localStorage.getItem(ZMO.UtilConstants.tokenName);
 		data["_"] = new Date().getTime();
@@ -212,6 +213,10 @@ ZMO.Util.Net.Ajax = (function($){
 //		}
 		if(!ZMO.onlineRecognizer || ZMO.onlineRecognizer.isConnected()){
 			
+		if(pushRequests[url]){
+			ZMO.logger.log("Abort "+url);
+			pushRequests[url].req && pushRequests[url].req.abort();
+		}
 		
 		var request = $.ajax({
 			type:"GET",
@@ -286,6 +291,7 @@ ZMO.Util.Net.Ajax = (function($){
 			});
 			
 		}else{//start long polling
+			ZMO.logger.log("Connect to news push long polling");
 			setTimeout(function(){
 				connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
 			},100);
@@ -487,8 +493,11 @@ ZMO.Util.Net.Ajax = (function($){
 	var init = function(){
 		ZMO.logger.log("Init ajax js");
 		if(isAndroid){
-			window.plugins.pushNotification.register(onGetPluginCalls, errorHandler,{"senderID":c.GCM_API_KEY,"ecb":"ZMO.ajax.onNotification"});
-		}
+		//	window.plugin.pushNotification.unregister(function(){
+				window.plugins.pushNotification.register(onGetPluginCalls, errorHandler,{"senderID":c.GCM_API_KEY,"ecb":"ZMO.ajax.onNotification"});
+
+			//});
+					}
 		
 	}
 	var pub = {
