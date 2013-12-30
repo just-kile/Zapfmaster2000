@@ -279,12 +279,12 @@ ZMO.Util.Net.Ajax = (function($){
 			return gcmHandlers[key]=val;
 	}
 	var connectToNewsPush = function(callback){
-		if(isAndroid){//registerCallbackHandler
+		if(false &&isAndroid){//registerCallbackHandler
 			ZMO.logger.log("Connect to news push");
 			$.each(ZMO.modules.Constants.drawfeed.types,function(key,type){
 				setGcmHandler(type,callback);
 			});
-		
+			
 		}else{//start long polling
 			setTimeout(function(){
 				connectToChannel(ZMO.modules.Constants.push.NEWS,callback);
@@ -399,7 +399,7 @@ ZMO.Util.Net.Ajax = (function($){
 				gcm:id
 			},
 			complete:function(e){
-				new ZMO.Util.Popup().open($("<input>").val(e&&e.status));
+				//new ZMO.Util.Popup().open($("<input>").val(e&&e.status));
 			}
 			
 		});
