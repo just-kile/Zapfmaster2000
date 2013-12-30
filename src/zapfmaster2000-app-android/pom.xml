@@ -1,13 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.kile.zapfmaster2000</groupId>
 	<artifactId>zapfmaster2000-app-android</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>apk</packaging>
+	<version>${zm2k.version}</version>
+
+	<parent>
+		<groupId>de.justkile.zapfmaster2000</groupId>
+		<artifactId>zapfmaster2000-parent</artifactId>
+		<version>1.0</version>
+		<relativePath>../zapfmaster2000-parent-pom</relativePath>
+	</parent>
+
 	<properties>
 		<skip.install>false</skip.install>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.google.android</groupId>
