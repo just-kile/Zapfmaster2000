@@ -2,17 +2,44 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
-import de.kile.zapfmaster2000.rest.model.zapfmaster2000.*;
-
 import java.sql.Blob;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AdminType;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DoneNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GCMToken;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Image;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.MappingQrRfid;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewUserNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Ticks;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Factory;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,6 +106,7 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.IMAGE: return createImage();
 			case Zapfmaster2000Package.TICKS: return createTicks();
 			case Zapfmaster2000Package.ADMIN: return createAdmin();
+			case Zapfmaster2000Package.GCM_TOKEN: return createGCMToken();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -342,6 +370,16 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	public Admin createAdmin() {
 		AdminImpl admin = new AdminImpl();
 		return admin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GCMToken createGCMToken() {
+		GCMTokenImpl gcmToken = new GCMTokenImpl();
+		return gcmToken;
 	}
 
 	/**

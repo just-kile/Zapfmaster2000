@@ -3,8 +3,6 @@ package de.kile.zapfmaster2000.rest.impl.core.transaction;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
-import org.eclipse.emf.teneo.mapping.strategy.EntityNameStrategy;
-import org.eclipse.emf.teneo.mapping.strategy.impl.ClassicEntityNameStrategy;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

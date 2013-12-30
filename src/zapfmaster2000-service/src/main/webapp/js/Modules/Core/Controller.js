@@ -45,6 +45,7 @@ ZMO.controller = (function($,document,view,ajax,localization){
 					view.init();
 					$(window).bind("hashchange",onPageChange);
 					$(window).trigger( "hashchange" );
+					if(ajax)ajax.init();
 				});
 			});
 			

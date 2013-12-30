@@ -20,6 +20,7 @@ ZMO.modules.Constants = {
 				return "mouseup touchend";
 			}
 		})(),
+		unregisterPushService:false,
 		drawfeed:{
 			types:{
 				ACHIEVEMENT:"ACHIEVEMENT",
@@ -48,7 +49,9 @@ ZMO.modules.Constants = {
 			CHALLENGEEMEMBERS:"rest/challenge/users",
 			STARTCHALLENGE:"rest/challenge/start/{0}",
 			ACCEPTCHALLENGE:"rest/challenge/accept",
-			DENYCHALLENGE:"rest/challenge/decline"
+			DENYCHALLENGE:"rest/challenge/decline",
+			GCMRESET:"rest/login/gcm/reset",
+			GCMREGISTER:"rest/login/gcm/register"
 			// NEWSLIST:"//thomas-notebook-ubuntu/rest/news"
 		},
 		push:{
@@ -71,6 +74,11 @@ ZMO.modules.Constants = {
 			showOthersPieChart:false
 		},
 		challenges:{
+			types:{
+				CHALLENGE_REQUEST:"ChallengeRequest",
+				CHALLENGE_ACCEPTED:"ChallengeAccepted",
+				CHALLENGE_DECLINED:"ChallengeDeclined"
+			},
 			modes:{
 				name:"Laenge",
 				id:"length",

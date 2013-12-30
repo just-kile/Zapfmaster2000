@@ -3,9 +3,12 @@ package de.kile.zapfmaster2000.rest.impl.core.challenge;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -63,6 +66,9 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 	@Override
 	public List<User> retrieveLoggedInUsers(Account pAccount) {
+
+		// collect the users that are polling the challenge service using
+		// reverse ajax
 		List<User> usersForAccount = new ArrayList<>();
 		if (pAccount != null) {
 			removeUsers();
@@ -72,7 +78,32 @@ public class ChallengeServiceImpl implements ChallengeService {
 				}
 			}
 		}
-		return usersForAccount;
+
+		// collect all users that have a google cloud message token as well
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		Query query = session.createQuery(
+				"SELECT t.user FROM Token t WHERE t.user IS NOT NULL "
+						+ "AND t.googleCloudMessagingToken IS NOT NULL "
+						+ "AND t.account.id = :accountId").setLong(
+				"accountId", pAccount.getId());
+		
+		@SuppressWarnings("unchecked")
+		List<User> results = query.list();
+		usersForAccount.addAll(results);
+		tx.commit();
+		
+		Set<Long> userIds = new HashSet<>();
+		List<User> result = new ArrayList<>();
+		for (User user : usersForAccount) {
+			if (userIds.add(user.getId())) {
+				result.add(user);
+			}
+		}
+
+		return result;
 	}
 
 	@Override

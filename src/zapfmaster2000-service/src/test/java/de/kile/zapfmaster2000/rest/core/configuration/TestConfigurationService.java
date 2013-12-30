@@ -6,8 +6,6 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
-import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationConstants;
-import de.kile.zapfmaster2000.rest.core.configuration.ConfigurationService;
 
 public class TestConfigurationService {
 

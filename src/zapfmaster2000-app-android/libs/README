@@ -1,4 +1,4 @@
-Please install cordova with pom - file to local repository to start building the app with maven
+Please install external libs with pom - file to local repository to start building the app with maven
 
 Todo so, just 
 1. Open console and change directory to libs folder in project

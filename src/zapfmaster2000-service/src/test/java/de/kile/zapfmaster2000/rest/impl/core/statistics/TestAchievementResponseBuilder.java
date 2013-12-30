@@ -1,5 +1,7 @@
 package de.kile.zapfmaster2000.rest.impl.core.statistics;
 
+import static junit.framework.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +12,6 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
-import static junit.framework.Assert.assertEquals;
 
 public class TestAchievementResponseBuilder extends AbstractMockingTest {
 	private Account account1;
