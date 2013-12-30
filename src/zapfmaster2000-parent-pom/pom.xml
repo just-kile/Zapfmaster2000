@@ -1,0 +1,17 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.justkile.zapfmaster2000</groupId>
+	<artifactId>zapfmaster2000-parent</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../zapfmaster2000-service</module>
+		<module>../zapfmaster2000-app-android</module>
+	</modules>
+
+	<properties>
+		<zm2k.version>2.1-Bodacious-Bock-SNAPSHOT</zm2k.version>
+	</properties>
+
+</project>
