@@ -217,12 +217,12 @@ public class DraftKitResource {
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
 		Box box = (Box) session.load(Zapfmaster2000Package.eINSTANCE.getBox()
 				.getName(), draftKitId);
+		
 		if (box != null) {
-
-			Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
-					.retrieveAdmin(token);
 
 			boolean isCorrectAccountAdmin = isAccountAdmin(admin)
 					&& admin.getAccount().getId() == box.getAccount().getId();
@@ -242,6 +242,10 @@ public class DraftKitResource {
 		} else {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
+	}
+	
+	public Response disableDraftKit(@PathParam("draftKitId") long draftKitId, @FormParam("token") String token) {
+		return null;
 	}
 
 	private boolean isAccountAdmin(Admin admin) {
@@ -272,5 +276,9 @@ public class DraftKitResource {
 			kits.add(response);
 		}
 		return kits;
+	}
+	
+	private boolean checkPrivileges(Admin admin, Box box) {
+		return false;
 	}
 }
