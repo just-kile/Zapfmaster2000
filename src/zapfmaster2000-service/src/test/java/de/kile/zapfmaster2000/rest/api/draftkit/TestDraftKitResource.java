@@ -175,6 +175,52 @@ public class TestDraftKitResource extends AbstractMockingTest {
 		assertEquals("box1", reloadedBox.getPassphrase());
 	}
 
+	@Test
+	public void testDisableDraftKitGlobalAdmin() {
+		Response response = new DraftKitResource().disableDraftKit(
+				box1.getId(), "tokenGlobalAdmin");
+
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals(false, reloadedBox.isEnabled());
+	}
+
+	@Test
+	public void testDisableDraftKitVaidAccountAdmin() {
+		Response response = new DraftKitResource().disableDraftKit(
+				box1.getId(), "tokenAdmin1");
+
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals(false, reloadedBox.isEnabled());
+	}
+
+	@Test
+	public void testDisableDraftKitInvalidAccountAdmin() {
+		Response response = new DraftKitResource().disableDraftKit(
+				box1.getId(), "tokenAdmin2");
+
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+
+		// box shouldn't be changed
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals(true, reloadedBox.isEnabled());
+	}
+
+	@Test
+	public void testDisableDraftKitInvalidToken() {
+		Response response = new DraftKitResource().disableDraftKit(
+				box1.getId(), "invalidToken");
+
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+
+		// box shouldn't be changed
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals(true, reloadedBox.isEnabled());
+	}
+
 	private Box reloadBox(long boxId) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
