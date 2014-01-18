@@ -33,6 +33,7 @@ public class KegResponseBuilder {
 								+ " FROM Keg k LEFT JOIN k.drawings AS d"
 								+ " WHERE k.box.account = :account "
 								+ " AND k.endDate IS NULL "
+								+ " AND k.box.account.enabled = true "
 								+ " GROUP BY k.id, k.brand, k.size, k.startDate "
 								+ " ORDER BY k.id")
 				.setEntity("account", account).list();
