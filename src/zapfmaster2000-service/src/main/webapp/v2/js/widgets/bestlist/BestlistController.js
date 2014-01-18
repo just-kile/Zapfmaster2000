@@ -38,7 +38,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     calcPercentAmount(data);
                     $scope.bestlist = data;
 
-                    if($scope.bestlist && $scope.bestlist.length>0){
+                    if ($scope.bestlist && $scope.bestlist.length > 0) {
                         $timeout(function () {
                             $scope.arrow.visible = true;
                             updateStatsArrow();
@@ -89,7 +89,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                                         $scope.bestlist.push(user);
                                         addedFlag = true;
                                         //$scope.bestlist.splice(oldIndex,1);
-                                    }else{
+                                    } else {
 
                                     }
                                     if (oldUser.order > lowestOrderUser.order) {
@@ -97,11 +97,11 @@ define(['Console', 'Underscore'], function (Console, _) {
                                         lowestIndex = oldIndex;
                                     }
                                 });
-                                if ($scope.bestlist.length > c.bestlistMax){
+                                if ($scope.bestlist.length > c.bestlistMax) {
                                     $scope.bestlist.splice(lowestIndex, 1);
-                                }else if(!addedFlag){
-                                    user.order=$scope.bestlist.length;
-                                       $scope.bestlist.push(user);
+                                } else if (!addedFlag) {
+                                    user.order = $scope.bestlist.length;
+                                    $scope.bestlist.push(user);
                                 }
 
                             }
@@ -117,14 +117,13 @@ define(['Console', 'Underscore'], function (Console, _) {
                 });
             }
             CometService.addPushListener(function (data) {
-                if (c.DRAWING == data.type){
+                if (c.DRAWING == data.type) {
                     updateScope();
                 }
 
             });
 
 
-            initScope();
             var counter = 0, changeInterval;
 
             /*Stats*/
@@ -148,7 +147,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
                 return -1;
             }
-            var activeStats= 0;
+            var activeStats = 0;
             var updateStatsArrow = function () {
                 var len;
                 if (!$scope.bestlist) {
@@ -163,11 +162,11 @@ define(['Console', 'Underscore'], function (Console, _) {
 
                 ajax.getDatas(c.frontPageUserStatsUrl, function (data) {
                     counter = ++counter % len;
-                    activeStats = ++activeStats%2;
+                    activeStats = ++activeStats % 2;
                     $scope.activeStats = activeStats;
-                    if(activeStats%2==1){
+                    if (activeStats % 2 == 1) {
                         $scope.statsodd = data;
-                    }else{
+                    } else {
                         $scope.statseven = data;
                     }
 
@@ -179,9 +178,28 @@ define(['Console', 'Underscore'], function (Console, _) {
 
 
             };
+
+            var resizeMethod = function () {
+                if (document.body.clientWidth < 768) {
+                    console.log('mobile');
+
+                    if (changeInterval)$timeout.cancel(changeInterval);
+
+                } else{
+
+                }
+            };
+            var initResizing = function () {
+                resizeMethod();
+                window.addEventListener("resize", resizeMethod, true);
+            }
+            initResizing();
+
+            initScope();
             initArrow();
             $scope.$on("$destroy", function () {
                 $timeout.cancel(changeInterval);
+                window.removeEventListener("resize",resizeMethod,true);
             });
             Console.groupEnd();
         }];
