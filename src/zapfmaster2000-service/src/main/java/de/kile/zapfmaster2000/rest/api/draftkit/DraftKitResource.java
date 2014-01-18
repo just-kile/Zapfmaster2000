@@ -239,6 +239,9 @@ public class DraftKitResource {
 		}
 	}
 
+	@POST
+	@Path("/{draftKitId}/disable")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response disableDraftKit(@PathParam("draftKitId") long draftKitId,
 			@FormParam("token") String token) {
 		
