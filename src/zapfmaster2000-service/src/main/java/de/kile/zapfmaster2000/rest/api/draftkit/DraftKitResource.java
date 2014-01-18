@@ -212,46 +212,68 @@ public class DraftKitResource {
 			@FormParam("token") String token) {
 
 		boolean success = false;
+
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
 		
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
 
-		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
-				.retrieveAdmin(token);
 		Box box = (Box) session.load(Zapfmaster2000Package.eINSTANCE.getBox()
 				.getName(), draftKitId);
-		
-		if (box != null) {
 
-			boolean isCorrectAccountAdmin = isAccountAdmin(admin)
-					&& admin.getAccount().getId() == box.getAccount().getId();
-			
-			if (isGlobalAdmin(admin) || isCorrectAccountAdmin) {
-				box.setLocation(newLocation);
-				box.setPassphrase(newPassphrase);
-				session.save(box);
-				success = true;
-			}
+		if (checkPrivileges(admin, box)) {
+			box.setLocation(newLocation);
+			box.setPassphrase(newPassphrase);
+			session.save(box);
+			success = true;
 		}
-		
+
 		tx.commit();
-		
+
 		if (success) {
 			return Response.ok().build();
 		} else {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
 	}
-	
-	public Response disableDraftKit(@PathParam("draftKitId") long draftKitId, @FormParam("token") String token) {
-		return null;
+
+	public Response disableDraftKit(@PathParam("draftKitId") long draftKitId,
+			@FormParam("token") String token) {
+		
+		boolean success = false;
+
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
+		
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		Box box = (Box) session.load(Zapfmaster2000Package.eINSTANCE.getBox()
+				.getName(), draftKitId);
+
+		if (checkPrivileges(admin, box)) {
+			box.setEnabled(false);
+			session.save(box);
+			success = true;
+		}
+
+		tx.commit();
+
+		if (success) {
+			return Response.ok().build();
+		} else {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
 	}
 
 	private boolean isAccountAdmin(Admin admin) {
 		return admin != null && admin.getAccount() != null;
 	}
-	
+
 	private boolean isGlobalAdmin(Admin admin) {
 		return admin != null && admin.getAccount() == null;
 	}
@@ -277,8 +299,13 @@ public class DraftKitResource {
 		}
 		return kits;
 	}
-	
+
 	private boolean checkPrivileges(Admin admin, Box box) {
+		if (box != null) {
+			boolean isCorrectAccountAdmin = isAccountAdmin(admin)
+					&& admin.getAccount().getId() == box.getAccount().getId();
+			return isGlobalAdmin(admin) || isCorrectAccountAdmin;
+		}
 		return false;
 	}
 }
