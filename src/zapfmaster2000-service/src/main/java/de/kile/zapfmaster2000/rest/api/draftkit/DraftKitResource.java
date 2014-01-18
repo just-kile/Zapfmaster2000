@@ -203,8 +203,82 @@ public class DraftKitResource {
 
 	}
 
+	@POST
+	@Path("/{draftKitId}/properties")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateProperties(@PathParam("draftKitId") long draftKitId,
+			@FormParam("location") String newLocation,
+			@FormParam("passphrase") String newPassphrase,
+			@FormParam("token") String token) {
+
+		boolean success = false;
+
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
+
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		Box box = (Box) session.load(Zapfmaster2000Package.eINSTANCE.getBox()
+				.getName(), draftKitId);
+
+		if (checkPrivileges(admin, box)) {
+			box.setLocation(newLocation);
+			box.setPassphrase(newPassphrase);
+			session.save(box);
+			success = true;
+		}
+
+		tx.commit();
+
+		if (success) {
+			return Response.ok().build();
+		} else {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+	}
+
+	@POST
+	@Path("/{draftKitId}/disable")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response disableDraftKit(@PathParam("draftKitId") long draftKitId,
+			@FormParam("token") String token) {
+
+		boolean success = false;
+
+		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+				.retrieveAdmin(token);
+
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		Box box = (Box) session.load(Zapfmaster2000Package.eINSTANCE.getBox()
+				.getName(), draftKitId);
+
+		if (checkPrivileges(admin, box)) {
+			box.setEnabled(false);
+			session.save(box);
+			success = true;
+		}
+
+		tx.commit();
+
+		if (success) {
+			return Response.ok().build();
+		} else {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+
+	}
+
 	private boolean isAccountAdmin(Admin admin) {
 		return admin != null && admin.getAccount() != null;
+	}
+
+	private boolean isGlobalAdmin(Admin admin) {
+		return admin != null && admin.getAccount() == null;
 	}
 
 	private List<DraftKitResponse> retrieveDraftKits(long accountId) {
@@ -214,7 +288,8 @@ public class DraftKitResource {
 
 		@SuppressWarnings("unchecked")
 		List<Box> result = session
-				.createQuery("From Box b WHERE b.account.id = :accountId")
+				.createQuery(
+						"From Box b WHERE b.account.id = :accountId AND b.enabled = true")
 				.setLong("accountId", accountId).list();
 		tx.commit();
 
@@ -227,5 +302,14 @@ public class DraftKitResource {
 			kits.add(response);
 		}
 		return kits;
+	}
+
+	private boolean checkPrivileges(Admin admin, Box box) {
+		if (box != null) {
+			boolean isCorrectAccountAdmin = isAccountAdmin(admin)
+					&& admin.getAccount().getId() == box.getAccount().getId();
+			return isGlobalAdmin(admin) || isCorrectAccountAdmin;
+		}
+		return false;
 	}
 }
