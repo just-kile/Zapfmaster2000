@@ -203,8 +203,53 @@ public class DraftKitResource {
 
 	}
 
+	@POST
+	@Path("/{draftKitId}/properties")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateProperties(@PathParam("draftKitId") long draftKitId,
+			@FormParam("location") String newLocation,
+			@FormParam("newPassphrase") String newPassphrase,
+			@FormParam("token") String token) {
+
+		boolean success = false;
+		
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+
+		Box box = (Box) session.load(Zapfmaster2000Package.eINSTANCE.getBox()
+				.getName(), draftKitId);
+		if (box != null) {
+
+			Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
+					.retrieveAdmin(token);
+
+			boolean isCorrectAccountAdmin = isAccountAdmin(admin)
+					&& admin.getAccount().getId() == box.getAccount().getId();
+			
+			if (isGlobalAdmin(admin) || isCorrectAccountAdmin) {
+				box.setLocation(newLocation);
+				box.setPassphrase(newPassphrase);
+				session.save(box);
+				success = true;
+			}
+		}
+		
+		tx.commit();
+		
+		if (success) {
+			return Response.ok().build();
+		} else {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+	}
+
 	private boolean isAccountAdmin(Admin admin) {
 		return admin != null && admin.getAccount() != null;
+	}
+	
+	private boolean isGlobalAdmin(Admin admin) {
+		return admin != null && admin.getAccount() == null;
 	}
 
 	private List<DraftKitResponse> retrieveDraftKits(long accountId) {
