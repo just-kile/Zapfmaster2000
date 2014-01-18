@@ -6,6 +6,7 @@ requirejs.config({
         Console: 'libs/console/console-min',
         jQuery: 'libs/jquery/jquery-2.0.3.min',//'http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min'
         Underscore: 'libs/underscore/underscore-min',
+        d3:'libs/d3js/d3.min',
         Angular: 'libs/angular/angular.min',
         AngularRoute: 'libs/angular/angular-route',
         AngularResource: "libs/angular/angular-resource",
@@ -33,10 +34,13 @@ requirejs.config({
         Underscore: {
             exports: "_"
         },
-
+        d3:{
+          exports:"d3"
+        },
         Console: {
             exports: "console"
-        }
+        } ,
+
     }, priority: [
         "Console"
         , "jQuery"
@@ -52,16 +56,18 @@ requirejs([
     , 'jQuery'
     , 'Underscore'
     , 'moment'
+    ,'d3'
     , 'Angular',
     'AngularRoute',
     'AngularResource',
     'AngularAnimate'
-], function (require, Console, $, _,moment, angular,angularRoute,angularResource,angularAnimate) {
+], function (require, Console, $, _,moment,d3, angular,angularRoute,angularResource,angularAnimate) {
     Console.group("Bootstrap dependencies loaded.");
     Console.info("Console", Console);
     Console.info("jQuery", $);
     Console.info("Underscore: ", _);
     Console.info("Moment: ",moment);
+    Console.info("d3: ",d3);
     Console.info("Angular: ", angular);
     Console.group("Angular Directives");
     Console.info("ngRoute: ", angularRoute);
