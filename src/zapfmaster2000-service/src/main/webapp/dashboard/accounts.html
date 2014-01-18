@@ -84,9 +84,18 @@
     });
 </script>
 <script type="text/javascript">
-
+    var boxToChange;
     $(function () {
         var c = ZMO.modules.Constants;
+
+        var changePropertiesHandler = function(e,box){
+            $("#changeAccountProperties").modal();
+            boxToChange = box;
+            $("#box-passphrase-change").val(box.passphrase);
+            $("#box-location-change").val(box.name);
+
+
+        }
         var updateList = function () {
             ajax.getDatas("rest/account", function (accounts) {
                 $("#usersTable > tbody").empty();
@@ -94,15 +103,21 @@
 
                     var $template = $(ich["dashboard-account-row"](account));
                     ajax.getDatas("rest/draftkit/account/{0}".replace("{0}", account.accountId), function (boxes) {
-                        var boxRow = $($template.find(".boxes-row"));
-                        var boxArr = [];
+                        var $boxRow = $($template.find(".boxes-row"));
+                        var btn;
                         $.each(boxes, function (ind, item) {
-                            boxArr.push(item.passphrase + ": " + item.name);
+                            btn = $("<a>")
+                                    .addClass("btn btn-primary")
+                                    .text(item.passphrase + ": " + item.name)
+                                    .css("margin-right","10px").on("click",function(e){
+                                        changePropertiesHandler(e,item);
+                                    });
+                            $boxRow.append(btn);
                         });
-                        boxRow.text(boxArr.join(" | "));
 
                     });
                     $("#usersTable").append($template);
+
                 })
             });
         }
@@ -144,7 +159,51 @@
                     updateList();
                 }
             })
-        })
+        });
+
+        $("#changeAccountProperties .submit").on("click",function(){
+           if(boxToChange){
+               var token = localStorage.getItem("token");
+               var boxId = boxToChange.boxId;
+               if(boxId){
+                   $.ajax({
+                       url:baseUrl+"rest/draftkit/"+boxId+"/properties",
+                       type:"POST",
+                       data:{
+                           passphrase: $("#box-passphrase-change").val(),
+                           location:$("#box-location-change").val(),
+                           token:token
+                       },
+                       success:updateList,
+                       error:function(e){
+                           alert("Fehler: "+ e.status);
+                       }
+                   })
+               }
+
+           }
+        });
+        $("#changeAccountProperties .delete").on("click",function(){
+            if(boxToChange){
+                var token = localStorage.getItem("token");
+                var boxId = boxToChange.boxId;
+                if(boxId){
+                    $.ajax({
+                        url:baseUrl+"rest/draftkit/"+boxId+"/disable",
+                        type:"POST",
+                        data:{
+                            token:token
+                        },
+                        success: updateList,
+
+                        error:function(e){
+                            alert("Fehler: "+ e.status);
+                        }
+                    })
+                }
+
+            }
+        });
     });
 
 
@@ -234,6 +293,44 @@
         </div>
         <div class="modal-footer">
             <button id="addAccountBtn" data-dismiss="modal" class="btn btn-primary" aria-hidden="true">Hinzufügen
+            </button>
+
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Abbrechen</button>
+
+        </div>
+    </div>
+</div>
+<div id="changeAccountProperties" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden=true>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Ändere Draftkit Eigenschaften<span id="box-id"></span></h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="span5">
+
+                <p class="well">
+                    <label for="box-passphrase-change">Box Passphrase</label>
+                    <input class="input-large" id="box-passphrase-change" type="text">
+                </p>
+
+                <p class="well">
+                    <label for="box-location-change">Ort</label>
+                    <input class="input-large" id="box-location-change" type="text">
+                </p>
+
+
+
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button id="changeBoxPropertiesBtn" data-dismiss="modal" class="btn btn-primary submit" aria-hidden="true">Ändern
+            </button>
+            <button id="deleteBox" data-dismiss="modal" class="btn btn-danger delete" aria-hidden="true">Löschen
             </button>
 
             <button class="btn" data-dismiss="modal" aria-hidden="true">Abbrechen</button>
