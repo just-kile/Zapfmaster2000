@@ -215,7 +215,7 @@ public class DraftKitResource {
 
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAdmin(token);
-		
+
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
@@ -244,12 +244,12 @@ public class DraftKitResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response disableDraftKit(@PathParam("draftKitId") long draftKitId,
 			@FormParam("token") String token) {
-		
+
 		boolean success = false;
 
 		Admin admin = Zapfmaster2000Core.INSTANCE.getAuthService()
 				.retrieveAdmin(token);
-		
+
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
 		Transaction tx = session.beginTransaction();
@@ -270,7 +270,7 @@ public class DraftKitResource {
 		} else {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
-		
+
 	}
 
 	private boolean isAccountAdmin(Admin admin) {
@@ -288,7 +288,8 @@ public class DraftKitResource {
 
 		@SuppressWarnings("unchecked")
 		List<Box> result = session
-				.createQuery("From Box b WHERE b.account.id = :accountId")
+				.createQuery(
+						"From Box b WHERE b.account.id = :accountId AND b.enabled = true")
 				.setLong("accountId", accountId).list();
 		tx.commit();
 
