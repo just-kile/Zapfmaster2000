@@ -2,6 +2,7 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl;
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.*;
 import java.sql.Blob;
 
 import org.eclipse.emf.ecore.EClass;
