@@ -208,7 +208,7 @@ public class DraftKitResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateProperties(@PathParam("draftKitId") long draftKitId,
 			@FormParam("location") String newLocation,
-			@FormParam("newPassphrase") String newPassphrase,
+			@FormParam("passphrase") String newPassphrase,
 			@FormParam("token") String token) {
 
 		boolean success = false;
