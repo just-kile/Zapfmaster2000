@@ -6,7 +6,7 @@ define(['Console'], function (Console) {
         Console.group("HomeController entered.");
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         var widgetTimeouts = {};
-        var firstWidgets = 0, widgetChangeEnabled=true;
+        var firstWidgets = 1, widgetChangeEnabled=false;
         var rows = {
             topLeft: [
                 {
@@ -35,12 +35,12 @@ define(['Console'], function (Console) {
                 ],
                 [
                     {
-                        name: "challenges",
+                        name: "linechart",
                         className: "col-md-8",
                         interval: 5000
                     },
                     {
-                        name: "bestlist",
+                        name: "challenges",
                         className: "col-md-4",
                         interval: 12000
                     }
@@ -67,15 +67,18 @@ define(['Console'], function (Console) {
             })(newWidget,index,rows,actualRow);
 
         };
+        var changeInterval;
         var startUpdater = function (rows) {
             var startCenterWidgets = rows.center[0];
             _.each(startCenterWidgets, function (widget, index) {
-                $timeout(function () {
+                changeInterval =   $timeout(function () {
                     updateWidget(widget, index, rows,0);
                 }, widget.interval);
             });
         }
-
+       var stopUpdater = function(){
+           $timeout.cancel(changeInterval);
+       }
        if(widgetChangeEnabled)startUpdater(rows);
 
 

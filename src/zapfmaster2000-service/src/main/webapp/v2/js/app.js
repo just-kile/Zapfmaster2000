@@ -16,7 +16,7 @@ define([
     var initialize = function () {
         Console.group("Starting application.");
         Console.info("Services: ", services);
-        Console.info("Widgets: ", directives);
+        Console.info("Directives: ", directives);
         Console.info("Filters: ", filters);
         Console.info("Controllers: ", controllers);
 

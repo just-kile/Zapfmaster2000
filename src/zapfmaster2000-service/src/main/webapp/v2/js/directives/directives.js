@@ -6,12 +6,15 @@ define([
   , 'Angular'    // lib/angular/angular
 
   // Application Widgets
-
-], function(Console, $, _, angular){
+  ,'directives/BarChart'
+], function(Console, $, _, angular,BarChart){
   "use strict";
   Console.group("Entering Widgets module.");
 
-  var directives = {};
+  var directives = {
+      d3bars:BarChart
+  };
+
   Console.info("Registered directives: ", directives);
 
   var initialize = function (angModule) {
