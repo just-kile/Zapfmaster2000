@@ -10,16 +10,20 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.Before;
 import org.junit.Test;
 
 import de.kile.zapfmaster2000.rest.AbstractMockingTest;
+import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.core.auth.AuthService;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Zapfmaster2000Package;
 
 public class TestDraftKitResource extends AbstractMockingTest {
 
@@ -38,12 +42,20 @@ public class TestDraftKitResource extends AbstractMockingTest {
 		createBox("box3", "loc3", "v3", account2);
 		createUser("", "", "", 0, Sex.FEMALE, 0, UserType.USER, account1);
 
-		Admin admin = createAdmin("a1", "pw1", account1);
+		Admin account1Admin = createAdmin("a1", "pw1", account1);
+		Admin account2Admin = createAdmin("a1", "pw1", account2);
+		Admin globalAdmin = createAdmin("a2", "pw2", null);
 
 		AuthService authService = mock(AuthService.class);
 		when(authService.retrieveAccount("tokenUser")).thenReturn(account1);
-		when(authService.retrieveAdmin("tokenAdmin1")).thenReturn(admin);
-		when(authService.retrieveAdmin("tokenAdmin2")).thenReturn(null);
+		when(authService.retrieveAdmin("tokenAdmin1"))
+				.thenReturn(account1Admin);
+		when(authService.retrieveAdmin("tokenAdmin2"))
+				.thenReturn(account2Admin);
+		when(authService.retrieveAdmin("tokenGlobalAdmin")).thenReturn(
+				globalAdmin);
+		when(authService.retrieveAdmin("tokenInvalid")).thenReturn(null);
+
 		mockAuthService(authService);
 	}
 
@@ -82,7 +94,7 @@ public class TestDraftKitResource extends AbstractMockingTest {
 	@Test
 	public void testRetriveAvailableDraftKitsInvalidToken() {
 		Response response = new DraftKitResource()
-				.retriveAvailableDraftKits("tokenAdmin2");
+				.retriveAvailableDraftKits("tokenInvalid");
 
 		assertEquals(Status.FORBIDDEN.getStatusCode(), response.getStatus());
 	}
@@ -107,10 +119,116 @@ public class TestDraftKitResource extends AbstractMockingTest {
 	@Test
 	public void testRetrieveAccountBoxesInvalidAdmin() {
 		Response response = new DraftKitResource().retrieveAccountBoxes(
-				account1.getId(), "tokenAdmin2");
+				account1.getId(), "tokenInvalid");
 
 		assertEquals(Status.FORBIDDEN.getStatusCode(), response.getStatus());
 		assertNull(response.getEntity());
+	}
+
+	@Test
+	public void testUpdatePropertiesGlobalAdmin() {
+		Response response = new DraftKitResource().updateProperties(
+				box1.getId(), "nl", "np", "tokenGlobalAdmin");
+
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals("nl", reloadedBox.getLocation());
+		assertEquals("np", reloadedBox.getPassphrase());
+	}
+
+	@Test
+	public void testUpdatePropertiesVaidAccountAdmin() {
+		Response response = new DraftKitResource().updateProperties(
+				box1.getId(), "nl", "np", "tokenAdmin1");
+
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals("nl", reloadedBox.getLocation());
+		assertEquals("np", reloadedBox.getPassphrase());
+	}
+
+	@Test
+	public void testUpdatePropertiesInvalidAccountAdmin() {
+		Response response = new DraftKitResource().updateProperties(
+				box1.getId(), "nl", "np", "tokenAdmin2");
+
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+
+		// box shouldn't be changed
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals("loc1", reloadedBox.getLocation());
+		assertEquals("box1", reloadedBox.getPassphrase());
+	}
+
+	@Test
+	public void testUpdatePropertiesInvalidToken() {
+		Response response = new DraftKitResource().updateProperties(
+				box1.getId(), "nl", "np", "invalidToken");
+
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+
+		// box shouldn't be changed
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals("loc1", reloadedBox.getLocation());
+		assertEquals("box1", reloadedBox.getPassphrase());
+	}
+
+	@Test
+	public void testDisableDraftKitGlobalAdmin() {
+		Response response = new DraftKitResource().disableDraftKit(
+				box1.getId(), "tokenGlobalAdmin");
+
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals(false, reloadedBox.isEnabled());
+	}
+
+	@Test
+	public void testDisableDraftKitVaidAccountAdmin() {
+		Response response = new DraftKitResource().disableDraftKit(
+				box1.getId(), "tokenAdmin1");
+
+		assertEquals(Status.OK.getStatusCode(), response.getStatus());
+
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals(false, reloadedBox.isEnabled());
+	}
+
+	@Test
+	public void testDisableDraftKitInvalidAccountAdmin() {
+		Response response = new DraftKitResource().disableDraftKit(
+				box1.getId(), "tokenAdmin2");
+
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+
+		// box shouldn't be changed
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals(true, reloadedBox.isEnabled());
+	}
+
+	@Test
+	public void testDisableDraftKitInvalidToken() {
+		Response response = new DraftKitResource().disableDraftKit(
+				box1.getId(), "invalidToken");
+
+		assertEquals(Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+
+		// box shouldn't be changed
+		Box reloadedBox = reloadBox(box1.getId());
+		assertEquals(true, reloadedBox.isEnabled());
+	}
+
+	private Box reloadBox(long boxId) {
+		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
+				.getSessionFactory().getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Box reloadedBox = (Box) session.load(Zapfmaster2000Package.eINSTANCE
+				.getBox().getName(), boxId);
+		tx.commit();
+		return reloadedBox;
 	}
 
 	private void internalAssertEquals(Box box, DraftKitResponse response) {

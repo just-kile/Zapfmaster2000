@@ -2,6 +2,7 @@
  */
 package de.kile.zapfmaster2000.rest.model.zapfmaster2000.util;
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
