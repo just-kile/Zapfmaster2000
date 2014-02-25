@@ -11,7 +11,7 @@ define(['Console', 'd3'], function (Console, d3) {
                         onClick: '&'
                     },
                   //  templateUrl: 'js/directives/BarChart/template.html',
-                    link: function (scope, ele, attrs) {
+                    link: function ($scope, ele, attrs) {
                         var renderTimeout;
                         var margin = parseInt(attrs.margin) || 20,
                             barHeight = parseInt(attrs.barHeight) || 20,
@@ -25,28 +25,32 @@ define(['Console', 'd3'], function (Console, d3) {
                         //    svg.exit().remove();
                         });
                         $window.onresize = function () {
-                            scope.$apply();
+                            $scope.$apply();
                         };
 
-                        scope.$watch(function () {
+                        $scope.$watch(function () {
                             return angular.element($window)[0].innerWidth;
                         }, function () {
-                            scope.render(scope.data);
+                            $scope.render($scope.data);
                         });
 
-                        scope.$watch('data', function (newData) {
-                            scope.render(newData);
+                        $scope.$watch('data', function (newData) {
+                            $scope.update(newData);
                         }, true);
+                        $scope.update = function(data){
+                            var text = svg.selectAll("text")
+                                .data(data, function(d) { return d; });
 
-                        scope.render = function (data) {
+                        }
+                        $scope.render = function (data) {
                             svg.selectAll('*').remove();
 
                             if (!data) return;
-                            if (renderTimeout) clearTimeout(renderTimeout);
+                            //if (renderTimeout) clearTimeout(renderTimeout);
 
-                            renderTimeout = $timeout(function () {
+                           // renderTimeout = $timeout(function () {
                                 var width = d3.select(ele[0])[0][0].offsetWidth - margin,
-                                    height = scope.data.length * (barHeight + barPadding),
+                                    height = $scope.data.length * (barHeight + barPadding),
                                     color = d3.scale.category20(),
                                     xScale = d3.scale.linear()
                                         .domain([0, d3.max(data, function (d) {
@@ -60,9 +64,6 @@ define(['Console', 'd3'], function (Console, d3) {
                                     .data(data)
                                     .enter()
                                     .append('rect')
-                                    .on('click', function (d, i) {
-                                        return scope.onClick({item: d});
-                                    })
                                     .attr('height', barHeight)
                                     .attr('width', 140)
                                     .attr('x', Math.round(margin / 2))
@@ -89,7 +90,7 @@ define(['Console', 'd3'], function (Console, d3) {
                                     .text(function (d) {
                                         return d.name + " (scored: " + d.score + ")";
                                     });
-                            }, 200);
+
                         };
                     }
                 }

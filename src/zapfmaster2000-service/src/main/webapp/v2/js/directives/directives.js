@@ -7,12 +7,14 @@ define([
 
   // Application Widgets
   ,'directives/BarChart'
-], function(Console, $, _, angular,BarChart){
+    ,'directives/FigureChart/FigureChart'
+], function(Console, $, _, angular,BarChart,FigureChart){
   "use strict";
   Console.group("Entering Widgets module.");
 
   var directives = {
-      d3bars:BarChart
+      d3bars:BarChart,
+      figurechart:FigureChart
   };
 
   Console.info("Registered directives: ", directives);

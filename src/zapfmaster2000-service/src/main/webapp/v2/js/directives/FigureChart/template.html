@@ -1,0 +1,18 @@
+<div>
+    <div ng-repeat="image in images" style="position:relative;" ng-style="{height:image.height}">
+
+        <!--<div class="zm-crop" ng-style="{height:image.amount+'%'}"> --->
+            <!-- <img src="{{image.img_src_empty}}" style="height: 100px" ng-style="{top:100-image.amount+'%'}" />        -->
+        <div class="zm-crop" ng-style="{height:image.height+'%'}">
+            <img src="{{image.img_src_empty}}" ng-style="{height:image.height+'px'}"/>
+        </div>
+        <div class="zm-crop" ng-style="{height:(100-image.amount)+'%',top:image.amount+'%'}">
+            <img src="{{image.img_src_full}}"
+                 ng-style="{'margin-top':-image.amount*image.height/100+'px',height:image.height+'px'}"/>
+
+        </div>
+
+
+    </div>
+
+</div>

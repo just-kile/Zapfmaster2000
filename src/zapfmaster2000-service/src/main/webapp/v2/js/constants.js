@@ -26,7 +26,8 @@ define([
         LOGOUT:"LOGOUT",
         DRAW:"DRAW",
       SERVER_TIME_FORMAT:"YYYYMMDD-HHmmss",
-      COUNTDOWN_TIME_FORMAT:"mm:ss"
+      COUNTDOWN_TIME_FORMAT:"mm:ss",
+      MUG_SIZE:0.4
     }
 
     Console.info("Register constants: ", constants);

@@ -812,3 +812,10 @@ transition: translateZ(0);
     display: inline-block;
     width:150px;
 }
+
+
+.zm-crop{
+    overflow:hidden;
+    position: absolute;
+    top: 0;
+}

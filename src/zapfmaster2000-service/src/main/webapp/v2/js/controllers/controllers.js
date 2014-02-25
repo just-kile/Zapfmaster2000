@@ -18,10 +18,11 @@ define([
      'widgets/draftkits/DraftKitController',
      'widgets/splashscreen/SplashScreenController',
     'widgets/linechart/LineChartController',
+    'widgets/amountchart/AmountChartController',
 
     //Constants
     'constants'
-], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,constants) {
+], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,amountchart,constants) {
     "use strict";
     Console.group("Entering controllers module.");
     Console.info("AppController", app);
@@ -34,6 +35,7 @@ define([
         DraftKitController:draftkit,
         SplashScreenController:splash,
         LineChartController:linechart,
+        AmountChartController:amountchart,
         stats: stats
 
     };
@@ -59,13 +61,16 @@ define([
             });
             $routeProvider.otherwise({ redirectTo: routes.home.route });
         });
-        angModule.run(["$rootScope","CometService",function ($rootScope,CometService) {
+        angModule.run(["$rootScope","$templateCache","CometService",function ($rootScope,$templateCache,CometService) {
             $rootScope.$on('$routeChangeSuccess', function (next, last) {
                 Console.debug("Navigating from ", last);
                 Console.debug("Navigating to   ", next);
                 CometService.reset();
 
 
+            });
+            $rootScope.$on('$viewContentLoaded', function() {
+                $templateCache.removeAll();
             });
         }]);
     }
