@@ -29,12 +29,13 @@ define([
         COUNTDOWN_TIME_FORMAT: "mm:ss",
         MUG_SIZE: 0.4,
         FIGURE_CHART:{
-            MAX_IMAGES_PER_LINE:10,
-            MIN_IMAGES:5,
-            MAX_LINES:3,
-
-            INITIAL_HEIGHT:75,
-            INITIAL_WIDTH:60
+            MAX_IMAGES_PER_LINE:5,
+            //MIN_IMAGES:5,
+            //MAX_LINES:3,
+            ANIMATION_IN:"bounceIn",
+            ANIMATION_OUT:"flipOutY",
+            INITIAL_HEIGHT:100,
+            INITIAL_WIDTH:90
 
         }
     }

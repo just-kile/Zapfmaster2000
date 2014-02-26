@@ -37,12 +37,12 @@ define(['Console'], function (Console) {
                 [
                     {
                         name: "linechart",
-                        className: "col-md-8",
+                        className: "col-md-6",
                         interval: 5000
                     },
                     {
                         name: "amountchart",
-                        className: "col-md-4",
+                        className: "col-md-6",
                         interval: 12000
                     }
                 ]

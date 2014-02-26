@@ -15,7 +15,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                         var calcAmountPieces = function (amount) {
                             var result = [];
                             if (amount) {
-                                var times = amount / c.MUG_SIZE;
+                                var times = (amount / c.MUG_SIZE ) % c.FIGURE_CHART.MAX_IMAGES_PER_LINE;
                                 var amount;
                                 while (times > 0) {
                                     amount = times > 1 ? 100 : Math.ceil(times * 100);
@@ -32,42 +32,44 @@ define(['Console', 'jQuery'], function (Console, $) {
                             return result;
                         }
                         $scope.images = [];
-                        $scope.countimage={
-                            height: c.FIGURE_CHART.INITIAL_HEIGHT+30,
-                            imgsrc:attrs.imgBig
-                        }
+                        $scope.countimage = {
+                            height: c.FIGURE_CHART.INITIAL_HEIGHT + 30,
+                            imgsrc: attrs.imgBig,
+                            mugcount:0
+                        };
+                        $scope.mug_size = c.MUG_SIZE;
                         //Animation
                         $scope.$watch("images", function (newArray, oldArray) {
                             var diff = newArray.length - oldArray.length;
                             var els = element.children().children();
                             if (diff > 0) {
-                               // $timeout(function () {//workaround: image width is not set fast enough
-                                    var offset = oldArray.length+1;
-                                    for (var i = diff - 1; i >= 0; i--) {
+                                // $timeout(function () {//workaround: image width is not set fast enough
+                                var offset = oldArray.length + 1;
+                                for (var i = diff - 1; i >= 0; i--) {
 
-                                        (function (index) {
-                                            $animate.addClass($(els[offset + index]), 'animated bounceIn', function () {
-                                                $timeout(function () {
-                                                    $animate.removeClass($(els[offset + index]), 'animated bounceIn');
+                                    (function (index) {
+                                        $animate.addClass($(els[offset + index]), 'animated ' + c.FIGURE_CHART.ANIMATION_IN, function () {
+                                            $timeout(function () {
+                                                $animate.removeClass($(els[offset + index]), 'animated ' + c.FIGURE_CHART.ANIMATION_IN);
 
-                                                }, 1000);
-                                            });
-                                        })(i);
+                                            }, 1000);
+                                        });
+                                    })(i);
 
-                                    }
-                              //  }, 0)
+                                }
+                                //  }, 0)
 
                             } else if (diff < 0) {
-                                var offset = oldArray.length+1;
+                                var offset = oldArray.length + 1;
                                 for (var i = -diff; i > 0; i--) {
                                     (function (index) {
-                                        $animate.addClass($(els[offset - index]), 'animated bounceOut', function () {
+                                        $animate.addClass($(els[offset - index]), 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
                                             $timeout(function () {
                                                 var currEl = $(els[offset - index]);
-                                                $animate.removeClass(currEl, 'animated bounceOut', function () {
+                                                $animate.removeClass(currEl, 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
                                                     currEl.remove();
                                                 })
-                                            }, 1000);
+                                            }, 2000);
                                         });
                                     })(i);
 
@@ -80,6 +82,8 @@ define(['Console', 'jQuery'], function (Console, $) {
                         $scope.$watch(attrs.currentAmount, function (value) {
                             // alert("Amount Changes!");
                             console.log(value);
+                            $scope.countimage.mugcount = Math.floor(value/c.MUG_SIZE - (value/ c.MUG_SIZE) % c.FIGURE_CHART.MAX_IMAGES_PER_LINE);
+                            $scope.complete_mug_count=(Math.round(value/ c.MUG_SIZE*100)*0.01).toFixed(2);
                             var newAmountPieces = calcAmountPieces(value);
                             var diff = newAmountPieces.length - $scope.images.length;
                             var newLength = newAmountPieces.length;
@@ -103,19 +107,23 @@ define(['Console', 'jQuery'], function (Console, $) {
                                 if ($scope.images.length > 0 && newAmountPieces.length > 0) {
                                     $scope.images.splice(diff, -diff);
                                     $scope.images[$scope.images.length - 1].amount = newAmountPieces[newLength - 1].amount;
+                                    $scope.images[$scope.images.length - 1].height = newAmountPieces[newLength - 1].height;
                                 }
                             }
 
 
-
                             //recalculate width
-                            var width = element.width()-element.children().children(":first").width()-20;
-                            var newWidthPerItem = width / newLength;
-                            if (newWidthPerItem < c.FIGURE_CHART.INITIAL_WIDTH) {
-                                _.each($scope.images, function (item, index) {
-                                    item.height = item.height * (newWidthPerItem / item.width);
-                                    item.width = newWidthPerItem;
-                                });
+                            if (element) {
+
+
+                                var width = element.width() - element.children().children(":first").width() - 20;
+                                var newWidthPerItem = width / newLength;
+                                if (newWidthPerItem < c.FIGURE_CHART.INITIAL_WIDTH) {
+                                    _.each($scope.images, function (item, index) {
+                                        item.height = item.height * (newWidthPerItem / item.width);
+                                        item.width = newWidthPerItem;
+                                    });
+                                }
                             }
                             //change height
                             /* var width = element.width();
