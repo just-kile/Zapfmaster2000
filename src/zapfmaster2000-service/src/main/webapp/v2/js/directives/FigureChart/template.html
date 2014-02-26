@@ -1,18 +1,26 @@
 <div>
-    <div ng-repeat="image in images" style="position:relative;" ng-style="{height:image.height}">
-
-        <!--<div class="zm-crop" ng-style="{height:image.amount+'%'}"> --->
-            <!-- <img src="{{image.img_src_empty}}" style="height: 100px" ng-style="{top:100-image.amount+'%'}" />        -->
-        <div class="zm-crop" ng-style="{height:image.height+'%'}">
-            <img src="{{image.img_src_empty}}" ng-style="{height:image.height+'px'}"/>
-        </div>
-        <div class="zm-crop" ng-style="{height:(100-image.amount)+'%',top:image.amount+'%'}">
-            <img src="{{image.img_src_full}}"
-                 ng-style="{'margin-top':-image.amount*image.height/100+'px',height:image.height+'px'}"/>
-
-        </div>
-
+    <div ng-style="{height:countimage.height+'px',display:'inline-block'}">
+        <img src="{{countimage.imgsrc}}" ng-style="{height:countimage.height+'px'}" />
 
     </div>
 
+    <div class="zm-figure-chart-item" ng-repeat="image in images" ng-style="{height:image.height+'px',width:(image.width)+'px',padding:'10% 0'}">
+        <div style="position:relative;"
+             ng-style="{height:image.height+'px',padding:'5% 0'}">
+
+
+            <!--<div class="zm-crop" ng-style="{height:image.amount+'%'}"> --->
+            <!-- <img src="{{image.img_src_empty}}" style="height: 100px" ng-style="{top:100-image.amount+'%'}" />        -->
+            <div class="zm-crop" ng-style="{height:image.height+'px'}">
+                <img src="{{image.img_src_empty}}" ng-style="{height:image.height+'px'}"/>
+            </div>
+            <div class="zm-crop" ng-style="{height:(100-image.amount)+'%',top:image.amount+'%'}">
+                <img src="{{image.img_src_full}}"
+                     ng-style="{'margin-top':-image.amount*image.height/100+'px',height:image.height+'px'}"/>
+
+            </div>
+
+
+        </div>
+    </div>
 </div>

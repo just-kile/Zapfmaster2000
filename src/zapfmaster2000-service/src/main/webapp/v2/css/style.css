@@ -819,3 +819,7 @@ transition: translateZ(0);
     position: absolute;
     top: 0;
 }
+.zm-figure-chart-item{
+      display:inline-block;
+
+}
