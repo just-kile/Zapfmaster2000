@@ -2,12 +2,12 @@ define(['Console'], function (Console) {
     "use strict";
     Console.group("Entering HomeController module.");
 
-    var controller = ['$scope', '$timeout', 'ZMConstants', function ($scope, $timeout, c) {
+    var controller = ['$scope', '$timeout', 'ZMConstants','$animate', function ($scope, $timeout, c,$animate) {
         Console.group("HomeController entered.");
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         var widgetTimeouts = {};
-        var firstWidgets = 1,
-            widgetChangeEnabled=false;
+        var firstWidgets = 0,
+            widgetChangeEnabled=true;
         var rows = {
             topLeft: [
                 {
@@ -31,19 +31,19 @@ define(['Console'], function (Console) {
                     {
                         name: "challenges",
                         className: "col-md-4",
-                        interval: 70000
+                        interval: 50000
                     }
                 ],
                 [
                     {
-                        name: "linechart",
+                        name: "bestlist",
                         className: "col-md-6",
                         interval: 50000
                     },
                     {
                         name: "amountchart",
                         className: "col-md-6",
-                        interval: 120000
+                        interval: 50000
                     }
                 ]
             ]
@@ -81,10 +81,13 @@ define(['Console'], function (Console) {
            $timeout.cancel(changeInterval);
        }
        if(widgetChangeEnabled)startUpdater(rows);
+       init(rows);
+
+
 
 
         //controller.$inject = [];
-        init(rows);
+
 
     }];
     Console.groupEnd();

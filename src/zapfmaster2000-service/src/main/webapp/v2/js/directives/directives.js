@@ -8,13 +8,16 @@ define([
   // Application Widgets
   ,'directives/BarChart'
     ,'directives/FigureChart/FigureChart'
-], function(Console, $, _, angular,BarChart,FigureChart){
+
+    ,'directives/ShowDirective'
+], function(Console, $, _, angular,BarChart,FigureChart,ShowDirective){
   "use strict";
   Console.group("Entering Widgets module.");
 
   var directives = {
       d3bars:BarChart,
-      figurechart:FigureChart
+      figurechart:FigureChart,
+      animatewidget:ShowDirective
   };
 
   Console.info("Registered directives: ", directives);
@@ -22,7 +25,7 @@ define([
   var initialize = function (angModule) {
     _.each(directives,function(filter,name){
        angModule.directive(name,filter);
-    })
+    });
     Console.debug("Custom widgets initialized.");
   }
 

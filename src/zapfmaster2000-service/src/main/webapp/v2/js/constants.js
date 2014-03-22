@@ -38,6 +38,10 @@ define([
             INITIAL_HEIGHT:100,
             INITIAL_WIDTH:90
 
+        },
+        WIDGETS:{
+            ANIMATION_IN:"fadeIn",
+            ANIMATION_OUT:"fadeOut"
         }
     }
 

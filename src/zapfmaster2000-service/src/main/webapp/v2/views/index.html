@@ -15,9 +15,9 @@
     </div>
 
     <div class="row">
-        <div ng-repeat="widget in rows.center"
+        <div ng-repeat="widget in rows.center" animatewidget
              ng-include="widgetBaseUrl+ widget.name+'/template.html'"
-             class="{{widget.className}}">
+             ng-class="widget.className">
         </div>
 
     </div>
