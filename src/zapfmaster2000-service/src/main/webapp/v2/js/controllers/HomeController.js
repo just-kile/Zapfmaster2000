@@ -26,24 +26,24 @@ define(['Console'], function (Console) {
                     {
                         name: "bestlist",
                         className: "col-md-8",
-                        interval: 5000
+                        interval: 50000
                     },
                     {
                         name: "challenges",
                         className: "col-md-4",
-                        interval: 7000
+                        interval: 70000
                     }
                 ],
                 [
                     {
                         name: "linechart",
                         className: "col-md-6",
-                        interval: 5000
+                        interval: 50000
                     },
                     {
                         name: "amountchart",
                         className: "col-md-6",
-                        interval: 12000
+                        interval: 120000
                     }
                 ]
             ]

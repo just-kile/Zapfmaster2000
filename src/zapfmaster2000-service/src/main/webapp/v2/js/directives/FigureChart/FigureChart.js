@@ -114,17 +114,18 @@ define(['Console', 'jQuery'], function (Console, $) {
 
                             //recalculate width
                             if (element) {
-
-
                                 var width = element.width() - element.children().children(":first").width() - 20;
-                                var newWidthPerItem = width / newLength;
-                                if (newWidthPerItem < c.FIGURE_CHART.INITIAL_WIDTH) {
+                                //var newWidthPerItem = width / newLength;
+                                var newWidthPerItem = width / c.FIGURE_CHART.MAX_IMAGES_PER_LINE;
+
+                                if (true || newWidthPerItem < c.FIGURE_CHART.INITIAL_WIDTH) {
                                     _.each($scope.images, function (item, index) {
-                                        item.height = item.height * (newWidthPerItem / item.width);
+                                       // item.height = item.height * (newWidthPerItem / item.width);
                                         item.width = newWidthPerItem;
                                     });
                                 }
                             }
+
                             //change height
                             /* var width = element.width();
                              var height = element.height();

@@ -8,13 +8,28 @@ define(['Console', 'Underscore'], function (Console, _) {
             /*Bestlist*/
             $scope.baseUrl = c.baseUrl;
             $scope.currentAmount = 0;
-            var updateAmount  =function(){
-               // $scope.currentAmount =$scope.currentAmount-0.5<0?2:$scope.currentAmount-0.5;
-                $scope.currentAmount =$scope.currentAmount+0.23;
 
-                $timeout(updateAmount,3000);
+            var updateAmount  =function(amount){
+               // $scope.currentAmount =$scope.currentAmount-0.5<0?2:$scope.currentAmount-0.5;
+                $scope.currentAmount =amount;
+
+
             }
-            updateAmount();
+
+            var retrieveAmount  =function(callback){
+                ajax.getDatas(c.amountStatsUrl,function(responseJson){
+                     callback(responseJson.amountTotal);
+                });
+            }
+            CometService.addPushListener(function (data) {
+                if (c.DRAWING == data.type) {
+                    retrieveAmount(updateAmount);
+                }
+
+            });
+            retrieveAmount(updateAmount);
+
+           // updateAmount();
             Console.groupEnd();
         }];
     //controller.$inject = [];

@@ -11,6 +11,7 @@ define([
         challengeUrl: "rest/challenge",
         bestlistUrl: "rest/statistics/rankings/bestUserList",
         frontPageUserStatsUrl: "rest/statistics/frontpageUserStats",
+        amountStatsUrl:"rest/statistics/amount",
         kegStatsUrl: "rest/statistics/keg",
         newsPushUrl: "rest/push/news",
         updateAmountPushUrl: "rest/push/draftkit/{0}",
