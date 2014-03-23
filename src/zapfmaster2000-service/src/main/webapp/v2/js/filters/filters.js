@@ -6,8 +6,10 @@ define([
    "filters/CountdownFilter",
     "filters/AmountFilter",
     "filters/AchievementFilter",
-    "filters/ImageFilterBig"
-], function (Console,_,CountdownFilter,AmountFilter,AchievementFilter,ImageFilterBig){
+    "filters/ImageFilterBig",
+    "filters/ClientDateFilter",
+    "filters/MaxCountFilter"
+], function (Console,_,CountdownFilter,AmountFilter,AchievementFilter,ImageFilterBig,ClientDateFilter,MaxCountFilter){
   "use strict";
   Console.group("Entering Filters module.");
 
@@ -15,7 +17,9 @@ define([
       countdown:CountdownFilter,
       amount:AmountFilter,
       achievement:AchievementFilter,
-      big:  ImageFilterBig
+      big:  ImageFilterBig,
+      clientdate:ClientDateFilter,
+      maxcount:MaxCountFilter
   };
   Console.info("Registered filters: ", filters);
 

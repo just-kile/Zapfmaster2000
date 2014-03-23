@@ -7,7 +7,7 @@ define(['Console'], function (Console) {
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         var widgetTimeouts = {};
         var firstWidgets = 0,
-            widgetChangeEnabled=true;
+            widgetChangeEnabled=false;
         var rows = {
             topLeft: [
                 {

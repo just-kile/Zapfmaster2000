@@ -27,6 +27,7 @@ define([
         LOGOUT: "LOGOUT",
         DRAW: "DRAW",
         SERVER_TIME_FORMAT: "YYYYMMDD-HHmmss",
+        CLIENT_TIME_FORMAT:"HH:mm",
         COUNTDOWN_TIME_FORMAT: "mm:ss",
         MUG_SIZE: 0.4,
         FIGURE_CHART:{

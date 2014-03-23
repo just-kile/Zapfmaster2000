@@ -719,7 +719,40 @@ li.zm-draftkit{
     font-size: 1em;
 }
 
+/**
+* Newsstack
+*/
+.zm-newsstacks{
+    padding-top: 35px;
+    padding-right:30px;
+}
+li.zm-newsstack{
+    font-family: RalewayLight;
+    list-style: none;
+    float:left;
+    height: 50px;
+    display: inline;
 
+    min-width: 250px;
+    /*margin-left: 30px;*/
+}
+
+.zm-newsstack  img{
+    float:left;
+    margin-right: 10px;
+}
+  .zm-newsstack-ul{
+      padding-left: 0;
+  }
+.zm-newsstack .brand{
+    font-size: 1.3em;
+    margin-top: 5px;
+
+}
+.zm-newsstack .location{
+    font-size: 1em;
+    margin-top: -0.5em;
+}
 
 /**
 * SplashScreen

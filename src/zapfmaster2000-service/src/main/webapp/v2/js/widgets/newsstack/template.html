@@ -1,19 +1,41 @@
+<div ng-controller="NewsstackController">
+<!--    <div ng-class="{zmdim: news.length>0}" >
+        <img src="css/images/zm_logo.png" style="margin-left: 5%"/>
+    </div>
 
-<div ng-controller="NewsstackController" class="zm-newsstack"">
-        <div ng-class="{zmdim: news.length>0}" >
-            <img src="css/images/zm_logo.png" style="margin-left: 5%"/>
+
+    -->
+<!-- {"type":"DRAWING",
+"image":"rest/image/user/1",
+"date":"20140323-184633",
+"userId":1,
+"userName":"Ben",
+"amount":0.12798644841493814,
+"kegId":1,"brand":"Carlsberg",
+"location":"Kölle"};
+-->
+<ul class="zm-newsstack-ul">
+    <li ng-repeat="n in news|maxcount" class="zm-newsstack">
+
+        <div class="flip-container" ng-if="n.type=='DRAWING'">
+            <div class="flipper">
+                <div class="front zm-backgrnd">
+                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+
+                    <div class="brand">{{n.userName}} zapfte {{n.amount|amount}} l</div>
+                    <div class="location">@ {{n.location}}, {{n.date|clientdate}} Uhr</div>
+
+
+                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
+
+                </div>
+
+
+            </div>
         </div>
-        <ul class="news">
-          <!-- <li>
-                <div>test</div>
-            </li>
-            <li>
-                <div>test</div>
-            </li>-->
-            <li ng-repeat="n in news">
-                {{n.userName}}
-            </li>
 
-        </ul>
 
+    </li>
+
+</ul>
 </div>
