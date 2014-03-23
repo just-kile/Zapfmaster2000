@@ -1,8 +1,25 @@
-
 <div>
-    <div ng-repeat="row in rows" class="row">
+    <!--<div ng-repeat="row in rows" class="row">
         <div ng-repeat="col in row" ng-include="col.name+'/template.html'" class="{{col.className}}">
         </div>
+    </div>-->
+    <div class="row">
+        <div ng-repeat="widget in rows.topLeft"
+             ng-include="widgetBaseUrl+ widget.name+'/template.html'"
+             class="{{widget.className}}">
+        </div>
+        <div ng-repeat="widget in rows.topRight"
+             ng-include="widgetBaseUrl+ widget.name+'/template.html'"
+             class="{{widget.className}}">
+        </div>
+    </div>
+
+    <div class="row">
+        <div ng-repeat="widget in rows.center" animatewidget
+             ng-include="widgetBaseUrl+ widget.name+'/template.html'"
+             ng-class="widget.className">
+        </div>
+
     </div>
     <div ng-include="'js/widgets/splashscreen/template.html'">
 

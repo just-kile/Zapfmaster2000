@@ -2,16 +2,18 @@ define(['Console', 'Underscore'], function (Console, _) {
     "use strict";
     Console.group("Entering CometService module.");
 
-    var service = ['$http', "ZMConstants", function ($http, c) {
+    var service = ['$http', "ZMConstants",'$q', function ($http, c,$q) {
         var callbacks = {
-            newspush: [],
+            newspush: []
         };
+        var ajaxCalls = {};
 
         var startCometService = function (url, cbKey) {
-            $http({method: 'GET', url: c.baseUrl + url, params: {
+            ajaxCalls[cbKey] = $q.defer();
+             $http({method: 'GET', url: c.baseUrl + url, params: {
                 token: localStorage.getItem("token"),
                 _: new Date().getTime()
-            }, timeout: c.ajaxTimeout}).
+            }, timeout:  ajaxCalls[cbKey].promise}).
                 success(function (data, status, headers, config) {
 
                     Console.group("Received Push datas");
@@ -51,12 +53,13 @@ define(['Console', 'Underscore'], function (Console, _) {
             },
             addInstantUpdateListener: function (boxId,callback) {
                 if (callback){
+                    if(!callbacks[boxId]){
+                        startCometService(c.updateAmountPushUrl.replace("{0}",boxId),boxId);
+                    }
                     if(!callbacks[boxId])callbacks[boxId] = [];
                     callbacks[boxId].push(callback);
                     Console.debug("Added Amount Push Listener");
-                    if(callbacks[boxId].length==1){
-                        startCometService(c.updateAmountPushUrl.replace("{0}",boxId),boxId);
-                    }
+
                 }
                 // Console.debug("Push Listener", callback, "added");
                 Console.log("All Push Listeners: ", callbacks);
@@ -64,12 +67,15 @@ define(['Console', 'Underscore'], function (Console, _) {
             resetPush:function(id){
                 if(callbacks && callbacks[id]){
                     callbacks[id].length = 0;
+                    //if( ajaxCalls[id])ajaxCalls[id].resolve();
                 }
             },
             reset: function () {
-                _.each(callbacks,function(push){
-                    push.length=0;
+                var me = this;
+                _.each(callbacks,function(push,boxId){
+                    me.resetPush(boxId);
                 });
+
                 Console.log("Reset callbacks.");
             }
         }

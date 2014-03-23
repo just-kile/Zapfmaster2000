@@ -1,19 +1,23 @@
-
 <div ng-controller="ChallengeController" class="zmo-challenges">
     <header class="zmo-header">Duelle</header>
-    <div class="zmo-container">
-        <li class ="challenge-container color-container" ng-repeat="challenge in challenges">
-          <!--  <div class="zm-img" style='background: url("{{baseurl+challenge.team1[0].userImage}}")'/>  --->
+    <ul class="zmo-container">
+        <li class="challenge-container color-container" ng-repeat="challenge in challenges">
+            <!--  <div class="zm-img" style='background: url("{{baseurl+challenge.team1[0].userImage}}")'/>  --->
             <div class="bar1 zm-absolute zm-animate" ng-style="{width:challenge.team1Percent+'%'}"></div>
             <div class="bar2 zm-absolute zm-animate" ng-style="{width:challenge.team2Percent+'%'}"></div>
-            <img ng-class="{winner: challenge.team1[0].won}" class="zm-absolute img-responsive img-rounded userimage1" src="{{baseUrl+challenge.team1[0].userImage}}">
+            <img ng-class="{winner: challenge.team1[0].won}" class="zm-absolute img-responsive img-rounded userimage1"
+                 src="{{baseUrl+challenge.team1[0].userImage}}">
+
             <div class="username1 zm-absolute">{{challenge.team1[0].userName}}</div>
 
 
-            <img ng-class="{winner: challenge.team2[0].won}" class="zm-absolute img-responsive img-rounded userimage2" src="{{baseUrl+challenge.team2[0].userImage}}">
+            <img ng-class="{winner: challenge.team2[0].won}" class="zm-absolute img-responsive img-rounded userimage2"
+                 src="{{baseUrl+challenge.team2[0].userImage}}">
+
             <div class="username2 zm-absolute">{{challenge.team2[0].userName}}</div>
             <div class="clock">{{challenge.countdown|countdown}}</div>
-        </div>
-    </li>
+        </li>
+    </ul>
+
 
 </div>

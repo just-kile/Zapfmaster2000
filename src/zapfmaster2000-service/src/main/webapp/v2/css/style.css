@@ -812,3 +812,51 @@ transition: translateZ(0);
     display: inline-block;
     width:150px;
 }
+
+
+.zm-crop{
+    overflow:hidden;
+    position: absolute;
+    top: 0;
+    margin:25% 0;
+}
+.zm-crop img{
+
+}
+.zm-figure-chart-item{
+     /* display:inline-block;*/
+    float: left;
+
+}
+.zm-figure-chart-countimage{
+   position: relative;
+    width: 114px;
+
+}
+.zm-figure-chart-countimage > img{
+    position: absolute;
+    top:0;
+
+}
+.zm-figure-chart-countimage > div{
+    text-align: center;
+   font-size: 4em;
+    width: 97px;
+    position: absolute;
+    font-family: RalewaySemiBold;
+    text-shadow: 1px 1px 1px #000;
+
+}
+.zm-figure-chart-info{
+    width: 100%;
+    clear:both;
+    line-height: normal;
+}
+.zm-figure-chart-info span:first-child{
+    color:#ED71A8;
+    font-family: RalewayBold;
+    font-size: 3em;
+}
+.zm-figure-chart-info span:last-child{
+    font-size: 2em ;
+}
