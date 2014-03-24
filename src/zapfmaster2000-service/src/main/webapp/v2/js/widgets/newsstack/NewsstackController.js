@@ -4,27 +4,65 @@ define(['Console'], function (Console) {
 
     var controller = ['$scope', '$timeout', 'CometService', 'DataService', "ZMConstants",
         function ($scope, $timeout, CometService, ajax, c) {
-        Console.group("Newsstack controller entered.");
+            Console.group("Newsstack controller entered.");
+            $scope.baseUrl = c.baseUrl;
+            var waitingQueue = [];
             CometService.addPushListener(function (data) {
-                if (c.DRAWING == data.type){
-                 //   addToNewsQueue(data);
-                }
+                addToNewsQueue(data);
             });
-            var addToNewsQueue = function(data){
-                $scope.news.push(data);
-                /*$timeout(function(){
-                   $scope.shift();
-                },5000);   */
+            var queueTimeout = false;
+            var isRunning = false;
+            var startUpdating = function (force) {
+                if (waitingQueue.length > 0) {
+                    if(isRunning&&!force)return;
+                    $scope.news.unshift(waitingQueue.pop());
+                    queueTimeout = $timeout(function(){startUpdating(true)}, c.newsFeedTimeout);
+                    isRunning = true;
+                } else if(waitingQueue.length==0){
+                     isRunning = false;
+                }
+
             }
-            var initScope = function(){
+            var addToNewsQueue = function (data) {
+                waitingQueue.push(data);
+                startUpdating();
+
+            }
+
+            var initScope = function () {
                 $scope.news = [];
 
             }
-              //  initScope();
+            initScope();
+            /*Testing, delete if not necessary*/
+            //addToNewsQueue(DUMMY_DATAS);
+            /*  var stopFlag = false;
+             var dummydata = function(){
 
+             var DUMMY_DATAS = {"type":"DRAWING","image":"rest/image/user/1","date":"20140323-184633","userId":1,"userName":"Ben","amount":Math.random()*10,"kegId":1,"brand":"Carlsberg","location":"Kölle"};
+
+             addToNewsQueue(DUMMY_DATAS);
+
+             if(!stopFlag)$timeout(dummydata,4000);
+             //stopFlag = true;
+             }
+
+             dummydata();
+             stopFlag = false;   */
+            ajax.getDatas(c.newsFeedUrl, function (json) {
+                if(json){
+                    _.each(json.reverse(), function (data) {
+                        addToNewsQueue(data);
+                    });
+                }
+
+            }, {
+                start: 0,
+                length: c.newsFeedLength
+            })
 
             Console.groupEnd();
-    }];
+        }];
     //controller.$inject = [];
 
     Console.groupEnd();

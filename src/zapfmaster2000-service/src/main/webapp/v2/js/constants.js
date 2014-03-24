@@ -16,6 +16,9 @@ define([
         newsPushUrl: "rest/push/news",
         updateAmountPushUrl: "rest/push/draftkit/{0}",
         boxesUrl: "rest/draftkit",
+        newsFeedUrl:"rest/news",
+        newsFeedLength:2,
+        newsFeedTimeout:2000,
         progressUrl: "rest/statistics/progress",
         challengeMaxDuels: 6,
         bestlistMax: 6,
@@ -27,6 +30,7 @@ define([
         LOGOUT: "LOGOUT",
         DRAW: "DRAW",
         SERVER_TIME_FORMAT: "YYYYMMDD-HHmmss",
+        CLIENT_TIME_FORMAT:"HH:mm",
         COUNTDOWN_TIME_FORMAT: "mm:ss",
         MUG_SIZE: 0.4,
         FIGURE_CHART:{
