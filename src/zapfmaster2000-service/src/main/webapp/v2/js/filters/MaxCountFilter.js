@@ -4,7 +4,7 @@ define(['Console',"Underscore"], function (Console,_) {
 
     var service = ['ZMConstants', function (c) {
         return function(input) {
-            if(input.length>2){
+            if(input.length> c.newsFeedLength){
                 input.length=c.newsFeedLength;
             }
 
