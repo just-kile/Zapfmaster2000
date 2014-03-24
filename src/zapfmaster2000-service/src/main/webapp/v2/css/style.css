@@ -224,7 +224,7 @@ header > nav > ul > li::before {
 /* ----------------------
         Challenges
 ------------------------- */
-.zmo-challenges,.zm-draftkits,.zm-newsstack {
+.zmo-challenges,.zm-draftkits {
     padding-right: 15px;
     padding-left: 15px;
 }
@@ -292,19 +292,19 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 }
 
 .color-container:nth-child(odd) .userimage1 {
-    border: 1px solid #FFF143;
+    border: 2px solid #FFF143;
 }
 
 .color-container:nth-child(even) .userimage1 {
-    border: 1px solid #FF71AC;
+    border: 2px solid #FF71AC;
 }
 
 .color-container:nth-child(odd) .userimage2 {
-    border: 1px solid #FF71AC;
+    border:2px solid #FF71AC;
 }
 
 .color-container:nth-child(even) .userimage2 {
-    border: 1px solid #FFF143;
+    border: 2px solid #FFF143;
 }
 .zm-animate{
     transition: translateZ(0);
@@ -729,11 +729,12 @@ li.zm-draftkit{
 li.zm-newsstack{
     font-family: RalewayLight;
     list-style: none;
-    float:left;
-    height: 50px;
-    display: inline;
 
-    min-width: 250px;
+    height: 50px;
+    display: inline-block;
+    padding-top: 0px;
+    width: 250px;
+    white-space: nowrap;
     /*margin-left: 30px;*/
 }
 
@@ -742,12 +743,20 @@ li.zm-newsstack{
     margin-right: 10px;
 }
   .zm-newsstack-ul{
-      padding-left: 0;
+      padding-left: 50px;
   }
 .zm-newsstack .brand{
     font-size: 1.3em;
     margin-top: 5px;
 
+}
+.zm-newsstack .two-lines{
+    margin-top: -3px;
+    font-size: 1.3em;
+}
+
+.zm-newsstack .two-lines.last{
+    margin-top: -10px;
 }
 .zm-newsstack .location{
     font-size: 1em;
@@ -892,4 +901,29 @@ transition: translateZ(0);
 }
 .zm-figure-chart-info span:last-child{
     font-size: 2em ;
+}
+
+.animate-repeat {
+   box-sizing:border-box;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+    -webkit-transition:all 1s;
+    transition:all 1s;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+    opacity:0;
+    width:0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+    opacity:1;
+    width:250px;
 }
