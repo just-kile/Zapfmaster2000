@@ -183,14 +183,17 @@ define(['Console', 'Underscore'], function (Console, _) {
                 if (document.body.clientWidth < 768) {
                     console.log('mobile');
 
-                    if (changeInterval)$timeout.cancel(changeInterval);
+                    if (changeInterval){
+                        $timeout.cancel(changeInterval);
+                        changeInterval = null;
+                    }
 
                 } else{
 
                 }
             };
             var initResizing = function () {
-                resizeMethod();
+                //resizeMethod();
                 window.addEventListener("resize", resizeMethod, true);
             }
             initResizing();

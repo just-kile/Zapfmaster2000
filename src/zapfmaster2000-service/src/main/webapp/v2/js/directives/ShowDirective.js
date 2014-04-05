@@ -20,7 +20,7 @@ define(['Console', 'd3'], function (Console, d3) {
                                 })
                             },1000);
                         });
-                        $scope.$on("$destroy", function () {
+                       /* $scope.$on("$destroy", function () {
                             $animate.addClass(ele, 'animated ' + c.WIDGETS.ANIMATION_OUT, function () {
                                 $timeout(function () {
 
@@ -30,7 +30,7 @@ define(['Console', 'd3'], function (Console, d3) {
                                 }, 1000);
                             });
 
-                        });
+                        });*/
                      /*   $scope.$watch("rows.center", function (newArray, oldArray) {
                             var els = $element.find(".zm-widget");
 

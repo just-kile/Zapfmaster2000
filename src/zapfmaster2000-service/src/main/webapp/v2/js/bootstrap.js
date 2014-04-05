@@ -11,6 +11,7 @@ requirejs.config({
         AngularRoute: 'libs/angular/angular-route',
         AngularResource: "libs/angular/angular-resource",
         AngularAnimate:"libs/angular/angular-animate",
+        AngularWebworker:"libs/angular/webworkerpool-core-angular.min",
         moment:"libs/moment/moment.min",
         templates: './../views'
     },
@@ -27,6 +28,9 @@ requirejs.config({
         },
         AngularAnimate: {
             deps: ['Angular']
+        },
+        AngularWebworker:{
+          deps:['Angular']
         },
         jQuery: {
             exports: "jQuery"
@@ -60,7 +64,8 @@ requirejs([
     , 'Angular',
     'AngularRoute',
     'AngularResource',
-    'AngularAnimate'
+    'AngularAnimate',
+    'AngularWebworker'
 ], function (require, Console, $, _,moment,d3, angular,angularRoute,angularResource,angularAnimate) {
     Console.group("Bootstrap dependencies loaded.");
     Console.info("Console", Console);

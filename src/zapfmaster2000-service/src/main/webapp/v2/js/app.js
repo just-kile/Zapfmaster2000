@@ -22,7 +22,7 @@ define([
 
         Console.group("Setup Angular");
 
-        var mainModule = angular.module('myApp', ['ngRoute', 'ngResource', 'ngAnimate']);
+        var mainModule = angular.module('myApp', ['ngRoute', 'ngResource', 'ngAnimate','webWorkerPool']);
         services.initialize(mainModule);
         directives.initialize(mainModule);
         filters.initialize(mainModule);

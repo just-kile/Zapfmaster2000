@@ -8,6 +8,7 @@
                     <h2>{{statsodd.user.userName}}</h2>
                     <ul>
                         <li>{{statsodd.amount.amountTotal|amount}} L</li>
+                        <li>{{statsodd.drawCount.count}} Zapfvorgänge</li>
                         <li><span>{{statsodd.achievement.count|achievement}} Achievements</span>
                             <ul style="padding:0">
                                 <li style="display:inline-block;list-style: none;" ng-repeat="achievement in statsodd.achievement.achievements">
@@ -15,7 +16,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>{{statsodd.drawCount.count}} Zapfvorgänge</li>
+
                     </ul>
                 </div>
                 <div class="back userstats animate-show" ng-show="arrow.visible">
@@ -24,6 +25,7 @@
                     <h2>{{statseven.user.userName}}</h2>
                     <ul>
                         <li>{{statseven.amount.amountTotal|amount}} L</li>
+                        <li>{{statseven.drawCount.count}} Zapfvorgänge</li>
                         <li><span>{{statseven.achievement.count|achievement}} Achievements</span>
                             <ul style="padding:0">
                                 <li style="display:inline-block;list-style: none" ng-repeat="achievement in statseven.achievement.achievements">
@@ -31,7 +33,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>{{statseven.drawCount.count}} Zapfvorgänge</li>
+
                     </ul>
 
                 </div>

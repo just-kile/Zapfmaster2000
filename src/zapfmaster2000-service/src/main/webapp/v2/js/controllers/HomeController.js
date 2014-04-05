@@ -12,13 +12,13 @@ define(['Console'], function (Console) {
             topLeft: [
                 {
                     name: "newsstack",
-                    className: "col-md-6"
+                    className: "col-md-7"
                 }
             ],
             topRight: [
                 {
                     name: "draftkits",
-                    className: "col-md-6"
+                    className: "col-md-5"
                 }
             ],
             center: [

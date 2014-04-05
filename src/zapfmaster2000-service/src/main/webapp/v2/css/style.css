@@ -235,7 +235,7 @@ header.zmo-header {
 }
 
 .zmo-container {
-    height: 620px;
+    /*height: 620px;     */
     background: rgba(0, 0, 0, 0.4);
 
     border-radius: 10px;
@@ -399,6 +399,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 .row {
     margin-left: 0;
     margin-right: 0;
+    padding-top:20px;
 }
 
 .img-rounded {
@@ -411,7 +412,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 
 .bestlist {
     position: relative;
-
+    min-height:620px;
 }
 .bestlist > ul{
     padding: 0;
@@ -660,7 +661,7 @@ li.bestlist-item.ng-leave-active {
 }
 /** Drafkit**/
 .zm-draftkits{
-    padding-top: 35px;
+    padding-top: 0px;
     padding-right:30px;
 }
 li.zm-draftkit{
@@ -669,8 +670,8 @@ li.zm-draftkit{
     float:right;
     height: 50px;
     display: inline;
-
-    min-width: 250px;
+    margin-top: -10px;
+    min-width: 200px;
     margin-left: 30px;
 }
 
@@ -691,7 +692,7 @@ li.zm-draftkit{
 .zm-draftkit .amount,.zm-draftkit .amountNumbers{
     height: 15px;
     position: absolute;
-    width: 71%;
+    width: 65%;
     right:7px;
     bottom: 7px;
 

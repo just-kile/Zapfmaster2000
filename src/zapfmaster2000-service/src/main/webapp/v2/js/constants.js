@@ -17,7 +17,7 @@ define([
         updateAmountPushUrl: "rest/push/draftkit/{0}",
         boxesUrl: "rest/draftkit",
         newsFeedUrl:"rest/news",
-        newsFeedLength:2,
+        newsFeedLength:3,
         newsFeedTimeout:2000,
         progressUrl: "rest/statistics/progress",
         challengeMaxDuels: 6,
