@@ -6,7 +6,7 @@ define(['Console'], function (Console) {
         Console.group("HomeController entered.");
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         var widgetTimeouts = {};
-        var firstWidgets = 0,
+        var firstWidgets = 1,
             widgetChangeEnabled=false;
         var rows = {
             topLeft: [
@@ -30,6 +30,17 @@ define(['Console'], function (Console) {
                     },
                     {
                         name: "challenges",
+                        className: "col-md-4",
+                        interval: 50000
+                    }
+                ],[
+                    {
+                        name: "bestlist",
+                        className: "col-md-8",
+                        interval: 50000
+                    },
+                    {
+                        name: "newsfeed",
                         className: "col-md-4",
                         interval: 50000
                     }
