@@ -18,9 +18,9 @@ define(['Console', 'Underscore','jQuery'], function (Console, _,$) {
                     console.log(event.data);
                     var e = event.data;
                     var status = e.status;
-                    var data = $.parseJSON(e.responseText);
                     Console.group("Received Push datas");
                     if (status == 200 && callbacks[cbKey].length > 0) {
+                        var data = $.parseJSON(e.responseText);
                         Console.debug("Datas", data);
                         _.each(callbacks[cbKey], function (callback, index) {
                             if (callback)callback(data);
