@@ -1,12 +1,25 @@
+
+var baseUrl;
 self.addEventListener('message', function (e) {
-    //Data Posting from page is accepting here
     var data = e.data;
+    var serviceUrl = data.url+"?token="+data.token+"&_="+new Date().getTime();
+
+    if(data.init && data.baseUrl){
+       // importScripts(data.baseUrl+"js/libs/jquery/jquery-2.0.3.min.js");
+        baseUrl = data.baseUrl;
+    }else{
+        getData();
+    }
+
     //ADD YOUR SERVICE URL HERE     var ServiceUrl = host + "/GetUpdate?eMailId=" + data.email;
-    var serviceUrl = data.url+"?token="+data.token;
-    GetData();
-    function GetData() {
-        debugger;
+    var serviceUrl =baseUrl+ data.url+"?token="+data.token+"&_="+new Date().getTime();
+
+    function getData() {
+        //debugger;
+        //postMessage(data);
+      //  throw serviceUrl;//JSON.stringify()
         try {
+
             var xhr = new XMLHttpRequest();
             xhr.open('GET', serviceUrl, false);
             xhr.setRequestHeader("Content-Type",
@@ -15,7 +28,11 @@ self.addEventListener('message', function (e) {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
                         //Posting Back the Result
-                        postMessage(xhr.responseText);
+                        postMessage({
+                            status:xhr.status,
+                            statusText:xhr.statusText,
+                            responseText:xhr.responseText
+                        });
                     }
                 }
             };
