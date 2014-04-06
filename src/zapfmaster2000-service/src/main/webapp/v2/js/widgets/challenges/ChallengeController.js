@@ -6,6 +6,7 @@ define(['Console', 'Underscore'], function (Console, _) {
         function ($scope, $timeout, CometService, ajax, c, DateService, splash) {
             Console.group("Challenge controller entered.");
             $scope.baseUrl = c.baseUrl;
+            $scope.challengeMaxDuels = c.challengeMaxDuels;
 
             var calcTeamPercent = function (data) {
                 _.each(data, function (challenge, key) {

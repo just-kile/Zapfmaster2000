@@ -1,6 +1,6 @@
 <div ng-controller="BestlistController" >
     <div class="col-md-5 color-container">
-        <div class="flip-container zmo-container yellow-border  userstats-wrapper" ng-class="{flip: activeStats==0}">
+        <div class="flip-container zmo-container yellow-border  userstats-wrapper" ng-style="{height:bestlistMax+'20'+'px'}" ng-class="{flip: activeStats==0}">
             <div class="flipper">
                 <div class="front userstats animate-show" ng-show="arrow.visible">
                     <img width="160" class="img-responsive img-rounded" src="{{baseUrl + statsodd.user.userImage|big}}"/>
@@ -42,7 +42,7 @@
     </div>
     <div class="col-md-7">
         <header class="zmo-header">Top Zapfer</header>
-        <div class="zmo-container bestlist">
+        <div class="zmo-container bestlist" ng-style="{height:bestlistMax+'20'+'px'}">
             <div class="zm-absolute arrow animate-show" ng-show="arrow.visible"
                  ng-style="{top:arrow.pointer*100+'px'} ">
                 <img src="css/images/arrow_left.png"/>

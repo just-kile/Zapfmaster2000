@@ -8,7 +8,7 @@ define(['Console', 'Underscore','jQuery'], function (Console, _,$) {
         };
         var baseUrl =  document.location.origin+ document.location.pathname;
         var ajaxCalls = {};
-        var webWorkerPool = webWorkerPoolFactory.createPool('js/services/CometWorker.js', 8);
+        var webWorkerPool = webWorkerPoolFactory.createPool('js/services/CometWorker.js', c.webWorkers);
        // webWorkerPool.postMessage({init:true,baseUrl:document.location.origin+ document.location.pathname});
         var startCometService = function (url, cbKey) {
             ajaxCalls[cbKey] = $q.defer();
