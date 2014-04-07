@@ -6,7 +6,7 @@ define(['Console'], function (Console) {
         Console.group("HomeController entered.");
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         var widgetTimeouts = {};
-        var firstWidgets = 0,
+        var firstWidgets = 1,
             widgetChangeEnabled=false;
         var rows = {
             topLeft: [

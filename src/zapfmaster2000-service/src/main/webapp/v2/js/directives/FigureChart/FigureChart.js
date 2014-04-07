@@ -6,7 +6,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                 return {
                     restrict: 'A',
                     scope: {
-                        currentAmount: '='
+                        //amount: '&'
                     },
                     templateUrl: 'js/directives/FigureChart/template.html',
                     link: function ($scope, element, attrs) {
@@ -78,8 +78,12 @@ define(['Console', 'jQuery'], function (Console, $) {
 
                         }, true);
                         //real data changing
-
-                        $scope.$watch(attrs.currentAmount, function (value) {
+                        attrs.$observe('amount',function(val){
+                           var value  =parseFloat(val);
+                            console.log(' type:',attrs.createControl);
+                            //element.text('Directive text, type is: '+attrs.createControl);
+                       // });
+                     //  $scope.$watch(attrs.amount, function (value) {
                             // alert("Amount Changes!");
                             console.log(value);
                             $scope.countimage.mugcount = Math.floor(value/c.MUG_SIZE - (value/ c.MUG_SIZE) % c.FIGURE_CHART.MAX_IMAGES_PER_LINE);
@@ -127,31 +131,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                             }
 
                             //change height
-                            /* var width = element.width();
-                             var height = element.height();
-                             if(newLength> c.FIGURE_CHART.MIN_IMAGES && newLength< c.FIGURE_CHART.MAX_IMAGES_PER_LINE){
-                             var newWidthPerItem = width/newLength;
-                             _.each($scope.images, function (item,index) {
-                             item.height = item.height*(newWidthPerItem/item.width);
-                             item.width =newWidthPerItem;
 
-
-                             });
-                             }else if(newLength>= c.FIGURE_CHART.MAX_IMAGES_PER_LINE
-                             && newLength- c.FIGURE_CHART.MAX_LINES*c.FIGURE_CHART.MAX_IMAGES_PER_LINE<0){
-
-                             var newWidthPerItem = width/c.FIGURE_CHART.MAX_IMAGES_PER_LINE;
-                             _.each($scope.images, function (item,index) {
-                             item.height = item.height*(newWidthPerItem/item.width);
-                             item.width =newWidthPerItem;
-                             });
-                             }else if(newLength>= c.FIGURE_CHART.MAX_IMAGES_PER_LINE){
-                             var newWidthPerItem = width/newLength*c.FIGURE_CHART.MAX_LINES;
-                             _.each($scope.images, function (item,index) {
-                             item.height = item.height*(newWidthPerItem/item.width);
-                             item.width =newWidthPerItem;
-                             });
-                             }   */
 
                         });
 
