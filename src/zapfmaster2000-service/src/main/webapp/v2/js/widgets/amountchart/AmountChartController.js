@@ -9,6 +9,8 @@ define(['Console', 'Underscore'], function (Console, _) {
             $scope.baseUrl = c.baseUrl;
             $scope.currentAmount = 0;
             $scope.achievementCount = 0;
+            $scope.unitMugs = c.MUG_SIZE;
+            $scope.unitAchievements = 1;
             var updateView  =function(amount){
                // $scope.currentAmount =$scope.currentAmount-0.5<0?2:$scope.currentAmount-0.5;
                 $scope.currentAmount =amount.amountTotal;
