@@ -164,7 +164,34 @@ header > nav > ul > li::before {
         opacity: 1;
     }
 }
+@-webkit-keyframes height {
+    0% {
 
+        height: 0px;
+        opacity:0;
+    }
+
+    100% {
+
+        height: 100px;
+        opacity:1;
+    }
+}
+@keyframes height {
+    0% {
+
+        height: 0px;
+        opacity: 0;
+
+    }
+
+    100% {
+
+        height: 100px;
+        opacity: 1;
+
+    }
+}
 
 
 .username1,.username2{
@@ -763,6 +790,72 @@ li.zm-newsstack{
     font-size: 1em;
     margin-top: -0.5em;
 }
+.zm-newsstack ul.news{
+    position: absolute;
+    top:35px;
+
+}
+.zm-newsstack ul.news li{
+    list-style: none;
+    display: inline-block;
+    width:150px;
+}
+/**
+Newsfeed
+**/
+
+li.zm-newsfeed{
+    font-family: RalewayLight;
+    list-style: none;
+
+    height: 100px;
+    display: inline-block;
+    padding-top: 0px;
+    width: 100%;
+    white-space: nowrap;
+    /*margin-left: 30px;*/
+}
+.zm-newsfeed:nth-child(even) .front{
+   border: 2px solid #FFF143
+}
+.zm-newsfeed:nth-child(odd) .front{
+    border:2px solid #FF71AC
+}
+.zm-newsfeed  img{
+    float:left;
+    margin-right: 10px;
+    height:64px;
+}
+.zm-newsfeed-ul{
+    padding-left: 0px;
+}
+.zm-newsfeed .brand{
+    font-size: 1.8em;
+    margin-top: 5px;
+
+}
+.zm-newsfeed .two-lines{
+    margin-top: -3px;
+    font-size: 1.8em;
+}
+
+.zm-newsfeed .two-lines.last{
+    margin-top: -10px;
+}
+.zm-newsfeed .location{
+    font-size: 1em;
+    margin-top: -0.8em;
+}
+.zm-newsfeed ul.news{
+    position: absolute;
+    top:35px;
+
+}
+.zm-newsfeed ul.news li{
+    list-style: none;
+    display: inline-block;
+    width:150px;
+}
 
 /**
 * SplashScreen
@@ -845,16 +938,7 @@ transition: translateZ(0);
 .zmdim{
     opacity: 0.5;
 }
-.zm-newsstack ul.news{
-    position: absolute;
-    top:35px;
 
-}
-.zm-newsstack ul.news li{
-    list-style: none;
-    display: inline-block;
-    width:150px;
-}
 
 
 .zm-crop{
@@ -904,6 +988,41 @@ transition: translateZ(0);
     font-size: 2em ;
 }
 
+.animate-height{
+    -webkit-animation: height 0.5s;
+    animation: height 0.5s;
+}
+.animate-height-reverse{
+    -webkit-animation: height 0.5s reverse;
+    animation: height 0.5s reverse;
+}
+
+/**Animate newsfeed**/
+/*.animate-repeat-y {
+    box-sizing:border-box;
+}
+
+.animate-repeat-y.ng-move,
+.animate-repeat-y.ng-enter,
+.animate-repeat-y.ng-leave {
+    -webkit-transition:all 1s;
+    transition:all 1s;
+}
+
+.animate-repeat-y.ng-leave.ng-leave-active,
+.animate-repeat-y.ng-move,
+.animate-repeat-y.ng-enter {
+    opacity:0;
+    height:0;
+}
+
+.animate-repeat-y.ng-leave,
+.animate-repeat-y.ng-move.ng-move-active,
+.animate-repeat-y.ng-enter.ng-enter-active {
+    opacity:1;
+    height:100px;
+}  */
+      /**animate newsstack*/
 .animate-repeat {
    box-sizing:border-box;
 }

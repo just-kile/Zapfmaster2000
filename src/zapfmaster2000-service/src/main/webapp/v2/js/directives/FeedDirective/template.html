@@ -1,0 +1,185 @@
+<ul class="zm-newsfeed-ul" style="position:relative">
+    <li class="zm-newsfeed animate-repeat-y" ng-repeat="n in items|maxcount:maxlength">
+        <!-- DRAWING -->
+        <div class="flip-container" ng-if="n.type=='DRAWING'">
+            <div class="flipper">
+                <div class="front zm-backgrnd">
+                    <img src="{{baseUrl+n.image|big}}" class="img-rounded"/>
+                    <div class="brand">{{n.userName}} zapfte {{n.amount|amount}} l</div>
+                    <div class="location">@ {{n.location}}, {{n.date|clientdate}} Uhr</div>
+
+
+                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- ACHIEVEMENET -->
+        <!--    {
+        "type": "ACHIEVEMENT",
+        "image": "images/achievements/nimmersatt.png",
+        "date": 1355687887000,
+        "achievementName": "Nimmersatt",
+        "achievementId": 3,
+        "userName": "user-3",
+        "userId": 3
+    }-->
+        <div class="flip-container" ng-if="n.type=='ACHIEVEMENT'">
+            <div class="flipper">
+                <div class="front zm-backgrnd">
+                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+
+                    <div class="two-lines">{{n.userName}} erreicht</div>
+                    <div class="two-lines last">{{n.achievementName}}!</div>
+                    <div class="location">{{n.date|clientdate}} Uhr</div>
+
+
+                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- New Keg-->
+
+        <!--{
+         "boxId": 1
+         "brand": "Oettinger"
+         "date": "20130228-000000"
+         "image": "images/others/newkeg.jpg"
+         "kegId": 1
+         "location": "local"
+         "size": 50
+         "type": "NEW_KEG"
+    } -->
+        <div class="flip-container" ng-if="n.type=='NEW_KEG'">
+            <div class="flipper">
+                <div class="front zm-backgrnd">
+                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+
+                    <div class="two-lines">Frisches {{n.brand}}</div>
+                    <div class="two-lines last">angezapft!</div>
+
+                    <div class="location">#{{n.size}}L, um {{n.date|clientdate}} Uhr</div>
+
+
+                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- New User-->
+        <!-- date: "20140324-201423"
+image: "images/others/newuser.jpg"
+type: "NEW_USER"
+userId: 3
+userName: "Karl"-->
+        <div class="flip-container" ng-if="n.type=='NEW_USER'">
+            <div class="flipper">
+                <div class="front zm-backgrnd">
+                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+
+                    <div class="brand">Willkommen {{n.userName}}!</div>
+                    <div class="location">um {{n.date|clientdate}} Uhr</div>
+
+
+                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- Challenge Started -->
+        <!-- {
+            "challengeType": "1v1",
+            "challengeDuration": "30",
+            "startDate": "1346459019",
+            "challengeId": "9",
+            "challengeImage": "images/others/1v1.jpg",
+            "type": "CHALLENGE_STARTED",
+            "team1": [
+                {
+                    "userId": "6",
+                    "userName": "Thomas",
+                    "userImage": "images/avatars/43981527934208.jpg",
+                    "amount": 0.41851239669421,
+                    "won": "0"
+                }
+            ],
+            "team2": [
+                {
+                    "userId": "2",
+                    "userName": "Winni",
+                    "userImage": "images/avatars/43981527934208.jpg",
+                    "amount": 0.32851239669421,
+                    "won": "0"
+                }
+            ]
+        } -->
+        <div class="flip-container" ng-if="n.type=='CHALLENGE_STARTED'">
+            <div class="flipper">
+                <div class="front zm-backgrnd">
+                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+
+                    <div class="two-lines">Challenge gestartet</div>
+                    <div class="two-lines last">{{n.team1[0].userName}} vs {{n.team2[0].userName}}</div>
+
+                    <div class="location">{{n.challengeDuration}}min, {{n.startDate|clientdate}} Uhr</div>
+
+
+                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- Challenge Done -->
+        <!--
+        -->
+        <div class="flip-container" ng-if="n.type=='CHALLENGE_DONE'">
+            <div class="flipper">
+                <div class="front zm-backgrnd">
+                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+
+                    <div class="two-lines">Challenge beendet</div>
+                    <div class="two-lines last">{{n.team1[0].won?n.team1[0].userName:n.team2[0].userName}} hat gewonnen</div>
+
+                    <div class="location">{{n.challengeDuration}}min, {{n.date|clientdate}} Uhr</div>
+
+
+                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- CHALLENGE DECLINED-->
+        <div class="flip-container" ng-if="n.type=='CHALLENGE_DECLINED'">
+            <div class="flipper">
+                <div class="front zm-backgrnd">
+                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+
+                    <div class="two-lines">Challenge abgelehnt</div>
+                    <div class="two-lines last">von {{n.team2[0].userName}}</div>
+
+                    <div class="location">{{n.challengeDuration}}min, {{n.date|clientdate}} Uhr</div>
+
+
+                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
+
+                </div>
+
+
+            </div>
+        </div>
+    </li>
+
+</ul>

@@ -33,6 +33,17 @@ define(['Console'], function (Console) {
                         className: "col-md-4",
                         interval: 50000
                     }
+                ],[
+                    {
+                        name: "bestlist",
+                        className: "col-md-8",
+                        interval: 50000
+                    },
+                    {
+                        name: "newsfeed",
+                        className: "col-md-4",
+                        interval: 50000
+                    }
                 ],
                 [
                     {
