@@ -884,7 +884,7 @@ transition: translateZ(0);
 .zm-figure-chart-countimage > div{
     text-align: center;
    font-size: 4em;
-    width: 97px;
+    width: 100%;
     position: absolute;
     font-family: RalewaySemiBold;
     text-shadow: 1px 1px 1px #000;
@@ -900,7 +900,7 @@ transition: translateZ(0);
     font-family: RalewayBold;
     font-size: 3em;
 }
-.zm-figure-chart-info span:last-child{
+.zm-figure-chart-info span:nth-child(2){
     font-size: 2em ;
 }
 
