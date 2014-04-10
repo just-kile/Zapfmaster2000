@@ -6,16 +6,23 @@ define(['Console'], function (Console) {
         Console.group("HomeController entered.");
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         var widgetTimeouts = {};
-        var firstWidget = $routeParams.widgetId || 2,
+        var firstWidget = $routeParams.widgetId || 0,
             widgetChangeEnabled = typeof $routeParams.widgetId == "undefined";
 
         var rowsDivider = 2;//rows.centerHalf.length;
-        var activeSubWidget = firstWidget>=rowsDivider?"centerHalf":"centerThird";
+        var activeSubWidget = firstWidget >= rowsDivider ? "centerHalf" : "centerThird";
         firstWidget = firstWidget % rowsDivider;
-        function getActiveSubWidget(){
+        function getActiveSubWidget() {
             return activeSubWidget;
         }
+
         var rows = {
+            switchTime: 150000,
+            switchingModule:{
+                name: "zapfmastersplash",
+                className: "col-md-12",
+                interval: 10000
+            },
             topLeft: [
                 {
                     name: "newsstack",
@@ -33,24 +40,24 @@ define(['Console'], function (Console) {
                     {
                         name: "bestlist",
                         className: "col-md-8",
-                        interval: 5000
+                        interval: 60000
                     },
                     {
                         name: "challenges",
                         className: "col-md-4",
-                        interval: 5000
+                        interval: 60000
                     }
                 ],
                 [
                     {
                         name: "newsfeed",
                         className: "col-md-8",
-                        interval: 5000
+                        interval: 60000
                     },
                     {
                         name: "achievementfeed",
                         className: "col-md-4",
-                        interval: 5000
+                        interval: 60000
                     }
 
                 ]
@@ -60,24 +67,24 @@ define(['Console'], function (Console) {
                     {
                         name: "linechart",
                         className: "col-md-6",
-                        interval: 5000
+                        interval: 60000
                     },
                     {
                         name: "amountchart",
                         className: "col-md-6",
-                        interval: 5000
+                        interval: 60000
                     }
                 ],
                 [
                     {
                         name: "achievementfeed",
                         className: "col-md-6",
-                        interval: 5000
+                        interval: 60000
                     },
                     {
                         name: "newsfeed",
                         className: "col-md-6",
-                        interval: 5000
+                        interval: 60000
                     }
                 ]
             ]
@@ -97,7 +104,7 @@ define(['Console'], function (Console) {
             var newWidget = rows[getActiveSubWidget()][actualRow] && rows[getActiveSubWidget()][actualRow][index];
             $scope.rows.center.splice(index, 1, newWidget);
             (function (newWidget, index, rows, actualRow) {
-                changeInterval[getActiveSubWidget()+index] =  $timeout(function () {
+                changeInterval[getActiveSubWidget() + index] = $timeout(function () {
                     updateWidget(newWidget, index, rows, actualRow);
                 }, newWidget.interval);
 
@@ -105,22 +112,51 @@ define(['Console'], function (Console) {
 
         };
 
-        var startUpdater = function (rows) {
+        var startUpdater = function (rows,instant) {
             var startCenterWidgets = rows[getActiveSubWidget()][0];
             _.each(startCenterWidgets, function (widget, index) {
-                changeInterval[getActiveSubWidget()+index] = $timeout(function () {
-                    updateWidget(widget, index, rows, 0);
-                }, widget.interval);
+                if(instant){
+                    updateWidget(widget, index, rows, -1);
+                }else{
+                    changeInterval[getActiveSubWidget() + index] = $timeout(function () {
+                        updateWidget(widget, index, rows, 0);
+                    }, widget.interval);
+                }
+
             });
         }
+
         var stopUpdater = function () {
-            _.each(changeInterval,function(interval){
+            _.each(changeInterval, function (interval) {
                 $timeout.cancel(interval);
             });
             changeInterval = {};
 
         }
-        if (widgetChangeEnabled)startUpdater(rows);
+        var widgetSwitchTimeout;
+        var stopWidgetSwitch = function () {
+            $timeout.cancel(widgetSwitchTimeout);
+        }
+        var startWidgetSwitch = function (rows) {
+            widgetSwitchTimeout = $timeout(function () {
+                stopUpdater();
+                activeSubWidget = activeSubWidget == "centerHalf" ? "centerThird" : "centerHalf";
+                $scope.rows.center.splice(0, 2,
+                    rows.switchingModule);
+
+                $timeout(function(){
+                    startUpdater(rows,true);
+                    startWidgetSwitch(rows);
+                },rows.switchingModule.interval)
+
+            }, rows.switchTime);
+
+
+        }
+        if (widgetChangeEnabled) {
+            startUpdater(rows);
+            startWidgetSwitch(rows);
+        }
         init(rows);
 
 
