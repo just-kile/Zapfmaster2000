@@ -6,6 +6,7 @@ define(['Console', 'Underscore'], function (Console, _) {
         function ($scope, $timeout, CometService, ajax, c) {
             Console.group("Bestlist controller entered.");
             /*Bestlist*/
+            $scope.bestlistMax = c.bestlistMax;
             $scope.baseUrl = c.baseUrl;
             var calcPercentAmount = function (data) {
                 var sum = 0, sumAdd = 0, amount = 0, len = data.length;
