@@ -58,7 +58,7 @@ define(['Console'], function (Console) {
 
             }, {
                 start: 0,
-                length: c.newsFeedLength
+                length: c.newsStackLength
             })
 
             Console.groupEnd();

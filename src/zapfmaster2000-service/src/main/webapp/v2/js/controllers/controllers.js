@@ -19,10 +19,10 @@ define([
      'widgets/splashscreen/SplashScreenController',
     'widgets/linechart/LineChartController',
     'widgets/amountchart/AmountChartController',
-
+    'widgets/newsfeed/NewsfeedController',
     //Constants
     'constants'
-], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,amountchart,constants) {
+], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,amountchart,newsfeed,constants) {
     "use strict";
     Console.group("Entering controllers module.");
     Console.info("AppController", app);
@@ -36,6 +36,7 @@ define([
         SplashScreenController:splash,
         LineChartController:linechart,
         AmountChartController:amountchart,
+        NewsfeedController:newsfeed,
         stats: stats
 
     };
