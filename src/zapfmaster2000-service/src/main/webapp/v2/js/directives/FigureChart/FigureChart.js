@@ -14,6 +14,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                         $scope.initialWidth = c.FIGURE_CHART.INITIAL_WIDTH;
                         $scope.unittitle= attrs.unittitle;
                         $scope.unittext=attrs.unittext;
+                        $scope.tofixed=attrs.tofixed;
                         var unitSize = attrs.unit;
                         var calcAmountPieces = function (amount) {
                             var result = [];
@@ -90,7 +91,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                             // alert("Amount Changes!");
                             console.log(value);
                             $scope.countimage.mugcount = Math.floor(value/unitSize - (value/ unitSize) % c.FIGURE_CHART.MAX_IMAGES_PER_LINE);
-                            $scope.complete_mug_count=(Math.round(value/ unitSize*100)*0.01).toFixed(2);
+                            $scope.complete_mug_count=value/ unitSize;
                             var newAmountPieces = calcAmountPieces(value);
                             var diff = newAmountPieces.length - $scope.images.length;
                             var newLength = newAmountPieces.length;

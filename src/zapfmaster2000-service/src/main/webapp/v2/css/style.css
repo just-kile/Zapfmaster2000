@@ -557,7 +557,7 @@ li.bestlist-item.ng-leave-active {
 
 .bestlist .amount {
     right: 10px;
-
+    white-space:nowrap;
     z-index: 1;
 
 }
@@ -981,6 +981,12 @@ transition: translateZ(0);
 }
 .zm-figure-chart-info span:first-child{
     color:#ED71A8;
+    font-family: RalewayBold;
+    font-size: 3em;
+}
+
+.zm-goblet .zm-figure-chart-info span:first-child{
+    color:#FFF143;
     font-family: RalewayBold;
     font-size: 3em;
 }

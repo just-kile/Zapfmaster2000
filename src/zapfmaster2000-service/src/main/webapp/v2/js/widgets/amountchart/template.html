@@ -1,5 +1,5 @@
 
-<div ng-controller="AmountChartController" class="zmo-challenges">
+<div ng-controller="AmountChartController">
     <header class="zmo-header">Complete Mugs <span class="small"></span></header>
     <div class="zmo-container">
         <div figurechart
@@ -8,19 +8,20 @@
              unit="{{unitMugs}}"
              unitTitle="Mugs"
              unittext="l per Mug"
-                img_big="css/images/mug_pink_filling.svg"></div>
+             tofixed="2"
+             img_big="css/images/mug_pink_filling.svg"></div>
 
 
     </div>
 
     <header class="zmo-header">Erreichte Achievements <span class="small"></span></header>
-    <div class="zmo-container">
+    <div class="zmo-container zm-goblet">
         <div figurechart
              img_empty="css/images/goblet_white.svg"
              img_full="css/images/goblet_yellow.svg" label="name" amount="{{achievementCount}}"
              unit="{{unitAchievements}}"
              unittitle="Achievements"
-
+             tofixed="0"
              img_big="css/images/goblet_yellow.svg"></div>
 
 

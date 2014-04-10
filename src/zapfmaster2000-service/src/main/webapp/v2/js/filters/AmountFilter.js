@@ -7,7 +7,7 @@ define(['Console'], function (Console) {
             if(type=="full"){
                 return Math.round(input);
             } else if(input && typeof input =="number"){
-                return input.toFixed(2)
+                return input.toFixed(type||2);
             }else{
                 return input;
             }
