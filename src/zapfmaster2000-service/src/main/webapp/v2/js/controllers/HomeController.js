@@ -2,12 +2,12 @@ define(['Console'], function (Console) {
     "use strict";
     Console.group("Entering HomeController module.");
 
-    var controller = ['$scope', '$timeout', 'ZMConstants','$animate', function ($scope, $timeout, c,$animate) {
+    var controller = ['$scope','$routeParams', '$timeout', 'ZMConstants','$animate', function ($scope,$routeParams, $timeout, c,$animate) {
         Console.group("HomeController entered.");
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         var widgetTimeouts = {};
-        var firstWidgets = 0,
-            widgetChangeEnabled=true;
+        var firstWidgets = $routeParams.widgetId || 0,
+            widgetChangeEnabled=typeof $routeParams.widgetId =="undefined";
         var rows = {
             topLeft: [
                 {
