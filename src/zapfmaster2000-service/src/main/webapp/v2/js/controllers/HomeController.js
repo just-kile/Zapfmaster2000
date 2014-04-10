@@ -31,7 +31,18 @@ define(['Console'], function (Console) {
                     {
                         name: "challenges",
                         className: "col-md-4",
+                        interval: 5000
+                    }
+                ],[
+                    {
+                        name: "bestlist",
+                        className: "col-md-8",
                         interval: 50000
+                    },
+                    {
+                        name: "zapfmastersplash",
+                        className: "col-md-4",
+                        interval: 10000
                     }
                 ],[
                     {
