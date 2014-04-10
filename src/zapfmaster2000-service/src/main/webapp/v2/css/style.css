@@ -49,10 +49,11 @@ body {
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    top: 200px;
     left: 0;
     text-align: center;
-
+    font-size: 3em;
+    color:#ED71A8;
 }
 
 header > nav {

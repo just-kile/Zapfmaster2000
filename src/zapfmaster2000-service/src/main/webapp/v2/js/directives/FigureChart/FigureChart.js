@@ -4,7 +4,7 @@ define(['Console', 'jQuery'], function (Console, $) {
 
         var directive = ['ZMConstants', '$window', '$timeout', '$animate', function (c, $window, $timeout, $animate) {
                 return {
-                    restrict: 'E',
+                    restrict: 'A',
                     scope: {
                         //amount: '&'
                     },
