@@ -259,7 +259,7 @@ header > nav > ul > li::before {
 
 header.zmo-header {
     font-family: RalewayBold;
-    font-size: 32px;
+    font-size: 2.3em;
 }
 
 .zmo-container {
@@ -281,7 +281,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 }
 
 .zmo-challenges .clock {
-    font-size: 22pt;
+    font-size: 2em;
     padding-top: 35px;
 }
 
@@ -316,7 +316,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 
 .zmo-challenges div.username1, .zmo-challenges div.username2 {
     margin-top: 50px;
-    font-size: 15pt;
+    font-size: 2em;
 }
 
 .color-container:nth-child(odd) .userimage1 {
@@ -552,8 +552,8 @@ li.bestlist-item.ng-leave-active {
 }
 .bestlist .username1,.bestlist .amount {
     font-family: RalewaySemiBold;
-    font-size: 18pt;
-    line-height: 80px;
+    font-size: 2em;
+    line-height: 82px;
 }
 
 .bestlist .amount {
@@ -583,13 +583,13 @@ li.bestlist-item.ng-leave-active {
 }
 .userstats >h2{
     font-family: RalewayBold;
-    font-size: 28pt;
+    font-size: 2.8em;
     margin-top: 10px;
     text-overflow: ellipsis;
 }
 .userstats > ul{
     text-align: left;
-    font-size: 23pt;
+    font-size: 2.3em;
 
 }
 .userstats > ul > li{
@@ -710,7 +710,7 @@ li.zm-draftkit{
 }
 
 .zm-draftkit .brand{
-    font-size: 1.8em;
+    font-size: 1.7em;
     margin-top: 5px;
 
 }
@@ -740,7 +740,7 @@ li.zm-draftkit{
     margin-right: auto;
     text-align: center;
     white-space: nowrap;
-    font-size: 1.1em;
+    font-size: 1em;
     font-family: RalewaySemiBold;
     transition:width 1s;
     padding-left: 5px;
@@ -777,13 +777,13 @@ li.zm-newsstack{
       padding-left: 50px;
   }
 .zm-newsstack .brand{
-    font-size: 1.8em;
+    font-size: 1.7em;
     margin-top: 10px;
 
 }
 .zm-newsstack .two-lines{
     margin-top: 3px;
-    font-size: 1.8em;
+    font-size: 1.7em;
 }
 
 .zm-newsstack .two-lines.last{
@@ -815,7 +815,6 @@ li.zm-newsfeed{
     display: inline-block;
     padding-top: 0px;
     width: 100%;
-    white-space: nowrap;
     /*margin-left: 30px;*/
 }
 .zm-newsfeed:nth-child(even) .front{
@@ -833,21 +832,29 @@ li.zm-newsfeed{
     padding-left: 0px;
 }
 .zm-newsfeed .brand{
-    font-size: 1.8em;
-    margin-top: 5px;
-
+    font-size: 1.7em;
+    display:table-cell;
+    height: 60px;
+    vertical-align: middle;
 }
 .zm-newsfeed .two-lines{
     margin-top: -3px;
-    font-size: 1.8em;
+    font-size: 1.7em;
 }
+.zm-bold{
+    font-family: RalewaySemiBold;
+    /*font-style: italic; */
 
+}
 .zm-newsfeed .two-lines.last{
     margin-top: -10px;
 }
 .zm-newsfeed .location{
-    font-size: 1em;
-    margin-top: -0.8em;
+    font-size: 1.3em;
+    margin-top: -0.5em;
+    position: absolute;
+    right: 0;
+    top: 60px;
 }
 .zm-newsfeed ul.news{
     position: absolute;
