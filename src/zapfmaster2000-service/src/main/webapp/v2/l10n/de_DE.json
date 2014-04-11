@@ -38,7 +38,7 @@
     "NEWSFEED_NEW_KEG_INFO": "{{date}} Uhr #{{size}}L",
     "NEWSFEED_NEW_USER": "Ein neuer Nutzer hat sich registriert. Willkommen <span class=\"zm-bold\">{{username}}</span>!",
     "NEWSFEED_NEW_USER_INFO": "{{date}} Uhr",
-    "NEWSFEED_CHALLENGE_STARTED": "Eine <span class=\"zm-bold\">{{duration}}min Challenge</span><span class=\"zm-bold\">{{username1}}</span> vs <span class=\"zm-bold\">{{username2}}</span> wurde gestartet!",
+    "NEWSFEED_CHALLENGE_STARTED": "Eine <span class=\"zm-bold\">{{duration}}min Challenge </span><span class=\"zm-bold\">{{username1}}</span> vs <span class=\"zm-bold\">{{username2}}</span> wurde gestartet!",
     "NEWSFEED_CHALLENGE_STARTED_INFO": "{{date}} Uhr",
 
     "NEWSFEED_CHALLENGE_DONE": " <span class=\"zm-bold\">{{winner}}</span> hat eine Challenge <span class=\"zm-bold\">gewonnen</span>!",

@@ -5,9 +5,13 @@
             <div class="flipper">
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image|big}}" class="img-rounded"/>
-                    <div class="brand"><span class="zm-bold">{{n.userName}}</span> zapfte
-                        <span class="zm-bold">{{n.amount|amount}}</span> l.</div>
-                    <div class="location">@ {{n.location}}, {{n.date|clientdate}} Uhr</div>
+                    <div class="brand" translate="NEWSFEED_DRAWING"
+                         translate-value-username="{{n.userName}}"
+                         translate-value-amount="{{n.amount|amount}}">
+                    </div>
+                    <div class="location" translate="NEWSFEED_DRAWING_INFO"
+                         translate-value-date="{{n.date|clientdate}}"
+                         translate-value-location="{{n.location}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -32,9 +36,13 @@
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand"><span class="zm-bold">{{n.userName}}</span> erreicht
-                        <span class="zm-bold">{{n.achievementName}}.</span>!</div>
-                    <div class="location">{{n.date|clientdate}} Uhr</div>
+                     <div class="brand"
+                            translate="NEWSFEED_ACHIEVEMENT"
+                            translate-value-username="{{n.userName}}"
+                            translate-value-achievementname="{{n.achievementName}}">
+                </div>
+                    <div class="location" translate="ACHIEVEMENT_INFO"
+                         translate-value-date="{{n.date|clientdate}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -61,10 +69,16 @@
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand">Ein neues Fass frisches <span class="zm-bold">{{n.brand}}</span> wurde
-                   angezapft!</div>
+                    <div class="brand"
+                         translate="NEWSFEED_NEW_KEG"
+                         translate-value-brand="{{n.brand}}"
+                            ></div>
 
-                    <div class="location">#{{n.size}}L, um {{n.date|clientdate}} Uhr</div>
+                    <div class="location"
+                         translate="NEWSFEED_NEW_KEG"
+                         translate-value-date="{{n.date|clientdate}}"
+                         translate-value-size="{{n.size}}"
+                            ></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -85,8 +99,11 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand">Ein neuer Nutzer hat sich registriert. Willkommen <span class="zm-bold">{{n.userName}}</span>!</div>
-                    <div class="location">um {{n.date|clientdate}} Uhr</div>
+                    <div class="brand"
+                         translate="NEWSFEED_NEW_USER"
+                         translate-value-username="{{n.userName}}"></div>
+                    <div class="location"  translate="NEWSFEED_NEW_USER_INFO"
+                         translate-value-date="{{n.date|clientdate}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -128,11 +145,18 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand">Eine <span class="zm-bold">{{n.challengeDuration}}min Challenge</span>
-                        <span class="zm-bold">{{n.team1[0].userName}}</span> vs
-                        <span class="zm-bold">{{n.team2[0].userName}}</span> wurde gestartet!</div>
+                    <div class="brand"
+                         translate="NEWSFEED_CHALLENGE_STARTED"
+                         translate-value-username1="{{n.team1[0].userName}}"
+                         translate-value-username2="{{n.team2[0].userName}}"
+                         translate-value-duration="{{n.challengeDuration}}"
+                            >
+                    </div>
 
-                    <div class="location">{{n.startDate|clientdate}} Uhr</div>
+                    <div class="location"
+                         translate="NEWSFEED_CHALLENGE_STARTED_INFO"
+                         translate-value-date="{{n.startDate|clientdate}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -150,10 +174,15 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand"> <span class="zm-bold">{{n.team1[0].won?n.team1[0].userName:n.team2[0].userName}}</span> hat eine Challenge <span class="zm-bold">gewonnen</span>!</div>
+                    <div class="brand" translate="NEWSFEED_CHALLENGE_DONE"
+                         translate-value-username1="{{n.team1[0].userName}}"
+                         translate-value-username2="{{n.team2[0].userName}}"
+                         translate-value-winner="{{n.team1[0].won?n.team1[0].userName:n.team2[0].userName}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
 
-                    <div class="location">{{n.date|clientdate}} Uhr</div>
-
+                    <div class="location" translate="NEWSFEED_CHALLENGE_DONE_INFO"
+                         translate-value-date="{{n.startDate|clientdate}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
@@ -168,9 +197,15 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand"><span class="zm-bold">{{n.team2[0].userName}}</span> hat eine Challenge <span class="zm-bold">abgelehnt</span>. Buuuuh!</div>
+                    <div class="brand" translate="NEWSFEED_CHALLENGE_DECLINED"
+                         translate-value-username1="{{n.team1[0].userName}}"
+                         translate-value-username2="{{n.team2[0].userName}}"
+                         translate-value-declinee="{{n.team2[0].userName}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
 
-                    <div class="location">{{n.date|clientdate}} Uhr</div>
+                    <div class="location"  translate="NEWSFEED_CHALLENGE_DECLINED_INFO"
+                         translate-value-date="{{n.date|clientdate}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
