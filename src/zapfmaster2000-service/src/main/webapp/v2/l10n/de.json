@@ -1,9 +1,9 @@
 {
     "ACHIEVEMENT_FEED_TITLE": "Achievementfeed",
     "NEWSFEED_TITLE": "Newsfeed",
-    "MUG_CHART_TITLE": "Complete Mugs",
-    "MUGS_CHART_UNIT": "Mugs",
-    "MUGS_CHART_ENDING": "l per Mug",
+    "MUG_CHART_TITLE": "Gesamte Krüge",
+    "MUGS_CHART_UNIT": "Krüge",
+    "MUGS_CHART_ENDING": "l pro Krug",
     "ACHIEVEMENT_CHART_TITLE": "Erreichte Achievements",
     "ACHIEVEMENT_CHART_UNIT": "Achievements",
     "BESTLIST_TITLE": "Top Zapfer",
@@ -11,8 +11,8 @@
     "BESTLIST_COUNT_UNIT": "Zapfvorgänge",
     "BESTLIST_ACHIEVEMENTS_UNIT": "Achievements",
     "CHALLENGES_TITLE": "Duelle",
-    "CHALLENGES_SPLASH_STARTED_TITLE":"Challenge Started!",
-    "CHALLENGES_SPLASH_DONE_TITLE":"Challenge beendet!",
+    "CHALLENGES_SPLASH_STARTED_TITLE":"Duell begonnen!",
+    "CHALLENGES_SPLASH_DONE_TITLE":"Duell beendet!",
 
 
     "NEWSSTACK_DRAWING": "{{username}} zapfte {{amount}} l",
@@ -23,11 +23,11 @@
     "NEWSSTACK_NEW_KEG_INFO": "{{date}} Uhr #{{size}}L",
     "NEWSSTACK_NEW_USER": "Willkommen {{username}}!",
     "NEWSSTACK_NEW_USER_INFO": "{{date}} Uhr",
-    "NEWSSTACK_CHALLENGE_STARTED": "Challenge gestartet {{username1}} vs {{username2}}",
+    "NEWSSTACK_CHALLENGE_STARTED": "Duell begonnen, {{username1}} vs {{username2}}",
     "NEWSSTACK_CHALLENGE_STARTED_INFO": "{{duration}} min {{date}} Uhr",
-    "NEWSSTACK_CHALLENGE_DONE": "Challenge beendet {{winner}} hat gewonnen",
+    "NEWSSTACK_CHALLENGE_DONE": "Duell beendet, {{winner}} hat gewonnen",
     "NEWSSTACK_CHALLENGE_DONE_INFO": "{{date}} Uhr",
-    "NEWSSTACK_CHALLENGE_DECLINED": "Challenge abgelehnt von {{declinee}}",
+    "NEWSSTACK_CHALLENGE_DECLINED": "Duell abgelehnt von {{declinee}}",
     "NEWSSTACK_CHALLENGE_DECLINED_INFO": "{{date}} Uhr",
 
     "NEWSFEED_DRAWING": "<span class=\"zm-bold\">{{username}}</span> zapfte <span class=\"zm-bold\">{{amount}}</span> l.",
@@ -38,12 +38,12 @@
     "NEWSFEED_NEW_KEG_INFO": "{{date}} Uhr #{{size}}L",
     "NEWSFEED_NEW_USER": "Ein neuer Nutzer hat sich registriert. Willkommen <span class=\"zm-bold\">{{username}}</span>!",
     "NEWSFEED_NEW_USER_INFO": "{{date}} Uhr",
-    "NEWSFEED_CHALLENGE_STARTED": "Eine <span class=\"zm-bold\">{{duration}}min Challenge </span><span class=\"zm-bold\">{{username1}}</span> vs <span class=\"zm-bold\">{{username2}}</span> wurde gestartet!",
+    "NEWSFEED_CHALLENGE_STARTED": "Ein <span class=\"zm-bold\">{{duration}}min Duell </span><span class=\"zm-bold\">{{username1}}</span> vs <span class=\"zm-bold\">{{username2}}</span> wurde gestartet!",
     "NEWSFEED_CHALLENGE_STARTED_INFO": "{{date}} Uhr",
 
-    "NEWSFEED_CHALLENGE_DONE": " <span class=\"zm-bold\">{{winner}}</span> hat eine Challenge <span class=\"zm-bold\">gewonnen</span>!",
+    "NEWSFEED_CHALLENGE_DONE": " <span class=\"zm-bold\">{{winner}}</span> hat ein Duell <span class=\"zm-bold\">gewonnen</span>!",
     "NEWSFEED_CHALLENGE_DONE_INFO": "{{date}} Uhr",
-    "NEWSFEED_CHALLENGE_DECLINED": "<span class=\"zm-bold\">{{declinee}}</span> hat eine Challenge <span class=\"zm-bold\">abgelehnt</span>. Buuuuh!",
+    "NEWSFEED_CHALLENGE_DECLINED": "<span class=\"zm-bold\">{{declinee}}</span> hat ein Duell <span class=\"zm-bold\">abgelehnt</span>. Buuuuh!",
     "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}} Uhr"
 
 
