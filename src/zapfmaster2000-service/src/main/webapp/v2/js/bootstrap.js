@@ -50,7 +50,7 @@ requirejs.config({
         , "jQuery"
         , "Underscore"
         , "Angular"
-    ], urlArgs: 'v=1.0'
+    ], urlArgs: 'token='+localStorage.getItem("token")
 });
 
 requirejs([

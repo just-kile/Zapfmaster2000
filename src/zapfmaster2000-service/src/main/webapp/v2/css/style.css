@@ -871,8 +871,16 @@ li.zm-newsfeed{
     width:150px;
 }
 
+.zm-splash-container{
+    text-align: center;
+    margin-top: 0%
+
+}
+.zm-splash-container img{
+    width: 900px;
+}
 /**
-* SplashScreen
+* Challenges SplashScreen
 */
 .zm-splash{
     position: absolute;
