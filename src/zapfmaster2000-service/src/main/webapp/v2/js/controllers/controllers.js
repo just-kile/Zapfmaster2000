@@ -83,11 +83,18 @@ define([
     }
     var setUpLanguage = function(angModule){
         angModule.config(['$translateProvider',function ($translateProvider) {
-             $translateProvider.useStaticFilesLoader({
+             $translateProvider
+                 .useStaticFilesLoader({
                  prefix:'l10n/',
                  suffix:'.json'
-             });
-            $translateProvider.preferredLanguage("de_DE");
+                })
+                 .registerAvailableLanguageKeys(["de","en"],{
+                     'en_US':'en',
+                     'en_UK':'en',
+                     'de_DE':'de',
+                     'de_CH':'de'
+                 })
+                 .determinePreferredLanguage();
         }]);
     }
     var initialize = function (angModule) {
