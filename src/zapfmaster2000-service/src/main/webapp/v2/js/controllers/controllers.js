@@ -81,7 +81,15 @@ define([
             });
         }]);
     }
-
+    var setUpLanguage = function(angModule){
+        angModule.config(['$translateProvider',function ($translateProvider) {
+             $translateProvider.useStaticFilesLoader({
+                 prefix:'l10n/',
+                 suffix:'.json'
+             });
+            $translateProvider.preferredLanguage("de_DE");
+        }]);
+    }
     var initialize = function (angModule) {
         angModule.controller('AppController', app);
         _.each(controllers, function (controller, name) {
@@ -89,6 +97,7 @@ define([
         })
         setUpRoutes(angModule);
         setUpConstants(angModule);
+        setUpLanguage(angModule);
         Console.info("Registered Controllers: ", controllers);
     };
 

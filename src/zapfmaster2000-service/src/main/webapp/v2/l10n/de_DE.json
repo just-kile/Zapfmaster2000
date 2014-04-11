@@ -1,0 +1,20 @@
+{
+   "ACHIEVEMENT_FEED_TITLE": "Achievementfeed",
+   "NEWSFEED_TITLE":"Newsfeed",
+    "MUG_CHART_TITLE":"Complete Mugs",
+    "MUGS_CHART_UNIT":"Mugs",
+    "MUGS_CHART_ENDING":"l per Mug",
+    "ACHIEVEMENT_CHART_TITLE":"Erreichte Achievements",
+    "ACHIEVEMENT_CHART_UNIT":"Achievements",
+    "BESTLIST_TITLE":"Top Zapfer",
+    "LITER_UNIT":"L",
+    "BESTLIST_COUNT_UNIT":"Zapfvorgänge",
+    "BESTLIST_ACHIEVEMENTS_UNIT":"Achievements",
+    "CHALLENGES_TITLE":"Duelle",
+
+    "NEWSSTACK_DRAWING":"{{username}} zapfte {{amount}} l",
+    "NEWSSTACK_DRAWING_LOCATION":"{{date}} Uhr @ {{location}}"
+
+
+
+}

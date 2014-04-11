@@ -7,9 +7,9 @@
 
                     <h2>{{statsodd.user.userName}}</h2>
                     <ul>
-                        <li>{{statsodd.amount.amountTotal|amount}} L</li>
-                        <li>{{statsodd.drawCount.count}} Zapfvorgänge</li>
-                        <li><span>{{statsodd.achievement.count|achievement}} Achievements</span>
+                        <li>{{statsodd.amount.amountTotal|amount}} {{'LITER_UNIT'|translate}}</li>
+                        <li>{{statsodd.drawCount.count}} {{'BESTLIST_COUNT_UNIT'|translate}}</li>
+                        <li><span>{{statsodd.achievement.count|achievement}} {{'BESTLIST_ACHIEVEMENTS_UNIT'|translate}}</span>
                             <ul style="padding:0">
                                 <li style="display:inline-block;list-style: none;" ng-repeat="achievement in statsodd.achievement.achievements">
                                     <img class="img-rounded" src="{{baseUrl + achievement.achievementImage}}">
@@ -24,9 +24,9 @@
 
                     <h2>{{statseven.user.userName}}</h2>
                     <ul>
-                        <li>{{statseven.amount.amountTotal|amount}} L</li>
-                        <li>{{statseven.drawCount.count}} Zapfvorgänge</li>
-                        <li><span>{{statseven.achievement.count|achievement}} Achievements</span>
+                        <li>{{statseven.amount.amountTotal|amount}} {{'LITER_UNIT'|translate}}</li>
+                        <li>{{statseven.drawCount.count}} {{'BESTLIST_COUNT_UNIT'|translate}}</li>
+                        <li><span>{{statseven.achievement.count|achievement}} {{'BESTLIST_ACHIEVEMENTS_UNIT'|translate}}</span>
                             <ul style="padding:0">
                                 <li style="display:inline-block;list-style: none" ng-repeat="achievement in statseven.achievement.achievements">
                                     <img class="img-rounded" src="{{baseUrl + achievement.achievementImage}}">
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="col-md-7">
-        <header class="zmo-header">Top Zapfer</header>
+        <header class="zmo-header">{{'BESTLIST_TITLE'|translate}}</header>
         <div class="zmo-container bestlist" ng-style="{height:bestlistMax+'20'+'px'}">
             <div class="zm-absolute arrow animate-show" ng-show="arrow.visible"
                  ng-style="{top:arrow.pointer*100+'px'} ">
