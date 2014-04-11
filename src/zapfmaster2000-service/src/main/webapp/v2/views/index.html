@@ -1,27 +1,34 @@
 <div>
-    <!--<div ng-repeat="row in rows" class="row">
-        <div ng-repeat="col in row" ng-include="col.name+'/template.html'" class="{{col.className}}">
-        </div>
-    </div>-->
-    <div class="row">
-        <div ng-repeat="widget in rows.topLeft"
-             ng-include="widgetBaseUrl+ widget.name+'/template.html'"
-             class="{{widget.className}}">
-        </div>
-        <div ng-repeat="widget in rows.topRight"
-             ng-include="widgetBaseUrl+ widget.name+'/template.html'"
-             class="{{widget.className}}">
-        </div>
-    </div>
-
-    <div class="row">
-        <div ng-repeat="widget in rows.center" animatewidget
-             ng-include="widgetBaseUrl+ widget.name+'/template.html'"
-             ng-class="widget.className">
-        </div>
+    <div class="languageSwitch">
+        <img src="css/images/flagDE.png" ng-click="changeLanguage('de_DE')">
+        <img src="css/images/flagEN.png" ng-click="changeLanguage('en_US')">
 
     </div>
-    <div ng-include="'js/widgets/splashscreen/template.html'">
 
+</div>
+<!--<div ng-repeat="row in rows" class="row">
+    <div ng-repeat="col in row" ng-include="col.name+'/template.html'" class="{{col.className}}">
     </div>
+</div>-->
+<div class="row">
+    <div ng-repeat="widget in rows.topLeft"
+         ng-include="widgetBaseUrl+ widget.name+'/template.html'"
+         class="{{widget.className}}">
+    </div>
+    <div ng-repeat="widget in rows.topRight"
+         ng-include="widgetBaseUrl+ widget.name+'/template.html'"
+         class="{{widget.className}}">
+    </div>
+</div>
+
+<div class="row">
+    <div ng-repeat="widget in rows.center" animatewidget
+         ng-include="widgetBaseUrl+ widget.name+'/template.html'"
+         ng-class="widget.className">
+    </div>
+
+</div>
+<div ng-include="'js/widgets/splashscreen/template.html'">
+
+</div>
 </div>

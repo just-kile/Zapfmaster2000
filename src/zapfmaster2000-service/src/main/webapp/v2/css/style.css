@@ -56,6 +56,12 @@ body {
     color:#ED71A8;
 }
 
+.languageSwitch{
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.3;
+}
 header > nav {
     text-align: center;
     font-size: 18px;

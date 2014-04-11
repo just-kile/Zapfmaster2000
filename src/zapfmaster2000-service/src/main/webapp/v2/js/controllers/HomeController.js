@@ -5,9 +5,12 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
     if(typeof rows=="string"){
         rows = $.parseJSON(rowsResponse);
     }
-    var controller = ['$scope', '$routeParams', '$timeout', 'ZMConstants', '$animate', function ($scope, $routeParams, $timeout, c, $animate) {
+    var controller = ['$scope', '$routeParams', '$timeout', 'ZMConstants', '$animate','$translate', function ($scope, $routeParams, $timeout, c, $animate,$translate) {
         Console.group("HomeController entered.");
         $scope.widgetBaseUrl = c.widgetBaseUrl;
+        $scope.changeLanguage = function(langKey){
+            $translate.use(langKey);
+        };
         var widgetTimeouts = {};
         var firstWidget = $routeParams.widgetId || 0,
             widgetChangeEnabled = typeof $routeParams.widgetId == "undefined";
