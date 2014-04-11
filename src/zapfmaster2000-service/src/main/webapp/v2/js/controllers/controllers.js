@@ -81,7 +81,22 @@ define([
             });
         }]);
     }
-
+    var setUpLanguage = function(angModule){
+        angModule.config(['$translateProvider',function ($translateProvider) {
+             $translateProvider
+                 .useStaticFilesLoader({
+                 prefix:'l10n/',
+                 suffix:'.json'
+                })
+                 .registerAvailableLanguageKeys(["de","en"],{
+                     'en_US':'en',
+                     'en_UK':'en',
+                     'de_DE':'de',
+                     'de_CH':'de'
+                 })
+                 .determinePreferredLanguage();
+        }]);
+    }
     var initialize = function (angModule) {
         angModule.controller('AppController', app);
         _.each(controllers, function (controller, name) {
@@ -89,6 +104,7 @@ define([
         })
         setUpRoutes(angModule);
         setUpConstants(angModule);
+        setUpLanguage(angModule);
         Console.info("Registered Controllers: ", controllers);
     };
 
