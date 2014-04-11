@@ -150,7 +150,7 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand"> <span class="zm-bold">{{n.team1[0].won?n.team1[0].userName:n.team2[0].userName}}</span> hat eine Challenge gewonnen!</div>
+                    <div class="brand"> <span class="zm-bold">{{n.team1[0].won?n.team1[0].userName:n.team2[0].userName}}</span> hat eine Challenge <span class="zm-bold">gewonnen</span>!</div>
 
                     <div class="location">{{n.date|clientdate}} Uhr</div>
 
@@ -168,7 +168,7 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand"><span class="zm-bold">{{n.team2[0].userName}}</span> hat eine Challenge abgelehnt. Buuuuh!</div>
+                    <div class="brand"><span class="zm-bold">{{n.team2[0].userName}}</span> hat eine Challenge <span class="zm-bold">abgelehnt</span>. Buuuuh!</div>
 
                     <div class="location">{{n.date|clientdate}} Uhr</div>
 

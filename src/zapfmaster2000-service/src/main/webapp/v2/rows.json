@@ -1,0 +1,67 @@
+{
+    "switchTime": 150000,
+    "switchingModule": {
+        "name": "zapfmastersplash",
+        "className": "col-md-12",
+        "interval": 8000
+    }, "topLeft": [
+    {
+        "name": "newsstack",
+        "className": "col-md-6"
+    }
+], "topRight": [
+    {
+        "name": "draftkits",
+        "className": "col-md-6"
+    }
+], "centerThird": [
+    [
+        {
+            "name": "bestlist",
+            "className": "col-md-8",
+            "interval": 60000
+        },
+        {
+            "name": "challenges",
+            "className": "col-md-4",
+            "interval": 60000
+        }
+    ],
+    [
+        {
+            "name": "newsfeed",
+            "className": "col-md-8",
+            "interval": 60000
+        },
+        {
+            "name": "achievementfeed",
+            "className": "col-md-4",
+            "interval": 60000
+        }
+    ]
+], "centerHalf": [
+    [
+        {
+            "name": "linechart",
+            "className": "col-md-6",
+            "interval": 60000
+        },
+        {
+            "name": "amountchart",
+            "className": "col-md-6",
+            "interval": 60000
+        }
+    ],
+    [
+        {
+            "name": "achievementfeed",
+            "className": "col-md-6",
+            "interval": 60000
+        },
+        {
+            "name": "newsfeed",
+            "className": "col-md-6",
+            "interval": 60000
+        }
+    ]
+]}

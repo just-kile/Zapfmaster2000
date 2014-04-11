@@ -1,7 +1,10 @@
-define(['Console'], function (Console) {
+define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
     "use strict";
     Console.group("Entering HomeController module.");
-
+    var rows = rowsResponse;
+    if(typeof rows=="string"){
+        rows = $.parseJSON(rowsResponse);
+    }
     var controller = ['$scope', '$routeParams', '$timeout', 'ZMConstants', '$animate', function ($scope, $routeParams, $timeout, c, $animate) {
         Console.group("HomeController entered.");
         $scope.widgetBaseUrl = c.widgetBaseUrl;
@@ -16,79 +19,7 @@ define(['Console'], function (Console) {
             return activeSubWidget;
         }
 
-        var rows = {
-            switchTime: 150000,
-            switchingModule:{
-                name: "zapfmastersplash",
-                className: "col-md-12",
-                interval: 10000
-            },
-            topLeft: [
-                {
-                    name: "newsstack",
-                    className: "col-md-6"
-                }
-            ],
-            topRight: [
-                {
-                    name: "draftkits",
-                    className: "col-md-6"
-                }
-            ],
-            centerThird: [
-                [
-                    {
-                        name: "bestlist",
-                        className: "col-md-8",
-                        interval: 60000
-                    },
-                    {
-                        name: "challenges",
-                        className: "col-md-4",
-                        interval: 60000
-                    }
-                ],
-                [
-                    {
-                        name: "newsfeed",
-                        className: "col-md-8",
-                        interval: 60000
-                    },
-                    {
-                        name: "achievementfeed",
-                        className: "col-md-4",
-                        interval: 60000
-                    }
 
-                ]
-            ],
-            centerHalf: [
-                [
-                    {
-                        name: "linechart",
-                        className: "col-md-6",
-                        interval: 60000
-                    },
-                    {
-                        name: "amountchart",
-                        className: "col-md-6",
-                        interval: 60000
-                    }
-                ],
-                [
-                    {
-                        name: "achievementfeed",
-                        className: "col-md-6",
-                        interval: 60000
-                    },
-                    {
-                        name: "newsfeed",
-                        className: "col-md-6",
-                        interval: 60000
-                    }
-                ]
-            ]
-        };
         var init = function (rows) {
             $scope.rows = {};
             $scope.rows.topLeft = rows.topLeft;
@@ -137,6 +68,7 @@ define(['Console'], function (Console) {
         var stopWidgetSwitch = function () {
             $timeout.cancel(widgetSwitchTimeout);
         }
+
         var startWidgetSwitch = function (rows) {
             widgetSwitchTimeout = $timeout(function () {
                 stopUpdater();
@@ -159,7 +91,10 @@ define(['Console'], function (Console) {
         }
         init(rows);
 
-
+        $scope.$on("$destroy", function () {
+          stopUpdater();
+          stopWidgetSwitch();
+        });
         //controller.$inject = [];
 
 

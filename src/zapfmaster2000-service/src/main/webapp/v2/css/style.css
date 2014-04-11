@@ -873,11 +873,11 @@ li.zm-newsfeed{
 
 .zm-splash-container{
     text-align: center;
-    margin-top: 20%
+    margin-top: 0%
 
 }
 .zm-splash-container img{
-    width: 400px;
+    width: 900px;
 }
 /**
 * Challenges SplashScreen
