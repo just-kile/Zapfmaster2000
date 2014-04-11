@@ -26,7 +26,7 @@
                          translate-value-username="{{n.userName}}"
                          translate-value-amount="{{n.amount|amount}}">
                         </div>
-                    <div class="location" translate="NEWSSTACK_DRAWING_LOCATION"
+                    <div class="location" translate="NEWSSTACK_DRAWING_INFO"
                             translate-value-date="{{n.date|clientdate}}"
                             translate-value-location="{{n.location}}"></div>
 
@@ -53,8 +53,13 @@
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand">{{n.userName}} erreicht {{n.achievementName}}!</div>
-                    <div class="location">{{n.date|clientdate}} Uhr</div>
+                    <div class="brand"
+                         translate="NEWSSTACK_ACHIEVEMENT"
+                         translate-value-username="{{n.userName}}"
+                         translate-value-achievementname="{{n.achievementName}}">
+                       </div>
+                    <div class="location" translate="ACHIEVEMENT_INFO"
+                            translate-value-date="{{n.date|clientdate}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -81,9 +86,16 @@
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand">Frisches {{n.brand}} angezapft!</div>
+                    <div class="brand"
+                         translate="NEWSSTACK_NEW_KEG"
+                         translate-value-brand="{{n.brand}}"
+                            ></div>
 
-                    <div class="location">{{n.date|clientdate}} Uhr #{{n.size}}L</div>
+                    <div class="location"
+                         translate="NEWSSTACK_NEW_KEG"
+                         translate-value-date="{{n.date|clientdate}}"
+                         translate-value-size="{{n.size}}"
+                            ></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -104,8 +116,11 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand">Willkommen {{n.userName}}!</div>
-                    <div class="location">{{n.date|clientdate}} Uhr</div>
+                    <div class="brand"
+                         translate="NEWSSTACK_NEW_USER"
+                         translate-value-username="{{n.userName}}"></div>
+                    <div class="location"  translate="NEWSSTACK_NEW_USER_INFO"
+                         translate-value-date="{{n.date|clientdate}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -147,9 +162,18 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand">Challenge gestartet {{n.team1[0].userName}} vs {{n.team2[0].userName}}</div>
+                    <div class="brand"
+                         translate="NEWSSTACK_CHALLENGE_STARTED"
+                         translate-value-username1="{{n.team1[0].userName}}"
+                         translate-value-username2="{{n.team2[0].userName}}"
+                         translate-value-duration="{{n.challengeDuration}}"
+                            >
+                        </div>
 
-                    <div class="location">{{n.challengeDuration}} min {{n.startDate|clientdate}} Uhr</div>
+                    <div class="location"
+                         translate="NEWSSTACK_CHALLENGE_STARTED_INFO"
+                         translate-value-date="{{n.startDate|clientdate}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -167,9 +191,15 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand">Challenge beendet {{n.team1[0].won?n.team1[0].userName:n.team2[0].userName}} hat gewonnen</div>
+                    <div class="brand" translate="NEWSSTACK_CHALLENGE_DONE"
+                         translate-value-username1="{{n.team1[0].userName}}"
+                         translate-value-username2="{{n.team2[0].userName}}"
+                         translate-value-winner="{{n.team1[0].won?n.team1[0].userName:n.team2[0].userName}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
 
-                    <div class="location">{{n.date|clientdate}} Uhr</div>
+                    <div class="location" translate="NEWSSTACK_CHALLENGE_DONE_INFO"
+                         translate-value-date="{{n.startDate|clientdate}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
@@ -185,9 +215,15 @@ userName: "Karl"-->
                 <div class="front zm-backgrnd">
                     <img src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand">Challenge abgelehnt von {{n.team2[0].userName}}</div>
+                    <div class="brand" translate="NEWSSTACK_CHALLENGE_DECLINED"
+                         translate-value-username1="{{n.team1[0].userName}}"
+                         translate-value-username2="{{n.team2[0].userName}}"
+                         translate-value-declinee="{{n.team2[0].userName}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
 
-                    <div class="location">{{n.date|clientdate}} Uhr</div>
+                    <div class="location"  translate="NEWSSTACK_CHALLENGE_DECLINED_INFO"
+                         translate-value-date="{{n.date|clientdate}}"
+                         translate-value-duration="{{n.challengeDuration}}">{{n.date|clientdate}} Uhr</div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->

@@ -1,19 +1,32 @@
 {
-   "ACHIEVEMENT_FEED_TITLE": "Achievementfeed",
-   "NEWSFEED_TITLE":"Newsfeed",
-    "MUG_CHART_TITLE":"Complete Mugs",
-    "MUGS_CHART_UNIT":"Mugs",
-    "MUGS_CHART_ENDING":"l per Mug",
-    "ACHIEVEMENT_CHART_TITLE":"Erreichte Achievements",
-    "ACHIEVEMENT_CHART_UNIT":"Achievements",
-    "BESTLIST_TITLE":"Top Zapfer",
-    "LITER_UNIT":"L",
-    "BESTLIST_COUNT_UNIT":"Zapfvorgänge",
-    "BESTLIST_ACHIEVEMENTS_UNIT":"Achievements",
-    "CHALLENGES_TITLE":"Duelle",
+    "ACHIEVEMENT_FEED_TITLE": "Achievementfeed",
+    "NEWSFEED_TITLE": "Newsfeed",
+    "MUG_CHART_TITLE": "Complete Mugs",
+    "MUGS_CHART_UNIT": "Mugs",
+    "MUGS_CHART_ENDING": "l per Mug",
+    "ACHIEVEMENT_CHART_TITLE": "Erreichte Achievements",
+    "ACHIEVEMENT_CHART_UNIT": "Achievements",
+    "BESTLIST_TITLE": "Top Zapfer",
+    "LITER_UNIT": "L",
+    "BESTLIST_COUNT_UNIT": "Zapfvorgänge",
+    "BESTLIST_ACHIEVEMENTS_UNIT": "Achievements",
+    "CHALLENGES_TITLE": "Duelle",
 
-    "NEWSSTACK_DRAWING":"{{username}} zapfte {{amount}} l",
-    "NEWSSTACK_DRAWING_LOCATION":"{{date}} Uhr @ {{location}}"
+    "NEWSSTACK_DRAWING": "{{username}} zapfte {{amount}} l",
+    "NEWSSTACK_DRAWING_INFO": "{{date}} Uhr @ {{location}}",
+    "NEWSSTACK_ACHIEVEMENT": "{{username}} erreicht {{achievementname}}!",
+    "NEWSSTACK_ACHIEVEMENT_INFO": "{{date}} Uhr",
+    "NEWSSTACK_NEW_KEG": "Frisches {{brand}} angezapft!",
+    "NEWSSTACK_NEW_KEG_INFO": "{{date}} Uhr #{{size}}L",
+    "NEWSSTACK_NEW_USER": "Willkommen {{username}}!",
+    "NEWSSTACK_NEW_USER_INFO": "{{date}} Uhr",
+    "NEWSSTACK_CHALLENGE_STARTED": "Challenge gestartet {{username1}} vs {{username2}}",
+    "NEWSSTACK_CHALLENGE_STARTED_INFO": "{{duration}} min {{date}} Uhr",
+    "NEWSSTACK_CHALLENGE_DONE": "Challenge beendet {{winner}} hat gewonnen",
+    "NEWSSTACK_CHALLENGE_DONE_INFO": "{{date}} Uhr",
+    "NEWSSTACK_CHALLENGE_DECLINED": "Challenge abgelehnt von {{declinee}}",
+    "NEWSSTACK_CHALLENGE_DECLINED_INFO": "{{date}} Uhr"
+
 
 
 
