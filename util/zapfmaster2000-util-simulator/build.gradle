@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'groovy'
+
+sourceCompatibility = 1.5
+version = '1.0'
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+	}
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+	compile 'org.apache.httpcomponents:httpclient:4.3.3'
+	compile 'org.codehaus.groovy:groovy-all:2.2.0'
+}
+
+test { systemProperties 'property': 'value' }
+
+uploadArchives {
+	repositories { flatDir { dirs 'repos' } }
+}
