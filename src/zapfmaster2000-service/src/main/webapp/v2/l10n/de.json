@@ -13,7 +13,8 @@
     "CHALLENGES_TITLE": "Duelle",
     "CHALLENGES_SPLASH_STARTED_TITLE":"Duell begonnen!",
     "CHALLENGES_SPLASH_DONE_TITLE":"Duell beendet!",
-
+    "ZAPFVELOCITY_TITLE":"Zapfgeschwindigkeit",
+    "PIECHART_TITLE":"#1 vs the World",
 
     "NEWSSTACK_DRAWING": "{{username}} zapfte {{amount}} l",
     "NEWSSTACK_DRAWING_INFO": "{{date}} Uhr @ {{location}}",

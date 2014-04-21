@@ -83,7 +83,8 @@ define([
     }
     var setUpLanguage = function(angModule){
         angModule.config(['$translateProvider',function ($translateProvider) {
-             $translateProvider
+           // $translateProvider.useLocalStorage();
+            $translateProvider
                  .useStaticFilesLoader({
                  prefix:'l10n/',
                  suffix:'.json'
@@ -94,7 +95,13 @@ define([
                      'de_DE':'de',
                      'de_CH':'de'
                  })
-                 .determinePreferredLanguage();
+                .fallbackLanguage("en");
+            if( localStorage.getItem("zm-lang")){
+                $translateProvider.preferredLanguage(localStorage.getItem("zm-lang"));
+            }else{
+                $translateProvider.determinePreferredLanguage();
+            }
+
         }]);
     }
     var initialize = function (angModule) {

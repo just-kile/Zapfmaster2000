@@ -11,12 +11,15 @@ define([
     ,'directives/FeedDirective/FeedDirective'
 
     ,'directives/ShowDirective'
-], function(Console, $, _, angular,BarChart,FigureChart,FeedDirective,ShowDirective){
+//    ,'directives/LineChart'
+
+], function(Console, $, _, angular,BarChart,FigureChart,FeedDirective,ShowDirective,LineChart){
   "use strict";
   Console.group("Entering Widgets module.");
 
   var directives = {
       d3bars:BarChart,
+     // d3line:LineChart,
       figurechart:FigureChart,
       animatewidget:ShowDirective,
       feed:FeedDirective

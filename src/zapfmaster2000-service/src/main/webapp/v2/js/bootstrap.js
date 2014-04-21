@@ -6,15 +6,15 @@ requirejs.config({
         Console: 'libs/console/console-min',
         jQuery: 'libs/jquery/jquery-2.0.3.min',//'http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min'
         Underscore: 'libs/underscore/underscore-min',
-        d3:'libs/d3js/d3.min',
+        d3:'libs/d3js/d3.v2',
+        nvd3:'libs/d3js/nv.d3',
         Angular: 'libs/angular/angular.min',
         AngularRoute: 'libs/angular/angular-route',
         AngularResource: "libs/angular/angular-resource",
         AngularAnimate:"libs/angular/angular-animate",
         AngularTranslate:"libs/angular/angular-translate.min",
-        AngularTranslateStaticFiles:"libs/angular/angular-translate-loader-static-files.min",
-        AngularTranslateLoader:"libs/angular/angular-translate-loader-url.min",
         AngularWebworker:"libs/angular/webworkerpool-core-angular.min",
+        AngularD3Directives:"libs/angular/angularjs-nvd3-directives.min",
         moment:"libs/moment/moment.min",
         templates: './../views'
     },
@@ -24,6 +24,10 @@ requirejs.config({
         },
         AngularResource: {
             deps: ['Angular'],
+            exports:""
+        },
+        AngularD3Directives: {
+            deps: ['Angular','d3'],
             exports:""
         },
         AngularRoute: {
@@ -38,12 +42,6 @@ requirejs.config({
         AngularTranslate:{
             deps:['Angular']
         },
-        AngularTranslateStaticFiles:{
-            deps:['Angular','AngularTranslate']
-        },
-        AngularTranslateLoader:{
-            deps:['Angular','AngularTranslate']
-        },
         jQuery: {
             exports: "jQuery"
         },
@@ -51,7 +49,14 @@ requirejs.config({
             exports: "_"
         },
         d3:{
-          exports:"d3"
+          exports:"d3",
+            init:function(d3){
+                window.d3 = d3;
+            }
+        },
+        nvd3:{
+            deps:['d3'],
+            exports:"nv"
         },
         Console: {
             exports: "console"
@@ -64,7 +69,6 @@ requirejs.config({
         , "Angular"
     ], urlArgs: 'token='+localStorage.getItem("token")
 });
-
 requirejs([
     // Standard Libs
     'require'
@@ -79,8 +83,8 @@ requirejs([
     'AngularAnimate',
     'AngularWebworker',
     'AngularTranslate',
-    'AngularTranslateStaticFiles',
-    //'AngularTranslateLoader'
+    'AngularD3Directives',
+
 ], function (require, Console, $, _,moment,d3, angular,angularRoute,angularResource,angularAnimate) {
     Console.group("Bootstrap dependencies loaded.");
     Console.info("Console", Console);
@@ -94,8 +98,8 @@ requirejs([
     Console.info("ngResource: ", angularResource);
     Console.info("ngAnimate: ", angularAnimate);
     Console.groupEnd();
-
-    require(['app'], function (App) {
+    window.d3 = d3;
+    require(['app','nvd3'], function (App) {
         Console.group("Starting bootstrap.");
         Console.info("App: ", App);
         Console.groupEnd();

@@ -10,6 +10,7 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         $scope.changeLanguage = function(langKey){
             $translate.use(langKey);
+            localStorage.setItem("zm-lang",langKey);
         };
         var widgetTimeouts = {};
         var firstWidget = $routeParams.widgetId || 0,

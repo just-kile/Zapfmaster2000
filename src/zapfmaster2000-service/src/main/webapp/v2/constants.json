@@ -17,6 +17,8 @@
     "newsStackLength": 2,
     "newsFeedTimeout": 2000,
     "progressUrl": "rest/statistics/progress",
+    "PROGRESS_FROM_MINUTES":360,
+    "PROGRESS_INTERVAL":15,
     "challengeMaxDuels": 6,
     "bestlistMax": 6,
     "CHALLENGE_STARTED": "CHALLENGE_STARTED",
