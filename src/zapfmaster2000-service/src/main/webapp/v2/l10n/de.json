@@ -15,6 +15,7 @@
     "CHALLENGES_SPLASH_DONE_TITLE":"Duell beendet!",
     "ZAPFVELOCITY_TITLE":"Zapfgeschwindigkeit",
     "PIECHART_TITLE":"#1 vs the World",
+    "USERPROFILE_TITLE":"Zapfer im Interview",
 
     "NEWSSTACK_DRAWING": "{{username}} zapfte {{amount}} l",
     "NEWSSTACK_DRAWING_INFO": "{{date}} Uhr @ {{location}}",

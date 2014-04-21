@@ -16,7 +16,7 @@ startDate: 1386087479000-->
             <div class="flip-container" ng-class="{flip: keg.user.loggedin}">
                 <div class="flipper">
                     <div class="front zm-backgrnd">
-                        <img src="{{keg.image || 'css/images/ZapfKit_BodaciousBock_small.png'}}" class="img-rounded"/>
+                        <img ng-src="{{keg.image || 'css/images/ZapfKit_BodaciousBock_small.png'}}" class="img-rounded"/>
 
                         <div class="brand">{{keg.brand}}</div>
                         <div class="location">@ {{keg.boxLocation}}</div>
@@ -31,7 +31,7 @@ startDate: 1386087479000-->
 
                     </div>
                     <div class="back zm-backgrnd">
-                        <img src="{{keg.user.image || 'css/images/defaultKeg.jpg'}}" class="img-rounded"/>
+                        <img ng-src="{{keg.user.image || 'css/images/defaultKeg.jpg'}}" class="img-rounded"/>
 
                         <div class="brand">{{keg.user.userName}}</div>
                         <div class="location">@ {{keg.boxLocation}}</div>

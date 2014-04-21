@@ -4,7 +4,7 @@
         <div class="flip-container" ng-if="n.type=='DRAWING'">
             <div class="flipper">
                 <div class="front zm-backgrnd">
-                    <img src="{{baseUrl+n.image|big}}" class="img-rounded"/>
+                    <img ng-src="{{baseUrl+n.image|big}}" class="img-rounded"/>
                     <div class="brand" translate="NEWSFEED_DRAWING"
                          translate-value-username="{{n.userName}}"
                          translate-value-amount="{{n.amount|amount}}">
@@ -34,7 +34,7 @@
         <div class="flip-container" ng-if="n.type=='ACHIEVEMENT'">
             <div class="flipper">
                 <div class="front zm-backgrnd">
-                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+                    <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
                      <div class="brand"
                             translate="NEWSFEED_ACHIEVEMENT"
@@ -67,7 +67,7 @@
         <div class="flip-container" ng-if="n.type=='NEW_KEG'">
             <div class="flipper">
                 <div class="front zm-backgrnd">
-                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+                    <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
                     <div class="brand"
                          translate="NEWSFEED_NEW_KEG"
@@ -97,7 +97,7 @@ userName: "Karl"-->
         <div class="flip-container" ng-if="n.type=='NEW_USER'">
             <div class="flipper">
                 <div class="front zm-backgrnd">
-                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+                    <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
                     <div class="brand"
                          translate="NEWSFEED_NEW_USER"
@@ -143,7 +143,7 @@ userName: "Karl"-->
         <div class="flip-container" ng-if="n.type=='CHALLENGE_STARTED'">
             <div class="flipper">
                 <div class="front zm-backgrnd">
-                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+                    <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
                     <div class="brand"
                          translate="NEWSFEED_CHALLENGE_STARTED"
@@ -172,7 +172,7 @@ userName: "Karl"-->
         <div class="flip-container" ng-if="n.type=='CHALLENGE_DONE'">
             <div class="flipper">
                 <div class="front zm-backgrnd">
-                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+                    <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
                     <div class="brand" translate="NEWSFEED_CHALLENGE_DONE"
                          translate-value-username1="{{n.team1[0].userName}}"
@@ -195,7 +195,7 @@ userName: "Karl"-->
         <div class="flip-container" ng-if="n.type=='CHALLENGE_DECLINED'">
             <div class="flipper">
                 <div class="front zm-backgrnd">
-                    <img src="{{baseUrl+n.image}}" class="img-rounded"/>
+                    <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
                     <div class="brand" translate="NEWSFEED_CHALLENGE_DECLINED"
                          translate-value-username1="{{n.team1[0].userName}}"

@@ -29,7 +29,7 @@
     ],
     [
         {
-            "name": "newsfeed",
+            "name": "userprofile",
             "className": "col-md-8",
             "interval": 60000
         },

@@ -15,6 +15,8 @@
     "CHALLENGES_SPLASH_DONE_TITLE":"Challenge done!",
     "ZAPFVELOCITY_TITLE":"Zapfvelocity",
     "PIECHART_TITLE":"#1 vs the World",
+    "USERPROFILE_TITLE":"User Interview",
+
 
     "NEWSSTACK_DRAWING": "{{username}} zapfed {{amount}} l",
     "NEWSSTACK_DRAWING_INFO": "{{date}} h @ {{location}}",
