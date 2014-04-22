@@ -843,7 +843,7 @@ li.zm-newsstack {
 }
 
 .zm-newsstack-ul {
-    padding-left: 50px;
+    padding-left: 0px;
     white-space: nowrap;
 }
 
@@ -1191,29 +1191,33 @@ li.zm-newsfeed {
     width: 310px;
 }
 
-
 /* Chart customizing */
-.zm-linechart g{
-    fill:white;
+.zm-linechart g {
+    fill: white;
 }
-.zm-linechart svg text{
-      font:2em RalewayLight!important;
+
+.zm-linechart svg text {
+    font: 2em RalewayLight !important;
+    fill: white;
 }
-.zm-linechart g .nv-axisMaxMin{
+
+.zm-linechart g .nv-axisMaxMin {
     display: none;
 }
-.zm-linechart .nvd3 .nv-axis line{
-    stroke:#666!important;
-}
-.zm-linechart .nvd3 .nv-y .nv-axis line{
-       display: none;
-}
-.zm-linechart .nvd3 .nv-groups path.nv-line{
-    stroke-width:3px!important;
+
+.zm-linechart .nvd3 .nv-axis line {
+    stroke: #666 !important;
 }
 
+.zm-linechart .nvd3 .nv-y .nv-axis line {
+    display: none;
+}
 
-.zm-piechart svg text{
-    font:3em RalewayLight!important;
-    fill:white!important;
+.zm-linechart .nvd3 .nv-groups path.nv-line {
+    stroke-width: 3px !important;
+}
+
+.zm-piechart svg text {
+    font: 3em RalewayLight !important;
+    fill: white !important;
 }

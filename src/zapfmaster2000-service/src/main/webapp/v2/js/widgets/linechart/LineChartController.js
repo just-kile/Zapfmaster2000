@@ -80,7 +80,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     $scope.chartData = [
                         {
                             key: "Progress",
-                            values: transformData(data)
+                            values: data.amount.length>1?transformData(data):[]
                         }
                     ]
                 }, {

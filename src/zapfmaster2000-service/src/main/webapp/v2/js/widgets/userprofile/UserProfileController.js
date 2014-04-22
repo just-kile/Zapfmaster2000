@@ -5,7 +5,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
     var controller = ['$scope', '$timeout', 'CometService', 'DataService', "ZMConstants", 'DateService',
         function ($scope, $timeout, CometService, ajax, c, DateService) {
             Console.group("UserProfile controller entered.");
-            var userId=1;
+            var userId=2;
             $scope.baseUrl = c.baseUrl;
             function init(){
                 ajax.getDatas(c.frontPageUserStatsUrl, function (data) {
