@@ -17,8 +17,8 @@
     "newsStackLength": 2,
     "newsFeedTimeout": 2000,
     "progressUrl": "rest/statistics/progress",
-    "PROGRESS_FROM_MINUTES":360,
-    "PROGRESS_INTERVAL":15,
+    "PROGRESS_FROM_MINUTES": 360,
+    "PROGRESS_INTERVAL": 15,
     "challengeMaxDuels": 6,
     "bestlistMax": 6,
     "CHALLENGE_STARTED": "CHALLENGE_STARTED",
@@ -43,5 +43,14 @@
     "WIDGETS": {
         "ANIMATION_IN": "fadeIn",
         "ANIMATION_OUT": "fadeOut"
+    },
+    "FILTER": {
+        "ACHIEVEMENT": "AchievementNews",
+        "DRAWING": "DrawingNews",
+        "CHALLENGE_STARTED": "Challenge1v1StartedNews",
+        "CHALLEMGE_DECLINED": "Challenge1v1DeclinedNews",
+        "NEWKEG": "NewKegNews",
+        "NEWUSER": "NewUserNews"
+
     }
 }

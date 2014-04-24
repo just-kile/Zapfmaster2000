@@ -1221,4 +1221,5 @@ li.zm-newsfeed {
 .zm-piechart svg text {
     font: 3em RalewayLight !important;
     fill: white !important;
+    text-shadow: 1px 1px 1px #000;
 }

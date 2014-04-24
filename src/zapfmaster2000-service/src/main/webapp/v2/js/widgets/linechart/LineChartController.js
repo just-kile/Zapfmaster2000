@@ -48,7 +48,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                 }
             }
             $scope.colorFunctionPie = function(){
-                var colorArray = ["rgba(255,31,124,0.8)","rgba(245,228,0,0.8)"]
+                var colorArray = ["#ED71A8","#FFF143"]
                 return function(d,i){
                     return colorArray[i]
                 }
