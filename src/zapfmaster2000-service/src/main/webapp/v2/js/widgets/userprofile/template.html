@@ -36,8 +36,40 @@
                 </blockquote>
             </div>
         </div>
-        <div class="row" ng-repeat="">
-
+        <div class="row">
+            <div class="zm-feeditem" ng-repeat="achievement in achievement.achievements">
+                <img ng-src="{{baseUrl+achievement.achievementImage}}" class="img-rounded"/>
+            </div>
         </div>
+        <div class="row">
+            <div class="zm-feeditem">
+               {{amount.amountTotal|amount}} L gezapft
+            </div>
+            <div class="zm-feeditem">
+               {{amount.greatestDrawing|amount}} L auf einmal gezapft
+            </div>
+            <div class="zm-feeditem">
+              {{amount.mostActivityHour}} Uhr am Aktivsten
+            </div>
+            <div class="zm-feeditem">
+               {{achievement.count}} Achievements erreicht
+            </div>
+            <div class="zm-feeditem">
+                {{drawCount.count}} x an der Zapfanlage
+            </div>
+            <div class="zm-feeditem">
+               Durchschnittlich {{drawCount.averageOperationsPerHour}} x an der Zapfanlage
+            </div>
+            <div class="zm-feeditem">
+                Platz {{rank.amount}} in der Bestenliste
+            </div>
+            <div class="zm-feeditem">
+                Platz {{rank.achievements}} in der Achievement Bewertung
+            </div>
+           <!-- <div class="zm-feeditem">
+                Platz {{rank.drawCount}} in der Zapfvorgänge Bewertung
+            </div>-->
+        </div>
+
     </div>
 </div>

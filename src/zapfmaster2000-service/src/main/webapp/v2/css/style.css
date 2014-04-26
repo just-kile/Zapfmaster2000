@@ -1239,19 +1239,20 @@ li.zm-newsfeed {
     height:120px;
 }
 
-.zm-achievementstats .zm-feeditem{
+.zm-feeditem{
     border-radius: 10px;
     padding:7px;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
-.zm-achievementstats .zm-feeditem:nth-child(even){
+ .zm-feeditem:nth-child(even){
      border: 2px solid #FFF143
  }
 
-.zm-achievementstats .zm-feeditem:nth-child(odd){
+ .zm-feeditem:nth-child(odd){
     border: 2px solid #FF71AC
 }
-.zm-achievementstats .zm-feeditem{
+.zm-feeditem{
     font-size:1.7em;
     float:left;
 }

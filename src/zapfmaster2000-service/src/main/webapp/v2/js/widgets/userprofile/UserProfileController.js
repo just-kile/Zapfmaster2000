@@ -17,6 +17,11 @@ define(['Console', 'moment', 'Underscore','text!../../../fake_cite.json'], funct
                     $scope.userName=data.user.userName;
                     $scope.userImage = data.user.userImage;
 
+                    $scope.amount = data.amount;
+                    $scope.achievement = data.achievement;
+                    $scope.drawCount = data.drawCount;
+                    $scope.rank = data.rank;
+
                     var index = Math.floor((Math.random()*cites.length));
                     $scope.quotation = cites[index];
                     callback && callback();

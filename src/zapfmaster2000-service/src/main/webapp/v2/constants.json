@@ -47,7 +47,10 @@
     },
     "WIDGETS": {
         "ANIMATION_IN": "fadeIn",
-        "ANIMATION_OUT": "fadeOut"
+        "ANIMATION_OUT": "fadeOut",
+        "ANIMATION_SWITCH_IN": "fadeInUp",
+        "ANIMATION_SWITCH_OUT": "fadeOutDown"
+
     },
     "FILTER": {
         "ACHIEVEMENT": "AchievementNews",

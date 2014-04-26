@@ -13,8 +13,10 @@ define(['Console', 'd3'], function (Console, d3) {
                     link: function ($scope, ele, attrs) {
                        // console.log($scope);
                         console.log("Switch directive called!");
-                        var animateIn = "fadeInUp"//c.WIDGETS.ANIMATION_IN;
-                        var animateOut = "fadeOutDown"//c.WIDGETS.ANIMATION_OUT;
+                     //   var animateIn = "fadeInUp"//c.WIDGETS.ANIMATION_IN;
+                     //   var animateOut = "fadeOutDown"//c.WIDGETS.ANIMATION_OUT;
+                        var animateIn = c.WIDGETS.ANIMATION_SWITCH_IN;
+                        var animateOut = c.WIDGETS.ANIMATION_SWITCH_OUT;
                         function goOnWithUpdate(){
                             $animate.removeClass(ele, 'animated ' + animateOut);
                             $animate.addClass(ele, 'animated ' +animateIn, function () {
