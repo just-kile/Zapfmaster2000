@@ -16,7 +16,7 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
         var firstWidget = $routeParams.widgetId || 0,
             widgetChangeEnabled = typeof $routeParams.widgetId == "undefined";
 
-        var rowsDivider = 2;//rows.centerHalf.length;
+        var rowsDivider = rows.centerThird.length;
         var activeSubWidget = firstWidget >= rowsDivider ? "centerHalf" : "centerThird";
         firstWidget = firstWidget % rowsDivider;
         function getActiveSubWidget() {

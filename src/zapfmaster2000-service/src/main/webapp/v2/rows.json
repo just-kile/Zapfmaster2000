@@ -19,7 +19,7 @@
         {
             "name": "bestlist",
             "className": "col-md-8",
-            "interval": 60000
+            "interval": 120000
         },
         {
             "name": "challenges",
@@ -34,10 +34,24 @@
             "interval": 60000
         },
         {
+            "name": "newsfeed",
+            "className": "col-md-4",
+            "interval": 60000
+        }
+
+    ],
+    [
+        {
+            "name": "achievementstats",
+            "className": "col-md-8",
+            "interval": 60000
+        },
+        {
             "name": "achievementfeed",
             "className": "col-md-4",
             "interval": 60000
         }
+
     ]
 ], "centerHalf": [
     [

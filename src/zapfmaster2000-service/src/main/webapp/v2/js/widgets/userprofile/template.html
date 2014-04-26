@@ -1,16 +1,17 @@
-<div ng-controller="UserProfileController" class="zmo-challenges">
+<div ng-controller="UserProfileController" class="zm-userprofile">
     <header class="zmo-header">{{'USERPROFILE_TITLE'|translate}}: {{userName}}</header>
-    <div class="zmo-container">
+    <div class="zmo-container" switch="updateFn(okCallback)">
         <div class="row">
-            <div class="col-md-3"><img ng-src="{{baseUrl+userImage|big}}" class="img-rounded"></div>
+            <div class="col-md-3"><img ng-src="{{baseUrl+userImage|big}}" class="img-rounded userimage"></div>
             <div class="col-md-9">
-                <blockquote class="reverse">
-                    <p>Die Zapferitis hat bei mir sofort zugeschlagen! Heut abend hab ich mir großes vorgenommen, füüüüüüüüüüüüüünf steckdosen. test Lorem</p>
-                    <footer>The famous {{userName}}</footer>
+                <blockquote class="reverse quote">
+                    <p>{{quotation}}</p>
+                    <footer>{{userName}}</footer>
                 </blockquote>
             </div>
+        </div>
+        <div class="row">
 
         </div>
-
     </div>
 </div>

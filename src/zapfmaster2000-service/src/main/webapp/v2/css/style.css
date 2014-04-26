@@ -1222,4 +1222,19 @@ li.zm-newsfeed {
     font: 3em RalewayLight !important;
     fill: white !important;
     text-shadow: 1px 1px 1px #000;
+
+}
+.zm-piechart svg g.nv-label:first-child text{
+    text-anchor:start!important;
+}
+
+.zm-piechart svg g.nv-label text{
+    text-anchor:end!important;
+}
+
+.zm-userprofile blockquote p,.zm-achievementstats blockquote p{
+    font-size: 2em;
+}
+.zm-userprofile .userimage, .zm-userprofile .quote{
+    height:120px;
 }
