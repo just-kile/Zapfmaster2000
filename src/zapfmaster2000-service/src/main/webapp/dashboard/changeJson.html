@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta Tags for mobile -->
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <script src="../libs/jquery/jquery-1.8.1.js"></script>
+    <script src="../libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../libs/ICanHaz.min.js"></script>
+    <script>
+        //Init Namespace
+        var ZMO = ZMO || {};
+        ZMO.Util = ZMO.Util ||{};
+        ZMO.modules = ZMO.modules ||{};
+    </script>
+    <script src="../js/Modules/Constants.js"></script>
+    <script src="../js/Modules/Model.js"></script>
+    <script src="../js/Util/UtilConstants.js"></script>
+    <script src="../js/Util/Object/Exists.js"></script>
+    <script src="../js/Util/Net/Ajax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap-responsive.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script>
+        var baseUrl = "../";
+        var rows = 2;
+        var ajax = ZMO.Util.Net.Ajax;
+        ZMO.exists = ZMO.Util.Object.exists;
+        var defaultImg = "../images/view/pix.png";
+    </script>
+
+
+</head>
+<body>
+<!-- Include Navigation -->
+<div id="navigation"></div>
+<script>
+    var navigation = $("#navigation").load("header.html",function(){
+        navigation.find(".mock").addClass("active");
+    });
+</script>
+<script type="text/javascript">
+
+    $(function(){
+
+
+    });
+
+</script>
+<!-- Main Container -->
+
+<div id="mainContainer" class="container mainContainer" style="margin-top:50px">
+
+
+    <div id="boxRow" class="row">
+
+    </div>
+</div>
+
+</body>
+</html>

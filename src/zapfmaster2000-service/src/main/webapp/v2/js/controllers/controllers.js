@@ -58,7 +58,7 @@ define([
     var setUpRoutes = function (angModule) {
         // hook up routing
         Console.group('Initializing navigation and routing.');
-        angModule.config(function ($routeProvider) {
+        angModule.config(['$routeProvider',function ($routeProvider) {
             _.each(routes, function (value, key) {
                 Console.debug("Adding ", key, ":", value);
                 $routeProvider.when(
@@ -69,7 +69,7 @@ define([
                 );
             });
             $routeProvider.otherwise({ redirectTo: routes.home.route });
-        });
+        }]);
         angModule.run(["$rootScope","$templateCache","CometService",function ($rootScope,$templateCache,CometService) {
             $rootScope.$on('$routeChangeSuccess', function (next, last) {
                 Console.debug("Navigating from ", last);
