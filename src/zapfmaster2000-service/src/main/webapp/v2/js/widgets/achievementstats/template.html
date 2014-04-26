@@ -32,6 +32,12 @@
             </div>
 
         </div>
-
+        <h2>Erreicht von</h2>
+<div class="row">
+    <div class="zm-feeditem" ng-repeat="user in users">
+            <img ng-src="{{baseUrl+user.userImage}}" class="img-rounded">
+        {{user.userName}} um {{user.date|clientdate:'full'}}
+    </div>
+</div>
     </div>
 </div>

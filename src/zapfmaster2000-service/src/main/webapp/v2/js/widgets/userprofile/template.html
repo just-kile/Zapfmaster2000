@@ -1,3 +1,29 @@
+<!-- {
+    "amount": {
+        "amountTotal": 0.3692531170453928,
+        "greatestDrawing": 0.3692531170453928,
+        "mostActivityHour": 17
+    },
+    "achievement": {
+        "count": 0,
+        "mostAchievementHour": -1,
+        "achievements": []
+    },
+    "drawCount": {
+        "count": 1,
+        "averageOperationsPerHour": 1
+    },
+    "rank": {
+        "achievements": 3,
+        "amount": 4,
+        "drawCount": 4
+    },
+    "user": {
+        "userId": 4,
+        "userName": "Felix",
+        "userImage": "images/others/defaultUser.png"
+    }
+}-->
 <div ng-controller="UserProfileController" class="zm-userprofile">
     <header class="zmo-header">{{'USERPROFILE_TITLE'|translate}}: {{userName}}</header>
     <div class="zmo-container" switch="updateFn(okCallback)">
@@ -10,7 +36,7 @@
                 </blockquote>
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-repeat="">
 
         </div>
     </div>
