@@ -1,5 +1,5 @@
 {
-    "switchTime": 150000,
+    "switchTime": 180000,
     "switchingModule": {
         "name": "zapfmastersplash",
         "className": "col-md-12",

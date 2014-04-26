@@ -13,24 +13,28 @@ define(['Console', 'd3'], function (Console, d3) {
                     link: function ($scope, ele, attrs) {
                        // console.log($scope);
                         console.log("Switch directive called!");
-                     //   var animateIn = "fadeInUp"//c.WIDGETS.ANIMATION_IN;
-                     //   var animateOut = "fadeOutDown"//c.WIDGETS.ANIMATION_OUT;
-                        var animateIn = c.WIDGETS.ANIMATION_SWITCH_IN;
-                        var animateOut = c.WIDGETS.ANIMATION_SWITCH_OUT;
+                        $animate.addClass(ele, "animated");
+                        var animateIn = "fadeInUp"//c.WIDGETS.ANIMATION_IN;
+                        var animateOut = "fadeOutDown"//c.WIDGETS.ANIMATION_OUT;
+                    //    var animateIn = c.WIDGETS.ANIMATION_SWITCH_IN;
+                    //    var animateOut = c.WIDGETS.ANIMATION_SWITCH_OUT;
                         function goOnWithUpdate(){
-                            $animate.removeClass(ele, 'animated ' + animateOut);
-                            $animate.addClass(ele, 'animated ' +animateIn, function () {
-                                $timeout(function(){
 
-                                },1000)
-                                activateTimeout();
-                            });
+                                $animate.addClass(ele, animateIn, function () {
+
+                                    $timeout(function(){
+
+                                    },1000)
+                                    activateTimeout();
+                                });
+                            $animate.removeClass(ele, animateOut);
+
                         }
                         function activateTimeout(){
                             $timeout(function () {
-                                $animate.removeClass(ele, 'animated ' + animateIn);
 
-                                $animate.addClass(ele, 'animated ' + animateOut, function () {
+                                $animate.addClass(ele,  animateOut, function () {
+
                                     $timeout(function(){
                                         $scope.switch && $scope.switch({
                                             okCallback:goOnWithUpdate
@@ -38,6 +42,8 @@ define(['Console', 'd3'], function (Console, d3) {
                                          },1000)
 
                                 });
+                                $animate.removeClass(ele, animateIn);
+
 
                             }, c.userProfileChangeTimeout);
                         }

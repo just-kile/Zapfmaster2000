@@ -18,7 +18,7 @@
     "webWorkers": 4,
     "newsFeedLength": 6,
     "newsStackLength": 2,
-    "userProfileChangeTimeout":10000,
+    "userProfileChangeTimeout":15000,
     "newsFeedTimeout": 2000,
     "progressUrl": "rest/statistics/progress",
     "PROGRESS_FROM_MINUTES": 360,
