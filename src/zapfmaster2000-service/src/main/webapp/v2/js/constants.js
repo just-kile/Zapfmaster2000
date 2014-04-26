@@ -4,9 +4,9 @@ define([
     'text!../constants.json'
 ], function (Console,constantsResponse) {
     "use strict";
-    var constants = constantsResponse;
+    var constants = localStorage.getItem("zm-constants")||constantsResponse;
     if(typeof constants=="string"){
-        constants = $.parseJSON(constantsResponse);
+        constants = $.parseJSON(constants);
     }
     Console.group("Entering Constants module.");
     Console.info("Register constants: ", constants);

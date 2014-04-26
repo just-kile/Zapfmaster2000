@@ -1,7 +1,7 @@
 define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
     "use strict";
     Console.group("Entering HomeController module.");
-    var rows = rowsResponse;
+    var rows = localStorage.getItem("zm-rows") || rowsResponse;
     if(typeof rows=="string"){
         rows = $.parseJSON(rowsResponse);
     }

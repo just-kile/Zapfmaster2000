@@ -48,7 +48,34 @@
 <script type="text/javascript">
 
     $(function(){
+        $.ajax({
+            url:"../v2/constants.json",
+            contentType:"text/plain",
+            success:function(resp){
+                $("#constants").val(JSON.stringify(resp,null,4));
+            }
+        });
+        $.ajax({
+            url:"../v2/rows.json",
+            contentType:"text/plain",
+            success:function(resp){
+                $("#rows").val(JSON.stringify(resp,null,4));
+            }
+        });
+        $("#setConstants").on("click",function(){
+            localStorage.setItem("zm-constants",$("#constants").val());
+        });
+        $("#setRows").on("click",function(){
+            localStorage.setItem("zm-rows",$("#rows").val());
+        });
 
+        $("#clearConstants").on("click",function(){
+            localStorage.removeItem("zm-constants");
+        })
+
+        $("#clearRows").on("click",function(){
+            localStorage.removeItem("zm-rows");
+        })
 
     });
 
@@ -57,9 +84,21 @@
 
 <div id="mainContainer" class="container mainContainer" style="margin-top:50px">
 
-
-    <div id="boxRow" class="row">
-
+    <h2>Constants</h2>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <button id="setConstants" class="btn btn-primary">Save</button>
+            <button id="clearConstants" class="btn btn-danger">Reset</button>
+            <textarea id="constants" class="span11" style="height:300px"></textarea>
+        </div>
+    </div>
+    <h2>Modules</h2>
+    <div  class="navbar">
+        <div class="navbar-inner">
+            <button id="setRows" class="btn btn-primary">Save</button>
+            <button id="clearRows" class="btn btn-danger">Reset</button>
+            <textarea id="rows" class="span11" style="height:300px"></textarea>
+        </div>
     </div>
 </div>
 
