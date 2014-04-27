@@ -48,8 +48,16 @@
     "NEWSFEED_CHALLENGE_DONE": " <span class=\"zm-bold\">{{winner}}</span> <span class=\"zm-bold\">won</span> a challenge! !",
     "NEWSFEED_CHALLENGE_DONE_INFO": "{{date}}",
     "NEWSFEED_CHALLENGE_DECLINED": "<span class=\"zm-bold\">{{declinee}}</span> <span class=\"zm-bold\">declined</span> a challenge. Boooooo!",
-    "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}}"
+    "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}}",
 
+    "USERPROFILE_AMOUNT":"{{amount}} L zapfed",
+    "USERPROFILE_GREATEST_DRAWING":"{{amount}} L zapfed at once",
+    "USERPROFILE_MOST_ACTIVITY_HOUR":"Most active at {{hour}}h",
+    "USERPROFILE_ACHIEVEMENT_COUNT":"{{count}} Achievements gained",
+    "USERPROFILE_DRAW_COUNT":"{{count}} x at the zapfing spot",
+    "USERPROFILE_AVERAGE_DRAW_COUNT":"Average {{count}} x at the zapfing spot",
+    "USERPROFILE_DRAW_RANK":"Rank {{rank}} at Bestlist",
+    "USERPROFILE_ACHIEVEMENT_RANK":"Rank {{rank}} at achievement bestlist"
 
 
 }

@@ -26,7 +26,7 @@
 }-->
 <div ng-controller="UserProfileController" class="zm-userprofile">
     <header class="zmo-header">{{'USERPROFILE_TITLE'|translate}}: {{userName}}</header>
-    <div class="zmo-container" switch="updateFn(okCallback)">
+    <div class="zmo-container" switch="updateFn(ok)">
         <div class="row">
             <div class="col-md-3"><img ng-src="{{baseUrl+userImage|big}}" class="img-rounded userimage"></div>
             <div class="col-md-9">
@@ -42,29 +42,42 @@
             </div>
         </div>
         <div class="row">
-            <div class="zm-feeditem">
-               {{amount.amountTotal|amount}} L gezapft
+            <div class="zm-feeditem"
+                 translate="USERPROFILE_AMOUNT"
+                 translate-value-amount="{{amount.amountTotal|amount}}">
             </div>
-            <div class="zm-feeditem">
-               {{amount.greatestDrawing|amount}} L auf einmal gezapft
+            <div class="zm-feeditem"
+                 translate="USERPROFILE_GREATEST_DRAWING"
+                 translate-value-amount="{{amount.greatestDrawing|amount}}">
             </div>
-            <div class="zm-feeditem">
-              {{amount.mostActivityHour}} Uhr am Aktivsten
+            <div class="zm-feeditem"
+                 translate="USERPROFILE_MOST_ACTIVITY_HOUR"
+                 translate-value-hour="{{amount.mostActivityHour}}">
             </div>
-            <div class="zm-feeditem">
-               {{achievement.count}} Achievements erreicht
+            <div class="zm-feeditem"
+                 translate="USERPROFILE_ACHIEVEMENT_COUNT"
+                 translate-value-count="{{achievement.count}}">
+
             </div>
-            <div class="zm-feeditem">
-                {{drawCount.count}} x an der Zapfanlage
+            <div class="zm-feeditem"
+                 translate="USERPROFILE_DRAW_COUNT"
+                 translate-value-count="{{drawCount.count}}">
+
             </div>
-            <div class="zm-feeditem">
-               Durchschnittlich {{drawCount.averageOperationsPerHour}} x an der Zapfanlage
+            <div class="zm-feeditem"
+                 translate="USERPROFILE_AVERAGE_DRAW_COUNT"
+                 translate-value-count="{{drawCount.averageOperationsPerHour}}">
+
             </div>
-            <div class="zm-feeditem">
-                Platz {{rank.amount}} in der Bestenliste
+            <div class="zm-feeditem"
+                 translate="USERPROFILE_DRAW_RANK"
+                 translate-value-rank="{{rank.amount}}"
+                    >
+
             </div>
-            <div class="zm-feeditem">
-                Platz {{rank.achievements}} in der Achievement Bewertung
+            <div class="zm-feeditem"
+                 translate="USERPROFILE_ACHIEVEMENT_RANK"
+                 translate-value-rank="{{rank.achievements}}">
             </div>
            <!-- <div class="zm-feeditem">
                 Platz {{rank.drawCount}} in der Zapfvorgänge Bewertung

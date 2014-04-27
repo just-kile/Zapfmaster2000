@@ -21,7 +21,7 @@
 
 <div ng-controller="AchievementStatsController" class="zm-achievementstats">
     <header class="zmo-header">{{'ACHIEVEMENTSTATS_TITLE'|translate}}: {{achievementName}}</header>
-    <div class="zmo-container" switch="updateFn(okCallback)">
+    <div class="zmo-container" switch="updateFn(ok)">
         <div class="row">
             <div class="col-md-2"><img ng-src="{{baseUrl+image}}" class="img-rounded" style="height:80px"></div>
             <div class="col-md-10">
@@ -35,7 +35,7 @@
         <h2>Erreicht von</h2>
 <div class="row">
     <div class="zm-feeditem" ng-repeat="user in users">
-            <img ng-src="{{baseUrl+user.userImage}}" class="img-rounded">
+            <img ng-src="{{baseUrl+user.userImage}}" class="img-rounded" height="48">
         {{user.userName}} um {{user.date|clientdate:'full'}}
     </div>
 </div>

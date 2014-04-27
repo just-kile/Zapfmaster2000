@@ -47,7 +47,16 @@
     "NEWSFEED_CHALLENGE_DONE": " <span class=\"zm-bold\">{{winner}}</span> hat ein Duell <span class=\"zm-bold\">gewonnen</span>!",
     "NEWSFEED_CHALLENGE_DONE_INFO": "{{date}} Uhr",
     "NEWSFEED_CHALLENGE_DECLINED": "<span class=\"zm-bold\">{{declinee}}</span> hat ein Duell <span class=\"zm-bold\">abgelehnt</span>. Buuuuh!",
-    "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}} Uhr"
+    "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}} Uhr",
+
+    "USERPROFILE_AMOUNT":" <span class=\"zm-bold\">{{amount}}</span> L gezapft",
+    "USERPROFILE_GREATEST_DRAWING":" <span class=\"zm-bold\">{{amount}}</span> L auf  <span class=\"zm-bold\">einmal</span> gezapft",
+    "USERPROFILE_MOST_ACTIVITY_HOUR":"{{hour}} Uhr am Aktivsten",
+    "USERPROFILE_ACHIEVEMENT_COUNT":"{{count}} Achievements erreicht",
+    "USERPROFILE_DRAW_COUNT":"{{count}} x an der Zapfanlage",
+    "USERPROFILE_AVERAGE_DRAW_COUNT":" Durchschnittlich {{count}} x an der Zapfanlage",
+    "USERPROFILE_DRAW_RANK":" Platz {{rank}} in der Bestenliste",
+    "USERPROFILE_ACHIEVEMENT_RANK":"Platz {{rank}} in der Achievement Bewertung"
 
 
 

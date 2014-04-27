@@ -14,17 +14,16 @@ define(['Console', 'd3'], function (Console, d3) {
                        // console.log($scope);
                         console.log("Switch directive called!");
                         $animate.addClass(ele, "animated");
-                        var animateIn = "fadeInUp"//c.WIDGETS.ANIMATION_IN;
-                        var animateOut = "fadeOutDown"//c.WIDGETS.ANIMATION_OUT;
-                    //    var animateIn = c.WIDGETS.ANIMATION_SWITCH_IN;
-                    //    var animateOut = c.WIDGETS.ANIMATION_SWITCH_OUT;
+                      //  var animateIn = "fadeInUpBig"//c.WIDGETS.ANIMATION_IN;
+                       // var animateOut = "fadeOutDownBig"//c.WIDGETS.ANIMATION_OUT;
+                       // var animateIn = "rotateInDownRight"//c.WIDGETS.ANIMATION_IN;
+                        //var animateOut = "rotateOutDownRight"//c.WIDGETS.ANIMATION_OUT;
+
+                        var animateIn = c.WIDGETS.ANIMATION_SWITCH_IN;
+                        var animateOut = c.WIDGETS.ANIMATION_SWITCH_OUT;
                         function goOnWithUpdate(){
 
                                 $animate.addClass(ele, animateIn, function () {
-
-                                    $timeout(function(){
-
-                                    },1000)
                                     activateTimeout();
                                 });
                             $animate.removeClass(ele, animateOut);
@@ -32,12 +31,10 @@ define(['Console', 'd3'], function (Console, d3) {
                         }
                         function activateTimeout(){
                             $timeout(function () {
-
                                 $animate.addClass(ele,  animateOut, function () {
-
                                     $timeout(function(){
                                         $scope.switch && $scope.switch({
-                                            okCallback:goOnWithUpdate
+                                            ok:goOnWithUpdate
                                         });
                                          },1000)
 

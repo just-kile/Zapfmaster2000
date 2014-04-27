@@ -48,7 +48,7 @@
     "WIDGETS": {
         "ANIMATION_IN": "fadeIn",
         "ANIMATION_OUT": "fadeOut",
-        "ANIMATION_SWITCH_IN": "fadeInUp",
+        "ANIMATION_SWITCH_IN": "fadeInDown",
         "ANIMATION_SWITCH_OUT": "fadeOutDown"
 
     },
