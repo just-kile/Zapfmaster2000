@@ -17,7 +17,7 @@
     "PIECHART_TITLE":"#1 vs the World",
     "USERPROFILE_TITLE":"User Interview",
     "ACHIEVEMENTSTATS_TITLE":"Introducing Achievement",
-
+    "DISTRIBUTION_TITLE":"Zapfdistribution",
 
     "NEWSSTACK_DRAWING": "{{username}} zapfed {{amount}} l",
     "NEWSSTACK_DRAWING_INFO": "{{date}} h @ {{location}}",

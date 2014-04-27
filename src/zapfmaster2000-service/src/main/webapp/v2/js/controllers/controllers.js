@@ -25,10 +25,11 @@ define([
     'widgets/zapfmastersplash/ZapfmasterSplashController',
     'widgets/userprofile/UserProfileController',
     'widgets/achievementstats/AchievementStatsController',
+    'widgets/distribution/DistributionController',
 
     //Constants
     'constants'
-], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,amountchart,newsfeed,achievementfeed,zmsplash,userprofile,achievementstats,constants) {
+], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,amountchart,newsfeed,achievementfeed,zmsplash,userprofile,achievementstats,distribution,constants) {
     "use strict";
     Console.group("Entering controllers module.");
     Console.info("AppController", app);
@@ -47,6 +48,7 @@ define([
         ZapfmasterSplashController:zmsplash,
         UserProfileController:userprofile,
         AchievementStatsController:achievementstats,
+        DistributionController:distribution,
         stats: stats
 
     };

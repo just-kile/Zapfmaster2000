@@ -17,6 +17,7 @@
     "PIECHART_TITLE":"#1 vs the World",
     "USERPROFILE_TITLE":"Zapfer im Interview",
     "ACHIEVEMENTSTATS_TITLE":"Achievement vorgestellt",
+    "DISTRIBUTION_TITLE":"Zapfverteilung",
 
     "NEWSSTACK_DRAWING": "{{username}} zapfte {{amount}} l",
     "NEWSSTACK_DRAWING_INFO": "{{date}} Uhr @ {{location}}",

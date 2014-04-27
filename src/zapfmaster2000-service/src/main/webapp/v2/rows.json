@@ -68,7 +68,7 @@
     ],
     [
         {
-            "name": "achievementfeed",
+            "name": "distribution",
             "className": "col-md-6",
             "interval": 60000
         },

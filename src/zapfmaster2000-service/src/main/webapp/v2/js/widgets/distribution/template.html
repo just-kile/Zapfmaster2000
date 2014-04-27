@@ -1,0 +1,43 @@
+<div ng-controller="DistributionController" class="zm-distribution">
+    <header class="zmo-header">{{'DISTRIBUTION_TITLE'|translate}}</header>
+    <div class="zmo-container">
+        <nvd3-line-chart
+                class="zm-linechart"
+                data="chartData"
+                xAxisTickFormat="xAxisTickFormatFunction()"
+                yAxisTickFormat="yAxisTickFormatFunction()"
+                width="{{width}}"
+                height="{{height}}"
+                interpolate="basis-open"
+                showXAxis="true"
+                showYAxis="true"
+                color="colorFunction()"
+                noData="No Zapfing atm"
+                forcey="[0]"
+                forcex="[0]"
+                isArea="true">
+            <svg ng-style="{width:width+'px',height:height+'px',marginLeft:'-100px',marginTop:'-40px'}"></svg>
+        </nvd3-line-chart>
+        <!-- see http://de.wikipedia.org/wiki/Moment_(Stochastik)#Zentrale_Momente-->
+        <div class="row">
+            <div class="col-md-8">Erwartungswert &#956;</div>
+            <div class="col-md-4 zm-bold">{{expectation}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">Varianz &#963;&sup2;</div>
+            <div class="col-md-4 zm-bold">{{variance}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">Standardabweichung &#963;</div>
+            <div class="col-md-4 zm-bold">{{degression}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">Schiefe v</div>
+            <div class="col-md-4 zm-bold">{{skew}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">Wölbung w</div>
+            <div class="col-md-4 zm-bold">{{kurtosis}}</div>
+        </div>
+    </div>
+</div>
