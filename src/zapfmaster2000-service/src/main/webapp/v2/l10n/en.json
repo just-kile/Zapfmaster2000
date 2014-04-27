@@ -57,7 +57,16 @@
     "USERPROFILE_DRAW_COUNT":"{{count}} x at the zapfing spot",
     "USERPROFILE_AVERAGE_DRAW_COUNT":"Average {{count}} x at the zapfing spot",
     "USERPROFILE_DRAW_RANK":"Rank {{rank}} at Bestlist",
-    "USERPROFILE_ACHIEVEMENT_RANK":"Rank {{rank}} at achievement bestlist"
+    "USERPROFILE_ACHIEVEMENT_RANK":"Rank {{rank}} at achievement bestlist",
 
+
+    "NOBODY":"Nobody",
+    "ACHIEVEMENTSTATS_USER":"{{username}} at {{date}} h",
+
+    "EXPECTATION":"Expectation",
+    "VARIANCE":"Variance",
+    "DEGRESSION":"Standard degression",
+    "SKEW":"Skew",
+    "KURTOSIS":"Kurtosis"
 
 }

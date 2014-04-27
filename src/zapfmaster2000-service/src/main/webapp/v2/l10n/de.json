@@ -52,13 +52,20 @@
 
     "USERPROFILE_AMOUNT":" <span class=\"zm-bold\">{{amount}}</span> L gezapft",
     "USERPROFILE_GREATEST_DRAWING":" <span class=\"zm-bold\">{{amount}}</span> L auf  <span class=\"zm-bold\">einmal</span> gezapft",
-    "USERPROFILE_MOST_ACTIVITY_HOUR":"{{hour}} Uhr am Aktivsten",
-    "USERPROFILE_ACHIEVEMENT_COUNT":"{{count}} Achievements erreicht",
-    "USERPROFILE_DRAW_COUNT":"{{count}} x an der Zapfanlage",
-    "USERPROFILE_AVERAGE_DRAW_COUNT":" Durchschnittlich {{count}} x an der Zapfanlage",
-    "USERPROFILE_DRAW_RANK":" Platz {{rank}} in der Bestenliste",
-    "USERPROFILE_ACHIEVEMENT_RANK":"Platz {{rank}} in der Achievement Bewertung"
+    "USERPROFILE_MOST_ACTIVITY_HOUR":"<span class=\"zm-bold\">{{hour}}</span> Uhr am <span class=\"zm-bold\">Aktivsten</span>",
+    "USERPROFILE_ACHIEVEMENT_COUNT":"<span class=\"zm-bold\">{{count}} Achievements</span> erreicht",
+    "USERPROFILE_DRAW_COUNT":"<span class=\"zm-bold\">{{count}}x</span>  an der Zapfanlage",
+    "USERPROFILE_AVERAGE_DRAW_COUNT":" <span class=\"zm-bold\">Durchschnittlich {{count}}x</span> an der Zapfanlage",
+    "USERPROFILE_DRAW_RANK":" <span class=\"zm-bold\">Platz {{rank}}</span> in der Bestenliste",
+    "USERPROFILE_ACHIEVEMENT_RANK":"<span class=\"zm-bold\">Platz {{rank}}</span> in der <span class=\"zm-bold\">Achievement</span> Bewertung",
 
+    "NOBODY":"Niemandem",
+    "ACHIEVEMENTSTATS_USER":"{{username}} um {{date}} Uhr",
+    "EXPECTATION":"Erwartungswert",
+    "VARIANCE":"Varianz",
+    "DEGRESSION":"Standardabweichung",
+    "SKEW":"Schiefe",
+    "KURTOSIS":"Wölbung"
 
 
 }
