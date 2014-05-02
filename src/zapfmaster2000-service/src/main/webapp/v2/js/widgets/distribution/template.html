@@ -20,24 +20,17 @@
         </nvd3-line-chart>
         <!-- see http://de.wikipedia.org/wiki/Moment_(Stochastik)#Zentrale_Momente-->
         <div class="row">
-            <div class="col-md-8" >{{'EXPECTATION'|translate}} &#956;</div>
-            <div class="col-md-4 zm-bold">{{expectation}}</div>
+            <div class="col-md-8" > &#956; ({{'EXPECTATION'|translate}})</div>
+            <div class="col-md-4 zm-bold">{{expectation|amount}}</div>
         </div>
         <div class="row">
-            <div class="col-md-8">{{'VARIANCE'|translate}} &#963;&sup2;</div>
-            <div class="col-md-4 zm-bold">{{variance}}</div>
+            <div class="col-md-8"> &#963;&sup2; ({{'VARIANCE'|translate}})</div>
+            <div class="col-md-4 zm-bold">{{variance|amount}}</div>
         </div>
         <div class="row">
-            <div class="col-md-8">{{'DEGRESSION'|translate}} &#963;</div>
-            <div class="col-md-4 zm-bold">{{degression}}</div>
+            <div class="col-md-8"> &#963;({{'DEGRESSION'|translate}})</div>
+            <div class="col-md-4 zm-bold">{{degression|amount}}</div>
         </div>
-        <div class="row">
-            <div class="col-md-8">{{'SKEW'|translate}} v</div>
-            <div class="col-md-4 zm-bold">{{skew}}</div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">{{'KURTOSIS'|translate}} w</div>
-            <div class="col-md-4 zm-bold">{{kurtosis}}</div>
-        </div>
+
     </div>
 </div>
