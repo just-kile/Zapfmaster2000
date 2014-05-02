@@ -15,7 +15,6 @@
     "CHALLENGES_SPLASH_DONE_TITLE":"Duell beendet!",
     "ZAPFVELOCITY_TITLE":"Zapfgeschwindigkeit",
     "PIECHART_TITLE":"#1 vs the World",
-    "USERPROFILE_TITLE":"Zapfer im Interview",
     "ACHIEVEMENTSTATS_TITLE":"Achievement vorgestellt",
     "DISTRIBUTION_TITLE":"Zapfverteilung",
 
@@ -50,6 +49,7 @@
     "NEWSFEED_CHALLENGE_DECLINED": "<span class=\"zm-bold\">{{declinee}}</span> hat ein Duell <span class=\"zm-bold\">abgelehnt</span>. Buuuuh!",
     "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}} Uhr",
 
+    "USERPROFILE_TITLE":"Zapfer im Rampenlicht: {{username}}",
     "USERPROFILE_AMOUNT":" <span class=\"zm-bold\">{{amount}}</span> L gezapft",
     "USERPROFILE_GREATEST_DRAWING":" <span class=\"zm-bold\">{{amount}}</span> L auf  <span class=\"zm-bold\">einmal</span> gezapft",
     "USERPROFILE_MOST_ACTIVITY_HOUR":"<span class=\"zm-bold\">{{hour}}</span> Uhr am <span class=\"zm-bold\">Aktivsten</span>",

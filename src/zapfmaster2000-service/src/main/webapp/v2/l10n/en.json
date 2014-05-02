@@ -15,7 +15,6 @@
     "CHALLENGES_SPLASH_DONE_TITLE":"Challenge done!",
     "ZAPFVELOCITY_TITLE":"Zapfvelocity",
     "PIECHART_TITLE":"#1 vs the World",
-    "USERPROFILE_TITLE":"User Interview",
     "ACHIEVEMENTSTATS_TITLE":"Introducing Achievement",
     "DISTRIBUTION_TITLE":"Zapfdistribution",
 
@@ -50,6 +49,7 @@
     "NEWSFEED_CHALLENGE_DECLINED": "<span class=\"zm-bold\">{{declinee}}</span> <span class=\"zm-bold\">declined</span> a challenge. Boooooo!",
     "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}}",
 
+    "USERPROFILE_TITLE":"Zapfer Spotlight: {{username}}",
     "USERPROFILE_AMOUNT":"{{amount}} L zapfed",
     "USERPROFILE_GREATEST_DRAWING":"{{amount}} L zapfed at once",
     "USERPROFILE_MOST_ACTIVITY_HOUR":"Most active at {{hour}}h",

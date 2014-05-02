@@ -25,63 +25,31 @@
     }
 }-->
 <div ng-controller="UserProfileController" class="zm-userprofile">
-    <header class="zmo-header">{{'USERPROFILE_TITLE'|translate}}: {{userName}}</header>
+    <header class="zmo-header"
+            translate="USERPROFILE_TITLE"
+            translate-value-username="{{userName}}"></header>
     <div class="zmo-container" switch="updateFn(ok)">
-        <div class="row">
+        <div class="row zm-feeditem">
             <div class="col-md-3"><img ng-src="{{baseUrl+userImage|big}}" class="img-rounded userimage"></div>
             <div class="col-md-9">
                 <blockquote class="reverse quote">
-                    <p>{{quotation}}</p>
+                    <p>&quot;{{quotation}}&quot;</p>
                     <footer>{{userName}}</footer>
                 </blockquote>
             </div>
         </div>
-        <div class="row">
-            <div class="zm-feeditem" ng-repeat="achievement in achievement.achievements">
-                <img ng-src="{{baseUrl+achievement.achievementImage}}" class="img-rounded"/>
+        <div class="row zm-feeditem">
+            <img ng-src="css/images/mug_pink_filling.svg" class="img-rounded col-md-4"/>
+            <div class="col-md-8">
+            {{userName}} ranks {{rank.amount}}
             </div>
         </div>
-        <div class="row">
-            <div class="zm-feeditem"
-                 translate="USERPROFILE_AMOUNT"
-                 translate-value-amount="{{amount.amountTotal|amount}}">
-            </div>
-            <div class="zm-feeditem"
-                 translate="USERPROFILE_GREATEST_DRAWING"
-                 translate-value-amount="{{amount.greatestDrawing|amount}}">
-            </div>
-            <div class="zm-feeditem"
-                 translate="USERPROFILE_MOST_ACTIVITY_HOUR"
-                 translate-value-hour="{{amount.mostActivityHour}}">
-            </div>
-            <div class="zm-feeditem"
-                 translate="USERPROFILE_ACHIEVEMENT_COUNT"
-                 translate-value-count="{{achievement.count}}">
+        <div class="row zm-feeditem">
+            <div class="col-md-8">
 
             </div>
-            <div class="zm-feeditem"
-                 translate="USERPROFILE_DRAW_COUNT"
-                 translate-value-count="{{drawCount.count}}">
+            <img ng-src="css/images/goblet_yellow.svg" class="img-rounded col-md-4"/>
 
-            </div>
-            <div class="zm-feeditem"
-                 translate="USERPROFILE_AVERAGE_DRAW_COUNT"
-                 translate-value-count="{{drawCount.averageOperationsPerHour|amount}}">
-
-            </div>
-            <div class="zm-feeditem"
-                 translate="USERPROFILE_DRAW_RANK"
-                 translate-value-rank="{{rank.amount}}"
-                    >
-
-            </div>
-            <div class="zm-feeditem"
-                 translate="USERPROFILE_ACHIEVEMENT_RANK"
-                 translate-value-rank="{{rank.achievements}}">
-            </div>
-           <!-- <div class="zm-feeditem">
-                Platz {{rank.drawCount}} in der Zapfvorgänge Bewertung
-            </div>-->
         </div>
 
     </div>
