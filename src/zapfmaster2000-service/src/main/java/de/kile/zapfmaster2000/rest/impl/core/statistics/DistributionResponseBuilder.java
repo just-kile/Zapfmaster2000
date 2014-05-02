@@ -26,8 +26,38 @@ public class DistributionResponseBuilder {
 		DistributionResponse response = new DistributionResponse(expectation,
 				variance, degression);
 		addNormalCurveValues(response);
+		addRealCurveValues(response, amountRankings);
 
 		return response;
+	}
+
+	private void addRealCurveValues(DistributionResponse response, UserAmountResponse[] amountRankings) {
+		int range = 3;
+		for (int i = -range; i <= range; i++) {
+			double x = response.getExpectation() + i * response.getDegression();
+			
+			double minAmount = x - response.getDegression() / 2;
+			double maxAmount = x + response.getDegression() / 2;
+			int numUsersInRange = findNumUsersInRange(amountRankings,
+					minAmount, maxAmount);
+
+			int numUsers = amountRankings.length;
+			double probability = (double) numUsersInRange / numUsers;
+			
+			response.getActualCurve().add(new CurveValue(x, probability));
+		}		
+	}
+
+	private int findNumUsersInRange(UserAmountResponse[] amountRankings,
+			double minAmount, double maxAmount) {
+		int numUsersInRange = 0;
+
+		for (UserAmountResponse amountRanking : amountRankings) {
+			if (amountRanking.getAmount() >= minAmount && amountRanking.getAmount() < maxAmount) {
+				numUsersInRange++;
+			}
+		}
+		return numUsersInRange;
 	}
 
 	private void addNormalCurveValues(DistributionResponse response) {
@@ -35,7 +65,7 @@ public class DistributionResponseBuilder {
 		for (int i = -range; i <= range; i++) {
 			double x = response.getExpectation() + i * response.getDegression();
 			double p_x = calcNormalValue(response, x);
-			response.getNormalCurveValues().add(new CurveValue(x, p_x));
+			response.getNormalCurve().add(new CurveValue(x, p_x));
 		}
 	}
 

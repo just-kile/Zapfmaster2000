@@ -46,20 +46,24 @@ public class DistributionResponse {
 		this.degression = degression;
 	}
 
-	public List<CurveValue> getNormalCurveValues() {
+	public List<CurveValue> getNormalCurve() {
 		return normalCurve;
+	}
+
+	public List<CurveValue> getActualCurve() {
+		return actualCurve;
 	}
 
 	public static class CurveValue {
 
 		private double amount;
 
-		private double userCount;
+		private double probability;
 
-		public CurveValue(double amount, double userCount) {
+		public CurveValue(double amount, double probability) {
 			super();
 			this.amount = amount;
-			this.userCount = userCount;
+			this.probability = probability;
 		}
 
 		public double getAmount() {
@@ -70,12 +74,12 @@ public class DistributionResponse {
 			this.amount = amount;
 		}
 
-		public double getUserCount() {
-			return userCount;
+		public double getProbability() {
+			return probability;
 		}
 
-		public void setUserCount(double userCount) {
-			this.userCount = userCount;
+		public void setProbability(double probability) {
+			this.probability = probability;
 		}
 
 	}
