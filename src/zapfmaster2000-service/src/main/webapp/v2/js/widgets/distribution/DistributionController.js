@@ -15,13 +15,13 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                 });
                 chartData = result;
                 return result;
-            }
+            };
             $scope.width = 750;
             $scope.height = 250;
 
             $scope.xAxisTickFormatFunction = function () {
                 return function (val) {
-                    return moment.unix(val).format(c.CLIENT_TIME_FORMAT);
+                    return val;
                 };
             }
             $scope.yAxisTickFormatFunction = function () {
@@ -35,61 +35,27 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     return '#F5E400 '
                 };
             }
-            /*Pie chart helper functions*/
-            $scope.xFunction = function () {
-                return function (val) {
-                    return val.key //+ " ("+val.y.toFixed(2)+"l)";
-                }
-            }
-
-            $scope.yFunction = function () {
-                return function (val) {
-                    return val.y;
-                }
-            }
-            $scope.colorFunctionPie = function(){
-                var colorArray = ["#ED71A8","#FFF143"]
-                return function(d,i){
-                    return colorArray[i]
-                }
-            }
-            var transformDataPie = function (bestlist) {
-
-                var sum = 0;
-                _.each(bestlist, function (user, index) {
-                    if (index > 0) {
-                        sum += user.amount;
-                    }
-                });
-                if (bestlist.length > 0) {
-                    return [{
-                        key:bestlist[0].name,
-                        y:bestlist[0].amount
-                    },{
-                        key:"The World",
-                        y:sum
-                    }];
-                }else{
-                    return null;
-                }
-
-            }
             var initScope = function () {
                 ajax.getDatas(c.progressUrl, function (data) {
-                    console.log(data);
+                   // console.log(data);
+                    var distData = [[-1,0],[0,0.0001],[1,0.001],[4,0.42],[7,0.44],[10,0.1],[12,0],[13,0]];
+
                     $scope.chartData = [
                         {
                             key: "Progress",
-                            values: data.amount.length>1?transformData(data):[]
+                            values: distData
                         }
                     ]
+                    $scope.expectation = 4.2;
+                    $scope.variance = 0.5;
+                    $scope.degression = 0.3;
+                    $scope.skew = -0.3;
+                    $scope.kurtosis = 0;
                 }, {
                     from: moment().subtract('minutes', c.PROGRESS_FROM_MINUTES).format(c.SERVER_TIME_FORMAT),
                     interval: c.PROGRESS_INTERVAL
                 });
-                ajax.getDatas(c.bestlistUrl, function (bestlist) {
-                    $scope.pieChartData = transformDataPie(bestlist);
-                })
+
 
             };
             initScope();

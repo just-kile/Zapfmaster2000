@@ -13,7 +13,11 @@
     "CHALLENGES_TITLE": "Challenges",
     "CHALLENGES_SPLASH_STARTED_TITLE":"Challenge started!",
     "CHALLENGES_SPLASH_DONE_TITLE":"Challenge done!",
-
+    "ZAPFVELOCITY_TITLE":"Zapfvelocity",
+    "PIECHART_TITLE":"#1 vs the World",
+    "USERPROFILE_TITLE":"User Interview",
+    "ACHIEVEMENTSTATS_TITLE":"Introducing Achievement",
+    "DISTRIBUTION_TITLE":"Zapfdistribution",
 
     "NEWSSTACK_DRAWING": "{{username}} zapfed {{amount}} l",
     "NEWSSTACK_DRAWING_INFO": "{{date}} h @ {{location}}",
@@ -44,8 +48,25 @@
     "NEWSFEED_CHALLENGE_DONE": " <span class=\"zm-bold\">{{winner}}</span> <span class=\"zm-bold\">won</span> a challenge! !",
     "NEWSFEED_CHALLENGE_DONE_INFO": "{{date}}",
     "NEWSFEED_CHALLENGE_DECLINED": "<span class=\"zm-bold\">{{declinee}}</span> <span class=\"zm-bold\">declined</span> a challenge. Boooooo!",
-    "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}}"
+    "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}}",
+
+    "USERPROFILE_AMOUNT":"{{amount}} L zapfed",
+    "USERPROFILE_GREATEST_DRAWING":"{{amount}} L zapfed at once",
+    "USERPROFILE_MOST_ACTIVITY_HOUR":"Most active at {{hour}}h",
+    "USERPROFILE_ACHIEVEMENT_COUNT":"{{count}} Achievements gained",
+    "USERPROFILE_DRAW_COUNT":"{{count}} x at the zapfing spot",
+    "USERPROFILE_AVERAGE_DRAW_COUNT":"Average {{count}} x at the zapfing spot",
+    "USERPROFILE_DRAW_RANK":"Rank {{rank}} at Bestlist",
+    "USERPROFILE_ACHIEVEMENT_RANK":"Rank {{rank}} at achievement bestlist",
 
 
+    "NOBODY":"Nobody",
+    "ACHIEVEMENTSTATS_USER":"{{username}} at {{date}} h",
+
+    "EXPECTATION":"Expectation",
+    "VARIANCE":"Variance",
+    "DEGRESSION":"Standard degression",
+    "SKEW":"Skew",
+    "KURTOSIS":"Kurtosis"
 
 }

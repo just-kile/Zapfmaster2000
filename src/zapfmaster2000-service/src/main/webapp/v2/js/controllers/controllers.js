@@ -23,10 +23,13 @@ define([
     'widgets/achievementfeed/AchievementfeedController',
 
     'widgets/zapfmastersplash/ZapfmasterSplashController',
+    'widgets/userprofile/UserProfileController',
+    'widgets/achievementstats/AchievementStatsController',
+    'widgets/distribution/DistributionController',
 
     //Constants
     'constants'
-], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,amountchart,newsfeed,achievementfeed,zmsplash,constants) {
+], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,amountchart,newsfeed,achievementfeed,zmsplash,userprofile,achievementstats,distribution,constants) {
     "use strict";
     Console.group("Entering controllers module.");
     Console.info("AppController", app);
@@ -43,6 +46,9 @@ define([
         NewsfeedController:newsfeed,
         AchievementfeedController:achievementfeed,
         ZapfmasterSplashController:zmsplash,
+        UserProfileController:userprofile,
+        AchievementStatsController:achievementstats,
+        DistributionController:distribution,
         stats: stats
 
     };
@@ -56,7 +62,7 @@ define([
     var setUpRoutes = function (angModule) {
         // hook up routing
         Console.group('Initializing navigation and routing.');
-        angModule.config(function ($routeProvider) {
+        angModule.config(['$routeProvider',function ($routeProvider) {
             _.each(routes, function (value, key) {
                 Console.debug("Adding ", key, ":", value);
                 $routeProvider.when(
@@ -67,7 +73,7 @@ define([
                 );
             });
             $routeProvider.otherwise({ redirectTo: routes.home.route });
-        });
+        }]);
         angModule.run(["$rootScope","$templateCache","CometService",function ($rootScope,$templateCache,CometService) {
             $rootScope.$on('$routeChangeSuccess', function (next, last) {
                 Console.debug("Navigating from ", last);
@@ -83,7 +89,8 @@ define([
     }
     var setUpLanguage = function(angModule){
         angModule.config(['$translateProvider',function ($translateProvider) {
-             $translateProvider
+           // $translateProvider.useLocalStorage();
+            $translateProvider
                  .useStaticFilesLoader({
                  prefix:'l10n/',
                  suffix:'.json'
@@ -94,7 +101,13 @@ define([
                      'de_DE':'de',
                      'de_CH':'de'
                  })
-                 .determinePreferredLanguage();
+                .fallbackLanguage("en");
+            if( localStorage.getItem("zm-lang")){
+                $translateProvider.preferredLanguage(localStorage.getItem("zm-lang"));
+            }else{
+                $translateProvider.determinePreferredLanguage();
+            }
+
         }]);
     }
     var initialize = function (angModule) {

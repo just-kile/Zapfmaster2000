@@ -1,6 +1,4 @@
-"use strict";
-
-requirejs.config({
+({
 
     paths: {
         Console: 'libs/console/console-min',
@@ -37,7 +35,7 @@ requirejs.config({
             deps: ['Angular']
         },
         AngularWebworker:{
-          deps:['Angular']
+            deps:['Angular']
         },
         AngularTranslate:{
             deps:['Angular']
@@ -49,7 +47,7 @@ requirejs.config({
             exports: "_"
         },
         d3:{
-          exports:"d3",
+            exports:"d3",
             init:function(d3){
                 window.d3 = d3;
             }
@@ -67,46 +65,9 @@ requirejs.config({
         , "jQuery"
         , "Underscore"
         , "Angular"
-    ], urlArgs: 'token='+localStorage.getItem("token")
-});
-requirejs([
-    // Standard Libs
-    'require'
-    , 'Console'
-    , 'jQuery'
-    , 'Underscore'
-    , 'moment'
-    ,'d3'
-    , 'Angular',
-    'AngularRoute',
-    'AngularResource',
-    'AngularAnimate',
-    'AngularWebworker',
-    'AngularTranslate',
-    'AngularD3Directives',
-
-], function (require, Console, $, _,moment,d3, angular,angularRoute,angularResource,angularAnimate) {
-    Console.group("Bootstrap dependencies loaded.");
-    Console.info("Console", Console);
-    Console.info("jQuery", $);
-    Console.info("Underscore: ", _);
-    Console.info("Moment: ",moment);
-    Console.info("d3: ",d3);
-    Console.info("Angular: ", angular);
-    Console.group("Angular Directives");
-    Console.info("ngRoute: ", angularRoute);
-    Console.info("ngResource: ", angularResource);
-    Console.info("ngAnimate: ", angularAnimate);
-    Console.groupEnd();
-    window.d3 = d3;
-    require(['app','nvd3'], function (App) {
-        Console.group("Starting bootstrap.");
-        Console.info("App: ", App);
-        Console.groupEnd();
-        App.initialize();
-
-
-    });
-
-    Console.groupEnd();
-});
+    ],
+    baseUrl: ".",
+    findNestedDependencies:true,
+    name: "bootstrap",
+    out: "v2-built.js"
+})

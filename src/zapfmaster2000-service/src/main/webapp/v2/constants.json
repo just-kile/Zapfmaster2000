@@ -6,7 +6,10 @@
     "bestlistUrl": "rest/statistics/rankings/bestUserList",
     "frontPageUserStatsUrl": "rest/statistics/frontpageUserStats",
     "amountStatsUrl": "rest/statistics/amount",
+    "membersUrl":"rest/members",
     "achievementStatsUrl": "rest/statistics/achievements",
+    "achievementStatsDetailedUrl":"rest/achievementStats",
+    "achievementsUrl":"rest/achievements",
     "kegStatsUrl": "rest/statistics/keg",
     "newsPushUrl": "rest/push/news",
     "updateAmountPushUrl": "rest/push/draftkit/{0}",
@@ -15,8 +18,11 @@
     "webWorkers": 4,
     "newsFeedLength": 6,
     "newsStackLength": 2,
+    "userProfileChangeTimeout":15000,
     "newsFeedTimeout": 2000,
     "progressUrl": "rest/statistics/progress",
+    "PROGRESS_FROM_MINUTES": 360,
+    "PROGRESS_INTERVAL": 15,
     "challengeMaxDuels": 6,
     "bestlistMax": 6,
     "CHALLENGE_STARTED": "CHALLENGE_STARTED",
@@ -29,6 +35,7 @@
     "DRAW": "DRAW",
     "SERVER_TIME_FORMAT": "YYYYMMDD-HHmmss",
     "CLIENT_TIME_FORMAT": "HH:mm",
+    "FULL_CLIENT_TIME_FORMAT":"HH:mm",
     "COUNTDOWN_TIME_FORMAT": "mm:ss",
     "MUG_SIZE": 0.4,
     "FIGURE_CHART": {
@@ -40,6 +47,18 @@
     },
     "WIDGETS": {
         "ANIMATION_IN": "fadeIn",
-        "ANIMATION_OUT": "fadeOut"
+        "ANIMATION_OUT": "fadeOut",
+        "ANIMATION_SWITCH_IN": "fadeInDown",
+        "ANIMATION_SWITCH_OUT": "fadeOutDown"
+
+    },
+    "FILTER": {
+        "ACHIEVEMENT": "AchievementNews",
+        "DRAWING": "DrawingNews",
+        "CHALLENGE_STARTED": "Challenge1v1StartedNews",
+        "CHALLEMGE_DECLINED": "Challenge1v1DeclinedNews",
+        "NEWKEG": "NewKegNews",
+        "NEWUSER": "NewUserNews"
+
     }
 }

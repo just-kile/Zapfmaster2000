@@ -1,5 +1,5 @@
 {
-    "switchTime": 150000,
+    "switchTime": 180000,
     "switchingModule": {
         "name": "zapfmastersplash",
         "className": "col-md-12",
@@ -19,7 +19,7 @@
         {
             "name": "bestlist",
             "className": "col-md-8",
-            "interval": 60000
+            "interval": 120000
         },
         {
             "name": "challenges",
@@ -29,7 +29,20 @@
     ],
     [
         {
+            "name": "userprofile",
+            "className": "col-md-8",
+            "interval": 60000
+        },
+        {
             "name": "newsfeed",
+            "className": "col-md-4",
+            "interval": 60000
+        }
+
+    ],
+    [
+        {
+            "name": "achievementstats",
             "className": "col-md-8",
             "interval": 60000
         },
@@ -38,6 +51,7 @@
             "className": "col-md-4",
             "interval": 60000
         }
+
     ]
 ], "centerHalf": [
     [
@@ -54,7 +68,7 @@
     ],
     [
         {
-            "name": "achievementfeed",
+            "name": "distribution",
             "className": "col-md-6",
             "interval": 60000
         },

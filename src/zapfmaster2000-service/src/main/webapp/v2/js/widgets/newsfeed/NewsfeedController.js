@@ -7,7 +7,7 @@ define(['Console'], function (Console) {
             Console.group("Newsfeed controller entered.");
             $scope.baseUrl = c.baseUrl;
             $scope.items = [];
-             $scope.maxlength= c.newsFeedLength;
+            $scope.maxlength= c.newsFeedLength;
             function addNewsToScope(data){
                 $scope.items.unshift(data);
             }

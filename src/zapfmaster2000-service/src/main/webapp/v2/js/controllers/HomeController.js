@@ -1,7 +1,7 @@
 define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
     "use strict";
     Console.group("Entering HomeController module.");
-    var rows = rowsResponse;
+    var rows = localStorage.getItem("zm-rows") || rowsResponse;
     if(typeof rows=="string"){
         rows = $.parseJSON(rowsResponse);
     }
@@ -10,12 +10,13 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         $scope.changeLanguage = function(langKey){
             $translate.use(langKey);
+            localStorage.setItem("zm-lang",langKey);
         };
         var widgetTimeouts = {};
         var firstWidget = $routeParams.widgetId || 0,
             widgetChangeEnabled = typeof $routeParams.widgetId == "undefined";
 
-        var rowsDivider = 2;//rows.centerHalf.length;
+        var rowsDivider = rows.centerThird.length;
         var activeSubWidget = firstWidget >= rowsDivider ? "centerHalf" : "centerThird";
         firstWidget = firstWidget % rowsDivider;
         function getActiveSubWidget() {

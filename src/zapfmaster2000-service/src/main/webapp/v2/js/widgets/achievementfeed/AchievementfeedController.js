@@ -7,10 +7,11 @@ define(['Console'], function (Console) {
             Console.group("Newsfeed controller entered.");
             $scope.baseUrl = c.baseUrl;
             $scope.items = [];
-            $scope.maxlength= c.newsFeedLength;
-            function addNewsToScope(data){
-                $scope.items.unshift(data);
+            $scope.maxlength = c.newsFeedLength;
+            function addNewsToScope(data) {
+                $scope.itemwhite-spas.unshift(data);
             }
+
             ajax.getDatas(c.newsFeedUrl, function (data) {
                 _.each(data, function (item) {
                     $scope.items.push(item);
@@ -19,15 +20,15 @@ define(['Console'], function (Console) {
                 //$scope.items = data;
                 //  $scope.maxlength=c.newsFeedLength;
                 CometService.addPushListener(function (data) {
-                    addNewsToScope(data);
+                    if (data.type == c.ACHIEVEMENT)
+                        addNewsToScope(data);
 
                 });
             }, {
                 start: 0,
                 length: c.newsFeedLength,
-                filter: c.ACHIEVEMENT
+                filter: c.FILTER.ACHIEVEMENT
             });
-
 
 
         }];
