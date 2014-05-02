@@ -30,19 +30,28 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
             }
 
             $scope.colorFunction = function () {
+                var colors = ["#F5E400","#FF1F7C"];
                 return function (d, i) {
-                    return '#F5E400 '
+
+                    return colors[i%colors.length];
                 };
             }
             var initScope = function () {
                 ajax.getDatas(c.distributionUrl, function (data) {
                    // console.log(data);
-                   // var distData = [[-1,0],[0,0.0001],[1,0.001],[4,0.42],[7,0.44],[10,0.1],[12,0],[13,0]];
-                    var distData = transformData(data.normalCurveValues)
+                    //var distData = [[-1,0],[0,0.0001],[1,0.001],[4,0.42],[7,0.44],[10,0.1],[12,0],[13,0]];
+                    var normalCurve = transformData(data.normalCurveValues);
+                    var activeCurve = transformData(data.activeCurveValues);
+
                     $scope.chartData = [
-                        {
-                            key: "Progress",
-                            values: distData
+                       {
+                            key: "activeCurve",
+                            area:true,
+                            values: activeCurve
+                        }, {
+                            key: "normalCurve",
+                            area:false,
+                            values: normalCurve
                         }
                     ]
                     $scope.expectation = data.expectation;
