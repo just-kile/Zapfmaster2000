@@ -82,7 +82,7 @@ public class TestUserRankingByAmountBuilder extends AbstractMockingTest {
 
 	@Test
 	public void testAmountRanking() {
-		UserAmountResponse[] userAmountResponses = RankingsBuilder
+		UserAmountResponse[] userAmountResponses = new RankingsBuilder()
 				.retrieveUserAmountResponse(null, null, -1, account);
 		assertEquals(3, userAmountResponses.length);
 
@@ -96,7 +96,7 @@ public class TestUserRankingByAmountBuilder extends AbstractMockingTest {
 		cal.setTime(midDate);
 		cal.add(Calendar.MINUTE, -1);
 
-		UserAmountResponse[] userAmountResponses = RankingsBuilder
+		UserAmountResponse[] userAmountResponses = new RankingsBuilder()
 				.retrieveUserAmountResponse(cal.getTime(), null, -1, account);
 
 		assertEquals(3, userAmountResponses.length);
@@ -113,7 +113,7 @@ public class TestUserRankingByAmountBuilder extends AbstractMockingTest {
 		calTo.setTime(midDate2);
 		calTo.add(Calendar.MINUTE, 1);
 
-		UserAmountResponse[] userAmountResponses = RankingsBuilder
+		UserAmountResponse[] userAmountResponses = new RankingsBuilder()
 				.retrieveUserAmountResponse(calFrom.getTime(), calTo.getTime(),
 						-1, account);
 
@@ -122,10 +122,10 @@ public class TestUserRankingByAmountBuilder extends AbstractMockingTest {
 		// user3 should not be first because his drawings at in the wrong time
 		assertConforms(user1, userAmountResponses[0]);
 	}
-	
+
 	@Test
 	public void testMax() {
-		UserAmountResponse[] userAmountResponses = RankingsBuilder
+		UserAmountResponse[] userAmountResponses = new RankingsBuilder()
 				.retrieveUserAmountResponse(null, null, 1, account);
 		assertEquals(1, userAmountResponses.length);
 

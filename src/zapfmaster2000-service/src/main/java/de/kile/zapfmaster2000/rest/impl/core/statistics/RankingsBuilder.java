@@ -32,7 +32,7 @@ public class RankingsBuilder {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static UserAmountResponse[] retrieveUserAmountResponse(Date dFrom,
+	public UserAmountResponse[] retrieveUserAmountResponse(Date dFrom,
 			Date dTo, int maxResults, Account account) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
@@ -114,7 +114,7 @@ public class RankingsBuilder {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static DrawCountUserListResponse[] retrieveDrawCountUserListResponse(
+	public DrawCountUserListResponse[] retrieveDrawCountUserListResponse(
 			Date dFrom, Date dTo, int maxResults, Account account) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();
@@ -195,7 +195,7 @@ public class RankingsBuilder {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static AchievementUserListResponse[] retrieveAchievementUserListResponse(
+	public AchievementUserListResponse[] retrieveAchievementUserListResponse(
 			Date dFrom, Date dTo, int maxResults, Account account) {
 		Session session = Zapfmaster2000Core.INSTANCE.getTransactionService()
 				.getSessionFactory().getCurrentSession();

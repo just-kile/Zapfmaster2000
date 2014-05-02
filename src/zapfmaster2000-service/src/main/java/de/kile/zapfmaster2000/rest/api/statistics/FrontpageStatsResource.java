@@ -27,6 +27,8 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 public class FrontpageStatsResource {
 
 	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
+	
+	private final RankingsBuilder rankingsBuilder = new RankingsBuilder();
 
 	/**
 	 * Returns {@link FrontpageStatsResponse}, a compilation of some lists.
@@ -65,18 +67,18 @@ public class FrontpageStatsResource {
 
 			KegResponse[] kegResponses = KegResponseBuilder
 					.retrieveKegResponse(account);
-			DrawCountUserListResponse[] drawCountUserListResponses = RankingsBuilder
+			DrawCountUserListResponse[] drawCountUserListResponses = rankingsBuilder
 					.retrieveDrawCountUserListResponse(null, null, max, account);
-			UserAmountResponse[] bestUserList = RankingsBuilder
+			UserAmountResponse[] bestUserList = rankingsBuilder
 					.retrieveUserAmountResponse(null, null, max, account);
 
 			Calendar lastHour = Calendar.getInstance();
 			lastHour.add(Calendar.HOUR, -1);
 
-			UserAmountResponse[] bestUserListHour = RankingsBuilder
+			UserAmountResponse[] bestUserListHour = rankingsBuilder
 					.retrieveUserAmountResponse(lastHour.getTime(), null, max,
 							account);
-			AchievementUserListResponse[] achievementUserList = RankingsBuilder
+			AchievementUserListResponse[] achievementUserList = rankingsBuilder
 					.retrieveAchievementUserListResponse(null, null, max,
 							account);
 			AlcoholLevelResponse promille = AlcoholResponseBuilder

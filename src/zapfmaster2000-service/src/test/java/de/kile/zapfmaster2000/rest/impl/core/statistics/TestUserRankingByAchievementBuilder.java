@@ -77,13 +77,13 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 	@Test
 	public void testAchievementList() {
 
-		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilder()
 				.retrieveAchievementUserListResponse(null, null, -1, account);
 
 		assertEquals(3, achievementUserListResponses.length);
 
 		assertConforms(user3, achievementUserListResponses[0]);
-		
+
 		// user 1 and 2 both have one achievement: Expect order by name!
 		assertConforms(user1, achievementUserListResponses[1]);
 		assertConforms(user2, achievementUserListResponses[2]);
@@ -95,7 +95,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		calFrom.setTime(midDate);
 		calFrom.add(Calendar.MINUTE, -1);
 
-		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilder()
 				.retrieveAchievementUserListResponse(calFrom.getTime(), null,
 						-1, account);
 
@@ -117,7 +117,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		calTo.setTime(midDate2);
 		calTo.add(Calendar.MINUTE, 1);
 
-		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilder()
 				.retrieveAchievementUserListResponse(calFrom.getTime(),
 						calTo.getTime(), -1, account);
 
@@ -128,18 +128,17 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		assertEquals(user1.getGained().size(),
 				achievementUserListResponses[0].getCount());
 	}
-	
+
 	@Test
 	public void testMax() {
 
-		AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilder()
 				.retrieveAchievementUserListResponse(null, null, 1, account);
 
 		assertEquals(1, achievementUserListResponses.length);
 
 		assertConforms(user3, achievementUserListResponses[0]);
 	}
-
 
 	public void assertConforms(User user, AchievementUserListResponse response) {
 		assertEquals(user.getName(), response.getName());

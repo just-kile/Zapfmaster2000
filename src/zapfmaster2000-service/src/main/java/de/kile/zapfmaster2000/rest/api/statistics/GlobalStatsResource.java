@@ -33,8 +33,10 @@ import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
  */
 @Path("statistics")
 public class GlobalStatsResource {
-
+	
 	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
+
+	private RankingsBuilder rankingsBuilder = new RankingsBuilder();
 
 	/**
 	 * Returns {@link GlobalStatsResponse} as a compilation of different
@@ -117,18 +119,18 @@ public class GlobalStatsResource {
 					.retrieveAchievementResponse(-1, account);
 			DrawCountResponse drawCountResponse = DrawCountResponseBuilder
 					.retrieveDrawCountResponse(-1, account);
-			DrawCountUserListResponse[] drawCountUserListResponses = RankingsBuilder
+			DrawCountUserListResponse[] drawCountUserListResponses = rankingsBuilder
 					.retrieveDrawCountUserListResponse(null, null, -1, account);
-			UserAmountResponse[] bestUserList = RankingsBuilder
+			UserAmountResponse[] bestUserList = rankingsBuilder
 					.retrieveUserAmountResponse(null, null, -1, account);
 
 			Calendar lastHour = Calendar.getInstance();
 			lastHour.add(Calendar.HOUR, -1);
 
-			UserAmountResponse[] bestUserListHour = RankingsBuilder
+			UserAmountResponse[] bestUserListHour = rankingsBuilder
 					.retrieveUserAmountResponse(lastHour.getTime(), null, -1,
 							account);
-			AchievementUserListResponse[] achievementUserList = RankingsBuilder
+			AchievementUserListResponse[] achievementUserList = rankingsBuilder
 					.retrieveAchievementUserListResponse(null, null, -1,
 							account);
 			DrinkProgressResponse progress = DrinkProgressResponseBuilder

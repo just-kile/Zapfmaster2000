@@ -30,6 +30,8 @@ public class RankingsResource {
 
 	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
 
+	private final RankingsBuilder rankingsBuilder = new RankingsBuilder();
+
 	/**
 	 * Returns {@link UserAmountResponse} list ordered by the amount drawn by
 	 * each {@link User} in the given time span Users that have no drawings in
@@ -98,7 +100,7 @@ public class RankingsResource {
 				}
 			}
 
-			UserAmountResponse[] userAmountResponses = RankingsBuilder
+			UserAmountResponse[] userAmountResponses = rankingsBuilder
 					.retrieveUserAmountResponse(dFrom, dTo, maxResults, account);
 
 			return Response.ok(userAmountResponses).build();
@@ -176,7 +178,7 @@ public class RankingsResource {
 				}
 			}
 
-			DrawCountUserListResponse[] drawCountUserListResponses = RankingsBuilder
+			DrawCountUserListResponse[] drawCountUserListResponses = rankingsBuilder
 					.retrieveDrawCountUserListResponse(dFrom, dTo, maxResults,
 							account);
 
@@ -253,7 +255,7 @@ public class RankingsResource {
 				}
 			}
 
-			AchievementUserListResponse[] achievementUserListResponses = RankingsBuilder
+			AchievementUserListResponse[] achievementUserListResponses = rankingsBuilder
 					.retrieveAchievementUserListResponse(dFrom, dTo,
 							maxResults, account);
 
