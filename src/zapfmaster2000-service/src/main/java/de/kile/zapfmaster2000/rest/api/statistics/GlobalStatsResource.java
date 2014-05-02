@@ -23,6 +23,7 @@ import de.kile.zapfmaster2000.rest.impl.core.statistics.AmountResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.DrawCountResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.DrinkProgressResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.KegResponseBuilder;
+import de.kile.zapfmaster2000.rest.impl.core.statistics.RankingsBuilderImpl;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.RankingsBuilder;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
@@ -36,7 +37,7 @@ public class GlobalStatsResource {
 	
 	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
 
-	private RankingsBuilder rankingsBuilder = new RankingsBuilder();
+	private RankingsBuilder rankingsBuilder = new RankingsBuilderImpl();
 
 	/**
 	 * Returns {@link GlobalStatsResponse} as a compilation of different

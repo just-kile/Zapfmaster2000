@@ -9,6 +9,17 @@ public class UserAmountResponse {
 	private String userImage;
 	
 	private double amount;
+	
+	public UserAmountResponse() {
+	}
+
+	public UserAmountResponse(String userName, long userId, String userImage,
+			double amount) {
+		this.userName = userName;
+		this.userId = userId;
+		this.userImage = userImage;
+		this.amount = amount;
+	}
 
 	public String getName() {
 		return userName;

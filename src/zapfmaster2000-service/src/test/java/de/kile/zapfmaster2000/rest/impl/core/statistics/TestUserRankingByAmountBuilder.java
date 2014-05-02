@@ -82,7 +82,7 @@ public class TestUserRankingByAmountBuilder extends AbstractMockingTest {
 
 	@Test
 	public void testAmountRanking() {
-		UserAmountResponse[] userAmountResponses = new RankingsBuilder()
+		UserAmountResponse[] userAmountResponses = new RankingsBuilderImpl()
 				.retrieveUserAmountResponse(null, null, -1, account);
 		assertEquals(3, userAmountResponses.length);
 
@@ -96,7 +96,7 @@ public class TestUserRankingByAmountBuilder extends AbstractMockingTest {
 		cal.setTime(midDate);
 		cal.add(Calendar.MINUTE, -1);
 
-		UserAmountResponse[] userAmountResponses = new RankingsBuilder()
+		UserAmountResponse[] userAmountResponses = new RankingsBuilderImpl()
 				.retrieveUserAmountResponse(cal.getTime(), null, -1, account);
 
 		assertEquals(3, userAmountResponses.length);
@@ -113,7 +113,7 @@ public class TestUserRankingByAmountBuilder extends AbstractMockingTest {
 		calTo.setTime(midDate2);
 		calTo.add(Calendar.MINUTE, 1);
 
-		UserAmountResponse[] userAmountResponses = new RankingsBuilder()
+		UserAmountResponse[] userAmountResponses = new RankingsBuilderImpl()
 				.retrieveUserAmountResponse(calFrom.getTime(), calTo.getTime(),
 						-1, account);
 
@@ -125,7 +125,7 @@ public class TestUserRankingByAmountBuilder extends AbstractMockingTest {
 
 	@Test
 	public void testMax() {
-		UserAmountResponse[] userAmountResponses = new RankingsBuilder()
+		UserAmountResponse[] userAmountResponses = new RankingsBuilderImpl()
 				.retrieveUserAmountResponse(null, null, 1, account);
 		assertEquals(1, userAmountResponses.length);
 

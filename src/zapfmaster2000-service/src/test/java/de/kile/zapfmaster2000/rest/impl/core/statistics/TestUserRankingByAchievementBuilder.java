@@ -77,7 +77,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 	@Test
 	public void testAchievementList() {
 
-		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilder()
+		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilderImpl()
 				.retrieveAchievementUserListResponse(null, null, -1, account);
 
 		assertEquals(3, achievementUserListResponses.length);
@@ -95,7 +95,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		calFrom.setTime(midDate);
 		calFrom.add(Calendar.MINUTE, -1);
 
-		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilder()
+		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilderImpl()
 				.retrieveAchievementUserListResponse(calFrom.getTime(), null,
 						-1, account);
 
@@ -117,7 +117,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 		calTo.setTime(midDate2);
 		calTo.add(Calendar.MINUTE, 1);
 
-		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilder()
+		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilderImpl()
 				.retrieveAchievementUserListResponse(calFrom.getTime(),
 						calTo.getTime(), -1, account);
 
@@ -132,7 +132,7 @@ public class TestUserRankingByAchievementBuilder extends AbstractMockingTest {
 	@Test
 	public void testMax() {
 
-		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilder()
+		AchievementUserListResponse[] achievementUserListResponses = new RankingsBuilderImpl()
 				.retrieveAchievementUserListResponse(null, null, 1, account);
 
 		assertEquals(1, achievementUserListResponses.length);

@@ -83,7 +83,7 @@ public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 
 	@Test
 	public void testDrawCountRanking() {
-		DrawCountUserListResponse[] drawCountUserListResponses = new RankingsBuilder()
+		DrawCountUserListResponse[] drawCountUserListResponses = new RankingsBuilderImpl()
 				.retrieveDrawCountUserListResponse(null, null, -1, account);
 		assertEquals(3, drawCountUserListResponses.length);
 
@@ -99,7 +99,7 @@ public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 		calFrom.setTime(midDate);
 		calFrom.add(Calendar.MINUTE, -1);
 
-		DrawCountUserListResponse[] drawCountUserListResponses = new RankingsBuilder()
+		DrawCountUserListResponse[] drawCountUserListResponses = new RankingsBuilderImpl()
 				.retrieveDrawCountUserListResponse(calFrom.getTime(), null, -1,
 						account);
 
@@ -119,7 +119,7 @@ public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 		calTo.setTime(midDate2);
 		calTo.add(Calendar.MINUTE, 1);
 
-		DrawCountUserListResponse[] drawCountUserListResponses = new RankingsBuilder()
+		DrawCountUserListResponse[] drawCountUserListResponses = new RankingsBuilderImpl()
 				.retrieveDrawCountUserListResponse(calFrom.getTime(),
 						calTo.getTime(), -1, account);
 
@@ -140,7 +140,7 @@ public class TestUserRankingByDrawCountBuilder extends AbstractMockingTest {
 
 	@Test
 	public void testMax() {
-		DrawCountUserListResponse[] drawCountUserListResponses = new RankingsBuilder()
+		DrawCountUserListResponse[] drawCountUserListResponses = new RankingsBuilderImpl()
 				.retrieveDrawCountUserListResponse(null, null, 1, account);
 		assertEquals(1, drawCountUserListResponses.length);
 

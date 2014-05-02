@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.AlcoholResponseBuilder;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.KegResponseBuilder;
+import de.kile.zapfmaster2000.rest.impl.core.statistics.RankingsBuilderImpl;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.RankingsBuilder;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
@@ -28,7 +29,7 @@ public class FrontpageStatsResource {
 
 	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
 	
-	private final RankingsBuilder rankingsBuilder = new RankingsBuilder();
+	private final RankingsBuilder rankingsBuilder = new RankingsBuilderImpl();
 
 	/**
 	 * Returns {@link FrontpageStatsResponse}, a compilation of some lists.

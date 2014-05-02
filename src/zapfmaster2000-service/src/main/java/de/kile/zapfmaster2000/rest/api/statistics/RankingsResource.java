@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 
 import de.kile.zapfmaster2000.rest.constants.PlatformConstants;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
+import de.kile.zapfmaster2000.rest.impl.core.statistics.RankingsBuilderImpl;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.RankingsBuilder;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
@@ -30,7 +31,7 @@ public class RankingsResource {
 
 	private static final Logger LOG = Logger.getLogger(RankingsResource.class);
 
-	private final RankingsBuilder rankingsBuilder = new RankingsBuilder();
+	private final RankingsBuilder rankingsBuilder = new RankingsBuilderImpl();
 
 	/**
 	 * Returns {@link UserAmountResponse} list ordered by the amount drawn by

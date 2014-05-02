@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response.Status;
 
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.impl.core.statistics.DistributionResponseBuilder;
-import de.kile.zapfmaster2000.rest.impl.core.statistics.RankingsBuilder;
+import de.kile.zapfmaster2000.rest.impl.core.statistics.RankingsBuilderImpl;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
 public class DistributionResource {
@@ -25,7 +25,7 @@ public class DistributionResource {
 				.retrieveAccount(pToken);
 		if (account != null) {
 			DistributionResponseBuilder builder = new DistributionResponseBuilder(
-					new RankingsBuilder());
+					new RankingsBuilderImpl());
 			DistributionResponse distribution = builder
 					.retrieveAmountResponse(account);
 			return Response.ok(distribution).build();

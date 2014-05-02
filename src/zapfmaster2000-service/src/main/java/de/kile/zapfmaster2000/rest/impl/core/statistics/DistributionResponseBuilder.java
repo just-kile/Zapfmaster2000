@@ -40,10 +40,14 @@ public class DistributionResponseBuilder {
 	}
 
 	private double calcNormalValue(DistributionResponse response, double x) {
-		double factor = 1 / (response.getDegression()* Math.sqrt(2 * Math.PI));
-		double exponent = - 1/2 * square((x  - response.getExpectation()) / response.getDegression());
+		double degression = response.getDegression();
+		double expectation = response.getExpectation();
+
+		double factor = 1.0 / (degression * Math.sqrt(2 * Math.PI));
+		double exponent = -0.5 * square((x - expectation) / degression);
 		double powerE = Math.pow(Math.E, exponent);
 		double result = factor * powerE;
+
 		return result;
 	}
 
