@@ -9,7 +9,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                 var result = [];
                  result.push([0,0]);
                 _.each(curveValues, function (data, index) {
-                    result.push([data.amount, data.userCount]);
+                    result.push([data.amount, data.probability]);
                 });
                 var lastAmount = result[result.length -1];
                 result.push([lastAmount[0]+1,0])
@@ -40,8 +40,8 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                 ajax.getDatas(c.distributionUrl, function (data) {
                    // console.log(data);
                     //var distData = [[-1,0],[0,0.0001],[1,0.001],[4,0.42],[7,0.44],[10,0.1],[12,0],[13,0]];
-                    var normalCurve = transformData(data.normalCurveValues);
-                    var activeCurve = transformData(data.activeCurveValues);
+                    var normalCurve = transformData(data.normalCurve);
+                    var activeCurve = transformData(data.actualCurve);
 
                     $scope.chartData = [
                        {
