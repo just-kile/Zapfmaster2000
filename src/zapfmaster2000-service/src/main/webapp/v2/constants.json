@@ -4,6 +4,7 @@
     "ajaxTimeout": 120000,
     "challengeUrl": "rest/challenge",
     "bestlistUrl": "rest/statistics/rankings/bestUserList",
+    "distributionUrl":"rest/statistics/distribution",
     "frontPageUserStatsUrl": "rest/statistics/frontpageUserStats",
     "amountStatsUrl": "rest/statistics/amount",
     "membersUrl":"rest/members",

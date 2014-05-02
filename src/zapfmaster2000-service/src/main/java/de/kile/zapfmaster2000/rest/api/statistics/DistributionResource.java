@@ -14,9 +14,10 @@ import de.kile.zapfmaster2000.rest.impl.core.statistics.DistributionResponseBuil
 import de.kile.zapfmaster2000.rest.impl.core.statistics.RankingsBuilder;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 
+@Path("statistics")
 public class DistributionResource {
 
-	@Path("statistics/distribution")
+	@Path("distribution")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveDistribution(@QueryParam("token") String pToken) {
