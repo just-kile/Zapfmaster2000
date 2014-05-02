@@ -13,11 +13,19 @@ import org.junit.After;
 import de.kile.zapfmaster2000.rest.core.Zapfmaster2000Core;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Account;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Achievement;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.AchievementNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Admin;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Box;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1DeclinedNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Drawing;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.DrawingNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.GainedAchievement;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Keg;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewKegNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.NewUserNews;
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Token;
 import de.kile.zapfmaster2000.rest.model.zapfmaster2000.User;
@@ -197,6 +205,83 @@ public abstract class AbstractDatabaseTest {
 		dbToken.setGoogleCloudMessagingToken(gcmToken);
 		saveEntity(dbToken);
 		return dbToken;
+	}
+
+	protected DrawingNews createDrawingNews(Account account, Date date,
+			Drawing drawing) {
+		DrawingNews drawingNews = Zapfmaster2000Factory.eINSTANCE
+				.createDrawingNews();
+		drawingNews.setAccount(account);
+		drawingNews.setDate(date);
+		drawingNews.setDrawing(drawing);
+		saveEntity(drawingNews, account);
+		return drawingNews;
+	}
+
+	protected AchievementNews createAchievementNews(Account account, Date date,
+			GainedAchievement gainedAchievement) {
+		AchievementNews achievementNews = Zapfmaster2000Factory.eINSTANCE
+				.createAchievementNews();
+		achievementNews.setAccount(account);
+		achievementNews.setDate(date);
+		achievementNews.setGainedAchievment(gainedAchievement);
+		saveEntity(achievementNews , account);
+		return achievementNews;
+	}
+
+	protected Challenge1v1StartedNews createChallenge1v1StartedNews(
+			Account account, Date date, Challenge1v1 challenge) {
+		Challenge1v1StartedNews challenge1v1StartedNews = Zapfmaster2000Factory.eINSTANCE
+				.createChallenge1v1StartedNews();
+		challenge1v1StartedNews.setAccount(account);
+		challenge1v1StartedNews.setDate(date);
+		challenge1v1StartedNews.setChallenge(challenge);
+		saveEntity(challenge1v1StartedNews, account);
+		return challenge1v1StartedNews;
+	}
+
+	protected Challenge1v1DeclinedNews createChallenge1v1DeclinedNews(
+			Account account, Date date, Challenge1v1 challenge) {
+		Challenge1v1DeclinedNews challenge1v1DeclinedNews = Zapfmaster2000Factory.eINSTANCE
+				.createChallenge1v1DeclinedNews();
+		challenge1v1DeclinedNews.setAccount(account);
+		challenge1v1DeclinedNews.setDate(date);
+		challenge1v1DeclinedNews.setChallenge(challenge);
+		saveEntity(challenge1v1DeclinedNews, account);
+		return challenge1v1DeclinedNews;
+	}
+
+	protected NewKegNews createNewKegNews(Account account, Date date, Keg keg) {
+		NewKegNews newKegNews = Zapfmaster2000Factory.eINSTANCE
+				.createNewKegNews();
+		newKegNews.setAccount(account);
+		newKegNews.setDate(date);
+		newKegNews.setKeg(keg);
+		saveEntity(newKegNews, account);
+		return newKegNews;
+	}
+
+	protected NewUserNews createNewUserNews(Account account, Date date,
+			User user) {
+		NewUserNews newUserNews = Zapfmaster2000Factory.eINSTANCE
+				.createNewUserNews();
+		newUserNews.setAccount(account);
+		newUserNews.setDate(date);
+		newUserNews.setUser(user);
+		saveEntity(newUserNews, account);
+		return newUserNews;
+	}
+
+	protected Challenge1v1 createChallenge1v1(User user1, User user2,
+			User winner, int duration) {
+		Challenge1v1 challenge1v1 = Zapfmaster2000Factory.eINSTANCE
+				.createChallenge1v1();
+		challenge1v1.setUser1(user1);
+		challenge1v1.setUser2(user2);
+		challenge1v1.setWinner(winner);
+		challenge1v1.setDuration(duration);
+		saveEntity(challenge1v1);
+		return challenge1v1;
 	}
 
 	protected void saveEntity(EObject pEntity, EObject... pEntitiesToUpdate) {

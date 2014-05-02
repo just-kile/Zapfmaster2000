@@ -95,7 +95,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 			case Zapfmaster2000Package.KEG: return createKeg();
 			case Zapfmaster2000Package.DRAWING_NEWS: return createDrawingNews();
 			case Zapfmaster2000Package.ACHIEVEMENT_NEWS: return createAchievementNews();
-			case Zapfmaster2000Package.OTHER_NEWS: return createOtherNews();
 			case Zapfmaster2000Package.CHALLENGE1V1_STARTED_NEWS: return createChallenge1v1StartedNews();
 			case Zapfmaster2000Package.CHALLENGE1V1_DECLINED_NEWS: return createChallenge1v1DeclinedNews();
 			case Zapfmaster2000Package.CHALLENGE1V1_DONE_NEWS: return createChallenge1v1DoneNews();
@@ -251,16 +250,6 @@ public class Zapfmaster2000FactoryImpl extends EFactoryImpl implements Zapfmaste
 	public AchievementNews createAchievementNews() {
 		AchievementNewsImpl achievementNews = new AchievementNewsImpl();
 		return achievementNews;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OtherNews createOtherNews() {
-		OtherNewsImpl otherNews = new OtherNewsImpl();
-		return otherNews;
 	}
 
 	/**

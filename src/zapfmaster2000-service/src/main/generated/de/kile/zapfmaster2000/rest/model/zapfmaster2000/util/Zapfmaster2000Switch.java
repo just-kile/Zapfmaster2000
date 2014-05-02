@@ -159,13 +159,6 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case Zapfmaster2000Package.OTHER_NEWS: {
-				OtherNews otherNews = (OtherNews)theEObject;
-				T result = caseOtherNews(otherNews);
-				if (result == null) result = caseNews(otherNews);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case Zapfmaster2000Package.CHALLENGE1V1_STARTED_NEWS: {
 				Challenge1v1StartedNews challenge1v1StartedNews = (Challenge1v1StartedNews)theEObject;
 				T result = caseChallenge1v1StartedNews(challenge1v1StartedNews);
@@ -409,21 +402,6 @@ public class Zapfmaster2000Switch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAchievementNews(AchievementNews object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Other News</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Other News</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOtherNews(OtherNews object) {
 		return null;
 	}
 

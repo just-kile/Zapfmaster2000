@@ -807,70 +807,6 @@ public interface Zapfmaster2000Package extends EPackage {
 	int ACHIEVEMENT_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.OtherNewsImpl <em>Other News</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.OtherNewsImpl
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getOtherNews()
-	 * @generated
-	 */
-	int OTHER_NEWS = 11;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OTHER_NEWS__ID = NEWS__ID;
-
-	/**
-	 * The feature id for the '<em><b>Account</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OTHER_NEWS__ACCOUNT = NEWS__ACCOUNT;
-
-	/**
-	 * The feature id for the '<em><b>Date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OTHER_NEWS__DATE = NEWS__DATE;
-
-	/**
-	 * The feature id for the '<em><b>Contents</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OTHER_NEWS__CONTENTS = NEWS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Image Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OTHER_NEWS__IMAGE_PATH = NEWS_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Other News</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OTHER_NEWS_FEATURE_COUNT = NEWS_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl <em>Challenge1v1 Started News</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -878,7 +814,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1StartedNews()
 	 * @generated
 	 */
-	int CHALLENGE1V1_STARTED_NEWS = 12;
+	int CHALLENGE1V1_STARTED_NEWS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -933,7 +869,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DeclinedNews()
 	 * @generated
 	 */
-	int CHALLENGE1V1_DECLINED_NEWS = 13;
+	int CHALLENGE1V1_DECLINED_NEWS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -988,7 +924,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallenge1v1DoneNews()
 	 * @generated
 	 */
-	int CHALLENGE1V1_DONE_NEWS = 14;
+	int CHALLENGE1V1_DONE_NEWS = 13;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1043,7 +979,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getNewKegNews()
 	 * @generated
 	 */
-	int NEW_KEG_NEWS = 15;
+	int NEW_KEG_NEWS = 14;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1098,7 +1034,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getNewUserNews()
 	 * @generated
 	 */
-	int NEW_USER_NEWS = 16;
+	int NEW_USER_NEWS = 15;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1153,7 +1089,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getMappingQrRfid()
 	 * @generated
 	 */
-	int MAPPING_QR_RFID = 17;
+	int MAPPING_QR_RFID = 16;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1199,7 +1135,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUser()
 	 * @generated
 	 */
-	int USER = 18;
+	int USER = 17;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1317,7 +1253,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getToken()
 	 * @generated
 	 */
-	int TOKEN = 19;
+	int TOKEN = 18;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1390,7 +1326,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getImage()
 	 * @generated
 	 */
-	int IMAGE = 20;
+	int IMAGE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1454,7 +1390,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getTicks()
 	 * @generated
 	 */
-	int TICKS = 21;
+	int TICKS = 20;
 
 	/**
 	 * The feature id for the '<em><b>Date</b></em>' attribute.
@@ -1491,7 +1427,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAdmin()
 	 * @generated
 	 */
-	int ADMIN = 22;
+	int ADMIN = 21;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1555,7 +1491,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getGCMToken()
 	 * @generated
 	 */
-	int GCM_TOKEN = 23;
+	int GCM_TOKEN = 22;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1610,7 +1546,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 24;
+	int SEX = 23;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeType <em>Challenge Type</em>}' enum.
@@ -1620,7 +1556,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeType()
 	 * @generated
 	 */
-	int CHALLENGE_TYPE = 25;
+	int CHALLENGE_TYPE = 24;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.UserType <em>User Type</em>}' enum.
@@ -1630,7 +1566,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getUserType()
 	 * @generated
 	 */
-	int USER_TYPE = 26;
+	int USER_TYPE = 25;
 
 	/**
 	 * The meta object id for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.ChallengeState <em>Challenge State</em>}' enum.
@@ -1640,7 +1576,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getChallengeState()
 	 * @generated
 	 */
-	int CHALLENGE_STATE = 27;
+	int CHALLENGE_STATE = 26;
 
 
 	/**
@@ -1651,7 +1587,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getAdminType()
 	 * @generated
 	 */
-	int ADMIN_TYPE = 28;
+	int ADMIN_TYPE = 27;
 
 	/**
 	 * The meta object id for the '<em>Blob</em>' data type.
@@ -1661,7 +1597,7 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getBlob()
 	 * @generated
 	 */
-	int BLOB = 29;
+	int BLOB = 28;
 
 
 	/**
@@ -2323,38 +2259,6 @@ public interface Zapfmaster2000Package extends EPackage {
 	 * @generated
 	 */
 	EReference getAchievementNews_GainedAchievment();
-
-	/**
-	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews <em>Other News</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Other News</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews
-	 * @generated
-	 */
-	EClass getOtherNews();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getContents <em>Contents</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Contents</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getContents()
-	 * @see #getOtherNews()
-	 * @generated
-	 */
-	EAttribute getOtherNews_Contents();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getImagePath <em>Image Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Image Path</em>'.
-	 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.OtherNews#getImagePath()
-	 * @see #getOtherNews()
-	 * @generated
-	 */
-	EAttribute getOtherNews_ImagePath();
 
 	/**
 	 * Returns the meta object for class '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.Challenge1v1StartedNews <em>Challenge1v1 Started News</em>}'.
@@ -3519,32 +3423,6 @@ public interface Zapfmaster2000Package extends EPackage {
 		 * @generated
 		 */
 		EReference ACHIEVEMENT_NEWS__GAINED_ACHIEVMENT = eINSTANCE.getAchievementNews_GainedAchievment();
-
-		/**
-		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.OtherNewsImpl <em>Other News</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.OtherNewsImpl
-		 * @see de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Zapfmaster2000PackageImpl#getOtherNews()
-		 * @generated
-		 */
-		EClass OTHER_NEWS = eINSTANCE.getOtherNews();
-
-		/**
-		 * The meta object literal for the '<em><b>Contents</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OTHER_NEWS__CONTENTS = eINSTANCE.getOtherNews_Contents();
-
-		/**
-		 * The meta object literal for the '<em><b>Image Path</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OTHER_NEWS__IMAGE_PATH = eINSTANCE.getOtherNews_ImagePath();
 
 		/**
 		 * The meta object literal for the '{@link de.kile.zapfmaster2000.rest.model.zapfmaster2000.impl.Challenge1v1StartedNewsImpl <em>Challenge1v1 Started News</em>}' class.

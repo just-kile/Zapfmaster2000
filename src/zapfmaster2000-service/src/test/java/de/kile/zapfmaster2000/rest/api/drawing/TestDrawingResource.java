@@ -1,4 +1,4 @@
-package de.kile.zapfmaster2000.rest.api.news;
+package de.kile.zapfmaster2000.rest.api.drawing;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;

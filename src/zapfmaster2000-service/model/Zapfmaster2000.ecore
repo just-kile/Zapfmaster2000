@@ -96,10 +96,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="AchievementNews" eSuperTypes="#//News">
     <eStructuralFeatures xsi:type="ecore:EReference" name="gainedAchievment" eType="#//GainedAchievement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OtherNews" eSuperTypes="#//News">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contents" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Challenge1v1StartedNews" eSuperTypes="#//News">
     <eStructuralFeatures xsi:type="ecore:EReference" name="challenge" eType="#//Challenge1v1"/>
   </eClassifiers>

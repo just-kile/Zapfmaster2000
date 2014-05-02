@@ -103,15 +103,6 @@ public interface Zapfmaster2000Factory extends EFactory {
 	AchievementNews createAchievementNews();
 
 	/**
-	 * Returns a new object of class '<em>Other News</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Other News</em>'.
-	 * @generated
-	 */
-	OtherNews createOtherNews();
-
-	/**
 	 * Returns a new object of class '<em>Challenge1v1 Started News</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

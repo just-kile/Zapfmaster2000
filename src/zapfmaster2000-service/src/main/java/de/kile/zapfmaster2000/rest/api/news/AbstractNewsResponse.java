@@ -62,6 +62,40 @@ public class AbstractNewsResponse {
 
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AbstractNewsResponse other = (AbstractNewsResponse) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (image == null) {
+			if (other.image != null)
+				return false;
+		} else if (!image.equals(other.image))
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
+	}
+
 	public enum Type {
 		DRAWING, ACHIEVEMENT, CHALLENGE_STARTED, CHALLENGE_DECLINED, CHALLENGE_DONE, NEW_KEG, NEW_USER
 	}
