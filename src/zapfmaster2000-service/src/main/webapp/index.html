@@ -569,7 +569,7 @@ $("#updateImageRfid").on("click",function(e){
      complete:function(resp){
          if(resp && resp.status===200){
              var json = JSON.parse(resp.responseText);
-             $("#versionInfo").html(json.pomVersion +"<br/>"+json.buildNumber + "<br/> "+ json.buildTime);
+             $("#versionInfo").html(json.pomVersion +" - "+json.buildNumber + " - "+ json.buildTime);
          }
          //window.location.href="install.html";
      }
@@ -658,7 +658,7 @@ $("#updateImageRfid").on("click",function(e){
 </div>
 </div>
 <div class="firm">
-        <div id="versionInfo" style="position: absolute;left:0;top: -10px">Version bloar</div>
+        <div id="versionInfo" style="position: absolute;left:0;top: 35px;width:320px">Version bloar</div>
 		<div class="firmText">Ein Produkt von </div>
 		<div class="firmImg"><img class="jklogo" src="images/view/justKile.png" /></div>
 	</div>
