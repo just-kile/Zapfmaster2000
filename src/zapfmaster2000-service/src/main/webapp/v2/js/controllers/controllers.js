@@ -26,10 +26,11 @@ define([
     'widgets/userprofile/UserProfileController',
     'widgets/achievementstats/AchievementStatsController',
     'widgets/distribution/DistributionController',
+    'widgets/aboutus/AboutUsController',
 
     //Constants
     'constants'
-], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,amountchart,newsfeed,achievementfeed,zmsplash,userprofile,achievementstats,distribution,constants) {
+], function (Console, _, routes, app, home, stats,bestlist,challenge,newsstack,draftkit,splash,linechart,amountchart,newsfeed,achievementfeed,zmsplash,userprofile,achievementstats,distribution,aboutUs,constants) {
     "use strict";
     Console.group("Entering controllers module.");
     Console.info("AppController", app);
@@ -49,6 +50,7 @@ define([
         UserProfileController:userprofile,
         AchievementStatsController:achievementstats,
         DistributionController:distribution,
+        AboutUsController:aboutUs,
         stats: stats
 
     };

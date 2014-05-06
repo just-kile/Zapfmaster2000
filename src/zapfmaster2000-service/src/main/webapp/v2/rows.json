@@ -1,5 +1,5 @@
 {
-    "switchTime": 180000,
+    "switchTime": 270000,
     "switchingModule": {
         "name": "zapfmastersplash",
         "className": "col-md-12",
@@ -24,7 +24,7 @@
         {
             "name": "challenges",
             "className": "col-md-4",
-            "interval": 60000
+            "interval": 45000
         }
     ],
     [
@@ -36,7 +36,7 @@
         {
             "name": "newsfeed",
             "className": "col-md-4",
-            "interval": 60000
+            "interval": 45000
         }
 
     ],
@@ -44,12 +44,12 @@
         {
             "name": "achievementstats",
             "className": "col-md-8",
-            "interval": 60000
+            "interval": 70000
         },
         {
             "name": "achievementfeed",
             "className": "col-md-4",
-            "interval": 60000
+            "interval": 45000
         }
 
     ]
@@ -58,24 +58,35 @@
         {
             "name": "linechart",
             "className": "col-md-6",
-            "interval": 60000
+            "interval": 90000
         },
         {
             "name": "amountchart",
             "className": "col-md-6",
-            "interval": 60000
+            "interval": 120000
         }
     ],
     [
         {
             "name": "distribution",
             "className": "col-md-6",
-            "interval": 60000
+            "interval": 120000
         },
         {
             "name": "newsfeed",
             "className": "col-md-6",
             "interval": 60000
+        }
+    ],[
+        {
+            "name": "newsfeed",
+            "className": "col-md-6",
+            "interval": 60000
+        },
+        {
+            "name": "aboutus",
+            "className": "col-md-6",
+            "interval": 90000
         }
     ]
 ]}
