@@ -28,14 +28,15 @@
     <header class="zmo-header"
             translate="USERPROFILE_TITLE"
             translate-value-username="{{userName}}"></header>
+    <!--<div class="zmo-container" switch="updateFn(ok)">-->
     <div class="zmo-container" switch="updateFn(ok)">
         <div class="row zm-feeditem">
             <div class="col-md-3"><img ng-src="{{baseUrl+userImage|big}}" class="img-rounded userimage"></div>
             <div class="col-md-9">
-                <blockquote class="reverse quote">
-                    <p>&quot;{{quotation}}&quot;</p>
-                    <footer>{{userName}}</footer>
-                </blockquote>
+                <div class="quote" textfill="quotation">
+                    <span>&#132;{{quotation}}&#148;</span>
+                    <cite>{{userName}}</cite>
+                </div>
             </div>
         </div>
         <div class="row zm-feeditem">

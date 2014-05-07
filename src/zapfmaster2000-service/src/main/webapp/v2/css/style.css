@@ -74,7 +74,7 @@ header > nav {
     z-index: 26000;
 }
 
-header > nav  > ul {
+header > nav > ul {
     background: #000000;
     color: #ffffff;
     opacity: 0.5;
@@ -623,7 +623,7 @@ li.bestlist-item.ng-leave-active {
     margin-right: auto;
 }
 
-.userstats >h2 {
+.userstats > h2 {
     font-family: RalewayBold;
     font-size: 2.8em;
     margin-top: 10px;
@@ -765,7 +765,7 @@ li.zm-draftkit {
     margin-left: 30px;
 }
 
-.zm-draftkit  img {
+.zm-draftkit img {
     float: left;
     height: 80px;
     margin-right: 10px;
@@ -836,7 +836,7 @@ li.zm-newsstack {
     /*margin-left: 30px;*/
 }
 
-.zm-newsstack  img {
+.zm-newsstack img {
     float: left;
     margin-right: 10px;
     height: 80px;
@@ -910,7 +910,7 @@ li.zm-newsfeed {
     border: 2px solid #FF71AC
 }
 
-.zm-newsfeed  img {
+.zm-newsfeed img {
     float: left;
     margin-right: 10px;
     height: 64px;
@@ -1224,48 +1224,65 @@ li.zm-newsfeed {
     text-shadow: 1px 1px 1px #000;
 
 }
-.zm-piechart svg g.nv-label:first-child text{
-    text-anchor:start!important;
+
+.zm-piechart svg g.nv-label:first-child text {
+    text-anchor: start !important;
 }
 
-.zm-piechart svg g.nv-label text{
-    text-anchor:end!important;
+.zm-piechart svg g.nv-label text {
+    text-anchor: end !important;
 }
 
-.zm-userprofile blockquote p,.zm-achievementstats blockquote p{
+.zm-userprofile blockquote p, .zm-achievementstats blockquote p {
     font-size: 2em;
 }
-.zm-userprofile img, .zm-userprofile .quote{
-    height:160px;
-}
+
 .zm-userprofile img{
-
+    height: 160px;
+}
+.zm-userprofile .quote{
+    height: 160px;
 }
 
+.zm-userprofile .quote cite {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    font-size: 1.7em;
+}
 
+.zm-userprofile img {
 
-.zm-feeditem{
+}
+.zm-userprofile .zm-feeditem{
+    padding:17px 7px;
+}
+
+.zm-feeditem {
     border-radius: 10px;
-    padding:7px;
+    padding: 7px;
+
     margin-right: 10px;
     margin-bottom: 10px;
 }
- .zm-feeditem:nth-child(even){
-     border: 2px solid #FFF143
- }
 
- .zm-feeditem:nth-child(odd){
+.zm-feeditem:nth-child(even) {
+    border: 2px solid #FFF143
+}
+
+.zm-feeditem:nth-child(odd) {
     border: 2px solid #FF71AC
 }
-.zm-feeditem{
+
+.zm-feeditem {
 
 }
-.zm-text-middle{
-    font-size:1.7em;
-    float:left;
+
+.zm-text-middle {
+    font-size: 1.7em;
+    float: left;
 }
 
-
-.zm-distribution .row{
+.zm-distribution .row {
     font-size: 2.3em;
 }

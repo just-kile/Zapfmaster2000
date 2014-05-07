@@ -16,6 +16,7 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
         var firstWidget = $routeParams.widgetId || 0,
             widgetChangeEnabled = typeof $routeParams.widgetId == "undefined";
 
+        var multiplier = parseFloat($routeParams.t) || 1;
         var rowsDivider = rows.centerThird.length;
         var activeSubWidget = firstWidget >= rowsDivider ? "centerHalf" : "centerThird";
         firstWidget = firstWidget % rowsDivider;
@@ -41,7 +42,7 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
             (function (newWidget, index, rows, actualRow) {
                 changeInterval[getActiveSubWidget() + index] = $timeout(function () {
                     updateWidget(newWidget, index, rows, actualRow);
-                }, newWidget.interval);
+                }, newWidget.interval*multiplier);
 
             })(newWidget, index, rows, actualRow);
 
@@ -55,7 +56,7 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
                 }else{
                     changeInterval[getActiveSubWidget() + index] = $timeout(function () {
                         updateWidget(widget, index, rows, 0);
-                    }, widget.interval);
+                    }, widget.interval*multiplier);
                 }
 
             });
@@ -85,7 +86,7 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
                     startWidgetSwitch(rows);
                 },rows.switchingModule.interval)
 
-            }, rows.switchTime);
+            }, rows.switchTime*multiplier);
 
 
         }

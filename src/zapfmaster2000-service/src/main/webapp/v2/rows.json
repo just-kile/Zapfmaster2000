@@ -1,5 +1,5 @@
 {
-    "switchTime": 270000,
+    "switchTime": 250000,
     "switchingModule": {
         "name": "zapfmastersplash",
         "className": "col-md-12",
@@ -47,6 +47,18 @@
             "interval": 70000
         },
         {
+            "name": "challenges",
+            "className": "col-md-4",
+            "interval": 45000
+        }
+
+    ],[
+        {
+            "name": "bestlist",
+            "className": "col-md-8",
+            "interval": 120000
+        },
+        {
             "name": "achievementfeed",
             "className": "col-md-4",
             "interval": 45000
@@ -58,35 +70,35 @@
         {
             "name": "linechart",
             "className": "col-md-6",
-            "interval": 90000
+            "interval": 83333
         },
         {
             "name": "amountchart",
             "className": "col-md-6",
-            "interval": 120000
+            "interval": 111111
         }
     ],
     [
         {
             "name": "distribution",
             "className": "col-md-6",
-            "interval": 120000
+            "interval": 111111
         },
         {
-            "name": "newsfeed",
+            "name": "achievementfeed",
             "className": "col-md-6",
-            "interval": 60000
+            "interval": 55555
         }
     ],[
         {
             "name": "newsfeed",
             "className": "col-md-6",
-            "interval": 60000
+            "interval": 70000
         },
         {
             "name": "aboutus",
             "className": "col-md-6",
-            "interval": 90000
+            "interval": 70000
         }
     ]
 ]}
