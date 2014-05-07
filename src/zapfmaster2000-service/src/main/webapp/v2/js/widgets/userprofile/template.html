@@ -28,7 +28,6 @@
     <header class="zmo-header"
             translate="USERPROFILE_TITLE"
             translate-value-username="{{userName}}"></header>
-    <!--<div class="zmo-container" switch="updateFn(ok)">-->
     <div class="zmo-container" switch="updateFn(ok)">
         <div class="row zm-feeditem">
             <div class="col-md-3"><img ng-src="{{baseUrl+userImage|big}}" class="img-rounded userimage"></div>
@@ -41,13 +40,19 @@
         </div>
         <div class="row zm-feeditem">
             <img ng-src="css/images/mug_pink_filling.svg" class="img-rounded col-md-4"/>
-            <div class="col-md-8">
-            {{userName}} ranks {{rank.amount}}
+
+            <div class="col-md-8 zm-userprofile-item">
+                <div>{{userName}} ranks {{rank.amount|rank}} with</div>
+                <div><span>{{amount.amountTotal|amount}} litres </span><span>(and {{alcoholLevel}}</span> &permil;)</small></div>
+                <div> His largest mug held {{amount.greatestDrawing|amount}}L.</div>
             </div>
+
         </div>
         <div class="row zm-feeditem">
-            <div class="col-md-8">
-
+            <div class="col-md-8 zm-userprofile-item">
+                <div>He has the {{rank.achievements|rank}} most achievements @</div>
+                <div> <span>{{achievement.count}} achievements</span></div>
+                <div> of which were most earned at {{achievement.mostAchievementHour}}h</div>
             </div>
             <img ng-src="css/images/goblet_yellow.svg" class="img-rounded col-md-4"/>
 

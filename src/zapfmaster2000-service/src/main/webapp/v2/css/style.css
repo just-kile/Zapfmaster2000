@@ -1257,6 +1257,13 @@ li.zm-newsfeed {
 .zm-userprofile .zm-feeditem{
     padding:17px 7px;
 }
+.zm-userprofile-item > div{
+    font-size:2.0em;
+}
+
+.zm-userprofile-item > div >span:first-child{
+    font-size:2.0em;
+}
 
 .zm-feeditem {
     border-radius: 10px;

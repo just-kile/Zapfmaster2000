@@ -11,6 +11,7 @@
     "membersUrl":"rest/members",
     "achievementStatsUrl": "rest/statistics/achievements",
     "achievementStatsDetailedUrl":"rest/achievementStats",
+    "alcoholLevelUrl":"rest/statistics/alcoholLevel",
     "achievementsUrl":"rest/achievements",
     "kegStatsUrl": "rest/statistics/keg",
     "newsPushUrl": "rest/push/news",

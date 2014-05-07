@@ -26,6 +26,9 @@ define(['Console', 'moment', 'Underscore','text!../../../fake_cite.json'], funct
                     $scope.quotation = cites[index];
                     callback && callback();
                 }, {user: userId});
+                ajax.getDatas(c.alcoholLevelUrl, function (data) {
+                    $scope.alcoholLevel=data.alcoholLevel;
+                }, {user: userId});
             }
             $scope.updateFn = function(ok){
                 update(generateRandomId(),ok);
