@@ -67,6 +67,11 @@
     "VARIANCE":"Variance",
     "DEGRESSION":"Standard degression",
     "SKEW":"Skew",
-    "KURTOSIS":"Kurtosis"
+    "KURTOSIS":"Kurtosis",
+
+    "IMPRINT_HEADLINE":"Zapfmaster 2000 is being developed by",
+    "IMPRINT_GITHUB":"Get the open sourced code",
+    "IMPRINT_TITLE":"About Us"
+
 
 }

@@ -98,7 +98,7 @@
         {
             "name": "aboutus",
             "className": "col-md-6",
-            "interval": 70000
+            "interval": 90000
         }
     ]
 ]}

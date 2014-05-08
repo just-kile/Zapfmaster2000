@@ -1307,7 +1307,7 @@ li.zm-newsfeed {
     font-size: 2.3em;
 }
 .zm-imprint .zmo-header{
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 .zm-imprint .row{
     font-size: 2em;
@@ -1329,4 +1329,9 @@ li.zm-newsfeed {
 .zm-imprint .social img{
     height:36px;
     margin-top:-5px;
+}
+.zm-imprint a{
+    text-decoration: none;
+    color:white;
+
 }

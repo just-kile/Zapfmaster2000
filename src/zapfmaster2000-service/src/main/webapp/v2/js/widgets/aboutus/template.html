@@ -1,8 +1,8 @@
 <div ng-controller="AboutUsController" class="zm-imprint">
-    <header class="zmo-header">Imprint</header>
+    <header class="zmo-header">{{'IMPRINT_TITLE'|translate}}</header>
     <div class="zm-feeditem zmo-container">
         <div class="row">
-            <div class="col-md-12">Zapfmaster 2000 is being developed by</div>
+            <div class="col-md-12">{{'IMPRINT_HEADLINE'|translate}}</div>
         </div>
         <div class="row" style="height: 32px">
             <div class="col-md-4 justKile"><img ng-src="css/images/justKile_forBlackBG.png"></div>
@@ -31,21 +31,31 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">zapfmaster2000.org</div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 social">
-                <img src="css/images/facebook.png">/Zapfmaster2000
-            </div>
-            <div class="col-md-6 social">
-                <img src="css/images/twitter.png">@Zapfmaster2000
+            <div class="col-md-12">
+                <a href="http://zapfmaster2000.org" target="_blank">
+                    zapfmaster2000.org
+                </a>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12">Get the open sourced code <br/>
-                github.com/just-kile/Zapfmaster2000
+            <div class="col-md-6 social">
+                <a href="http://facebook.com/Zapfmaster2000" target="_blank">
+                    <img src="css/images/facebook.png">/Zapfmaster2000
+                </a>
+            </div>
+            <div class="col-md-6 social">
+                <a href="http://twitter.com/Zapfmaster2000" target="_blank">
+                    <img src="css/images/twitter.png">@Zapfmaster2000
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="http://github.com/just-kile/Zapfmaster2000" target="_blank">
+                    {{'IMPRINT_GITHUB'|translate}}<br/>
+                github.com/just-kile/Zapfmaster2000</a>
             </div>
         </div>
     </div>
