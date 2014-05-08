@@ -1246,17 +1246,28 @@ li.zm-newsfeed {
     height: 160px;
 }
 
-.zm-userprofile .quote cite {
+.zm-userprofile .quote cite  {
     position: absolute;
     bottom: 0;
     right: 10px;
     font-size: 1.7em;
 }
-
+.zm-achievementstats .quote cite{
+    position: absolute;
+    bottom: -15px;
+    right: 10px;
+    font-size: 1.7em;
+}
+.zm-achievementstats .zm-feeditem.main img{
+    height: 120px;
+}
+.zm-achievementstats .zm-feeditem.main .quote{
+    height: 120px;
+}
 .zm-userprofile img {
 
 }
-.zm-userprofile .zm-feeditem{
+.zm-userprofile .zm-feeditem,.zm-achievementstats .zm-feeditem.main{
     padding:17px 7px;
 }
 .zm-userprofile-item > div{

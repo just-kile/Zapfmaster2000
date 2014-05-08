@@ -20,18 +20,18 @@
 } -->
 
 <div ng-controller="AchievementStatsController" class="zm-achievementstats">
-    <header class="zmo-header">{{'ACHIEVEMENTSTATS_TITLE'|translate}}: {{achievementName}}</header>
+    <header class="zmo-header"><small>{{'ACHIEVEMENTSTATS_TITLE'|translate}}:</small> {{achievementName}}</header>
     <div class="zmo-container" switch="updateFn(ok)">
-        <div class="row">
-            <div class="col-md-2"><img ng-src="{{baseUrl+image}}" class="img-rounded" style="height:80px"></div>
-            <div class="col-md-10">
-                <blockquote class="reverse" style="height:80px">
-                    <p>{{description}}</p>
-                    <footer>{{achievementName}}</footer>
-                </blockquote>
+        <div class="row zm-feeditem main">
+            <div class="col-md-3"><img ng-src="{{baseUrl+image}}" class="img-rounded userimage"></div>
+            <div class="col-md-9">
+                <div class="quote" textfill="description">
+                    <span>&#132;{{description}}&#148;</span>
+                    <cite>{{achievementName}}</cite>
+                </div>
             </div>
-
         </div>
+
 
         <h2>Erreicht von</h2>
 <div class="row" ng-if="users.length>0">
