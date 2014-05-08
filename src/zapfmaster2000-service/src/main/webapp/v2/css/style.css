@@ -833,7 +833,7 @@ li.zm-newsstack {
     height: 80px;
     display: inline-block;
     padding-top: 0px;
-    width: 310px;
+    width: 350px;
     /*white-space: nowrap;    */
     /*margin-left: 30px;*/
 }
@@ -1191,7 +1191,7 @@ li.zm-newsfeed {
 .animate-repeat.ng-move.ng-move-active,
 .animate-repeat.ng-enter.ng-enter-active {
     opacity: 1;
-    width: 310px;
+    width: 350px;
 }
 
 /* Chart customizing */

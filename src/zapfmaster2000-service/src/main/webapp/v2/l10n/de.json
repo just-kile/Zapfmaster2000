@@ -37,7 +37,7 @@
     "NEWSFEED_DRAWING_INFO": "{{date}} Uhr @ {{location}}",
     "NEWSFEED_ACHIEVEMENT": "<span class=\"zm-bold\">{{username}}</span> erreicht <span class=\"zm-bold\">{{achievementname}}.</span>",
     "NEWSFEED_ACHIEVEMENT_INFO": "{{date}} Uhr",
-    "NEWSFEED_NEW_KEG": "Ein Fass frisches <span class=\"zm-bold\">{{brand}}</span> wurde angezapft!",
+    "NEWSFEED_NEW_KEG": "Ein Fass <span class=\"zm-bold\">{{brand}}</span> wurde angezapft!",
     "NEWSFEED_NEW_KEG_INFO": "{{date}} Uhr #{{size}}L",
     "NEWSFEED_NEW_USER": "Ein neuer Nutzer hat sich registriert. Willkommen <span class=\"zm-bold\">{{username}}</span>!",
     "NEWSFEED_NEW_USER_INFO": "{{date}} Uhr",
