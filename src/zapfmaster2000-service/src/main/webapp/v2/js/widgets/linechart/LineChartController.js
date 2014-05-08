@@ -1,6 +1,6 @@
 define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
     "use strict";
-    Console.group("Entering Newsstack controller module.");
+    Console.group("Entering Linechart controller module.");
 
     var controller = ['$scope', '$timeout', 'CometService', 'DataService', "ZMConstants", 'DateService',
         function ($scope, $timeout, CometService, ajax, c, DateService) {

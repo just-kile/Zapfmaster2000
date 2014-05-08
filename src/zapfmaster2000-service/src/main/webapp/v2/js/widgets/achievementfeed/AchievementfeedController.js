@@ -4,7 +4,7 @@ define(['Console'], function (Console) {
 
     var controller = ['$scope', '$timeout', 'CometService', 'DataService', "ZMConstants",
         function ($scope, $timeout, CometService, ajax, c) {
-            Console.group("Newsfeed controller entered.");
+            Console.group("AchievementFeed controller entered.");
             $scope.baseUrl = c.baseUrl;
             $scope.items = [];
             $scope.maxlength = c.newsFeedLength;
@@ -30,7 +30,7 @@ define(['Console'], function (Console) {
                 filter: c.FILTER.ACHIEVEMENT
             });
 
-
+            Console.groupEnd();
         }];
 
     Console.groupEnd();

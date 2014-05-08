@@ -4,7 +4,7 @@ define(['Console', 'Underscore'], function (Console, _) {
 
     var controller = ['$scope', '$timeout', 'CometService', 'DataService', "ZMConstants",
         function ($scope, $timeout, CometService, ajax, c) {
-            Console.group("Bestlist controller entered.");
+            Console.group("Amount Chart controller entered.");
             /*Bestlist*/
             $scope.baseUrl = c.baseUrl;
             $scope.currentAmount = 0;

@@ -31,7 +31,7 @@ define(['Console'], function (Console) {
 
                 $scope.animationClass = animationClassesOut[randOut];
             }, 6000);
-
+            Console.groupEnd();
         }];
     //controller.$inject = [];
 

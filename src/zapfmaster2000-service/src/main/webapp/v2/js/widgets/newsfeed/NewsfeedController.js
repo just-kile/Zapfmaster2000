@@ -26,7 +26,7 @@ define(['Console'], function (Console) {
                 start: 0,
                 length: c.newsFeedLength
             });
-
+            Console.groupEnd();
 
 
         }];

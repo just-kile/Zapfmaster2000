@@ -11,7 +11,6 @@ define(['Console', 'd3'], function (Console, d3) {
                     },
                     //  templateUrl: 'js/directives/BarChart/template.html',
                     link: function ($scope, ele, attrs) {
-                        console.log($scope);
                         $animate.addClass(ele, 'animated ' + c.WIDGETS.ANIMATION_IN, function () {
                             $timeout(function () {
 

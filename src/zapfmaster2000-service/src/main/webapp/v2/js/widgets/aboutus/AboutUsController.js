@@ -5,7 +5,7 @@ define(['Console'], function (Console) {
     var controller = ['$scope', '$timeout', 'CometService', 'DataService', "ZMConstants",
         function ($scope, $timeout, CometService, ajax, c) {
             Console.group("About Us controller entered.");
-
+            Console.groupEnd();
         }];
 
     Console.groupEnd();
