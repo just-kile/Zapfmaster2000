@@ -8,14 +8,12 @@ define(['Console'], function (Console) {
             $scope.baseUrl = c.baseUrl;
             var animationClassesIn =
                 [
-                    "lightSpeedIn",
                     "flipInY",
                     "flipInX",
                     "bounceIn"
                 ];
             var animationClassesOut =
                 [
-                    "lightSpeedOut",
                     "fadeOutDown",
                     "flipOutY",
                     "flipOutX"
