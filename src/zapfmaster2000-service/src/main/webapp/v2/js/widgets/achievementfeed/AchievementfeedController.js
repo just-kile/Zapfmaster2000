@@ -8,8 +8,8 @@ define(['Console'], function (Console) {
             $scope.baseUrl = c.baseUrl;
             $scope.items = [];
             $scope.maxlength = c.newsFeedLength;
-            function addNewsToScope(data) {
-                $scope.itemwhite-spas.unshift(data);
+            function addNewsToScope(data){
+                $scope.items.unshift(data);
             }
 
             ajax.getDatas(c.newsFeedUrl, function (data) {

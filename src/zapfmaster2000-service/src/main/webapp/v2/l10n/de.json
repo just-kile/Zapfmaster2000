@@ -39,7 +39,7 @@
     "NEWSFEED_ACHIEVEMENT_INFO": "{{date}} Uhr",
     "NEWSFEED_NEW_KEG": "Ein Fass <span class=\"zm-bold\">{{brand}}</span> wurde angezapft!",
     "NEWSFEED_NEW_KEG_INFO": "{{date}} Uhr #{{size}}L",
-    "NEWSFEED_NEW_USER": "Ein neuer Nutzer hat sich registriert. Willkommen <span class=\"zm-bold\">{{username}}</span>!",
+    "NEWSFEED_NEW_USER": "Neuer Zapfer registriert. Willkommen <span class=\"zm-bold\">{{username}}</span>!",
     "NEWSFEED_NEW_USER_INFO": "{{date}} Uhr",
     "NEWSFEED_CHALLENGE_STARTED": "Ein <span class=\"zm-bold\">{{duration}}min Duell </span><span class=\"zm-bold\">{{username1}}</span> vs <span class=\"zm-bold\">{{username2}}</span> wurde gestartet!",
     "NEWSFEED_CHALLENGE_STARTED_INFO": "{{date}} Uhr",
