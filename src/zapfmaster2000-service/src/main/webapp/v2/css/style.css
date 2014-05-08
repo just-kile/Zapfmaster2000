@@ -1306,3 +1306,27 @@ li.zm-newsfeed {
 .zm-distribution .row {
     font-size: 2.3em;
 }
+.zm-imprint .zmo-header{
+    margin-bottom: 20px;
+}
+.zm-imprint .row{
+    font-size: 2em;
+    padding-top: 40px;
+}
+.zm-imprint .avatar img{
+    margin-bottom: 15px;
+    border:1px solid #FFF143;
+    float: left;
+}
+.zm-imprint .avatar div{
+     line-height: 34px;
+    padding-left:75px;
+ }
+.zm-imprint .avatar img,.zm-imprint .justKile img{
+    height:64px;
+}
+
+.zm-imprint .social img{
+    height:36px;
+    margin-top:-5px;
+}
