@@ -753,6 +753,8 @@ li.bestlist-item.ng-leave-active {
     padding-top: 0px;
     padding-right: 30px;
 }
+.zm-draftkits ul {
+}
 
 li.zm-draftkit {
     font-family: RalewayLight;

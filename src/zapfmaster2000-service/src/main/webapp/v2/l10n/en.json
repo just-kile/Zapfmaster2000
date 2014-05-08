@@ -37,7 +37,7 @@
     "NEWSFEED_DRAWING_INFO": "{{date}} h @ {{location}}",
     "NEWSFEED_ACHIEVEMENT": "<span class=\"zm-bold\">{{username}}</span> gained <span class=\"zm-bold\">{{achievementname}}.</span>!",
     "NEWSFEED_ACHIEVEMENT_INFO": "{{date}} h",
-    "NEWSFEED_NEW_KEG": "A new Keg of <span class=\"zm-bold\">{{brand}}</span> has been tapped!",
+    "NEWSFEED_NEW_KEG": "A Keg of <span class=\"zm-bold\">{{brand}}</span> has been tapped!",
     "NEWSFEED_NEW_KEG_INFO": "{{date}} h #{{size}}L",
     "NEWSFEED_NEW_USER": "A new user has registered. Welcome <span class=\"zm-bold\">{{username}}</span>!",
     "NEWSFEED_NEW_USER_INFO": "{{date}} h",
@@ -50,14 +50,14 @@
     "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}}",
 
     "USERPROFILE_TITLE":"<small>Zapfee Spotlight:</small> {{username}}",
-    "USERPROFILE_AMOUNT":"{{amount}} L zapfed",
-    "USERPROFILE_GREATEST_DRAWING":"{{amount}} L zapfed at once",
-    "USERPROFILE_MOST_ACTIVITY_HOUR":"Most active at {{hour}}h",
-    "USERPROFILE_ACHIEVEMENT_COUNT":"{{count}} Achievements gained",
-    "USERPROFILE_DRAW_COUNT":"{{count}} x at the zapfing spot",
-    "USERPROFILE_AVERAGE_DRAW_COUNT":"Average {{count}} x at the zapfing spot",
-    "USERPROFILE_DRAW_RANK":"Rank {{rank}} at Bestlist",
-    "USERPROFILE_ACHIEVEMENT_RANK":"Rank {{rank}} at achievement bestlist",
+    "USERPROFILE_USER_RANK":"{{username}} ranks {{rank}} with",
+    "USERPROFILE_AMOUNT":"{{amount}} litres",
+    "USERPROFILE_ALCOHOLLEVEL":"(and {{alcohollevel}} &permil;)",
+    "USERPROFILE_GREATEST_DRAWING":"{{sex=='MALE'?'His':'Her'}} largest mug held {{amount}}l",
+    "USERPROFILE_ACHIEVEMENT_RANK":"{{sex=='MALE'?'He':'She'}}  has the {{rank}} most achievements @",
+    "USERPROFILE_ACHIEVEMENT_COUNT":"{{count}} achievements",
+    "USERPROFILE_MOST_ACHIEVEMENT_HOUR":"of which most were earned at {{date}}h",
+
 
 
     "NOBODY":"Nobody",

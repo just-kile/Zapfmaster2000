@@ -14,8 +14,7 @@ define(['Console', 'moment', 'Underscore','text!../../../fake_cite.json'], funct
             }
             function update(userId,callback){
                 ajax.getDatas(c.frontPageUserStatsUrl, function (data) {
-                    $scope.userName=data.user.userName;
-                    $scope.userImage = data.user.userImage;
+                    $scope.user=data.user;
 
                     $scope.amount = data.amount;
                     $scope.achievement = data.achievement;
