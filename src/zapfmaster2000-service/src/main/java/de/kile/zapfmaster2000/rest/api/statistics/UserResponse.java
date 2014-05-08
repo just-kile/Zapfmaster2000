@@ -1,6 +1,8 @@
 package de.kile.zapfmaster2000.rest.api.statistics;
 
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
+
 public class UserResponse {
 
 	/**
@@ -9,6 +11,8 @@ public class UserResponse {
 	private long userId;
 	private String userName;
 	private String userImage;
+    private Sex sex;
+
 	public long getUserId() {
 		return userId;
 	}
@@ -27,6 +31,13 @@ public class UserResponse {
 	public void setUserImage(String userImage) {
 		this.userImage = userImage;
 	}
+    public Sex getSex() {
+        return sex;
+    }
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
 
 	/**
 	 * Number of kegs drunk so far (including the current one)

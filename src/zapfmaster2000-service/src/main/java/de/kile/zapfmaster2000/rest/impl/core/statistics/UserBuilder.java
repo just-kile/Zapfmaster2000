@@ -3,6 +3,7 @@ package de.kile.zapfmaster2000.rest.impl.core.statistics;
 
 import java.util.List;
 
+import de.kile.zapfmaster2000.rest.model.zapfmaster2000.Sex;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -37,7 +38,7 @@ public class UserBuilder {
 			Transaction tx = session.beginTransaction();
 			List<?> result = session
 					.createQuery(
-							"SELECT name, imagePath, id "
+							"SELECT name, imagePath, id, sex "
 									+ "FROM User "
 									+ "WHERE account.id = :accountId AND id = :userId")
 					.setLong("accountId", account.getId()).setString("userId", pUser).list();
@@ -47,6 +48,7 @@ public class UserBuilder {
 			userResponse.setUserId((Long) resultArray[2]);
 			userResponse.setUserName((String) resultArray[0]);
 			userResponse.setUserImage((String) resultArray[1]);
+            userResponse.setSex((Sex) resultArray[3]);
 
 			tx.commit();
 		}
