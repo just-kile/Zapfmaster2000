@@ -56,7 +56,7 @@
     "USERPROFILE_GREATEST_DRAWING":"{{sex=='MALE'?'Sein':'Ihr'}} größter Krug fasste {{amount}}l",
     "USERPROFILE_ACHIEVEMENT_RANK":"{{sex=='MALE'?'Er':'Sie'}} hat die {{rank}} meisten Achievements @",
     "USERPROFILE_ACHIEVEMENT_COUNT":"{{count}} Achievements",
-    "USERPROFILE_MOST_ACHIEVEMENT_HOUR":"von denen die meisten gegen {{date}}Uhr erreicht wurden",
+    "USERPROFILE_MOST_ACHIEVEMENT_HOUR":"von denen viele gegen {{date}}Uhr erreicht wurden",
 
 
 

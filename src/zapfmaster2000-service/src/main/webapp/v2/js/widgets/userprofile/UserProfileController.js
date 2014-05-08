@@ -8,8 +8,10 @@ define(['Console', 'moment', 'Underscore','text!../../../fake_cite.json'], funct
             var users = {};
             var cites = JSON.parse(citeString);
             $scope.baseUrl = c.baseUrl;
-            function generateRandomId(){
+            function generateRandomId(force){
                 var index = Math.floor((Math.random()*users.length));
+                var user = users[index];
+                if(!force && user.userName=="Guest") return generateRandomId(true);
                 return users[index].userId;
             }
             function update(userId,callback){
