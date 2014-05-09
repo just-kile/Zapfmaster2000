@@ -1243,18 +1243,18 @@ li.zm-newsfeed {
     height: 160px;
 }
 .zm-userprofile .quote{
-    height: 160px;
+    height: 140px;
 }
 
 .zm-userprofile .quote cite  {
     position: absolute;
-    bottom: 0;
+    bottom: -35px;
     right: 10px;
     font-size: 1.7em;
 }
 .zm-achievementstats .quote cite{
     position: absolute;
-    bottom: -15px;
+    bottom: -35px;
     right: 10px;
     font-size: 1.7em;
 }
@@ -1262,7 +1262,7 @@ li.zm-newsfeed {
     height: 120px;
 }
 .zm-achievementstats .zm-feeditem.main .quote{
-    height: 120px;
+    height: 100px;
 }
 .zm-userprofile img {
 
