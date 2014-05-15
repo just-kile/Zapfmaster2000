@@ -33,7 +33,7 @@ define(['Console', 'moment', 'Underscore','text!../../../fake_cite.json'], funct
             }
             $scope.updateFn = function(ok){
                 update(generateRandomId(),ok);
-            }
+            };
             function init(){
                 ajax.getDatas(c.membersUrl,function(data){
                     users = data;

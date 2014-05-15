@@ -15,7 +15,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                 });
                 chartData = result;
                 return result;
-            }
+            };
             $scope.width = 750;
             $scope.height = 250;
 
@@ -23,36 +23,36 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                 return function (val) {
                     return moment.unix(val).format(c.CLIENT_TIME_FORMAT);
                 };
-            }
+            };
             $scope.yAxisTickFormatFunction = function () {
                 return function (val) {
                     return val;
                 };
-            }
+            };
 
             $scope.colorFunction = function () {
                 return function (d, i) {
                     return '#F5E400 '
                 };
-            }
+            };
             /*Pie chart helper functions*/
             $scope.xFunction = function () {
                 return function (val) {
-                    return val.key //+ " ("+val.y.toFixed(2)+"l)";
+                    return val.key; //+ " ("+val.y.toFixed(2)+"l)";
                 }
-            }
+            };
 
             $scope.yFunction = function () {
                 return function (val) {
                     return val.y;
                 }
-            }
+            };
             $scope.colorFunctionPie = function(){
-                var colorArray = ["#ED71A8","#FFF143"]
+                var colorArray = ["#ED71A8","#FFF143"];
                 return function(d,i){
                     return colorArray[i]
                 }
-            }
+            };
             var transformDataPie = function (bestlist) {
 
                 var sum = 0;
@@ -73,7 +73,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     return null;
                 }
 
-            }
+            };
             var initScope = function () {
                 ajax.getDatas(c.progressUrl, function (data) {
                     console.log(data);

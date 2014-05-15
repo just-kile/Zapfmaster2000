@@ -1,7 +1,6 @@
 var baseUrl;
 self.addEventListener('message', function (e) {
     var data = e.data;
-    var serviceUrl = data.url + "?token=" + data.token + "&_=" + new Date().getTime();
 
     if (data.init && data.baseUrl) {
         // importScripts(data.baseUrl+"js/libs/jquery/jquery-2.0.3.min.js");

@@ -11,28 +11,27 @@ define(['Console', 'Underscore'], function (Console, _) {
             var calcTeamPercent = function (data) {
                 _.each(data, function (challenge, key) {
                     var team1Percent = challenge.team1[0].amount / (challenge.team1[0].amount + challenge.team2[0].amount) * 100;
-                    var team2Percent = challenge.team2[0].amount / (challenge.team1[0].amount + challenge.team2[0].amount) * 100
+                    var team2Percent = challenge.team2[0].amount / (challenge.team1[0].amount + challenge.team2[0].amount) * 100;
                     challenge.team1Percent = !isNaN(team1Percent) ? team1Percent : 50;
                     challenge.team2Percent = !isNaN(team2Percent) ? team2Percent : 50;
                     challenge.countdown = 0;
                 });
                 return data;
 
-            }
+            };
             Console.log(moment);
             var clockInterval;
             $scope.letTheClockTick = function () {
                 if (clockInterval)clearInterval(clockInterval);
 
                 _.each($scope.challenges, function (challenge, keys) {
-                    var end = DateService.calcDiffToNow(challenge.startDate, challenge.challengeDuration, "mm:ss");
-                    $scope.challenges[keys].countdown = end;
+                    $scope.challenges[keys].countdown = DateService.calcDiffToNow(challenge.startDate, challenge.challengeDuration, "mm:ss");
                 });
 
                 clockInterval = $timeout($scope.letTheClockTick, 1000);
 
 
-            }
+            };
             var initScope = function () {
 
                 ajax.getDatas(c.challengeUrl, function (data) {
@@ -62,7 +61,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     $scope.challenges.pop();
                 }
                 $scope.challenges.unshift(data);
-            }
+            };
 
             initScope();
             var pushListener = function (data) {

@@ -24,7 +24,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
             }
             $scope.updateFn = function(ok){
                 update(generateRandomId(),ok);
-            }
+            };
             function init(){
                 ajax.getDatas(c.achievementsUrl,function(data){
                     achievements = data;

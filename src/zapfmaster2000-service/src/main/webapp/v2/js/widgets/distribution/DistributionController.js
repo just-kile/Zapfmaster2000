@@ -16,7 +16,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     result.push([data.amount, data.probability / sum]);
                 });
                 var lastAmount = result[result.length - 1];
-                result.push([lastAmount[0] + 1, 0])
+                result.push([lastAmount[0] + 1, 0]);
                 return result;
             };
             $scope.width = 750;
@@ -26,12 +26,12 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                 return function (val) {
                     return val.toFixed(2);
                 };
-            }
+            };
             $scope.yAxisTickFormatFunction = function () {
                 return function (val) {
                     return val;
                 };
-            }
+            };
 
             $scope.colorFunction = function () {
                 var colors = ["#F5E400", "#FF1F7C"];
@@ -39,7 +39,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
 
                     return colors[i % colors.length];
                 };
-            }
+            };
             var initScope = function () {
                 ajax.getDatas(c.distributionUrl, function (data) {
                     // console.log(data);
@@ -58,7 +58,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                             area: false,
                             values: normalCurve
                         }
-                    ]
+                    ];
                     $scope.expectation = data.expectation;
                     $scope.variance = data.variance;
                     $scope.degression = data.degression;

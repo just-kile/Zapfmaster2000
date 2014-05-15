@@ -23,13 +23,13 @@ define(['Console', 'Underscore'], function (Console, _) {
                     if (!isNaN(amount))userRev.amountPercent = amount;
                 });
                 return data;
-            }
+            };
             var initOrder = function (data) {
                 _.each(data, function (user, index) {
                     user.order = index;
                 });
                 return data;
-            }
+            };
             var initScope = function () {
                 ajax.getDatas(c.bestlistUrl, function (data) {
                     if (data.length > c.bestlistMax) {
@@ -58,7 +58,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                         }
                     }
                 }
-            }
+            };
             var updateScope = function (data) {
                 ajax.getDatas(c.bestlistUrl, function (data) {
                     if (data.length > c.bestlistMax) {
@@ -116,7 +116,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     }
 
                 });
-            }
+            };
             CometService.addPushListener(function (data) {
                 if (c.DRAWING == data.type) {
                     updateScope();
@@ -136,7 +136,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 };
 
 
-            }
+            };
             var getUserIdFromPointer = function (order) {
                 if ($scope.bestlist) {
                     var list = $scope.bestlist;
@@ -147,7 +147,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     }
                 }
                 return -1;
-            }
+            };
             var activeStats = 0;
             var updateStatsArrow = function () {
                 var len;
@@ -196,7 +196,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             var initResizing = function () {
                 //resizeMethod();
                 window.addEventListener("resize", resizeMethod, true);
-            }
+            };
             initResizing();
 
             initScope();

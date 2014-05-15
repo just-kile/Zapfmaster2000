@@ -22,17 +22,17 @@ define(['Console'], function (Console) {
                      isRunning = false;
                 }
 
-            }
+            };
             var addToNewsQueue = function (data) {
                 waitingQueue.push(data);
                 startUpdating();
 
-            }
+            };
 
             var initScope = function () {
                 $scope.news = [];
 
-            }
+            };
             initScope();
             /*Testing, delete if not necessary*/
             //addToNewsQueue(DUMMY_DATAS);
@@ -59,7 +59,7 @@ define(['Console'], function (Console) {
             }, {
                 start: 0,
                 length: c.newsStackLength
-            })
+            });
 
             Console.groupEnd();
         }];

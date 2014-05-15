@@ -15,21 +15,21 @@ define(['Console', 'Underscore'], function (Console, _) {
                // $scope.currentAmount =$scope.currentAmount-0.5<0?2:$scope.currentAmount-0.5;
                 $scope.currentAmount =amount.amountTotal;
 
-            }
+            };
 
             var updateAchievements = function(achievementsCount){
                 $scope.achievementCount =achievementsCount.count;
-            }
+            };
             var retrieveAmount  =function(callback){
                 ajax.getDatas(c.amountStatsUrl,function(responseJson){
                      callback(responseJson);
                 });
-            }
+            };
             var retrieveAchievement = function(callback){
                 ajax.getDatas(c.achievementStatsUrl,function(achievementStats){
                       callback(achievementStats);
                 });
-            }
+            };
 
             CometService.addPushListener(function (data) {
                 if (c.DRAWING == data.type ) {

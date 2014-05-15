@@ -51,7 +51,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     $scope.kegs = datas;
                 }
 
-            }
+            };
             var updateScope = function () {
                 ajax.getDatas(c.kegStatsUrl, function (kegs) {
                     Console.log("Received Keg Data ", kegs);
@@ -73,7 +73,7 @@ define(['Console', 'Underscore'], function (Console, _) {
 
 
                 });
-            }
+            };
 
 
             CometService.addPushListener(function (data) {

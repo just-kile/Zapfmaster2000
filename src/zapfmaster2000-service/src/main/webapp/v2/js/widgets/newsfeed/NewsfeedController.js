@@ -14,7 +14,7 @@ define(['Console'], function (Console) {
             ajax.getDatas(c.newsFeedUrl, function (data) {
                 _.each(data, function (item) {
                     $scope.items.push(item);
-                })
+                });
                 //  $scope.items = data;
                 //$scope.items = data;
                 //  $scope.maxlength=c.newsFeedLength;

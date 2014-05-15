@@ -8,6 +8,7 @@ define([
     if(typeof constants=="string"){
         constants = $.parseJSON(constants);
     }
+
     Console.group("Entering Constants module.");
     Console.info("Register constants: ", constants);
     Console.groupEnd();
