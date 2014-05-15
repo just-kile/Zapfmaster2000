@@ -2,3 +2,4 @@
 *.iml
 src/main/webapp/v2/js/vendor
 buildutils/node_modules
+dist
