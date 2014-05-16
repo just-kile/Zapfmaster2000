@@ -3,12 +3,22 @@ var gulp = require('gulp'),
     bower = require('gulp-bower'),
     rjs = require("gulp-requirejs"),
     jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    clean = require('gulp-clean');
 
 var basedir = "../src/main/webapp/v2";
 var distdir = "../src/main/webapp/v2/dist";
 
-gulp.task('bower', function () {
+gulp.task("clean", function () {
+    "use strict";
+    gulp.src(distdir, {read: false})
+        .pipe(clean({force: true}));
+    gulp.src(basedir + "/js/vendor", {read: false})
+        .pipe(clean({force: true}));
+
+});
+
+gulp.task('bower', ['clean'], function () {
     "use strict";
     return bower()
         .pipe(gulp.dest(basedir + '/js/vendor'));
@@ -28,7 +38,7 @@ gulp.task('rjs', ['bower'], function () {
         }))
         .pipe(gulp.dest(distdir + '/js'));
 });
-gulp.task('html', function () {
+gulp.task('copyResources', function () {
     "use strict";
 
 });
@@ -42,4 +52,4 @@ gulp.task('lint', function () {
 });
 
 
-gulp.task('default', ['bower', 'rjs', 'lint']);
+gulp.task('default', ['clean', 'bower', 'rjs', 'lint']);
