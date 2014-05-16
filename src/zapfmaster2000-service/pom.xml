@@ -165,6 +165,8 @@
 
 
 	<build>
+
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -238,7 +240,7 @@
 			</plugin>
 
 			<!-- build/install/deploy a jar alongside of the war -->
-			<plugin>
+			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<executions>
@@ -250,9 +252,39 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <workingDirectory>buildutils</workingDirectory>
+                    <executable>gulp</executable>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
 
-			<plugin>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>dist</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
+
+<!--			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
 				<executions>
@@ -293,7 +325,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

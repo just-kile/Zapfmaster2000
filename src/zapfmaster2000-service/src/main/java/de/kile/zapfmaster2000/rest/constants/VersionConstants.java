@@ -11,9 +11,9 @@ package de.kile.zapfmaster2000.rest.constants;
  */
 public class VersionConstants {
 	
-    public static final String BUILD_NUMBER ="d72ea55f41d1b70768c03391db894081bacb66cf";
+    public static final String BUILD_NUMBER ="c3c1a990a2705d45ddc27734ec24166591d4ba81";
 
-    public static final String BUILD_TIME ="20140508-0901";
+    public static final String BUILD_TIME ="20140516-1316";
 
     public static final String POM_VERSION ="2.2-Bodacious-Bock-SNAPSHOT";
 

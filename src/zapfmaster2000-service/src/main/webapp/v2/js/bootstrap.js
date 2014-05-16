@@ -5,7 +5,8 @@ requirejs.config({
         jQuery: '../vendor/jquery/dist/jquery.min',//'http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min'
         Underscore: '../vendor/underscore/underscore',
         d3: '../vendor/d3/d3.min',
-        nvd3: '../vendor/nvd3/nv.d3.min',
+        nvd3fix:"js/nvd3.fix",
+        nvd3: '//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min',
         Angular: '../vendor/angular/angular.min',
         AngularRoute: '../vendor/angular-route/angular-route.min',
         AngularResource: "../vendor/angular-resource/angular-resource.min",
@@ -54,6 +55,7 @@ requirejs.config({
         Underscore: {
             exports: "_"
         },
+
         d3: {
             exports: "d3",
             init: function (d3) {
@@ -62,7 +64,7 @@ requirejs.config({
             }
         },
         nvd3: {
-            deps: ['d3'],
+            deps: ['d3','nvd3.fix'],
             exports: "nv"
         },
         Console: {
@@ -75,8 +77,8 @@ requirejs.config({
         "jQuery",
         "Underscore",
         "Angular"
-    ],
-    urlArgs: 'token=' + localStorage.getItem("token")
+    ]
+    //urlArgs: 'token=' + localStorage.getItem("token")
 });
 requirejs([
     // Standard Libs
@@ -86,12 +88,13 @@ requirejs([
     'Underscore',
     'moment',
     'd3',
+    'nvd3',
+    'AngularD3Directives',
     'Angular',
     'AngularRoute',
     'AngularResource',
     'AngularAnimate',
     'AngularTranslate',
-    'AngularD3Directives',
     'AngularTranslateStaticFileLoader',
     'AngularTranslateLocalStorage',
     'AngularTranslateCookieStorage'
@@ -111,8 +114,8 @@ requirejs([
     Console.info("ngAnimate: ", angularAnimate);
     Console.groupEnd();
 
-    window.d3 = d3;
-    require(['app', 'nvd3'], function (App) {
+
+    require(['app'], function (App) {
         Console.group("Starting bootstrap.");
         Console.info("App: ", App);
         Console.groupEnd();

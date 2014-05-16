@@ -117,6 +117,7 @@
     ],
     "indent"        : 4,        // Specify indentation spacing,
     "globals"   : {
+        "exports":true,
         "define"     : false,
         "require":false,
         "requirejs":false,
