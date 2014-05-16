@@ -58,7 +58,7 @@ gulp.task("clean", function () {
 gulp.task('bower', function () {
     "use strict";
     bower()
-        .pipe(gulp.dest(basedirV2 + '/js/vendor'));
+        .pipe(gulp.dest(basedirV2 + '/vendor'));
 });
 
 

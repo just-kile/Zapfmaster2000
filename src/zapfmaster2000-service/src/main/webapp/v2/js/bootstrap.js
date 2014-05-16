@@ -1,4 +1,3 @@
-var requirejs = window.requirejs || {};
 requirejs.config({
 
     paths: {

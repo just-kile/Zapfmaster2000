@@ -115,5 +115,17 @@
         //"anotherCoolGlobal",
         //"iLoveDouglas"
     ],
-    "indent"        : 4         // Specify indentation spacing
+    "indent"        : 4,        // Specify indentation spacing,
+    "globals"   : {
+        "define"     : false,
+        "require":false,
+        "requirejs":false,
+        /* MOCHA */
+        "describe"   : false,
+        "it"         : false,
+        "before"     : false,
+        "beforeEach" : false,
+        "after"      : false,
+        "afterEach"  : false
+    }
 }
