@@ -6,7 +6,7 @@ requirejs.config({
         Underscore: '../vendor/underscore/underscore',
         d3: '../vendor/d3/d3.min',
         nvd3fix:"js/nvd3.fix",
-        nvd3: '//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min',
+        nvd3: "//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min.js",//'../vendor/nvd3/nv.d3.min',
         Angular: '../vendor/angular/angular.min',
         AngularRoute: '../vendor/angular-route/angular-route.min',
         AngularResource: "../vendor/angular-resource/angular-resource.min",
