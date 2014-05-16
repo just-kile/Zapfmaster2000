@@ -1,4 +1,4 @@
-define(['Console', 'moment', 'Underscore','text!../../../fake_cite.json'], function (Console, moment, _,citeString) {
+define(['Console', 'moment', 'Underscore','text!../../fake_cite.json'], function (Console, moment, _,citeString) {
     "use strict";
     Console.group("Entering UserProfile controller module.");
 

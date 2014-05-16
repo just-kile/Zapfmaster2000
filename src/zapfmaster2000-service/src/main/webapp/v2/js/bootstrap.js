@@ -11,7 +11,6 @@ requirejs.config({
         AngularRoute: '../vendor/angular-route/angular-route.min',
         AngularResource: "../vendor/angular-resource/angular-resource.min",
         AngularAnimate: "../vendor/angular-animate/angular-animate.min",
-        AngularWebworker: "../vendor/webworkerpool/dist/webworkerpool-core-angular.min",
         AngularD3Directives: "../vendor/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min",
         AngularTranslate: "../vendor/angular-translate/angular-translate.min",
         AngularTranslateLocalStorage: "../vendor/angular-translate-storage-local/angular-translate-storage-local.min",
@@ -36,9 +35,6 @@ requirejs.config({
             deps: ['Angular']
         },
         AngularAnimate: {
-            deps: ['Angular']
-        },
-        AngularWebworker: {
             deps: ['Angular']
         },
         AngularTranslate: {
@@ -95,7 +91,6 @@ requirejs([
     'AngularRoute',
     'AngularResource',
     'AngularAnimate',
-    'AngularWebworker',
     'AngularTranslate',
     'AngularD3Directives',
     'AngularTranslateStaticFileLoader',

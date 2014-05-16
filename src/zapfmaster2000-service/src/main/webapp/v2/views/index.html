@@ -12,23 +12,23 @@
 </div>-->
 <div class="row">
     <div ng-repeat="widget in rows.topLeft"
-         ng-include="widgetBaseUrl+ widget.name+'/template.html'"
+         ng-include="'views/widgets/'+ widget.name+'.html'"
          class="{{widget.className}}">
     </div>
     <div ng-repeat="widget in rows.topRight"
-         ng-include="widgetBaseUrl+ widget.name+'/template.html'"
+         ng-include="'views/widgets/'+ widget.name+'.html'"
          class="{{widget.className}}">
     </div>
 </div>
 
 <div class="row">
     <div ng-repeat="widget in rows.center" animatewidget
-         ng-include="widgetBaseUrl+ widget.name+'/template.html'"
+         ng-include="'views/widgets/'+ widget.name+'.html'"
          ng-class="widget.className">
     </div>
 
 </div>
-<div ng-include="'js/widgets/splashscreen/template.html'">
+<div ng-include="'views/widgets/splashscreen.html'">
 
 </div>
 </div>

@@ -12,21 +12,21 @@ define([
      'controllers/StatsController',
 
     //Modules Controller
-     'widgets/bestlist/BestlistController',
-     'widgets/challenges/ChallengeController',
-     'widgets/newsstack/NewsstackController',
-     'widgets/draftkits/DraftKitController',
-     'widgets/splashscreen/SplashScreenController',
-    'widgets/linechart/LineChartController',
-    'widgets/amountchart/AmountChartController',
-    'widgets/newsfeed/NewsfeedController',
-    'widgets/achievementfeed/AchievementfeedController',
+     'widgets/BestlistController',
+     'widgets/ChallengeController',
+     'widgets/NewsstackController',
+     'widgets/DraftKitController',
+     'widgets/SplashScreenController',
+    'widgets/LineChartController',
+    'widgets/AmountChartController',
+    'widgets/NewsfeedController',
+    'widgets/AchievementfeedController',
 
-    'widgets/zapfmastersplash/ZapfmasterSplashController',
-    'widgets/userprofile/UserProfileController',
-    'widgets/achievementstats/AchievementStatsController',
-    'widgets/distribution/DistributionController',
-    'widgets/aboutus/AboutUsController',
+    'widgets/ZapfmasterSplashController',
+    'widgets/UserProfileController',
+    'widgets/AchievementStatsController',
+    'widgets/DistributionController',
+    'widgets/AboutUsController',
 
     //Constants
     'constants'
