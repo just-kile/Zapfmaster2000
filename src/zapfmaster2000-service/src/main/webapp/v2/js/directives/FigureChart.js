@@ -8,7 +8,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                     scope: {
                         //amount: '&'
                     },
-                    templateUrl: 'js/directives/FigureChart/template.html',
+                    templateUrl: 'views/directives/FigureChart.html',
                     link: function ($scope, element, attrs) {
                         Console.log("Amount Directive called");
                         $scope.initialWidth = c.FIGURE_CHART.INITIAL_WIDTH;

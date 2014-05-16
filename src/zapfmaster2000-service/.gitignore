@@ -1,5 +1,5 @@
 /target
 *.iml
-src/main/webapp/v2/js/vendor
+src/main/webapp/v2/vendor
 buildutils/node_modules
 dist

@@ -7,8 +7,8 @@ define([
 
     // Application Widgets
     , 'directives/BarChart'
-    , 'directives/FigureChart/FigureChart'
-    , 'directives/FeedDirective/FeedDirective'
+    , 'directives/FigureChart'
+    , 'directives/FeedDirective'
 
     , 'directives/ShowDirective'
     , 'directives/SwitchDirective'

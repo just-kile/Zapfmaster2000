@@ -9,7 +9,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                         items: '=',
                         maxlength:'='
                     },
-                    templateUrl: 'js/directives/FeedDirective/template.html',
+                    templateUrl: 'views/directives/FeedDirective.html',
                     link: function ($scope, element, attrs) {
                         Console.log("Feed Directive called");
 
