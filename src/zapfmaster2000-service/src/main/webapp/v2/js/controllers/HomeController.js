@@ -1,20 +1,20 @@
-define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
+define(['Console', 'text!../../rows.json', 'Underscore'], function (Console, rowsResponse, _) {
     "use strict";
     Console.group("Entering HomeController module.");
     var rows = localStorage.getItem("zm-rows") || rowsResponse;
-    if(typeof rows=="string"){
-        rows = $.parseJSON(rowsResponse);
+    if (typeof rows === "string") {
+        rows = JSON.parse(rowsResponse);
     }
-    var controller = ['$scope', '$routeParams', '$timeout', 'ZMConstants', '$animate','$translate', function ($scope, $routeParams, $timeout, c, $animate,$translate) {
+    var controller = ['$scope', '$routeParams', '$timeout', 'ZMConstants', '$animate', '$translate', function ($scope, $routeParams, $timeout, c, $animate, $translate) {
         Console.group("HomeController entered.");
         $scope.widgetBaseUrl = c.widgetBaseUrl;
-        $scope.changeLanguage = function(langKey){
+        $scope.changeLanguage = function (langKey) {
             $translate.use(langKey);
-            localStorage.setItem("zm-lang",langKey);
+            localStorage.setItem("zm-lang", langKey);
         };
         var widgetTimeouts = {};
         var firstWidget = $routeParams.widgetId || 0,
-            widgetChangeEnabled = typeof $routeParams.widgetId == "undefined";
+            widgetChangeEnabled = typeof $routeParams.widgetId === "undefined";
 
         var multiplier = parseFloat($routeParams.t) || 1;
         var rowsDivider = rows.centerThird.length;
@@ -42,25 +42,25 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
             (function (newWidget, index, rows, actualRow) {
                 changeInterval[getActiveSubWidget() + index] = $timeout(function () {
                     updateWidget(newWidget, index, rows, actualRow);
-                }, newWidget.interval*multiplier);
+                }, newWidget.interval * multiplier);
 
             })(newWidget, index, rows, actualRow);
 
         };
 
-        var startUpdater = function (rows,instant) {
+        var startUpdater = function (rows, instant) {
             var startCenterWidgets = rows[getActiveSubWidget()][0];
             _.each(startCenterWidgets, function (widget, index) {
-                if(instant){
+                if (instant) {
                     updateWidget(widget, index, rows, -1);
-                }else{
+                } else {
                     changeInterval[getActiveSubWidget() + index] = $timeout(function () {
                         updateWidget(widget, index, rows, 0);
-                    }, widget.interval*multiplier);
+                    }, widget.interval * multiplier);
                 }
 
             });
-        }
+        };
 
         var stopUpdater = function () {
             _.each(changeInterval, function (interval) {
@@ -68,28 +68,28 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
             });
             changeInterval = {};
 
-        }
+        };
         var widgetSwitchTimeout;
         var stopWidgetSwitch = function () {
             $timeout.cancel(widgetSwitchTimeout);
-        }
+        };
 
         var startWidgetSwitch = function (rows) {
             widgetSwitchTimeout = $timeout(function () {
                 stopUpdater();
-                activeSubWidget = activeSubWidget == "centerHalf" ? "centerThird" : "centerHalf";
+                activeSubWidget = activeSubWidget === "centerHalf" ? "centerThird" : "centerHalf";
                 $scope.rows.center.splice(0, 2,
                     rows.switchingModule);
 
-                $timeout(function(){
-                    startUpdater(rows,true);
+                $timeout(function () {
+                    startUpdater(rows, true);
                     startWidgetSwitch(rows);
-                },rows.switchingModule.interval)
+                }, rows.switchingModule.interval);
 
-            }, rows.switchTime*multiplier);
+            }, rows.switchTime * multiplier);
 
 
-        }
+        };
         if (widgetChangeEnabled) {
             startUpdater(rows);
             startWidgetSwitch(rows);
@@ -97,8 +97,8 @@ define(['Console','text!../../rows.json'], function (Console,rowsResponse) {
         init(rows);
 
         $scope.$on("$destroy", function () {
-          stopUpdater();
-          stopWidgetSwitch();
+            stopUpdater();
+            stopWidgetSwitch();
         });
         //controller.$inject = [];
 

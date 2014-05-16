@@ -15,17 +15,21 @@ define(['Console', 'Underscore'], function (Console, _) {
             var updateAmount = function (data) {
                 Console.log("Update Amount with ", data);
                 var scopeKeg = _.find($scope.kegs, function (keg) {
-                    return data.boxId == keg.boxId;
+                    return data.boxId === keg.boxId;
                 });
                 if (scopeKeg) {
-                    if (data.type == c.LOGIN || data.type == c.DRAW) {
-                        if (!scopeKeg.user)scopeKeg.user = {};
+                    if (data.type === c.LOGIN || data.type === c.DRAW) {
+                        if (!scopeKeg.user) {
+                            scopeKeg.user = {};
+                        }
                         scopeKeg.user.loggedin = true;
                         scopeKeg.user.image = c.baseUrl + data.imagePath;
                         scopeKeg.user.userName = data.userName;
                         scopeKeg.user.amount = data.amount || 0;
                     } else {
-                        if (!scopeKeg.user)scopeKeg.user = {};
+                        if (!scopeKeg.user) {
+                            scopeKeg.user = {};
+                        }
                         scopeKeg.user.loggedin = false;
                     }
 
@@ -55,12 +59,12 @@ define(['Console', 'Underscore'], function (Console, _) {
             var updateScope = function () {
                 ajax.getDatas(c.kegStatsUrl, function (kegs) {
                     Console.log("Received Keg Data ", kegs);
-                    if ($scope.kegs && $scope.kegs.length != kegs.length) {
+                    if ($scope.kegs && $scope.kegs.length !== kegs.length) {
                         initScope(kegs);
                     } else {
                         _.find(kegs, function (keg) {
                             var scopeKeg = _.find($scope.kegs, function (scopeKeg) {
-                                return keg.kegId == scopeKeg.kegId;
+                                return keg.kegId === scopeKeg.kegId;
                             });
                             if (scopeKeg) {
                                 scopeKeg.currentAmount = keg.currentAmount;
@@ -68,7 +72,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                                 initScope(kegs);//some kegdata changed, render completely
                                 return true;
                             }
-                        })
+                        });
                     }
 
 
@@ -77,9 +81,9 @@ define(['Console', 'Underscore'], function (Console, _) {
 
 
             CometService.addPushListener(function (data) {
-                if (c.DRAWING == data.type) {
+                if (c.DRAWING === data.type) {
                     updateScope();
-                } else if (c.NEWKEG == data.type) {
+                } else if (c.NEWKEG === data.type) {
                     initScope();
                 }
             });

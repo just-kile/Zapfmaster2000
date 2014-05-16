@@ -9,7 +9,12 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
             var transformData = function (curveValues) {
                 var result = [];
                 var sum = 0;
-                for (var i in curveValues) sum += curveValues[i].probability;
+                for (var i in curveValues) {
+                    if (curveValues.hasOwnProperty(i)) {
+                        sum += curveValues[i].probability;
+                    }
+
+                }
 
                 result.push([0, 0]);
                 _.each(curveValues, function (data, index) {

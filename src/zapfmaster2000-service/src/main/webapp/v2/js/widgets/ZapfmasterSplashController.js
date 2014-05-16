@@ -18,16 +18,16 @@ define(['Console'], function (Console) {
                     "flipOutY",
                     "flipOutX"
                 ];
-           $timeout(function () {
-                $scope.visible=true;
-               var randIn = Math.floor((Math.random()*animationClassesIn.length));
-               $scope.animationClass = animationClassesIn[randIn];
-               $timeout(function () {
-                   $scope.animationClass = "";
-               }, 1000);
+            $timeout(function () {
+                $scope.visible = true;
+                var randIn = Math.floor((Math.random() * animationClassesIn.length));
+                $scope.animationClass = animationClassesIn[randIn];
+                $timeout(function () {
+                    $scope.animationClass = "";
+                }, 1000);
             }, 1000);
             $timeout(function () {
-                var randOut = Math.floor((Math.random()*animationClassesOut.length));
+                var randOut = Math.floor((Math.random() * animationClassesOut.length));
 
                 $scope.animationClass = animationClassesOut[randOut];
             }, 6000);

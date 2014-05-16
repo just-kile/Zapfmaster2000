@@ -32,26 +32,26 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
 
             $scope.colorFunction = function () {
                 return function (d, i) {
-                    return '#F5E400 '
+                    return '#F5E400 ';
                 };
             };
             /*Pie chart helper functions*/
             $scope.xFunction = function () {
                 return function (val) {
                     return val.key; //+ " ("+val.y.toFixed(2)+"l)";
-                }
+                };
             };
 
             $scope.yFunction = function () {
                 return function (val) {
                     return val.y;
-                }
+                };
             };
-            $scope.colorFunctionPie = function(){
-                var colorArray = ["#ED71A8","#FFF143"];
-                return function(d,i){
-                    return colorArray[i]
-                }
+            $scope.colorFunctionPie = function () {
+                var colorArray = ["#ED71A8", "#FFF143"];
+                return function (d, i) {
+                    return colorArray[i];
+                };
             };
             var transformDataPie = function (bestlist) {
 
@@ -62,34 +62,37 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     }
                 });
                 if (bestlist.length > 0) {
-                    return [{
-                        key:bestlist[0].name,
-                        y:bestlist[0].amount
-                    },{
-                        key:"The World",
-                        y:sum
-                    }];
-                }else{
+                    return [
+                        {
+                            key: bestlist[0].name,
+                            y: bestlist[0].amount
+                        },
+                        {
+                            key: "The World",
+                            y: sum
+                        }
+                    ];
+                } else {
                     return null;
                 }
 
             };
             var initScope = function () {
                 ajax.getDatas(c.progressUrl, function (data) {
-                    console.log(data);
+                    Console.log(data);
                     $scope.chartData = [
                         {
                             key: "Progress",
-                            values: data.amount.length>1?transformData(data):[]
+                            values: data.amount.length > 1 ? transformData(data) : []
                         }
-                    ]
+                    ];
                 }, {
                     from: moment().subtract('minutes', c.PROGRESS_FROM_MINUTES).format(c.SERVER_TIME_FORMAT),
                     interval: c.PROGRESS_INTERVAL
                 });
                 ajax.getDatas(c.bestlistUrl, function (bestlist) {
                     $scope.pieChartData = transformDataPie(bestlist);
-                })
+                });
 
             };
             initScope();

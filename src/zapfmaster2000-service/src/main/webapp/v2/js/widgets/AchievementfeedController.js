@@ -1,4 +1,4 @@
-define(['Console'], function (Console) {
+define(['Console', 'Underscore'], function (Console, _) {
     "use strict";
     Console.group("Entering AchievementFeed controller module.");
 
@@ -8,7 +8,7 @@ define(['Console'], function (Console) {
             $scope.baseUrl = c.baseUrl;
             $scope.items = [];
             $scope.maxlength = c.newsFeedLength;
-            function addNewsToScope(data){
+            function addNewsToScope(data) {
                 $scope.items.unshift(data);
             }
 
@@ -20,8 +20,9 @@ define(['Console'], function (Console) {
                 //$scope.items = data;
                 //  $scope.maxlength=c.newsFeedLength;
                 CometService.addPushListener(function (data) {
-                    if (data.type == c.ACHIEVEMENT)
+                    if (data.type === c.ACHIEVEMENT) {
                         addNewsToScope(data);
+                    }
 
                 });
             }, {

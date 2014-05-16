@@ -20,7 +20,9 @@ define(['Console', 'Underscore'], function (Console, _) {
                     var userRev = userlist[len - 1 - index];
                     sumAdd += userRev.amount;
                     amount = sumAdd * 100 / sum;
-                    if (!isNaN(amount))userRev.amountPercent = amount;
+                    if (!isNaN(amount)) {
+                        userRev.amountPercent = amount;
+                    }
                 });
                 return data;
             };
@@ -73,7 +75,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                             var userId = user.id;
                             var isUserInList = false;
                             _.each(bestlist, function (oldUser, oldIndex) {
-                                if (oldUser.id == userId) {
+                                if (oldUser.id === userId) {
                                     $scope.bestlist[oldIndex].order = index;
                                     $scope.bestlist[oldIndex].amount = user.amount;
                                     $scope.bestlist[oldIndex].amountPercent = user.amountPercent;
@@ -85,13 +87,11 @@ define(['Console', 'Underscore'], function (Console, _) {
                                 var addedFlag = false;
                                 var lowestIndex = 0;
                                 _.each(bestlist, function (oldUser, oldIndex) {
-                                    if (oldUser.order == index) {
+                                    if (oldUser.order === index) {
                                         user.order = index;
                                         $scope.bestlist.push(user);
                                         addedFlag = true;
                                         //$scope.bestlist.splice(oldIndex,1);
-                                    } else {
-
                                     }
                                     if (oldUser.order > lowestOrderUser.order) {
                                         lowestOrderUser = oldUser;
@@ -118,7 +118,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 });
             };
             CometService.addPushListener(function (data) {
-                if (c.DRAWING == data.type) {
+                if (c.DRAWING === data.type) {
                     updateScope();
                 }
 
@@ -141,7 +141,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 if ($scope.bestlist) {
                     var list = $scope.bestlist;
                     for (var i = 0; i < list.length; i++) {
-                        if (list[i] && (list[i].order == order)) {
+                        if (list[i] && (list[i].order === order)) {
                             return list[i].id;
                         }
                     }
@@ -154,18 +154,20 @@ define(['Console', 'Underscore'], function (Console, _) {
                 if (!$scope.bestlist) {
                     len = 1;
                 } else {
-                    len = $scope.bestlist.length
+                    len = $scope.bestlist.length;
                 }
 
                 $scope.arrow.pointer = counter;
 
-                if (changeInterval)$timeout.cancel(changeInterval);
+                if (changeInterval) {
+                    $timeout.cancel(changeInterval);
+                }
 
                 ajax.getDatas(c.frontPageUserStatsUrl, function (data) {
                     counter = ++counter % len;
                     activeStats = ++activeStats % 2;
                     $scope.activeStats = activeStats;
-                    if (activeStats % 2 == 1) {
+                    if (activeStats % 2 === 1) {
                         $scope.statsodd = data;
                     } else {
                         $scope.statseven = data;
@@ -182,14 +184,12 @@ define(['Console', 'Underscore'], function (Console, _) {
 
             var resizeMethod = function () {
                 if (document.body.clientWidth < 768) {
-                    console.log('mobile');
+                    Console.log('mobile');
 
-                    if (changeInterval){
+                    if (changeInterval) {
                         $timeout.cancel(changeInterval);
                         changeInterval = null;
                     }
-
-                } else{
 
                 }
             };
@@ -203,7 +203,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             initArrow();
             $scope.$on("$destroy", function () {
                 $timeout.cancel(changeInterval);
-                window.removeEventListener("resize",resizeMethod,true);
+                window.removeEventListener("resize", resizeMethod, true);
             });
             Console.groupEnd();
         }];

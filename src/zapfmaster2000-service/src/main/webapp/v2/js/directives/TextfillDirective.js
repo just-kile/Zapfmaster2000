@@ -6,14 +6,14 @@ define(['Console', 'jQuery'], function (Console, $) {
                 return {
                     restrict: 'A',
                     scope: {
-                        textfill:"="
+                        textfill: "="
 
                     },
                     //  templateUrl: 'js/directives/BarChart/template.html',
                     link: function ($scope, ele, attrs) {
                         // console.log($scope);
-                        console.log("Textfill directive called!");
-                        function update(){
+                        Console.log("Textfill directive called!");
+                        function update() {
                             var fontSize = 50;
                             var ourText = $('span:visible:first', ele);
                             var maxHeight = $(ele).height();
@@ -27,11 +27,12 @@ define(['Console', 'jQuery'], function (Console, $) {
                                 fontSize = fontSize - 1;
                             } while ((textHeight > maxHeight || textWidth > maxWidth) && fontSize > 3);
                         }
-                        $scope.$watch("textfill",update);
+
+                        $scope.$watch("textfill", update);
 
 
                     }
-                }
+                };
 
             }
             ]

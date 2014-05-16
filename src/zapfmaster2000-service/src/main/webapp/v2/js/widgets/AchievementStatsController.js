@@ -7,14 +7,15 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
             Console.group("AchievementStats controller entered.");
             var achievements = {};
             $scope.baseUrl = c.baseUrl;
-            function generateRandomId(){
-                var index = Math.floor((Math.random()*achievements.length));
-               return achievements[index].achievementId;
+            function generateRandomId() {
+                var index = Math.floor((Math.random() * achievements.length));
+                return achievements[index].achievementId;
             }
-            function update(achievementId,callback){
-               // achievementId = 1;
+
+            function update(achievementId, callback) {
+                // achievementId = 1;
                 ajax.getDatas(c.achievementStatsDetailedUrl, function (data) {
-                    $scope.achievementName=data.achievementName;
+                    $scope.achievementName = data.achievementName;
                     // $scope.userImage = data.user.userImage;
                     $scope.image = data.achievementImage;
                     $scope.description = data.description;
@@ -22,11 +23,12 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     callback && callback();
                 }, {id: achievementId});
             }
-            $scope.updateFn = function(ok){
-                update(generateRandomId(),ok);
+
+            $scope.updateFn = function (ok) {
+                update(generateRandomId(), ok);
             };
-            function init(){
-                ajax.getDatas(c.achievementsUrl,function(data){
+            function init() {
+                ajax.getDatas(c.achievementsUrl, function (data) {
                     achievements = data;
                     update(generateRandomId());
                 });

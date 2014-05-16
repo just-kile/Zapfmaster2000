@@ -3,12 +3,12 @@ define(['Console'], function (Console) {
     Console.group("Entering AmountFilter module.");
 
     var service = ['ZMConstants', function (c) {
-        return function(input,type) {
-            if(type=="full"){
+        return function (input, type) {
+            if (type === "full") {
                 return Math.round(input);
-            } else if(input && typeof input =="number"){
-                return input.toFixed(type||2);
-            }else{
+            } else if (input && typeof input === "number") {
+                return input.toFixed(type || 2);
+            } else {
                 return input;
             }
         };

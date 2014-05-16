@@ -1,4 +1,4 @@
-define(['Console'], function (Console) {
+define(['Console', 'Underscore'], function (Console) {
     "use strict";
     Console.group("Entering Newsstack controller module.");
 
@@ -14,12 +14,16 @@ define(['Console'], function (Console) {
             var isRunning = false;
             var startUpdating = function (force) {
                 if (waitingQueue.length > 0) {
-                    if(isRunning&&!force)return;
+                    if (isRunning && !force) {
+                        return;
+                    }
                     $scope.news.unshift(waitingQueue.pop());
-                    queueTimeout = $timeout(function(){startUpdating(true)}, c.newsFeedTimeout);
+                    queueTimeout = $timeout(function () {
+                        startUpdating(true);
+                    }, c.newsFeedTimeout);
                     isRunning = true;
-                } else if(waitingQueue.length==0){
-                     isRunning = false;
+                } else if (waitingQueue.length === 0) {
+                    isRunning = false;
                 }
 
             };
@@ -50,7 +54,7 @@ define(['Console'], function (Console) {
              dummydata();
              stopFlag = false;   */
             ajax.getDatas(c.newsFeedUrl, function (json) {
-                if(json){
+                if (json) {
                     _.each(json.reverse(), function (data) {
                         addToNewsQueue(data);
                     });

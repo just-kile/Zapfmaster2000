@@ -1,4 +1,4 @@
-define(['Console'], function (Console) {
+define(['Console','Underscore'], function (Console,_) {
     "use strict";
     Console.group("Entering Newsstack controller module.");
 
@@ -7,10 +7,11 @@ define(['Console'], function (Console) {
             Console.group("Newsfeed controller entered.");
             $scope.baseUrl = c.baseUrl;
             $scope.items = [];
-            $scope.maxlength= c.newsFeedLength;
-            function addNewsToScope(data){
+            $scope.maxlength = c.newsFeedLength;
+            function addNewsToScope(data) {
                 $scope.items.unshift(data);
             }
+
             ajax.getDatas(c.newsFeedUrl, function (data) {
                 _.each(data, function (item) {
                     $scope.items.push(item);
