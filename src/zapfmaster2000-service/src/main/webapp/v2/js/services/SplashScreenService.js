@@ -1,6 +1,6 @@
 define(['Console', 'Underscore'], function (Console, _) {
     "use strict";
-    Console.group("Entering DataService module.");
+    Console.group("Entering ChallengeSplashscreen module.");
 
     var service = ['$http', 'ZMConstants', '$timeout', function ($http, c, $timeout) {
         var scope = null;

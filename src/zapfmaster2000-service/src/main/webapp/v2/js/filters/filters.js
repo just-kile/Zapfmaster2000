@@ -29,7 +29,8 @@ define([
         _.each(filters, function (filter, name) {
             angModule.filter(name, filter);
         });
-        Console.debug("Custom filters initialized.");
+        Console.info("Registered filters: ", filters);
+
     };
 
     Console.groupEnd();

@@ -36,7 +36,8 @@ define([
         _.each(directives, function (filter, name) {
             angModule.directive(name, filter);
         });
-        Console.debug("Custom widgets initialized.");
+        Console.info("Registered Directives: ", directives);
+
     };
 
     Console.groupEnd();

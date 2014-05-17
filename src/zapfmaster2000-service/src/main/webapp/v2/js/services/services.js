@@ -3,7 +3,7 @@ define([
     'Console' ,
     'Underscore',
     // Custom Services
-    , 'services/DataService',
+    'services/DataService',
     'services/CometService',
     'services/DateService',
     'services/SplashScreenService'
@@ -26,7 +26,8 @@ define([
             angModule.factory(name, service);
         });
 
-        Console.debug("Custom services initialized.");
+        Console.info("Registered Services: ", services);
+
     };
 
     Console.groupEnd();
