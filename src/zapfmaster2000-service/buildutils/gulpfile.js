@@ -66,6 +66,6 @@ gulp.task("scss", function () {
 });
 
 
-gulp.task('default', [ "bower", "lint", 'jasmine']);
+gulp.task('default', [ "bower", "lint"]);
 gulp.task('develop', [ "lint",  'scss', 'rjs-nouglify']);
-gulp.task('production', [ "lint", 'jasmine', 'scss', 'rjs']);
+gulp.task('production', [ "lint", 'scss', 'rjs']);

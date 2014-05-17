@@ -59,8 +59,8 @@ define(['Console', 'Underscore'], function (Console, _) {
                 if (callback) {
                     if (!callbacks[boxId]) {
                         startCometService(c.updateAmountPushUrl.replace("{0}", boxId), boxId);
+                        callbacks[boxId] = [];
                     }
-                    if (!callbacks[boxId])callbacks[boxId] = [];
                     callbacks[boxId].push(callback);
                     Console.debug("Added Amount Push Listener");
 

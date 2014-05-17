@@ -177,14 +177,14 @@
             <id>develop</id>
             <properties>
                 <gulp.argument>develop</gulp.argument>
-                <webresource.directory>dist</webresource.directory>
+                <webresource.directory>target/dist</webresource.directory>
             </properties>
         </profile>
         <profile>
             <id>production</id>
             <properties>
                 <gulp.argument>production</gulp.argument>
-                <webresource.directory>dist</webresource.directory>
+                <webresource.directory>target/dist</webresource.directory>
             </properties>
         </profile>
     </profiles>

@@ -1,8 +1,7 @@
 define([
     // Standard Libs
     'Console' ,
-    'Underscore' ,
-
+    'Underscore',
     // Custom Services
     , 'services/DataService',
     'services/CometService',
