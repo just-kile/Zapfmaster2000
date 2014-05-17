@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 
 var basedirV2 = "../src/main/webapp/v2";
 var basedir = "../src/main/webapp";
-var distdir = "../dist";
+var distdir = "../target/dist";
 
 gulp.task("clean", function () {
     "use strict";
@@ -59,9 +59,7 @@ gulp.task('lint', function () {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task("jasmine", function () {
 
-});
 
 gulp.task("scss", function () {
 
@@ -69,5 +67,5 @@ gulp.task("scss", function () {
 
 
 gulp.task('default', [ "bower", "lint", 'jasmine']);
-gulp.task('develop', [ "lint", 'jasmine', 'scss', 'rjs-nouglify']);
+gulp.task('develop', [ "lint",  'scss', 'rjs-nouglify']);
 gulp.task('production', [ "lint", 'jasmine', 'scss', 'rjs']);
