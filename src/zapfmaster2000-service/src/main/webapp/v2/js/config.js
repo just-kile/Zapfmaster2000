@@ -1,0 +1,85 @@
+
+requirejs.config({
+
+    paths: {
+        config:"config",
+        Console: '../vendor/console/ba-debug',
+        jQuery: '../vendor/jquery/dist/jquery.min',//'http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min'
+        Underscore: '../vendor/underscore/underscore',
+        d3: '../vendor/d3/d3.min',
+        nvd3fix:"js/nvd3.fix",
+        nvd3: "//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min",//'../vendor/nvd3/nv.d3.min',
+        Angular: '../vendor/angular/angular.min',
+        AngularRoute: '../vendor/angular-route/angular-route.min',
+        AngularResource: "../vendor/angular-resource/angular-resource.min",
+        AngularAnimate: "../vendor/angular-animate/angular-animate.min",
+        AngularD3Directives: "../vendor/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min",
+        AngularTranslate: "../vendor/angular-translate/angular-translate.min",
+        AngularTranslateLocalStorage: "../vendor/angular-translate-storage-local/angular-translate-storage-local.min",
+        AngularTranslateCookieStorage: "../vendor/angular-translate-storage-cookie/angular-translate-storage-cookie.min",
+        AngularTranslateStaticFileLoader: "../vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.min",
+        moment: "../vendor/moment/min/moment.min",
+        text:"../vendor/requirejs-text/text",
+        templates: './../views'
+    },
+    shim: {
+        Angular: {
+            exports: "angular"
+        },
+        AngularResource: {
+            deps: ['Angular'],
+            exports: ""
+        },
+        AngularD3Directives: {
+            deps: ['Angular', 'd3'],
+            exports: ""
+        },
+        AngularRoute: {
+            deps: ['Angular']
+        },
+        AngularAnimate: {
+            deps: ['Angular']
+        },
+        AngularTranslate: {
+            deps: ['Angular']
+        },
+        AngularTranslateLocalStorage: {
+            deps: ['Angular', 'AngularTranslate']
+        },
+        AngularTranslateCookieStorage: {
+            deps: ['Angular', 'AngularTranslate']
+        },
+        AngularTranslateStaticFileLoader: {
+            deps: ['Angular', 'AngularTranslate']
+        },
+        jQuery: {
+            exports: "jQuery"
+        },
+        Underscore: {
+            exports: "_"
+        },
+
+        d3: {
+            exports: "d3",
+            init: function (d3) {
+                "use strict";
+                window.d3 = d3;
+            }
+        },
+        nvd3: {
+            deps: ['d3','nvd3.fix'],
+            exports: "nv"
+        },
+        Console: {
+            exports: "console"
+        }
+
+    },
+    priority: [
+        "Console",
+        "jQuery",
+        "Underscore",
+        "Angular"
+    ]
+    //urlArgs: 'token=' + localStorage.getItem("token")
+});

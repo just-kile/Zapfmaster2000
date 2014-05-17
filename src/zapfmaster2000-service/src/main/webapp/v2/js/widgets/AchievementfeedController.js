@@ -16,9 +16,6 @@ define(['Console', 'Underscore'], function (Console, _) {
                 _.each(data, function (item) {
                     $scope.items.push(item);
                 });
-                //  $scope.items = data;
-                //$scope.items = data;
-                //  $scope.maxlength=c.newsFeedLength;
                 CometService.addPushListener(function (data) {
                     if (data.type === c.ACHIEVEMENT) {
                         addNewsToScope(data);

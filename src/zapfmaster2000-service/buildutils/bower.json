@@ -1,28 +1,34 @@
 {
-  "name": "Zapfmaster2000 Webapp",
-  "version": "$Needs to be replaced by Version$",
-  "homepage": "http://www.zapfmaster2000.de",
-  "dependencies": {
-    "jquery": ">=2.0.3",
-    "underscore": ">=1.6.0",
-    "moment": "2.4.0",
-    "console": "git://github.com/cowboy/javascript-debug.git#v0.4",
-    "bootstrap": ">=3.1.1",
-    "angular": "~1.2.16",
-    "angular-resource": "~1.2.1",
-    "angular-animate": "~1.2.1",
-    "angular-route": "~1.2.1",
-    "d3": "git://github.com/mbostock/d3#v3.4.6",
-    "nvd3": "v1.1.15b",
-    "angularjs-nvd3-directives": "0.0.7",
-    "angular-translate": "~2.1.0",
-    "angular-translate-loader-static-files": "~2.1.0",
-    "angular-translate-storage-local": "~2.1.0",
-    "animate.css":"v3.1.0"
-  },
-  "resolutions": {
-    "d3": "v3.4.6",
-    "nvd3": "~v1.1.15-beta",
-    "angular-translate": "~2.1.0"
-  }
+    "name": "Zapfmaster2000 Webapp",
+    "version": "$Needs to be replaced by Version$",
+    "homepage": "http://www.zapfmaster2000.de",
+    "dependencies": {
+        "jquery": ">=2.0.3",
+        "underscore": ">=1.6.0",
+        "moment": "2.4.0",
+        "console": "git://github.com/cowboy/javascript-debug.git#v0.4",
+        "bootstrap": ">=3.1.1",
+        "angular": "~1.2.16",
+        "angular-resource": "~1.2.1",
+        "angular-animate": "~1.2.1",
+        "angular-route": "~1.2.1",
+        "angular-mocks": "~1.2.1",
+        "angular-scenario":"~1.2.1",
+        "d3": "git://github.com/mbostock/d3#v3.4.6",
+        "nvd3": "v1.1.15b",
+        "angularjs-nvd3-directives": "0.0.7",
+        "angular-translate": "~2.1.0",
+        "angular-translate-loader-static-files": "~2.1.0",
+        "angular-translate-storage-local": "~2.1.0",
+        "animate.css": "v3.1.0",
+        "requirejs":"latest",
+        "requirejs-text":"~2.0.12",
+        //"karma, karma-jasmine, karma-junit-reporter, karma-firefox-launcher
+
+    },
+    "resolutions": {
+        "d3": "v3.4.6",
+        "nvd3": "~v1.1.15-beta",
+        "angular-translate": "~2.1.0"
+    }
 }

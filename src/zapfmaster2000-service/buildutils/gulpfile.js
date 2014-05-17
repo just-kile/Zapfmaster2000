@@ -32,7 +32,7 @@ gulp.task('rjs', ['bower'], function () {
         out: 'bootstrap.js',
         name: "bootstrap",
         fileExclusionRegExp:/^(nv.d3.min)$/,
-        mainConfigFile: basedirV2 + "/js/bootstrap.js",
+        mainConfigFile: basedirV2 + "/js/config.js",
         findNestedDependencies: true
     })
         .pipe(uglify({

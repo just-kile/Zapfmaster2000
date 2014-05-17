@@ -23,6 +23,7 @@
             <id>jboss</id>
             <url>http://repository.jboss.org/nexus/content/groups/public/</url>
         </repository>
+
     </repositories>
 
 
@@ -31,6 +32,12 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kelveden</groupId>
+            <artifactId>maven-karma-plugin</artifactId>
+            <version>1.7</version>
         </dependency>
 
         <dependency>
@@ -297,7 +304,33 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <!-- Exec jasmine tests in Karma -->
+            <plugin>
+                <groupId>com.kelveden</groupId>
+                <artifactId>maven-karma-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configFile>src/main/webapp/resources/karma-0.10.2.conf.js</configFile>
+                    <junitReportFile>src/main/webapp/resources/test-results.xml</junitReportFile>
+                    <reportsDirectory>${project.build.directory}/karma-reports</reportsDirectory>
+                    <browsers>PhantomJS</browsers>
+                    <autoWatch>false</autoWatch>
+                    <singleRun>true</singleRun>
+                    <colors>true</colors>
+                    <skipKarma>false</skipKarma>
+                    <skipTests>false</skipTests>
+                    <karmaFailureIgnore>false</karmaFailureIgnore>
+                    <reporters>dots,junit</reporters>
+                </configuration>
+            </plugin>
             <!-- build war and  jar file -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
