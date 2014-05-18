@@ -15,14 +15,14 @@
             delete global.__karma__.files[file];
 
             // we get all the test files automatically and store to window.tests array
-            if (/spec\.js$/.test(fileWithoutLeadingSlash)) {
+            if (/Spec\.js$/.test(fileWithoutLeadingSlash)) {
                 global.tests.push(fileWithoutLeadingSlash);
             }
         }
     }
 })(this);
 
-require(['base/main/webapp/v2/js/config'], function (config) {
+require(['base/main/webapp/v2/js/config-require'], function (config) {
     'use strict';
 
     // improve config
@@ -32,15 +32,15 @@ require(['base/main/webapp/v2/js/config'], function (config) {
 
     // adapt paths to work with built app
     for (var i in config.paths) {
-        config.paths[i] = config.paths[i].replace('../vendor', '../../main/webapp/v2/vendor');
+        config.paths[i] = config.paths[i].replace('../vendor', 'main/webapp/v2/vendor');
     }
 
     // add config for test dependencies
-    config.paths['angular-mocks'] =  '../../main/webapp/v2/vendor/angular-mocks/angular-mocks';
+    config.paths['angular-mocks'] =  'main/webapp/v2/vendor/angular-mocks/angular-mocks';
     config.shim['angular-mocks'] = ['angular'];
 
     // alias
-    config.paths['Source'] = '../../main/webapp/v2/js';
+    config.paths['Source'] = 'main/webapp/v2/js';
 
     // apply config to require
     window.require.config(config);

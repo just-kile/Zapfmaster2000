@@ -17,6 +17,8 @@ module.exports = function (config) {
         files: [
             {pattern: 'main/webapp/v2/vendor/**/*.js', included: false},
             {pattern: 'main/webapp/v2/js/**/*.js', included: false},
+            {pattern: 'test/javascript/unit/**/*Spec.js', included: false},
+
             'test/javascript/unit/test-main.js'
         ],
 
@@ -37,7 +39,7 @@ module.exports = function (config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress'],
+        reporters: ['dots'],
 
 
         // web server port

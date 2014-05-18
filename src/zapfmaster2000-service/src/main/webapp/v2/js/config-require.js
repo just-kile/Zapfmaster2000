@@ -1,5 +1,4 @@
-
-requirejs.config({
+define({
 
     paths: {
         config:"config",
