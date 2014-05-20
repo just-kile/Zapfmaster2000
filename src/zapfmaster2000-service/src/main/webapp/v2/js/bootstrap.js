@@ -1,7 +1,8 @@
 require(["config-require"],function(config){
-    config.urlArgs = 'token=' + localStorage.getItem("token");
-    requirejs.config(config);
-    requirejs([
+    "use strict";
+    //config.urlArgs = 'token=' + localStorage.getItem("token");
+    require.config(config);
+    require([
         // Standard Libs
         'require',
         'Console',

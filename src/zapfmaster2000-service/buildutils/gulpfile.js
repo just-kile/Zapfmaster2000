@@ -31,8 +31,8 @@ gulp.task('rjs', ['bower'], function () {
         baseUrl: basedirV2 + "/js",
         out: 'bootstrap.js',
         name: "bootstrap",
-        fileExclusionRegExp:/^(nv.d3.min)$/,
-        mainConfigFile: basedirV2 + "/js/config.js",
+       // fileExclusionRegExp:/^(nv.d3.min)/,
+        mainConfigFile: basedirV2 + "/js/config-require.js",
         findNestedDependencies: true
     })
         .pipe(uglify({
@@ -40,13 +40,15 @@ gulp.task('rjs', ['bower'], function () {
         }))
         .pipe(gulp.dest(distdir + '/v2/js'));
 });
+
 gulp.task('rjs-nouglify', ['bower'], function () {
     "use strict";
     return rjs({
         baseUrl: basedirV2 + "/js",
         out: 'bootstrap.js',
         name: "bootstrap",
-        mainConfigFile: basedirV2 + "/js/bootstrap.js",
+        //mainConfigFile: basedirV2 + "/js/config-require.js",
+        mainConfigFile: basedirV2 + "/js/config-require.js",
         findNestedDependencies: true
     })
         .pipe(gulp.dest(distdir + '/v2/js'));
