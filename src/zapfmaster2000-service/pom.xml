@@ -276,7 +276,7 @@
                 <executions>
                     <execution>
                         <id>npm-install</id>
-                        <phase>test-compile</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -290,7 +290,7 @@
                     </execution>
                     <execution>
                         <id>bower-install</id>
-                        <phase>test-compile</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -299,6 +299,25 @@
                             <executable>node_modules/.bin/gulp</executable>
                             <arguments>
                                 <argument>bower</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>karma-tests</id>
+                        <phase>tests</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>buildutils</workingDirectory>
+                            <executable>node_modules/karma/bin/karma</executable>
+                            <arguments>
+                                <argument>start</argument>
+                                <argument>../src/test/javascript/karma.conf.js</argument>
+                                <argument>--browsers=Chrome,Firefox</argument>
+                                <argument>--autoWatch=false</argument>
+                                <argument>--singleRun=true</argument>
+                                <argument>--karmaFailureIgnore=true</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -319,7 +338,7 @@
                 </executions>
             </plugin>
             <!-- Exec jasmine tests in Karma -->
-            <plugin>
+            <!--<plugin>
                 <groupId>com.kelveden</groupId>
                 <artifactId>maven-karma-plugin</artifactId>
                 <version>1.7</version>
@@ -339,12 +358,11 @@
                     <autoWatch>false</autoWatch>
                     <singleRun>true</singleRun>
                     <colors>true</colors>
-                    <!--<skipKarma>false</skipKarma>-->
-                   <!-- <skipTests>false</skipTests>-->
+
                     <karmaFailureIgnore>true</karmaFailureIgnore>
                     <reporters>progress,junit</reporters>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <!-- build war and  jar file -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
