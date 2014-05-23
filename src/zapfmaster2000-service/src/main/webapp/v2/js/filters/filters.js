@@ -1,7 +1,7 @@
 define([
     // Standard Libs
-    'Console',       // lib/console/console
-    'Underscore',  // lib/underscore/underscore
+    'Console',
+    'Underscore',
     // Application Filters
     "filters/CountdownFilter",
     "filters/AmountFilter",
@@ -29,7 +29,7 @@ define([
         _.each(filters, function (filter, name) {
             angModule.filter(name, filter);
         });
-        Console.info("Registered filters: ", filters);
+        Console.debug("Registered filters: ", filters);
 
     };
 

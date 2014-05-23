@@ -4,7 +4,7 @@ define(['Console'], function (Console) {
 
     var service = ['ZMConstants', function (c) {
         return function (input) {
-            return "" + input;
+            return typeof input === "undefined" || input === null ? "" : "" + input;
         };
 
     }];
