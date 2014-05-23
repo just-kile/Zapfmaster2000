@@ -21,6 +21,7 @@ module.exports = function (config) {
   //          {pattern: 'main/webapp/v2/vendor/angular-mocks/angular-mocks.js', included: true},
 
             {pattern: 'main/webapp/v2/vendor/**/*.js', included: false},
+            {pattern: 'main/webapp/v2/*.json', included: false},
             {pattern: 'main/webapp/v2/js/**/*.js', included: false},
             {pattern: 'test/javascript/unit/**/*Spec.js', included: false},
 
@@ -44,8 +45,11 @@ module.exports = function (config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['dots'],
-
+        reporters: ['dots','junit'],
+        junitReporter: {
+            outputFile: 'test/javascript/test-results.xml',
+            suite: ''
+        },
 
         // web server port
         port: 9876,

@@ -276,7 +276,7 @@
                 <executions>
                     <execution>
                         <id>npm-install</id>
-                        <phase>prepare-package</phase>
+                        <phase>test-compile</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -285,6 +285,20 @@
                             <executable>npm</executable>
                             <arguments>
                                 <argument>install</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>bower-install</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>buildutils</workingDirectory>
+                            <executable>gulp</executable>
+                            <arguments>
+                                <argument>bower</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -319,7 +333,7 @@
                 </executions>
                 <configuration>
                     <configFile>src/test/javascript/karma.conf.js</configFile>
-                 <!--   <junitReportFile>src/test/javascript/test-results.xml</junitReportFile>-->
+                    <junitReportFile>src/test/javascript/test-results.xml</junitReportFile>
                     <reportsDirectory>${project.build.directory}/karma-reports</reportsDirectory>
                     <browsers>Chrome</browsers>
                     <autoWatch>false</autoWatch>
@@ -327,8 +341,8 @@
                     <colors>true</colors>
                     <skipKarma>false</skipKarma>
                     <skipTests>false</skipTests>
-                    <karmaFailureIgnore>false</karmaFailureIgnore>
-                    <reporters>dots</reporters>
+                    <karmaFailureIgnore>true</karmaFailureIgnore>
+                    <reporters>dots,junit</reporters>
                 </configuration>
             </plugin>
             <!-- build war and  jar file -->

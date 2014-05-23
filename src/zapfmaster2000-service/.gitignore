@@ -3,3 +3,4 @@
 src/main/webapp/v2/vendor
 buildutils/node_modules
 dist
+test-results.xml
