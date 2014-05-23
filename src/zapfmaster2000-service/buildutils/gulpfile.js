@@ -5,7 +5,9 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     clean = require('gulp-clean'),
     sass = require('gulp-sass'),
-    watch = require("gulp-watch");
+    watch = require("gulp-watch"),
+    plumber = require("gulp-plumber");
+
 
 var basedirV2 = "../src/main/webapp/v2";
 var basedir = "../src/main/webapp";
@@ -20,13 +22,14 @@ gulp.task("clean", function () {
 
 });
 
+/*Installs frontend dependencies*/
 gulp.task('bower', function () {
     "use strict";
     return bower()
         .pipe(gulp.dest(basedirV2 + '/vendor'));
 });
 
-
+/*Concat and compress js files*/
 gulp.task('rjs', ['bower'], function () {
     "use strict";
     return rjs({
@@ -43,6 +46,7 @@ gulp.task('rjs', ['bower'], function () {
         .pipe(gulp.dest(distdir + '/v2/js'));
 });
 
+/*Only concat js filees*/
 gulp.task('rjs-nouglify', ['bower'], function () {
     "use strict";
     return rjs({
@@ -55,7 +59,7 @@ gulp.task('rjs-nouglify', ['bower'], function () {
     })
         .pipe(gulp.dest(distdir + '/v2/js'));
 });
-
+/*Checks js syntax*/
 gulp.task('lint', function () {
     "use strict";
     return gulp.src(basedirV2 + '/js/**/*.js')
@@ -63,17 +67,21 @@ gulp.task('lint', function () {
         .pipe(jshint.reporter('default'));
 });
 
-
+/*Compiles Sass*/
 gulp.task("sass", function () {
-  return gulp.src(basedirV2 + '/sass/*.scss')
+    return gulp.src(basedirV2 + '/sass/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest(basedirV2+'/css/sass'));
+        .pipe(gulp.dest(basedirV2 + '/css/sass'));
 });
+
+/*Watch task for sass development*/
 gulp.task('watch', function () {
     gulp.src(basedirV2 + '/sass/**/*.scss')
-        .pipe(watch(function(files) {
-            return gulp.src(basedirV2 + '/**/*.scss').pipe(sass())
-                .pipe(gulp.dest(basedirV2+'/css'));
+        .pipe(watch(function (files) {
+            return gulp.src(basedirV2 + '/**/*.scss')
+                .pipe(plumber())
+                .pipe(sass())
+                .pipe(gulp.dest(basedirV2 + '/css'));
         }));
 });
 
