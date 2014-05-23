@@ -296,7 +296,7 @@
                         </goals>
                         <configuration>
                             <workingDirectory>buildutils</workingDirectory>
-                            <executable>gulp</executable>
+                            <executable>node_modules/.bin/gulp</executable>
                             <arguments>
                                 <argument>bower</argument>
                             </arguments>
