@@ -325,7 +325,7 @@
                 <version>1.7</version>
                 <executions>
                     <execution>
-                        <phase>test</phase>
+                        <phase>process-test-resources</phase>
                         <goals>
                             <goal>start</goal>
                         </goals>
@@ -339,10 +339,10 @@
                     <autoWatch>false</autoWatch>
                     <singleRun>true</singleRun>
                     <colors>true</colors>
-                    <skipKarma>false</skipKarma>
-                    <skipTests>false</skipTests>
+                    <!--<skipKarma>false</skipKarma>-->
+                   <!-- <skipTests>false</skipTests>-->
                     <karmaFailureIgnore>true</karmaFailureIgnore>
-                    <reporters>dots,junit</reporters>
+                    <reporters>progress,junit</reporters>
                 </configuration>
             </plugin>
             <!-- build war and  jar file -->

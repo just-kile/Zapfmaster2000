@@ -70,7 +70,7 @@ define(function () {
                 exports: "nv"
             },
             Console: {
-                exports: "console"
+                exports: "debug"
             }
 
         },

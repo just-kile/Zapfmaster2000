@@ -25,6 +25,7 @@
 
 
 require(["base/main/webapp/v2/js/config-require"], function (config) {
+
     //var config = {paths:{},shim:{}};
     // improve config
     config.baseUrl = 'base/main/webapp/v2/js';

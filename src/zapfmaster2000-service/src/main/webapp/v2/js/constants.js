@@ -9,8 +9,8 @@ define([
         constants = JSON.parse(constants);
     }
 
-    Console.group("Entering Constants module.");
-    Console.info("Register constants: ", constants);
-    Console.groupEnd();
+    //Console.group("Entering Constants module.");
+    //Console.debug("Register constants: ", constants);
+    //Console.groupEnd();
     return constants;
 });

@@ -19,6 +19,7 @@ module.exports = function (config) {
 
 //            {pattern: 'main/webapp/v2/vendor/angular/angular.js', included: true},
   //          {pattern: 'main/webapp/v2/vendor/angular-mocks/angular-mocks.js', included: true},
+            //{pattern: 'main/webapp/v2/vendor/console/ba-debug.js', included: true},
 
             {pattern: 'main/webapp/v2/vendor/**/*.js', included: false},
             {pattern: 'main/webapp/v2/*.json', included: false},
@@ -45,7 +46,7 @@ module.exports = function (config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['dots','junit'],
+        reporters: ["progress",'junit'],
         junitReporter: {
             outputFile: 'test/javascript/test-results.xml',
             suite: ''
@@ -58,7 +59,7 @@ module.exports = function (config) {
         // enable / disable colors in the output (reporters and logs)
         colors: true,
 
-
+        loggers:[{type: 'console'}],
         // level of logging
         // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
         logLevel: config.LOG_INFO,
@@ -71,7 +72,6 @@ module.exports = function (config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: ['Chrome'],
-
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
