@@ -35,9 +35,11 @@ define(['Console', 'd3'], function (Console, d3) {
                             $timeout(function () {
                                 $animate.addClass(ele, animateOut, function () {
                                     $timeout(function () {
-                                        $scope.switch && $scope.switch({
-                                            ok: goOnWithUpdate
-                                        });
+                                        if($scope.switch){
+                                            $scope.switch({
+                                                ok: goOnWithUpdate
+                                            });
+                                        }
                                     }, 1000);
 
                                 });

@@ -23,7 +23,6 @@ require(["config-require"],function(config){
         'AngularTranslateCookieStorage'
 
     ], function (require, Console, $, _, moment, d3, angular, angularRoute, angularResource, angularAnimate) {
-        "use strict";
         Console.group("Bootstrap dependencies loaded.");
         Console.info("Console", Console);
         Console.info("jQuery", $);

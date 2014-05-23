@@ -23,4 +23,4 @@ define([
             template: statsTemplate
         }
     };
-})
+});

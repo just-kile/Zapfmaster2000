@@ -20,7 +20,9 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     $scope.image = data.achievementImage;
                     $scope.description = data.description;
                     $scope.users = data.users;
-                    callback && callback();
+                    if (callback) {
+                        callback();
+                    }
                 }, {id: achievementId});
             }
 

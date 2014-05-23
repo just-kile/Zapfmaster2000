@@ -35,6 +35,27 @@ define(['Console', 'jQuery', 'Underscore'], function (Console, $, _) {
                             }
                             return result;
                         };
+
+                        function animateElementIn(els, offset, index) {
+                            $animate.addClass($(els[offset + index]), 'animated ' + c.FIGURE_CHART.ANIMATION_IN, function () {
+                                $timeout(function () {
+                                    $animate.removeClass($(els[offset + index]), 'animated ' + c.FIGURE_CHART.ANIMATION_IN);
+
+                                }, 1000);
+                            });
+                        }
+
+                        function animateElementOut(els, offset, index) {
+                            $animate.addClass($(els[offset - index]), 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
+                                $timeout(function () {
+                                    var currEl = $(els[offset - index]);
+                                    $animate.removeClass(currEl, 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
+                                        currEl.remove();
+                                    });
+                                }, 2000);
+                            });
+                        }
+
                         $scope.images = [];
                         $scope.countimage = {
                             height: c.FIGURE_CHART.INITIAL_HEIGHT + 30,
@@ -51,33 +72,14 @@ define(['Console', 'jQuery', 'Underscore'], function (Console, $, _) {
                                 // $timeout(function () {//workaround: image width is not set fast enough
                                 offset = oldArray.length + 1;
                                 for (i = diff - 1; i >= 0; i--) {
-
-                                    (function (index) {
-                                        $animate.addClass($(els[offset + index]), 'animated ' + c.FIGURE_CHART.ANIMATION_IN, function () {
-                                            $timeout(function () {
-                                                $animate.removeClass($(els[offset + index]), 'animated ' + c.FIGURE_CHART.ANIMATION_IN);
-
-                                            }, 1000);
-                                        });
-                                    })(i);
-
+                                    animateElementIn.call(this, els, offset, i);
                                 }
                                 //  }, 0)
 
                             } else if (diff < 0) {
                                 offset = oldArray.length + 1;
                                 for (i = -diff; i > 0; i--) {
-                                    (function (index) {
-                                        $animate.addClass($(els[offset - index]), 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
-                                            $timeout(function () {
-                                                var currEl = $(els[offset - index]);
-                                                $animate.removeClass(currEl, 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
-                                                    currEl.remove();
-                                                });
-                                            }, 2000);
-                                        });
-                                    })(i);
-
+                                    animateElementOut.call(this, els, offset, i);
                                 }
                             }
 
