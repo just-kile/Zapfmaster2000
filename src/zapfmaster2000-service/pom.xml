@@ -335,7 +335,7 @@
                     <configFile>src/test/javascript/karma.conf.js</configFile>
                     <junitReportFile>src/test/javascript/test-results.xml</junitReportFile>
                     <reportsDirectory>${project.build.directory}/karma-reports</reportsDirectory>
-                    <browsers>Chrome</browsers>
+                    <browsers>Chrome,Firefox</browsers>
                     <autoWatch>false</autoWatch>
                     <singleRun>true</singleRun>
                     <colors>true</colors>
