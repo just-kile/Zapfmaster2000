@@ -3,7 +3,9 @@ var gulp = require('gulp'),
     rjs = require("gulp-requirejs"),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
-    clean = require('gulp-clean');
+    clean = require('gulp-clean'),
+    sass = require('gulp-sass'),
+    watch = require("gulp-watch");
 
 var basedirV2 = "../src/main/webapp/v2";
 var basedir = "../src/main/webapp";
@@ -31,7 +33,7 @@ gulp.task('rjs', ['bower'], function () {
         baseUrl: basedirV2 + "/js",
         out: 'bootstrap.js',
         name: "bootstrap",
-       // fileExclusionRegExp:/^(nv.d3.min)/,
+        // fileExclusionRegExp:/^(nv.d3.min)/,
         mainConfigFile: basedirV2 + "/js/config-require.js",
         findNestedDependencies: true
     })
@@ -62,12 +64,20 @@ gulp.task('lint', function () {
 });
 
 
-
-gulp.task("scss", function () {
-
+gulp.task("sass", function () {
+  return gulp.src(basedirV2 + '/sass/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest(basedirV2+'/css/sass'));
+});
+gulp.task('watch', function () {
+    gulp.src(basedirV2 + '/sass/**/*.scss')
+        .pipe(watch(function(files) {
+            return gulp.src(basedirV2 + '/**/*.scss').pipe(sass())
+                .pipe(gulp.dest(basedirV2+'/css'));
+        }));
 });
 
 
-gulp.task('default', [ "bower", "lint"]);
-gulp.task('develop', [ "lint",  'scss', 'rjs-nouglify']);
-gulp.task('production', [ "lint", 'scss', 'rjs']);
+gulp.task('default', [ "bower", "lint", "sass"]);
+gulp.task('develop', [ "lint", 'sass', 'rjs-nouglify']);
+gulp.task('production', [ "lint", 'sass', 'rjs']);
