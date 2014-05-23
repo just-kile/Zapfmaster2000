@@ -11,7 +11,7 @@
 	</modules>
 
 	<properties>
-		<zm2k.version>2.2-Bodacious-Bock-SNAPSHOT</zm2k.version>
+		<zm2k.version>2.3-Bodacious-Bock-SNAPSHOT</zm2k.version>
 	</properties>
 
 </project>

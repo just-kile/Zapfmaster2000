@@ -327,6 +327,8 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 
 .zmo-challenges img.userimage1 {
     left: 0px;
+    width:52px;
+    height:52px;
     /* width: 12.8%;
      height: 50%;  */
 }
@@ -338,6 +340,8 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 
 .zmo-challenges img.userimage2 {
     right: 0px;
+    width:52px;
+    height:52px;
     /* width: 12.8%;
      height: 50%; */
 }
