@@ -4,21 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/Files.cpp \
-../src/ZapfController.cpp \
-../src/ZapfDisplay.cpp \
+../src/Threads.cpp \
 ../src/ZapfkitClient.cpp 
 
 OBJS += \
-./src/Files.o \
-./src/ZapfController.o \
-./src/ZapfDisplay.o \
+./src/Threads.o \
 ./src/ZapfkitClient.o 
 
 CPP_DEPS += \
-./src/Files.d \
-./src/ZapfController.d \
-./src/ZapfDisplay.d \
+./src/Threads.d \
 ./src/ZapfkitClient.d 
 
 

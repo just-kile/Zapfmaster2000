@@ -1,21 +1,21 @@
 CC        := g++
 LD        := g++
 
-MODULES   := views serial
+MODULES   := main statemachine
 SRC_DIR   := $(addprefix src/,$(MODULES))
 BUILD_DIR := $(addprefix build/,$(MODULES))
 
 SRC       := $(foreach sdir,$(SRC_DIR),$(wildcard $(sdir)/*.cpp)) $(wildcard src/*.cpp)
 OBJ       := $(patsubst src/%.cpp,build/%.o,$(SRC))
 INCLUDES  := $(addprefix -I,$(SRC_DIR))
-ALL_LIBS  := curl SDL SDL_ttf SDL_image boost_thread wiringPi pthread log4cpp
+ALL_LIBS  := curl SDL SDL_ttf SDL_image boost_thread boost_system wiringPi pthread log4cpp
 LIBS	  := $(addprefix -l,$(ALL_LIBS))
 
 vpath %.cpp $(SRC_DIR)
 
 define make-goal
 $1/%.o: %.cpp
-	$(CC) $(INCLUDES) -c $$< -o $$@
+	$(CC) $(INCLUDES) -c -std=c++11 $$< -o $$@
 endef
 
 build/%.o: src/%.cpp
