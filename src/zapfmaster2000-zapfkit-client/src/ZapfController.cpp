@@ -43,11 +43,13 @@ void ZapfController::run() {
 				unkownUser = false;
 				display.paint(unkownUserView);
 				ledController.changeColor(RED);
+				valveController.switchValve(CLOSE);
 				boost::this_thread::sleep(boost::posix_time::seconds(1));
 			} else if (currentUser == "") {
 				// idle
 				display.paint(idleView);
 				ledController.changeColor(YELLOW);
+				valveController.switchValve(CLOSE);
 				boost::this_thread::sleep(boost::posix_time::seconds(100));
 			} else {
 				boost::posix_time::ptime now =
@@ -61,6 +63,7 @@ void ZapfController::run() {
 					amount = 0;
 				} else {
 					ledController.changeColor(GREEN);
+					valveController.switchValve(OPEN);
 					drawView.setUserName(currentUser);
 					drawView.setAmount(amount);
 					drawView.setUserImage(userImage);

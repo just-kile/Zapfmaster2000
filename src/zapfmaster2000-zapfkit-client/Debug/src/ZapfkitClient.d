@@ -10,7 +10,8 @@ src/ZapfkitClient.d: ../src/ZapfkitClient.cpp \
  ../src/../include/views/UnkownUserView.hpp \
  ../src/../include/serial/InputService.hpp \
  ../src/../include/serial/WebserviceConnector.hpp \
- ../src/../include/serial/LEDController.hpp ../src/../include/Files.hpp
+ ../src/../include/serial/LEDController.hpp \
+ ../src/../include/serial/ValveController.hpp ../src/../include/Files.hpp
 
 ../src/../include/ZapfDisplay.hpp:
 
@@ -37,5 +38,7 @@ src/ZapfkitClient.d: ../src/ZapfkitClient.cpp \
 ../src/../include/serial/WebserviceConnector.hpp:
 
 ../src/../include/serial/LEDController.hpp:
+
+../src/../include/serial/ValveController.hpp:
 
 ../src/../include/Files.hpp:

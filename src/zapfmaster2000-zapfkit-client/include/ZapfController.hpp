@@ -16,6 +16,7 @@
 #include "serial/InputService.hpp"
 #include "serial/WebserviceConnector.hpp"
 #include "serial/LEDController.hpp"
+#include "serial/ValveController.hpp"
 #include <boost/thread.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <log4cpp/Category.hh>
@@ -32,6 +33,7 @@ private:
 	UnkownUserView unkownUserView;
 	WebserviceConnector* connector;
 	LEDController ledController;
+	ValveController valveController;
 
 	bool unkownUser;
 	std::string currentUser;
