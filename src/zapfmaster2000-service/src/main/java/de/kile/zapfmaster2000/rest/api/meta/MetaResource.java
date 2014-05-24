@@ -15,10 +15,18 @@ public class MetaResource {
 	@Path("version")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response retrieveVersion() {
+		boolean isProductive = checkIsProductive(VersionConstants.POM_VERSION);
+
 		VersionResponse versionResponse = new VersionResponse();
 		versionResponse.setBuildNumber(VersionConstants.BUILD_NUMBER);
 		versionResponse.setBuildTime(VersionConstants.BUILD_TIME);
 		versionResponse.setPomVersion(VersionConstants.POM_VERSION);
+		versionResponse.setProductive(isProductive);
+		
 		return Response.ok(versionResponse).build();
+	}
+
+	private boolean checkIsProductive(String pomVersion) {
+		return pomVersion != null && !pomVersion.endsWith("SNAPSHOT");
 	}
 }
