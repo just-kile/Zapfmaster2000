@@ -7,6 +7,8 @@ public class VersionResponse {
 	private String buildTime;
 
 	private String pomVersion;
+	
+	private boolean isProductive;
 
 	public String getBuildNumber() {
 		return buildNumber;
@@ -30,6 +32,14 @@ public class VersionResponse {
 
 	public void setPomVersion(String pomVersion) {
 		this.pomVersion = pomVersion;
+	}
+
+	public boolean isProductive() {
+		return isProductive;
+	}
+
+	public void setProductive(boolean isProductive) {
+		this.isProductive = isProductive;
 	}
 
 }

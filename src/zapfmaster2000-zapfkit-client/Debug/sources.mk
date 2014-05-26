@@ -27,6 +27,8 @@ src/views \
 src/serial \
 src \
 build/views \
+build/statemachine \
 build/serial \
+build/main \
 build \
 
