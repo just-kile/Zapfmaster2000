@@ -337,32 +337,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Exec jasmine tests in Karma -->
-            <!--<plugin>
-                <groupId>com.kelveden</groupId>
-                <artifactId>maven-karma-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <configFile>src/test/javascript/karma.conf.js</configFile>
-                    <junitReportFile>src/test/javascript/test-results.xml</junitReportFile>
-                    <reportsDirectory>${project.build.directory}/karma-reports</reportsDirectory>
-                    <browsers>Chrome,Firefox</browsers>
-                    <autoWatch>false</autoWatch>
-                    <singleRun>true</singleRun>
-                    <colors>true</colors>
 
-                    <karmaFailureIgnore>true</karmaFailureIgnore>
-                    <reporters>progress,junit</reporters>
-                </configuration>
-            </plugin>-->
             <!-- build war and  jar file -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
