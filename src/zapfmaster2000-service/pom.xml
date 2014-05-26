@@ -313,7 +313,7 @@
                             <executable>node_modules/karma/bin/karma</executable>
                             <arguments>
                                 <argument>start</argument>
-                                <argument>../src/test/javascript/karma.conf.js</argument>
+                                <argument>../src/test/resources/javascript/karma.conf.js</argument>
                                 <argument>--browsers=Chrome,Firefox</argument>
                                 <argument>--autoWatch=false</argument>
                                 <argument>--singleRun=true</argument>

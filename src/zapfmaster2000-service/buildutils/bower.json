@@ -23,7 +23,7 @@
         "animate.css": "v3.1.0",
         "requirejs":"latest",
         "requirejs-text":"~2.0.12",
-        "testr":"git://github.com/medallia/testr.js.git"
+        "squire":"~0.2.0"
 
     },
     "resolutions": {

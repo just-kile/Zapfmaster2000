@@ -5,7 +5,7 @@ module.exports = function (config) {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: '../../',
+        basePath: '../../../',
 
 
         // frameworks to use
@@ -21,12 +21,12 @@ module.exports = function (config) {
   //          {pattern: 'main/webapp/v2/vendor/angular-mocks/angular-mocks.js', included: true},
             //{pattern: 'main/webapp/v2/vendor/console/ba-debug.js', included: true},
 
+            'test/resources/javascript/test-main.js',
             {pattern: 'main/webapp/v2/vendor/**/*.js', included: false},
             {pattern: 'main/webapp/v2/*.json', included: false},
             {pattern: 'main/webapp/v2/js/**/*.js', included: false},
-            {pattern: 'test/javascript/unit/**/*Spec.js', included: false},
 
-            'test/javascript/unit/test-main.js'
+            {pattern: 'test/javascript/unit/**/*Spec.js', included: false}
         ],
 
 
@@ -48,7 +48,7 @@ module.exports = function (config) {
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         reporters: ["progress",'junit'],
         junitReporter: {
-            outputFile: 'test/javascript/test-results.xml',
+            outputFile: '../target/karma-reports/test-results.xml',
             suite: ''
         },
 

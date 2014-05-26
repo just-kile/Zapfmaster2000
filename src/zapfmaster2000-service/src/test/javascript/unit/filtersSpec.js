@@ -1,6 +1,7 @@
 define(["Console",'Underscore', 'Angular', 'angular-mocks', 'filters/filters', 'constants'],
     function (Console,_, angular, mocks, filters, c) {
         "use strict";
+
         describe('filters testing: ', function () {
             var mod;
 
