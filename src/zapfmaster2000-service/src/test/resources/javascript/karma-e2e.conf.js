@@ -1,26 +1,19 @@
-module.exports = function(config) {
-    config.set({
-        basePath: '../../',
-        frameworks: ['ng-scenario'],
-        files: [
-            'test/e2e/**/*.js'
-        ],
+exports.config = {
+    allScriptsTimeout: 11000,
 
-        autoWatch: false,
+    specs: [
+        '../../javascript/e2e/*.js'
+    ],
 
-        browsers: ['Firefox'],
+    capabilities: {
+        'browserName': 'chrome'
+    },
 
-        singleRun: true,
+    baseUrl: 'http://localhost:8000/app/',
 
-        proxies: {
-            '/': 'http://localhost:8000/'
-        },
+    framework: 'jasmine',
 
-        urlRoot: "__karma__",
-
-        junitReporter: {
-            outputFile: 'test_out/e2e.xml',
-            suite: 'e2e'
-        }
-    });
+    jasmineNodeOpts: {
+        defaultTimeoutInterval: 30000
+    }
 };
