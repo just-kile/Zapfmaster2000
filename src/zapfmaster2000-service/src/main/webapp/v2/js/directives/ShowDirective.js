@@ -2,7 +2,7 @@ define(['Console', 'd3'], function (Console, d3) {
         "use strict";
         Console.group("Entering BarChart directive.");
 
-        var directive = ['$animate','$timeout','ZMConstants', function ($animate,$timeout,c) {
+        var directive = ['$animate', '$timeout', 'ZMConstants', function ($animate, $timeout, c) {
                 return {
                     restrict: 'A',
                     scope: {
@@ -16,36 +16,36 @@ define(['Console', 'd3'], function (Console, d3) {
 
                                 $animate.removeClass(ele, 'animated ' + c.WIDGETS.ANIMATION_IN, function () {
 
-                                })
-                            },1000);
+                                });
+                            }, 1000);
                         });
-                       /* $scope.$on("$destroy", function () {
-                            $animate.addClass(ele, 'animated ' + c.WIDGETS.ANIMATION_OUT, function () {
-                                $timeout(function () {
+                        /* $scope.$on("$destroy", function () {
+                         $animate.addClass(ele, 'animated ' + c.WIDGETS.ANIMATION_OUT, function () {
+                         $timeout(function () {
 
-                                    $animate.removeClass(ele, 'animated ' + c.WIDGETS.ANIMATION_OUT, function () {
+                         $animate.removeClass(ele, 'animated ' + c.WIDGETS.ANIMATION_OUT, function () {
 
-                                    })
-                                }, 1000);
-                            });
+                         })
+                         }, 1000);
+                         });
 
-                        });*/
-                     /*   $scope.$watch("rows.center", function (newArray, oldArray) {
-                            var els = $element.find(".zm-widget");
+                         });*/
+                        /*   $scope.$watch("rows.center", function (newArray, oldArray) {
+                         var els = $element.find(".zm-widget");
 
-                            $animate.addClass($(els[0]), 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
-                                $timeout(function () {
-                                    var currEl = $(els[offset - index]);
-                                    $animate.removeClass(currEl, 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
-                                        currEl.remove();
-                                    })
-                                }, 2000);
-                            });
+                         $animate.addClass($(els[0]), 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
+                         $timeout(function () {
+                         var currEl = $(els[offset - index]);
+                         $animate.removeClass(currEl, 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
+                         currEl.remove();
+                         })
+                         }, 2000);
+                         });
 
-                        }, true);
-                                      */
+                         }, true);
+                         */
                     }
-                }
+                };
 
             }
             ]

@@ -3,8 +3,8 @@ define(['Console'], function (Console) {
     Console.group("Entering AchievementFilter module.");
 
     var service = ['ZMConstants', function (c) {
-        return function(input) {
-                return ""+input
+        return function (input) {
+            return typeof input === "undefined" || input === null ? "" : "" + input;
         };
 
     }];

@@ -12,7 +12,7 @@ define(['Console', 'd3'], function (Console, d3) {
                     //  templateUrl: 'js/directives/BarChart/template.html',
                     link: function ($scope, ele, attrs) {
                         // console.log($scope);
-                        console.log("Switch directive called!");
+                        Console.log("Switch directive called!");
                         $animate.addClass(ele, "animated");
                         //  var animateIn = "fadeInUpBig"//c.WIDGETS.ANIMATION_IN;
                         // var animateOut = "fadeOutDownBig"//c.WIDGETS.ANIMATION_OUT;
@@ -35,10 +35,12 @@ define(['Console', 'd3'], function (Console, d3) {
                             $timeout(function () {
                                 $animate.addClass(ele, animateOut, function () {
                                     $timeout(function () {
-                                        $scope.switch && $scope.switch({
-                                            ok: goOnWithUpdate
-                                        });
-                                    }, 1000)
+                                        if($scope.switch){
+                                            $scope.switch({
+                                                ok: goOnWithUpdate
+                                            });
+                                        }
+                                    }, 1000);
 
                                 });
                                 $animate.removeClass(ele, animateIn);
@@ -49,7 +51,7 @@ define(['Console', 'd3'], function (Console, d3) {
 
                         activateTimeout();
                     }
-                }
+                };
 
             }
             ]

@@ -3,10 +3,10 @@ define(['Console'], function (Console) {
     Console.group("Entering CountdownFiler module.");
 
     var service = ['ZMConstants', function (c) {
-        return function(input) {
-            if(input && input.indexOf("default")<0){
-                return input+"/big";
-            }  else{
+        return function (input) {
+            if (input && input.indexOf("default") < 0) {
+                return input + "/big";
+            } else {
                 return input;
             }
 

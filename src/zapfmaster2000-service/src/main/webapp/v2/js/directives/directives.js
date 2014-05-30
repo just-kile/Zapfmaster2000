@@ -1,18 +1,18 @@
 define([
     // Standard Libs
-    'Console'      // lib/console/console
-    , 'jQuery'     // lib/jquery/jquery
-    , 'Underscore' // lib/underscore/underscore
-    , 'Angular'    // lib/angular/angular
+    'Console',
+    'jQuery',
+    'Underscore',
+    'Angular',
 
     // Application Widgets
-    , 'directives/BarChart'
-    , 'directives/FigureChart/FigureChart'
-    , 'directives/FeedDirective/FeedDirective'
+    'directives/BarChart',
+    'directives/FigureChart',
+    'directives/FeedDirective',
 
-    , 'directives/ShowDirective'
-    , 'directives/SwitchDirective'
-    , 'directives/TextfillDirective'
+    'directives/ShowDirective',
+    'directives/SwitchDirective',
+    'directives/TextfillDirective'
 
 //    ,'directives/LineChart'
 
@@ -36,8 +36,9 @@ define([
         _.each(directives, function (filter, name) {
             angModule.directive(name, filter);
         });
-        Console.debug("Custom widgets initialized.");
-    }
+        Console.info("Registered Directives: ", directives);
+
+    };
 
     Console.groupEnd();
     return {
