@@ -5,7 +5,11 @@ First of all: Install nodejs and npm
 Type in command 
 
 * `sudo add-apt-repository ppa:chris-lea/node.js`
-* `sudo apt-get install nodejs npm`
+* `sudo apt-get install nodejs`
+
+Try npm -v to see if it has been installed, otherwise sudo apt-get install npm
+
+Now 
 
 It is recommended (but optional) to install karma and gulp globally with
 
