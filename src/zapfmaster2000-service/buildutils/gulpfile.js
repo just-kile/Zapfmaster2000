@@ -53,6 +53,9 @@ gulp.task('rjs-nouglify', ['bower'], function () {
         baseUrl: basedirV2 + "/js",
         out: 'bootstrap.js',
         name: "bootstrap",
+        paths: {
+            nvd3: "empty:"
+        },
         //mainConfigFile: basedirV2 + "/js/config-require.js",
         mainConfigFile: basedirV2 + "/js/config-require.js",
         findNestedDependencies: true
@@ -84,7 +87,6 @@ gulp.task('watch', function () {
                 .pipe(gulp.dest(basedirV2 + '/css'));
         }));
 });
-
 
 
 gulp.task('default', [ "bower", "lint", "sass"]);
