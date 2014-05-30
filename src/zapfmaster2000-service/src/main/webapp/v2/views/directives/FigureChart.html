@@ -1,0 +1,30 @@
+<div ng-style="{'line-height':countimage.height+'px'}">
+    <div class="zm-figure-chart-item" ng-style="{height:countimage.height+'px'}">
+        <div class="zm-figure-chart-countimage">
+            <img ng-src="{{countimage.imgsrc}}" ng-style="{height:countimage.height+'px'}"/>
+            <div>{{countimage.mugcount}}</div>
+        </div>
+    </div>
+
+    <div class="zm-figure-chart-item" ng-repeat="image in images"
+         ng-style="{height:image.height+'px',width:(image.width)+'px'}">
+        <div style="position:relative;"
+             ng-style="{height:image.height+'px'}">
+
+
+            <!--<div class="zm-crop" ng-style="{height:image.amount+'%'}"> --->
+            <!-- <img ng-src="{{image.img_src_empty}}" style="height: 100px" ng-style="{top:100-image.amount+'%'}" />        -->
+            <div class="zm-crop" ng-style="{height:image.height+'px','line-height':'normal'}">
+                <img ng-src="{{image.img_src_empty}}" ng-style="{height:image.height+'px'}"/>
+            </div>
+            <div class="zm-crop" ng-style="{height:(100-image.amount)+'%',top:image.amount+'%','line-height':'normal'}">
+                <img ng-src="{{image.img_src_full}}"
+                     ng-style="{'margin-top':-image.amount*image.height/100+'px',height:image.height+'px'}"/>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="zm-figure-chart-info"><span>{{complete_mug_count|amount:tofixed}} {{unittitle}}</span> <span ng-if="unittext">@ {{mug_size}}{{unittext}}</span></div>
+</div>

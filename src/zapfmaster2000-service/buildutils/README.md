@@ -22,6 +22,8 @@ so you can cd to buildutils and type:
 
 
  
+ To run karma tests just type
+ 
+ *`karma start src/test/resources/javascript/karma.conf.js`
 
-
-That's it!
+The jasmine tests will be executed everytime a file has been changed.
