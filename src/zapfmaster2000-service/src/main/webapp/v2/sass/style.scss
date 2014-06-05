@@ -5,15 +5,5 @@
   }
 }
 @import "includes/settings";
-
-.content-navigation {
-  border-color: $blue;
-  color: darken($blue, 9%);
-  font-family: RalewayBold;
-}
-
-.border {
-  padding: $margin / 2;
-  margin: $margin / 2;
-  border-color: $blue;
-}
+@import "includes/home";
+@import "includes/navbar";

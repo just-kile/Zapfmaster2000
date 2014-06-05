@@ -2,18 +2,24 @@ define(['Console', 'Underscore'], function (Console, _) {
     "use strict";
     Console.group("Entering CometService module.");
 
-    var service = ['$http', "ZMConstants", '$q', function ($http, c, $q) {
+    var service = ['$http', "ZMConstants", '$q', '$rootScope', function ($http, c, $q, $rootScope) {
         var callbacks = {
             newspush: []
         };
-        var ajaxCalls = {};
-
-        var startCometService = function (url, cbKey) {
-            ajaxCalls[cbKey] = $q.defer();
+        var newspushStopped = false;
+        //var ajaxCalls = {};
+        var cometRunningMap = {};
+        var startCometServiceFor = function (url, cbKey) {
+            //ajaxCalls[cbKey] = $q.defer();
+            cometRunningMap[cbKey] = {
+                running: true,
+                url: url,
+                stop: $q.defer()
+            };
             $http({method: 'GET', url: c.baseUrl + url, params: {
                 token: localStorage.getItem("token"),
                 _: new Date().getTime()
-            }, timeout: ajaxCalls[cbKey].promise}).
+            }, timeout: cometRunningMap[cbKey].stop.promise}).
                 success(function (data, status, headers, config) {
 
                     Console.group("Received Push datas");
@@ -24,7 +30,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                                 callback(data);
                             }
                         });
-                        startCometService(url, cbKey);
+                        startCometServiceFor(url, cbKey);
 
                     }
                     Console.groupEnd();
@@ -33,19 +39,60 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }).
                 error(function (data, status, headers, config) {
                     Console.log("Error Status: ", status);
-                    if ([503, 0, 504].indexOf(status) > -1) {
+                    if (!cometRunningMap[cbKey].running) {
+                        Console.debug("Comet service manually stopped!");
+                        return;
+                    } else if ([503, 0, 504].indexOf(status) > -1) {
                         Console.debug("Timeout. Reconnect Newspush");
-                        startCometService(url, cbKey);
+                        startCometServiceFor(url, cbKey);
 
                     } else {
                         Console.debug("Reconnect in 5s...");
                         window.setTimeout(function () {
-                            startCometService(url, cbKey);
+                            startCometServiceFor(url, cbKey);
                         }, 5000);
                     }
+                    return true;
                 });
         };
-        startCometService(c.newsPushUrl, 'newspush');
+        var resetPush = function (id) {
+            if (callbacks && callbacks[id]) {
+                callbacks[id].length = 0;
+                //if( ajaxCalls[id])ajaxCalls[id].resolve();
+            }
+        };
+        var reset = function () {
+            _.each(callbacks, function (push, boxId) {
+                resetPush(boxId);
+            });
+
+            Console.log("Reset callbacks.");
+        };
+        var startNewsPush = function () {
+            startCometServiceFor(c.newsPushUrl, 'newspush');
+        };
+        var stopCometServiceFor = function (cbKey) {
+            if (cometRunningMap[cbKey] && cometRunningMap[cbKey].running) {
+                cometRunningMap[cbKey].running = false;
+                cometRunningMap[cbKey].stop.resolve();
+            }
+        };
+        var stopCometService = function (cbKey) {
+            _.each(cometRunningMap, function (req, cbKey) {
+                stopCometServiceFor(cbKey);
+            });
+        };
+        var startCometService = function () {
+            _.each(cometRunningMap, function (req, cbKey) {
+                if (!req.running) {
+                    startCometServiceFor(req.url, cbKey);
+                }
+            });
+        };
+
+        $rootScope.$on('$routeChangeSuccess', function (next, last) {
+            reset();
+        });
 
         return {
             addPushListener: function (callback) {
@@ -58,7 +105,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             addInstantUpdateListener: function (boxId, callback) {
                 if (callback) {
                     if (!callbacks[boxId]) {
-                        startCometService(c.updateAmountPushUrl.replace("{0}", boxId), boxId);
+                        startCometServiceFor(c.updateAmountPushUrl.replace("{0}", boxId), boxId);
                         callbacks[boxId] = [];
                     }
                     callbacks[boxId].push(callback);
@@ -68,20 +115,11 @@ define(['Console', 'Underscore'], function (Console, _) {
                 // Console.debug("Push Listener", callback, "added");
                 Console.log("All Push Listeners: ", callbacks);
             },
-            resetPush: function (id) {
-                if (callbacks && callbacks[id]) {
-                    callbacks[id].length = 0;
-                    //if( ajaxCalls[id])ajaxCalls[id].resolve();
-                }
-            },
-            reset: function () {
-                var me = this;
-                _.each(callbacks, function (push, boxId) {
-                    me.resetPush(boxId);
-                });
-
-                Console.log("Reset callbacks.");
-            }
+            resetPush: resetPush,
+            reset: reset,
+            startCometService: startCometService,
+            stopCometService: stopCometService,
+            startNewsPush:startNewsPush
         };
 
     }];
