@@ -1,6 +1,6 @@
 define(['Console', 'text!../../rows.json', 'Underscore'], function (Console, rowsResponse, _) {
     "use strict";
-    Console.group("Entering HomeController module.");
+    Console.group("Entering Presentationcontroller module.");
     var rows = localStorage.getItem("zm-rows") || rowsResponse;
     if (typeof rows === "string") {
         rows = JSON.parse(rowsResponse);
