@@ -6,7 +6,7 @@ define(["Console", 'Underscore'], function (Console, _) {
         function ($scope, $routeParams, $timeout, c, $animate, $translate) {
 
 
-    }];
+        }];
     Console.groupEnd();
     return controller;
 });

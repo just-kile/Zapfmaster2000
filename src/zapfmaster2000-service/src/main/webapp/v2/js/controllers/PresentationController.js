@@ -5,8 +5,10 @@ define(['Console', 'text!../../rows.json', 'Underscore'], function (Console, row
     if (typeof rows === "string") {
         rows = JSON.parse(rowsResponse);
     }
-    var controller = ['$scope', '$routeParams', '$timeout', 'ZMConstants', '$animate', '$translate', function ($scope, $routeParams, $timeout, c, $animate, $translate) {
+    var controller = ['$scope', '$routeParams', '$timeout', 'ZMConstants', '$animate', '$translate',"CometService",
+        function ($scope, $routeParams, $timeout, c, $animate, $translate,CometService) {
         Console.group("HomeController entered.");
+        CometService.startNewsPush();
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         $scope.changeLanguage = function (langKey) {
             $translate.use(langKey);

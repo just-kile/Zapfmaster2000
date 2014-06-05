@@ -10,7 +10,8 @@ define([
     'controllers/AppController',
     'controllers/PresentationController',
     'controllers/StatsController',
-    'controllers/WebappController',
+    'controllers/HomeController',
+    'controllers/ChallengesWebappController',
 
     //Modules Controller
     'widgets/BestlistController',
@@ -31,14 +32,17 @@ define([
 
     //Constants
     'constants'
-], function (Console, _, routes, app, presentation, stats,webapp, bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
+], function (Console, _, routes, app, presentation, stats,home,challengesWebapp, bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
     "use strict";
     Console.group("Entering controllers module.");
     Console.info("AppController", app);
 
     var controllers = {
         PresentationController: presentation,
-        WebappController:webapp,
+        HomeController:home,
+        ChallengesWebappController:challengesWebapp,
+        StatsController: stats,
+
         BestlistController: bestlist,
         ChallengeController: challenge,
         NewsstackController: newsstack,
@@ -52,8 +56,7 @@ define([
         UserProfileController: userprofile,
         AchievementStatsController: achievementstats,
         DistributionController: distribution,
-        AboutUsController: aboutUs,
-        stats: stats
+        AboutUsController: aboutUs
 
     };
 
@@ -84,9 +87,6 @@ define([
             $rootScope.$on('$routeChangeSuccess', function (next, last) {
                 Console.debug("Navigating from ", last);
                 Console.debug("Navigating to   ", next);
-                CometService.reset();
-
-
             });
             $rootScope.$on('$viewContentLoaded', function () {
                 $templateCache.removeAll();
