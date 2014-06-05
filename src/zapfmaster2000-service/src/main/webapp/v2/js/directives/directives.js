@@ -12,11 +12,13 @@ define([
 
     'directives/ShowDirective',
     'directives/SwitchDirective',
-    'directives/TextfillDirective'
+    'directives/TextfillDirective',
+    'directives/NavigationDirective'
 
 //    ,'directives/LineChart'
 
-], function (Console, $, _, angular, BarChart, FigureChart, FeedDirective, ShowDirective, SwitchDirective, TextfillDirective) {
+], function (Console, $, _, angular, BarChart, FigureChart, FeedDirective, ShowDirective, SwitchDirective,
+             TextfillDirective, NavigationDirective) {
     "use strict";
     Console.group("Entering Widgets module.");
 
@@ -27,7 +29,8 @@ define([
         figurechart: FigureChart,
         animatewidget: ShowDirective,
         feed: FeedDirective,
-        textfill: TextfillDirective
+        textfill: TextfillDirective,
+        navigation:NavigationDirective
     };
 
     Console.info("Registered directives: ", directives);

@@ -14,15 +14,15 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="zm-navbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#home">Home</a></li>
-                <li><a href="#challenges">Challenges</a></li>
-                <li><a href="#statistics">Statistics</a></li>
-                <li><a href="#settings">Settings</a></li>
+                <li class="{{topic==='home'?'active':''}}"><a href="#home">Home</a></li>
+                <li class="{{topic==='challenges'?'active':''}}"><a href="#challenges">Challenges</a></li>
+                <li class="{{topic==='stats'?'active':''}}"><a href="#statistics">Statistics</a></li>
+                <li class="{{topic==='settings'?'active':''}}"><a href="#settings">Settings</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#presentation">Presentation Mode</a></li>
-                <li><a href="../">Logout</a></li>
+                <li><a href="../../">Logout</a></li>
 
             </ul>
         </div><!-- /.navbar-collapse -->
