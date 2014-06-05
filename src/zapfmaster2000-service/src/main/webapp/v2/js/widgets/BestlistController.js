@@ -32,7 +32,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 });
                 return data;
             };
-            var initScope = function () {
+            var initScope = function (isOnlyBestlist) {
                 ajax.getDatas(c.bestlistUrl, function (data) {
                     if (data.length > c.bestlistMax) {
                         data.length = c.bestlistMax;
@@ -41,7 +41,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     calcPercentAmount(data);
                     $scope.bestlist = data;
 
-                    if ($scope.bestlist && $scope.bestlist.length > 0) {
+                    if (!isOnlyBestlist && $scope.bestlist && $scope.bestlist.length > 0) {
                         $timeout(function () {
                             $scope.arrow.visible = true;
                             updateStatsArrow();
@@ -203,7 +203,7 @@ define(['Console', 'Underscore'], function (Console, _) {
 
                     initArrow();
                 }
-                initScope();
+                initScope(isOnlyBestlist);
             };
 
             $scope.$on("$destroy", function () {

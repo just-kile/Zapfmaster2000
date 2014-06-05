@@ -1,17 +1,14 @@
-<div ng-include="'views/header.html'"></div>
+<navigation topic="home"></navigation>
+
 <div class="row" style="margin-top:50px">
     <div ng-controller="BestlistController" ng-init="init(true);" class="col-xs-12 col-sm-6 col-md-8">
         <ul>
             <li ng-repeat="user in bestlist">
                 <div class="zm-relative">
                     <div class="zm-absolute amount">{{user.amount|amount}} l</div>
-
                 </div>
-
             </li>
-
         </ul>
-
     </div>
     <div class="col-xs-6 col-md-4">test2</div>
 
