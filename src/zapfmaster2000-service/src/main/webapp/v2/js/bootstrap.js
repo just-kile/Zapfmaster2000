@@ -10,10 +10,11 @@ require(["config-require"],function(config){
         'Underscore',
         'moment',
         'd3',
+        'Angular',
         'nvd3',
         'text',
+        'Bootstrap',
         'AngularD3Directives',
-        'Angular',
         'AngularRoute',
         'AngularResource',
         'AngularAnimate',
@@ -22,7 +23,7 @@ require(["config-require"],function(config){
         'AngularTranslateLocalStorage',
         'AngularTranslateCookieStorage'
 
-    ], function (require, Console, $, _, moment, d3, angular, angularRoute, angularResource, angularAnimate) {
+    ], function (require, Console, $, _, moment, d3, angular) {
         Console.group("Bootstrap dependencies loaded.");
         Console.info("Console", Console);
         Console.info("jQuery", $);
@@ -30,10 +31,6 @@ require(["config-require"],function(config){
         Console.info("Moment: ", moment);
         Console.info("d3: ", d3);
         Console.info("Angular: ", angular);
-        Console.group("Angular Directives");
-        Console.info("ngRoute: ", angularRoute);
-        Console.info("ngResource: ", angularResource);
-        Console.info("ngAnimate: ", angularAnimate);
         Console.groupEnd();
 
 

@@ -1,9 +1,10 @@
 define(function () {
     "use strict";
     var config;
-     requirejs.config({
+    requirejs.config({
         paths: {
             Console: '../vendor/console/ba-debug',
+            Bootstrap: '../vendor/bootstrap/dist/js/bootstrap.min',
             jQuery: '../vendor/jquery/dist/jquery.min',//'http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min'
             Underscore: '../vendor/underscore/underscore',
             d3: '../vendor/d3/d3.min',
@@ -54,6 +55,9 @@ define(function () {
             },
             jQuery: {
                 exports: "jQuery"
+            },
+            Bootstrap: {
+                deps: ["jQuery"]
             },
             Underscore: {
                 exports: "_"

@@ -1,26 +1,26 @@
 define([
-    'text!templates/index.html',
-    'text!templates/stats.html'
-], function (presentationTemplate, statsTemplate) {
+    'text!templates/presentation.html',
+    'text!templates/webapp.html'
+], function (presentationTemplate, webappTemplate) {
     "use strict";
     return {
         presentationSlide: {
             title: 'Presentation',
             route: '/presentation/:widgetId',
-            controller: 'presentationController',
+            controller: 'PresentationController',
             template: presentationTemplate
         },
         presentation: {
             title: 'Presentation',
             route: '/presentation',
-            controller: 'presentationController',
+            controller: 'PresentationController',
             template: presentationTemplate
         },
         home: {
             title: 'Home',
             route: '/home',
-            controller: 'presentationController',
-            template: presentationTemplate
+            controller: 'WebappController',
+            template: webappTemplate
         }
 
 
