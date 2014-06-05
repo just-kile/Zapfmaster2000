@@ -8,7 +8,7 @@ define([
 
     // Application Controller
     'controllers/AppController',
-    'controllers/HomeController',
+    'controllers/PresentationController',
     'controllers/StatsController',
 
     //Modules Controller
@@ -30,13 +30,13 @@ define([
 
     //Constants
     'constants'
-], function (Console, _, routes, app, home, stats, bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
+], function (Console, _, routes, app, presentation, stats, bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
     "use strict";
     Console.group("Entering controllers module.");
     Console.info("AppController", app);
 
     var controllers = {
-        home: home,
+        presentationController: presentation,
         BestlistController: bestlist,
         ChallengeController: challenge,
         NewsstackController: newsstack,
@@ -76,7 +76,7 @@ define([
                     }
                 );
             });
-            $routeProvider.otherwise({ redirectTo: routes.home.route });
+            $routeProvider.otherwise({ redirectTo: routes.presentation.route });
         }]);
         angModule.run(["$rootScope", "$templateCache", "CometService", function ($rootScope, $templateCache, CometService) {
             $rootScope.$on('$routeChangeSuccess', function (next, last) {
