@@ -52,7 +52,6 @@ define(['Console', 'Underscore'], function (Console, _) {
                             startCometServiceFor(url, cbKey);
                         }, 5000);
                     }
-                    return true;
                 });
         };
         var resetPush = function (id) {
@@ -69,7 +68,10 @@ define(['Console', 'Underscore'], function (Console, _) {
             Console.log("Reset callbacks.");
         };
         var startNewsPush = function () {
-            startCometServiceFor(c.newsPushUrl, 'newspush');
+            if (!cometRunningMap['newspush'] || !cometRunningMap['newspush'].running)
+            {
+                startCometServiceFor(c.newsPushUrl, 'newspush');
+            }
         };
         var stopCometServiceFor = function (cbKey) {
             if (cometRunningMap[cbKey] && cometRunningMap[cbKey].running) {
@@ -119,7 +121,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             reset: reset,
             startCometService: startCometService,
             stopCometService: stopCometService,
-            startNewsPush:startNewsPush
+            startNewsPush: startNewsPush
         };
 
     }];

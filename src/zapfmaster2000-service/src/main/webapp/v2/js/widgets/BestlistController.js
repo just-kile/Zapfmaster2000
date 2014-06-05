@@ -197,10 +197,15 @@ define(['Console', 'Underscore'], function (Console, _) {
                 //resizeMethod();
                 window.addEventListener("resize", resizeMethod, true);
             };
-            initResizing();
+            $scope.init = function (isOnlyBestlist) {
+                if (!isOnlyBestlist) {
+                    initResizing();
 
-            initScope();
-            initArrow();
+                    initArrow();
+                }
+                initScope();
+            };
+
             $scope.$on("$destroy", function () {
                 $timeout.cancel(changeInterval);
                 window.removeEventListener("resize", resizeMethod, true);
