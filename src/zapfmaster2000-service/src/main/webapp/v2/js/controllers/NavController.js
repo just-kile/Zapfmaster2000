@@ -12,7 +12,7 @@ define([
 
         $rootScope.$on('$routeChangeSuccess', function (next, last) {
             $scope.showNav = shouldShowNav();
-            //$(".navbar.navbar-inverse.navbar-fixed-top.zm-navbar").collapse("hide");
+
         });
         $scope.navClass = function (page) {
             var currentRoute = $location.path().substring(1) || 'home';
@@ -20,6 +20,7 @@ define([
         };
 
         $scope.load = function (topic) {
+            $("#zm-navbar").collapse("hide");
             $location.url('/' + topic);
         };
 
