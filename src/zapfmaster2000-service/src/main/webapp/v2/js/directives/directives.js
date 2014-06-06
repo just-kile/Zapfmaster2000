@@ -13,7 +13,6 @@ define([
     'directives/ShowDirective',
     'directives/SwitchDirective',
     'directives/TextfillDirective',
-    'directives/NavigationDirective'
 
 //    ,'directives/LineChart'
 
@@ -29,8 +28,7 @@ define([
         figurechart: FigureChart,
         animatewidget: ShowDirective,
         feed: FeedDirective,
-        textfill: TextfillDirective,
-        navigation:NavigationDirective
+        textfill: TextfillDirective
     };
 
     Console.info("Registered directives: ", directives);

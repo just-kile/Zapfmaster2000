@@ -5,7 +5,7 @@ define([
 
     // routing
     'routes/routes',
-
+    'controllers/NavController',
     // Application Controller
     'controllers/AppController',
     'controllers/PresentationController',
@@ -32,12 +32,13 @@ define([
 
     //Constants
     'constants'
-], function (Console, _, routes, app, presentation, stats,home,challengesWebapp, bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
+], function (Console, _, routes,nav, app, presentation, stats,home,challengesWebapp, bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
     "use strict";
     Console.group("Entering controllers module.");
     Console.info("AppController", app);
 
     var controllers = {
+        NavController:nav,
         PresentationController: presentation,
         HomeController:home,
         ChallengesWebappController:challengesWebapp,

@@ -27,7 +27,7 @@ define([
         },
         statistics: {
             title: 'Stats',
-            route: '/statistics',
+            route: '/stats',
             controller: 'StatsController',
             template: statsTemplate
         },
