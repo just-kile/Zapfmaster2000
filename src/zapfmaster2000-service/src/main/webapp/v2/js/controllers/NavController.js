@@ -5,13 +5,26 @@ define([
 ], function (Console, $, routes) {
     "use strict";
 
-    var appController = ['$scope', '$location', '$rootScope', function ($scope, $location, $rootScope) {
+    var appController = ['$scope', '$location', '$rootScope','$timeout', function ($scope, $location, $rootScope,$timeout) {
         function shouldShowNav() {
             return  !/presentation/.test($location.path().substring(1));
         }
+        function tmp(){
+            $timeout(function(){
+                $scope.showNav = !$scope.showNav;
+                tmp();
+            },1500);
 
+        }
         $rootScope.$on('$routeChangeSuccess', function (next, last) {
-            $scope.showNav = shouldShowNav();
+            if(shouldShowNav()){
+                $timeout(function(){
+                    $scope.showNav =true;
+                },500);
+            }else{
+                $scope.showNav =false;
+            }
+
 
         });
         $scope.navClass = function (page) {
