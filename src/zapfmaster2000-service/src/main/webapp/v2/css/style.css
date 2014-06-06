@@ -1339,3 +1339,21 @@ li.zm-newsfeed {
     color:white;
 
 }
+.zm-animate-show.ng-hide-add,
+.zm-animate-show.ng-hide-remove {
+    -webkit-transition:margin 0.5s;
+    -moz-transition:margin 0.5s;
+    -o-transition:margin 0.5s;
+    transition:margin 0.5s;
+    display:block!important;
+}
+
+.zm-animate-show.ng-hide-add.ng-hide-add-active,
+.zm-animate-show.ng-hide-remove {
+    margin-top:-50px;
+}
+
+.zm-animate-show.ng-hide-add,
+.zm-animate-show.ng-hide-remove.ng-hide-remove-active {
+    margin-top:0;
+}
