@@ -1,0 +1,6 @@
+.zmw-newsfeed {
+  .zm-backgrnd{
+    @include vendor-prefix(box-sizing, border-box);
+    margin:0;
+  }
+}
