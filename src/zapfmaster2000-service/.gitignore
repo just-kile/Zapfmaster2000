@@ -5,3 +5,4 @@ buildutils/node_modules
 dist
 test-results.xml
 src/main/webapp/v2/css/sass/
+style_sass.css
