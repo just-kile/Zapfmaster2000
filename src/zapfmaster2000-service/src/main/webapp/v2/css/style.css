@@ -1339,3 +1339,6 @@ li.zm-newsfeed {
     color:white;
 
 }
+.nvd3.nv-wrap.nv-scatter .nv-groups{
+    display:none;
+}
