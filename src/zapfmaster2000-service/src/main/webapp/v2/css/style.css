@@ -1,24 +1,3 @@
-/*@font-face {
-    font-family: RalewayLight;
-    src: url(fonts/Raleway-Light.otf);
-}
-
-@font-face {
-    font-family: RalewayRegular;
-    src: url(fonts/Raleway-Regular.otf);
-}
-
-@font-face {
-    font-family: RalewaySemiBold;
-    src: url(fonts/Raleway-SemiBold.otf);
-}
-
-@font-face {
-    font-family: RalewayBold;
-    src: url(fonts/Raleway-Bold.otf);
-}*/
-
-
 @-webkit-keyframes left {
     50% {
 
@@ -1255,4 +1234,7 @@ li.zm-newsfeed {
 .zm-animate-show.ng-hide-add,
 .zm-animate-show.ng-hide-remove.ng-hide-remove-active {
     margin-top:0;
+}
+.nvd3.nv-wrap.nv-scatter .nv-groups{
+    display:none;
 }
