@@ -1,9 +1,0 @@
-@each $font-face in Raleway-Bold, Raleway-Light,Raleway-Regular,Raleway-SemiBold {
-  @font-face {
-    font-family: $font-face; font-style: normal; font-weight: normal;
-    src: url('../fonts/#{$font-face}.otf');
-  }
-}
-@import "includes/settings";
-@import "includes/home";
-@import "includes/navbar";

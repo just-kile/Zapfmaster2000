@@ -1,0 +1,23 @@
+
+$font-stack: RalewayRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$drops-png: "images/drops.png";
+$main-text-color:#ffffff;
+$color-pink:#ED71A8;
+$color-yellow:#FFF143;
+
+
+@each $font-face in RalewayBold, RalewayLight, RalewayRegular, RalewaySemiBold {
+  @font-face {
+    font-family: $font-face;
+    src: url(fonts/#{$font-face}.otf);
+  }
+}
+
+
+@mixin vendor-prefix($name, $argument) {
+  -webkit-#{$name}: #{$argument};
+  -ms-#{$name}: #{$argument};
+  -moz-#{$name}: #{$argument};
+  -o-#{$name}: #{$argument};
+  #{$name}: #{$argument};
+}
