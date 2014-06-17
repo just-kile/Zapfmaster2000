@@ -32,9 +32,9 @@ define(['Console', 'Underscore'], function (Console, _) {
                 });
                 return data;
             };
-            var initScope = function (isOnlyBestlist) {
+            var initScope = function (isOnlyBestlist,showAll) {
                 ajax.getDatas(c.bestlistUrl, function (data) {
-                    if (data.length > c.bestlistMax) {
+                    if (data.length > c.bestlistMax && !showAll) {
                         data.length = c.bestlistMax;
                     }
                     initOrder(data);
@@ -197,13 +197,13 @@ define(['Console', 'Underscore'], function (Console, _) {
                 //resizeMethod();
                 window.addEventListener("resize", resizeMethod, true);
             };
-            $scope.init = function (isOnlyBestlist) {
+            $scope.init = function (isOnlyBestlist,showAll) {
                 if (!isOnlyBestlist) {
                     initResizing();
 
                     initArrow();
                 }
-                initScope(isOnlyBestlist);
+                initScope(isOnlyBestlist,showAll);
             };
 
             $scope.$on("$destroy", function () {

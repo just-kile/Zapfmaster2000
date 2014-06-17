@@ -1,4 +1,51 @@
-.zm-navbar .navbar-brand img{
-  height:45px;
-  margin-top:-15px
+.zm-navbar {
+  .navbar-brand img{
+    height:45px;
+    margin-top:-15px
+  }
+  .navbar-nav{
+    padding: 0;
+    margin: 0!important;
+    width: 100%;
+    li{
+      text-align: center;
+      width: 120px;
+      line-height:35px;
+    }
+  }
+
+  ul.nav-justified{
+    padding-left:0;
+  }
+  .active{
+    position:relative;
+  }
+  .active::after{
+    content: ' ';
+    border-bottom:2px solid $color-pink;
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    left: 0;
+  }
+
+  li{
+    list-style: none;
+    display: inline;
+    text-align: center;
+    a{
+      text-decoration: none;
+      color: $main-text-color;
+    }
+    border-right: 1px solid grey;
+
+  }
+
+  .nav-justified>li {
+    display: table-cell;
+    float:left;
+    width: 20%;
+  }
+
+
 }

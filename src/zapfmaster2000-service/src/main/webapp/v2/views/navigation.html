@@ -1,57 +1,74 @@
-<nav class="navbar navbar-inverse navbar-fixed-top zm-navbar zm-animate-show" role="navigation"
+<nav class="navbar-fixed-top zm-navbar zm-animate-show" role="navigation"
      ng-show="showNav">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#zm-navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="css/images/zm_logo.png"/></a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="zm-navbar">
-            <ul class="nav navbar-nav" >
-                <li ng-class="navClass('home')">
-                    <a href="" ng-click="load('home')">Home</a>
-                </li>
-                <li ng-class="navClass('challenges')">
-                    <a  href=""
-                       ng-click="load('challenges')">Challenges</a>
-                </li>
-                <li ng-class="navClass('stats')">
-                    <a href=""
-                       ng-click="load('stats')">Statistics</a>
-                </li>
-                <li ng-class="navClass('settings')">
-                    <a href=""
-                       ng-click="load('settings')">Settings</a>
-                </li>
-              <!--  <li ng-class="navClass('home')">
-                    <a href="#home">Home</a>
-                </li>
-                <li ng-class="navClass('challenges')">
-                    <a href="#challenges" >Challenges</a>
-                </li>
-                <li ng-class="navClass('stats')">
-                    <a href="#stats">Statistics</a>
-                </li>
-                <li ng-class="navClass('settings')">
-                    <a href="#settings">Settings</a>
-                </li>-->
+    <!-- Brand and toggle get grouped for better mobile display -->
 
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="divider"></li>
-                <li class="hidden-xs"><a href="" ng-click="load('presentation')">Presentation Mode</a></li>
-                <li><a href="../../" ng-click="logout()">Logout</a></li>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <ul class="navbar-nav hidden-xs">
+        <li>
+            <a ng-class="navClass('home')" href="" ng-click="load('home')"> <img src="css/images/twitter.png" height="24"/>
+                <span>News</span></a>
+        </li>
+        <li >
+            <a ng-class="navClass('challenges')" href=""
+               ng-click="load('challenges')">
+                <img src="css/images/twitter.png" height="24"/>
+                <span>Challenges</span>
+            </a>
+        </li>
+        <li >
+            <a ng-class="navClass('stats')" href=""
+               ng-click="load('stats')"> <img src="css/images/twitter.png" height="24"/>
+                <span>Statistics</span></a>
+        </li>
+        <li>
+            <a ng-class="navClass('settings')" href=""
+               ng-click="load('settings')"> <img src="css/images/twitter.png" height="24"/>
+                <span>Settings</span></a>
+        </li>
 
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
+        <li class="pull-right"><a href="../../" ng-click="logout()"><img src="css/images/twitter.png" height="24"/>
+            <span>Logout</span></a></li>
+        <li class="pull-right">
+            <a href="" ng-click="load('presentation')">
+                <img src="css/images/twitter.png" height="24"/>
+                <span>Presentation</span>
+            </a>
+        </li>
+
+    </ul>
+
+    <!--<ul class="row visible-xs">
+        <li class="col-xs-2 active"><a href="#home" data-toggle="tab">Home</a></li>
+        <li class="col-xs-2"><a href="#profile" data-toggle="tab">Profile</a></li>
+        <li class="col-xs-2"><a href="#messages" data-toggle="tab">Messages</a></li>
+        <li class="col-xs-2"><a href="#settings" data-toggle="tab">Settings</a></li>
+        <li class="col-xs-2"><a href="#settings" data-toggle="tab">Settings</a></li>
+    </ul>-->
+    <ul class="nav-justified visible-xs">
+        <li ng-class="navClass('home')"> <a href=""
+                               ng-click="load('home')">
+            <img src="css/images/twitter.png" height="24"/>
+        </a></li>
+        <li ng-class="navClass('challenges')"> <a href=""
+                         ng-click="load('challenges')">
+            <img src="css/images/twitter.png" height="24"/>
+        </a></li>
+        <li ng-class="navClass('stats')"> <a href=""
+                         ng-click="load('stats')">
+            <img src="css/images/twitter.png" height="24"/>
+        </a></li>
+        <li ng-class="navClass('settings')"> <a href=""
+                         ng-click="load('settings')">
+            <img src="css/images/twitter.png" height="24"/>
+        </a></li>
+        <li ng-class="navClass('logout')"> <a href=""
+                         ng-click="load('logout')">
+            <img src="css/images/twitter.png" height="24"/>
+        </a></li>
+    </ul>
+
+    <!-- /.navbar-collapse -->
+
     <!-- /.container-fluid -->
 </nav>
