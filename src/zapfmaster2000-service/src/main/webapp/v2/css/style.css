@@ -340,7 +340,7 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
     box-shadow: 0 0 40px;
 }
 
-.row {
+.row.zm-row {
     margin-left: 0;
     margin-right: 0;
     padding-top: 20px;

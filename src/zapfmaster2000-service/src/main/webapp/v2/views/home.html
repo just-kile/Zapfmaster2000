@@ -1,15 +1,15 @@
-
-<div class="row" style="margin-top:50px">
-    <div ng-controller="BestlistController" ng-init="init(true);" class="col-xs-12 col-sm-6 col-md-8">
-        <ul>
-            <li ng-repeat="user in bestlist">
-                <div class="zm-relative">
-                    <div class="zm-absolute amount">{{user.amount|amount}} l</div>
-                </div>
+<div class="row zm-row" style="margin-top:50px">
+    <div ng-controller="BestlistController" ng-init="init(true,true);" class="col-xs-12 col-sm-6 col-md-8">
+        <header class="zmo-header">{{'BESTLIST_TITLE'|translate}}</header>
+        <ul class="zm-bestlist">
+            <li ng-repeat="user in bestlist" style="position: relative">
+                <div>{{$index+1}}. {{user.name}} {{user.amount|amount}} l <img class="img-rounded pull-right" ng-src="{{baseUrl+user.image}}" width="50"/></div>
+                <div class="zm-bar" ng-style="{'width':(user.amountPercent)+'%'}"></div>
             </li>
         </ul>
     </div>
     <div ng-controller="NewsfeedController" class="col-xs-12 col-md-4 zmw-newsfeed">
+        <header class="zmo-header">News</header>
         <feed items="items" maxlength="10"></feed>
     </div>
 

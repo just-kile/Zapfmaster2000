@@ -1,0 +1,20 @@
+.zm-border{
+
+    font-family: RalewayLight;
+    list-style: none;
+
+    display: inline-block;
+    width: 100%;
+    @include vendor-prefix(border-radius, 10px);
+
+    /*margin-left: 30px;*/
+  }
+
+
+.zm-border:nth-child(even) {
+  border: 2px solid $color-pink
+}
+
+.zm-border:nth-child(odd) {
+  border: 2px solid $color-yellow;
+}
