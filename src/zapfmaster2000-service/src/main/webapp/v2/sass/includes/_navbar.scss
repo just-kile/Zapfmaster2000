@@ -9,23 +9,32 @@
     width: 100%;
     li{
       text-align: center;
-      width: 120px;
-      line-height:35px;
+      width: $navbar-item-width;
+      line-height:$navbar-item-height;
     }
+  }
+  .navbar-nav,.nav-justified{
+    background: rgba(0,0,0,0.5);
+    height: $navbar-item-height;
   }
 
   ul.nav-justified{
     padding-left:0;
+    padding-top:5px;
+
+  }
+  a.active::after{
+    top:$navbar-item-height+5px;
   }
   .active{
     position:relative;
   }
   .active::after{
     content: ' ';
-    border-bottom:2px solid $color-pink;
+    border-bottom:3px solid $color-pink;
     position: absolute;
     width: 100%;
-    top: 40px;
+    top: $navbar-item-height+5px;
     left: 0;
   }
 
@@ -37,6 +46,7 @@
       text-decoration: none;
       color: $main-text-color;
     }
+    line-height: $navbar-item-height;
     border-right: 1px solid grey;
 
   }

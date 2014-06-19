@@ -19,6 +19,7 @@ define(function () {
             AngularTranslateLocalStorage: "../vendor/angular-translate-storage-local/angular-translate-storage-local.min",
             AngularTranslateCookieStorage: "../vendor/angular-translate-storage-cookie/angular-translate-storage-cookie.min",
             AngularTranslateStaticFileLoader: "../vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.min",
+            AngularInfiniteScroll:"../vendor/ngInfiniteScroll/build/ng-infinite-scroll.min",
             moment: "../vendor/moment/min/moment.min",
             text: "../vendor/requirejs-text/text",
             templates: './../views'
@@ -52,6 +53,9 @@ define(function () {
             },
             AngularTranslateStaticFileLoader: {
                 deps: ['Angular', 'AngularTranslate']
+            },
+            AngularInfiniteScroll:{
+              deps:['Angular']
             },
             jQuery: {
                 exports: "jQuery"

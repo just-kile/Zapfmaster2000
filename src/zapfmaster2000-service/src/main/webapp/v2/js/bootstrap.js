@@ -21,8 +21,8 @@ require(["config-require"],function(config){
         'AngularTranslate',
         'AngularTranslateStaticFileLoader',
         'AngularTranslateLocalStorage',
-        'AngularTranslateCookieStorage'
-
+        'AngularTranslateCookieStorage',
+        'AngularInfiniteScroll'
     ], function (require, Console, $, _, moment, d3, angular) {
         Console.group("Bootstrap dependencies loaded.");
         Console.info("Console", Console);

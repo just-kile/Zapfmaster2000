@@ -13,7 +13,8 @@
         "angular-animate": "~1.2.1",
         "angular-route": "~1.2.1",
         "angular-mocks": "~1.2.1",
-        "angular-scenario":"~1.2.1",
+        "angular-scenario": "~1.2.1",
+        "ngInfiniteScroll": "1.0.0",
         "d3": "git://github.com/mbostock/d3#v3.4.6",
         "nvd3": "v1.1.15b",
         "angularjs-nvd3-directives": "0.0.7",
@@ -21,9 +22,9 @@
         "angular-translate-loader-static-files": "~2.1.0",
         "angular-translate-storage-local": "~2.1.0",
         "animate.css": "v3.1.0",
-        "requirejs":"latest",
-        "requirejs-text":"~2.0.12",
-        "squire":"~0.2.0"
+        "requirejs": "latest",
+        "requirejs-text": "~2.0.12",
+        "squire": "~0.2.0"
 
     },
     "resolutions": {
