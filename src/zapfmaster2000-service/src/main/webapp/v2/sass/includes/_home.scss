@@ -1,9 +1,3 @@
-.zmw-newsfeed {
-  .zm-backgrnd {
-    @include vendor-prefix(box-sizing, border-box);
-    margin: 0;
-  }
-}
 
 .zm-bestlist {
   padding: 0;
@@ -12,16 +6,16 @@
     font-size: 1.7em;
     padding: 10px;
     line-height: 50px;
-    img{
-      margin-top:4px;
+    img {
+      margin-top: 4px;
     }
     .zm-bar {
       position: absolute;
       border-radius: 10px;
-      height:14px;
-      top:50px;
-      z-index:-1;
-      left:0;
+      height: 14px;
+      top: 50px;
+      z-index: -1;
+      left: 0;
       max-width: 95%;
       min-width: 5%;
     }
@@ -30,7 +24,7 @@
   li:nth-child(odd) {
     .zm-bar {
       border: 2px solid $color-pink;
-     /* background: $color-pink;*/
+      /* background: $color-pink;*/
     }
 
   }
@@ -41,4 +35,27 @@
     }
   }
 
+}
+
+.zmw-newsfeed {
+  .zm-backgrnd {
+    @include vendor-prefix(box-sizing, border-box);
+    margin: 0;
+  }
+  .zm-newsfeed .front.zm-backgrnd {
+    border: none;
+    .location {
+      display: none;
+    }
+  }
+  .zm-newsfeed:nth-child(odd) {
+    img {
+      border: 2px solid $color-yellow;
+    }
+  }
+  .zm-newsfeed:nth-child(even) {
+    img {
+      border: 2px solid $color-pink;
+    }
+  }
 }
