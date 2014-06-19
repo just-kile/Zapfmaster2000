@@ -37,33 +37,25 @@
         </li>
 
     </ul>
-
-    <!--<ul class="row visible-xs">
-        <li class="col-xs-2 active"><a href="#home" data-toggle="tab">Home</a></li>
-        <li class="col-xs-2"><a href="#profile" data-toggle="tab">Profile</a></li>
-        <li class="col-xs-2"><a href="#messages" data-toggle="tab">Messages</a></li>
-        <li class="col-xs-2"><a href="#settings" data-toggle="tab">Settings</a></li>
-        <li class="col-xs-2"><a href="#settings" data-toggle="tab">Settings</a></li>
-    </ul>-->
     <ul class="nav-justified visible-xs">
-        <li ng-class="navClass('home')"> <a href=""
-                               ng-click="load('home')">
+        <li ng-class="navClass('home')" ng-click="load('home')"> <a href=""
+                             >
             <img src="css/images/twitter.png" height="24"/>
         </a></li>
-        <li ng-class="navClass('challenges')"> <a href=""
-                         ng-click="load('challenges')">
+        <li ng-class="navClass('challenges')" ng-click="load('challenges')"> <a href=""
+                        >
+            <img src="css/images/facebook.png" height="24"/>
+        </a></li>
+        <li ng-class="navClass('stats')" ng-click="load('stats')"> <a href=""
+                        >
             <img src="css/images/twitter.png" height="24"/>
         </a></li>
-        <li ng-class="navClass('stats')"> <a href=""
-                         ng-click="load('stats')">
-            <img src="css/images/twitter.png" height="24"/>
+        <li ng-class="navClass('settings')" ng-click="load('settings')"> <a href=""
+                         >
+            <img src="css/images/facebook.png" height="24"/>
         </a></li>
-        <li ng-class="navClass('settings')"> <a href=""
-                         ng-click="load('settings')">
-            <img src="css/images/twitter.png" height="24"/>
-        </a></li>
-        <li ng-class="navClass('logout')"> <a href=""
-                         ng-click="load('logout')">
+        <li ng-class="navClass('logout')"  ng-click="load('logout')"> <a href=""
+                        >
             <img src="css/images/twitter.png" height="24"/>
         </a></li>
     </ul>
