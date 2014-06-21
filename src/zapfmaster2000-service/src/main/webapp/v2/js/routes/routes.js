@@ -4,7 +4,7 @@ define([
     'text!templates/stats.html',
     'text!templates/challenges.html',
 
-], function (presentationTemplate, homeTemplate,statsTemplate,challengesTemplate) {
+], function (presentationTemplate, homeTemplate, statsTemplate, challengesTemplate) {
     "use strict";
     return {
         presentationSlide: {
@@ -21,7 +21,7 @@ define([
         },
         home: {
             title: 'Home',
-            route: '/home',
+            route: '/news',
             controller: 'HomeController',
             template: homeTemplate
         },
@@ -34,6 +34,18 @@ define([
         challenges: {
             title: 'Challenges',
             route: '/challenges',
+            controller: 'ChallengesWebappController',
+            template: challengesTemplate
+        },
+        settings: {
+            title: 'Settings',
+            route: '/settings',
+            controller: 'ChallengesWebappController',
+            template: challengesTemplate
+        },
+        logout: {
+            title: 'Logout',
+            route: '/logout',
             controller: 'ChallengesWebappController',
             template: challengesTemplate
         }
