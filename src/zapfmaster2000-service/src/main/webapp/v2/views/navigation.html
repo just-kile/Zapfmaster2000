@@ -5,58 +5,17 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <ul class="navbar-nav hidden-xs">
-        <li>
-            <a ng-class="navClass('home')" href="" ng-click="load('home')"> <img src="css/images/twitter.png" height="24"/>
-                <span>News</span></a>
-        </li>
-        <li >
-            <a ng-class="navClass('challenges')" href=""
-               ng-click="load('challenges')">
-                <img src="css/images/twitter.png" height="24"/>
-                <span>Challenges</span>
-            </a>
-        </li>
-        <li >
-            <a ng-class="navClass('stats')" href=""
-               ng-click="load('stats')"> <img src="css/images/twitter.png" height="24"/>
-                <span>Statistics</span></a>
-        </li>
-        <li>
-            <a ng-class="navClass('settings')" href=""
-               ng-click="load('settings')"> <img src="css/images/twitter.png" height="24"/>
-                <span>Settings</span></a>
-        </li>
-
-        <li class="pull-right"><a href="../../" ng-click="logout()"><img src="css/images/twitter.png" height="24"/>
-            <span>Logout</span></a></li>
-        <li class="pull-right">
-            <a href="" ng-click="load('presentation')">
-                <img src="css/images/twitter.png" height="24"/>
-                <span>Presentation</span>
-            </a>
+        <li ng-repeat="item in navItems" ng-class="item.pullRight?'pull-right':''">
+            <a ng-class="item.navClass()" href="" ng-click="item.onClick()"> <img ng-src="{{item.imageUrl}}" height="24"/>
+                <span>{{item.title}}</span></a>
         </li>
 
     </ul>
     <ul class="nav-justified visible-xs">
-        <li ng-class="navClass('home')" ng-click="load('home')"> <a href=""
-                             >
-            <img src="css/images/twitter.png" height="24"/>
-        </a></li>
-        <li ng-class="navClass('challenges')" ng-click="load('challenges')"> <a href=""
-                        >
-            <img src="css/images/facebook.png" height="24"/>
-        </a></li>
-        <li ng-class="navClass('stats')" ng-click="load('stats')"> <a href=""
-                        >
-            <img src="css/images/twitter.png" height="24"/>
-        </a></li>
-        <li ng-class="navClass('settings')" ng-click="load('settings')"> <a href=""
-                         >
-            <img src="css/images/facebook.png" height="24"/>
-        </a></li>
-        <li ng-class="navClass('logout')"  ng-click="load('logout')"> <a href=""
-                        >
-            <img src="css/images/twitter.png" height="24"/>
+
+        <li ng-repeat="item in navItems" ng-if="!item.notVisibleXs" ng-class="item.navClass()" ng-click="item.onClick()">
+            <a href="">
+            <img ng-src="{{item.imageUrl}}" height="24"/>
         </a></li>
     </ul>
 
