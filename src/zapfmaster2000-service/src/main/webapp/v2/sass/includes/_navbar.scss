@@ -1,48 +1,51 @@
 .zm-navbar {
-  .navbar-brand img{
-    height:45px;
-    margin-top:-15px
+  .navbar-brand img {
+    height: 45px;
+    margin-top: -15px
   }
-  .navbar-nav{
+  .navbar-nav {
     padding: 0;
-    margin: 0!important;
+    margin: 0 !important;
     width: 100%;
-    li{
+    li {
       text-align: center;
       width: $navbar-item-width;
-      line-height:$navbar-item-height;
+      line-height: $navbar-item-height;
     }
   }
-  .navbar-nav,.nav-justified{
-    background: rgba(0,0,0,0.5);
+  .navbar-nav, .nav-justified {
+    background: rgba(0, 0, 0, 0.5);
     height: $navbar-item-height;
   }
 
-  ul.nav-justified{
-    padding-left:0;
-    padding-top:5px;
+  ul.nav-justified {
+    padding-left: 0;
+    padding-top: 5px;
 
   }
-  a.active::after{
-    top:$navbar-item-height+5px;
-  }
-  .active{
-    position:relative;
-  }
-  .active::after{
-    content: ' ';
-    border-bottom:3px solid $color-pink;
-    position: absolute;
-    width: 100%;
-    top: $navbar-item-height+5px;
-    left: 0;
+  .nav-justified {
+
+    a.active::after {
+      top: $navbar-item-height+5px;
+    }
+    .active {
+      position: relative;
+    }
+    .active::after {
+      content: ' ';
+      border-bottom: 3px solid $color-pink;
+      position: absolute;
+      width: 100%;
+      top: $navbar-item-height+5px;
+      left: 0;
+    }
   }
 
-  li{
+  li {
     list-style: none;
     display: inline;
     text-align: center;
-    a{
+    a {
       text-decoration: none;
       color: $main-text-color;
     }
@@ -51,11 +54,20 @@
 
   }
 
-  .nav-justified>li {
+  .nav-justified > li {
     display: table-cell;
-    float:left;
+    float: left;
     width: 20%;
   }
 
+}
+
+.movingdiv {
+  position: absolute;
+  @include vendor-prefix(transition, translateZ(0));
+  @include vendor-prefix(transition, 0.4s ease-out);
+  border: 1px solid $color-pink;
+  top: $navbar-item-height+5px;
+  width: $navbar-item-width;
 
 }

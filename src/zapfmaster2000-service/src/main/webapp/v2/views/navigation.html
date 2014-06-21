@@ -4,9 +4,9 @@
     <!-- Brand and toggle get grouped for better mobile display -->
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <ul class="navbar-nav hidden-xs">
-        <li ng-repeat="item in navItems" ng-class="item.pullRight?'pull-right':''">
-            <a ng-class="item.navClass()" href="" ng-click="item.onClick()"> <img ng-src="{{item.imageUrl}}" height="24"/>
+    <ul class="navbar-nav hidden-xs" movingunderline="navItems">
+        <li ng-repeat="item in navItems" ng-class="{'pull-right':item.pullRight}" class="{{item.navClass()}}">
+            <a  href="" ng-click="item.onClick()"> <img ng-src="{{item.imageUrl}}" height="24"/>
                 <span>{{item.title}}</span></a>
         </li>
 
