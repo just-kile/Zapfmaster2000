@@ -10,7 +10,8 @@
             </li>
         </ul>
     </div>
-    <div ng-controller="NewsfeedController" class="col-xs-12 col-sm-6 col-md-4 col-sm-pull-6 col-md-pull-8 zmw-newsfeed">
+    <div ng-controller="NewsfeedController" class="col-xs-12 col-sm-6 col-md-4 col-sm-pull-6 col-md-pull-8 zmw-newsfeed"
+         infinite-scroll="loadNextItems()" infinite-scroll-distance="1">
         <header class="zmo-header">News</header>
         <feed items="items" no-animation="true"></feed>
         <div class="btn" ng-click="loadNextItems()">Mehr</div>
