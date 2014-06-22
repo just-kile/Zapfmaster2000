@@ -7,7 +7,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                     restrict: 'E',
                     scope: {
                         items: '=',
-                        maxlength: '='
+                        noAnimation: '='
                     },
                     templateUrl: 'views/directives/FeedDirective.html',
                     link: function ($scope, element, attrs) {
@@ -30,17 +30,18 @@ define(['Console', 'jQuery'], function (Console, $) {
                                 var first = $(el.first());
                                 var last = $(el.last());
 
-
-                                $animate.addClass(first, 'animate-height', function () {
-                                    $timeout(function () {
-                                        $animate.removeClass(first, 'animate-height');
-                                    }, 1000);
-                                });
-                                $animate.addClass(last, 'animate-height-reverse', function () {
-                                    $timeout(function () {
-                                        $animate.removeClass(last, 'animate-height-reverse');
-                                    }, 1000);
-                                });
+                                if (!attrs.noAnimation=="true") {
+                                    $animate.addClass(first, 'animate-height', function () {
+                                        $timeout(function () {
+                                            $animate.removeClass(first, 'animate-height');
+                                        }, 1000);
+                                    });
+                                    $animate.addClass(last, 'animate-height-reverse', function () {
+                                        $timeout(function () {
+                                            $animate.removeClass(last, 'animate-height-reverse');
+                                        }, 1000);
+                                    });
+                                }
                             }
 
                         }, true);
