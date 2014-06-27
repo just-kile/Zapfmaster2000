@@ -2,36 +2,42 @@
     {
         "title": "News",
         "imageUrl": "css/images/twitter.png",
+        "glyphicon":"glyphicon-th-list",
         "pullRight": false,
         "url": "news"
     },
     {
         "title": "Challenges",
         "imageUrl": "css/images/twitter.png",
+        "glyphicon":"glyphicon-tower",
         "pullRight": false,
         "url": "challenges"
     },
     {
         "title": "Stats",
         "imageUrl": "css/images/twitter.png",
+        "glyphicon":"glyphicon-stats",
         "pullRight": false,
         "url": "stats"
     },
     {
         "title": "Settings",
         "imageUrl": "css/images/twitter.png",
+        "glyphicon":"glyphicon-wrench",
         "pullRight": false,
         "url": "settings"
     },
     {
         "title": "Logout",
         "imageUrl": "css/images/twitter.png",
+        "glyphicon":"glyphicon-off",
         "pullRight": true,
         "url": "logout"
     },
     {
         "title": "Presentation",
         "imageUrl": "css/images/twitter.png",
+        "glyphicon":"glyphicon-facetime-video",
         "pullRight": true,
         "url": "presentation",
         "notVisibleXs": true
