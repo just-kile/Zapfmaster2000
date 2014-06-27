@@ -13,12 +13,13 @@ define([
     'directives/ShowDirective',
     'directives/SwitchDirective',
     'directives/TextfillDirective',
-    'directives/MovingUnderline'
+    'directives/MovingUnderline',
+    'directives/AccordionDirective'
 
 //    ,'directives/LineChart'
 
 ], function (Console, $, _, angular, BarChart, FigureChart, FeedDirective, ShowDirective, SwitchDirective,
-             TextfillDirective, MovingUnderline) {
+             TextfillDirective, MovingUnderline,AccordionDirective) {
     "use strict";
     Console.group("Entering Widgets module.");
 
@@ -30,7 +31,8 @@ define([
         animatewidget: ShowDirective,
         feed: FeedDirective,
         textfill: TextfillDirective,
-        movingunderline:MovingUnderline
+        movingunderline:MovingUnderline,
+        zmAccordion:AccordionDirective
 
     };
 
