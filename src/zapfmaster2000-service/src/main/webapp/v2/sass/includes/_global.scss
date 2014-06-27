@@ -19,6 +19,7 @@
   border: 2px solid $color-yellow;
 }
 .zm-accordion{
+  margin-top:10px;
   .zm-accordion-container{
 
     max-height: 999px;
@@ -29,6 +30,7 @@
       max-height: 0;
     }
   }
-
-
+}
+.zmo-header-xs{
+  font-size:1.4em;
 }

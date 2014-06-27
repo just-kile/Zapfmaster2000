@@ -6,7 +6,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <ul class="navbar-nav hidden-xs" movingunderline="navItems">
         <li ng-repeat="item in navItems" ng-class="{'pull-right':item.pullRight}" class="{{item.navClass()}}">
-            <a  href="" ng-click="item.onClick()"> <img ng-src="{{item.imageUrl}}" height="24"/>
+            <a  href="" ng-click="item.onClick()">
+                <!--<img ng-src="{{item.imageUrl}}" height="24"/>-->
+                <i class="glyphicon {{item.glyphicon}}" style="font-size: 1.5em"/>
                 <span>{{item.title}}</span></a>
         </li>
 
@@ -15,7 +17,8 @@
 
         <li ng-repeat="item in navItems" ng-if="!item.notVisibleXs" ng-class="item.navClass()" ng-click="item.onClick()">
             <a href="">
-            <img ng-src="{{item.imageUrl}}" height="24"/>
+            <!--<img ng-src="{{item.imageUrl}}" height="24"/>-->
+             <i class="glyphicon {{item.glyphicon}}" style="font-size: 1.7em; margin-top:5px"/>
         </a></li>
     </ul>
 
