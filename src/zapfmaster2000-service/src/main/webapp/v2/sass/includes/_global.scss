@@ -18,3 +18,17 @@
 .zm-border:nth-child(odd) {
   border: 2px solid $color-yellow;
 }
+.zm-accordion{
+  .zm-accordion-container{
+
+    max-height: 999px;
+    @include vendor-prefix(transition, translateZ(0));
+    @include vendor-prefix(transition, max-height 0.8s ease-out);
+    &.zm-hidden{
+      overflow: hidden;
+      max-height: 0;
+    }
+  }
+
+
+}
