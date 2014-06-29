@@ -15,13 +15,14 @@ define(['Console', 'Underscore'], function (Console, _) {
                     challenge.team1Percent = !isNaN(team1Percent) ? team1Percent : 50;
                     challenge.team2Percent = !isNaN(team2Percent) ? team2Percent : 50;
                     challenge.countdown = 0;
+                    challenge.diffAmount = Math.abs(challenge.team1[0].amount - challenge.team1[0].amount);
                 });
                 return data;
 
             };
             var clockInterval;
             $scope.letTheClockTick = function () {
-                if (clockInterval){
+                if (clockInterval) {
                     clearInterval(clockInterval);
                 }
 
@@ -36,7 +37,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             var initScope = function (noMaxLength) {
 
                 ajax.getDatas(c.challengeUrl, function (data) {
-                    if (!noMaxLength&&data.length > c.challengeMaxDuels) {
+                    if (!noMaxLength && data.length > c.challengeMaxDuels) {
                         data.length = c.challengeMaxDuels;
                     }
 
@@ -53,6 +54,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     _.each($scope.challenges, function (challenge, key) {
                         challenge.team1Percent = data[key].team1Percent;
                         challenge.team2Percent = data[key].team2Percent;
+                        challenge.diffAmount = data[key].diffAmount;
                     });
                 });
             };
