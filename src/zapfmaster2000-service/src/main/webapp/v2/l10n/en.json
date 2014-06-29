@@ -13,10 +13,15 @@
     "CHALLENGES_TITLE": "Challenges",
     "CHALLENGES_SPLASH_STARTED_TITLE":"Challenge started!",
     "CHALLENGES_SPLASH_DONE_TITLE":"Challenge done!",
+    "CHALLENGES_RUNNING_TITLE":"Running Challenges",
+    "CHALLENGES_DONE_TITLE":"Completed Challenges",
+
     "ZAPFVELOCITY_TITLE":"Zapfvelocity",
     "PIECHART_TITLE":"#1 vs the World",
     "ACHIEVEMENTSTATS_TITLE":"Introducing Achievement",
     "DISTRIBUTION_TITLE":"Zapfdistribution",
+
+
 
     "NEWSSTACK_DRAWING": "{{username}} zapfed {{amount}} l",
     "NEWSSTACK_DRAWING_INFO": "{{date}} h @ {{location}}",

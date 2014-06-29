@@ -33,10 +33,10 @@ define(['Console', 'Underscore'], function (Console, _) {
 
 
             };
-            var initScope = function () {
+            var initScope = function (noMaxLength) {
 
                 ajax.getDatas(c.challengeUrl, function (data) {
-                    if (data.length > c.challengeMaxDuels) {
+                    if (!noMaxLength&&data.length > c.challengeMaxDuels) {
                         data.length = c.challengeMaxDuels;
                     }
 
@@ -64,7 +64,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 $scope.challenges.unshift(data);
             };
 
-            initScope();
+
             var pushListener = function (data) {
                 if (data) {
                     if (data.type === c.DRAWING) {
@@ -84,7 +84,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             $scope.$on("$destroy", function () {
                 $timeout.cancel(clockInterval);
             });
-
+            $scope.init = initScope;
             /*     var dummyChallengeData = {"type": "CHALLENGE_STARTED", "image": "images/others/challengeStarted.jpg", "date": "20131206-172849", "challengeDuration": 10, "startDate": "20131206-172849", "challengeId": 4, "team1": [
              {"userId": 1, "userName": "Ben", "userImage": "rest/image/user/1", "amount": 0.0, "won": true}
              ], "team2": [
