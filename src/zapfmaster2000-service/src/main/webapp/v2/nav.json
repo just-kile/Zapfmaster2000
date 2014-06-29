@@ -24,6 +24,7 @@
         "title": "User",
         "imageUrl": "css/images/twitter.png",
         "glyphicon":"glyphicon-user",
+        "directive":"userInfo",
         "pullRight": false,
         "url": "user"
     },

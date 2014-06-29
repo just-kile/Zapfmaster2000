@@ -6,7 +6,8 @@
     "bestlistUrl": "rest/statistics/rankings/bestUserList",
     "distributionUrl":"rest/statistics/distribution",
     "frontPageUserStatsUrl": "rest/statistics/frontpageUserStats",
-    "userStatsUrl":"rest/statistics/",
+    "userStatsUrl":"rest/statistics/userStats",
+
     "amountStatsUrl": "rest/statistics/amount",
     "membersUrl":"rest/members",
     "achievementStatsUrl": "rest/statistics/achievements",
