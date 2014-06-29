@@ -21,11 +21,11 @@
         "url": "stats"
     },
     {
-        "title": "Settings",
+        "title": "User",
         "imageUrl": "css/images/twitter.png",
-        "glyphicon":"glyphicon-wrench",
+        "glyphicon":"glyphicon-user",
         "pullRight": false,
-        "url": "settings"
+        "url": "user"
     },
     {
         "title": "Logout",

@@ -37,9 +37,9 @@ define([
             controller: 'ChallengesWebappController',
             template: challengesTemplate
         },
-        settings: {
-            title: 'Settings',
-            route: '/settings',
+        user: {
+            title: 'User',
+            route: '/user',
             controller: 'ChallengesWebappController',
             template: challengesTemplate
         },

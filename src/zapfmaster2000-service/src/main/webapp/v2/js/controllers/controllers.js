@@ -82,7 +82,7 @@ define([
                     }
                 );
             });
-            $routeProvider.otherwise({ redirectTo: routes.presentation.route });
+            $routeProvider.otherwise({ redirectTo: routes.home.route });
         }]);
         angModule.run(["$rootScope", "$templateCache", "CometService", function ($rootScope, $templateCache, CometService) {
             $rootScope.$on('$routeChangeSuccess', function (next, last) {

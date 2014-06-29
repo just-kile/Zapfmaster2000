@@ -10,11 +10,18 @@ define(['Console', 'jQuery'], function (Console, $) {
                     },
                     //  templateUrl: 'js/directives/BarChart/template.html',
                     link: function ($scope, ele, attrs) {
+
                         var movingDiv = $("<div>").addClass("movingdiv").css({
                             left: 0
                         });
                         movingDiv.appendTo(ele);
                         $scope.$watch("movingunderline", function () {
+                            $timeout(function(){
+                                movingDiv.css({
+                                    left: $(ele).find(".active").position().left
+                                });
+                            },500)
+
                             $(ele)
                                 .find("li")
                                 .on("mouseover", function (e) {
