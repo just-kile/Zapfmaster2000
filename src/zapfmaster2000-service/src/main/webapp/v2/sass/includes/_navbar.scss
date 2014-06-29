@@ -9,7 +9,8 @@
     width: 100%;
     li {
       text-align: center;
-      width: $navbar-item-width;
+      width: auto;
+      padding: 0 20px;
       line-height: $navbar-item-height;
     }
   }
@@ -70,4 +71,13 @@
   top: $navbar-item-height+5px;
   width: $navbar-item-width;
 
+}
+.zm-userinfo{
+  img{
+    height: 32px;
+  }
+  span{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

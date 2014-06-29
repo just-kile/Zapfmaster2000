@@ -13,27 +13,32 @@ define(['Console', 'jQuery'], function (Console, $) {
 
                         var movingDiv = $("<div>").addClass("movingdiv").css({
                             left: 0
+
                         });
                         movingDiv.appendTo(ele);
                         $scope.$watch("movingunderline", function () {
                             $timeout(function(){
+                                var activeLi= $(ele).find(".active");
                                 movingDiv.css({
-                                    left: $(ele).find(".active").position().left
+                                    left: activeLi.position().left,
+                                    width:activeLi.outerWidth()
                                 });
-                            },500)
+                            },500);
 
                             $(ele)
                                 .find("li")
                                 .on("mouseover", function (e) {
                                     movingDiv.css({
-                                        left: $(e.currentTarget).position().left
+                                        left: $(e.currentTarget).position().left,
+                                        width:$(e.currentTarget).outerWidth()
                                     });
                                     //$(e.currentTarget).addClass("active").siblings().removeClass("active");
                                 })
                                 .on("mouseout", function (e) {
                                     var currentTarget = $(e.currentTarget);
                                     !currentTarget.hasClass("active") && movingDiv.css({
-                                        left: currentTarget.siblings(".active").position().left
+                                        left: currentTarget.siblings(".active").position().left,
+                                        width:currentTarget.siblings(".active").outerWidth()
                                     });
                                 });
 
