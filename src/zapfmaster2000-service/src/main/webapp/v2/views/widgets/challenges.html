@@ -1,4 +1,4 @@
-<div ng-controller="ChallengeController" class="zmo-challenges">
+<div ng-controller="ChallengeController" class="zmo-challenges" ng-init="init()">
     <header class="zmo-header">{{'CHALLENGES_TITLE'|translate}}</header>
     <ul class="zmo-container" ng-style="{height:challengeMaxDuels+'20'+'px'}">
         <li class="challenge-container color-container" ng-repeat="challenge in challenges">
