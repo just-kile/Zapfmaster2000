@@ -30,7 +30,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                                 var first = $(el.first());
                                 var last = $(el.last());
 
-                                if (!attrs.noAnimation=="true") {
+                                if (attrs.noAnimation!="true") {
                                     $animate.addClass(first, 'animate-height', function () {
                                         $timeout(function () {
                                             $animate.removeClass(first, 'animate-height');

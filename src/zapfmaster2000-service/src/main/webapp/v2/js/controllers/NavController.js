@@ -42,7 +42,7 @@ define([
                 return page === currentRoute ? 'active' : '';
             };
 
-        };
+        }
         function load(topic) {
             return function () {
                 // $("#zm-navbar").collapse("hide");

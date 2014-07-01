@@ -68,7 +68,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             Console.log("Reset callbacks.");
         };
         var startNewsPush = function () {
-            if (!cometRunningMap['newspush'] || !cometRunningMap['newspush'].running)
+            if (!cometRunningMap.newspush || !cometRunningMap.newspush.running)
             {
                 startCometServiceFor(c.newsPushUrl, 'newspush');
             }
