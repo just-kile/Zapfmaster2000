@@ -89,8 +89,6 @@ define([
                 $rootScope.$on('$routeChangeSuccess', function (next, last) {
                     Console.debug("Navigating from ", last);
                     Console.debug("Navigating to   ", next);
-                    Analytics.trackPage(next.$$route.originalPath);
-
                 });
                 $rootScope.$on('$viewContentLoaded', function () {
                     $templateCache.removeAll();
