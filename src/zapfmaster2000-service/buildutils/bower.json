@@ -14,6 +14,7 @@
         "angular-route": "~1.2.1",
         "angular-mocks": "~1.2.1",
         "angular-scenario": "~1.2.1",
+        "angular-google-analytics": "*",
         "ngInfiniteScroll": "1.0.0",
         "d3": "git://github.com/mbostock/d3#v3.4.6",
         "nvd3": "v1.1.15b",

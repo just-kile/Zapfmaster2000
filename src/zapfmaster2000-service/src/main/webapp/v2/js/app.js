@@ -22,7 +22,8 @@ define([
 
         Console.group("Setup Angular");
 
-        var mainModule = angular.module('myApp', ['ngRoute', 'ngResource', 'ngAnimate', 'pascalprecht.translate', 'nvd3ChartDirectives','infinite-scroll']);
+        var mainModule = angular.module('myApp',
+            ['ngRoute', 'ngResource', 'ngAnimate', 'pascalprecht.translate', 'nvd3ChartDirectives','infinite-scroll','angular-google-analytics']);
         services.initialize(mainModule);
         directives.initialize(mainModule);
         filters.initialize(mainModule);
