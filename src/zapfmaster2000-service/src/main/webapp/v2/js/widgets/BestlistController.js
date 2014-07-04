@@ -109,7 +109,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                         });
                     } else {
                         initScope();
-                        $timeout(function () {
+                        changeInterval =  $timeout(function () {
                             $scope.arrow.visible = true;
                             updateStatsArrow();
                         }, 3000);
