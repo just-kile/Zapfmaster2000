@@ -38,20 +38,32 @@
     "NEWSSTACK_CHALLENGE_DECLINED": "{{declinee}} declined a challenge",
     "NEWSSTACK_CHALLENGE_DECLINED_INFO": "{{date}} h",
 
-    "NEWSFEED_DRAWING": "<span class=\"zm-bold\">{{username}}</span> zapfed <span class=\"zm-bold\">{{amount}}</span> l.",
+    "NEWSFEED_DRAWING_HEADLINE": "<span class=\"zm-bold\">{{username}}</span> zapfed <span class=\"zm-bold\">{{amount}}</span> l.",
+    "NEWSFEED_DRAWING_DESCRIPTION": "<span class=\"zm-bold\">{{username}}</span> zapfed <span class=\"zm-bold\">{{amount}}</span> l.",
     "NEWSFEED_DRAWING_INFO": "{{date}} h @ {{location}}",
-    "NEWSFEED_ACHIEVEMENT": "<span class=\"zm-bold\">{{username}}</span> gained <span class=\"zm-bold\">{{achievementname}}.</span>!",
+
+    "NEWSFEED_ACHIEVEMENT_HEADLINE": "<span class=\"zm-bold\">{{username}}</span> gained <span class=\"zm-bold\">{{achievementname}}.</span>!",
+    "NEWSFEED_ACHIEVEMENT_DESCRIPTION": "<span class=\"zm-bold\">{{username}}</span> gained <span class=\"zm-bold\">{{achievementname}}.</span>!",
     "NEWSFEED_ACHIEVEMENT_INFO": "{{date}} h",
-    "NEWSFEED_NEW_KEG": "A Keg of <span class=\"zm-bold\">{{brand}}</span> has been tapped!",
+
+    "NEWSFEED_NEW_KEG_HEADLINE": "A Keg of <span class=\"zm-bold\">{{brand}}</span> has been tapped!",
+    "NEWSFEED_NEW_KEG_DESCRIPTION": "A Keg of <span class=\"zm-bold\">{{brand}}</span> has been tapped!",
     "NEWSFEED_NEW_KEG_INFO": "{{date}} h #{{size}}L",
-    "NEWSFEED_NEW_USER": "A new user has registered. Welcome <span class=\"zm-bold\">{{username}}</span>!",
+
+    "NEWSFEED_NEW_USER_HEADLINE": "A new user has registered. Welcome <span class=\"zm-bold\">{{username}}</span>!",
+    "NEWSFEED_NEW_USER_DESCRIPTION": "A new user has registered. Welcome <span class=\"zm-bold\">{{username}}</span>!",
     "NEWSFEED_NEW_USER_INFO": "{{date}} h",
-    "NEWSFEED_CHALLENGE_STARTED": "A <span class=\"zm-bold\">{{duration}}min challenge </span><span class=\"zm-bold\">{{username1}}</span> vs <span class=\"zm-bold\">{{username2}}</span> has started!",
+
+    "NEWSFEED_CHALLENGE_STARTED_HEADLINE": "A <span class=\"zm-bold\">{{duration}}min challenge </span><span class=\"zm-bold\">{{username1}}</span> vs <span class=\"zm-bold\">{{username2}}</span> has started!",
+    "NEWSFEED_CHALLENGE_STARTED_DESCRIPTION": "A <span class=\"zm-bold\">{{duration}}min challenge </span><span class=\"zm-bold\">{{username1}}</span> vs <span class=\"zm-bold\">{{username2}}</span> has started!",
     "NEWSFEED_CHALLENGE_STARTED_INFO": "{{date}} h",
 
-    "NEWSFEED_CHALLENGE_DONE": " <span class=\"zm-bold\">{{winner}}</span> <span class=\"zm-bold\">won</span> a challenge! !",
+    "NEWSFEED_CHALLENGE_DONE_HEADLINE": " <span class=\"zm-bold\">{{winner}}</span> <span class=\"zm-bold\">won</span> a challenge! !",
+    "NEWSFEED_CHALLENGE_DONE_DESCRIPTION": " <span class=\"zm-bold\">{{winner}}</span> <span class=\"zm-bold\">won</span> a challenge! !",
     "NEWSFEED_CHALLENGE_DONE_INFO": "{{date}}",
-    "NEWSFEED_CHALLENGE_DECLINED": "<span class=\"zm-bold\">{{declinee}}</span> <span class=\"zm-bold\">declined</span> a challenge. Boooooo!",
+
+    "NEWSFEED_CHALLENGE_DECLINED_HEADLINE": "<span class=\"zm-bold\">{{declinee}}</span> <span class=\"zm-bold\">declined</span> a challenge. Boooooo!",
+    "NEWSFEED_CHALLENGE_DECLINED_DESCRIPTION": "<span class=\"zm-bold\">{{declinee}}</span> <span class=\"zm-bold\">declined</span> a challenge. Boooooo!",
     "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}}",
 
     "USERPROFILE_TITLE":"<small>Zapfee Spotlight:</small> {{username}}",

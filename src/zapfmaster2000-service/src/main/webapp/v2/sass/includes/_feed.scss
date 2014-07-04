@@ -1,0 +1,40 @@
+.zm-newsfeed-ul {
+  padding-left: 0px;
+  .zm-newsfeed {
+    font-family: $font-stack;
+    list-style: none;
+    height: 100px;
+    display: inline-block;
+    padding-top: 0px;
+    width: 100%;
+    img {
+      float: left;
+      margin-right: 10px;
+      height: 64px;
+    }
+
+    .zm-backgrnd {
+      padding: 7px;
+      &::after{
+        content: ' ';
+        position: absolute;
+        bottom: 0;
+        border:1px solid $color-pink;
+        width: 75%;
+        left:75px;
+      }
+    }
+    .feed-headline{
+      font-size: $font-size-m;
+    }
+    .feed-info{
+      position: absolute;
+      right: 7px;
+      top: 0;
+    }
+    .feed-description{
+      font-size: $font-size-s;
+    }
+  }
+
+}

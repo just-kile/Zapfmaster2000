@@ -19,7 +19,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                         $scope.$watch("movingunderline", function () {
                             $timeout(function () {
                                 var activeLi = $(ele).find(".active");
-                                movingDiv.css({
+                               if(activeLi.length>0) movingDiv.css({
                                     left: activeLi.position().left,
                                     width: activeLi.outerWidth()
                                 });

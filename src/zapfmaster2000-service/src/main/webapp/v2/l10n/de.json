@@ -36,20 +36,32 @@
     "NEWSSTACK_CHALLENGE_DECLINED": "Duell abgelehnt von {{declinee}}",
     "NEWSSTACK_CHALLENGE_DECLINED_INFO": "{{date}} Uhr",
 
-    "NEWSFEED_DRAWING": "<span class=\"zm-bold\">{{username}}</span> zapfte <span class=\"zm-bold\">{{amount}}</span> l.",
-    "NEWSFEED_DRAWING_INFO": "{{date}} Uhr @ {{location}}",
-    "NEWSFEED_ACHIEVEMENT": "<span class=\"zm-bold\">{{username}}</span> erreicht <span class=\"zm-bold\">{{achievementname}}.</span>",
+    "NEWSFEED_DRAWING_HEADLINE": "{{amount}}l gezapft von {{username}} ",
+    "NEWSFEED_DRAWING_DESCRIPTION": "An Zapfstation {{location}}",
+    "NEWSFEED_DRAWING_INFO": "{{date}} Uhr",
+
+    "NEWSFEED_ACHIEVEMENT_HEADLINE": "{{achievementname}} erreicht!",
+    "NEWSFEED_ACHIEVEMENT_DESCRIPTION": "{{username}} erreicht das {{achievementname}} Achievement",
     "NEWSFEED_ACHIEVEMENT_INFO": "{{date}} Uhr",
-    "NEWSFEED_NEW_KEG": "Ein Fass <span class=\"zm-bold\">{{brand}}</span> wurde angezapft!",
-    "NEWSFEED_NEW_KEG_INFO": "{{date}} Uhr #{{size}}L",
-    "NEWSFEED_NEW_USER": "Neuer Zapfer registriert. Willkommen <span class=\"zm-bold\">{{username}}</span>!",
+
+    "NEWSFEED_NEW_KEG_HEADLINE": "Neues Bier bei {{location}} ",
+    "NEWSFEED_NEW_KEG_DESCRIPTION": "Ein {{size}}l Fass {{brand}} wurde angezapft",
+    "NEWSFEED_NEW_KEG_INFO": "{{date}} Uhr",
+
+    "NEWSFEED_NEW_USER_HEADLINE": "Willkommen {{username}}!",
+    "NEWSFEED_NEW_USER_DESCRIPTION": "{{username}} hat sich registriert",
     "NEWSFEED_NEW_USER_INFO": "{{date}} Uhr",
-    "NEWSFEED_CHALLENGE_STARTED": "Ein <span class=\"zm-bold\">{{duration}}min Duell </span><span class=\"zm-bold\">{{username1}}</span> vs <span class=\"zm-bold\">{{username2}}</span> wurde gestartet!",
+
+    "NEWSFEED_CHALLENGE_STARTED_HEADLINE": "{{username1}} vs {{username2}}",
+    "NEWSFEED_CHALLENGE_STARTED_DESCRIPTION": "Neues {{duration}}min Duell",
     "NEWSFEED_CHALLENGE_STARTED_INFO": "{{date}} Uhr",
 
-    "NEWSFEED_CHALLENGE_DONE": " <span class=\"zm-bold\">{{winner}}</span> hat ein Duell <span class=\"zm-bold\">gewonnen</span>!",
+    "NEWSFEED_CHALLENGE_DONE_HEADLINE": " {{winner}} gewinnt!",
+    "NEWSFEED_CHALLENGE_DONE_DESCRIPTION": "{{loser}} wurde bezwungen in {{duration}}min Challenge",
     "NEWSFEED_CHALLENGE_DONE_INFO": "{{date}} Uhr",
-    "NEWSFEED_CHALLENGE_DECLINED": "<span class=\"zm-bold\">{{declinee}}</span> hat ein Duell <span class=\"zm-bold\">abgelehnt</span>. Buuuuh!",
+
+    "NEWSFEED_CHALLENGE_DECLINED_HEADLINE": "{{declinee}} hat abgelehnt",
+    "NEWSFEED_CHALLENGE_DECLINED_DESCRIPTION": "{{declinee}} hat ein {{duration}}min Duell abgelehnt",
     "NEWSFEED_CHALLENGE_DECLINED_INFO": "{{date}} Uhr",
 
     "USERPROFILE_TITLE":"<small>Zapfer im Rampenlicht:</small> {{username}}",

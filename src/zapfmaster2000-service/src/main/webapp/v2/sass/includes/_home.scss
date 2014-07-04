@@ -44,21 +44,13 @@
   }
   .zm-newsfeed .front.zm-backgrnd {
     border: none;
-    .location {
-      /*display: none;*/
-    }
   }
-  .zm-newsfeed:nth-child(odd) {
+  .zm-newsfeed {
     img {
       border: 2px solid $color-yellow;
     }
   }
-  .zm-newsfeed:nth-child(even) {
-    img {
-      border: 2px solid $color-pink;
-    }
-  }
-  .zm-newsfeed .brand{
-    line-height: 20px;
-  }
+
+
 }
+

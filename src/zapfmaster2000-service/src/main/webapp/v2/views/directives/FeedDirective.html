@@ -1,25 +1,26 @@
 <ul class="zm-newsfeed-ul" style="position:relative">
     <li class="zm-newsfeed" ng-repeat="n in items">
         <!-- DRAWING -->
-        <div class="flip-container" ng-if="n.type=='DRAWING'">
-            <div class="flipper">
-                <div class="front zm-backgrnd">
+        <div class="flip-container">
+                <div class="front zm-backgrnd"  ng-if="n.type=='DRAWING'">
                     <img ng-src="{{baseUrl+n.image|big}}" class="img-rounded"/>
-                    <div class="brand" translate="NEWSFEED_DRAWING"
+                    <div class="feed-headline" translate="NEWSFEED_DRAWING_HEADLINE"
                          translate-value-username="{{n.userName}}"
                          translate-value-amount="{{n.amount|amount}}">
                     </div>
-                    <div class="location" translate="NEWSFEED_DRAWING_INFO"
+                    <div class="feed-description" translate="NEWSFEED_DRAWING_DESCRIPTION"
+                         translate-value-username="{{n.userName}}"
+                         translate-value-amount="{{n.amount|amount}}"
+                         translate-value-location="{{n.location}}"
+                            >
+                    </div>
+
+                    <div class="feed-info" translate="NEWSFEED_DRAWING_INFO"
                          translate-value-date="{{n.date|clientdate}}"
                          translate-value-location="{{n.location}}"></div>
 
-
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
-
                 </div>
-
-
-            </div>
         </div>
         <!-- ACHIEVEMENET -->
         <!--    {
@@ -32,16 +33,20 @@
         "userId": 3
     }-->
         <div class="flip-container" ng-if="n.type=='ACHIEVEMENT'">
-            <div class="flipper">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                     <div class="brand"
-                            translate="NEWSFEED_ACHIEVEMENT"
+                     <div class="feed-headline"
+                            translate="NEWSFEED_ACHIEVEMENT_HEADLINE"
                             translate-value-username="{{n.userName}}"
                             translate-value-achievementname="{{n.achievementName}}">
-                </div>
-                    <div class="location" translate="NEWSFEED_ACHIEVEMENT_INFO"
+                    </div>
+                    <div class="feed-description"
+                         translate="NEWSFEED_ACHIEVEMENT_DESCRIPTION"
+                         translate-value-username="{{n.userName}}"
+                         translate-value-achievementname="{{n.achievementName}}">
+                    </div>
+                    <div class="feed-info" translate="NEWSFEED_ACHIEVEMENT_INFO"
                          translate-value-date="{{n.date|clientdate}}"></div>
 
 
@@ -51,7 +56,6 @@
 
 
             </div>
-        </div>
         <!-- New Keg-->
 
         <!--{
@@ -65,19 +69,25 @@
          "type": "NEW_KEG"
     } -->
         <div class="flip-container" ng-if="n.type=='NEW_KEG'">
-            <div class="flipper">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand"
-                         translate="NEWSFEED_NEW_KEG"
+                    <div class="feed-headline"
+                         translate="NEWSFEED_NEW_KEG_HEADLINE"
                          translate-value-brand="{{n.brand}}"
+                         translate-value-location="{{n.location}}"
+                            ></div>
+                    <div class="feed-description"
+                         translate="NEWSFEED_NEW_KEG_DESCRIPTION"
+                         translate-value-brand="{{n.brand}}"
+                         translate-value-size="{{n.size}}"
+
                             ></div>
 
-                    <div class="location"
+                    <div class="feed-info"
                          translate="NEWSFEED_NEW_KEG_INFO"
                          translate-value-date="{{n.date|clientdate}}"
-                         translate-value-size="{{n.size}}"
+
                             ></div>
 
 
@@ -86,7 +96,6 @@
                 </div>
 
 
-            </div>
         </div>
         <!-- New User-->
         <!-- date: "20140324-201423"
@@ -95,20 +104,21 @@ type: "NEW_USER"
 userId: 3
 userName: "Karl"-->
         <div class="flip-container" ng-if="n.type=='NEW_USER'">
-            <div class="flipper">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand"
-                         translate="NEWSFEED_NEW_USER"
+                    <div class="feed-headline"
+                         translate="NEWSFEED_NEW_USER_HEADLINE"
                          translate-value-username="{{n.userName}}"></div>
-                    <div class="location"  translate="NEWSFEED_NEW_USER_INFO"
+                    <div class="feed-description"
+                         translate="NEWSFEED_NEW_USER_DESCRIPTION"
+                         translate-value-username="{{n.userName}}"></div>
+                    <div class="feed-info"  translate="NEWSFEED_NEW_USER_INFO"
                          translate-value-date="{{n.date|clientdate}}"></div>
 
 
                     <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
-                </div>
 
 
             </div>
@@ -141,19 +151,25 @@ userName: "Karl"-->
             ]
         } -->
         <div class="flip-container" ng-if="n.type=='CHALLENGE_STARTED'">
-            <div class="flipper">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand"
-                         translate="NEWSFEED_CHALLENGE_STARTED"
+                    <div class="feed-headline"
+                         translate="NEWSFEED_CHALLENGE_STARTED_HEADLINE"
+                         translate-value-username1="{{n.team1[0].userName}}"
+                         translate-value-username2="{{n.team2[0].userName}}"
+                         translate-value-duration="{{n.challengeDuration}}"
+                            >
+                    </div>
+                    <div class="feed-description"
+                         translate="NEWSFEED_CHALLENGE_STARTED_DESCRIPTION"
                          translate-value-username1="{{n.team1[0].userName}}"
                          translate-value-username2="{{n.team2[0].userName}}"
                          translate-value-duration="{{n.challengeDuration}}"
                             >
                     </div>
 
-                    <div class="location"
+                    <div class="feed-info"
                          translate="NEWSFEED_CHALLENGE_STARTED_INFO"
                          translate-value-date="{{n.startDate|clientdate}}"
                          translate-value-duration="{{n.challengeDuration}}"></div>
@@ -164,23 +180,28 @@ userName: "Karl"-->
                 </div>
 
 
-            </div>
         </div>
         <!-- Challenge Done -->
         <!--
         -->
         <div class="flip-container" ng-if="n.type=='CHALLENGE_DONE'">
-            <div class="flipper">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand" translate="NEWSFEED_CHALLENGE_DONE"
+                    <div class="feed-headline" translate="NEWSFEED_CHALLENGE_DONE_HEADLINE"
                          translate-value-username1="{{n.team1[0].userName}}"
                          translate-value-username2="{{n.team2[0].userName}}"
                          translate-value-winner="{{n.team1[0].won?n.team1[0].userName:n.team2[0].userName}}"
+                         translate-value-loser="{{!n.team1[0].won?n.team1[0].userName:n.team2[0].userName}}"
+                         translate-value-duration="{{n.challengeDuration}}"></div>
+                    <div class="feed-description" translate="NEWSFEED_CHALLENGE_DONE_DESCRIPTION"
+                         translate-value-username1="{{n.team1[0].userName}}"
+                         translate-value-username2="{{n.team2[0].userName}}"
+                         translate-value-winner="{{n.team1[0].won?n.team1[0].userName:n.team2[0].userName}}"
+                         translate-value-loser="{{!n.team1[0].won?n.team1[0].userName:n.team2[0].userName}}"
                          translate-value-duration="{{n.challengeDuration}}"></div>
 
-                    <div class="location" translate="NEWSFEED_CHALLENGE_DONE_INFO"
+                    <div class="feed-info" translate="NEWSFEED_CHALLENGE_DONE_INFO"
                          translate-value-date="{{n.startDate|clientdate}}"
                          translate-value-duration="{{n.challengeDuration}}"></div>
 
@@ -189,21 +210,24 @@ userName: "Karl"-->
                 </div>
 
 
-            </div>
         </div>
         <!-- CHALLENGE DECLINED-->
         <div class="flip-container" ng-if="n.type=='CHALLENGE_DECLINED'">
-            <div class="flipper">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
 
-                    <div class="brand" translate="NEWSFEED_CHALLENGE_DECLINED"
+                    <div class="feed-headline" translate="NEWSFEED_CHALLENGE_DECLINED_HEADLINE"
                          translate-value-username1="{{n.team1[0].userName}}"
                          translate-value-username2="{{n.team2[0].userName}}"
                          translate-value-declinee="{{n.team2[0].userName}}"
                          translate-value-duration="{{n.challengeDuration}}"></div>
+                    <div class="feed-description" translate="NEWSFEED_CHALLENGE_DECLINED_DESCRIPTION"
+                    translate-value-username1="{{n.team1[0].userName}}"
+                    translate-value-username2="{{n.team2[0].userName}}"
+                    translate-value-declinee="{{n.team2[0].userName}}"
+                    translate-value-duration="{{n.challengeDuration}}"></div>
 
-                    <div class="location"  translate="NEWSFEED_CHALLENGE_DECLINED_INFO"
+                    <div class="feed-info"  translate="NEWSFEED_CHALLENGE_DECLINED_INFO"
                          translate-value-date="{{n.date|clientdate}}"
                          translate-value-duration="{{n.challengeDuration}}"></div>
 
@@ -214,7 +238,6 @@ userName: "Karl"-->
 
 
             </div>
-        </div>
     </li>
 
 </ul>

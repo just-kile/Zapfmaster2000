@@ -786,13 +786,6 @@ li.zm-newsfeed {
     /*margin-left: 30px;*/
 }
 
-.zm-newsfeed:nth-child(even) .front {
-    border: 2px solid #FFF143
-}
-
-.zm-newsfeed:nth-child(odd) .front {
-    border: 2px solid #FF71AC
-}
 
 .zm-newsfeed img {
     float: left;
