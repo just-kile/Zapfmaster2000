@@ -6,16 +6,11 @@ define(['Console', 'Underscore'], function (Console, _) {
         //controller.$inject = [];
         function ($scope, $timeout, CometService, ajax, c) {
             Console.group("Newsfeed controller entered.");
-            $scope.baseUrl = c.baseUrl;
-            $scope.items = [];
-            $scope.maxlength = c.newsFeedLength;
+
 
             function addNewsToScope(data) {
                 $scope.items.unshift(data);
             }
-
-            $scope.busy = false;
-            $scope.loadNextItems = loadNextItems;
 
             function loadNextItems() {
                 $scope.busy = true;
@@ -24,7 +19,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                         $scope.items.push(item);
                     });
                     $scope.busy = false;
-                    if(data.length == 0){
+                    if (data.length === 0) {
                         $scope.noMoreData = true;
                     }
                 }, {
@@ -40,6 +35,11 @@ define(['Console', 'Underscore'], function (Console, _) {
 
                 });
             }
+            $scope.baseUrl = c.baseUrl;
+            $scope.items = [];
+            $scope.maxlength = c.newsFeedLength;
+            $scope.busy = false;
+            $scope.loadNextItems = loadNextItems;
 
             init();
 
