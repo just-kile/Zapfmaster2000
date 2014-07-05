@@ -4,10 +4,9 @@ define(['Console', "Underscore"], function (Console, _) {
 
     var service = ['ZMConstants', function (c) {
         return function (input, expression) {
-            if (input && (input.length > (expression || c.newsStackLength))) {
-                input.length = expression || c.newsStackLength;
+            if (input && expression && _.isArray(input) && input.length > (expression)) {
+                input.length = expression;
             }
-
             return input;
 
         };

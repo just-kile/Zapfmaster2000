@@ -4,9 +4,12 @@ define(['Console'], function (Console) {
 
     var service = ['ZMConstants', function (c) {
         return function (input) {
-            if (input && input.indexOf("default") < 0) {
+            if (typeof input === "string" &&
+                 input.indexOf(".png") < 0) {
                 return input + "/big";
-            } else {
+            } else if(typeof input==="number"){
+                return input+"/big";
+            }else{
                 return input;
             }
 

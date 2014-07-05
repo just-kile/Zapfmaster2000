@@ -15,7 +15,7 @@
 "location":"Kölle"};
 -->
 <ul class="zm-newsstack-ul" style="position:relative">
-    <li class="zm-newsstack animate-repeat" ng-repeat="n in news|maxcount">
+    <li class="zm-newsstack animate-repeat" ng-repeat="n in news|maxcount:newsStackLength">
     <!-- DRAWING -->
         <div class="flip-container" ng-if="n.type=='DRAWING'">
             <div class="flipper">

@@ -7,6 +7,9 @@ define(['Console', 'moment'], function (Console, moment) {
             if (typeof input === "string") {
                 return input;
             }
+            if(typeof input==="undefined"||input === null){
+                return "";
+            }
             var output = moment(input).format(c.COUNTDOWN_TIME_FORMAT);
             // Console.debug("Filter ",input," with Output ", output);
             return output;

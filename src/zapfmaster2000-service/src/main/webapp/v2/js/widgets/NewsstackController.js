@@ -6,6 +6,7 @@ define(['Console', 'Underscore'], function (Console) {
         function ($scope, $timeout, CometService, ajax, c) {
             Console.group("Newsstack controller entered.");
             $scope.baseUrl = c.baseUrl;
+            $scope.newsStackLength = c.newsStackLength;
             var waitingQueue = [];
             CometService.addPushListener(function (data) {
                 addToNewsQueue(data);
