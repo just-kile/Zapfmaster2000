@@ -191,47 +191,6 @@ header.zmo-header {
 img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 }
 
-.zmo-challenges .clock {
-    font-size: 2em;
-    padding-top: 35px;
-}
-
-.zmo-challenges .challenge-container {
-    position: relative;
-    height: 100px;
-    text-align: center;
-    list-style: none;
-}
-
-.zmo-challenges img.userimage1 {
-    left: 0px;
-    width:52px;
-    height:52px;
-    /* width: 12.8%;
-     height: 50%;  */
-}
-
-.zmo-challenges div.username1 {
-    left: 5px;
-
-}
-
-.zmo-challenges img.userimage2 {
-    right: 0px;
-    width:52px;
-    height:52px;
-    /* width: 12.8%;
-     height: 50%; */
-}
-
-.zmo-challenges div.username2 {
-    right: 5px;
-}
-
-.zmo-challenges div.username1, .zmo-challenges div.username2 {
-    margin-top: 50px;
-    font-size: 2em;
-}
 
 .color-container:nth-child(odd) .userimage1 {
     border: 2px solid #FFF143;
@@ -255,54 +214,11 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
     opacity: 1;
 }
 
-.zmo-challenges .bar1, .zmo-challenges .bar2 {
-    top: 10px;
-    transition: translateZ(0);
-    transition: 1s;
 
-}
 
-.zmo-challenges .bar1 {
 
-}
 
-.zmo-challenges .bar2 {
-    right: 0;
-}
 
-.color-container:nth-child(even) .bar1 {
-    border: 2px solid #FF71AC;
-    background: rgba(255, 113, 172, 0.5);
-    height: 30px;
-}
-
-.color-container:nth-child(odd) .bar1 {
-    border: 2px solid #FFF143;
-    background: rgba(255, 241, 67, 0.5);
-    height: 30px;
-}
-
-.color-container:nth-child(even) .bar2 {
-    border: 2px solid #FFF143;
-    background: rgba(255, 241, 67, 0.5);
-    height: 30px;
-}
-
-.color-container:nth-child(odd) .bar2 {
-    border: 2px solid #FF71AC;
-    background: rgba(255, 113, 172, 0.5);
-    height: 30px;
-}
-
-.zmo-challenges .zm-img {
-    border: 1px solid yellow;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -khtml-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    width: 48px;
-    height: 48px;
-}
 
 .challenge-container.ng-enter, li.zm-draftkit.ng-enter {
     transition: translateZ(0);

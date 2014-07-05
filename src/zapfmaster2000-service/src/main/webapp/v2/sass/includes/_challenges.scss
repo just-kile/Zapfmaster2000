@@ -1,0 +1,72 @@
+.zmo-challenges {
+  .challenge-amount-1 {
+    position: absolute;
+    left: 65px;
+    top: 9px;
+    font-size: $font-size-m;
+  }
+  .challenge-amount-2 {
+    position: absolute;
+    right: 65px;
+    top: 9px;
+    font-size: $font-size-m;
+  }
+  .clock {
+    font-size: 2em;
+    padding-top: 35px;
+  }
+  .challenge-container {
+    position: relative;
+    height: 100px;
+    text-align: center;
+    list-style: none;
+  }
+  .userimage1 {
+    left: 0px;
+    width: 52px;
+    height: 52px;
+  }
+  .username1 {
+    left: 5px;
+  }
+  .username1, .username2 {
+    margin-top: 50px;
+    font-size: $font-size-l;
+  }
+  .userimage2 {
+    right: 0px;
+    width: 52px;
+    height: 52px;
+  }
+  .username2 {
+    right: 5px;
+  }
+  .bar1, .bar2 {
+    top: 10px;
+    transition: translateZ(0);
+    transition: 1s;
+  }
+  .bar2 {
+    right: 0;
+  }
+  .zm-img {
+    border: 1px solid yellow;
+    @include vendor-prefix(border-radius, 10px);
+    width: 48px;
+    height: 48px;
+  }
+
+}
+
+.color-container {
+  .bar1 {
+    border: 2px solid $color-pink;
+    background: rgba($color-pink, 0.5);
+    height: 30px;
+  }
+  .bar2{
+    border: 2px solid #FFF143;
+    background: rgba($color-yellow, 0.5);
+    height: 30px;
+  }
+}

@@ -3,11 +3,15 @@ $font-stack: RalewayRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 $drops-png: "images/drops.png";
 $main-text-color:#ffffff;
 $color-pink:#ED71A8;
+$color-pink-light:#FFADCF;
 $color-yellow:#FFF143;
+$color-yellow-light:#FFF899;
 $navbar-item-width:120px;
 $navbar-item-height:40px;
 $font-size-m:1.6em;
 $font-size-s:1.2em;
+$font-size-l:2em;
+
 
 
 @each $font-face in RalewayBold, RalewayLight, RalewayRegular, RalewaySemiBold {

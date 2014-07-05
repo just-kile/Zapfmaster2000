@@ -3,8 +3,7 @@
     <div class="col-xs-12 col-sm-6 col-md-8 col-sm-push-6 col-md-push-4 zmo-challenges">
         <!--<header class="zmo-header">{{'BESTLIST_TITLE'|translate}}</header>-->
         <zm-accordion title="{{'CHALLENGES_RUNNING_TITLE'|translate}}">
-            <ul class="zmo-container"
-            ">
+            <ul class="zmo-container">
             <li class="challenge-container color-container" ng-repeat="challenge in challenges"
                 ng-if="challenge.type!='CHALLENGE_DONE'">
                 <!--  <div class="zm-img" style='background: url("{{baseurl+challenge.team1[0].userImage}}")'/>  --->
@@ -34,19 +33,23 @@
             <ul class="zmo-container">
                 <li class="challenge-container color-container" ng-repeat="challenge in challenges"
                     ng-if="challenge.type=='CHALLENGE_DONE'">
-                    <!--  <div class="zm-img" style='background: url("{{baseurl+challenge.team1[0].userImage}}")'/>  --->
+                    <div class="bar1 zm-absolute zm-animate" ng-style="{width:challenge.team1Percent+'%'}"></div>
+                    <div class="bar2 zm-absolute zm-animate" ng-style="{width:challenge.team2Percent+'%'}"></div>
                     <img ng-class="{winner: challenge.team1[0].won}"
                          class="zm-absolute img-responsive img-rounded userimage1"
                          ng-src="{{baseUrl+challenge.team1[0].userImage}}">
 
                     <div class="username1 zm-absolute">{{challenge.team1[0].userName}}</div>
-                    <div class="diffAmount">{{challenge.diffAmount}}</div>
+
 
                     <img ng-class="{winner: challenge.team2[0].won}"
                          class="zm-absolute img-responsive img-rounded userimage2"
                          ng-src="{{baseUrl+challenge.team2[0].userImage}}">
 
                     <div class="username2 zm-absolute">{{challenge.team2[0].userName}}</div>
+                    <div class="clock">{{challenge.countdown|countdown}}</div>
+                    <div class="challenge-amount-1">{{challenge.team1Amount|amount}}l</div>
+                    <div class="challenge-amount-2">{{challenge.team2Amount|amount}}l</div>
                 </li>
             </ul>
         </zm-accordion>
