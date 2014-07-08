@@ -7,7 +7,8 @@ define(['Console', 'd3', "Angular",'jQuery'], function (Console, d3, angular,$) 
                 transclude:true,
                 restrict: 'E',
                 scope:{
-                    title:"@"
+                    title:"@",
+                    icon:"@"
                 },
                 templateUrl: 'views/directives/AccordionDirective.html',
                 link:function($scope,ele,attrs){
@@ -25,10 +26,7 @@ define(['Console', 'd3', "Angular",'jQuery'], function (Console, d3, angular,$) 
                         container.toggleClass("zm-hidden");
                         toggleIcon();
                     };
-                    $scope.$watch("title",function(){
-                        $scope.title = attrs.title;
 
-                    });
                 }
             };
 

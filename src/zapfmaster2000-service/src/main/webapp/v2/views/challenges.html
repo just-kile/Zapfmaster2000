@@ -2,7 +2,7 @@
 
     <div class="col-xs-12 col-sm-6 col-md-8 col-sm-push-6 col-md-push-4 zmo-challenges">
         <!--<header class="zmo-header">{{'BESTLIST_TITLE'|translate}}</header>-->
-        <zm-accordion title="{{'CHALLENGES_RUNNING_TITLE'|translate}}">
+        <zm-accordion title="{{'CHALLENGES_RUNNING_TITLE'|translate}}" icon="css/images/ic_menu_challenge.svg">
             <ul class="zmo-container">
             <li class="challenge-container color-container" ng-repeat="challenge in challenges"
                 ng-if="challenge.type!='CHALLENGE_DONE'">
@@ -25,11 +25,9 @@
             </li>
             </ul>
         </zm-accordion>
-
-
     </div>
     <div class="col-xs-12 col-sm-6 col-md-4 col-sm-pull-6 col-md-pull-8 zmo-challenges">
-        <zm-accordion title="{{'CHALLENGES_DONE_TITLE'|translate}}">
+        <zm-accordion title="{{'CHALLENGES_DONE_TITLE'|translate}}"  icon="css/images/ic_menu_challenge.svg">
             <ul class="zmo-container">
                 <li class="challenge-container color-container" ng-repeat="challenge in challenges"
                     ng-if="challenge.type=='CHALLENGE_DONE'">
