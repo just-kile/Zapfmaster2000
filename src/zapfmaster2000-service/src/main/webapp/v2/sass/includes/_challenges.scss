@@ -61,12 +61,15 @@
 .color-container {
   .bar1 {
     border: 2px solid $color-pink;
-    background: rgba($color-pink, 0.5);
+    // background: rgba($color-pink, 0.5);
+    @include linear-gradient(black, $color-pink-dark);
     height: 30px;
   }
-  .bar2{
+  .bar2 {
     border: 2px solid #FFF143;
-    background: rgba($color-yellow, 0.5);
+    //background: rgba($color-yellow, 0.5);
+    @include linear-gradient($color-yellow-dark, black);
+
     height: 30px;
   }
 }

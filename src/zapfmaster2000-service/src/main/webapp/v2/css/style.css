@@ -319,7 +319,7 @@ li.bestlist-item.ng-leave-active {
 }
 
 .bestlist .bar1 {
-    background-color: black !important;
+    background: black !important;
     border-radius: 10px;
     border-width: 2px;
 }
