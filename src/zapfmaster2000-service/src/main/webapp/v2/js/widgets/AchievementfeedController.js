@@ -3,7 +3,7 @@ define(['Console', 'Underscore'], function (Console, _) {
     Console.group("Entering AchievementFeed controller module.");
 
     var controller = ['$scope', '$timeout', 'CometService', 'DataService', "ZMConstants",
-        function ($scope, $timeout, CometService, ajax, c) {
+        function ($scope, $timeout, CometService, dataService, c) {
             Console.group("AchievementFeed controller entered.");
             $scope.baseUrl = c.baseUrl;
             $scope.items = [];
@@ -12,9 +12,9 @@ define(['Console', 'Underscore'], function (Console, _) {
                 $scope.items.unshift(data);
             }
 
-            ajax.getDatas(c.newsFeedUrl, function (data) {
-                _.each(data, function (item) {
-                    $scope.items.push(item);
+            dataService.getAchievements().then(function (achievements) {
+                _.each(achievements, function (achievement) {
+                    $scope.items.push(achievement);
                 });
                 CometService.addPushListener(function (data) {
                     if (data.type === c.ACHIEVEMENT) {
@@ -22,10 +22,6 @@ define(['Console', 'Underscore'], function (Console, _) {
                     }
 
                 });
-            }, {
-                start: 0,
-                length: c.newsFeedLength,
-                filter: c.FILTER.ACHIEVEMENT
             });
 
             Console.groupEnd();
