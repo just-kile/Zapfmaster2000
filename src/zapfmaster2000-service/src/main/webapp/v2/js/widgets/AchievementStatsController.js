@@ -14,16 +14,16 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
 
             function update(achievementId, callback) {
                 // achievementId = 1;
-                ajax.getDatas(c.achievementStatsDetailedUrl, function (data) {
-                    $scope.achievementName = data.achievementName;
+                ajax.getDetailedAchievementStats(achievementId).then( function (achievementStats) {
+                    $scope.achievementName = achievementStats.achievementName;
                     // $scope.userImage = data.user.userImage;
-                    $scope.image = data.achievementImage;
-                    $scope.description = data.description;
-                    $scope.users = data.users;
+                    $scope.image = achievementStats.achievementImage;
+                    $scope.description = achievementStats.description;
+                    $scope.users = achievementStats.users;
                     if (callback) {
                         callback();
                     }
-                }, {id: achievementId});
+                });
             }
 
             $scope.updateFn = function (ok) {

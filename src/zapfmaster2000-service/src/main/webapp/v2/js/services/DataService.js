@@ -23,7 +23,9 @@ define(['Console', 'Underscore',"Angular"], function (Console, _,angular) {
                 }, data)
             });
         };
-        var getAchievements = function () {
+
+
+        var getAchievementFeed = function () {
             var req = requestPromise(c.newsFeedUrl, {
                 start: 0,
                 length: c.newsFeedLength,
@@ -33,6 +35,32 @@ define(['Console', 'Underscore',"Angular"], function (Console, _,angular) {
 
         };
 
+        var getDetailedAchievementStats = function(achievementId){
+            var req = requestPromise(c.achievementStatsDetailedUrl,{
+                id:achievementId
+            });
+            return req.then(handleSuccess,handleError);
+        };
+
+        var getAmountStats = function(){
+            var req = requestPromise(c.amountStatsUrl);
+            return req.then(handleSuccess,handleError);
+        };
+        var getAchievementStats = function(){
+            var req = requestPromise(c.achievementStatsUrl);
+            return req.then(handleSuccess,handleError);
+        };
+        var getBestlist = function(){
+            var req = requestPromise(c.bestlistUrl);
+            return req.then(handleSuccess,handleError);
+        };
+        var getUserStats = function(userId){
+            var req = requestPromise(c.frontPageUserStatsUrl,{
+                user:userId
+            });
+            return req.then(handleSuccess,handleError);
+
+        }
         function handleError( response ) {
             if (! angular.isObject( response.data ) || ! response.data.message
                 ) {
@@ -47,8 +75,6 @@ define(['Console', 'Underscore',"Angular"], function (Console, _,angular) {
         }
 
 
-        // I transform the successful response, unwrapping the application data
-        // from the API response payload.
         function handleSuccess( response ) {
 
             return( response.data );
@@ -56,7 +82,12 @@ define(['Console', 'Underscore',"Angular"], function (Console, _,angular) {
         }
         return {
             getDatas: request,
-            getAchievements:getAchievements
+            getAchievementFeed:getAchievementFeed,
+            getDetailedAchievementStats:getDetailedAchievementStats,
+            getAmountStats:getAmountStats,
+            getAchievementStats:getAchievementStats,
+            getBestlist:getBestlist,
+            getUserStats:getUserStats
         };
 
     }];

@@ -21,12 +21,12 @@ define(['Console', 'Underscore'], function (Console, _) {
                 $scope.achievementCount = achievementsCount.count;
             };
             var retrieveAmount = function (callback) {
-                ajax.getDatas(c.amountStatsUrl, function (responseJson) {
+                ajax.getAmountStats().then(function (responseJson) {
                     callback(responseJson);
                 });
             };
             var retrieveAchievement = function (callback) {
-                ajax.getDatas(c.achievementStatsUrl, function (achievementStats) {
+                ajax.getAchievementStats().then(function (achievementStats) {
                     callback(achievementStats);
                 });
             };

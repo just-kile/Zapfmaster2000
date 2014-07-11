@@ -33,7 +33,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 return data;
             };
             var initScope = function (isOnlyBestlist,showAll) {
-                ajax.getDatas(c.bestlistUrl, function (data) {
+                ajax.getBestlist().then(function (data) {
                     if (data.length > c.bestlistMax && !showAll) {
                         data.length = c.bestlistMax;
                     }
@@ -62,7 +62,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
             };
             var updateScope = function (data) {
-                ajax.getDatas(c.bestlistUrl, function (data) {
+                ajax.getBeslist().then(function (data) {
                     if (data.length > c.bestlistMax) {
                         data.length = c.bestlistMax;
                     }
@@ -163,7 +163,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     $timeout.cancel(changeInterval);
                 }
 
-                ajax.getDatas(c.frontPageUserStatsUrl, function (data) {
+                ajax.getUserStats(getUserIdFromPointer(counter)).then(function (data) {
                     counter = ++counter % len;
                     activeStats = ++activeStats % 2;
                     $scope.activeStats = activeStats;
@@ -177,7 +177,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     changeInterval = $timeout(function () {
                         updateStatsArrow();
                     }, 5000);
-                }, {user: getUserIdFromPointer(counter)});
+                });
 
 
             };
