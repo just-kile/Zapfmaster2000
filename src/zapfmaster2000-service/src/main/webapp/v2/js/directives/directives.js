@@ -15,12 +15,13 @@ define([
     'directives/TextfillDirective',
     'directives/MovingUnderline',
     'directives/AccordionDirective',
-    'directives/UserInformationDirective'
+    'directives/UserInformationDirective',
+    'directives/StickyScrollDirective'
 
 //    ,'directives/LineChart'
 
 ], function (Console, $, _, angular, BarChart, FigureChart, FeedDirective, ShowDirective, SwitchDirective,
-             TextfillDirective, MovingUnderline,AccordionDirective,UserInformationDirective) {
+             TextfillDirective, MovingUnderline,AccordionDirective,UserInformationDirective,StickyScroll) {
     "use strict";
     Console.group("Entering Widgets module.");
 
@@ -34,7 +35,8 @@ define([
         textfill: TextfillDirective,
         movingunderline:MovingUnderline,
         zmAccordion:AccordionDirective,
-        userInfo:UserInformationDirective
+        userInfo:UserInformationDirective,
+        zmStickyScroll:StickyScroll
 
     };
 

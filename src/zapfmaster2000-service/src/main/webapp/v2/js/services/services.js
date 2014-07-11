@@ -6,8 +6,9 @@ define([
     'services/DataService',
     'services/CometService',
     'services/DateService',
-    'services/SplashScreenService'
-], function (Console, _, ds, cs, dateS, splash) {
+    'services/SplashScreenService',
+    'services/ResizeService'
+], function (Console, _, ds, cs, dateS, splash,resize) {
     "use strict";
     Console.group("Entering Service module.");
     Console.info("DataService", ds);
@@ -17,7 +18,8 @@ define([
         DataService: ds,
         CometService: cs,
         DateService: dateS,
-        SplashScreenService: splash
+        SplashScreenService: splash,
+        ResizeService:resize
     };
     Console.info("Registered services: ", services);
 
