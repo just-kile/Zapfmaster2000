@@ -39,7 +39,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             };
             var initScope = function (noMaxLength) {
 
-                ajax.getDatas(c.challengeUrl, function (data) {
+                ajax.getChallenges().then(function (data) {
                     if (!noMaxLength && data.length > c.challengeMaxDuels) {
                         data.length = c.challengeMaxDuels;
                     }
@@ -52,7 +52,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 });
             };
             var updateAmount = function () {
-                ajax.getDatas(c.challengeUrl, function (data) {
+                ajax.getChallenges().then(function (data) {
                     calcTeamPercent(data);
                     _.each($scope.challenges, function (challenge, key) {
                         challenge.team1Percent = data[key].team1Percent;

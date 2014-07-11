@@ -45,8 +45,11 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     return colors[i % colors.length];
                 };
             };
+
             var initScope = function () {
-                ajax.getDatas(c.distributionUrl, function (data) {
+                var from = moment().subtract('minutes', c.PROGRESS_FROM_MINUTES).format(c.SERVER_TIME_FORMAT);
+                var interval = c.PROGRESS_INTERVAL;
+                ajax.getZapfDistribution(from,interval).then( function (data) {
                     // console.log(data);
                     //var distData = [[-1,0],[0,0.0001],[1,0.001],[4,0.42],[7,0.44],[10,0.1],[12,0],[13,0]];
                     var normalCurve = transformData(data.normalCurve);
@@ -69,9 +72,6 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     $scope.degression = data.degression;
                     // $scope.skew = -0.3;
                     //$scope.kurtosis = 0;
-                }, {
-                    from: moment().subtract('minutes', c.PROGRESS_FROM_MINUTES).format(c.SERVER_TIME_FORMAT),
-                    interval: c.PROGRESS_INTERVAL
                 });
 
 

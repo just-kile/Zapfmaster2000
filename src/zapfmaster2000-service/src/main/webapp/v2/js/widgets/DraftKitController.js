@@ -39,7 +39,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             var initScope = function (datas) {
 
                 if (!datas) {
-                    ajax.getDatas(c.kegStatsUrl, function (kegs) {
+                    ajax.getKegStats().then(function (kegs) {
                         Console.log("Received Keg Data ", kegs);
                         if (firstInit) {
                             _.each(kegs, function (keg) {
@@ -57,7 +57,7 @@ define(['Console', 'Underscore'], function (Console, _) {
 
             };
             var updateScope = function () {
-                ajax.getDatas(c.kegStatsUrl, function (kegs) {
+                ajax.getKegStats().then(function (kegs) {
                     Console.log("Received Keg Data ", kegs);
                     if ($scope.kegs && $scope.kegs.length !== kegs.length) {
                         initScope(kegs);

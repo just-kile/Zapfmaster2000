@@ -54,16 +54,13 @@ define(['Console', 'Underscore'], function (Console) {
 
              dummydata();
              stopFlag = false;   */
-            ajax.getDatas(c.newsFeedUrl, function (json) {
+            ajax.getNewsFeed(0, c.newsStackLength).then( function (json) {
                 if (json) {
                     _.each(json.reverse(), function (data) {
                         addToNewsQueue(data);
                     });
                 }
 
-            }, {
-                start: 0,
-                length: c.newsStackLength
             });
 
             Console.groupEnd();

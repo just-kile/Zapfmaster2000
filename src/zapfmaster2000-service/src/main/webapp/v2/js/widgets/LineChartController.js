@@ -78,7 +78,9 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
 
             };
             var initScope = function () {
-                ajax.getDatas(c.progressUrl, function (data) {
+                var from = moment().subtract('minutes', c.PROGRESS_FROM_MINUTES).format(c.SERVER_TIME_FORMAT);
+                var interval = c.PROGRESS_INTERVAL;
+                ajax.getProgress(from, interval).then(function (data) {
                     Console.log(data);
                     $scope.chartData = [
                         {
@@ -86,11 +88,8 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                             values: data.amount.length > 1 ? transformData(data) : []
                         }
                     ];
-                }, {
-                    from: moment().subtract('minutes', c.PROGRESS_FROM_MINUTES).format(c.SERVER_TIME_FORMAT),
-                    interval: c.PROGRESS_INTERVAL
                 });
-                ajax.getDatas(c.bestlistUrl, function (bestlist) {
+                ajax.getBestlist().then(function (bestlist) {
                     $scope.pieChartData = transformDataPie(bestlist);
                 });
 

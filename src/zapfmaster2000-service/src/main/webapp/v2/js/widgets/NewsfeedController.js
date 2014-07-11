@@ -14,7 +14,7 @@ define(['Console', 'Underscore'], function (Console, _) {
 
             function loadNextItems() {
                 $scope.busy = true;
-                ajax.getDatas(c.newsFeedUrl, function (data) {
+                ajax.getNewsFeed($scope.items.length, c.newsFeedLength).then(function (data) {
                     _.each(data, function (item) {
                         $scope.items.push(item);
                     });
@@ -22,9 +22,6 @@ define(['Console', 'Underscore'], function (Console, _) {
                     if (data.length === 0) {
                         $scope.noMoreData = true;
                     }
-                }, {
-                    start: $scope.items.length,
-                    length: c.newsFeedLength
                 });
             }
 

@@ -12,7 +12,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 $scope.items.unshift(data);
             }
 
-            dataService.getAchievements().then(function (achievements) {
+            dataService.getAchievementFeed(c.newsFeedLength).then(function (achievements) {
                 _.each(achievements, function (achievement) {
                     $scope.items.push(achievement);
                 });

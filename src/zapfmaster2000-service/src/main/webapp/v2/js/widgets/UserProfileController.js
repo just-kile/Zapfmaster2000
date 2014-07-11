@@ -18,7 +18,7 @@ define(['Console', 'moment', 'Underscore', 'text!../../fake_cite.json'], functio
             }
 
             function update(userId, callback) {
-                ajax.getDatas(c.frontPageUserStatsUrl, function (data) {
+                ajax.getUserStats(userId).then(function (data) {
                     $scope.user = data.user;
 
                     $scope.amount = data.amount;
@@ -41,7 +41,7 @@ define(['Console', 'moment', 'Underscore', 'text!../../fake_cite.json'], functio
                 update(generateRandomId(), ok);
             };
             function init() {
-                ajax.getDatas(c.membersUrl, function (data) {
+                ajax.getMembers().then(function (data) {
                     users = data;
                     update(generateRandomId());
                 });
