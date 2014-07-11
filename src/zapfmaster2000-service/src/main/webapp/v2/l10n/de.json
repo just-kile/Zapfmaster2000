@@ -15,6 +15,7 @@
     "CHALLENGES_SPLASH_DONE_TITLE":"Duell beendet!",
     "CHALLENGES_RUNNING_TITLE":"Laufende Duelle",
     "CHALLENGES_DONE_TITLE":"Beendete Duelle",
+    "CHALLENGES_WINNER_TEXT":"{{winner}} gewann das Duell",
     
     "ZAPFVELOCITY_TITLE":"Zapfgeschwindigkeit",
     "PIECHART_TITLE":"#1 vs the World",
