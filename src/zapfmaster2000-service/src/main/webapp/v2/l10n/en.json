@@ -16,6 +16,8 @@
     "CHALLENGES_RUNNING_TITLE":"Running Challenges",
     "CHALLENGES_DONE_TITLE":"Completed Challenges",
     "CHALLENGES_WINNER_TEXT":"{{winner}} won a challenge",
+    "CHALLENGES_WINNER_TEXT_EVEN":"Drawn!",
+
 
     "ZAPFVELOCITY_TITLE":"Zapfvelocity",
     "PIECHART_TITLE":"#1 vs the World",

@@ -36,8 +36,16 @@
 
 
 
-                    <div class="username1 zm-absolute"
+                    <div ng-if="!(challenge.team1[0].won || challenge.team2[0].won)" class="username1 zm-absolute"
                          translate="CHALLENGES_WINNER_TEXT"
+
+                         translate-value-winner="{{challenge.team1[0].won?challenge.team1[0].userName:challenge.team2[0].userName}}"
+                         translate-value-loser="{{challenge.team1[0].won?challenge.team2[0].userName:challenge.team1[0].userName}}">
+
+                    </div>
+
+                    <div ng-if="(challenge.team1[0].won || challenge.team2[0].won)" class="username1 zm-absolute"
+                         translate="CHALLENGES_WINNER_TEXT_EVEN"
                          translate-value-winner="{{challenge.team1[0].won?challenge.team1[0].userName:challenge.team2[0].userName}}"
                          translate-value-loser="{{challenge.team1[0].won?challenge.team2[0].userName:challenge.team1[0].userName}}">
 

@@ -16,7 +16,9 @@
     "CHALLENGES_RUNNING_TITLE":"Laufende Duelle",
     "CHALLENGES_DONE_TITLE":"Beendete Duelle",
     "CHALLENGES_WINNER_TEXT":"{{winner}} gewann das Duell",
-    
+    "CHALLENGES_WINNER_TEXT_EVEN":"Unentschieden!",
+
+
     "ZAPFVELOCITY_TITLE":"Zapfgeschwindigkeit",
     "PIECHART_TITLE":"#1 vs the World",
     "ACHIEVEMENTSTATS_TITLE":"Achievement vorgestellt",
