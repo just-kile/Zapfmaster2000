@@ -86,10 +86,45 @@ public class ChallengeResource {
 		}
 	}
 
+    @GET
+    @Path("/pending")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response retrievePendingOverview(@QueryParam("token") String pToken) {
+        User user = Zapfmaster2000Core.INSTANCE.getAuthService().retrieveUser(
+                pToken);
+        if (user != null) {
+            Session session = Zapfmaster2000Core.INSTANCE
+                    .getTransactionService().getSessionFactory()
+                    .getCurrentSession();
+            Transaction tx = session.beginTransaction();
+
+            String rawQuery = "FROM Challenge1v1 c "
+                    + "JOIN FETCH c.user1 JOIN FETCH c.user2 "
+                    + "WHERE c.user2.id = :userId "
+                    + "AND c.state = :pending";
+
+            Query query = session.createQuery(rawQuery)
+                    .setParameter("pending", ChallengeState.PENDING)
+                    .setLong("userId",user.getId());
+
+            @SuppressWarnings("unchecked")
+            List<Challenge1v1> result = query.list();
+            tx.commit();
+
+            List<ChallengeOverviewReponse> response = new ArrayList<>();
+            ChallengeAdapter adapter = new ChallengeAdapter();
+            for (Challenge1v1 c : result) {
+                response.add(adapter.adaptChallenge(c));
+            }
+            return Response.ok(response).build();
+        } else {
+            return Response.status(Status.FORBIDDEN).build();
+        }
+    }
 	/**
 	 * Retrieve the users that may be challenged. This is the list of currently
 	 * logged in users.
-	 * 
+	 *
 	 * @param pToken
 	 *            the token to retrieve the users for.
 	 */
@@ -133,7 +168,7 @@ public class ChallengeResource {
 					response.add(r);
 				}
 			}
-			
+
 			tx.commit();
 
 			// order by user name
@@ -154,7 +189,7 @@ public class ChallengeResource {
 
 	/**
 	 * Will start a new pending challenge.
-	 * 
+	 *
 	 * @param pRequest
 	 *            input
 	 * @return
