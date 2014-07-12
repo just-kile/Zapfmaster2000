@@ -96,6 +96,12 @@ define(['Console', 'Underscore', "Angular"], function (Console, _, angular) {
             var req = requestPromise(c.membersUrl);
             return req.then(handleSuccess, handleError);
         };
+        var getPendingChallenges = function(){
+            var req = requestPromise(c.challengePendingUrl);
+            return req.then(handleSuccess, handleError);
+        };
+
+
         function handleError(response) {
             if (!angular.isObject(response.data) || !response.data.message
                 ) {
@@ -125,11 +131,14 @@ define(['Console', 'Underscore', "Angular"], function (Console, _, angular) {
             getBestlist: getBestlist,
             getUserStats: getUserStats,
             getChallenges: getChallenges,
+            getPendingChallenges:getPendingChallenges,
             getZapfDistribution: getZapfDistribution,
             getKegStats:getKegStats,
             getProgress:getProgress,
             getNewsFeed:getNewsFeed,
             getMembers:getMembers
+
+
         };
 
     }];

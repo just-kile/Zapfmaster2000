@@ -15,7 +15,10 @@
     }
   }
   .navbar-nav, .nav-justified {
-    background: rgba(0, 0, 0, 0.5);
+  //  background: rgba(0, 0, 0, 0.5);
+    background: black;
+    height: 40px;
+    @include vendor-prefix(box-shadow, 0px 0px 10px 2px black);
     height: $navbar-item-height;
   }
 

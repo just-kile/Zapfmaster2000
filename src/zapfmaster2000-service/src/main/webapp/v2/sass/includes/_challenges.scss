@@ -1,3 +1,6 @@
+$challengeImageHeight: 52px;
+
+
 .zmo-challenges {
   .challenge-amount-1 {
     position: absolute;
@@ -23,8 +26,8 @@
   }
   .userimage1 {
     left: 0px;
-    width: 52px;
-    height: 52px;
+    width: $challengeImageHeight;
+    height: $challengeImageHeight;
   }
   .username1 {
     left: 60px;
@@ -35,8 +38,8 @@
   }
   .userimage2 {
     right: 0px;
-    width: 52px;
-    height: 52px;
+    width: $challengeImageHeight;
+    height: $challengeImageHeight;
   }
   .username2 {
     right: 60px;
@@ -72,4 +75,14 @@
 
     height: 30px;
   }
+}
+.create-challenge{
+
+ >li{
+   list-style: none;
+   img{
+     height: $challengeImageHeight;
+     border: 2px solid $color-yellow;
+   }
+ }
 }

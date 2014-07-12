@@ -1,7 +1,10 @@
 <div class="row zm-row" style="margin-top:50px" ng-controller="ChallengeController" ng-init="init(true)">
 
     <div class="col-xs-12 col-sm-6 col-md-8 col-sm-push-6 col-md-push-4 zmo-challenges">
-        <!--<header class="zmo-header">{{'BESTLIST_TITLE'|translate}}</header>-->
+        <!-- Challenge Accepted-->
+       <header class="zmo-header hidden-xs">{{'CHALLENGE_NEW_TITLE'|translate}}</header>
+       <zm-create-challenge></zm-create-challenge>
+        <!-- Running Challenges-->
         <zm-accordion title="{{'CHALLENGES_RUNNING_TITLE'|translate}}" icon="css/images/ic_menu_challenge.svg">
             <ul class="zmo-container">
             <li class="challenge-container color-container" ng-repeat="challenge in challenges"
@@ -15,15 +18,18 @@
                 <div class="username1 zm-absolute">{{challenge.team1[0].userName}}</div>
                 <img ng-class="{winner: challenge.team2[0].won}"
                      class="zm-absolute img-responsive img-rounded userimage2"
-                     ng-src="{{baseUrl+challenge.team2[0].userImage}}">
+                     ng-src="{{baseUrl+challenge.team2[0].userImage}}" />
 
                 <div class="username2 zm-absolute">{{challenge.team2[0].userName}}</div>
                 <div class="clock">{{challenge.countdown|countdown}}</div>
+                <div class="challenge-amount-1">{{challenge.team1Amount|amount}}l</div>
+                <div class="challenge-amount-2">{{challenge.team2Amount|amount}}l</div>
             </li>
             </ul>
         </zm-accordion>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-4 col-sm-pull-6 col-md-pull-8 zmo-challenges">
+        <!-- Challenge done -->
         <zm-accordion title="{{'CHALLENGES_DONE_TITLE'|translate}}"  icon="css/images/ic_menu_challenge.svg">
             <ul class="zmo-container">
                 <li class="challenge-container color-container" ng-repeat="challenge in challenges"
@@ -36,7 +42,7 @@
 
 
 
-                    <div ng-if="!(challenge.team1[0].won || challenge.team2[0].won)" class="username1 zm-absolute"
+                    <div ng-if="(challenge.team1[0].won || challenge.team2[0].won)" class="username1 zm-absolute"
                          translate="CHALLENGES_WINNER_TEXT"
 
                          translate-value-winner="{{challenge.team1[0].won?challenge.team1[0].userName:challenge.team2[0].userName}}"
@@ -44,7 +50,7 @@
 
                     </div>
 
-                    <div ng-if="(challenge.team1[0].won || challenge.team2[0].won)" class="username1 zm-absolute"
+                    <div ng-if="!(challenge.team1[0].won || challenge.team2[0].won)" class="username1 zm-absolute"
                          translate="CHALLENGES_WINNER_TEXT_EVEN"
                          translate-value-winner="{{challenge.team1[0].won?challenge.team1[0].userName:challenge.team2[0].userName}}"
                          translate-value-loser="{{challenge.team1[0].won?challenge.team2[0].userName:challenge.team1[0].userName}}">

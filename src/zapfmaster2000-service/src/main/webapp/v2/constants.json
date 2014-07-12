@@ -3,10 +3,16 @@
     "widgetBaseUrl": "js/widgets/",
     "ajaxTimeout": 120000,
     "challengeUrl": "rest/challenge",
+    "challengePendingUrl": "rest/challenge/pending",
+    "challengeAcceptUrl": "rest/challenge/accept",
+    "challengeDeclineUrl": "rest/challenge/decline",
+    "challengeRequestUrl": "rest/challenge/start/1v1",
+
     "bestlistUrl": "rest/statistics/rankings/bestUserList",
     "distributionUrl":"rest/statistics/distribution",
     "frontPageUserStatsUrl": "rest/statistics/frontpageUserStats",
     "userStatsUrl":"rest/statistics/userStats",
+
 
     "amountStatsUrl": "rest/statistics/amount",
     "membersUrl":"rest/members",
