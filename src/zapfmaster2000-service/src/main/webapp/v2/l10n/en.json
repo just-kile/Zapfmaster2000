@@ -18,6 +18,12 @@
     "CHALLENGES_WINNER_TEXT":"{{winner}} won a challenge",
     "CHALLENGES_WINNER_TEXT_EVEN":"Drawn!",
     "CHALLENGE_NEW_TITLE":"New Challenges",
+    "CREATE_CHALLENGE_HEADLINE":"New Challenge",
+    "CREATE_CHALLENGE_SUBTITLE":"{{challenger}} is challenging you for {{duration}}min.",
+    "CREATE_CHALLENGE_DECLINE":"Accept",
+    "CREATE_CHALLENGE_ACCEPT":"Decline",
+
+
 
     "ZAPFVELOCITY_TITLE":"Zapfvelocity",
     "PIECHART_TITLE":"#1 vs the World",

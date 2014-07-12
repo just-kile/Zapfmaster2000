@@ -83,6 +83,32 @@ $challengeImageHeight: 52px;
    img{
      height: $challengeImageHeight;
      border: 2px solid $color-yellow;
+     float: left;
+     margin-right:10px;
+   }
+   .title{
+     font-size: $font-size-m;
+   }
+   .subtitle{
+     font-size: $font-size-s;
+     padding-left:62px;
+   }
+   .buttons{
+     text-align: center;
+     margin-top:5px;
+     font-size: $font-size-m;
+     .accept,.decline{
+       line-height: 40px;
+       border-top: 2px solid dimgrey;
+       background: black;
+       cursor: pointer;
+       &:hover{
+         color: $color-pink;
+       }
+     }
+     .decline{
+       border-right: 2px solid dimgray;
+     }
    }
  }
 }

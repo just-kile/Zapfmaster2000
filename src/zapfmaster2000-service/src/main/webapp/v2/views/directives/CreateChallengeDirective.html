@@ -1,7 +1,21 @@
 <ul class="zmo-container create-challenge">
     <li ng-repeat="challenge in pendingChallenges">
-        <img class="img-rounded" ng-src="{{baseUrl+challenge.team1[0].userImage}}" />
-        <div class="title">New Challenge</div>
-        <div class="subtitle"></div>
+        <div>
+            <img class="img-rounded" ng-src="{{baseUrl+challenge.team1[0].userImage}}"/>
+
+            <div class="title"
+                 translate="CREATE_CHALLENGE_HEADLINE"></div>
+
+            <div class="subtitle"
+                 translate="CREATE_CHALLENGE_SUBTITLE"
+                 translate-value-challenger="{{challenge.team1[0].userName}}"
+                 translate-value-duration="{{challenge.challengeDuration}}"
+                    ></div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="buttons row">
+            <div class="decline col-xs-6" translate="CREATE_CHALLENGE_DECLINE"></div>
+            <div class="accept col-xs-6" translate="CREATE_CHALLENGE_ACCEPT"></div>
+        </div>
     </li>
 </ul>

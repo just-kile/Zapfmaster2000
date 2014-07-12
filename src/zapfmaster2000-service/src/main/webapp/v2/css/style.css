@@ -192,21 +192,16 @@ img.userimage1, img.userimage2, div.username1, div.username2, .bar1, .bar2 {
 }
 
 
-.color-container:nth-child(odd) .userimage1 {
+.color-container .userimage1 {
+    border: 2px solid #FF71AC;
+
+}
+
+.color-container .userimage2 {
     border: 2px solid #FFF143;
 }
 
-.color-container:nth-child(even) .userimage1 {
-    border: 2px solid #FF71AC;
-}
 
-.color-container:nth-child(odd) .userimage2 {
-    border: 2px solid #FF71AC;
-}
-
-.color-container:nth-child(even) .userimage2 {
-    border: 2px solid #FFF143;
-}
 
 .zm-animate {
     transition: translateZ(0);

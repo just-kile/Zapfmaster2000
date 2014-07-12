@@ -18,6 +18,10 @@
     "CHALLENGES_WINNER_TEXT":"{{winner}} gewann das Duell",
     "CHALLENGES_WINNER_TEXT_EVEN":"Unentschieden!",
     "CHALLENGE_NEW_TITLE":"Neue Duelle",
+    "CREATE_CHALLENGE_HEADLINE":"Neues Duell",
+    "CREATE_CHALLENGE_SUBTITLE":"{{challenger}} hat dich zu {{duration}}min herausgefordert",
+    "CREATE_CHALLENGE_DECLINE":"Ablehnen",
+    "CREATE_CHALLENGE_ACCEPT":"Akzeptieren",
 
     "ZAPFVELOCITY_TITLE":"Zapfgeschwindigkeit",
     "PIECHART_TITLE":"#1 vs the World",
