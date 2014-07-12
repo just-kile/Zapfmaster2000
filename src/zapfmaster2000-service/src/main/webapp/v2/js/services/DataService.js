@@ -1,4 +1,4 @@
-define(['Console', 'Underscore', "Angular"], function (Console, _, angular) {
+define(['Console', 'Underscore', "Angular","jQuery"], function (Console, _, angular,$) {
     "use strict";
     Console.group("Entering DataService module.");
 
@@ -27,9 +27,10 @@ define(['Console', 'Underscore', "Angular"], function (Console, _, angular) {
             return $http({
                 url: c.baseUrl + url,
                 method: "POST",
-                params: _.extend({
+                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                data: $.param(_.extend({
                     token: localStorage.getItem("token")
-                }, data)
+                }, data))
             });
         };
 
@@ -123,10 +124,10 @@ define(['Console', 'Underscore', "Angular"], function (Console, _, angular) {
             });
             return req.then(handleSuccess, handleError);
         };
-        var requestUserForChallenge = function (userId,duration) {
+        var requestUserForChallenge = function (userId, duration) {
             var req = postPromise(c.challengeRequestUrl, {
                 challengeeId: userId,
-                duration:duration
+                duration: duration
             });
             return req.then(handleSuccess, handleError);
         };
@@ -169,7 +170,7 @@ define(['Console', 'Underscore', "Angular"], function (Console, _, angular) {
 
             acceptChallenge: acceptChallenge,
             denyChallenge: denyChallenge,
-            requestUserForChallenge:requestUserForChallenge
+            requestUserForChallenge: requestUserForChallenge
 
         };
 
