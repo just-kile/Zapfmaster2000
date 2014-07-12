@@ -14,8 +14,8 @@
             <div style="clear:both"></div>
         </div>
         <div class="buttons row">
-            <div class="decline col-xs-6" translate="CREATE_CHALLENGE_DECLINE"></div>
-            <div class="accept col-xs-6" translate="CREATE_CHALLENGE_ACCEPT"></div>
+            <div ng-click="denyChallenge(challenge.challengeId)" class="decline col-xs-6" translate="CREATE_CHALLENGE_DECLINE"></div>
+            <div ng-click="acceptChallenge(challenge.challengeId)" class="accept col-xs-6" translate="CREATE_CHALLENGE_ACCEPT"></div>
         </div>
     </li>
 </ul>
