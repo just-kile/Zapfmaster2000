@@ -15,7 +15,7 @@
     "CHALLENGES_SPLASH_DONE_TITLE":"Duell beendet!",
     "CHALLENGES_RUNNING_TITLE":"Laufende Duelle",
     "CHALLENGES_DONE_TITLE":"Beendete Duelle",
-    "CHALLENGES_WINNER_TEXT":"{{winner}} gewann das Duell",
+    "CHALLENGES_WINNER_TEXT":"{{winner}} gewann ",
     "CHALLENGES_WINNER_TEXT_EVEN":"Unentschieden!",
     "CHALLENGE_NEW_TITLE":"Neue Duelle",
     "CREATE_CHALLENGE_HEADLINE":"Neues Duell",

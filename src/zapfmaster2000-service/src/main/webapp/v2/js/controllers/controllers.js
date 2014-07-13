@@ -12,6 +12,7 @@ define([
         'controllers/StatsController',
         'controllers/HomeController',
         'controllers/ChallengesWebappController',
+        'controllers/LogoutController',
 
         //Modules Controller
         'widgets/BestlistController',
@@ -32,7 +33,8 @@ define([
 
         //Constants
         'constants'
-    ], function (Console, _, routes, nav, app, presentation, stats, home, challengesWebapp, bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
+    ], function (Console, _, routes, nav, app, presentation, stats, home, challengesWebapp,logoutController,
+                 bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
         "use strict";
         Console.group("Entering controllers module.");
         Console.info("AppController", app);
@@ -43,6 +45,7 @@ define([
             HomeController: home,
             ChallengesWebappController: challengesWebapp,
             StatsController: stats,
+            LogoutController:logoutController,
 
             BestlistController: bestlist,
             ChallengeController: challenge,

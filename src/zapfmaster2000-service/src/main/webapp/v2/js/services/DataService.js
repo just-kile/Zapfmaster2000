@@ -132,12 +132,13 @@ define(['Console', 'Underscore', "Angular","jQuery"], function (Console, _, angu
             return req.then(handleSuccess, handleError);
         };
 
+        var getChallengeOpponents = function(){
+            var req = requestPromise(c.challengeOpponentsUrl);
+            return req.then(handleSuccess, handleError);
+        };
         function handleError(response) {
-            if (!angular.isObject(response.data) || !response.data.message
-                ) {
-
+            if (!angular.isObject(response.data) || !response.data.message) {
                 return( $q.reject("An unknown error occurred.") );
-
             }
 
             // Otherwise, use expected error message.
@@ -162,6 +163,7 @@ define(['Console', 'Underscore', "Angular","jQuery"], function (Console, _, angu
             getUserStats: getUserStats,
             getChallenges: getChallenges,
             getPendingChallenges: getPendingChallenges,
+            getChallengeOpponents:getChallengeOpponents,
             getZapfDistribution: getZapfDistribution,
             getKegStats: getKegStats,
             getProgress: getProgress,

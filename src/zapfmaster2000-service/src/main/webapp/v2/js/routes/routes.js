@@ -3,8 +3,9 @@ define([
     'text!templates/home.html',
     'text!templates/stats.html',
     'text!templates/challenges.html',
+    'text!templates/logout.html',
 
-], function (presentationTemplate, homeTemplate, statsTemplate, challengesTemplate) {
+], function (presentationTemplate, homeTemplate, statsTemplate, challengesTemplate,logoutTemplate) {
     "use strict";
     return {
         presentationSlide: {
@@ -46,13 +47,8 @@ define([
         logout: {
             title: 'Logout',
             route: '/logout',
-            controller: 'ChallengesWebappController',
-            template: challengesTemplate
+            controller: 'LogoutController',
+            template: logoutTemplate
         }
-
-
-
-
-
     };
 });

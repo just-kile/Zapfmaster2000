@@ -1,6 +1,5 @@
 $challengeImageHeight: 52px;
 
-
 .zmo-challenges {
   .challenge-amount-1 {
     position: absolute;
@@ -33,7 +32,9 @@ $challengeImageHeight: 52px;
     left: 60px;
   }
   .username1, .username2 {
-    margin-top: -20px;
+    margin-top: -33px;
+    line-height: 58px;
+    padding-right: 60px;
     font-size: $font-size-m;
   }
   .userimage2 {
@@ -42,7 +43,7 @@ $challengeImageHeight: 52px;
     height: $challengeImageHeight;
   }
   .username2 {
-    right: 60px;
+    right: 0px;
   }
   .bar1, .bar2 {
     top: 10px;
@@ -76,39 +77,118 @@ $challengeImageHeight: 52px;
     height: 30px;
   }
 }
-.create-challenge{
 
- >li{
-   list-style: none;
-   img{
-     height: $challengeImageHeight;
-     border: 2px solid $color-yellow;
-     float: left;
-     margin-right:10px;
-   }
-   .title{
-     font-size: $font-size-m;
-   }
-   .subtitle{
-     font-size: $font-size-s;
-     padding-left:62px;
-   }
-   .buttons{
-     text-align: center;
-     margin-top:5px;
-     font-size: $font-size-m;
-     .accept,.decline{
-       line-height: 40px;
-       border-top: 2px solid dimgrey;
-       background: black;
-       cursor: pointer;
-       &:hover{
-         color: $color-pink;
-       }
-     }
-     .decline{
-       border-right: 2px solid dimgray;
-     }
-   }
- }
+.create-challenge {
+
+  > li {
+    list-style: none;
+    img {
+      height: $challengeImageHeight;
+      border: 2px solid $color-yellow;
+      float: left;
+      margin-right: 10px;
+    }
+    .title {
+      font-size: $font-size-m;
+    }
+    .subtitle {
+      font-size: $font-size-s;
+      padding-left: 62px;
+    }
+    .buttons {
+      text-align: center;
+      margin-top: 5px;
+      font-size: $font-size-m;
+      .accept, .decline {
+        line-height: 40px;
+        border-top: 2px solid dimgrey;
+        background: black;
+        cursor: pointer;
+        &:hover {
+          color: $color-pink;
+        }
+      }
+      .decline {
+        border-right: 2px solid dimgray;
+      }
+    }
+  }
+}
+
+.create-new-challenge {
+  background: $color-yellow;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: 20px;
+  cursor: pointer;
+  img {
+    width: 48px;
+  }
+}
+
+.zm-modal-content {
+  position: relative;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* border: 1px solid #999; */
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0px 10px rgba(255, 255, 255, 0.5);
+  background-clip: padding-box;
+  outline: 0;
+  .modal-header {
+    button {
+      color: $main-text-color;
+      opacity: 1;
+      font-size: $font-size-l;
+    }
+    .zm-back{
+      margin-right: 35px;
+    }
+  }
+  .modal-body {
+    ul{
+      padding-left: 0;
+    }
+    .chose-duration li:after{
+      content: ' ';
+      position: absolute;
+      bottom: 0;
+      border: 1px solid $color-pink;
+      width: 100%;
+      left: 0px;
+    }
+    li{
+      position:relative;
+      list-style: none;
+      line-height: 52px;
+      margin-bottom:10px;
+      font-size: $font-size-m;
+      &:hover{
+        background: rgba(50,50,50,0.5);
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      &:after{
+        content: ' ';
+        position: absolute;
+        bottom: 0;
+        border: 1px solid $color-pink;
+        width: 75%;
+        left: 75px;
+      }
+
+
+    }
+    .zm-img {
+      height: 52px;
+      border: 2px solid $color-yellow;
+      float: left;
+      margin-right: 10px;
+    }
+
+  }
 }

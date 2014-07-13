@@ -15,7 +15,7 @@
     "CHALLENGES_SPLASH_DONE_TITLE":"Challenge done!",
     "CHALLENGES_RUNNING_TITLE":"Running Challenges",
     "CHALLENGES_DONE_TITLE":"Completed Challenges",
-    "CHALLENGES_WINNER_TEXT":"{{winner}} won a challenge",
+    "CHALLENGES_WINNER_TEXT":"{{winner}} won",
     "CHALLENGES_WINNER_TEXT_EVEN":"Drawn!",
     "CHALLENGE_NEW_TITLE":"New Challenges",
     "CREATE_CHALLENGE_HEADLINE":"New Challenge",
