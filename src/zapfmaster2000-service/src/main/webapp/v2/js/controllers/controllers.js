@@ -85,7 +85,7 @@ define([
                         }
                     );
                 });
-                $routeProvider.otherwise({ redirectTo: routes.presentation.route });
+                $routeProvider.otherwise({ redirectTo: routes.news.route });
             }]);
             angModule.run(["$rootScope", "$templateCache", "CometService","Analytics",
                 function ($rootScope, $templateCache, CometService,Analytics) {

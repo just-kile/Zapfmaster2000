@@ -20,7 +20,7 @@ define([
             controller: 'PresentationController',
             template: presentationTemplate
         },
-        home: {
+        news: {
             title: 'Home',
             route: '/news',
             controller: 'HomeController',
