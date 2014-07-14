@@ -23,6 +23,8 @@
     "achievementsUrl":"rest/achievements",
     "kegStatsUrl": "rest/statistics/keg",
     "newsPushUrl": "rest/push/news",
+    "challengePushUrl": "rest/push/challenge",
+
     "updateAmountPushUrl": "rest/push/draftkit/{0}",
     "boxesUrl": "rest/draftkit",
     "newsFeedUrl": "rest/news",

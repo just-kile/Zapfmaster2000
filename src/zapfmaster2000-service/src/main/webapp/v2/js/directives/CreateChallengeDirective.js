@@ -9,6 +9,7 @@ define(['Console', 'Underscore', "Angular", "jQuery"], function (Console, _, ang
                     link: function ($scope, ele, attrs) {
                         $scope.baseUrl = c.baseUrl;
                         $scope.chooseOpponent = true;
+
                         function removeChallengeId(id) {
                             var index = -1;
                             _.find($scope.pendingChallenges, function (challenge, ind) {
@@ -35,7 +36,7 @@ define(['Console', 'Underscore', "Angular", "jQuery"], function (Console, _, ang
                                 $scope.chooseOpponent = true;
                             });
 
-                        ajax.getPendingChallenges().then(addParamsToScope);
+
                         $scope.acceptChallenge = function (id) {
                             ajax.acceptChallenge(id).then(function () {
                                 removeChallengeId(id);
@@ -61,6 +62,11 @@ define(['Console', 'Underscore', "Angular", "jQuery"], function (Console, _, ang
                         $scope.backToOpponents = function(){
                             $scope.chooseOpponent = true;
                         };
+
+                        $scope.$on("zm-challenge.receive",function(){
+                            ajax.getPendingChallenges().then(addParamsToScope);
+                        });
+                        ajax.getPendingChallenges().then(addParamsToScope);
 
                     }
                 };

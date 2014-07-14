@@ -4,7 +4,8 @@ define(['Console', 'Underscore'], function (Console, _) {
 
     var service = ['$http', "ZMConstants", '$q', '$rootScope', function ($http, c, $q, $rootScope) {
         var callbacks = {
-            newspush: []
+            newspush: [],
+            challenges:[]
         };
         var newspushStopped = false;
         //var ajaxCalls = {};
@@ -90,17 +91,21 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
             });
         };
-        var startChallengesPush = function () {
+        var startChallengePush = function () {
             if (!cometRunningMap.challenges || !cometRunningMap.challenges.running) {
-                startCometServiceFor(c.newsPushUrl, 'challenges', true);
+                startCometServiceFor(c.challengePushUrl, 'challenges', true);
             }
         };
-        var stopChallengesPush = function () {
+        var stopChallengePush = function () {
             stopCometServiceFor("challenges", true);
         };
-        $rootScope.$on('$routeChangeSuccess', function (next, last) {
+        var addChallengePushListener = function(){
+
+        }
+
+      /*  $rootScope.$on('$routeChangeSuccess', function (next, last) {
             reset();
-        });
+        });*/
         var removeNewsPushListener = function (fn) {
             var fnString = fn.toString();
             var index = -1;
@@ -136,14 +141,21 @@ define(['Console', 'Underscore'], function (Console, _) {
                 // Console.debug("Push Listener", callback, "added");
                 Console.log("All Push Listeners: ", callbacks);
             },
+            addChallengePushListener:function(callback){
+                if (callback) {
+                    callbacks.challenges.push(callback);
+                }
+                Console.debug("Added Push Listener");
+                Console.log("All Push Listeners: ", callbacks);
+            },
             resetPush: resetPush,
             reset: reset,
             removeNewsPushListener: removeNewsPushListener,
             startCometService: startCometService,
             stopCometService: stopCometService,
             startNewsPush: startNewsPush,
-            startChallengesPush: startChallengesPush,
-            stopChallengesPush: stopChallengesPush,
+            startChallengePush: startChallengePush,
+            stopChallengePush: stopChallengePush
 
         };
 

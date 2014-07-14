@@ -9,6 +9,7 @@ define(['Console', 'text!../../rows.json', 'Underscore'], function (Console, row
         function ($scope, $routeParams, $timeout, c, $animate, $translate,CometService) {
         Console.group("HomeController entered.");
         CometService.startNewsPush();
+        CometService.stopChallengePush();
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         $scope.changeLanguage = function (langKey) {
             $translate.use(langKey);
