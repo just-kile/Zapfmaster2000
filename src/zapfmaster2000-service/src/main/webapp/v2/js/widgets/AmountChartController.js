@@ -30,8 +30,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     callback(achievementStats);
                 });
             };
-
-            CometService.addPushListener(function (data) {
+            var onNewsPush = function (data) {
                 if (c.DRAWING === data.type) {
                     retrieveAmount(updateView);
                 }
@@ -39,10 +38,14 @@ define(['Console', 'Underscore'], function (Console, _) {
                     retrieveAchievement(updateAchievements);
                 }
 
-            });
+            };
+            CometService.addPushListener(onNewsPush);
             retrieveAmount(updateView);
             retrieveAchievement(updateAchievements);
             // updateAmount();
+            $scope.$on("$destroy", function () {
+                CometService.removeNewsPushListener(onNewsPush);
+            });
             Console.groupEnd();
         }];
     //controller.$inject = [];

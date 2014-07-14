@@ -12,18 +12,21 @@ define(['Console', 'Underscore'], function (Console, _) {
                 $scope.items.unshift(data);
             }
 
+            function onNewsPush(data) {
+                if (data.type === c.ACHIEVEMENT) {
+                    addNewsToScope(data);
+                }
+            }
+
             dataService.getAchievementFeed(c.newsFeedLength).then(function (achievements) {
                 _.each(achievements, function (achievement) {
                     $scope.items.push(achievement);
                 });
-                CometService.addPushListener(function (data) {
-                    if (data.type === c.ACHIEVEMENT) {
-                        addNewsToScope(data);
-                    }
-
-                });
+                CometService.addPushListener(onNewsPush);
             });
-
+            $scope.$on("$destroy", function () {
+                CometService.removeNewsPushListener(onNewsPush);
+            });
             Console.groupEnd();
         }];
 

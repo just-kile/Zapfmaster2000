@@ -117,12 +117,13 @@ define(['Console', 'Underscore'], function (Console, _) {
 
                 });
             };
-            CometService.addPushListener(function (data) {
+            var onNewsPush = function (data) {
                 if (c.DRAWING === data.type) {
                     updateScope();
                 }
 
-            });
+            };
+            CometService.addPushListener(onNewsPush);
 
 
             var counter = 0, changeInterval;
@@ -209,6 +210,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             $scope.$on("$destroy", function () {
                 $timeout.cancel(changeInterval);
                 window.removeEventListener("resize", resizeMethod, true);
+                CometService.removeNewsPushListener(onNewsPush);
             });
             Console.groupEnd();
         }];

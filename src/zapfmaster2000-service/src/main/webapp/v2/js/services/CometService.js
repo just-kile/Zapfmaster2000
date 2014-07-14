@@ -9,12 +9,13 @@ define(['Console', 'Underscore'], function (Console, _) {
         var newspushStopped = false;
         //var ajaxCalls = {};
         var cometRunningMap = {};
-        var startCometServiceFor = function (url, cbKey) {
+        var startCometServiceFor = function (url, cbKey, stopManual) {
             //ajaxCalls[cbKey] = $q.defer();
             cometRunningMap[cbKey] = {
-                running: true,
+                running: true, // flag if comet service is already running
                 url: url,
-                stop: $q.defer()
+                stop: $q.defer(), //promise to abort request
+                stopManual: !!stopManual //true to start/stop this push manually
             };
             $http({method: 'GET', url: c.baseUrl + url, params: {
                 token: localStorage.getItem("token"),
@@ -41,7 +42,6 @@ define(['Console', 'Underscore'], function (Console, _) {
                     Console.log("Error Status: ", status);
                     if (!cometRunningMap[cbKey].running) {
                         Console.debug("Comet service manually stopped!");
-                        return;
                     } else if ([503, 0, 504].indexOf(status) > -1) {
                         Console.debug("Timeout. Reconnect Newspush");
                         startCometServiceFor(url, cbKey);
@@ -68,13 +68,12 @@ define(['Console', 'Underscore'], function (Console, _) {
             Console.log("Reset callbacks.");
         };
         var startNewsPush = function () {
-            if (!cometRunningMap.newspush || !cometRunningMap.newspush.running)
-            {
+            if (!cometRunningMap.newspush || !cometRunningMap.newspush.running) {
                 startCometServiceFor(c.newsPushUrl, 'newspush');
             }
         };
-        var stopCometServiceFor = function (cbKey) {
-            if (cometRunningMap[cbKey] && cometRunningMap[cbKey].running) {
+        var stopCometServiceFor = function (cbKey, force) {
+            if (cometRunningMap[cbKey] && cometRunningMap[cbKey].running && (!cometRunningMap[cbKey].stopManual || force)) {
                 cometRunningMap[cbKey].running = false;
                 cometRunningMap[cbKey].stop.resolve();
             }
@@ -91,11 +90,31 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
             });
         };
-
+        var startChallengesPush = function () {
+            if (!cometRunningMap.challenges || !cometRunningMap.challenges.running) {
+                startCometServiceFor(c.newsPushUrl, 'challenges', true);
+            }
+        };
+        var stopChallengesPush = function () {
+            stopCometServiceFor("challenges", true);
+        };
         $rootScope.$on('$routeChangeSuccess', function (next, last) {
             reset();
         });
-
+        var removeNewsPushListener = function (fn) {
+            var fnString = fn.toString();
+            var index = -1;
+            _.find(callbacks.newspush, function (callback, ind) {
+                if (fnString === callback.toString()) {
+                    index = ind;
+                    return true;
+                }
+                return false;
+            });
+            if(index>-1){
+                callbacks.newspush.splice(index,1);
+            }
+        };
         return {
             addPushListener: function (callback) {
                 if (callback) {
@@ -119,9 +138,13 @@ define(['Console', 'Underscore'], function (Console, _) {
             },
             resetPush: resetPush,
             reset: reset,
+            removeNewsPushListener: removeNewsPushListener,
             startCometService: startCometService,
             stopCometService: stopCometService,
-            startNewsPush: startNewsPush
+            startNewsPush: startNewsPush,
+            startChallengesPush: startChallengesPush,
+            stopChallengesPush: stopChallengesPush,
+
         };
 
     }];

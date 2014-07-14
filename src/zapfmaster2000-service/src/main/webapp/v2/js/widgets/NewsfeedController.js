@@ -25,13 +25,15 @@ define(['Console', 'Underscore'], function (Console, _) {
                 });
             }
 
+            var onNewsPush = function (data) {
+                addNewsToScope(data);
+            };
+
             function init() {
                 loadNextItems();
-                CometService.addPushListener(function (data) {
-                    addNewsToScope(data);
-
-                });
+                CometService.addPushListener(onNewsPush);
             }
+
             $scope.baseUrl = c.baseUrl;
             $scope.items = [];
             $scope.maxlength = c.newsFeedLength;
@@ -41,6 +43,9 @@ define(['Console', 'Underscore'], function (Console, _) {
             init();
 
             Console.groupEnd();
+            $scope.$on("$destroy", function () {
+                CometService.removeNewsPushListener(onNewsPush);
+            });
 
 
         }];

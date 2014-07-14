@@ -14,7 +14,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     var team2Percent = challenge.team2[0].amount / (challenge.team1[0].amount + challenge.team2[0].amount) * 100;
                     challenge.team1Percent = !isNaN(team1Percent) ? team1Percent : 50;
                     challenge.team2Percent = !isNaN(team2Percent) ? team2Percent : 50;
-                    challenge.team1Amount = data[key].team1[0].amount ;
+                    challenge.team1Amount = data[key].team1[0].amount;
                     challenge.team2Amount = data[key].team2[0].amount;
 
                     challenge.countdown = 0;
@@ -57,7 +57,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     _.each($scope.challenges, function (challenge, key) {
                         challenge.team1Percent = data[key].team1Percent;
                         challenge.team2Percent = data[key].team2Percent;
-                        challenge.team1Amount = data[key].team1[0].amount ;
+                        challenge.team1Amount = data[key].team1[0].amount;
                         challenge.team2Amount = data[key].team2[0].amount;
                         challenge.diffAmount = data[key].diffAmount;
                     });
@@ -90,6 +90,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             CometService.addPushListener(pushListener);
             $scope.$on("$destroy", function () {
                 $timeout.cancel(clockInterval);
+                CometService.removeNewsPushListener(pushListener);
             });
             $scope.init = initScope;
             /*     var dummyChallengeData = {"type": "CHALLENGE_STARTED", "image": "images/others/challengeStarted.jpg", "date": "20131206-172849", "challengeDuration": 10, "startDate": "20131206-172849", "challengeId": 4, "team1": [
