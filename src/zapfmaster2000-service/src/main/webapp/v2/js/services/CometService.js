@@ -5,14 +5,15 @@ define(['Console', 'Underscore'], function (Console, _) {
     var service = ['$http', "ZMConstants", '$q', '$rootScope', function ($http, c, $q, $rootScope) {
         var callbacks = {
             newspush: [],
-            challenges:[]
+            challenges: []
         };
-        var challengeTypeEventMapping={
-            ChallengeRequest:"zm.challenge.receive",
-            ChallengeAccepted:"zm.challenge.accepted",
-            ChallengeDecline:"zm.challenge.declined"
+        var challengeTypeEventMapping = {
+            ChallengeRequest: "zm.challenge.receive",
+            ChallengeAccepted: "zm.challenge.accepted",
+            ChallengeDecline: "zm.challenge.declined"
         };
         var newspushStopped = false;
+        var instantPushActivated = false;
         //var ajaxCalls = {};
         var cometRunningMap = {};
         var startCometServiceFor = function (url, cbKey, stopManual) {
@@ -34,10 +35,10 @@ define(['Console', 'Underscore'], function (Console, _) {
                         Console.debug("Datas", data);
                         _.each(callbacks[cbKey], function (callback, index) {
                             if (callback) {
-                                try{
+                                try {
                                     callback(data);
-                                }catch(e){
-                                    Console.error("Push callback throws error",e);
+                                } catch (e) {
+                                    Console.error("Push callback throws error", e);
                                 }
 
                             }
@@ -82,6 +83,11 @@ define(['Console', 'Underscore'], function (Console, _) {
             if (!cometRunningMap.newspush || !cometRunningMap.newspush.running) {
                 startCometServiceFor(c.newsPushUrl, 'newspush');
             }
+            return pub;
+        };
+        var stopNewsPush = function(){
+            stopCometServiceFor("newspush", true);
+            return pub;
         };
         var stopCometServiceFor = function (cbKey, force) {
             if (cometRunningMap[cbKey] && cometRunningMap[cbKey].running && (!cometRunningMap[cbKey].stopManual || force)) {
@@ -89,30 +95,39 @@ define(['Console', 'Underscore'], function (Console, _) {
                 cometRunningMap[cbKey].stop.resolve();
             }
         };
-        var stopCometService = function (cbKey) {
+        var stopBoxInstantPush = function (cbKey) {
             _.each(cometRunningMap, function (req, cbKey) {
-                stopCometServiceFor(cbKey);
-            });
-        };
-        var startCometService = function () {
-            _.each(cometRunningMap, function (req, cbKey) {
-                if (!req.running) {
-                    startCometServiceFor(req.url, cbKey);
+                if (!_.contains(["newspush", "challenges"], cbKey)) {
+                    stopCometServiceFor(cbKey);
                 }
             });
+            instantPushActivated = false;
+            return pub;
+        };
+        var startBoxInstantPush = function () {
+            _.each(callbacks, function (cb, cbKey) {
+                if (!_.contains(["newspush", "challenges"], cbKey) && (!cometRunningMap[cbKey] || !cometRunningMap[cbKey].running)) {
+                    startCometServiceFor(c.updateAmountPushUrl.replace("{0}", cbKey), cbKey);
+                }
+            });
+            instantPushActivated = true;
+            return pub;
+
         };
         var startChallengePush = function () {
             if (!cometRunningMap.challenges || !cometRunningMap.challenges.running) {
                 startCometServiceFor(c.challengePushUrl, 'challenges', true);
             }
+            return pub;
         };
         var stopChallengePush = function () {
             stopCometServiceFor("challenges", true);
+            return pub;
         };
 
-      /*  $rootScope.$on('$routeChangeSuccess', function (next, last) {
-            reset();
-        });*/
+        /*  $rootScope.$on('$routeChangeSuccess', function (next, last) {
+         reset();
+         });*/
         var removeNewsPushListener = function (fn) {
             var fnString = fn.toString();
             var index = -1;
@@ -123,26 +138,28 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
                 return false;
             });
-            if(index>-1){
-                callbacks.newspush.splice(index,1);
+            if (index > -1) {
+                callbacks.newspush.splice(index, 1);
             }
         };
-        function addChallengePushListener(callback){
+
+        function addChallengePushListener(callback) {
             if (callback) {
                 callbacks.challenges.push(callback);
             }
             Console.debug("Added Push Listener");
             Console.log("All Push Listeners: ", callbacks);
         }
+
         function onChallengeReceive(challenge) {
-            if(challengeTypeEventMapping[challenge.type]){
-                $rootScope.$broadcast(challengeTypeEventMapping[challenge.type],challenge);
+            if (challengeTypeEventMapping[challenge.type]) {
+                $rootScope.$broadcast(challengeTypeEventMapping[challenge.type], challenge);
             }
 
         }
 
         addChallengePushListener(onChallengeReceive);
-        return {
+        var pub = {
             addPushListener: function (callback) {
                 if (callback) {
                     callbacks.newspush.push(callback);
@@ -153,27 +170,31 @@ define(['Console', 'Underscore'], function (Console, _) {
             addInstantUpdateListener: function (boxId, callback) {
                 if (callback) {
                     if (!callbacks[boxId]) {
-                        startCometServiceFor(c.updateAmountPushUrl.replace("{0}", boxId), boxId);
                         callbacks[boxId] = [];
                     }
                     callbacks[boxId].push(callback);
                     Console.debug("Added Amount Push Listener");
+                    if(instantPushActivated){
+                        startBoxInstantPush();
+                    }
 
                 }
                 // Console.debug("Push Listener", callback, "added");
                 Console.log("All Push Listeners: ", callbacks);
             },
-            addChallengePushListener:addChallengePushListener,
+            addChallengePushListener: addChallengePushListener,
             resetPush: resetPush,
             reset: reset,
             removeNewsPushListener: removeNewsPushListener,
-            startCometService: startCometService,
-            stopCometService: stopCometService,
+            startBoxInstantPush: startBoxInstantPush,
+            stopBoxInstantPush: stopBoxInstantPush,
             startNewsPush: startNewsPush,
+            stopNewsPush:stopNewsPush,
             startChallengePush: startChallengePush,
             stopChallengePush: stopChallengePush
 
         };
+        return pub;
 
     }];
 

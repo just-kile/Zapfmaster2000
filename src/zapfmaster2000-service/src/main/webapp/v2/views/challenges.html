@@ -1,6 +1,6 @@
 <div class="row zm-row" style="margin-top:50px" ng-controller="ChallengeController" ng-init="init(true)">
 
-    <div class="col-xs-12 col-sm-6 col-md-8 col-sm-push-6 col-md-push-4 zmo-challenges">
+    <div class="col-xs-12 col-sm-6 col-md-8 zmo-challenges">
         <!-- Challenge Accepted-->
        <header class="zmo-header hidden-xs">{{'CHALLENGE_NEW_TITLE'|translate}}</header>
        <zm-create-challenge></zm-create-challenge>
@@ -28,7 +28,7 @@
             </ul>
         </zm-accordion>
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-sm-pull-6 col-md-pull-8 zmo-challenges">
+    <div class="col-xs-12 col-sm-6 col-md-4 zmo-challenges">
         <!-- Challenge done -->
         <zm-accordion title="{{'CHALLENGES_DONE_TITLE'|translate}}"  icon="css/images/ic_menu_challenge.svg">
             <ul class="zmo-container">

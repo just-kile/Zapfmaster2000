@@ -8,8 +8,8 @@ define(['Console', 'text!../../rows.json', 'Underscore'], function (Console, row
     var controller = ['$scope', '$routeParams', '$timeout', 'ZMConstants', '$animate', '$translate',"CometService",
         function ($scope, $routeParams, $timeout, c, $animate, $translate,CometService) {
         Console.group("HomeController entered.");
-        CometService.startNewsPush();
-        CometService.stopChallengePush();
+        CometService.startNewsPush().stopChallengePush().startBoxInstantPush();
+
         $scope.widgetBaseUrl = c.widgetBaseUrl;
         $scope.changeLanguage = function (langKey) {
             $translate.use(langKey);

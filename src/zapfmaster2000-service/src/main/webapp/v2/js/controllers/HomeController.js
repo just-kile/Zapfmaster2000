@@ -3,9 +3,9 @@ define(["Console", 'Underscore'], function (Console, _) {
     Console.group("Entering HomeController module.");
 
     var controller = ['$scope', 'ZMConstants', "CometService", "ResizeService",
-        function ($scope, c, cometService, resizeService) {
-            cometService.startNewsPush();
-            cometService.startChallengePush();
+        function ($scope, c, CometService, resizeService) {
+            CometService.startNewsPush().startChallengePush().stopBoxInstantPush();
+
             $scope.baseUrl = c.baseUrl;
 
         }];
