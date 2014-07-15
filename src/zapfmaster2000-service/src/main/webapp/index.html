@@ -570,10 +570,10 @@ $("#updateImageRfid").on("click",function(e){
          if(resp && resp.status===200){
             var json = JSON.parse(resp.responseText);
            	$("#versionInfo").html(json.pomVersion +" - "+json.buildNumber + " - "+ json.buildTime);
-       	 	if(!json.isProductive) {
+       	 	/*if(!json.isProductive) {
    	    		var backgroundUrl = baseUrl + "images/betawarning.png";
    				$('.login').css("background-image", "url(" + backgroundUrl + ")");  
-   	    	}
+   	    	}*/
          }
      }
  });
