@@ -4,7 +4,7 @@ define(["Console", 'Underscore'], function (Console, _) {
 
     var controller = ['$scope', 'ZMConstants', "CometService", "ResizeService",
         function ($scope, c, cometService, resizeService) {
-            cometService.stopCometService();
+            cometService.startNewsPush();
             cometService.startChallengePush();
             $scope.baseUrl = c.baseUrl;
 

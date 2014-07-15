@@ -20,8 +20,8 @@
     "CHALLENGE_NEW_TITLE":"New Challenges",
     "CREATE_CHALLENGE_HEADLINE":"New Challenge",
     "CREATE_CHALLENGE_SUBTITLE":"{{challenger}} is challenging you for {{duration}}min.",
-    "CREATE_CHALLENGE_DECLINE":"Accept",
-    "CREATE_CHALLENGE_ACCEPT":"Decline",
+    "CREATE_CHALLENGE_DECLINE":"Decline",
+    "CREATE_CHALLENGE_ACCEPT":"Accept",
 
 
 

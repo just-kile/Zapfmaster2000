@@ -63,7 +63,7 @@ define(['Console', 'Underscore', "Angular", "jQuery"], function (Console, _, ang
                             $scope.chooseOpponent = true;
                         };
 
-                        $scope.$on("zm-challenge.receive",function(){
+                        $scope.$on("zm.challenge.receive",function(){
                             ajax.getPendingChallenges().then(addParamsToScope);
                         });
                         ajax.getPendingChallenges().then(addParamsToScope);

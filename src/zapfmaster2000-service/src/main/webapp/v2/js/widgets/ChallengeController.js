@@ -30,7 +30,15 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
 
                 _.each($scope.challenges, function (challenge, keys) {
-                    $scope.challenges[keys].countdown = DateService.calcDiffToNow(challenge.startDate, challenge.challengeDuration, "mm:ss");
+                    var diff = DateService.calcDiffToNow(challenge.startDate, challenge.challengeDuration, "mm:ss");
+                    if (diff > 0) {
+                        $scope.challenges[keys].countdown = diff;
+                    }
+
+                    if (diff <= 0 && $scope.challenges[keys].type !== "CHALLENGE_DONE") {
+                        $scope.challenges[keys].type = "CHALLENGE_DONE";
+                    }
+
                 });
 
                 clockInterval = $timeout($scope.letTheClockTick, 1000);

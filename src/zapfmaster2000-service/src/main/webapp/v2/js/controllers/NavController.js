@@ -52,11 +52,7 @@ define([
                 };
             }
 
-            function onChallengeReceive(challenge) {
-                $rootScope.$broadcast("zm-challenge.receive",challenge);
-            }
 
-            cometService.addChallengePushListener(onChallengeReceive);
         }];
 
 

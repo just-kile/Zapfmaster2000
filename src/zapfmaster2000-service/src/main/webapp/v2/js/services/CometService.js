@@ -7,6 +7,11 @@ define(['Console', 'Underscore'], function (Console, _) {
             newspush: [],
             challenges:[]
         };
+        var challengeTypeEventMapping={
+            ChallengeRequest:"zm.challenge.receive",
+            ChallengeAccepted:"zm.challenge.accepted",
+            ChallengeDecline:"zm.challenge.declined"
+        };
         var newspushStopped = false;
         //var ajaxCalls = {};
         var cometRunningMap = {};
@@ -29,7 +34,12 @@ define(['Console', 'Underscore'], function (Console, _) {
                         Console.debug("Datas", data);
                         _.each(callbacks[cbKey], function (callback, index) {
                             if (callback) {
-                                callback(data);
+                                try{
+                                    callback(data);
+                                }catch(e){
+                                    Console.error("Push callback throws error",e);
+                                }
+
                             }
                         });
                         startCometServiceFor(url, cbKey);
@@ -99,9 +109,6 @@ define(['Console', 'Underscore'], function (Console, _) {
         var stopChallengePush = function () {
             stopCometServiceFor("challenges", true);
         };
-        var addChallengePushListener = function(){
-
-        }
 
       /*  $rootScope.$on('$routeChangeSuccess', function (next, last) {
             reset();
@@ -120,6 +127,21 @@ define(['Console', 'Underscore'], function (Console, _) {
                 callbacks.newspush.splice(index,1);
             }
         };
+        function addChallengePushListener(callback){
+            if (callback) {
+                callbacks.challenges.push(callback);
+            }
+            Console.debug("Added Push Listener");
+            Console.log("All Push Listeners: ", callbacks);
+        }
+        function onChallengeReceive(challenge) {
+            if(challengeTypeEventMapping[challenge.type]){
+                $rootScope.$broadcast(challengeTypeEventMapping[challenge.type],challenge);
+            }
+
+        }
+
+        addChallengePushListener(onChallengeReceive);
         return {
             addPushListener: function (callback) {
                 if (callback) {
@@ -141,13 +163,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 // Console.debug("Push Listener", callback, "added");
                 Console.log("All Push Listeners: ", callbacks);
             },
-            addChallengePushListener:function(callback){
-                if (callback) {
-                    callbacks.challenges.push(callback);
-                }
-                Console.debug("Added Push Listener");
-                Console.log("All Push Listeners: ", callbacks);
-            },
+            addChallengePushListener:addChallengePushListener,
             resetPush: resetPush,
             reset: reset,
             removeNewsPushListener: removeNewsPushListener,
