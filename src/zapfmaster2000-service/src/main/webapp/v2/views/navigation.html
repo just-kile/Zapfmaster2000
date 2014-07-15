@@ -16,7 +16,7 @@
     </ul>
     <ul class="nav-justified visible-xs">
 
-        <li ng-repeat="item in navItems" ng-style="{width:100/(navItems.length-1)+'%'}" ng-if="!item.notVisibleXs" ng-class="item.navClass()" ng-click="item.onClick()">
+        <li ng-repeat="item in navItems" ng-style="{width:100/(visibleItemsXs)+'%'}" ng-if="!item.notVisibleXs" ng-class="item.navClass()" ng-click="item.onClick()">
             <a href="">
             <img  ng-if="item.imageUrl" ng-src="{{item.imageUrl}}" height="42"/>
              <i ng-if="item.glyphicon" class="glyphicon {{item.glyphicon}}" style="font-size: 1.7em; margin-top:5px"/>

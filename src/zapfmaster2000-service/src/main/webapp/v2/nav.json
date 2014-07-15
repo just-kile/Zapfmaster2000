@@ -17,6 +17,7 @@
         "imageUrl": "css/images/ic_menu_profile.svg",
         "directive":"userInfo",
         "pullRight": false,
+        "notVisibleXs": true,
         "url": "user"
     },
     {

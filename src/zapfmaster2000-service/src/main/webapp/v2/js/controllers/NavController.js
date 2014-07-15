@@ -24,7 +24,13 @@ define([
             }
 
             $scope.navItems = prepareNavItems(navItems);
-
+            $scope.visibleItemsXs = _.reduce(navItems, function (memo, obj) {
+                if (!obj.notVisibleXs) {
+                    return memo + 1;
+                } else {
+                    return memo;
+                }
+            }, 0);
 
             $rootScope.$on('$routeChangeSuccess', function (next, last) {
                 if (shouldShowNav()) {
