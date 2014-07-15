@@ -11,12 +11,7 @@
         "pullRight": false,
         "url": "challenges"
     },
-    {
-        "title": "Stats",
-        "imageUrl": "css/images/ic_menu_statistics.svg",
-        "pullRight": false,
-        "url": "stats"
-    },
+
     {
         "title": "User",
         "imageUrl": "css/images/ic_menu_profile.svg",
