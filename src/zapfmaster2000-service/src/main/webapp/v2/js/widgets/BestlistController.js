@@ -62,7 +62,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
             };
             var updateScope = function (data) {
-                ajax.getBeslist().then(function (data) {
+                ajax.getBestlist().then(function (data) {
                     if (data.length > c.bestlistMax) {
                         data.length = c.bestlistMax;
                     }
