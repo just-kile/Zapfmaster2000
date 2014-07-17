@@ -6,9 +6,8 @@
         <zm-accordion title="{{'BESTLIST_TITLE'|translate }}" icon="css/images/ic_menu_ranking.svg">
             <ul class="zm-bestlist">
                 <li ng-repeat="user in bestlist" style="position: relative">
-                    <div>{{$index+1}}. {{user.name}} {{user.amount|amount}} l <img class="img-rounded pull-right"
-                                                                                   ng-src="{{baseUrl+user.image}}"
-                                                                                   width="50"/></div>
+                    <div>{{$index+1}}. {{user.name}} <span zm-number-interpolation="{{user.amount}}" filter="amount">{{user.amount|amount}}</span> l
+                        <img class="img-rounded pull-right" ng-src="{{baseUrl+user.image}}" width="50"/></div>
                     <div class="zm-bar" ng-style="{'width':(user.amountPercent)+'%'}"></div>
                 </li>
             </ul>

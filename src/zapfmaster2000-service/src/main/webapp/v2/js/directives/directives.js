@@ -17,12 +17,13 @@ define([
     'directives/AccordionDirective',
     'directives/UserInformationDirective',
     'directives/StickyScrollDirective',
-    'directives/CreateChallengeDirective'
+    'directives/CreateChallengeDirective',
+    'directives/NumberInterpolation'
+
 
 //    ,'directives/LineChart'
 
-], function (Console, $, _, angular, BarChart, FigureChart, FeedDirective, ShowDirective, SwitchDirective,
-             TextfillDirective, MovingUnderline,AccordionDirective,UserInformationDirective,StickyScroll,CreateChallengeDirective) {
+], function (Console, $, _, angular, BarChart, FigureChart, FeedDirective, ShowDirective, SwitchDirective, TextfillDirective, MovingUnderline, AccordionDirective, UserInformationDirective, StickyScroll, CreateChallengeDirective, NumberInterpolation) {
     "use strict";
     Console.group("Entering Widgets module.");
 
@@ -34,11 +35,12 @@ define([
         animatewidget: ShowDirective,
         feed: FeedDirective,
         textfill: TextfillDirective,
-        movingunderline:MovingUnderline,
-        zmAccordion:AccordionDirective,
-        userInfo:UserInformationDirective,
-        zmStickyScroll:StickyScroll,
-        zmCreateChallenge:CreateChallengeDirective
+        movingunderline: MovingUnderline,
+        zmAccordion: AccordionDirective,
+        userInfo: UserInformationDirective,
+        zmStickyScroll: StickyScroll,
+        zmCreateChallenge: CreateChallengeDirective,
+        zmNumberInterpolation:NumberInterpolation
 
 
     };

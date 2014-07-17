@@ -32,7 +32,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
 
             $scope.colorFunction = function () {
                 return function (d, i) {
-                    return '#F5E400 ';
+                    return '#F5E400';
                 };
             };
             /*Pie chart helper functions*/
