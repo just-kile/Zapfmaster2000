@@ -1004,6 +1004,7 @@ li.zm-newsfeed {
 
 .zm-linechart .nvd3 .nv-groups path.nv-line {
     stroke-width: 3px !important;
+    fill:none;
 }
 
 .zm-piechart svg text {
