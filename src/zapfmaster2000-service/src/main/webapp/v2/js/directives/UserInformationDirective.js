@@ -1,6 +1,6 @@
 define(['Console', 'jQuery'], function (Console, $) {
         "use strict";
-        Console.group("Entering Textfill directive.");
+        Console.group("Entering User information directive.");
 
         var directive = ['ZMConstants','DataService', function (c,ajax) {
                 return {
@@ -10,11 +10,13 @@ define(['Console', 'jQuery'], function (Console, $) {
                     link: function ($scope, ele, attrs) {
                         // console.log($scope);
                         $scope.baseUrl = c.baseUrl;
-                        ajax.getDatas(c.userStatsUrl,function(userStats){
+                        ajax.getLoggedInUserStats().then(function(userStats){
                             Console.log(userStats);
                             $scope.userName = userStats.user.userName;
                             $scope.userImage=userStats.user.userImage;
-
+                            $scope.isUserLoggedIn=true;
+                        },function(){
+                            $scope.isUserLoggedIn=false;
                         });
 
                     }

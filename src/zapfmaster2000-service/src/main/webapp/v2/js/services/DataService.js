@@ -71,6 +71,10 @@ define(['Console', 'Underscore', "Angular","jQuery"], function (Console, _, angu
             return req.then(handleSuccess, handleError);
 
         };
+        var getLoggedInUserStats = function(){
+            var req = requestPromise(c.userStatsUrl);
+            return req.then(handleSuccess, handleError);
+        };
         var getChallenges = function () {
             var req = requestPromise(c.challengeUrl);
             return req.then(handleSuccess, handleError);
@@ -161,6 +165,7 @@ define(['Console', 'Underscore', "Angular","jQuery"], function (Console, _, angu
             getAchievementStats: getAchievementStats,
             getBestlist: getBestlist,
             getUserStats: getUserStats,
+            getLoggedInUserStats:getLoggedInUserStats,
             getChallenges: getChallenges,
             getPendingChallenges: getPendingChallenges,
             getChallengeOpponents:getChallengeOpponents,
