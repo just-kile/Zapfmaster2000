@@ -24,7 +24,6 @@ define(['Console', 'jQuery'], function (Console, $) {
                         }
 
                         attrs.$observe("zmNumberInterpolation", function (newVal) {
-                            Console.log(arguments);
                             animate(Number.parseFloat(newVal), oldVal, 50);
                             oldVal = Number.parseFloat(newVal);
 

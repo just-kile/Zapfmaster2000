@@ -11,7 +11,6 @@ define(['Console', 'jQuery'], function (Console, $) {
                         // console.log($scope);
                         $scope.baseUrl = c.baseUrl;
                         ajax.getLoggedInUserStats().then(function(userStats){
-                            Console.log(userStats);
                             $scope.userName = userStats.user.userName;
                             $scope.userImage=userStats.user.userImage;
                             $scope.isUserLoggedIn=true;
