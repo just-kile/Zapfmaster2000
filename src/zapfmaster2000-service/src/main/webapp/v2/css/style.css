@@ -381,6 +381,7 @@ li.bestlist-item.ng-leave-active {
 
 .bestlist .username1 {
     min-width: 130px;
+    white-space:nowrap;
 }
 
 .bestlist .username1, .bestlist .amount {
