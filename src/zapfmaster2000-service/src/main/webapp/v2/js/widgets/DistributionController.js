@@ -50,8 +50,6 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                 var from = moment().subtract('minutes', c.PROGRESS_FROM_MINUTES).format(c.SERVER_TIME_FORMAT);
                 var interval = c.PROGRESS_INTERVAL;
                 ajax.getZapfDistribution(from,interval).then( function (data) {
-                    // console.log(data);
-                    //var distData = [[-1,0],[0,0.0001],[1,0.001],[4,0.42],[7,0.44],[10,0.1],[12,0],[13,0]];
                     var normalCurve = transformData(data.normalCurve);
                     var activeCurve = transformData(data.actualCurve);
 
@@ -70,8 +68,6 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
                     $scope.expectation = data.expectation;
                     $scope.variance = data.variance;
                     $scope.degression = data.degression;
-                    // $scope.skew = -0.3;
-                    //$scope.kurtosis = 0;
                 });
 
 

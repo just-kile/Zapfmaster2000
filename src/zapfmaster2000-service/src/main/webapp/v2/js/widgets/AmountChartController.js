@@ -12,7 +12,6 @@ define(['Console', 'Underscore'], function (Console, _) {
             $scope.unitMugs = c.MUG_SIZE;
             $scope.unitAchievements = 1;
             var updateView = function (amount) {
-                // $scope.currentAmount =$scope.currentAmount-0.5<0?2:$scope.currentAmount-0.5;
                 $scope.currentAmount = amount.amountTotal;
 
             };
@@ -42,13 +41,11 @@ define(['Console', 'Underscore'], function (Console, _) {
             CometService.addPushListener(onNewsPush);
             retrieveAmount(updateView);
             retrieveAchievement(updateAchievements);
-            // updateAmount();
             $scope.$on("$destroy", function () {
                 CometService.removeNewsPushListener(onNewsPush);
             });
             Console.groupEnd();
         }];
-    //controller.$inject = [];
 
     Console.groupEnd();
     return controller;

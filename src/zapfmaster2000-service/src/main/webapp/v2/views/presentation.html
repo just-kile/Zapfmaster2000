@@ -6,10 +6,7 @@
     </div>
 
 </div>
-<!--<div ng-repeat="row in rows" class="row">
-    <div ng-repeat="col in row" ng-include="col.name+'/template.html'" class="{{col.className}}">
-    </div>
-</div>-->
+
 <div class="row zm-row">
     <div ng-repeat="widget in rows.topLeft"
          ng-include="'views/widgets/'+ widget.name+'.html'"

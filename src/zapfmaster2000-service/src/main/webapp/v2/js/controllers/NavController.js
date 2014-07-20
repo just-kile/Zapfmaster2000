@@ -53,7 +53,6 @@ define([
 
             function load(topic) {
                 return function () {
-                    // $("#zm-navbar").collapse("hide");
                     $location.url('/' + topic);
                 };
             }

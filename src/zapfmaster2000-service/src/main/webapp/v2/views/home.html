@@ -1,8 +1,6 @@
 <div class="row zm-row" style="margin-top:50px">
-
     <div ng-controller="BestlistController" ng-init="init(true,true);"
          class="col-xs-12 col-sm-6 col-md-8 col-sm-push-6 col-md-push-4">
-        <!--div zm-sticky-scroll id="sticky"-->
         <zm-accordion title="{{'BESTLIST_TITLE'|translate }}" icon="css/images/ic_menu_ranking.svg">
             <ul class="zm-bestlist">
                 <li ng-repeat="user in bestlist" style="position: relative">
@@ -12,7 +10,6 @@
                 </li>
             </ul>
         </zm-accordion>
-        <!--/div-->
     </div>
     <div ng-controller="NewsfeedController"
          class="col-xs-12 col-sm-6 col-md-4 col-sm-pull-6 col-md-pull-8 zmw-newsfeed">

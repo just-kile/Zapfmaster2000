@@ -21,7 +21,6 @@ define(['Console', 'd3', "Angular",'jQuery'], function (Console, d3, angular,$) 
                         }
                     }
                     $scope.toggle=function(){
-                        // alert("Toggle");
                         var container = $(ele).find(".zm-accordion-container");
                         container.toggleClass("zm-hidden");
                         toggleIcon();

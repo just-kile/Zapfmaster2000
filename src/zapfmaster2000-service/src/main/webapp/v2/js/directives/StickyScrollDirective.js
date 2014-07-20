@@ -12,7 +12,6 @@ define(['Console', 'jQuery'], function (Console, $) {
                                 scrollTop, windowHeight, eleOffsetTop,betweenFlag = false,absTop;
 
                             function onScroll(e) {
-                                // Console.log(e);
                                 if (!height || height < EPS) {
                                     height = ele.height();
                                 }

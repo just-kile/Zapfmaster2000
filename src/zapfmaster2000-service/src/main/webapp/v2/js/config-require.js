@@ -5,11 +5,11 @@ define(function () {
         paths: {
             Console: '../vendor/console/ba-debug',
             Bootstrap: '../vendor/bootstrap/dist/js/bootstrap.min',
-            jQuery: '../vendor/jquery/dist/jquery.min',//'http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min'
+            jQuery: '../vendor/jquery/dist/jquery.min',
             Underscore: '../vendor/underscore/underscore',
             d3: '../vendor/d3/d3.min',
             nvd3fix: "js/nvd3.fix",
-            nvd3: '../vendor/nvd3/nv.d3.min',//"//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.15-beta/nv.d3.min",//
+            nvd3: '../vendor/nvd3/nv.d3.min',
             Angular: '../vendor/angular/angular.min',
             AngularRoute: '../vendor/angular-route/angular-route.min',
             AngularResource: "../vendor/angular-resource/angular-resource.min",
@@ -92,7 +92,6 @@ define(function () {
             "Underscore",
             "Angular"
         ]
-        //urlArgs: 'token=' + localStorage.getItem("token")
     });
 
 

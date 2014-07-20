@@ -144,8 +144,6 @@ define(['Console', 'Underscore', "Angular","jQuery"], function (Console, _, angu
             if (!angular.isObject(response.data) || !response.data.message) {
                 return( $q.reject("An unknown error occurred.") );
             }
-
-            // Otherwise, use expected error message.
             return( $q.reject(response.data.message) );
 
         }

@@ -9,9 +9,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                         textfill: "="
 
                     },
-                    //  templateUrl: 'js/directives/BarChart/template.html',
                     link: function ($scope, ele, attrs) {
-                        // console.log($scope);
                         Console.log("Textfill directive called!");
                         function update() {
                             var fontSize = 50;

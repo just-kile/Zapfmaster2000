@@ -1,16 +1,4 @@
 <div ng-controller="DraftKitController" class="zm-draftkits">
-    <!-- <div class="throbber">
-        <img src="css/images/glas_1.png" />
-    </div>-->
-    <!--
-    boxId: 1
-brand: "Berliner"
-currentAmount: 6.984397991730497
-kegId: 1
-kegNumber: 1
-lastsUntil: 1386305147644
-size: 50
-startDate: 1386087479000-->
     <ul>
         <li ng-repeat="keg in kegs" class="zm-draftkit">
             <div class="flip-container" ng-class="{flip: keg.user.loggedin}">
@@ -27,7 +15,6 @@ startDate: 1386087479000-->
                             </div>
 
                         </div>
-                        <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
                     </div>
                     <div class="back zm-backgrnd">

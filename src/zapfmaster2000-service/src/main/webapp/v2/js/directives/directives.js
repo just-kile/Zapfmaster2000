@@ -21,7 +21,6 @@ define([
     'directives/NumberInterpolation'
 
 
-//    ,'directives/LineChart'
 
 ], function (Console, $, _, angular, BarChart, FigureChart, FeedDirective, ShowDirective, SwitchDirective, TextfillDirective, MovingUnderline, AccordionDirective, UserInformationDirective, StickyScroll, CreateChallengeDirective, NumberInterpolation) {
     "use strict";
@@ -30,7 +29,6 @@ define([
     var directives = {
         d3bars: BarChart,
         switch: SwitchDirective,
-        // d3line:LineChart,
         figurechart: FigureChart,
         animatewidget: ShowDirective,
         feed: FeedDirective,

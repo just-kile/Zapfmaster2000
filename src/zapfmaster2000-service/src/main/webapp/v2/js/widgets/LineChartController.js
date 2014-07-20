@@ -38,7 +38,7 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
             /*Pie chart helper functions*/
             $scope.xFunction = function () {
                 return function (val) {
-                    return val.key; //+ " ("+val.y.toFixed(2)+"l)";
+                    return val.key;
                 };
             };
 

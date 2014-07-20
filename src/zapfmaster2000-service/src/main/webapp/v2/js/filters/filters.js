@@ -23,7 +23,6 @@ define([
         maxcount: MaxCountFilter,
         rank: RankFilter
     };
-   // Console.debug("Filters to be registered: ", filters);
 
     var initialize = function (angModule) {
         _.each(filters, function (filter, name) {

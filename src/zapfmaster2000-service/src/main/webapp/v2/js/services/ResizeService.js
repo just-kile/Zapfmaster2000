@@ -23,7 +23,6 @@ define(['Console', 'jQuery', 'Underscore'], function (Console, $, _) {
         var waitForFinalEvent = (function () {
             var timers = {};
             return function (callback, ms, uID) {
-                //
                 var uuID = (!uID) ? "I'm a banana!" : null;
                 if (timers[uuID]) {
                     clearTimeout(timers[uuID]);

@@ -9,7 +9,6 @@ define(['Console'], function (Console) {
         splash.register($scope);
         Console.groupEnd();
     }];
-    //controller.$inject = [];
 
     Console.groupEnd();
     return controller;

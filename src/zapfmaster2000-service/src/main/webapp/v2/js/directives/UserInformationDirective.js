@@ -5,10 +5,8 @@ define(['Console', 'jQuery'], function (Console, $) {
         var directive = ['ZMConstants','DataService', function (c,ajax) {
                 return {
                     restrict: 'E',
-
                     templateUrl: 'views/directives/UserInformationDirective.html',
                     link: function ($scope, ele, attrs) {
-                        // console.log($scope);
                         $scope.baseUrl = c.baseUrl;
                         ajax.getLoggedInUserStats().then(function(userStats){
                             $scope.userName = userStats.user.userName;

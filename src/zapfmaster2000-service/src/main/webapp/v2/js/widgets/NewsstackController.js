@@ -39,21 +39,6 @@ define(['Console', 'Underscore'], function (Console) {
 
             };
             initScope();
-            /*Testing, delete if not necessary*/
-            //addToNewsQueue(DUMMY_DATAS);
-            /*  var stopFlag = false;
-             var dummydata = function(){
-
-             var DUMMY_DATAS = {"type":"DRAWING","image":"rest/image/user/1","date":"20140323-184633","userId":1,"userName":"Ben","amount":Math.random()*10,"kegId":1,"brand":"Carlsberg","location":"Kölle"};
-
-             addToNewsQueue(DUMMY_DATAS);
-
-             if(!stopFlag)$timeout(dummydata,4000);
-             //stopFlag = true;
-             }
-
-             dummydata();
-             stopFlag = false;   */
             ajax.getNewsFeed(0, c.newsStackLength).then( function (json) {
                 if (json) {
                     _.each(json.reverse(), function (data) {
@@ -65,7 +50,6 @@ define(['Console', 'Underscore'], function (Console) {
 
             Console.groupEnd();
         }];
-    //controller.$inject = [];
 
     Console.groupEnd();
     return controller;

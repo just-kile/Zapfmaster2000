@@ -1,6 +1,5 @@
 require(["config-require"],function(config){
     "use strict";
-    //config.urlArgs = 'token=' + localStorage.getItem("token");
     require.config(config);
     require([
         // Standard Libs
@@ -33,7 +32,6 @@ require(["config-require"],function(config){
         Console.info("d3: ", d3);
         Console.info("Angular: ", angular);
         Console.groupEnd();
-
 
         require(['app'], function (App) {
             Console.group("Starting bootstrap.");

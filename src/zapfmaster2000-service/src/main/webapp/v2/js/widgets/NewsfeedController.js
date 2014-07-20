@@ -3,7 +3,6 @@ define(['Console', 'Underscore'], function (Console, _) {
     Console.group("Entering Newsstack controller module.");
 
     var controller = ['$scope', '$timeout', 'CometService', 'DataService', "ZMConstants",
-        //controller.$inject = [];
         function ($scope, $timeout, CometService, ajax, c) {
             Console.group("Newsfeed controller entered.");
 

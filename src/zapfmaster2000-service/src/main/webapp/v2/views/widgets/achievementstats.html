@@ -1,24 +1,3 @@
-<!--{
-    "achievementName": "Charlie Sheen",
-    "achievementId": "19",
-    "achievementImage": "images/achievements/charliesheen.png",
-    "description": "Zehn Bier gezapft",
-    "users": [
-        {
-            "userId": "4",
-            "userName": "Pete",
-            "userImage": "images/achievements/carl.png",
-            "date": "2012-08-31 20:26:45"
-        },
-        {
-            "userId": "4",
-            "userName": "Gustave",
-            "userImage": "images/achievements/carl.png",
-            "date": "2012-08-31 20:26:45"
-        }
-    ]
-} -->
-
 <div ng-controller="AchievementStatsController" class="zm-achievementstats">
     <header class="zmo-header">
         <small>{{'ACHIEVEMENTSTATS_TITLE'|translate}}:</small>
@@ -34,8 +13,6 @@
                 </div>
             </div>
         </div>
-
-
         <h2>Erreicht von</h2>
 
         <div class="row" ng-if="users.length>0">

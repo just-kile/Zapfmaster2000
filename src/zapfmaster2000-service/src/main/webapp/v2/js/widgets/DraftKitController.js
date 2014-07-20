@@ -91,7 +91,6 @@ define(['Console', 'Underscore'], function (Console, _) {
             initScope();
             Console.groupEnd();
         }];
-    //controller.$inject = [];
 
     Console.groupEnd();
     return controller;

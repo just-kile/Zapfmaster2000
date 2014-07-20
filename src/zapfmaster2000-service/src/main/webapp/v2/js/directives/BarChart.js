@@ -10,7 +10,6 @@ define(['Console', 'd3', "Angular"], function (Console, d3, angular) {
                     label: '@',
                     onClick: '&'
                 },
-                //  templateUrl: 'js/directives/BarChart/template.html',
                 link: function ($scope, ele, attrs) {
                     var renderTimeout;
                     var margin = parseInt(attrs.margin) || 20,
@@ -21,9 +20,6 @@ define(['Console', 'd3', "Angular"], function (Console, d3, angular) {
                         .append('svg')
                         .style('width', '100%');
 
-                    ele.bind("$destroy", function () {
-                        //    svg.exit().remove();
-                    });
                     $window.onresize = function () {
                         $scope.$apply();
                     };
@@ -50,9 +46,6 @@ define(['Console', 'd3', "Angular"], function (Console, d3, angular) {
                         if (!data) {
                             return;
                         }
-                        //if (renderTimeout) clearTimeout(renderTimeout);
-
-                        // renderTimeout = $timeout(function () {
                         var width = d3.select(ele[0])[0][0].offsetWidth - margin,
                             height = $scope.data.length * (barHeight + barPadding),
                             color = d3.scale.category20(),

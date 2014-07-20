@@ -6,7 +6,6 @@ define(['Console', 'jQuery', 'Underscore'], function (Console, $, _) {
                 return {
                     restrict: 'A',
                     scope: {
-                        //amount: '&'
                     },
                     templateUrl: 'views/directives/FigureChart.html',
                     link: function ($scope, element, attrs) {
@@ -69,12 +68,10 @@ define(['Console', 'jQuery', 'Underscore'], function (Console, $, _) {
                             var els = element.children().children();
                             var offset, i;
                             if (diff > 0) {
-                                // $timeout(function () {//workaround: image width is not set fast enough
                                 offset = oldArray.length + 1;
                                 for (i = diff - 1; i >= 0; i--) {
                                     animateElementIn.call(this, els, offset, i);
                                 }
-                                //  }, 0)
 
                             } else if (diff < 0) {
                                 offset = oldArray.length + 1;
@@ -88,10 +85,6 @@ define(['Console', 'jQuery', 'Underscore'], function (Console, $, _) {
                         attrs.$observe('amount', function (val) {
                             var value = parseFloat(val);
                             Console.log(' type:', attrs.createControl);
-                            //element.text('Directive text, type is: '+attrs.createControl);
-                            // });
-                            //  $scope.$watch(attrs.amount, function (value) {
-                            // alert("Amount Changes!");
                             $scope.countimage.mugcount = Math.floor(value / unitSize - (value / unitSize) % c.FIGURE_CHART.MAX_IMAGES_PER_LINE);
                             $scope.complete_mug_count = value / unitSize;
                             var newAmountPieces = calcAmountPieces(value);
@@ -103,8 +96,6 @@ define(['Console', 'jQuery', 'Underscore'], function (Console, $, _) {
                                 if ($scope.images.length > 0) {
                                     $scope.images[$scope.images.length - 1].amount = 0;
                                 }
-
-
                                 for (var i = diff; i > 0; i--) {
                                     $scope.images.push(newAmountPieces[newLength - i]);
                                 }
@@ -125,7 +116,6 @@ define(['Console', 'jQuery', 'Underscore'], function (Console, $, _) {
                             //recalculate width
                             if (element) {
                                 var width = element.width() - element.children().children(":first").width() - 20;
-                                //var newWidthPerItem = width / newLength;
                                 var newWidthPerItem = width / c.FIGURE_CHART.MAX_IMAGES_PER_LINE;
 
                                 if (true || newWidthPerItem < c.FIGURE_CHART.INITIAL_WIDTH) {
@@ -136,7 +126,6 @@ define(['Console', 'jQuery', 'Underscore'], function (Console, $, _) {
                                 }
                             }
 
-                            //change height
 
 
                         });

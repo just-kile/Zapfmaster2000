@@ -11,7 +11,6 @@ define(['Console', 'moment'], function (Console, moment) {
                 return "";
             }
             var output = moment(input).format(c.COUNTDOWN_TIME_FORMAT);
-            // Console.debug("Filter ",input," with Output ", output);
             return output;
         };
 

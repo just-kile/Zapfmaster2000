@@ -9,15 +9,9 @@ define(['Console', 'd3'], function (Console, d3) {
                         switch: "&"
 
                     },
-                    //  templateUrl: 'js/directives/BarChart/template.html',
                     link: function ($scope, ele, attrs) {
-                        // console.log($scope);
                         Console.log("Switch directive called!");
                         $animate.addClass(ele, "animated");
-                        //  var animateIn = "fadeInUpBig"//c.WIDGETS.ANIMATION_IN;
-                        // var animateOut = "fadeOutDownBig"//c.WIDGETS.ANIMATION_OUT;
-                        // var animateIn = "rotateInDownRight"//c.WIDGETS.ANIMATION_IN;
-                        //var animateOut = "rotateOutDownRight"//c.WIDGETS.ANIMATION_OUT;
 
                         var animateIn = c.WIDGETS.ANIMATION_SWITCH_IN;
                         var animateOut = c.WIDGETS.ANIMATION_SWITCH_OUT;

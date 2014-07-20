@@ -91,7 +91,6 @@ define(['Console', 'Underscore'], function (Console, _) {
                                         user.order = index;
                                         $scope.bestlist.push(user);
                                         addedFlag = true;
-                                        //$scope.bestlist.splice(oldIndex,1);
                                     }
                                     if (oldUser.order > lowestOrderUser.order) {
                                         lowestOrderUser = oldUser;
@@ -195,7 +194,6 @@ define(['Console', 'Underscore'], function (Console, _) {
                 }
             };
             var initResizing = function () {
-                //resizeMethod();
                 window.addEventListener("resize", resizeMethod, true);
             };
             $scope.init = function (isOnlyBestlist,showAll) {
@@ -214,7 +212,6 @@ define(['Console', 'Underscore'], function (Console, _) {
             });
             Console.groupEnd();
         }];
-    //controller.$inject = [];
 
     Console.groupEnd();
     return controller;

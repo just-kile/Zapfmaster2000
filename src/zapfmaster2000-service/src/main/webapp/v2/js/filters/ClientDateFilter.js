@@ -15,11 +15,9 @@ define(['Console', 'moment'], function (Console, moment) {
 
                 }
             } else {
-               // Console.error("Invalid date for client date filter!");
                 return "";
 
             }
-            // Console.debug("Filter ",input," with Output ", output);
 
         };
 

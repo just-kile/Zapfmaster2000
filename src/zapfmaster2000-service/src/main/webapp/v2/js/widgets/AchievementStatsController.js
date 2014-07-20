@@ -13,10 +13,8 @@ define(['Console', 'moment', 'Underscore'], function (Console, moment, _) {
             }
 
             function update(achievementId, callback) {
-                // achievementId = 1;
                 ajax.getDetailedAchievementStats(achievementId).then( function (achievementStats) {
                     $scope.achievementName = achievementStats.achievementName;
-                    // $scope.userImage = data.user.userImage;
                     $scope.image = achievementStats.achievementImage;
                     $scope.description = achievementStats.description;
                     $scope.users = achievementStats.users;

@@ -19,19 +19,10 @@
                          translate-value-date="{{n.date|clientdate}}"
                          translate-value-location="{{n.location}}"></div>
 
-                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
                 </div>
         </div>
         <!-- ACHIEVEMENET -->
-        <!--    {
-        "type": "ACHIEVEMENT",
-        "image": "images/achievements/nimmersatt.png",
-        "date": 1355687887000,
-        "achievementName": "Nimmersatt",
-        "achievementId": 3,
-        "userName": "user-3",
-        "userId": 3
-    }-->
+
         <div class="flip-container" ng-if="n.type=='ACHIEVEMENT'">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
@@ -50,24 +41,12 @@
                          translate-value-date="{{n.date|clientdate}}"></div>
 
 
-                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
                 </div>
 
 
             </div>
         <!-- New Keg-->
-
-        <!--{
-         "boxId": 1
-         "brand": "Oettinger"
-         "date": "20130228-000000"
-         "image": "images/others/newkeg.jpg"
-         "kegId": 1
-         "location": "local"
-         "size": 50
-         "type": "NEW_KEG"
-    } -->
         <div class="flip-container" ng-if="n.type=='NEW_KEG'">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
@@ -91,18 +70,13 @@
                             ></div>
 
 
-                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
                 </div>
 
 
         </div>
         <!-- New User-->
-        <!-- date: "20140324-201423"
-image: "images/others/newuser.jpg"
-type: "NEW_USER"
-userId: 3
-userName: "Karl"-->
+
         <div class="flip-container" ng-if="n.type=='NEW_USER'">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
@@ -117,39 +91,13 @@ userName: "Karl"-->
                          translate-value-date="{{n.date|clientdate}}"></div>
 
 
-                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
 
 
             </div>
         </div>
         <!-- Challenge Started -->
-        <!-- {
-            "challengeType": "1v1",
-            "challengeDuration": "30",
-            "startDate": "1346459019",
-            "challengeId": "9",
-            "challengeImage": "images/others/1v1.jpg",
-            "type": "CHALLENGE_STARTED",
-            "team1": [
-                {
-                    "userId": "6",
-                    "userName": "Thomas",
-                    "userImage": "images/avatars/43981527934208.jpg",
-                    "amount": 0.41851239669421,
-                    "won": "0"
-                }
-            ],
-            "team2": [
-                {
-                    "userId": "2",
-                    "userName": "Winni",
-                    "userImage": "images/avatars/43981527934208.jpg",
-                    "amount": 0.32851239669421,
-                    "won": "0"
-                }
-            ]
-        } -->
+
         <div class="flip-container" ng-if="n.type=='CHALLENGE_STARTED'">
                 <div class="front zm-backgrnd">
                     <img ng-src="{{baseUrl+n.image}}" class="img-rounded"/>
@@ -173,9 +121,6 @@ userName: "Karl"-->
                          translate="NEWSFEED_CHALLENGE_STARTED_INFO"
                          translate-value-date="{{n.startDate|clientdate}}"
                          translate-value-duration="{{n.challengeDuration}}"></div>
-
-
-                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
                 </div>
 
@@ -205,7 +150,6 @@ userName: "Karl"-->
                          translate-value-date="{{n.startDate|clientdate}}"
                          translate-value-duration="{{n.challengeDuration}}"></div>
 
-                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
                 </div>
 
@@ -232,7 +176,6 @@ userName: "Karl"-->
                          translate-value-duration="{{n.challengeDuration}}"></div>
 
 
-                    <!--<div class="amountNumbers">{{keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}}</div>-->
 
                 </div>
 

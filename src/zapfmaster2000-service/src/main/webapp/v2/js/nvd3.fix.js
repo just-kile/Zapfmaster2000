@@ -1,6 +1,6 @@
 define([
     // Standard Libs
-    'd3',      // lib/console/console
+    'd3'
 
 ], function (d3) {
     "use strict";

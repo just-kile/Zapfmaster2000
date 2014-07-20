@@ -1,7 +1,7 @@
 define([
         // Standard Libs
-        'Console',      // lib/console/console
-        'Underscore', // lib/underscore/underscore
+        'Console',
+        'Underscore',
 
         // routing
         'routes/routes',
@@ -33,8 +33,7 @@ define([
 
         //Constants
         'constants'
-    ], function (Console, _, routes, nav, app, presentation, stats, home, challengesWebapp,logoutController,
-                 bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
+    ], function (Console, _, routes, nav, app, presentation, stats, home, challengesWebapp, logoutController, bestlist, challenge, newsstack, draftkit, splash, linechart, amountchart, newsfeed, achievementfeed, zmsplash, userprofile, achievementstats, distribution, aboutUs, constants) {
         "use strict";
         Console.group("Entering controllers module.");
         Console.info("AppController", app);
@@ -45,7 +44,7 @@ define([
             HomeController: home,
             ChallengesWebappController: challengesWebapp,
             StatsController: stats,
-            LogoutController:logoutController,
+            LogoutController: logoutController,
 
             BestlistController: bestlist,
             ChallengeController: challenge,
@@ -87,20 +86,19 @@ define([
                 });
                 $routeProvider.otherwise({ redirectTo: routes.news.route });
             }]);
-            angModule.run(["$rootScope", "$templateCache", "CometService","Analytics",
-                function ($rootScope, $templateCache, CometService,Analytics) {
-                $rootScope.$on('$routeChangeSuccess', function (next, last) {
-                    Console.debug("Navigating from ", last);
-                    Console.debug("Navigating to   ", next);
-                });
-                $rootScope.$on('$viewContentLoaded', function () {
-                    $templateCache.removeAll();
-                });
-            }]);
+            angModule.run(["$rootScope", "$templateCache", "CometService", "Analytics",
+                function ($rootScope, $templateCache, CometService, Analytics) {
+                    $rootScope.$on('$routeChangeSuccess', function (next, last) {
+                        Console.debug("Navigating from ", last);
+                        Console.debug("Navigating to   ", next);
+                    });
+                    $rootScope.$on('$viewContentLoaded', function () {
+                        $templateCache.removeAll();
+                    });
+                }]);
         };
         var setUpLanguage = function (angModule) {
             angModule.config(['$translateProvider', function ($translateProvider) {
-                // $translateProvider.useLocalStorage();
                 $translateProvider
                     .useStaticFilesLoader({
                         prefix: 'l10n/',

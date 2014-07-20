@@ -1,9 +1,9 @@
 define([
     // Standard Libs
-    'Console',      // lib/console/console
-    'jQuery',     // lib/jquery/jquery
-    'Underscore', // lib/underscore/underscore
-    'Angular',    // lib/angular/angular
+    'Console',
+    'jQuery',
+    'Underscore',
+    'Angular',
 
     // Application Files
     'services/services',
@@ -23,7 +23,7 @@ define([
         Console.group("Setup Angular");
 
         var mainModule = angular.module('myApp',
-            ['ngRoute', 'ngResource', 'ngAnimate', 'pascalprecht.translate', 'nvd3ChartDirectives','infinite-scroll','angular-google-analytics']);
+            ['ngRoute', 'ngResource', 'ngAnimate', 'pascalprecht.translate', 'nvd3ChartDirectives', 'infinite-scroll', 'angular-google-analytics']);
         services.initialize(mainModule);
         directives.initialize(mainModule);
         filters.initialize(mainModule);

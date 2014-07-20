@@ -33,7 +33,6 @@ define(['Console'], function (Console) {
             }, 6000);
             Console.groupEnd();
         }];
-    //controller.$inject = [];
 
     Console.groupEnd();
     return controller;

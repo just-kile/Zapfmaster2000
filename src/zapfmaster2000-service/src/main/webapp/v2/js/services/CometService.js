@@ -14,10 +14,8 @@ define(['Console', 'Underscore'], function (Console, _) {
         };
         var newspushStopped = false;
         var instantPushActivated = false;
-        //var ajaxCalls = {};
         var cometRunningMap = {};
         var startCometServiceFor = function (url, cbKey, stopManual) {
-            //ajaxCalls[cbKey] = $q.defer();
             cometRunningMap[cbKey] = {
                 running: true, // flag if comet service is already running
                 url: url,
@@ -69,7 +67,6 @@ define(['Console', 'Underscore'], function (Console, _) {
         var resetPush = function (id) {
             if (callbacks && callbacks[id]) {
                 callbacks[id].length = 0;
-                //if( ajaxCalls[id])ajaxCalls[id].resolve();
             }
         };
         var reset = function () {
@@ -85,7 +82,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             }
             return pub;
         };
-        var stopNewsPush = function(){
+        var stopNewsPush = function () {
             stopCometServiceFor("newspush", true);
             return pub;
         };
@@ -125,9 +122,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             return pub;
         };
 
-        /*  $rootScope.$on('$routeChangeSuccess', function (next, last) {
-         reset();
-         });*/
+
         var removeNewsPushListener = function (fn) {
             var fnString = fn.toString();
             var index = -1;
@@ -174,7 +169,7 @@ define(['Console', 'Underscore'], function (Console, _) {
                     }
                     callbacks[boxId].push(callback);
                     Console.debug("Added Amount Push Listener");
-                    if(instantPushActivated){
+                    if (instantPushActivated) {
                         startBoxInstantPush();
                     }
 
@@ -189,7 +184,7 @@ define(['Console', 'Underscore'], function (Console, _) {
             startBoxInstantPush: startBoxInstantPush,
             stopBoxInstantPush: stopBoxInstantPush,
             startNewsPush: startNewsPush,
-            stopNewsPush:stopNewsPush,
+            stopNewsPush: stopNewsPush,
             startChallengePush: startChallengePush,
             stopChallengePush: stopChallengePush
 

@@ -8,7 +8,6 @@ define(['Console', 'jQuery'], function (Console, $) {
                     scope: {
                         movingunderline: "="
                     },
-                    //  templateUrl: 'js/directives/BarChart/template.html',
                     link: function ($scope, ele, attrs) {
 
                         var movingDiv = $("<div>").addClass("movingdiv").css({
@@ -32,7 +31,6 @@ define(['Console', 'jQuery'], function (Console, $) {
                                         left: $(e.currentTarget).position().left,
                                         width: $(e.currentTarget).outerWidth()
                                     });
-                                    //$(e.currentTarget).addClass("active").siblings().removeClass("active");
                                 })
                                 .on("mouseout", function (e) {
                                     var currentTarget = $(e.currentTarget);

@@ -9,7 +9,6 @@
             <ul class="zmo-container">
             <li class="challenge-container color-container" ng-repeat="challenge in challenges"
                 ng-if="challenge.type!='CHALLENGE_DONE'">
-                <!--  <div class="zm-img" style='background: url("{{baseurl+challenge.team1[0].userImage}}")'/>  --->
                 <div class="bar1 zm-absolute zm-animate" ng-style="{width:challenge.team1Percent+'%'}"></div>
                 <div class="bar2 zm-absolute zm-animate" ng-style="{width:challenge.team2Percent+'%'}"></div>
                 <img ng-class="{winner: challenge.team1[0].won}"
@@ -39,12 +38,8 @@
                     <img ng-class="{winner: challenge.team1[0].won}"
                          class="zm-absolute img-responsive img-rounded userimage1"
                          ng-src="{{baseUrl+challenge.team1[0].userImage}}">
-
-
-
                     <div ng-if="(challenge.team1[0].won || challenge.team2[0].won)" class="username1 zm-absolute"
                          translate="CHALLENGES_WINNER_TEXT"
-
                          translate-value-winner="{{challenge.team1[0].won?challenge.team1[0].userName:challenge.team2[0].userName}}"
                          translate-value-loser="{{challenge.team1[0].won?challenge.team2[0].userName:challenge.team1[0].userName}}">
 
@@ -54,13 +49,10 @@
                          translate="CHALLENGES_WINNER_TEXT_EVEN"
                          translate-value-winner="{{challenge.team1[0].won?challenge.team1[0].userName:challenge.team2[0].userName}}"
                          translate-value-loser="{{challenge.team1[0].won?challenge.team2[0].userName:challenge.team1[0].userName}}">
-
                     </div>
                     <img ng-class="{winner: challenge.team2[0].won}"
                          class="zm-absolute img-responsive img-rounded userimage2"
                          ng-src="{{baseUrl+challenge.team2[0].userImage}}">
-
-                    <!--<div class="clock">{{challenge.countdown|countdown}}</div>-->
                     <div class="challenge-amount-1">{{challenge.team1Amount|amount}}l</div>
                     <div class="challenge-amount-2">{{challenge.team2Amount|amount}}l</div>
                 </li>

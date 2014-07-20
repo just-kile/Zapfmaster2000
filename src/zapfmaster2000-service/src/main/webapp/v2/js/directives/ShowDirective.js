@@ -9,7 +9,6 @@ define(['Console', 'd3'], function (Console, d3) {
                         widget: '='
 
                     },
-                    //  templateUrl: 'js/directives/BarChart/template.html',
                     link: function ($scope, ele, attrs) {
                         $animate.addClass(ele, 'animated ' + c.WIDGETS.ANIMATION_IN, function () {
                             $timeout(function () {
@@ -19,31 +18,6 @@ define(['Console', 'd3'], function (Console, d3) {
                                 });
                             }, 1000);
                         });
-                        /* $scope.$on("$destroy", function () {
-                         $animate.addClass(ele, 'animated ' + c.WIDGETS.ANIMATION_OUT, function () {
-                         $timeout(function () {
-
-                         $animate.removeClass(ele, 'animated ' + c.WIDGETS.ANIMATION_OUT, function () {
-
-                         })
-                         }, 1000);
-                         });
-
-                         });*/
-                        /*   $scope.$watch("rows.center", function (newArray, oldArray) {
-                         var els = $element.find(".zm-widget");
-
-                         $animate.addClass($(els[0]), 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
-                         $timeout(function () {
-                         var currEl = $(els[offset - index]);
-                         $animate.removeClass(currEl, 'animated ' + c.FIGURE_CHART.ANIMATION_OUT, function () {
-                         currEl.remove();
-                         })
-                         }, 2000);
-                         });
-
-                         }, true);
-                         */
                     }
                 };
 

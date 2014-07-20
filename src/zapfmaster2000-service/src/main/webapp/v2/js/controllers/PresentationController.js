@@ -103,7 +103,6 @@ define(['Console', 'text!../../rows.json', 'Underscore'], function (Console, row
             stopUpdater();
             stopWidgetSwitch();
         });
-        //controller.$inject = [];
 
 
     }];

@@ -14,11 +14,7 @@ define(['Console', 'jQuery'], function (Console, $) {
                         Console.log("Feed Directive called");
 
                         $scope.baseUrl = c.baseUrl;
-                        // $scope.maxlength = c.newsFeedLength;//parseInt(attrs.maxlength);
-                        // $scope.items = [];
                         $scope.$watch("items", function (newVal, oldVal) {
-                            //  $scope.maxlength = c.newsFeedLength;
-                            // console.log(arguments);
                             if (oldVal && oldVal.length === 0 && newVal && newVal.length > 0) {
                                 $animate.addClass(element.find("li"), 'animated fadeIn', function () {
                                     $timeout(function () {
@@ -46,7 +42,6 @@ define(['Console', 'jQuery'], function (Console, $) {
 
                         }, true);
 
-                        //   $scope.items = attrs.items;
 
                     }
                 };
