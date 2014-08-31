@@ -1,0 +1,45 @@
+
+$font-stack: RalewayRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$drops-png: "images/drops.png";
+$main-text-color:#ffffff;
+$color-pink:#ED71A8;
+$color-pink-dark:#FF1F7C;
+$color-pink-light:#FFADCF;
+$color-yellow:#FFF143;
+$color-yellow-dark:#F5E400;
+$color-yellow-light:#FFF899;
+$navbar-item-width:120px;
+$navbar-item-height:40px;
+$font-size-m:1.6em;
+$font-size-s:1.2em;
+$font-size-l:2em;
+
+
+
+@each $font-face in RalewayBold, RalewayLight, RalewayRegular, RalewaySemiBold {
+  @font-face {
+    font-family: $font-face;
+    src: url(fonts/#{$font-face}.otf);
+  }
+}
+
+
+@mixin vendor-prefix($name, $argument) {
+  -webkit-#{$name}: #{$argument};
+  -ms-#{$name}: #{$argument};
+  -moz-#{$name}: #{$argument};
+  -o-#{$name}: #{$argument};
+  #{$name}: #{$argument};
+}
+
+
+@mixin linear-gradient($fromColor, $toColor) {
+  background-color: $toColor; /* Fallback Color */
+  background-image: -webkit-gradient(linear, left top, right top, from($fromColor), to($toColor)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(left, $fromColor, $toColor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(left, $fromColor, $toColor); /* FF3.6 */
+  background-image:     -ms-linear-gradient(left, $fromColor, $toColor); /* IE10 */
+  background-image:      -o-linear-gradient(left, $fromColor, $toColor); /* Opera 11.10+ */
+  background-image:         linear-gradient(left, $fromColor, $toColor);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+}

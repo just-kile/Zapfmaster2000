@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="640"
+   height="640"
+   id="svg2999"
+   xml:space="preserve"><metadata
+     id="metadata3005"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs3003"><clipPath
+       id="clipPath3013"><path
+         d="M 0,512 512,512 512,0 0,0 0,512 z"
+         id="path3015" /></clipPath></defs><g
+     transform="matrix(1.25,0,0,-1.25,0,640)"
+     id="g3007"><g
+       id="g3009"><g
+         clip-path="url(#clipPath3013)"
+         id="g3011"><g
+           transform="translate(433.2397,82.8896)"
+           id="g3017"><path
+             d="m 0,0 c 0,-10.36 -8.39,-18.75 -18.75,-18.75 l -316.28,0 c -10.35,0 -18.75,8.39 -18.75,18.75 0,1.439 0.16,2.84 0.48,4.189 0.77,1.971 1.57,3.901 2.39,5.79 17.31,39.851 44.56,62.92 77.9,75.901 9.46,3.68 22.33,4 31.32,0 19.78,-8.81 41.77,-13.35 64.75,-13.35 23.001,0 45.07,4.4 64.78,13.35 8.82,4 23.721,2.94 31.35,0 C -47.479,73.02 -20.29,49.939 -3,10.17 -2.109,8.13 -1.25,6.04 -0.41,3.899 -0.14,2.64 0,1.34 0,0"
+             id="path3019"
+             style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" /></g><g
+           transform="translate(262.5405,218.0703)"
+           id="g3021"><path
+             d="m 0,0 c -32.859,0 -62.25,18.625 -82.363,47.957 -4.363,6.363 -2.27,15.534 8.983,13.182 13.951,-2.916 43.208,-7.94 73.819,-7.94 29.561,0 57.007,4.676 70.956,7.639 C 84.821,63.69 85.719,52.726 82.035,47.469 61.761,18.539 32.696,0 0,0 m -6.237,229.481 c -70.731,0 -128.058,-57.326 -128.058,-128.06 0,-70.752 57.327,-128.069 128.058,-128.069 70.754,0 128.073,57.317 128.073,128.069 0,70.734 -57.319,128.06 -128.073,128.06"
+             id="path3023"
+             style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" /></g></g></g></g></svg>

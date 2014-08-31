@@ -1,0 +1,64 @@
+{
+   "basePath": "Fill with basePath config",
+   "apis": [{
+      "methods": [
+         {
+            "headers": [],
+            "bodyobject": null,
+            "jsondocId": "5b0047e5-f27a-48d4-8d5b-9a4926650eb9",
+            "consumes": [],
+            "response": {
+               "mapKeyObject": "",
+               "jsondocId": "bfe8a145-5903-4978-ad45-6df6ffb400e9",
+               "mapValueObject": "",
+               "object": "account"
+            },
+            "pathparameters": [],
+            "apierrors": [],
+            "verb": "GET",
+            "description": "Retrieve all accounts.",
+            "queryparameters": [],
+            "path": "/account/retrieveAccounts.json",
+            "produces": ["application/json"],
+            "methodName": "retrieveAccounts"
+         },
+         {
+            "headers": [],
+            "bodyobject": null,
+            "jsondocId": "14c9422c-ebd5-439d-8c91-9bf74456e741",
+            "consumes": [],
+            "response": {
+               "mapKeyObject": "",
+               "jsondocId": "cde1ab8a-f384-49e4-af3c-0ec86508bbcf",
+               "mapValueObject": "",
+               "object": "account"
+            },
+            "pathparameters": [],
+            "apierrors": [{
+               "jsondocId": "388d948f-afc6-467b-ad33-0f1c14fa6269",
+               "description": "No name was provided.",
+               "code": "400"
+            }],
+            "verb": "GET",
+            "description": "Creats a new account.",
+            "queryparameters": [{
+               "jsondocId": "051a54fd-9d95-4405-9320-3c2b7ebbaf2b",
+               "description": "Name of the account to create",
+               "name": "name",
+               "allowedvalues": [],
+               "format": "",
+               "required": "true",
+               "type": "string"
+            }],
+            "path": "/account/createAccount.json",
+            "produces": ["application/json"],
+            "methodName": "createAccount"
+         }
+      ],
+      "jsondocId": "1248e39d-119f-437b-aa20-f6ff84bf6014",
+      "description": "Methods to manage accounts.",
+      "name": "Account Services"
+   }],
+   "objects": [],
+   "version": "0.1.1"
+}

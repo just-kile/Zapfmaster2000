@@ -1,0 +1,31 @@
+<div>
+    <div class="languageSwitch">
+        <img src="css/images/flagDE.png" ng-click="changeLanguage('de')">
+        <img src="css/images/flagEN.png" ng-click="changeLanguage('en')">
+
+    </div>
+
+</div>
+
+<div class="row zm-row">
+    <div ng-repeat="widget in rows.topLeft"
+         ng-include="'views/widgets/'+ widget.name+'.html'"
+         class="{{widget.className}}">
+    </div>
+    <div ng-repeat="widget in rows.topRight"
+         ng-include="'views/widgets/'+ widget.name+'.html'"
+         class="{{widget.className}}">
+    </div>
+</div>
+
+<div class="row">
+    <div ng-repeat="widget in rows.center" animatewidget
+         ng-include="'views/widgets/'+ widget.name+'.html'"
+         ng-class="widget.className">
+    </div>
+
+</div>
+<div ng-include="'views/widgets/splashscreen.html'">
+
+</div>
+</div>

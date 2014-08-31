@@ -1,0 +1,55 @@
+
+<div ng-controller="UserProfileController" class="zm-userprofile">
+    <header class="zmo-header"
+            translate="USERPROFILE_TITLE"
+            translate-value-username="{{user.userName}}"></header>
+    <div class="zmo-container" switch="updateFn(ok)">
+        <div class="row zm-feeditem">
+            <div class="col-md-3"><img ng-src="{{baseUrl+user.userImage|big}}" class="img-rounded userimage"></div>
+            <div class="col-md-9">
+                <div class="quote" textfill="quotation">
+                    <span>&#132;{{quotation}}&#148;</span>
+                    <cite>{{user.userName}}</cite>
+                </div>
+            </div>
+        </div>
+        <div class="row zm-feeditem">
+            <img ng-src="css/images/mug_pink_filling.svg" class="img-rounded col-md-3"/>
+
+            <div class="col-md-9 zm-userprofile-item">
+                <div translate="USERPROFILE_USER_RANK"
+                     translate-value-username="{{user.userName}}"
+                     translate-value-rank="{{rank.amount|rank}}"></div>
+                <div>
+                    <span class="zm-bold"
+                          translate="USERPROFILE_AMOUNT"
+                          translate-value-amount="{{amount.amountTotal|amount}}"></span>
+                    <span translate="USERPROFILE_ALCOHOLLEVEL"
+                          translate-value-alcohollevel="{{alcoholLevel|amount}}"></span></span>
+                </div>
+                <div translate="USERPROFILE_GREATEST_DRAWING"
+                     translate-value-amount="{{amount.greatestDrawing|amount}}"
+                     translate-value-sex="{{user.sex}}"></div>
+            </div>
+
+        </div>
+        <div class="row zm-feeditem">
+            <div class="col-md-9 zm-userprofile-item">
+                <div translate="USERPROFILE_ACHIEVEMENT_RANK"
+                     translate-value-rank="{{rank.achievements|rank}}"
+                     translate-value-sex="{{user.sex}}"></div>
+                <div>
+                    <span class="zm-bold"
+                          translate="USERPROFILE_ACHIEVEMENT_COUNT"
+                          translate-value-count="{{achievement.count}}">
+
+                </span></div>
+                <div translate="USERPROFILE_MOST_ACHIEVEMENT_HOUR"
+                        translate-value-date="{{achievement.mostAchievementHour|clientdate:'hour'}}"></div>
+            </div>
+            <img ng-src="css/images/goblet_yellow.svg" class="img-rounded col-md-3"/>
+
+        </div>
+
+    </div>
+</div>

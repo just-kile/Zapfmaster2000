@@ -1,0 +1,24 @@
+<div ng-controller="SplashScreenController" class="zm-newsstack">
+<!-- Challenge Started-->
+    <div class="zm-splash animate-show" ng-show="visible_challenge_started">
+        <div class="headline" ng-class="{splashHeadlne:visible_challenge_started}">{{'CHALLENGES_SPLASH_STARTED_TITLE'|translate}}</div>
+
+        <div class="team1" ng-class="{splashTeam1:visible_challenge_started}">{{data.team1[0].userName}}</div>
+        <div class="vs" ng-class="{splashVs:visible_challenge_started}">vs</div>
+        <div class="team2" ng-class="{splashTeam2:visible_challenge_started}">{{data.team2[0].userName}}</div>
+        <div class="duration" ng-class="{splashDuration:visible_challenge_started}">{{data.challengeDuration}} min</div>
+    </div>
+    <!-- Challenge Done-->
+    <div class="zm-splash animate-show" ng-show="visible_challenge_done">
+        <div class="headline" ng-class="{splashHeadlne:visible_challenge_done}">{{'CHALLENGES_SPLASH_DONE_TITLE'|translate}}</div>
+
+        <div class="team1" ng-class="{splashTeam1:visible_challenge_done,splashWinner:data.team1[0].won}">{{data.team1[0].userName}}</div>
+        <div class="vs" ng-class="{splashVs:visible_challenge_done}">vs</div>
+        <div class="team2" ng-class="{splashTeam2:visible_challenge_done,splashWinner:data.team2[0].won}">{{data.team2[0].userName}}</div>
+        <div class="duration" ng-class="{splashDuration:visible_challenge_done}">{{data.challengeDuration}} min</div>
+
+
+    </div>
+
+
+</div>

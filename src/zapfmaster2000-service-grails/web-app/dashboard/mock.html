@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Meta Tags for mobile -->
+   <meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />  
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+ <script src="../libs/jquery/jquery-1.8.1.js"></script> 
+  <script src="../libs/bootstrap/js/bootstrap.min.js"></script> 
+  <script src="../libs/ICanHaz.min.js"></script> 
+  <script>
+  //Init Namespace
+  var ZMO = ZMO || {};
+  ZMO.Util = ZMO.Util ||{};
+  ZMO.modules = ZMO.modules ||{};
+  </script>
+    <script src="../js/Modules/Constants.js"></script> 
+      <script src="../js/Modules/Model.js"></script>    
+  <script src="../js/Util/UtilConstants.js"></script>   
+    <script src="../js/Util/Object/Exists.js"></script>   
+  <script src="../js/Util/Net/Ajax.js"></script>   
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css" />
+ 
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap-responsive.min.css" />
+
+ <link rel="stylesheet" type="text/css" href="css/style.css" />
+ <script>
+ var baseUrl = "../";
+ var rows = 2;
+ var ajax = ZMO.Util.Net.Ajax;
+ ZMO.exists = ZMO.Util.Object.exists;
+ var defaultImg = "../images/view/pix.png";
+ </script>
+<script id="dashboard-mock-box" type="text/html">
+<div class="span6 navbar">
+	<div class="navbar-inner box">
+		<form class="form-vertical" id="newDraw_{{boxId}}">
+	<fieldset>	
+<legend>{{boxId}}: {{name}}</legend>
+<div class="row">
+<div class="span3">
+<div class="control-group">
+	<label class="control-label" for="brand">User</label>
+	<div class="controls">
+	    <select id="usersSelect" class="userSelect" name="users" size="1">
+			
+		</select>
+		<div class="btn btn-success" id="refreshBoxBtn"><i class="icon-refresh icon-white"></i></div>
+	</div>
+	</div>
+	<div class="control-group">
+	    <label class="control-label" for="brand">Menge</label>
+	  <div class="controls">
+			<input class="registerItem" id="amount" name="size" type="number" size="30" maxlength="30" placeholder="in Liter" value="0.3" min="0" step="0.1">
+		</div>
+	</div>
+	<div class="control-group">
+	    <label class="control-label" for="brand">Zeit</label>
+	  <div class="controls">
+			<input class="registerItem" id="duration" name="time" type="number" size="30" maxlength="30" placeholder="Zeit (in s)" value="5" min="0" step="1">
+		</div>
+	</div>
+	<div class="control-group">
+		 <div class="controls form-inline">
+       
+            <input type="button" class="btn" placeholder="Key" value="Login" id="login">
+          
+            <input type="button" class="btn btn-primary" placeholder="Value" value="Zapfen" id="zapf">
+        </div>
+	</div>
+<hr/>
+	<div class="control-group">
+	    <label class="control-label" for="brand">Custom Rfid</label>
+	  <div class="controls">
+			<input class="registerItem" id="customRfid" name="size" type="text" size="30" maxlength="30" placeholder="Bel RFID" value="123">
+			<input type="button" class="btn btn-primary" placeholder="Senden" value="Senden" id="sendRfid">
+		
+	</div>
+	</div>
+</div>
+
+<div class="span2">
+<pre id="console" style="height:334px;overflow-y:scroll;width:200px;">
+  Init
+</pre>
+<input type="button" class="btn btn-danger" placeholder="Value" value="Clear" id="clearLog">
+</div>
+</div>
+	
+</fieldset>
+</form>
+	</div>
+</div>
+</script>
+<script type="text/html" id="dashboard-user-options">
+{{#members}}<option value="{{rfidTag}}">{{userName}}</option>{{/members}}
+</script>
+</head>
+<body>
+<!-- Include Navigation -->
+<div id="navigation"></div>
+<script>
+var navigation = $("#navigation").load("header.html",function(){
+	navigation.find(".mock").addClass("active");	
+});
+</script>
+<script type="text/javascript">
+
+$(function(){
+	var boxMapping = {}
+	var ticks = $("#ticks").val();
+	var UPDATE_RATE = $("#updateRate").val();
+	function log(boxContainer,msg){
+		boxContainer.find("#console").prepend("- "+msg+"\n");
+	}
+	function sendRequests(ticksPerUpdate,passphrase,counter,numRequests,div){
+		
+		$.ajax({
+			url:baseUrl+"rest/box/draw",
+			data:{
+				passphrase:passphrase,
+				ticks:ticksPerUpdate
+			},
+			success:function(amountJson){
+				log(div,"Amount: "+amountJson.totalAmount +":"+numRequests+":"+counter);
+				if(numRequests>counter){
+					setTimeout(function(){
+						sendRequests(ticksPerUpdate,passphrase,++counter,numRequests,div);
+					},UPDATE_RATE);
+				}
+			},error:function(resp){
+				log(div,"Error "+resp.status+": "+resp.statusText);
+
+				
+			}
+		});
+	}
+	function addFormHandlers(div,boxModel){
+		div.find("#refreshBoxBtn").on("click",getUsers);
+		div.find("#login").on("click",function(e){
+			e.preventDefault();
+			var rfid = div.find("#usersSelect").val();
+			$.ajax({
+				url:baseUrl+"rest/box/login",
+				data:{
+					rfid:rfid,
+					passphrase:boxModel.passphrase
+				},
+				success:function(resp){
+					log(div,"Login Successful for "+resp.userName);
+				},
+				error:function(resp){
+					log(div,"Error "+resp.status+": "+resp.statusText);
+				}
+			});			
+			
+		});
+		var interval = null;
+		div.find("#zapf").on("click",function(e){
+			e.preventDefault();
+			UPDATE_RATE =  parseInt($("#updateRate").val());
+			ticks =  parseInt($("#ticks").val());
+			var amount =   div.find("#amount").val();
+			var duration = div.find("#duration").val();
+			var rawTicks = amount*ticks;
+			var numRequests = Math.round(duration*1000 / UPDATE_RATE);
+
+			var ticksPerUpdate = Math.round(rawTicks / numRequests);
+			var counter = 0;
+			sendRequests(ticksPerUpdate,boxModel.passphrase,1,numRequests,div);
+			
+	
+		});
+		div.find("#clearLog").on("click",function(){
+			div.find("#console").text("");
+		});
+		div.find("#sendRfid").on("click",function(e){
+			e.preventDefault();
+			var rfid = div.find("#customRfid").val();
+			$.ajax({
+				url:baseUrl+"rest/box/login",
+				data:{
+					rfid:rfid,
+					passphrase:boxModel.passphrase
+				},
+				success:function(resp){
+					log(div,"Login Successful for "+resp.userName);
+				},
+				error:function(resp){
+					log(div,"Error "+resp.status+": "+resp.statusText);
+				}
+			});			
+		});
+	}
+	function initBox(boxModel){
+		var boxTemplate = $(ich["dashboard-mock-box"](boxModel));
+		$("#boxRow").append(boxTemplate);
+		boxMapping[boxModel.boxId] = boxTemplate;
+		return boxTemplate;
+		
+	}
+	function getUsers(){
+		ajax.getDatas("rest/members",function(members){
+			//var memberModel = new ZMO.MemberModel(members);
+			var obj = {
+					members:members
+			}
+			var template = $(ich["dashboard-user-options"](obj));
+			$(".userSelect").empty().append(template);
+		})
+	}
+	function getBoxes(){
+		ajax.getDatas("rest/draftkit",function(boxes){
+			$.each(boxes,function(ind,box){
+				addFormHandlers(initBox(box),box);
+			});
+			getUsers();
+		});
+	}
+	
+	getBoxes();
+	
+});
+
+</script>
+<!-- Main Container -->
+
+<div id="mainContainer" class="container mainContainer" style="margin-top:50px">
+	<div id="credentials" class="row" style="margin-bottom:10px;">
+	 	<div class="span12" style="text-align:center;">
+	 	
+	 		<form class="form-inline well">
+	 		<label style="margin-right:5px" for="updateRate">Update Rate</label><input type="number" id="updateRate" value="250" step="50" placeholder="Update Rate for Zapf Requests"/>
+	 		<label style="margin-right:5px;" for="ticks">Ticks</label><input type="number" id="ticks" value="5200" placeholder="Ticks"/>
+	 		</form>
+	 		
+	 	</div>
+	</div>
+
+	<div id="boxRow" class="row">
+	
+	</div>
+</div>
+
+</body>
+</html>

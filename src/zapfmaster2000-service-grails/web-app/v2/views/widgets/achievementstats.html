@@ -1,0 +1,32 @@
+<div ng-controller="AchievementStatsController" class="zm-achievementstats">
+    <header class="zmo-header">
+        <small>{{'ACHIEVEMENTSTATS_TITLE'|translate}}:</small>
+        {{achievementName}}
+    </header>
+    <div class="zmo-container" switch="updateFn(ok)">
+        <div class="row zm-feeditem main">
+            <div class="col-md-3"><img ng-src="{{baseUrl+image}}" class="img-rounded userimage"></div>
+            <div class="col-md-9">
+                <div class="quote" textfill="description">
+                    <span>&#132;{{description}}&#148;</span>
+                    <cite>{{achievementName}}</cite>
+                </div>
+            </div>
+        </div>
+        <h2>Erreicht von</h2>
+
+        <div class="row" ng-if="users.length>0">
+            <div class="zm-feeditem zm-text-middle" ng-repeat="user in users">
+                <img ng-src="{{baseUrl+user.userImage}}" class="img-rounded" height="48">
+        <span
+                translate="ACHIEVEMENTSTATS_USER"
+                translate-value-username="{{user.userName}}"
+                translate-value-date="{{user.date|clientdate:'full'}}"></span>
+            </div>
+        </div>
+        <div class="row" ng-if="users.length==0" style="font-size: 2.3em;">
+            {{'NOBODY'|translate}}
+        </div>
+
+    </div>
+</div>

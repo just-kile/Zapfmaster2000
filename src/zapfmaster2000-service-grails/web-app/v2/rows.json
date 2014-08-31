@@ -1,0 +1,104 @@
+{
+    "switchTime": 250000,
+    "switchingModule": {
+        "name": "zapfmastersplash",
+        "className": "col-md-12",
+        "interval": 8000
+    }, "topLeft": [
+    {
+        "name": "newsstack",
+        "className": "col-md-6"
+    }
+], "topRight": [
+    {
+        "name": "draftkits",
+        "className": "col-md-6"
+    }
+], "centerThird": [
+    [
+        {
+            "name": "bestlist",
+            "className": "col-md-8",
+            "interval": 120000
+        },
+        {
+            "name": "challenges",
+            "className": "col-md-4",
+            "interval": 45000
+        }
+    ],
+    [
+        {
+            "name": "userprofile",
+            "className": "col-md-8",
+            "interval": 60000
+        },
+        {
+            "name": "newsfeed",
+            "className": "col-md-4",
+            "interval": 45000
+        }
+
+    ],
+    [
+        {
+            "name": "achievementstats",
+            "className": "col-md-8",
+            "interval": 70000
+        },
+        {
+            "name": "challenges",
+            "className": "col-md-4",
+            "interval": 45000
+        }
+
+    ],[
+        {
+            "name": "bestlist",
+            "className": "col-md-8",
+            "interval": 120000
+        },
+        {
+            "name": "achievementfeed",
+            "className": "col-md-4",
+            "interval": 45000
+        }
+
+    ]
+], "centerHalf": [
+    [
+        {
+            "name": "linechart",
+            "className": "col-md-6",
+            "interval": 83333
+        },
+        {
+            "name": "amountchart",
+            "className": "col-md-6",
+            "interval": 111111
+        }
+    ],
+    [
+        {
+            "name": "distribution",
+            "className": "col-md-6",
+            "interval": 111111
+        },
+        {
+            "name": "achievementfeed",
+            "className": "col-md-6",
+            "interval": 55555
+        }
+    ],[
+        {
+            "name": "newsfeed",
+            "className": "col-md-6",
+            "interval": 70000
+        },
+        {
+            "name": "aboutus",
+            "className": "col-md-6",
+            "interval": 90000
+        }
+    ]
+]}

@@ -1,0 +1,41 @@
+<div ng-controller="DraftKitController" class="zm-draftkits">
+    <ul>
+        <li ng-repeat="keg in kegs" class="zm-draftkit">
+            <div class="flip-container" ng-class="{flip: keg.user.loggedin}">
+                <div class="flipper">
+                    <div class="front zm-backgrnd">
+                        <img ng-src="{{keg.image || 'css/images/ZapfKit_BodaciousBock_small.png'}}" class="img-rounded"/>
+
+                        <div class="brand">{{keg.brand}}</div>
+                        <div class="location">@ {{keg.boxLocation}}</div>
+
+                        <div class="amount">
+                            <div class="amountBar" ng-style="{width:(keg.size - keg.currentAmount)/keg.size * 100+'%'}">
+                                {{keg.size-keg.currentAmount|amount:'full'}} / {{keg.size|amount:'full'}} L
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="back zm-backgrnd">
+                        <img ng-src="{{keg.user.image || 'css/images/defaultKeg.jpg'}}" class="img-rounded"/>
+
+                        <div class="brand">{{keg.user.userName}}</div>
+                        <div class="location">@ {{keg.boxLocation}}</div>
+
+                        <div class="amount">
+                            <div class="amountBar" ng-style="{width:((keg.user.amount/0.5)%1) * 100+'%'}">
+                                {{keg.user.amount|amount}} L
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </li>
+
+    </ul>
+</div>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Meta Tags for mobile -->
+   <meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />  
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+ <script src="../libs/jquery/jquery-1.8.1.js"></script> 
+  <script src="../libs/bootstrap/js/bootstrap.min.js"></script> 
+  <script src="../libs/ICanHaz.min.js"></script> 
+  <script>
+  //Init Namespace
+  var ZMO = ZMO || {};
+  ZMO.Util = ZMO.Util ||{};
+  ZMO.modules = ZMO.modules ||{};
+  </script>
+    <script src="../js/Modules/Constants.js"></script> 
+      <script src="../js/Modules/Model.js"></script>    
+     
+  <script src="../js/Util/UtilConstants.js"></script>   
+     <script src="../js/Util/Object/Exists.js"></script>   
+     <script src="../js/Util/Browser/Scroller.js"></script> 
+  <script src="../js/Util/Net/Ajax.js"></script>   
+  <script src="../libs/datefunctions/date.js"></script>     
+  <script src="../js/Util/Date/TimeParser.js"></script>   
+    <script src="../js/Modules/Model.js"></script>   
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css" />
+ 
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap-responsive.min.css" />
+
+ <link rel="stylesheet" type="text/css" href="css/style.css" />
+ <script>
+ var baseUrl = "../";
+ var ajax = ZMO.Util.Net.Ajax;
+ ZMO.exists = ZMO.Util.Object.exists;
+ ZMO.Constants =ZMO.UtilConstants;
+ var defaultImg = "../images/view/pix.png";
+ ZMO.logger = (function(){
+	  	var log = function(str){
+	  		if(console && ZMO.Constants.debugMode){
+	  	
+	  		console.log(str);
+	  		}
+	  	};
+	  	var warning = function(str){
+	  		if(console && ZMO.Constants.debugMode){
+	  	
+	  		console.log(str);
+	  		}
+	  	};
+	  	var error = function(str){
+	  		if(console && ZMO.Constants.debugMode){
+	  			
+	  			console.log(str);
+	  			}
+	  	}
+	  	var pub = {
+	  			log:log,
+	  			warning:warning,
+	  			error:error
+	  	};
+	  	return pub;
+	  })();
+
+ </script>
+<script id="dashboard-zapf-box" type="text/html">
+<div class="span6 navbar">
+	<div class="navbar-inner box">
+		<form class="form-vertical">
+	<fieldset>	
+<legend>{{boxId}}{{#name}}: {{name}}{{/name}}</legend>
+<div class="row">
+<div class="span2">
+	<img id="profileImage" src="../images/view/pix.png" class="img-polaroid" width="160" height="160">
+	
+</div>
+<div class="span2">
+	<h2 id="name">Ben</h2>
+	<h1 id="amount">1,34 liter</h1>
+</div>
+</div>
+
+	
+</fieldset>
+</form>
+	</div>
+</div>
+</script>
+<script id="dashboard-zapfliste-row" type="text/html">
+
+<tr data-drawid="{{drawId}}" data-boxid="{{boxId}}" data-userid="{{userId}}" data-userimage="{{userImage}}{{image}}" data-username="{{userName}}">
+  <td><img class="img-rounded" src="{{userImage}}{{image}}" width="32" height="32"/></td>
+  <td>{{userName}}</td>
+   <td class="amountCol">{{amount}} l</td>
+<td>{{date}}</td>
+<td>{{boxName}}</td>
+    <td><button class="btn btn-primary" >Editieren</button></td>
+</tr>
+</script>
+</head>
+<body>
+<!-- Include Navigation -->
+<div id="navigation"></div>
+<script>
+var navigation = $("#navigation").load("header.html",function(){
+	navigation.find(".zapflist").addClass("active");	
+});
+</script>
+<script type="text/javascript">
+
+$(function(){
+	//---------- RFID PUSH ---------------
+	var c = ZMO.modules.Constants;
+	var boxesOverview = {};
+	function resetBox(box,boxId){
+		box.find("#profileImage").attr("src",defaultImg);
+		box.find("#name").text("Niemand");
+		box.find("#amount").text("0 liter");
+		if(boxesOverview[boxId])	boxesOverview[boxId].timeout = null;
+	}
+	function fillBoxWithDatas(box,newsModel,noImage){
+		if(!noImage)box.find("#profileImage").attr("src",newsModel.userImage+"/big");
+		box.find("#name").text(newsModel.userName);
+		isNaN(newsModel.amount)?
+					box.find("#amount").text("0 liter"):
+					box.find("#amount").text(newsModel.amount+" liter");
+	}
+	
+	function connectToAmountPush(box,container){
+		var boxId = box.boxId;
+		var boxContainer = container;
+		//RFID Push
+		ajax.connectToNewsUpdate(boxId,function(pushResponse){
+			var newsModel =  new ZMO.NewsModel(pushResponse);
+			var type = newsModel.type;
+			if(		boxesOverview[boxId] && boxesOverview[boxId].timeout){
+				clearTimeout(boxesOverview[boxId].timeout);	boxesOverview[boxId].timeout=null;
+			}
+			if(type.toLowerCase() == "login"){
+				fillBoxWithDatas(boxContainer,newsModel)
+			}else if(type.toLowerCase() == "draw"){
+				fillBoxWithDatas(boxContainer,newsModel,true)
+			}else if(type.toLowerCase() == "logout"){
+				boxesOverview[boxId].timeout = setTimeout(function(){
+					resetBox(boxContainer,boxId);
+				},20000);
+				
+			}else{
+				ZMO.logger.warning("No fitting push action detected!")
+			}
+		});
+		
+		
+	}
+	
+	function retrievingBoxes(){
+	//retrieving Zapfboxes
+
+	ajax.getDatas("rest/draftkit",function(boxes){
+
+		$.each(boxes,function(ind,box){
+			
+			var template = $(ich["dashboard-zapf-box"](box));
+			$("#drawings").append(template);
+			boxesOverview[box.boxId]= {
+					dom:template,
+					timeout:null
+			}
+			resetBox(template);
+			connectToAmountPush(box,template);
+		});
+		
+		
+	});
+	}
+	
+	// ------------ /RFID Push -----------
+	//-------zapfliste-----------
+	var LENGTH=30;
+	function loadListItems(start,len,callback,prepend){
+	
+		ajax.getDatas("rest/drawings",function(data){
+		//ajax.getDatas("rest/news",function(data){
+			
+			var container = $("#zapfliste");
+					$.each(data,function(ind,news){
+						//if(news.type.toLowerCase()=="drawing"){
+							news=	new ZMO.NewsModel(news);	
+							var template =$(ich["dashboard-zapfliste-row"](news));
+							if(prepend){
+								container.prepend(template);
+							}else{
+								container.append(template);
+							}
+						//}
+					});
+					if(callback)callback();
+			},{
+				start:start,
+				length:len
+		});
+	}
+	function connectToTablePush(){
+		//newspush
+		ajax.connectToNewsPush(function(json){
+			
+			if(json.type == c.drawfeed.types.DRAWING){
+				counter = 0;
+				//$("#zapfliste").empty();
+				addedNews++;
+				loadListItems(0,1,null,true);
+			}
+		});
+	}
+	var modalDrawId = null;
+	var currentTableRow = null;
+	$("#zapfliste").on("click",".btn",function(e){
+		var target = $(e.currentTarget);
+		var li = currentTableRow = target.parent().parent();
+		var modal = $("#editRow");
+		modal.find("#profileImage").attr("src",li.data("userimage")+"/big");
+		modal.find("#modal-user").text(li.data("username"));
+		modalDrawId = li.data("drawid");
+		modal.modal();
+	});
+	$("#editRow").on("click",".amount",function(e){
+		var target = $(e.currentTarget);
+		var current = currentTableRow;
+		ajax.postDatas("rest/drawings/"+modalDrawId,function(){
+			current.find(".amountCol").text(target.data("amount")+" l");
+		},{
+			//drawId:modalDrawId,
+			amount:target.data("amount")
+		});
+		 $("#editRow").modal("hide");
+	});
+	$("#editRow").on("click",".custom-amount",function(e){
+		var amount = $("#custom-amount-input").val();		
+		var current = currentTableRow;
+		ajax.postDatas("rest/drawings/"+modalDrawId,function(){
+			current.find(".amountCol").text(amount+" l");
+		},{
+			//drawId:modalDrawId,
+			amount:amount
+		});
+		 $("#editRow").modal("hide");
+	});	
+	//define load more on scroll
+	var counter = 0;
+	var addedNews = 0;
+	 ZMO.Util.scrollHandler.bindScrollHandler(function(loadingFinished){
+			//console.log("tes");
+			counter++;
+			loadListItems(counter*LENGTH+addedNews,LENGTH,loadingFinished);
+			
+		
+	 });
+	retrievingBoxes();
+	connectToTablePush();
+ 	loadListItems(0,LENGTH);
+
+});
+
+</script>
+<!-- Main Container -->
+
+<div class="container mainContainer" style="margin-top:50px">
+<div id="drawings" class="row">
+
+</div>
+<table id="" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Bild</th>
+      <th>Name</th>
+      <th>Menge</th>
+      <th>Date</th>
+      <th>Ort</th>
+      <th>Editieren</th>
+    </tr>
+  </thead>
+  <tbody id="zapfliste">
+   
+  </tbody>
+</table>
+</div>
+
+ 
+<!-- Modal -->
+<div id="editRow" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden=true>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Ändere Zapfmenge <span id="modal-user"></span></h3>
+  </div>
+  <div class="modal-body">
+  <div class="row">
+     <div class="span2" style="margin-bottom:10px"><img id="profileImage" src="../images/view/pix.png" class="img-polaroid" width="160" height="160"></div>
+    
+ <div class="span3">
+
+  <p class="well"><button class="btn btn-info amount" data-amount="0.1">0.1l</button>
+   <button class="btn btn-info amount" data-amount="0.2">0.2l</button>
+    <button class="btn btn-info amount" data-amount="0.3">0.3l</button>
+     <button class="btn btn-info amount" data-amount="0.4">0.4l</button>
+  </p>
+     <p class="well input-prepend">
+		<input class="input-small" id="custom-amount-input" type="number" step=0.01 value="0.1">
+     	<button class="btn btn-success custom-amount">Speichern</button>
+     	
+</p>
+     
+     
+     
+   </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Abbrechen</button>
+   
+  </div>
+</div></div>
+</body>
+</html>

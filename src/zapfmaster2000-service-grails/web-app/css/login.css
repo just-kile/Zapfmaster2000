@@ -1,0 +1,48 @@
+body {
+	background: none repeat scroll 0 0 #FFFFFF;
+	background-image: url(../images/view/backgrnd2.jpg);
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	color:white;
+}
+.login{
+	position:absolute;
+	width:20em;
+	background:rgba(0,0,0,0.2);
+	padding:5px;
+	padding-bottom:30px;
+	margin-left:-10em;
+	left:50%;
+	text-align:center;
+	top:10%;
+}
+.login img.zmlogo{
+	width:20em;
+}
+.login img.jklogo{
+	width:5em;
+	background:black;
+	padding:4px;
+}
+.login .firm{
+	font-size:8pt;
+position:relative;
+}
+
+.login .firm .firmText{
+	position:absolute;
+	right:6em;
+	top:0.9em;
+}
+.login .firm .firmImg{
+position:absolute;
+	right:0;
+}
+.registerFrontBtn{
+	height:20px;
+	width:120px;
+	background:black;
+}
+
+

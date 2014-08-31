@@ -1,0 +1,13 @@
+{
+  "name": "console",
+  "homepage": "https://github.com/cowboy/javascript-debug",
+  "_release": "v0.4",
+  "_resolution": {
+    "type": "tag",
+    "tag": "v0.4",
+    "commit": "415805bd218ae9bf0c70ae21d21350e4b109697e"
+  },
+  "_source": "git://github.com/cowboy/javascript-debug.git",
+  "_target": "v0.4",
+  "_originalSource": "git://github.com/cowboy/javascript-debug.git"
+}

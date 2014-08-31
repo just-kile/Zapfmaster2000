@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Meta Tags for mobile -->
+   <meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />  
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+ <script src="../libs/jquery/jquery-1.8.1.js"></script> 
+  <script src="../libs/bootstrap/js/bootstrap.min.js"></script> 
+  <script src="../libs/ICanHaz.min.js"></script> 
+  <script>
+  //Init Namespace
+  var ZMO = ZMO || {};
+  ZMO.Util = ZMO.Util ||{};
+  ZMO.modules = ZMO.modules ||{};
+  </script>
+  
+    <script src="../js/Modules/Constants.js"></script> 
+      <script src="../js/Modules/Model.js"></script>    
+     
+  <script src="../js/Util/UtilConstants.js"></script>   
+     <script src="../js/Util/Object/Exists.js"></script>   
+     <script src="../js/Util/Browser/Scroller.js"></script> 
+  <script src="../js/Util/Net/Ajax.js"></script>   
+  <script src="../libs/datefunctions/date.js"></script>
+  
+  <script src="../libs/moment/moment.min.js"></script>         
+  <script src="../js/Util/Date/TimeParser.js"></script>   
+    <script src="../js/Modules/Model.js"></script>   
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css" />
+ 
+ <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap-responsive.min.css" />
+
+ <link rel="stylesheet" type="text/css" href="css/style.css" />  
+  <script src="../libs/jqplot/jquery.jqplot.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="../libs/jqplot/plugins/jqplot.cursor.min.js"></script>
+<script type="text/javascript" src="../libs/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script type="text/javascript" src="../libs/jqplot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="../libs/jqplot/plugins/jqplot.pointLabels.min.js"></script>
+
+<script type="text/javascript" src="../libs/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script type="text/javascript" src="../libs/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<script type="text/javascript" src="../libs/jqplot/plugins/jqplot.highlighter.min.js"></script>
+<style>
+.jqplot-yaxis-label{
+left:-16px!important;
+}
+.chart-fixed{
+position:fixed;
+top:50px;
+left:537px;
+}
+</style>
+
+  
+   <script>
+ var baseUrl = "../";
+ var ajax = ZMO.Util.Net.Ajax;
+ ZMO.exists = ZMO.Util.Object.exists;
+ ZMO.Constants =ZMO.UtilConstants;
+ var c = ZMO.modules.Constants;
+ var defaultImg = "../images/view/pix.png";
+ ZMO.logger = (function(){
+	  	var log = function(str){
+	  		if(console && ZMO.Constants.debugMode){
+	  	
+	  		console.log(str);
+	  		}
+	  	};
+	  	var warning = function(str){
+	  		if(console && ZMO.Constants.debugMode){
+	  	
+	  		console.log(str);
+	  		}
+	  	};
+	  	var error = function(str){
+	  		if(console && ZMO.Constants.debugMode){
+	  			
+	  			console.log(str);
+	  			}
+	  	}
+	  	var pub = {
+	  			log:log,
+	  			warning:warning,
+	  			error:error
+	  	};
+	  	return pub;
+	  })();
+
+ </script>
+  <script id="dashboard-zapfliste-row" type="text/html">
+
+<tr data-drawid="{{drawId}}" data-boxid="{{boxId}}" data-userid="{{userId}}" data-userimage="{{userImage}}{{image}}" data-username="{{userName}}">
+<td><input type="checkbox" /></td>  
+<td><img class="img-rounded" src="{{userImage}}{{image}}" width="32" height="32"/></td>
+  <td>{{userName}}</td>
+   <td class="amountCol">{{amount}} l</td>
+ <td class="realamount"><input type="number" placeholder="Menge" class="input-mini" step="0.01" min="0"></td>
+</tr>
+</script>
+<script>
+var baseUrl = "../";
+var chart = {};
+$(document).ready(function(){
+	/**
+	 * Zapfliste
+	 */
+	 var LENGTH=30;
+	var isPrevEmptyRes = false;
+	function loadListItems(start,len,callback,prepend){
+		//if(!isPrevEmptyRes){
+			ajax.getDatas("rest/drawings",function(resData){
+			//ajax.getDatas("rest/news",function(data){
+				
+				var container = $("#zapfliste");
+				$.each(resData,function(ind,news){
+					if( getActiveBox() == news.boxId){
+					//if(news.type.toLowerCase()=="drawing"){
+						news=	new ZMO.NewsModel(news);	
+						var template =$(ich["dashboard-zapfliste-row"](news));
+						if(prepend){
+							container.prepend(template);
+						}else{
+							container.append(template);
+						}
+					}
+					//}
+				});
+				if(callback)callback();
+				if(resData.length == 0){
+					isPrevEmptyRes = true;
+				}
+				},{
+					start:start,
+					length:len
+			});
+		//}
+	}
+	var activeBox = 0;
+	var getActiveBox = function(){
+		return activeBox;
+	}
+	var counter = 0;
+	var addedNews = 0;
+	function connectToTablePush(){
+		//newspush
+		ajax.connectToNewsPush(function(json){
+			
+			if(json.type == c.drawfeed.types.DRAWING){
+				counter = 0;
+				//$("#zapfliste").empty();
+				addedNews++;
+				loadListItems(0,1,null,true);
+			}
+		});
+	}
+	function initDrawList(){
+		activeBox = $("#boxes-sel").val();
+		$("#zapfliste").empty();
+		loadListItems(0,LENGTH);
+	}
+	function getBoxes(){
+		ajax.getDatas("rest/draftkit",function(boxes){
+			$.each(boxes,function(ind,box){
+				$("#boxes-sel").append($("<option>").val(box.boxId).text(box.boxId+": "+box.name));	
+			});
+			//initDrawList();
+			$("#boxes-sel").trigger("change");
+		});
+	}
+	 ZMO.Util.scrollHandler.bindScrollHandler(function(loadingFinished){
+			//console.log("tes");
+			counter++;
+			loadListItems(counter*LENGTH+addedNews,LENGTH,loadingFinished);
+	 });
+	 var chartContainer = $("#chartContainer");
+	/* $(window).bind("scroll", function(e) {
+			var top = $(window).scrollTop();
+			var windowTop = 100;
+			if(windowTop<top){
+				chartContainer.addClass("chart-fixed")				
+			}else{
+				chartContainer.removeClass("chart-fixed");
+			}
+	})*/
+	
+	 $('#zapfliste').on("click","tr",function(e) {
+		 var el = $(e.currentTarget);
+		 $(this).addClass('info').siblings().removeClass('info');
+			//alert(el.data("drawid"));
+			getPlotDatas(el.data("drawid"));
+	 });
+	 
+	 
+	 connectToTablePush();
+	 getBoxes();
+	 $("#boxes-sel").on("change",function(e){
+			var el = $(e.currentTarget);
+			initDrawList();
+			ajax.getDatas("rest/calibration/boxes/"+el.val(),function(e){
+				var obj = e[0];
+				$("#a0").val(obj["a0"]);
+				$("#a1").val(obj["a1"])
+				$("#a2").val(obj["a2"])
+			});
+			
+	 })
+	 
+	/**
+	 * Chart
+	 */
+	
+	var plotOptions = {
+			 grid: {
+	        	    drawGridLines: false,        // wether to draw lines across
+												// the grid or not.
+	        //	        gridLineColor: 'rgba(0,0,0,0.3)',   // CSS color
+																	// spec of
+																	// the grid
+																	// lines.
+	        	        background: 'rgba(255,255,255,0)',      // CSS color
+																// spec for
+																// background
+																// color of
+																// grid.
+	        	        borderColor: 'rgba(255,255,255,0)',     // CSS color
+																// spec for
+																// border around
+																// grid.
+	        	        borderWidth: 0.0,           // pixel width of border
+													// around grid.
+	        	        shadow: false,               // draw a shadow for grid.
+	        	        shadowAngle: 45,            // angle of the shadow.
+													// Clockwise from x axis.
+	        	        shadowOffset: 1.5,          // offset from the line of
+													// the shadow.
+	        	        shadowWidth: 3,             // width of the stroke for
+													// the shadow.
+	        	        shadowDepth: 3
+	        	}, 
+	        	     	seriesColors: ["#dddf0d","#90b1d8",  "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
+	        	                 "#953579", "#4b5de4", "#d8b83f", "#ff5800", "#0085cc"],
+	        	                 
+	        	     				animateReplot: true,
+	        	     		          
+	        	     		          
+	        	     		           cursor: {
+	        	     		             show: false
+	        	     		           },
+	        	     		           highlighter: {
+	        	     		               show: true, 
+	        	     		               showLabel: true, 
+	        	     		               tooltipAxes: 'y',
+	        	     		               sizeAdjust: 7.5 ,
+	        	     		               tooltipLocation : 'ne'
+	        	     		           }
+	        	     		       
+	};
+	
+	function plotData(id,datas){
+		if(chart[id]){
+			chart[id].destroy();
+			chart[id] = null;
+		}
+		chart[id] = $.jqplot(id, datas,$.extend({},plotOptions,{
+			 title:'Ticks vs Time',
+	           axes:{
+	             xaxis:{
+	               renderer:$.jqplot.DateAxisRenderer,
+	               tickOptions:{
+	                 formatString:'%H:%M:%S'
+	               },
+	               label:"Time",
+	               labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                  labelOptions: {
+                    textColor: '#ccc',
+                    fontSize: '12pt'
+                  }
+	             },
+	             yaxis:{
+	               tickOptions:{
+// formatString:'%.2f'
+	            	   formatString:'%.0f'
+	                 },
+	                 min:0,
+					 max:500,
+					//padMax:100,
+	                 label:'Ticks',
+	                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+	                 labelOptions: {
+	                     textColor: '#ccc',
+	                     fontSize: '12pt'
+	                   }
+	             }
+	           },
+	           series:[ 
+	        	          {
+	        	            // Change our line width and use a diamond shaped marker.
+	        	           //showLine:false, 
+	        	            //markerOptions: { style:'diamond' }
+	        	          }, 
+	        	          {
+	        	            // Don't show a line, just show markers.
+	        	            // Make the markers 7 pixels with an 'x' style
+	        	            showMarker:false,
+	        	            lineWidth:2, 
+	        	           // markerOptions: { size: 7, style:"x" }
+	        	          }],
+
+		}));
+	}
+	function calcModel(a0,a1,a2){
+		
+		a0 = parseFloat(a0);
+		a1 = parseFloat(a1);
+		a2 = parseFloat(a2);
+		
+		var STEP_SIZE = 20;
+		var MESH_SIZE = 400;
+		var iterations  = Math.round(MESH_SIZE/STEP_SIZE);
+		var mesh = [];
+		for(var i=0;i<iterations;i++){
+			var ticks = i*STEP_SIZE;
+			var amount = a0+a1*ticks+a2*ticks*ticks;
+		
+			mesh.push([ticks,amount]);
+		}
+		return mesh;
+		
+		
+	}
+	function getPlotDatas(drawId){
+		ajax.getDatas("rest/drawings/"+drawId+"/ticks",function(data){
+				var arr = [];
+				var completeTicks = 0;
+				$.each(data,function(ind,val){
+					//date = new Date(getDateFromFormat(val.date,"yyyyMMdd-HHmmssSSS")).getTime();
+					var date = moment(val.date,"YYYYMMDD-HHmmssSSS").toDate();//.format("DD-MM-YYYY HH:mm:ss:SSS");
+					arr.push([date,val.ticks]);
+					completeTicks += val.ticks;
+				});
+				var regr = [];
+				completeTicks = completeTicks / data.length;
+				$.each(data,function(ind,val){
+					var date = moment(val.date,"YYYYMMDD-HHmmssSSS").toDate();
+					regr.push([date,completeTicks]);
+				});
+				
+				plotData("linechart",[arr,regr]);
+			})
+	};
+	var measuredDatasArr = [];
+	$("#calibrate-btn").on("click",function(e){
+		e.preventDefault();
+		var arr = [];
+		$.each($("#zapfliste input[type=checkbox]"),function(ind,el){
+			el = $(el);	
+		
+			if(el.is(":checked")){
+				
+				var drawingId = el.parent().parent().data("drawid");
+				var amount = el.parent().siblings(".realamount").children().val();
+			
+				arr.push({drawingId:drawingId,measuredAmount:amount});
+			}
+
+		});
+		var data = {
+				token:localStorage.getItem("token"),
+				data:arr
+		}
+		$.ajax({
+			type:"POST",
+			url:baseUrl+"rest/drawings/calibration",
+			data: JSON.stringify(data),
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(res) {
+			      console.log(res);
+			      $("#a0").val(res["a0"]);
+			      $("#a1").val(res["a1"]);
+			      $("#a2").val(res["a2"]);
+			      var chartArr = [];
+			      $.each(res.data,function(ind,val){
+			    	  chartArr.push([val.ticks,val.amount]);
+			      });
+			      var model = calcModel(res["a0"],res["a1"],res["a2"])
+			     // plotData("resChart",[chartArr]);
+			      if(chart["resChart"])chart["resChart"].destroy();
+			      measuredDatasArr = chartArr;
+			     chart["resChart"] = $.jqplot("resChart", [chartArr,model],{
+			    	 series:[ 
+		        	          {
+		        	            // Change our line width and use a diamond shaped marker.
+		        	           showLine:false, 
+		        	            //markerOptions: { style:'diamond' }
+		        	          }, 
+		        	          {
+		        	            // Don't show a line, just show markers.
+		        	            // Make the markers 7 pixels with an 'x' style
+		        	            showMarker:false,
+		        	            lineWidth:2, 
+		        	           // markerOptions: { size: 7, style:"x" }
+		        	          }],
+			     });
+			}
+		})
+	});
+	
+	$("#plot-btn").on("click",function(e){
+		e.preventDefault();
+	
+		var a0 = $("#a0").val();
+		var a1 = $("#a1").val();
+		var a2 = $("#a2").val();
+		var model = calcModel(a0,a1,a2);
+	     if(chart["resChart"])chart["resChart"].destroy();
+	     var datas;
+	     var series;
+	     if( measuredDatasArr.length==0){
+	    	 var datas = [model];
+	    	 series = [{
+	          	            // Don't show a line, just show markers.
+	          	            // Make the markers 7 pixels with an 'x' style
+	          	            showMarker:false,
+	          	            lineWidth:2, 
+	          	           // markerOptions: { size: 7, style:"x" }
+	          	          }];
+	     }else{
+	    	 datas = [measuredDatasArr,model];
+	    	 series = [ 
+	        	          {
+	          	            // Change our line width and use a diamond shaped marker.
+	          	           showLine:false, 
+	          	            //markerOptions: { style:'diamond' }
+	          	          }, 
+	          	          {
+	          	            // Don't show a line, just show markers.
+	          	            // Make the markers 7 pixels with an 'x' style
+	          	            showMarker:false,
+	          	            lineWidth:2, 
+	          	           // markerOptions: { size: 7, style:"x" }
+	          	          }];
+	     }
+	     chart["resChart"] = $.jqplot("resChart", datas,{
+	    	 series:series,
+	     });
+		
+	});
+	//TODO
+	$("#zapfliste").on("change","input[type=checkbox]",function(e){
+		if(e.target.checked){
+			
+		}
+		
+	});
+	$("#parameters").on("submit",function(e){
+		e.preventDefault();
+		ajax.postDatas("rest/calibration/boxes/"+$("#boxes-sel").val(),function(){
+			alert("Daten geändert!");
+		},{
+			"a0":$("#a0").val(),
+			"a1":$("#a1").val(),
+			"a2":$("#a2").val()
+		});
+	});
+	$("#plus-btn").on("click",function(e){
+		e.preventDefault();
+		var percent = $("#percent-input").val()*0.01+1;
+		$("#a0").val($("#a0").val()*percent);
+		$("#a1").val($("#a1").val()*percent);
+		$("#a2").val($("#a2").val()*percent);
+		$("#plot-btn").trigger("click");
+		
+	});
+	$("#minus-btn").on("click",function(e){
+		e.preventDefault();
+		var percent = $("#percent-input").val()*0.01+1;
+		$("#a0").val($("#a0").val()/percent);
+		$("#a1").val($("#a1").val()/percent);
+		$("#a2").val($("#a2").val()/percent);
+		$("#plot-btn").trigger("click");
+	});
+
+
+});
+
+
+</script>
+
+</head>
+<body>
+<!-- Include Navigation -->
+<div id="navigation"></div>
+<script>
+var navigation = $("#navigation").load("header.html",function(){
+	//navigation.find(".kegchange").addClass("active");	
+});
+</script>
+<div class="container">
+
+ <div class="row" >
+ <div class="span11" style="margin-top:50px;text-align:center"><form class="form-inline well"><select id="boxes-sel"></select><button id="calibrate-btn" class="btn btn-success">Calibrate!</button></form></div>
+<div class="well span4 zapftable">
+	<table id="" class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Active</th>
+      <th>Bild</th>
+      <th>Name</th>
+      <th>Menge</th>
+	  <th>Menge</th>
+			
+    </tr>
+  </thead>
+  <tbody id="zapfliste">
+   
+  </tbody>
+</table>
+	
+</div>
+<div id="chartContainer" class="navbar span7">
+  <div class="navbar-inner">
+  	<div id="linechart"></div>
+  	</div>
+
+<div class="navbar-inner" style="margin-top:20px">
+  		<form class="form-inline" id="parameters">
+	  <fieldset>
+	    <legend>Parameters</legend>
+	    <label>a0</label>
+	    <input id="a0" type="number" step="any" placeholder="Type something…" class="input-medium">
+	     <label>a1</label>
+	    <input id="a1" type="number" step="any" placeholder="Type something…" class="input-medium">
+	     <label>a2</label>
+	    <input id="a2" type="number" step="any" placeholder="Type something…" class="input-small">
+	    
+	    <button id="setParam-btn" type="submit" class="btn btn-warning">Set Params</button>
+	  </fieldset>
+	</form>
+	<form class="form-inline">
+	<button id="plot-btn" class="btn btn-primary">Plot</button>
+	
+	
+	<div class="input-append">
+	  <input id="percent-input" type="number" step="any" value="10" class="input-small">
+  	  <span class="add-on">%</span>
+	</div>
+	<button id="minus-btn" class="btn btn-info">-</button>
+	<button id="plus-btn" class="btn btn-info">+</button>
+	</form>
+</div>
+ <div class="navbar-inner" style="margin-top:20px">
+  	<div id="resChart"></div>
+  	</div>
+
+</div></div>
+</div>
+</body>
+</html>

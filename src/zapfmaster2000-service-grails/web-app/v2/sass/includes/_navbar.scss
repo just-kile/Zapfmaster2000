@@ -1,0 +1,86 @@
+.zm-navbar {
+  .navbar-brand img {
+    height: 45px;
+    margin-top: -15px
+  }
+  .navbar-nav {
+    padding: 0;
+    margin: 0 !important;
+    width: 100%;
+    li {
+      text-align: center;
+      width: auto;
+      padding: 0 20px;
+      line-height: $navbar-item-height;
+    }
+  }
+  .navbar-nav, .nav-justified {
+  //  background: rgba(0, 0, 0, 0.5);
+    background: black;
+    height: 40px;
+    @include vendor-prefix(box-shadow, 0px 0px 10px 2px black);
+    height: $navbar-item-height;
+  }
+
+  ul.nav-justified {
+    padding-left: 0;
+    padding-top: 5px;
+
+  }
+  .nav-justified {
+
+    a.active::after {
+      top: $navbar-item-height+5px;
+    }
+    .active {
+      position: relative;
+    }
+    .active::after {
+      content: ' ';
+      border-bottom: 3px solid $color-pink;
+      position: absolute;
+      width: 100%;
+      top: $navbar-item-height+5px;
+      left: 0;
+    }
+  }
+
+  li {
+    list-style: none;
+    display: inline;
+    text-align: center;
+    a {
+      text-decoration: none;
+      color: $main-text-color;
+    }
+    line-height: $navbar-item-height;
+    border-right: 1px solid grey;
+
+  }
+
+  .nav-justified > li {
+    display: table-cell;
+    float: left;
+    width: 20%;
+  }
+
+}
+
+.movingdiv {
+  position: absolute;
+  @include vendor-prefix(transition, translateZ(0));
+  @include vendor-prefix(transition, 0.4s ease-out);
+  border: 1px solid $color-pink;
+  top: $navbar-item-height+5px;
+  width: $navbar-item-width;
+
+}
+.zm-userinfo{
+  img{
+    height: 32px;
+  }
+  span{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

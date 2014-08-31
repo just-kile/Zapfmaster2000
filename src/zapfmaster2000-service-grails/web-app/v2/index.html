@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html
+        class="no-js ie6 oldie"
+        lang="en"
+        xmlns:ng="http://angularjs.org/"
+        ng:controller="AppController">
+<![endif]-->
+<!--[if IE 7]>
+<html
+        class="no-js ie7 oldie"
+        lang="en"
+        xmlns:ng="http://angularjs.org/"
+        ng:controller="AppController">
+<![endif]-->
+<!--[if IE 8]>
+<html
+        class="no-js ie8 oldie"
+        lang="en"
+        xmlns:ng="http://angularjs.org/"
+        ng:controller="AppController">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html
+        class="no-js"
+        lang="en"
+        xmlns:ng="http://angularjs.org/"
+        ng:controller="AppController">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <title ng:bind-template="{{title}} | Zapfmaster2000">Zapfmaster2000</title>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="vendor/animate.css/animate.min.css"/>
+
+    <link rel="stylesheet" href="css/style_sass.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <!--<script src="libs/modernizr-2.0.6.min.js"></script>     -->
+</head>
+
+<body>
+<div ng:bind-template="{{title}}">
+    <div class="loadingScreen">
+        <!--<div class="throbber"></div>-->
+      Preparing Zapfperience ...
+    </div>
+</div>
+<div id="container">
+    <noscript>
+        <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+            Your web browser must have JavaScript enabled in order for this application to display correctly.
+        </div>
+    </noscript>
+    <!--<header>
+        <nav>
+            <ul>
+                <li ng:repeat="nav in navigation">
+                    <a href="#{{nav.route}}">{{nav.title}}</a>
+                </li>
+            </ul>
+        </nav>
+    </header>-->
+    <div id="main" role="main" ng-controller="NavController">
+        <div ng-include="'views/navigation.html'"></div>
+        <ng-view></ng-view>
+    </div>
+    <!-- <footer>
+         <p>Copyright &copy; 2014 JustKile</p>
+    </footer>     -->
+</div>
+
+<!--<script data-main="js/v2-built" src="js/require.js"></script>-->
+<script data-main="js/bootstrap.js" src="vendor/requirejs/require.js"></script>
+
+<!--[if lt IE 7 ]>
+<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+<script>window.attachEvent('onload', function () {
+    CFInstall.check({mode: 'overlay'})
+})</script>
+<![endif]-->
+<div class="device-xs visible-xs"></div>
+<div class="device-sm visible-sm"></div>
+<div class="device-md visible-md"></div>
+<div class="device-lg visible-lg"></div>
+</body>
+</html>
