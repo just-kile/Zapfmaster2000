@@ -29,7 +29,9 @@ import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.hour.Ul
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.unique.HomoFaber;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.unique.Nimmersatt;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.user.Barney;
+import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.user.Pilsator;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.user.Carl;
+import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.user.FrequentZapfer;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.user.Homer;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.user.Lenny;
 import de.kile.zapfmaster2000.rest.impl.core.achievement.processor.total.user.Moe;
@@ -141,6 +143,12 @@ public class AchievementRegistry {
 		descriptors.add(createDescriptor("First Blood",
 				"Erster Zapfvorgang aus einem neuen Fass getätigt.",
 				"images/achievements/firstblood.png", FirstBlood.class));
+
+		descriptors.add(createDescriptor("Frequent Zapfer Status",
+				"1337 Statuspunkte erreicht.", "images/achievements/frequentzapfer.png",
+				FrequentZapfer.class));
+		descriptors.add(createDescriptor("Pilsator Status", "2000 Statuspunkte erreicht.",
+				"images/achievements/pilsator.png", Pilsator.class));
 
 		return descriptors;
 	}
