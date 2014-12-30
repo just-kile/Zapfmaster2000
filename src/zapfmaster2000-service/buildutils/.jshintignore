@@ -1,5 +1,0 @@
-dist/
-vendor/
-node_modules/
-/**/require.js
-s/theme-customizer.js
