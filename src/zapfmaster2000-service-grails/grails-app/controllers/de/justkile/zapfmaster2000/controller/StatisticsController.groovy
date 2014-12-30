@@ -41,8 +41,10 @@ class StatisticsController {
 
 
     private def internalRetrieveUserRanking(Account account, int max) {
-        User.createCriteria().list {
-            eq('account', account)
+        User.withCriteria {
+            accounts {
+                idEq(account.id)
+            }
             createAlias('drawings', 'drawings', CriteriaSpecification.LEFT_JOIN)
             projections {
                 property('id')

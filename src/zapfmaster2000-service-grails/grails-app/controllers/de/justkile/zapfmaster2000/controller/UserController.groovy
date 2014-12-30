@@ -14,7 +14,11 @@ class UserController {
     def retrieveUsers() {
         try {
             def loggedInAccount = authService.retrieveAccount(params.token)
-            def users = User.where {account == loggedInAccount}
+            def users = User.withCriteria {
+                accounts {
+                    idEq(loggedInAccount.id)
+                }
+            }
             respond users.collect {
                 [
                         userId   : it.id,

@@ -3,6 +3,7 @@ package de.justkile.zapfmaster2000.utils.zapfing
 import de.justkile.zapfmaster2000.model.*
 import de.justkile.zapfmaster2000.utils.constants.PlatformConstants
 import org.apache.log4j.Logger
+import org.hibernate.FetchMode
 
 
 /**
@@ -28,6 +29,7 @@ class ZapfService {
     }
 
     def User login(long rfidId) {
+        println ('LOGIN!' + rfidId)
         synchronized (SYNC_USER_LOCK) {
             if (currentUser?.getRfidTag() != rfidId) {
 
@@ -41,6 +43,7 @@ class ZapfService {
                         }
 
                         currentUser = newUser;
+                        println("CURRENT USER IS $currentUser")
                         scheduleAutoLogout();
                         lastDrawing = System.currentTimeMillis();
                         notifyLoginSuccessful(currentUser);
@@ -196,14 +199,18 @@ class ZapfService {
      */
     private User findGuest() {
         zapfKit = ZapfKit.get(zapfKit.id)
-        def guest = User.findByTypeAndAccount(User.Type.GUEST, zapfKit.account);
+
+        def guest = User.createCriteria().get {
+            eq('type', User.Type.GUEST)
+        };
+
         if (!guest) {
             guest = new User(
                     name: 'Guest',
                     imagePath: 'images/others/guest.png',
                     weight: 100,
                     type: User.Type.GUEST,
-                    account: zapfKit.account,
+                    accounts: [], // guest user is used for all accounts
                     password: 'none',
                     sex: User.Sex.FEMALE)
             guest.save()
@@ -214,7 +221,6 @@ class ZapfService {
     private void finishCurrentDraw() {
         zapfKit = ZapfKit.read(zapfKit.id)
         currentUser = User.read(currentUser.id)
-        println "!!! $currentUser"
         double realAmount = calcRealAmount(totalTicks);
         totalTicks = 0;
 
@@ -223,17 +229,21 @@ class ZapfService {
             // add drawing to database
             def activeKeg = Keg.createCriteria().get {
                 eq('zapfKit', zapfKit)
+                zapfKit {
+                    account {} // force fetching
+                }
                 order('startDate', 'desc')
                 maxResults(1)
             }
+
             def drawing = new Drawing(
                     amount: realAmount,
                     keg: activeKeg,
                     ticks: currentDrawingTicks,
-                    user: currentUser
+                    user: currentUser,
+                    account: activeKeg.zapfKit.account
             )
             currentUser.drawings.add drawing
-            println "valid? ${currentUser.validate()}"
             currentUser.save(failOnError: true)
             notifyEndDrawing(drawing);
         }

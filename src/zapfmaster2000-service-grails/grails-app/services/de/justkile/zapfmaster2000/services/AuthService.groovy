@@ -35,7 +35,7 @@ class AuthService {
 
 		if (user) {
 			def rawToken = createNextToken();
-            def token = new Token(token: rawToken, user: user, account: user.account)
+            def token = new Token(token: rawToken, user: user, account: user.accounts.first())
 			token.save()
 			return rawToken
 		} else {

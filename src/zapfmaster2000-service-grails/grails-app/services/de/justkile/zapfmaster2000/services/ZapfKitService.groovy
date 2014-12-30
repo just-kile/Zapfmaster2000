@@ -29,6 +29,7 @@ class ZapfKitService {
     }
 
     def processRfidTag(ZapfKit zapfKit, long rfidTag) {
+        retrieveZapfService(zapfKit).login(rfidTag)
         if (mapZapfKitId2RfidDelegator[zapfKit.id]) {
             mapZapfKitId2RfidDelegator[zapfKit.id].pushData(rfidTag)
         }

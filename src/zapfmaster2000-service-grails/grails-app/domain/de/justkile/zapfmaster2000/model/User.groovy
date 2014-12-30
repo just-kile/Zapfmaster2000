@@ -9,10 +9,13 @@ class User {
     int weight
     long rfidTag = -1
     Sex sex
-    Account account
     Type type = Type.USER
 
-    static hasMany = [drawings: Drawing]
+    static hasMany = [
+            drawings: Drawing,
+            accounts: Account
+    ]
+
     static fetchMode = [drawings: 'eager']
 
 	static constraints = {

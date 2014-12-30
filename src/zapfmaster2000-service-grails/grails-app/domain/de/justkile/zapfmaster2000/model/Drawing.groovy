@@ -4,6 +4,7 @@ class Drawing {
 
     double amount
     Keg keg
+    Account account
     Date date = new Date()
 
     static belongsTo = [user: User]

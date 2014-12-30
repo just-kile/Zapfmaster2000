@@ -7,6 +7,7 @@ import de.justkile.zapfmaster2000.services.AuthException
 import de.justkile.zapfmaster2000.services.AuthService
 import de.justkile.zapfmaster2000.services.KegService
 import de.justkile.zapfmaster2000.services.ZapfKitService
+import de.justkile.zapfmaster2000.utils.zapfing.ZapfService
 import grails.transaction.Transactional
 
 import static grails.async.Promises.tasks
