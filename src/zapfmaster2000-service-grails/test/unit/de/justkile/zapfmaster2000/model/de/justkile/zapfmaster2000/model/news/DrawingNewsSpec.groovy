@@ -1,5 +1,6 @@
 package de.justkile.zapfmaster2000.model.de.justkile.zapfmaster2000.model.news
 
+import de.justkile.zapfmaster2000.model.news.DrawingNews
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

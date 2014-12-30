@@ -1,6 +1,7 @@
 package de.justkile.zapfmaster2000.services
 
 import grails.test.mixin.TestFor
+import org.hibernate.engine.config.spi.ConfigurationService
 import spock.lang.Specification
 
 /**
