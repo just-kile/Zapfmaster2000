@@ -32,7 +32,10 @@ class NewsController {
     def retrieveNextNewsAsync() {
         try {
             def account = authService.retrieveAccount(params.token)
-            tasks { render newsAdapter.adapt( newsService.retrieveNextNews(account) ) as JSON}
+            def nextNews = newsAdapter.adapt( newsService.retrieveNextNews(account) )
+            if (!response.isCommitted()) {
+                respond nextNews
+            }
         } catch (AuthException e) {
             response.sendError 403
         }

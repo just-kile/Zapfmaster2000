@@ -29,7 +29,6 @@ class ZapfService {
     }
 
     def User login(long rfidId) {
-        println ('LOGIN!' + rfidId)
         synchronized (SYNC_USER_LOCK) {
             if (currentUser?.getRfidTag() != rfidId) {
 
@@ -43,7 +42,6 @@ class ZapfService {
                         }
 
                         currentUser = newUser;
-                        println("CURRENT USER IS $currentUser")
                         scheduleAutoLogout();
                         lastDrawing = System.currentTimeMillis();
                         notifyLoginSuccessful(currentUser);
