@@ -20,7 +20,7 @@ class RegistrationService {
                     sex: sex,
                     weight: weight,
                     imagePath: DEFAULT_IMAGE,
-                    account: account
+                    accounts: [account]
             );
             user.save()
             return user

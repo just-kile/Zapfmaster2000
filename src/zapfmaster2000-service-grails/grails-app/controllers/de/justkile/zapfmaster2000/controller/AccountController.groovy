@@ -26,7 +26,7 @@ class AccountController {
 		respond accounts
 	}
 
-    @RestApiMethod(description="Creats a new account.")
+    @RestApiMethod(description="Creates a new account.")
     @RestApiParams(params=[
             @RestApiParam(name="name", type="string", paramType = RestApiParamType.QUERY, description = "Name of the account to create")
     ])

@@ -12,7 +12,7 @@ import grails.transaction.Transactional
 @Transactional
 class NewsService {
 
-    final ZapfServiceListener zapfServiceListener = createZapfServiceListner()
+    final ZapfServiceListener zapfServiceListener = createZapfServiceListener()
 
     def zapfKitService
     def kegService
@@ -52,7 +52,7 @@ class NewsService {
         mapAccountId2NewsDelegator[news.account.id]?.pushData(news)
     }
 
-    private def createZapfServiceListner() {
+    private def createZapfServiceListener() {
         return new ZapfServiceListener() {
 
             void onLoginSuccessful(User user) {
@@ -66,7 +66,7 @@ class NewsService {
                     def d = Drawing.get(drawing.id)
                     publishNews(new DrawingNews(
                             drawing: d,
-                            account: d.user.account
+                            account: d.account
                     ))
                 }
             }
