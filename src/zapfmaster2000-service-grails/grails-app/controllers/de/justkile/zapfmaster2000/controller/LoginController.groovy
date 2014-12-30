@@ -35,7 +35,7 @@ class LoginController {
             def token = authService.loginUser(params.userName, params.password)
             render token
         } catch(AuthException e) {
-            reponse.sendError 403
+            response.sendError 403
         }
     }
 	
